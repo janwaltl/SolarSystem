@@ -159,8 +159,10 @@
   <ItemGroup>
     <ClInclude Include="Source\Common\SystemUnit.h" />
     <ClInclude Include="Source\Common\Common.h" />
-    <ClInclude Include="Source\Elements\Element.h" />
+    <ClInclude Include="Source\Units\Unit.h" />
     <ClInclude Include="Source\Exception.h" />
+    <ClInclude Include="Source\Math\Math.h" />
+    <ClInclude Include="Source\Math\Vec2.h" />
     <ClInclude Include="Source\Parsers\Parser.h" />
     <ClInclude Include="Source\Parsers\TestingParser.h" />
     <ClInclude Include="Source\SimMethods\SimMethod.h" />
