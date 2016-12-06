@@ -1,10 +1,10 @@
 #ifndef VIEWERS_VIEWER_HEADER
 #define VIEWERS_VIEWER_HEADER
 
-#include "../Common/Child.h"
+#include "../Common/SystemUnit.h"
 
 // Hooked up to simulation, gets access each frame to simulated data
-class Viewer :public Child
+class Viewer :public SystemUnit
 {
 public:
 	Viewer();

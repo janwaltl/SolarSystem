@@ -1,11 +1,11 @@
-#ifndef COMMON_CHILD_HEADER
-#define COMMON_CHILD_HEADER
+#ifndef COMMON_SYSTEMUNIT_HEADER
+#define COMMON_SYSTEMUNIT_HEADER
 
 #include "Common.h"
 
 //Base class for all components - Parsers,SimMethods,Viewers
 //So they can be linked to simulation and can control it
-class Child
+class SystemUnit
 {
 public:
 	void Link(Simulation* s);

@@ -1,12 +1,12 @@
-#include "Child.h"
+#include "SystemUnit.h"
 #include "../Simulation.h"
 
-void Child::Link(Simulation* s)
+void SystemUnit::Link(Simulation* s)
 {
 	assert(s);
 	sim = s;
 }
-void Child::StopSimulation()
+void SystemUnit::StopSimulation()
 {
 	assert(sim);
 	sim->StopSimulation();

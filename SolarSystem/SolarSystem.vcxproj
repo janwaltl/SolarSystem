@@ -149,7 +149,7 @@
     <Text Include="Plan.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Common\Child.cpp" />
+    <ClCompile Include="Source\Common\SystemUnit.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Parsers\Parser.cpp" />
     <ClCompile Include="Source\SimMethods\SimMethod.cpp" />
@@ -157,13 +157,16 @@
     <ClCompile Include="Source\Viewers\Viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Common\Child.h" />
+    <ClInclude Include="Source\Common\SystemUnit.h" />
     <ClInclude Include="Source\Common\Common.h" />
     <ClInclude Include="Source\Elements\Element.h" />
     <ClInclude Include="Source\Exception.h" />
     <ClInclude Include="Source\Parsers\Parser.h" />
+    <ClInclude Include="Source\Parsers\TestingParser.h" />
     <ClInclude Include="Source\SimMethods\SimMethod.h" />
+    <ClInclude Include="Source\SimMethods\TestingSimMethod.h" />
     <ClInclude Include="Source\Simulation.h" />
+    <ClInclude Include="Source\Viewers\TextViewer.h" />
     <ClInclude Include="Source\Viewers\Viewer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

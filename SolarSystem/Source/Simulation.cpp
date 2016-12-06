@@ -1,4 +1,5 @@
 #include <chrono>
+#include <iostream>
 #include "Simulation.h"
 #include "Parsers/Parser.h"
 #include "SimMethods/SimMethod.h"
@@ -11,18 +12,18 @@ Simulation::Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer) 
 	parser(std::move(parser)), simMethod(std::move(simMethod)), viewer(std::move(viewer)),
 	running(false)
 {
-	parser->Link(this);
-	viewer->Link(this);
-	simMethod->Link(this);
+	this->parser->Link(this);
+	this->viewer->Link(this);
+	this->simMethod->Link(this);
 }
 
-void Simulation::Start(double dt, runTime_t maxSimTime /*= 0s*/)
+void Simulation::Start(double dt, std::chrono::seconds maxSimTime /*= 0s*/)
 {
 	dtime = dt;
 	this->maxSimTime = maxSimTime;
 
+	//Obtain the data
 	elements = parser->Load();
-
 	Loop();
 }
 
@@ -40,9 +41,12 @@ void Simulation::Loop()
 	{
 		auto now = std::chrono::steady_clock::now();
 		auto frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(now - prevTime);
+		prevTime = now;
 		runTime += std::chrono::duration_cast<runTime_t>(frameTime);
+
 		acc += frameTime.count() / 1000.0;
 		acc = acc > 0.5 ? 0.5 : acc;
+
 		while (acc > dtime)
 		{
 			(*simMethod)(elements, dtime);
@@ -51,5 +55,8 @@ void Simulation::Loop()
 
 		(*viewer)(elements);
 	}
+	std::cout << runTime.count() / 1000.0 << std::endl;
+	running = false;
+	parser->Save(elements);
 }
 

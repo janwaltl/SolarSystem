@@ -1,15 +1,14 @@
 #ifndef ELEMENTS_ELEMENT_HEADER
 #define ELEMENTS_ELEMENT_HEADER
 
-//Basic element of simulated data - planet, star, 
+//Basic element of simulated data - planet, star, moon...
 class Element
 {
 public:
-	Element();
-private:
-	double x, y;
-	double mass;
-	double vx, vy;
+public:
+	double x {}, y {};
+	double mass {};
+	double vx {}, vy {};
 };
 
 
