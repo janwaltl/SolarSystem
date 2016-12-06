@@ -44,8 +44,6 @@ Controlling the simulation
 		Because calling it fewer times does not break simulation, only slows responsivnes and "precision of viewing".
 
 ========================================IMPLEMENTING PLAN========================================
-
-- Give access to Vec2, add length, lengthsqr methods
 - Properly implement one integration method
 	- Test it with parser that returns hardoced data and textViewer
 - Create OpenGLViewer

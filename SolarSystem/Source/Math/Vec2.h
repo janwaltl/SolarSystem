@@ -5,15 +5,15 @@
 //Two dimensional vector of doubles
 struct Vec2
 {
-	//Default ctor is fine
-
+	Vec2(double x, double y) :x(x), y(y) {}
+	Vec2() :Vec2(0.0, 0.0) {}
 	Vec2& operator+=(const Vec2& other)
 	{
 		this->x += other.x;
 		this->y += other.y;
 		return *this;
 	}
-	Vec2 operator+(const Vec2& other)
+	Vec2 operator+(const Vec2& other) const
 	{
 		Vec2 tmp;
 		return tmp += other;
@@ -25,7 +25,7 @@ struct Vec2
 		this->y -= other.y;
 		return *this;
 	}
-	Vec2 operator-(const Vec2& other)
+	Vec2 operator-(const Vec2& other) const
 	{
 		Vec2 tmp;
 		return tmp -= other;
@@ -37,12 +37,7 @@ struct Vec2
 		this->y *= val;
 		return *this;
 	}
-	template<typename T>
-	Vec2 operator*(T val)
-	{
-		Vec2 tmp;
-		retun tmp *= val;
-	}
+
 	double X() const { return x; }
 	double Y() const { return y; }
 	void X(double newX) { x = newX; }
@@ -51,5 +46,14 @@ private:
 	double x {}, y {};
 };
 
-
+template<typename T>
+Vec2 operator*(Vec2 vec, T val)
+{
+	return vec *= val;
+}
+template<typename T>
+Vec2 operator*( T val, Vec2 vec)
+{
+	return vec*=val;
+}
 #endif

@@ -152,6 +152,7 @@
     <ClCompile Include="Source\Common\SystemUnit.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Parsers\Parser.cpp" />
+    <ClCompile Include="Source\SimMethods\SemiImplicitEuler.cpp" />
     <ClCompile Include="Source\SimMethods\SimMethod.cpp" />
     <ClCompile Include="Source\Simulation.cpp" />
     <ClCompile Include="Source\Viewers\Viewer.cpp" />
@@ -159,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Common\SystemUnit.h" />
     <ClInclude Include="Source\Common\Common.h" />
+    <ClInclude Include="Source\SimMethods\SemiImplicitEuler.h" />
     <ClInclude Include="Source\Units\Unit.h" />
     <ClInclude Include="Source\Exception.h" />
     <ClInclude Include="Source\Math\Math.h" />
