@@ -1,0 +1,66 @@
+
+========================================THOUGHTS========================================
+Coordinates 
+	- Input will probably be in actual units - like KM, AU or something
+	- It can be simulated with doubles just fine, I guess. 
+	  But OpenGL won't draw it, needs to be normalized a little.
+		- Hope doubles can handle that too.
+OpenGL
+	- will need StartUp method - constructor might be fine
+		- maybe with static flag to do it just once
+Controlling the simulation
+	- By viewer - ability to Stop(End), Pause the simulation as well controlling its speed
+					- Pause = just render
+	Speed Control
+		- DT - time step - to stay deterministic
+		- accumulator - tries to make simulation real-time by multiple calls to simMethod with dt
+						- in the end N.dt should match elapsed real time
+		- speed can be changed by:
+			1. increasing DT - takes bigger steps
+							- well, it doesnt speed up anythings, just roughens or smoothens the simulation
+							- big DT can lead to explosion, chaos, the end
+			2. decrement acc by non-one multiple of DT
+						- that would speed it up if multiple<1
+							- for 1/2, it would simulate two seconds for each real-world-one
+						- slow down if multiple>1
+							- for 2 it would simulate one second for each 2 real-world-ones
+						= but it does it at expense of CPU time, becuase m=1/2 would loop 2times more than default
+							- so it might quickly get bottlenecked
+			3. pass multiples of DT into SimMethod
+						- that would speed it up at the expense of precision
+						- basically it would take bigger leaps, but not trying to catch up to real world
+						- m=60, for each DT siMethod would acts as 60DT was passed
+							- so, for each real/world second, it would simulate one minute
+						- m is conversion ratio between real-world time and simulated-time
+							- for m=60*60*24 each second would be one day.
+							- But simulation might be able to handle it, might result in explosions...
+		- good speed control would employ all two(three).
+			- Probably keep DT constant - everything can be achieved by other two.
+			- and to speed up simulation it would do more loops(2,m<1). If it could not handle it(acc>0.5),
+				it would instead multiply DT(2) and revert 2. Thus loosing bit of precision
+			- That's exactly how transmission works, probably.
+
+	- In cases where Viewer takes so much time, it can be configured so it is called only so many times a second.
+		Because calling it fewer times does not break simulation, only slows responsivnes and "precision of viewing".
+
+========================================IMPLEMENTING PLAN========================================
+
+- Give access to Vec2, add length,lengthsqr methods
+- Properly implement one integration method
+	- Test it with parser that returns hardoced data and textViewer
+- Create OpenGLViewer
+	- get OpenGL working...
+- Create ImGUIViewer
+	- get ImGUI working with OpenGL
+- Make it prettier
+	- Proper parser
+	- RK4 method or other
+	- Proper UI with controls
+- Make sure it works correctly
+	- Speeding up the sim
+	- All ranges of input
+- Write documentation
+- If time is left, make it even more prettier
+	- add colors, scenarios
+	- probably dont move into 3D
+	
