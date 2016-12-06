@@ -43,6 +43,10 @@ struct Vec2
 		Vec2 tmp;
 		retun tmp *= val;
 	}
+	double X() const { return x; }
+	double Y() const { return y; }
+	void X(double newX) { x = newX; }
+	void Y(double newY) { y = newY; }
 private:
 	double x {}, y {};
 };
