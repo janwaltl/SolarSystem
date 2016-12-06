@@ -7,8 +7,8 @@
 class SimMethod : public SystemUnit
 {
 public:
-	//Operates on elements, makes one physical time step
-	virtual void operator()(elements_t& elements, double step) = 0;
+	//Operates on data, makes one physical time step
+	virtual void operator()(simData_t& data, double step) = 0;
 };
 
 #endif

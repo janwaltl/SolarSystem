@@ -9,9 +9,9 @@ class Parser : public SystemUnit
 public:
 	Parser();
 	//Loads input from whethever
-	virtual elements_t Load() = 0;
+	virtual simData_t Load() = 0;
 	//Save them after end of simulation
-	virtual void Save(const elements_t& elements) {};
+	virtual void Save(const simData_t& data) {};
 };
 
 

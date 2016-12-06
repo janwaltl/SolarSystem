@@ -6,14 +6,14 @@
 class TestingParser :public Parser
 {
 public:
-	elements_t Load() override final
+	simData_t Load() override final
 	{
-		std::cout << "Loading elements.\n";
+		std::cout << "Loading data.\n";
 		return {{},{},{}};
 	}
-	void Save(const elements_t& elements) override final
+	void Save(const simData_t& data) override final
 	{
-		std::cout << "Saving elements.\n";
+		std::cout << "Saving data.\n";
 	}
 private:
 };

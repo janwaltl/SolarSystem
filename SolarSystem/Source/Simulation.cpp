@@ -23,7 +23,7 @@ void Simulation::Start(double dt, std::chrono::seconds maxSimTime /*= 0s*/)
 	this->maxSimTime = maxSimTime;
 
 	//Obtain the data
-	elements = parser->Load();
+	data = parser->Load();
 	Loop();
 }
 
@@ -49,14 +49,14 @@ void Simulation::Loop()
 
 		while (acc > dtime)
 		{
-			(*simMethod)(elements, dtime);
+			(*simMethod)(data, dtime);
 			acc -= dtime;
 		}
 
-		(*viewer)(elements);
+		(*viewer)(data);
 	}
 	std::cout << runTime.count() / 1000.0 << std::endl;
 	running = false;
-	parser->Save(elements);
+	parser->Save(data);
 }
 

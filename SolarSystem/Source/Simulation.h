@@ -28,7 +28,7 @@ private:
 	runTime_t runTime, maxSimTime;
 	std::chrono::time_point<std::chrono::steady_clock> prevTime;
 
-	elements_t elements;
+	simData_t data;
 	bool running;
 };
 

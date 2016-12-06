@@ -1,8 +1,8 @@
 #ifndef ELEMENTS_ELEMENT_HEADER
 #define ELEMENTS_ELEMENT_HEADER
 
-//Basic element of simulated data - planet, star, moon...
-class Element
+//Basic unit of simulated data - planet, star, moon...
+class Unit
 {
 public:
 public:

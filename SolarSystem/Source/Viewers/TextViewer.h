@@ -6,9 +6,9 @@
 class TextViewer :public Viewer
 {
 public:
-	void operator()(elements_t& elements) override final
+	void operator()(simData_t& data) override final
 	{
-		std::cout << "Viewing " << elements.size() << " elements\n";
+		std::cout << "Viewing " << data.size() << " data\n";
 	}
 private:
 };

@@ -11,7 +11,7 @@ class SimMethod;
 class Viewer;
 class Simulation;
 
-using elements_t = std::vector<Element>;
+using simData_t = std::vector<Unit>;
 using parser_p = std::unique_ptr<Parser>;
 using simMethod_p = std::unique_ptr<SimMethod>;
 using viewer_p = std::unique_ptr<Viewer>;

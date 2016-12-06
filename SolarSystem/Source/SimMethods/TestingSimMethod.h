@@ -3,15 +3,16 @@
 
 #include "SimMethod.h"
 #include <iostream>
+
 class TestingSimMethod :public SimMethod
 {
 public:
 	TestingSimMethod(double st) :state(st) {};
 
-	void operator()(elements_t& elements, double step) override final
+	void operator()(simData_t& data, double step) override final
 	{
-		std::cout << "Simulating " << elements.size() << " elements\n";
-		for (auto& e : elements)
+		std::cout << "Simulating " << data.size() << " data\n";
+		for (auto& e : data)
 		{
 			e.mass += state;
 		}

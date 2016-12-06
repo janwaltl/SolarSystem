@@ -3,7 +3,7 @@
 Viewer::Viewer()
 {
 }
-void Viewer::operator()(elements_t& elements)
+void Viewer::operator()(simData_t& data)
 {
 
 }
