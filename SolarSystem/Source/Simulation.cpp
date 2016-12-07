@@ -4,7 +4,7 @@
 #include "Parsers/Parser.h"
 #include "SimMethods/SimMethod.h"
 #include "Viewers/Viewer.h"
-
+#include <thread>
 
 using namespace std::chrono_literals;
 
@@ -17,10 +17,10 @@ Simulation::Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer) 
 	this->simMethod->Link(this);
 }
 
-void Simulation::Start(double dt, std::chrono::seconds maxSimTime /*= 0s*/)
+void Simulation::Start(stepTime_t dt, std::chrono::seconds maxSimTime /*= 0s*/)
 {
 	dtime = dt;
-	this->maxSimTime = std::chrono::duration_cast<std::chrono::milliseconds>(maxSimTime);
+	this->maxSimTime = maxSimTime;
 
 	//Obtain the data
 	data = parser->Load();
@@ -34,30 +34,55 @@ void Simulation::StopSimulation()
 
 void Simulation::Loop()
 {
-	beginning = prevTime = std::chrono::steady_clock::now();
-	runTime = runTime_t(0);
-	running = true;
-	while (running && (maxSimTime == runTime_t(0) || runTime < maxSimTime))
-	{
-		auto now = std::chrono::steady_clock::now();
-		auto frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(now - prevTime);
-		if (frameTime == 0ms) frameTime = 1ms;
-		prevTime = now;
-		runTime = std::chrono::duration_cast<runTime_t>(now - beginning);
+	ResetTimers();
 
-		acc += frameTime.count() / 1000.0;
-		acc = acc > 0.5 ? 0.5 : acc;
+	running = true;
+	while (running && IsNotRunningForTooLong())
+	{
+		TickTime();
+
+		auto tmp = acc;
 
 		while (acc > dtime)
 		{
-			(*simMethod)(data, dtime);
+			//(*simMethod)(data, dtime);
+			simTime += dtime;
 			acc -= dtime;
 		}
+		std::cout << "\t Simulated Time" << (tmp - acc).count() / double(decltype(tmp)::period::den) << std::endl;
 
 		(*viewer)(data);
 	}
-	std::cout << runTime.count() / 1000.0 << std::endl;
 	running = false;
+
+	std::cout << "RunTime" << runTime.count() / double(decltype(runTime)::period::den)
+			  << "s  Simulated amount " << simTime.count() / double(decltype(simTime)::period::den) << "s\n";
+	
 	parser->Save(data);
+}
+
+void Simulation::ResetTimers()
+{
+	acc = decltype(acc)::zero();
+	simTime = decltype(simTime)::zero();
+	runTime = decltype(runTime)::zero();
+	begining = prevTime = clock_t::now();
+}
+
+Simulation::stepTime_t Simulation::TickTime()
+{
+	auto now = clock_t::now();
+	auto frameTime = now - prevTime;
+	prevTime = now;
+	runTime = now - begining;
+	acc += frameTime;
+
+	std::cout << "FrameTime: " << frameTime.count() / double(decltype(frameTime)::period::den) << "secs\n";
+	return frameTime;
+}
+
+bool Simulation::IsNotRunningForTooLong()
+{
+	return (maxSimTime == decltype(maxSimTime)::zero() || runTime < maxSimTime);
 }
 
