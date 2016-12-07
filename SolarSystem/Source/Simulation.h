@@ -26,7 +26,7 @@ private:
 	double dtime;
 	double acc;
 	runTime_t runTime, maxSimTime;
-	std::chrono::time_point<std::chrono::steady_clock> prevTime;
+	std::chrono::time_point<std::chrono::steady_clock> prevTime,beginning;
 
 	simData_t data;
 	bool running;

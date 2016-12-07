@@ -1,8 +1,9 @@
 #include "SemiImplicitEuler.h"
-
+#include <iostream>
 
 void SemiImplicitEuler::operator()(simData_t & data, double step)
 {
+	//std::cout << "\n SIMULATING\n\n";
 	//Go through all pairs
 	for (auto& left = data.begin(); left != data.end(); ++left)
 	{

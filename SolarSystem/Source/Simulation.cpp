@@ -20,7 +20,7 @@ Simulation::Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer) 
 void Simulation::Start(double dt, std::chrono::seconds maxSimTime /*= 0s*/)
 {
 	dtime = dt;
-	this->maxSimTime = maxSimTime;
+	this->maxSimTime = std::chrono::duration_cast<std::chrono::milliseconds>(maxSimTime);
 
 	//Obtain the data
 	data = parser->Load();
@@ -34,15 +34,16 @@ void Simulation::StopSimulation()
 
 void Simulation::Loop()
 {
-	prevTime = std::chrono::steady_clock::now();
+	beginning = prevTime = std::chrono::steady_clock::now();
 	runTime = runTime_t(0);
 	running = true;
 	while (running && (maxSimTime == runTime_t(0) || runTime < maxSimTime))
 	{
 		auto now = std::chrono::steady_clock::now();
 		auto frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(now - prevTime);
+		if (frameTime == 0ms) frameTime = 1ms;
 		prevTime = now;
-		runTime += std::chrono::duration_cast<runTime_t>(frameTime);
+		runTime = std::chrono::duration_cast<runTime_t>(now - beginning);
 
 		acc += frameTime.count() / 1000.0;
 		acc = acc > 0.5 ? 0.5 : acc;

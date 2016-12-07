@@ -15,8 +15,9 @@ struct Vec2
 	}
 	Vec2 operator+(const Vec2& other) const
 	{
-		Vec2 tmp;
-		return tmp += other;
+		Vec2 tmp = *this;
+		tmp += other;
+		return tmp ;
 	}
 
 	Vec2& operator-=(const Vec2& other)
@@ -27,8 +28,9 @@ struct Vec2
 	}
 	Vec2 operator-(const Vec2& other) const
 	{
-		Vec2 tmp;
-		return tmp -= other;
+		Vec2 tmp = *this;
+		tmp -= other;
+		return tmp;
 	}
 	template< typename T>
 	Vec2& operator*=(T val)
@@ -49,11 +51,13 @@ private:
 template<typename T>
 Vec2 operator*(Vec2 vec, T val)
 {
-	return vec *= val;
+	vec *= val;
+	return vec;
 }
 template<typename T>
 Vec2 operator*( T val, Vec2 vec)
 {
-	return vec*=val;
+	vec *= val;
+	return vec;
 }
 #endif
