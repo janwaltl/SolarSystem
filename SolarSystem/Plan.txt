@@ -1,8 +1,28 @@
 =====================================IN THIS COMMIT=====================================
-
-Time should be fixed now.
-
+Commenting...
+Tested Circular motion, which seemed to work.
+Added ToSecs function.
+========================================IMPLEMENTING PLAN========================================
+- Properly implement one integration method
+	- Test it with parser that returns hardoced data and textViewer
+		= Would be nice to be able to vizualize it, hard to determine if its working without it
+- Create OpenGLViewer
+	- get OpenGL working...
+- Create ImGUIViewer
+	- get ImGUI working with OpenGL
+- Make it prettier
+	- Proper parser
+	- RK4 method or other
+	- Proper UI with controls
+- Make sure it works correctly
+	- Speeding up the sim
+	- All ranges of input
+- Write documentation
+- If time is left, make it even more prettier
+	- add colors, scenarios
+	- probably dont move into 3D
 ========================================THOUGHTS========================================
+
 Coordinates 
 	- Input will probably be in actual units - like KM, AU or something
 	- It can be simulated with doubles just fine, I guess. 
@@ -46,22 +66,4 @@ Controlling the simulation
 	- In cases where Viewer takes so much time, it can be configured so it is called only so many times a second.
 		Because calling it fewer times does not break simulation, only slows responsivnes and "precision of viewing".
 
-========================================IMPLEMENTING PLAN========================================
-- Properly implement one integration method
-	- Test it with parser that returns hardoced data and textViewer
-- Create OpenGLViewer
-	- get OpenGL working...
-- Create ImGUIViewer
-	- get ImGUI working with OpenGL
-- Make it prettier
-	- Proper parser
-	- RK4 method or other
-	- Proper UI with controls
-- Make sure it works correctly
-	- Speeding up the sim
-	- All ranges of input
-- Write documentation
-- If time is left, make it even more prettier
-	- add colors, scenarios
-	- probably dont move into 3D
 	

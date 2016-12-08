@@ -3,8 +3,7 @@
 
 void SemiImplicitEuler::operator()(simData_t & data, double step)
 {
-	//std::cout << "\n SIMULATING\n\n";
-	//Go through all pairs
+	/*//Go through all pairs
 	for (auto& left = data.begin(); left != data.end(); ++left)
 	{
 		for (auto& right = left + 1; right != data.end(); ++right)
@@ -26,5 +25,9 @@ void SemiImplicitEuler::operator()(simData_t & data, double step)
 			left->pos += step*left->vel;
 			right->pos += step*right->vel;
 		}
-	}
+	}*/
+	auto& earth = data[0];
+	Vec2 acc {-earth.pos.X(),-earth.pos.Y()};
+	earth.vel += step*acc;
+	earth.pos += step*earth.vel;
 }

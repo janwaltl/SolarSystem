@@ -41,23 +41,21 @@ void Simulation::Loop()
 	{
 		TickTime();
 
-		auto tmp = acc;
-
+		auto tmp = acc;///LOGGING
 		while (acc > dtime)
 		{
-			//(*simMethod)(data, dtime);
+			(*simMethod)(data, ToSecs(dtime));
 			simTime += dtime;
 			acc -= dtime;
 		}
-		std::cout << "\t Simulated Time" << (tmp - acc).count() / double(decltype(tmp)::period::den) << std::endl;
+		///LOGGING
+		std::cout << "\t Simulated Time" << ToSecs(tmp - acc) << std::endl;
 
 		(*viewer)(data);
 	}
 	running = false;
-
-	std::cout << "RunTime" << runTime.count() / double(decltype(runTime)::period::den)
-			  << "s  Simulated amount " << simTime.count() / double(decltype(simTime)::period::den) << "s\n";
-	
+	///LOGGING
+	std::cout << "RunTime" << ToSecs(runTime) << "s  Simulated amount " << ToSecs(simTime) << "s\n";
 	parser->Save(data);
 }
 
@@ -76,7 +74,7 @@ Simulation::stepTime_t Simulation::TickTime()
 	prevTime = now;
 	runTime = now - begining;
 	acc += frameTime;
-
+	///LOGGING
 	std::cout << "FrameTime: " << frameTime.count() / double(decltype(frameTime)::period::den) << "secs\n";
 	return frameTime;
 }

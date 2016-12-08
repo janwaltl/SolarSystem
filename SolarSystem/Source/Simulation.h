@@ -18,9 +18,18 @@ public:
 
 private:
 	void Loop();
+	//Clear timers before start of simulation's loop
 	void ResetTimers();
+	//Updates time in the loop
 	stepTime_t TickTime();
 	bool IsNotRunningForTooLong();
+	template<typename Rep,typename Per>
+	//Converts passed time duration to seconds
+	inline double ToSecs(const std::chrono::duration<Rep, Per>& time)
+	{
+		using type = std::chrono::duration<Rep, Per>;
+		return  time.count() * type::period::num / double(type::period::den);
+	}
 	parser_p parser;
 	simMethod_p simMethod;
 	viewer_p viewer;
@@ -30,11 +39,11 @@ private:
 	//Time bank, created by real time, consumed by physics simulation
 	stepTime_t acc;
 	//Amount of simulated time
-	stepTime_t simTime;
+	stepTime_t simTime;///Can actually count only to 270 years, which might be a problem, might need another in years...
 	//How long has been the simulation running in real time
 	stepTime_t runTime;
 	//How long can the simulation run in real time
-	stepTime_t maxSimTime;;
+	stepTime_t maxSimTime;///With step time being in nanosecs and represented by long long, max is at around 270 years...
 	//Helper variables to compute frameTime
 	clock_t::time_point prevTime,begining;
 
