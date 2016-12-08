@@ -9,9 +9,9 @@ public:
 	void operator()(simData_t& data) override final
 	{
 		assert(data.size() == 2);
-		auto& earth = data[0];
+		/*auto& earth = data[0];
 		auto& sun = data[1];
-		/*
+		
 		std::cout << "1. Earth: position(" << earth.pos.X() << ", " << earth.pos.Y() << ")\n";
 		std::cout << "          velocity(" << earth.vel.X() << ", " << earth.vel.Y() << ")\n";
 

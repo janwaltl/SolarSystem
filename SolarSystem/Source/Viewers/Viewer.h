@@ -7,8 +7,7 @@
 class Viewer :public SystemUnit
 {
 public:
-	Viewer();
-	virtual void operator()(simData_t& data) = 0;
+	virtual void operator()(simData_t&) = 0;
 };
 
 #endif

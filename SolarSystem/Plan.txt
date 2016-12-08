@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Commenting...
-Tested Circular motion, which seemed to work.
-Added ToSecs function.
+Fixed warnings and brought back gravity sim and parser.
 ========================================IMPLEMENTING PLAN========================================
 - Properly implement one integration method
 	- Test it with parser that returns hardoced data and textViewer

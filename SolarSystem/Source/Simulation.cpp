@@ -17,10 +17,10 @@ Simulation::Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer) 
 	this->simMethod->Link(this);
 }
 
-void Simulation::Start(stepTime_t dt, std::chrono::seconds maxSimTime /*= 0s*/)
+void Simulation::Start(stepTime_t dt, std::chrono::seconds maxSimT /*= 0s*/)
 {
 	dtime = dt;
-	this->maxSimTime = maxSimTime;
+	this->maxSimTime = maxSimT;
 
 	//Obtain the data
 	data = parser->Load();

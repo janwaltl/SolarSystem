@@ -11,7 +11,7 @@ public:
 	//Loads input from whethever
 	virtual simData_t Load() = 0;
 	//Save them after end of simulation
-	virtual void Save(const simData_t& data) {};
+	virtual void Save(const simData_t&) {};
 };
 
 

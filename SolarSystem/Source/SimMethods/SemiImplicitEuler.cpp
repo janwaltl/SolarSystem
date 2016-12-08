@@ -3,16 +3,16 @@
 
 void SemiImplicitEuler::operator()(simData_t & data, double step)
 {
-	/*//Go through all pairs
-	for (auto& left = data.begin(); left != data.end(); ++left)
+	//Go through all pairs
+	for (auto left = data.begin(); left != data.end(); ++left)
 	{
-		for (auto& right = left + 1; right != data.end(); ++right)
+		for (auto right = left + 1; right != data.end(); ++right)
 		{
 			auto distLR = dist(left->pos, right->pos);
 			distLR = distLR*distLR*distLR;
 
 			// acceleration = - G* R/R^3
-			//Acceleration of left unit gained from attraction to right unit, WITHOUT mass of right unit
+			//Acceleration of left unit gained from attraction to right unit, WITHOUT mass of correct unit
 			//Minus for the force to be attractive, not repulsive
 			Vec2 acc {-G*(left->pos.X() - right->pos.X()) / distLR, -G*(left->pos.Y() - right->pos.Y()) / distLR};
 
@@ -25,9 +25,5 @@ void SemiImplicitEuler::operator()(simData_t & data, double step)
 			left->pos += step*left->vel;
 			right->pos += step*right->vel;
 		}
-	}*/
-	auto& earth = data[0];
-	Vec2 acc {-earth.pos.X(),-earth.pos.Y()};
-	earth.vel += step*acc;
-	earth.pos += step*earth.vel;
+	}
 }

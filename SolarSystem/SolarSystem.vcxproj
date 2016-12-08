@@ -85,7 +85,7 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
@@ -155,7 +155,6 @@
     <ClCompile Include="Source\SimMethods\SemiImplicitEuler.cpp" />
     <ClCompile Include="Source\SimMethods\SimMethod.cpp" />
     <ClCompile Include="Source\Simulation.cpp" />
-    <ClCompile Include="Source\Viewers\Viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\SystemUnit.h" />
