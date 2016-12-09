@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Fixed warnings and brought back gravity sim and parser.
+Working on parser
+	- Implemented FormattedFileParser
 ========================================IMPLEMENTING PLAN========================================
 - Properly implement one integration method
 	- Test it with parser that returns hardoced data and textViewer
