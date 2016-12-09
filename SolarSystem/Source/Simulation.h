@@ -12,6 +12,7 @@ public:
 	using stepTime_t = clock_t::duration;
 	Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer);
 	//Starts simulation - loops until stopped, or maxSimulationTime is reached
+	//Throws Exception(std::logic_error) on invalid input
 	void Start(stepTime_t dt, std::chrono::seconds maxSimTime = std::chrono::seconds::zero());
 	//Breaks the loop, called internally by parsers,view
 	void StopSimulation();

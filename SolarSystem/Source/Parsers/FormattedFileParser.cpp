@@ -23,6 +23,7 @@ simData_t FormattedFileParser::Load()
 	buffer.clear();
 
 	simData_t data;
+
 	//Read first unit
 
 	auto beg = input.find_first_of('{');
@@ -31,7 +32,7 @@ simData_t FormattedFileParser::Load()
 
 	auto end = input.find_first_of('}', beg);
 	if (end == input.npos)
-		throw Exception("Invalid Format: Closing paranthese has not been found.");
+		throw Exception("Invalid Format: Closing bracket has not been found.");
 
 	data.emplace_back(ParseUnit(input.substr(beg + 1, end - beg - 1)));
 	//If there is more
@@ -41,7 +42,7 @@ simData_t FormattedFileParser::Load()
 		//Find the end of it
 		end = input.find_first_of('}', beg);
 		if (end == input.npos)
-			throw Exception("Invalid Format: Closing paranthese has not been found.");
+			throw Exception("Invalid Format: Closing bracket has not been found.");
 		data.emplace_back(ParseUnit(input.substr(beg + 1, end - beg - 1)));
 		//Try to find another
 		beg = input.find_first_of('{', end);
@@ -110,27 +111,34 @@ std::string FormattedFileParser::ParseToken(const std::string&str, const std::st
 
 void FormattedFileParser::ParsePosition(Unit & unit, const std::string & val)
 {
-	size_t pos {};
-	unit.pos.X(std::stod(val, &pos));
-	unit.pos.Y(std::stod(val.substr(pos)));
+	if (!val.empty())
+	{
+		size_t pos {};
+		unit.pos.X(std::stod(val, &pos));
+		unit.pos.Y(std::stod(val.substr(pos)));
+	}
 }
 
 void FormattedFileParser::ParseVelocity(Unit & unit, const std::string & val)
 {
-	size_t pos {};
-	unit.vel.X(std::stod(val, &pos));
-	unit.vel.Y(std::stod(val.substr(pos)));
+	if (!val.empty())
+	{
+		size_t pos {};
+		unit.vel.X(std::stod(val, &pos));
+		unit.vel.Y(std::stod(val.substr(pos)));
+	}
 }
 
 void FormattedFileParser::ParseMass(Unit & unit, const std::string & val)
 {
-	unit.mass = std::stod(val);
+	if (!val.empty())
+		unit.mass = std::stod(val);
 }
 
 std::string FormattedFileParser::SerializeUnit(const Unit & unit)
 {
 	std::string str;
-	
+
 	//str += "name<" + unit.name + ">\n";
 	str += "position<" + std::to_string(unit.pos.X()) + " " + std::to_string(unit.pos.Y()) + ">\n";
 	str += "  velocity<" + std::to_string(unit.vel.X()) + " " + std::to_string(unit.vel.Y()) + ">\n";

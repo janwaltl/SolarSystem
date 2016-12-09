@@ -1,6 +1,7 @@
 =====================================IN THIS COMMIT=====================================
 Working on parser
-	- Implemented FormattedFileParser
+	- Tested FormattedFileParser, seems fine. Even quite forgiving on braces
+	
 ========================================IMPLEMENTING PLAN========================================
 - Properly implement one integration method
 	- Test it with parser that returns hardoced data and textViewer

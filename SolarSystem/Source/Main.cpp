@@ -2,19 +2,33 @@
 
 #include "Simulation.h"
 #include "Viewers/TextViewer.h"
-#include "Parsers/TestingParser.h"
+#include "Parsers/FormattedFileParser.h"
 #include "SimMethods/SemiImplicitEuler.h"
+#include "Exception.h"
 int main()
 {
+	try
+	{
+		try
+		{
+			auto parser = std::make_unique<FormattedFileParser>("vstup.txt");
+			auto viewer = std::make_unique<TextViewer>();
+			auto method = std::make_unique<SemiImplicitEuler>();
 
-	auto parser = std::make_unique<TestingParser>();
-	auto viewer = std::make_unique<TextViewer>();
-	auto method = std::make_unique<SemiImplicitEuler>();
-	
-	using namespace std::chrono_literals;
-	Simulation sim(std::move(parser), std::move(method), std::move(viewer));
-	sim.Start(10ms, 3s);
-	std::cin.get();
-	std::cin.get();
+			using namespace std::chrono_literals;
+			Simulation sim(std::move(parser), std::move(method), std::move(viewer));
+			sim.Start(10ms, 3s);
+			std::cin.get();
+			std::cin.get();
+		}
+		catch (const Exception& e)
+		{
+			std::cout << "Simulation failed, reason:" << e.what();
+		}
+	}
+	catch (...)
+	{
+		std::cout << "UNCAUGHT EXCEPTION";
+	}
 	return false;
 }

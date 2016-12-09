@@ -5,6 +5,7 @@
 #include "SimMethods/SimMethod.h"
 #include "Viewers/Viewer.h"
 #include <thread>
+#include "Exception.h"
 
 using namespace std::chrono_literals;
 
@@ -22,8 +23,10 @@ void Simulation::Start(stepTime_t dt, std::chrono::seconds maxSimT /*= 0s*/)
 	dtime = dt;
 	this->maxSimTime = maxSimT;
 
-	//Obtain the data
+
+	//Obtain the data, throws on invalid input(format)
 	data = parser->Load();
+
 	Loop();
 }
 

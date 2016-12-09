@@ -13,6 +13,8 @@ public:
 	void Save(const simData_t& data) override final;
 private:
 	Unit ParseUnit(const std::string& str);
+	//Str must in format of' token=<val>', where val is returned string
+	//Throws Exception if invalid
 	std::string ParseToken(const std::string&str, const std::string& token);
 
 	void ParsePosition(Unit& unit, const std::string& val);
