@@ -11,6 +11,7 @@ namespace solar
 	public:
 		//Operates on data, makes one physical time step
 		virtual void operator()(simData_t& data, double step) = 0;
+		virtual ~SimMethod() = default;
 	};
 }
 

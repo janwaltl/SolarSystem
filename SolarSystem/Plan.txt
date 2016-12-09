@@ -1,8 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Added IMGUI library directly into project.
-Created OpenGLBackEnd to deal with OpenGL stuff
-For now using imgui_impl_glfw_gl as IMGUIBackend, must be replaced because of license and well, its unnecessary complex.
-Fixed some stuff...
+Apparently abstract base classes should have virtual destructors
 ========================================IMPLEMENTING PLAN========================================
 - Properly implement one integration method
 	- Test it with parser that returns hardoced data and textViewer

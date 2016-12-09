@@ -10,6 +10,7 @@ namespace solar
 	{
 	public:
 		virtual void operator()(simData_t&) = 0;
+		virtual ~Viewer() = default;
 	};
 }
 
