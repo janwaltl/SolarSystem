@@ -1,7 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Working on parser
-	- Tested FormattedFileParser, seems fine. Even quite forgiving on braces
-	
+- Added GL and IMGui libraries, changed include,lib paths to reflect that.
+
 ========================================IMPLEMENTING PLAN========================================
 - Properly implement one integration method
 	- Test it with parser that returns hardoced data and textViewer

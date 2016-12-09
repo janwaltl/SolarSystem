@@ -8,7 +8,6 @@ class TextViewer :public Viewer
 public:
 	void operator()(simData_t& data) override final
 	{
-		assert(data.size() == 2);
 		/*auto& earth = data[0];
 		auto& sun = data[1];
 		
