@@ -24,12 +24,6 @@
     <ClCompile Include="Source\Simulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Parsers\Parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SimMethods\SimMethod.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Common\SystemUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-- Added GL and IMGui libraries, changed include,lib paths to reflect that.
-
+Planning...Wrapped everything in solar namespace
 ========================================IMPLEMENTING PLAN========================================
 - Properly implement one integration method
 	- Test it with parser that returns hardoced data and textViewer
@@ -65,4 +64,22 @@ Controlling the simulation
 	- In cases where Viewer takes so much time, it can be configured so it is called only so many times a second.
 		Because calling it fewer times does not break simulation, only slows responsivnes and "precision of viewing".
 
+========================================Documentaion Draft========================================
+Uživatel
+- README navod jak program použít
+	- komentáø na formát vstupu
+	- komentáø k uživatelskému rozhraní
+	- odkázat na popis ostatních implementovaných modulù
+	- Exception class
+Programátor
+- Krátký popis použitých knihoven IMGUI, GLFW
+- Komentáøe na alogirtmy
+	- timeLoop - zmínit chrono?
+	- virtual methods, interface
+		- že je složen z 3 modulù - Parser,SimMethod,Viewer
+	- Popis modulù k èemu slouží, co musejí implementovat
+		- Popis jednotlivých implementovaných modulù
+			- FormatteFileParser, RK4 probably, IMGUIViewer
 	
+- Jak program rozšíøit
+ - popsáno asi u modulù

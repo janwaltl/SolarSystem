@@ -164,9 +164,7 @@
     <ClCompile Include="Source\Common\SystemUnit.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Parsers\FormattedFileParser.cpp" />
-    <ClCompile Include="Source\Parsers\Parser.cpp" />
     <ClCompile Include="Source\SimMethods\SemiImplicitEuler.cpp" />
-    <ClCompile Include="Source\SimMethods\SimMethod.cpp" />
     <ClCompile Include="Source\Simulation.cpp" />
   </ItemGroup>
   <ItemGroup>

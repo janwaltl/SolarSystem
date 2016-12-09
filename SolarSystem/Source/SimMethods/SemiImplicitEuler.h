@@ -3,12 +3,15 @@
 
 #include "SimMethod.h"
 
-class SemiImplicitEuler :public SimMethod
+namespace solar
 {
-public:
-	void operator()(simData_t& data, double step) override final;
-private:
-};
+	class SemiImplicitEuler :public SimMethod
+	{
+	public:
+		void operator()(simData_t& data, double step) override final;
+	private:
+	};
+}
 
 
 #endif

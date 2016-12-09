@@ -2,15 +2,18 @@
 #define ELEMENTS_ELEMENT_HEADER
 
 #include "../Math/Math.h"
-//Basic unit of simulated data - planet, star, moon...
-class Unit
+namespace solar
 {
-public:
-	Unit(const Vec2& pos, const Vec2&vel, double mass) :pos(pos), vel(vel), mass(mass) {}
-	Unit() :Unit({0.0,0.0}, {0.0,0.0}, 0.0) {}
-	Vec2 pos, vel;
-	double mass;
-};
+	//Basic unit of simulated data - planet, star, moon...
+	class Unit
+	{
+	public:
+		Unit(const Vec2& pos, const Vec2&vel, double mass) :pos(pos), vel(vel), mass(mass) {}
+		Unit() :Unit({0.0,0.0}, {0.0,0.0}, 0.0) {}
+		Vec2 pos, vel;
+		double mass;
+	};
+}
 
 
 #endif

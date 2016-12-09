@@ -241,3 +241,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /intermediate/Debug-SolarSystem
+/intermediate/Release-SolarSystem/SolarSystem.tlog

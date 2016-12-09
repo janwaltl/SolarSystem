@@ -3,16 +3,18 @@
 
 #include "../Common/SystemUnit.h"
 
-//Cares about input and output
-class Parser : public SystemUnit
+namespace solar
 {
-public:
-	Parser();
-	//Loads input from whethever
-	virtual simData_t Load() = 0;
-	//Save them after end of simulation
-	virtual void Save(const simData_t&) {};
-};
+	//Cares about input and output
+	class Parser : public SystemUnit
+	{
+	public:
+		//Loads input from whethever
+		virtual simData_t Load() = 0;
+		//Save them after end of simulation
+		virtual void Save(const simData_t&) {};
+	};
+}
 
 
 #endif

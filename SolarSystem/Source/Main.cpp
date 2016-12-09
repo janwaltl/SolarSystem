@@ -7,6 +7,9 @@
 #include "Exception.h"
 int main()
 {
+	using namespace solar;
+	using namespace std::chrono_literals;
+
 	try
 	{
 		try
@@ -15,7 +18,6 @@ int main()
 			auto viewer = std::make_unique<TextViewer>();
 			auto method = std::make_unique<SemiImplicitEuler>();
 
-			using namespace std::chrono_literals;
 			Simulation sim(std::move(parser), std::move(method), std::move(viewer));
 			sim.Start(10ms, 3s);
 			std::cin.get();

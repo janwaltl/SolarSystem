@@ -1,13 +1,16 @@
 #include "SystemUnit.h"
 #include "../Simulation.h"
 
-void SystemUnit::Link(Simulation* s)
+namespace solar
 {
-	assert(s);
-	sim = s;
-}
-void SystemUnit::StopSimulation()
-{
-	assert(sim);
-	sim->StopSimulation();
+	void SystemUnit::Link(Simulation* s)
+	{
+		assert(s);
+		sim = s;
+	}
+	void SystemUnit::StopSimulation()
+	{
+		assert(sim);
+		sim->StopSimulation();
+	}
 }

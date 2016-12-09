@@ -3,10 +3,14 @@
 
 #include <stdexcept>
 
-//Exception class to use in project
-class Exception : public std::runtime_error
+namespace solar
 {
-	using std::runtime_error::runtime_error;
-};
+	//Exception class to use in project
+	class Exception : public std::runtime_error
+	{
+		using std::runtime_error::runtime_error;
+	};
+
+}
 
 #endif
