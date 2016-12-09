@@ -56,13 +56,16 @@ namespace solar
 
 	void FormattedFileParser::Save(const simData_t & data)
 	{
-		std::ofstream outputF(outFileName, std::ios::trunc | std::ios::out);
-		if (!outputF.is_open())
-			throw Exception("Output file \'" + inFileName + "\' could not be created/opened.");
-
-		for (const auto& unit : data)
+		if (!outFileName.empty())
 		{
-			outputF << "{ " << SerializeUnit(unit) << " }\n\n";
+			std::ofstream outputF(outFileName, std::ios::trunc | std::ios::out);
+			if (!outputF.is_open())
+				throw Exception("Output file \'" + outFileName + "\' could not be created/opened.");
+
+			for (const auto& unit : data)
+			{
+				outputF << "{ " << SerializeUnit(unit) << " }\n\n";
+			}
 		}
 	}
 
