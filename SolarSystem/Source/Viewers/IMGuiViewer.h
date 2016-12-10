@@ -2,6 +2,7 @@
 #define VIEWERS_IMGUI_VIEWER_HEADER
 
 #include "Viewer.h"
+#include "IMGuiViewer/OpenGLBackEnd.h"
 
 struct GLFWwindow;
 
@@ -16,6 +17,7 @@ namespace solar
 		void operator()(simData_t& data) override final;
 		void Prepare(const simData_t& data) override final;
 	private:
+		OpenGLBackend openGL;
 	};
 }
 

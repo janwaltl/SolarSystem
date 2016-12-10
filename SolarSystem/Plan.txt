@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Added shaders for Units.
+Refactored shaders into Shader class.
 ========================================IMPLEMENTING PLAN========================================
 - About OpenGL
 	- Shaders - 

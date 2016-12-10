@@ -6,24 +6,23 @@
 
 namespace solar
 {
-	IMGuiViewer::IMGuiViewer()
+	IMGuiViewer::IMGuiViewer():
+		openGL(640, 480, "Simulation")
 	{
-		OpenGLBackEnd::Init(640, 480, "Simulation");
-		ImGui_ImplGlfwGL3_Init(OpenGLBackEnd::GetWin(), true);
+		ImGui_ImplGlfwGL3_Init(openGL.GetWin(), true);
 	}
 
 	IMGuiViewer::~IMGuiViewer()
 	{
 		ImGui_ImplGlfwGL3_Shutdown();
-		OpenGLBackEnd::Destroy();
 	}
 
 	void IMGuiViewer::operator()(simData_t & data)
 	{
-		if (glfwWindowShouldClose(OpenGLBackEnd::GetWin()))
+		if (glfwWindowShouldClose(openGL.GetWin()))
 			StopSimulation();
 		glfwPollEvents();
-		glfwSwapBuffers(OpenGLBackEnd::GetWin());
+		glfwSwapBuffers(openGL.GetWin());
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
 
