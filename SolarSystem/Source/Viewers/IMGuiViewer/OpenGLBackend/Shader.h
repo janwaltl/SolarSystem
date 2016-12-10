@@ -7,6 +7,7 @@ namespace solar
 {
 	namespace openGLBackend
 	{
+		//Manager for OpenGL's shader
 		class Shader
 		{
 		public:
@@ -18,19 +19,20 @@ namespace solar
 			Shader& operator=(Shader&& shader) = delete;
 
 			~Shader();
+
 			void Bind() const;
 			void UnBind() const;
 
 			void SetUniform2f(const std::string& name, const float &x, const float &y) const;
 			void SetUniform4f(const std::string& name, const float &x, const float &y, const float &z, const float &w) const;
-
 		private:
+			//Obtains locations of shader's uniforms and stores them in the map
 			void LoadUniforms();
 			unsigned int programID;
 
-			/* Map that holds all uniforms and their location
-			Location is guaranteed not to change,
-			so this way we do not need to look it up everytime*/
+			// Map that holds all uniforms and their locations
+			//Location is guaranteed not to change,
+			//so this way we do not need to look it up everytime
 			std::map<std::string, unsigned int> uniforms;
 		};
 	}

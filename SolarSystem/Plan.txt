@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Refactored shaders into Shader class.
+Got Drawing working.
+
 ========================================IMPLEMENTING PLAN========================================
 - About OpenGL
 	- Buffers - 

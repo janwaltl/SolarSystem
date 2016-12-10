@@ -22,8 +22,9 @@ namespace solar
 		//Destroys OpenGL context and GLFW window
 		~OpenGLBackend();
 		GLFWwindow* GetWin();
+		// Creates VAOs for Units(CircleBuffer) and line trails
 		void CreateBufferObjects(size_t numUnits);
-
+		// Draws simulated data
 		void DrawData(const simData_t& data);
 	private:
 		static void ErrorCallback(int err, const char* description);
@@ -39,6 +40,7 @@ namespace solar
 		static std::string error;//Stores error message
 
 		std::unique_ptr<openGLBackend::Shader> unitS;
+		//Used for drawing Units
 		std::unique_ptr<openGLBackend::CircleBuffer> circleB;
 
 	};

@@ -21,8 +21,8 @@ int main()
 
 			Simulation sim(std::move(parser), std::move(method), std::move(viewer));
 			sim.Start(10ms, 300s);
-			std::cin.get();
-			std::cin.get();
+			//std::cin.get();
+			//std::cin.get();
 		}
 		catch (const Exception& e)
 		{

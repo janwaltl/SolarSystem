@@ -62,19 +62,16 @@ namespace solar
 
 	void OpenGLBackend::CreateBufferObjects(size_t numUnits)
 	{
-		//One for Units, one for line trails
-		circleB = std::make_unique<openGLBackend::CircleBuffer>(6, 0.2f);
-
+		circleB = std::make_unique<openGLBackend::CircleBuffer>(24, 0.01f);
 	}
 
 	void OpenGLBackend::DrawData(const simData_t & data)
 	{
 		unitS->Bind();
-		unitS->SetUniform4f("col", 1.0f, 0.0f, 0.0f, 1.0f);
-		unitS->SetUniform2f("offset", 0.0f, 0.0f);
+		unitS->SetUniform4f("col", 0.0f, 1.0f, 0.0f, 1.0f);
+		unitS->SetUniform2f("offset", 0.85f, 0.0f);
 		circleB->Draw();
 		unitS->UnBind();
-
 	}
 
 	void OpenGLBackend::CreateShaders()
@@ -107,7 +104,7 @@ namespace solar
 
 			void main()
 			{
-				color = vec4(1.0,0.0,0.0,1.0) + 0.01*col;
+				color = col;
 			})";
 	}
 

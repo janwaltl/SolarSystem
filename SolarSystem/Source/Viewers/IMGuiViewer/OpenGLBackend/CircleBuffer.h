@@ -5,6 +5,7 @@ namespace solar
 {
 	namespace openGLBackend
 	{
+		//VAO buffer containing centered circle of given resolution and radius
 		class CircleBuffer
 		{
 		public:

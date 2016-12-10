@@ -7,7 +7,7 @@
 namespace solar
 {
 	IMGuiViewer::IMGuiViewer():
-		openGL(640, 480, "Simulation")
+		openGL(640, 640, "Simulation")
 	{
 		ImGui_ImplGlfwGL3_Init(openGL.GetWin(), true);
 	}
@@ -21,20 +21,23 @@ namespace solar
 	{
 		if (glfwWindowShouldClose(openGL.GetWin()))
 			StopSimulation();
+		glfwSwapBuffers(openGL.GetWin());
 		glfwPollEvents();
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		//Render Data
 		openGL.DrawData(data);
-		glfwSwapBuffers(openGL.GetWin());
-		/*ImGui_ImplGlfwGL3_NewFrame();
+		ImGui_ImplGlfwGL3_NewFrame();
+
 		//Render GUI
-		ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Always);
-		ImGui::Begin("Window", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-		ImGui::Text("Testing text.");
-		ImGui::End();
-		ImGui::Render();*/
+		{
+			ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Always);
+			ImGui::Begin("Window", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+			ImGui::Text("Testing text.");
+			ImGui::End();
+		}
+		ImGui::Render();
 	}
 
 	void IMGuiViewer::Prepare(const simData_t & data)

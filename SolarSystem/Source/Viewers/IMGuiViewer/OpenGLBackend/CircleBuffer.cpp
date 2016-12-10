@@ -11,8 +11,8 @@ namespace solar
 		{
 			std::vector<GLfloat> vertices;
 			std::vector<GLuint>  indices;
-			
-			const GLfloat step = 4 * atanf(1) / numVertices;// 2PI/numVertices
+
+			const GLfloat step = 8 * atanf(1) / numVertices;// 2PI/numVertices
 
 			//Push center vertex in
 			vertices.push_back(0.0f);
@@ -24,8 +24,8 @@ namespace solar
 				//Push x,y coordinates of point on circle
 				vertices.push_back(radius *cosf(i*step));
 				vertices.push_back(radius *sinf(i*step));
-				
-				indices.push_back(i+1);
+
+				indices.push_back(i + 1);
 			}
 			numIndices = indices.size();
 
@@ -35,17 +35,16 @@ namespace solar
 
 			glBindVertexArray(VAO);
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
-			glBufferData(GL_ARRAY_BUFFER, vertices.size(), vertices.data(), GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(GLfloat), vertices.data(), GL_STATIC_DRAW);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size(), indices.data(), GL_STATIC_DRAW);
-			
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
+
 			//Positions are Vec2 of floats at location=0
 			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
 			glEnableVertexAttribArray(0);
 
-			//glBindBuffer(GL_ARRAY_BUFFER, 0);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			glBindVertexArray(0);
-
 		}
 		CircleBuffer::~CircleBuffer()
 		{
