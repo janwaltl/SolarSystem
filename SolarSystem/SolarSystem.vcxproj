@@ -172,6 +172,7 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_draw.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_impl_glfw_gl3.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\SystemUnit.h" />

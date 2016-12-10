@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Apparently abstract base classes should have virtual destructors
+Refactoring of OpenGLBackend.
 ========================================IMPLEMENTING PLAN========================================
 - Properly implement one integration method
 	- Test it with parser that returns hardoced data and textViewer
