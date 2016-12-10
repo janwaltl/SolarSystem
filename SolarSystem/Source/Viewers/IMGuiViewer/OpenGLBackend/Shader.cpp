@@ -56,6 +56,7 @@ namespace solar
 				glGetProgramInfoLog(programID, 512, NULL, log);
 				throw Exception("Error:Shader's linkage has failed,reason:\n" + std::string(log));
 			}
+			LoadUniforms();
 			//They are not needed anymore
 			glDeleteShader(fragShader);
 			glDeleteShader(vertShader);
@@ -64,13 +65,37 @@ namespace solar
 		{
 			glDeleteProgram(programID);
 		}
-		void Shader::Bind()
+		void Shader::Bind() const
 		{
 			glUseProgram(programID);
 		}
-		void Shader::UnBind()
+		void Shader::UnBind() const
 		{
 			glUseProgram(0);
+		}
+		void Shader::SetUniform2f(const std::string & name, const float & x, const float & y) const
+		{
+			this->Bind();
+			glUniform2f(uniforms.at(name), x, y);
+		}
+		void Shader::SetUniform4f(const std::string& name, const float &x, const float &y, const float &z, const float &w) const
+		{
+			this->Bind();
+			glUniform4f(uniforms.at(name), x, y, z, w);
+		}
+		void Shader::LoadUniforms()
+		{
+			// go through all uniforms and store their location
+			GLint num, loc, size;
+			GLenum type;
+			GLchar name[512];
+			glGetProgramiv(this->programID, GL_ACTIVE_UNIFORMS, &num); // get number of uniforms
+			for (int i = 0; i < num; i++)
+			{
+				glGetActiveUniform(this->programID, i, 512, NULL, &size, &type, name);
+				loc = glGetUniformLocation(this->programID, name);
+				uniforms.emplace(name, loc);
+			}
 		}
 	}
 }

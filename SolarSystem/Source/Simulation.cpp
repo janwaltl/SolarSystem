@@ -45,7 +45,7 @@ namespace solar
 		while (running && IsNotRunningForTooLong())
 		{
 			TickTime();
-
+/*
 			auto tmp = acc;///LOGGING
 			while (acc > dtime)
 			{
@@ -55,7 +55,7 @@ namespace solar
 			}
 			///LOGGING
 			std::cout << "\t Simulated Time" << ToSecs(tmp - acc) << std::endl;
-
+*/
 			(*viewer)(data);
 		}
 		running = false;

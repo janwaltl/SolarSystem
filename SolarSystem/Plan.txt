@@ -2,7 +2,6 @@
 Refactored shaders into Shader class.
 ========================================IMPLEMENTING PLAN========================================
 - About OpenGL
-	- Shaders - 
 	- Buffers - 
 	- There should be circles for each planet, they need to be moving
 		- So, fixed VBO for them, reused by each unit

@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include "../../Exception.h"
 #include "OpenGLBackend/Shader.h"
+#include "OpenGLBackend/CircleBuffer.h"
 
 namespace solar
 {
@@ -38,7 +39,6 @@ namespace solar
 		//glfwSwapInterval(0);
 
 		CreateShaders();///IF IT Throws, glfw needs to be destroyed
-		//CreateBufferObjects();
 	}
 
 	OpenGLBackend::~OpenGLBackend()
@@ -63,6 +63,17 @@ namespace solar
 	void OpenGLBackend::CreateBufferObjects(size_t numUnits)
 	{
 		//One for Units, one for line trails
+		circleB = std::make_unique<openGLBackend::CircleBuffer>(6, 0.2f);
+
+	}
+
+	void OpenGLBackend::DrawData(const simData_t & data)
+	{
+		unitS->Bind();
+		unitS->SetUniform4f("col", 1.0f, 0.0f, 0.0f, 1.0f);
+		unitS->SetUniform2f("offset", 0.0f, 0.0f);
+		circleB->Draw();
+		unitS->UnBind();
 
 	}
 
@@ -70,6 +81,7 @@ namespace solar
 	{
 		unitS = std::make_unique<openGLBackend::Shader>(GetUnitVertSource(), GetUnitFragSource());
 	}
+
 
 	std::string OpenGLBackend::GetUnitVertSource()
 	{
@@ -91,11 +103,11 @@ namespace solar
 			#version 330 core
 			out vec4 color;
 
-			uniform vec3 col;
+			uniform vec4 col;
 
 			void main()
 			{
-				color = vec4(col,1.0f);
+				color = vec4(1.0,0.0,0.0,1.0) + 0.01*col;
 			})";
 	}
 

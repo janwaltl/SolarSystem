@@ -22,23 +22,24 @@ namespace solar
 		if (glfwWindowShouldClose(openGL.GetWin()))
 			StopSimulation();
 		glfwPollEvents();
-		glfwSwapBuffers(openGL.GetWin());
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		//Render Data
-
-		ImGui_ImplGlfwGL3_NewFrame();
+		openGL.DrawData(data);
+		glfwSwapBuffers(openGL.GetWin());
+		/*ImGui_ImplGlfwGL3_NewFrame();
 		//Render GUI
 		ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Always);
 		ImGui::Begin("Window", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 		ImGui::Text("Testing text.");
 		ImGui::End();
-		ImGui::Render();
+		ImGui::Render();*/
 	}
 
 	void IMGuiViewer::Prepare(const simData_t & data)
 	{
+		openGL.CreateBufferObjects(data.size());
 	}
 
 }

@@ -20,7 +20,7 @@ int main()
 			auto method = std::make_unique<SemiImplicitEuler>();
 
 			Simulation sim(std::move(parser), std::move(method), std::move(viewer));
-			sim.Start(10ms, 3s);
+			sim.Start(10ms, 300s);
 			std::cin.get();
 			std::cin.get();
 		}

@@ -51,6 +51,9 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\CircleBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Simulation.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\CircleBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
