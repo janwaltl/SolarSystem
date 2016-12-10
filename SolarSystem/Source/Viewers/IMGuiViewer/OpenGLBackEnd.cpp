@@ -8,7 +8,8 @@ namespace solar
 {
 	GLFWwindow* OpenGLBackEnd::win = nullptr;
 	std::string OpenGLBackEnd::error = "";
-	
+	unsigned int OpenGLBackEnd::shader;
+
 	void OpenGLBackEnd::Init(int width, int height, const std::string & title)
 	{
 		if (glfwInit() == GL_FALSE)
@@ -61,11 +62,79 @@ namespace solar
 	void OpenGLBackEnd::LoadShaders()
 	{
 		//One Shader for Units, one Shader for line trails
+		const std::string vertexSource = R"(
+			#version 330 core
+			layout(location = 0) in vec2 position;
+
+			uniform vec2 offset;
+
+			void main()
+			{
+				gl_Position = vec4(position.x + offset.x, position.y + offset.y, 0.0, 1.0);
+			})";
+		const std::string fragSource = R"(
+			#version 330 core
+			out vec4 color;
+
+			uniform vec3 col;
+
+			void main()
+			{
+				color = vec4(col,1.0f);
+			})";
+
+		//Compile vertexShader 
+
+		GLuint vertShader = glCreateShader(GL_VERTEX_SHADER);
+		const GLchar* vSource = vertexSource.c_str();
+		glShaderSource(vertShader, 1, &vSource, NULL);
+		glCompileShader(vertShader);
+		GLint success = false;
+		glGetShaderiv(vertShader, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			GLchar log[1024];
+			glGetShaderInfoLog(vertShader, 512, NULL, log);
+			throw Exception("Error:Vertex Shader's compilation failed,reason:\n" + std::string(log));
+		}
+
+		//Compile fragmentShader
+		
+		GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
+		const GLchar* fSource = fragSource.c_str();
+		glShaderSource(fragShader, 1, &fSource, NULL);
+		glCompileShader(fragShader);
+		glGetShaderiv(fragShader, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			GLchar log[1024];
+			glGetShaderInfoLog(fragShader, 512, NULL, log);
+			throw Exception("Error:Fragment Shader's compilation failed,reason:\n" + std::string(log));
+		}
+
+		//Link together
+
+		shader = glCreateProgram();
+		glAttachShader(shader, vertShader);
+		glAttachShader(shader, fragShader);
+		glLinkProgram(shader);
+		glGetProgramiv(shader, GL_LINK_STATUS, &success);
+		if (!success)
+		{
+			GLchar log[1024];
+			glGetProgramInfoLog(shader, 512, NULL, log);
+			throw Exception("Error:Shader's linkage has failed,reason:\n" + std::string(log));
+		}
+
+		glDeleteShader(fragShader);
+		glDeleteShader(vertShader);
+
 	}
 
 	void OpenGLBackEnd::CreateBufferObjects()
 	{
 		//One for Units, one for line trails
+		
 	}
 
 }

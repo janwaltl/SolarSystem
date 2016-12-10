@@ -1,24 +1,18 @@
 =====================================IN THIS COMMIT=====================================
-Added Viewer::Prepare() - to prepare anything with access to data-> so viewer knows how many units there are.
+Added shaders for Units.
 ========================================IMPLEMENTING PLAN========================================
-- Properly implement one integration method
-	- Test it with parser that returns hardoced data and textViewer
-		= Would be nice to be able to vizualize it, hard to determine if its working without it
-- Create OpenGLViewer
-	- get OpenGL working...
-- Create ImGUIViewer
-	- get ImGUI working with OpenGL
-- Make it prettier
-	- Proper parser
-	- RK4 method or other
-	- Proper UI with controls
-- Make sure it works correctly
-	- Speeding up the sim
-	- All ranges of input
-- Write documentation
-- If time is left, make it even more prettier
-	- add colors, scenarios
-	- probably dont move into 3D
+- About OpenGL
+	- Shaders - 
+	- Buffers - 
+	- There should be circles for each planet, they need to be moving
+		- So, fixed VBO for them, reused by each unit
+			- would store circle
+			- color and position would be controlled by uniforms
+	- There should be line trails behind the planets
+		- Lets say 50 line segments for each unit
+		- Sort of queue like system that would push old lines out and new lines in
+
+- Really needs normalization
 
 - Make proper IMGUIBackend
 ========================================THOUGHTS========================================

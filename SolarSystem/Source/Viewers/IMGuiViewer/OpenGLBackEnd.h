@@ -22,8 +22,10 @@ namespace solar
 		static void LoadShaders();
 		//Creates VAO,VBO,IBO for rendering of simData
 		static void CreateBufferObjects();
+
 		static GLFWwindow* win;
 		static std::string error;
+		static unsigned int shader;
 	};
 }
 
