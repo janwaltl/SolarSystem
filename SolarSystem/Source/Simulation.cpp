@@ -28,7 +28,7 @@ namespace solar
 
 		//Obtain the data, throws on invalid input(format)
 		data = parser->Load();
-
+		viewer->Prepare(data);
 		Loop();
 	}
 

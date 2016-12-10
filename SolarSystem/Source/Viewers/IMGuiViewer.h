@@ -14,6 +14,7 @@ namespace solar
 		~IMGuiViewer();
 
 		void operator()(simData_t& data) override final;
+		void Prepare(const simData_t& data) override final;
 	private:
 	};
 }

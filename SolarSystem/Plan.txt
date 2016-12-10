@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Refactoring of OpenGLBackend.
+Added Viewer::Prepare() - to prepare anything with access to data-> so viewer knows how many units there are.
 ========================================IMPLEMENTING PLAN========================================
 - Properly implement one integration method
 	- Test it with parser that returns hardoced data and textViewer

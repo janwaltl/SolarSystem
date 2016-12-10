@@ -38,4 +38,8 @@ namespace solar
 		ImGui::Render();
 	}
 
+	void IMGuiViewer::Prepare(const simData_t & data)
+	{
+	}
+
 }
