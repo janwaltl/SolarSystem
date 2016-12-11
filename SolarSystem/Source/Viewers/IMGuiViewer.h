@@ -17,7 +17,10 @@ namespace solar
 		void operator()(simData_t& data) override final;
 		void Prepare(const simData_t& data) override final;
 	private:
+		// Returns such scale factor, which when applied on all positions, yields positions between <-1,1>
+		double NormalizeData(const simData_t& data);
 		OpenGLBackend openGL;
+		double scaleFactor;
 	};
 }
 

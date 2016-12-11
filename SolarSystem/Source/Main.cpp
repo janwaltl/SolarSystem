@@ -4,7 +4,7 @@
 #include "Simulation.h"
 #include "Viewers/IMGuiViewer.h"
 #include "Parsers/TestingParser.h"
-#include "SimMethods/TestingSimMethod.h"
+#include "SimMethods/SemiImplicitEuler.h"
 #include "Exception.h"
 int main()
 {
@@ -17,7 +17,7 @@ int main()
 		{
 			auto parser = std::make_unique<TestingParser>();
 			auto viewer = std::make_unique<IMGuiViewer>();
-			auto method = std::make_unique<TestingSimMethod>();
+			auto method = std::make_unique<SemiImplicitEuler>();
 
 			Simulation sim(std::move(parser), std::move(method), std::move(viewer));
 			sim.Start(10ms, 300s);

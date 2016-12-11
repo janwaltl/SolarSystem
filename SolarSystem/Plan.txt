@@ -1,5 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Using Circular motion again. Will work on normalization.
+Finished normalization of data for viewer. Returnes back to SemiImplicitEuler.
+Everythings seems to be working - Earth orbiting Sun
+	- drawing big distances in <-1,1> via scaleFactor
+	- seems very stable - even with timestep of 10 days
 ========================================IMPLEMENTING PLAN========================================
 - About OpenGL
 	- Buffers - 
@@ -12,7 +15,11 @@ Using Circular motion again. Will work on normalization.
 		- Sort of queue like system that would push old lines out and new lines in
 
 - Really needs normalization
-
+	- scaleFactor and IMGuiViewer::NormalizeData()
+		- ensures that all data is normalized
+		- can be called by GUI whenever needed(such when one object gets out of view)
+		- can by multiplied to achieve zooming out/in
+	- can add offset, which can be applied after scale factor to allow for moving the view(eg. by mouse drag)
 - Make proper IMGUIBackend
 ========================================THOUGHTS========================================
 
