@@ -3,8 +3,8 @@
 
 #include "Simulation.h"
 #include "Viewers/IMGuiViewer.h"
-#include "Parsers/FormattedFileParser.h"
-#include "SimMethods/SemiImplicitEuler.h"
+#include "Parsers/TestingParser.h"
+#include "SimMethods/TestingSimMethod.h"
 #include "Exception.h"
 int main()
 {
@@ -15,9 +15,9 @@ int main()
 	{
 		try
 		{
-			auto parser = std::make_unique<FormattedFileParser>("vstup.txt");
+			auto parser = std::make_unique<TestingParser>();
 			auto viewer = std::make_unique<IMGuiViewer>();
-			auto method = std::make_unique<SemiImplicitEuler>();
+			auto method = std::make_unique<TestingSimMethod>();
 
 			Simulation sim(std::move(parser), std::move(method), std::move(viewer));
 			sim.Start(10ms, 300s);

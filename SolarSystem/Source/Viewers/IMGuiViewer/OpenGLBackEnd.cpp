@@ -68,9 +68,12 @@ namespace solar
 	void OpenGLBackend::DrawData(const simData_t & data)
 	{
 		unitS->Bind();
-		unitS->SetUniform4f("col", 0.0f, 1.0f, 0.0f, 1.0f);
-		unitS->SetUniform2f("offset", 0.85f, 0.0f);
-		circleB->Draw();
+		for (const auto& unit : data)
+		{
+			unitS->SetUniform4f("col", 0.0f, 1.0f, 0.0f, 1.0f);
+			unitS->SetUniform2f("offset", unit.pos.X(), unit.pos.Y());
+			circleB->Draw();
+		}
 		unitS->UnBind();
 	}
 

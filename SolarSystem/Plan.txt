@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Got Drawing working.
-
+Using Circular motion again. Will work on normalization.
 ========================================IMPLEMENTING PLAN========================================
 - About OpenGL
 	- Buffers - 

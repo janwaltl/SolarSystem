@@ -6,17 +6,18 @@
 
 namespace solar
 {
+	//Circular motion
 	class TestingSimMethod :public SimMethod
 	{
 	public:
-		TestingSimMethod(double st) :state(st) {};
+		TestingSimMethod() {};
 
 		void operator()(simData_t& data, double step) override final
 		{
-			std::cout << "Simulating " << data.size() << " data\n";
 			for (auto& e : data)
 			{
-				e.mass += state;
+				e.vel += step*Vec2{-e.pos.X(), -e.pos.Y()};
+				e.pos += step*e.vel;
 			}
 		}
 	private:

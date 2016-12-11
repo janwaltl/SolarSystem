@@ -12,6 +12,7 @@ namespace solar
 		Unit() :Unit({0.0,0.0}, {0.0,0.0}, 0.0) {}
 		Vec2 pos, vel;
 		double mass;
+
 	};
 }
 
