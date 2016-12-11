@@ -6,8 +6,7 @@ namespace solar
 	//Two dimensional vector of doubles
 	struct Vec2
 	{
-		Vec2(double x, double y) :x(x), y(y) {}
-		Vec2() :Vec2(0.0, 0.0) {}
+		Vec2(double x = 0.0, double y = 0.0) :x(x), y(y) {}
 		Vec2& operator+=(const Vec2& other)
 		{
 			this->x += other.x;

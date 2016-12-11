@@ -73,15 +73,23 @@ namespace solar
 		{
 			glUseProgram(0);
 		}
-		void Shader::SetUniform2f(const std::string & name, const float & x, const float & y) const
+		void Shader::SetUniform2f(const std::string& name, float x, float y) const
 		{
 			this->Bind();
 			glUniform2f(uniforms.at(name), x, y);
 		}
-		void Shader::SetUniform4f(const std::string& name, const float &x, const float &y, const float &z, const float &w) const
+		void Shader::SetUniform2f(const std::string & name, const Vec2 & vec) const
+		{
+			SetUniform2f(name, vec.X(), vec.Y());
+		}
+		void Shader::SetUniform4f(const std::string& name, float x, float y, float z, float w) const
 		{
 			this->Bind();
 			glUniform4f(uniforms.at(name), x, y, z, w);
+		}
+		void Shader::SetUniform4f(const std::string & name, const Vec4 & vec) const
+		{
+			SetUniform4f(name, vec.X(), vec.Y(), vec.Z(), vec.W());
 		}
 		void Shader::LoadUniforms()
 		{

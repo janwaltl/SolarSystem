@@ -1,8 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Finished normalization of data for viewer. Returnes back to SemiImplicitEuler.
-Everythings seems to be working - Earth orbiting Sun
-	- drawing big distances in <-1,1> via scaleFactor
-	- seems very stable - even with timestep of 10 days
+Added Vec4 - mainly for colors
+calling Shader::Uniforms with Vectors
+Added colors and names to Units.
 ========================================IMPLEMENTING PLAN========================================
 - About OpenGL
 	- Buffers - 

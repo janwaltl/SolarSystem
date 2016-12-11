@@ -2,6 +2,7 @@
 #define ELEMENTS_ELEMENT_HEADER
 
 #include "../Math/Math.h"
+#include <string>
 namespace solar
 {
 	//Basic unit of simulated data - planet, star, moon...
@@ -12,7 +13,8 @@ namespace solar
 		Unit() :Unit({0.0,0.0}, {0.0,0.0}, 0.0) {}
 		Vec2 pos, vel;
 		double mass;
-
+		Vec4 color;
+		std::string name;
 	};
 }
 

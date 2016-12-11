@@ -62,7 +62,7 @@ namespace solar
 
 	void OpenGLBackend::CreateBufferObjects(size_t numUnits)
 	{
-		circleB = std::make_unique<openGLBackend::CircleBuffer>(24, 0.01f);
+		circleB = std::make_unique<openGLBackend::CircleBuffer>(32, 0.01f);
 	}
 
 	void OpenGLBackend::DrawData(const simData_t & data, double scaleFactor)
@@ -70,8 +70,8 @@ namespace solar
 		unitS->Bind();
 		for (const auto& unit : data)
 		{
-			unitS->SetUniform4f("col", 0.0f, 1.0f, 0.0f, 1.0f);
-			unitS->SetUniform2f("offset", unit.pos.X()*scaleFactor, unit.pos.Y()*scaleFactor);
+			unitS->SetUniform4f("col", unit.color);
+			unitS->SetUniform2f("offset", scaleFactor*unit.pos);
 			circleB->Draw();
 		}
 		unitS->UnBind();

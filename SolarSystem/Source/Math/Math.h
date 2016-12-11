@@ -4,7 +4,7 @@
 
 #include <cmath>
 #include "Vec2.h"
-
+#include "Vec4.h"
 namespace solar
 {
 	const double PI = 4 * atan(1.0);

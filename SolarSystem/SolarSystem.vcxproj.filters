@@ -134,6 +134,9 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\CircleBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Math\Vec4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\LICENSE" />

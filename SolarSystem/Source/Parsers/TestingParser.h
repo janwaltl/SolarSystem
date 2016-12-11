@@ -13,11 +13,12 @@ namespace solar
 		simData_t Load() override final
 		{
 			std::cout << "Creating hardcoded data:\n";
-			Unit earth, sun,moon;
+			Unit earth, sun, moon;
 			earth.pos = {149'597'871'000.0,0.0};
 			earth.vel = {0,2 * PI / (365 * 24 * 3600) * earth.pos.X()};//One rotation per year
 			earth.mass = 5.9736e24;
-
+			earth.color = {0.1,0.2,1.0,1.0};
+			sun.color = {1.0, 1.0, 0.0, 1.0};
 			sun.mass = 332'950 * earth.mass;//Sun is 332 950 times heavier than Earth
 			/*
 			std::cout << "1. Earth: position(" << earth.pos.X() << ", " << earth.pos.Y() << ")\n";

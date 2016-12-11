@@ -3,6 +3,8 @@
 
 #include <string>
 #include <map>
+#include "../../../Math/Math.h"
+
 namespace solar
 {
 	namespace openGLBackend
@@ -23,8 +25,10 @@ namespace solar
 			void Bind() const;
 			void UnBind() const;
 
-			void SetUniform2f(const std::string& name, const float &x, const float &y) const;
-			void SetUniform4f(const std::string& name, const float &x, const float &y, const float &z, const float &w) const;
+			void SetUniform2f(const std::string& name, float x, float y) const;
+			void SetUniform2f(const std::string& name, const Vec2& vec) const;
+			void SetUniform4f(const std::string& name, float x, float y, float z, float w) const;
+			void SetUniform4f(const std::string& name, const Vec4& vec) const;
 		private:
 			//Obtains locations of shader's uniforms and stores them in the map
 			void LoadUniforms();

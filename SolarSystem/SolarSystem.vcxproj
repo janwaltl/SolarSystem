@@ -179,6 +179,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Common\SystemUnit.h" />
     <ClInclude Include="Source\Common\Common.h" />
+    <ClInclude Include="Source\Math\Vec4.h" />
     <ClInclude Include="Source\Parsers\FormattedFileParser.h" />
     <ClInclude Include="Source\SimMethods\SemiImplicitEuler.h" />
     <ClInclude Include="Source\Units\Unit.h" />
