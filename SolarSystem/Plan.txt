@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Cleaning up RK4.
+Just performance testing.
 ========================================IMPLEMENTING PLAN========================================
 - About OpenGL
 	- Buffers - 
