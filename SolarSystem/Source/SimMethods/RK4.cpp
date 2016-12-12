@@ -20,7 +20,6 @@ namespace solar
 	}
 	void RK4::operator()(simData_t & data, double step)
 	{
-
 		//Go through all pairs
 		auto computeKx = [&](size_t x, double mult)
 		{
@@ -34,7 +33,7 @@ namespace solar
 					auto distLR = dist(left.pos, right.pos);
 					distLR = distLR*distLR*distLR;
 					Vec2 dir = left.pos - right.pos;
-					Vec2 acc = -G / distLR * dir;
+					Vec2 acc = -physicsUnits::G / distLR * dir;
 					//Update left's and right's accelerations, store them in k1's acc
 					kXs[x][i].acc += acc*data[j].mass;
 					kXs[x][j].acc -= acc*data[i].mass;

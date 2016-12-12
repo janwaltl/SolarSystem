@@ -112,8 +112,8 @@ namespace solar
 		if (!val.empty())
 		{
 			size_t pos {};
-			unit.pos.X(std::stod(val, &pos));
-			unit.pos.Y(std::stod(val.substr(pos)));
+			unit.pos.X(std::stod(val, &pos)/physicsUnits::AUtoM);
+			unit.pos.Y(std::stod(val.substr(pos))/physicsUnits::AUtoM);
 		}
 	}
 
@@ -122,15 +122,15 @@ namespace solar
 		if (!val.empty())
 		{
 			size_t pos {};
-			unit.vel.X(std::stod(val, &pos));
-			unit.vel.Y(std::stod(val.substr(pos)));
+			unit.vel.X(std::stod(val, &pos)/physicsUnits::AUpYtoMpS);
+			unit.vel.Y(std::stod(val.substr(pos))/physicsUnits::AUpYtoMpS);
 		}
 	}
 
 	void FormattedFileParser::ParseMass(Unit & unit, const std::string & val)
 	{
 		if (!val.empty())
-			unit.mass = std::stod(val);
+			unit.mass = std::stod(val) / physicsUnits::SMtoKG;//Convert to Suns masses
 	}
 
 	void FormattedFileParser::ParseColor(Unit & unit, const std::string & val)

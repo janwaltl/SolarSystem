@@ -7,9 +7,6 @@
 #include "Vec4.h"
 namespace solar
 {
-	const double PI = 4 * atan(1.0);
-	const double G = 6.67191e-11;
-
 	inline double lengthsq(const Vec2& vec)
 	{
 		return vec.X()*vec.X() + vec.Y()*vec.Y();

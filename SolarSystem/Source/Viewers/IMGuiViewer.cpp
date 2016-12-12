@@ -28,7 +28,7 @@ namespace solar
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		//Render Data
-		openGL.DrawData(data,scaleFactor*20);//To fit data into <-0.8,0.8>
+		openGL.DrawData(data,scaleFactor*0.8);//To fit data into <-0.8,0.8>
 		ImGui_ImplGlfwGL3_NewFrame();
 
 		//Render GUI

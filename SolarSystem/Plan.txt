@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Just performance testing.
+Implemented normalization of units.
+ - Simulation is running in AU,years,suns masses.
 ========================================IMPLEMENTING PLAN========================================
 - About OpenGL
 	- Buffers - 
