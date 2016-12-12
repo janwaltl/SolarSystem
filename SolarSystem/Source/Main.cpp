@@ -3,19 +3,19 @@
 
 #include "Simulation.h"
 #include "Viewers/IMGuiViewer.h"
-#include "Parsers/TestingParser.h"
+#include "Parsers/FormattedFileParser.h"
 #include "SimMethods/SemiImplicitEuler.h"
 #include "Exception.h"
 int main()
 {
 	using namespace solar;
 	using namespace std::chrono_literals;
-
+	std::ios_base::sync_with_stdio(false);
 	try
 	{
 		try
 		{
-			auto parser = std::make_unique<TestingParser>();
+			auto parser = std::make_unique<FormattedFileParser>("vstup.txt");
 			auto viewer = std::make_unique<IMGuiViewer>();
 			auto method = std::make_unique<SemiImplicitEuler>();
 
@@ -27,6 +27,7 @@ int main()
 		catch (const Exception& e)
 		{
 			std::cout << "Simulation failed, reason:" << e.what();
+			system("PAUSE");
 		}
 	}
 	catch (...)

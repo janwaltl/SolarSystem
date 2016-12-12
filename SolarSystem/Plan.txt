@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Added Vec4 - mainly for colors
-calling Shader::Uniforms with Vectors
-Added colors and names to Units.
+Using formattedFileParser.
 ========================================IMPLEMENTING PLAN========================================
 - About OpenGL
 	- Buffers - 

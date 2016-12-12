@@ -52,8 +52,8 @@ namespace solar
 		double W() const { return w; }
 		void X(double newX) { x = newX; }
 		void Y(double newY) { y = newY; }
-		void Z(double newZ) { y = newZ; }
-		void W(double newW) { y = newW; }
+		void Z(double newZ) { z = newZ; }
+		void W(double newW) { w = newW; }
 	private:
 		double x, y, z, w;
 	};

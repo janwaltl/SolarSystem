@@ -36,7 +36,7 @@ namespace solar
 			throw Exception("GLEW initialization failed.");
 
 		glViewport(0, 0, width, height); // sets correct coordinate viewport
-		//glfwSwapInterval(0);
+		glfwSwapInterval(0);
 
 		CreateShaders();///IF IT Throws, glfw needs to be destroyed
 	}

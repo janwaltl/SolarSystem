@@ -48,12 +48,15 @@ namespace solar
 			auto tmp = acc;///LOGGING
 			while (acc > dtime)
 			{
-				(*simMethod)(data, ToSecs(1h));
-				simTime += 1h;
+				for (int i = 0; i < 30; i++)
+				{
+					(*simMethod)(data, ToSecs(1h));
+					simTime += 1h;
+				}
 				acc -= dtime;
 			}
 			///LOGGING
-			std::cout << "\t Simulated Time" << ToSecs(tmp - acc) << std::endl;
+			//std::cout << "\t Simulated Time" << ToSecs(tmp - acc) << std::endl;
 
 			(*viewer)(data);
 		}
@@ -77,7 +80,10 @@ namespace solar
 		auto frameTime = now - prevTime;
 		prevTime = now;
 		runTime = now - begining;
-		acc += frameTime;
+		if (frameTime > 1s)
+			acc += 1s;
+		else
+			acc += frameTime;
 		///LOGGING
 		std::cout << "FrameTime: " << frameTime.count() / double(decltype(frameTime)::period::den) << "secs\n";
 		return frameTime;

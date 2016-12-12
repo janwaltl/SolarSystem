@@ -72,28 +72,20 @@ namespace solar
 	Unit FormattedFileParser::ParseUnit(const std::string& str)
 	{
 		Unit unit;
-		//auto name = ParseToken(str, "name");
-		try
-		{
-			ParsePosition(unit, ParseToken(str, "position"));
-		}
-		catch (const std::logic_error& e)//std::stod threw out-of-range or invalid-argument
-		{ throw Exception("Invalid Format: Unit's position could not be parsed, reason: " + std::string(e.what())); }
+		auto parse = [str = str, &unit = unit](auto fnc, const std::string& token) {
+			try
+			{
+				fnc(unit, ParseToken(str, token));
+			}
+			catch (const std::logic_error& e)//std::stod threw out-of-range or invalid-argument
+			{ throw Exception("Invalid Format: Unit's " + token + "could not be parsed, reason: " + std::string(e.what())); }
+		};
 
-		try
-		{
-			ParseVelocity(unit, ParseToken(str, "velocity"));
-		}
-		catch (const std::logic_error& e)//std::stod threw out-of-range or invalid-argument
-		{ throw Exception("Invalid Format: Unit's velocity could not be parsed, reason: " + std::string(e.what())); }
-
-		try
-		{
-			ParseMass(unit, ParseToken(str, "mass"));
-		}
-		catch (const std::logic_error& e)//std::stod threw out-of-range or invalid-argument
-		{ throw Exception("Invalid Format: Unit's mass could not be parsed, reason: " + std::string(e.what())); }
-
+		parse(ParsePosition, "position");
+		parse(ParseVelocity, "velocity");
+		parse(ParseMass, "mass");
+		parse(ParseColor, "color");
+		parse(ParseName, "name");
 
 		return unit;
 	}
@@ -139,6 +131,26 @@ namespace solar
 	{
 		if (!val.empty())
 			unit.mass = std::stod(val);
+	}
+
+	void FormattedFileParser::ParseColor(Unit & unit, const std::string & val)
+	{
+		if (!val.empty())
+		{
+			size_t pos {};
+			unit.color.X(std::stod(val, &pos));
+			std::string tmp = val.substr(pos);
+			unit.color.Y(std::stod(tmp, &pos));
+			tmp = tmp.substr(pos);
+			unit.color.Z(std::stod(tmp, &pos));
+			tmp = tmp.substr(pos);
+			unit.color.W(std::stod(tmp));
+		}
+	}
+
+	void FormattedFileParser::ParseName(Unit & unit, const std::string & val)
+	{
+		unit.name = val;
 	}
 
 	std::string FormattedFileParser::SerializeUnit(const Unit & unit)

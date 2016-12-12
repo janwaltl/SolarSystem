@@ -35,7 +35,7 @@ namespace solar
 		{
 			ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Always);
 			ImGui::Begin("Window", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-			ImGui::Text("Testing text.");
+			ImGui::Text(std::to_string(length(data[2].pos)).c_str());
 			ImGui::End();
 		}
 		ImGui::Render();

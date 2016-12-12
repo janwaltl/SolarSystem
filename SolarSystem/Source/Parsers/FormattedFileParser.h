@@ -14,16 +14,18 @@ namespace solar
 		simData_t Load() override final;
 		void Save(const simData_t& data) override final;
 	private:
-		Unit ParseUnit(const std::string& str);
+		static Unit ParseUnit(const std::string& str);
 		//Str must in format of' token=<val>', where val is returned string
 		//Throws Exception if invalid
-		std::string ParseToken(const std::string&str, const std::string& token);
+		static std::string ParseToken(const std::string&str, const std::string& token);
 
-		void ParsePosition(Unit& unit, const std::string& val);
-		void ParseVelocity(Unit& unit, const std::string& val);
-		void ParseMass(Unit& unit, const std::string& val);
+		static void ParsePosition(Unit& unit, const std::string& val);
+		static void ParseVelocity(Unit& unit, const std::string& val);
+		static void ParseMass(Unit& unit, const std::string& val);
+		static void ParseColor(Unit& unit, const std::string& val);
+		static void ParseName(Unit& unit, const std::string& val);
+		static std::string SerializeUnit(const Unit& unit);
 
-		std::string SerializeUnit(const Unit& unit);
 		const std::string inFileName, outFileName;
 		std::string input;
 	};
