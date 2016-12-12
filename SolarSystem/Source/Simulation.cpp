@@ -28,6 +28,7 @@ namespace solar
 
 		//Obtain the data, throws on invalid input(format)
 		data = parser->Load();
+		simMethod->Prepare(data);
 		viewer->Prepare(data);
 		Loop();
 	}
@@ -48,7 +49,7 @@ namespace solar
 			auto tmp = acc;///LOGGING
 			while (acc > dtime)
 			{
-				for (int i = 0; i < 1000; i++)
+				for (int i = 0; i < 10; i++)
 				{
 					(*simMethod)(data, ToSecs(1min));
 					simTime += 1min;
