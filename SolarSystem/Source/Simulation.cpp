@@ -48,10 +48,10 @@ namespace solar
 			auto tmp = acc;///LOGGING
 			while (acc > dtime)
 			{
-				for (int i = 0; i < 30; i++)
+				for (int i = 0; i < 1000; i++)
 				{
-					(*simMethod)(data, ToSecs(1h));
-					simTime += 1h;
+					(*simMethod)(data, ToSecs(1min));
+					simTime += 1min;
 				}
 				acc -= dtime;
 			}

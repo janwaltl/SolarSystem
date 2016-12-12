@@ -4,6 +4,7 @@
 #include "Simulation.h"
 #include "Viewers/IMGuiViewer.h"
 #include "Parsers/FormattedFileParser.h"
+#include "SimMethods/RK4.h"
 #include "SimMethods/SemiImplicitEuler.h"
 #include "Exception.h"
 int main()
@@ -17,7 +18,7 @@ int main()
 		{
 			auto parser = std::make_unique<FormattedFileParser>("vstup.txt");
 			auto viewer = std::make_unique<IMGuiViewer>();
-			auto method = std::make_unique<SemiImplicitEuler>();
+			auto method = std::make_unique<RK4>();
 
 			Simulation sim(std::move(parser), std::move(method), std::move(viewer));
 			sim.Start(10ms, 300s);

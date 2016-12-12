@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Using formattedFileParser.
+Got RK4 working.
 ========================================IMPLEMENTING PLAN========================================
 - About OpenGL
 	- Buffers - 
