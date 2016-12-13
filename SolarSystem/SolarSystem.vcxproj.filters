@@ -77,15 +77,6 @@
     <ClInclude Include="Source\Common\Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Viewers\TextViewer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SimMethods\TestingSimMethod.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Parsers\TestingParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Common\SystemUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>

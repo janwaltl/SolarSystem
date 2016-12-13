@@ -18,7 +18,7 @@ namespace solar
 	{
 	public:
 		//Initializes OpenGL(GLFW & GLEW) and creates GLFWwindow
-		OpenGLBackend(int width, int height, const std::string& title);
+		OpenGLBackend(int width, int height, const std::string& title, float circleSize, size_t circleResolution);
 		//Destroys OpenGL context and GLFW window
 		~OpenGLBackend();
 		GLFWwindow* GetWin();
@@ -43,6 +43,9 @@ namespace solar
 		//Used for drawing Units
 		std::unique_ptr<openGLBackend::CircleBuffer> circleB;
 
+		double aspectRatio;
+		float cSize;
+		size_t cResolution;
 	};
 }
 

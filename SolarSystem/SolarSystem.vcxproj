@@ -189,9 +189,7 @@
     <ClInclude Include="Source\Math\Math.h" />
     <ClInclude Include="Source\Math\Vec2.h" />
     <ClInclude Include="Source\Parsers\Parser.h" />
-    <ClInclude Include="Source\Parsers\TestingParser.h" />
     <ClInclude Include="Source\SimMethods\SimMethod.h" />
-    <ClInclude Include="Source\SimMethods\TestingSimMethod.h" />
     <ClInclude Include="Source\Simulation.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imconfig.h" />
@@ -204,7 +202,6 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\CircleBuffer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\Shader.h" />
-    <ClInclude Include="Source\Viewers\TextViewer.h" />
     <ClInclude Include="Source\Viewers\Viewer.h" />
   </ItemGroup>
   <ItemGroup>

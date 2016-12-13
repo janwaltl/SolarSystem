@@ -10,9 +10,13 @@ namespace solar
 {
 	std::string OpenGLBackend::error;
 
-	OpenGLBackend::OpenGLBackend(int width, int height, const std::string & title) :
+	OpenGLBackend::OpenGLBackend(int width, int height, const std::string & title, float circleSize,
+								 size_t circleResolution) :
 		unitS(nullptr)
 	{
+		aspectRatio = double(width) / height;
+		cSize = circleSize;
+		cResolution = circleResolution;
 		if (glfwInit() == GL_FALSE)
 			throw Exception("Cannot initialize GLFW library.");
 
@@ -62,7 +66,7 @@ namespace solar
 
 	void OpenGLBackend::CreateBufferObjects(size_t numUnits)
 	{
-		circleB = std::make_unique<openGLBackend::CircleBuffer>(32, 0.01f);
+		circleB = std::make_unique<openGLBackend::CircleBuffer>(cResolution, cSize);
 	}
 
 	void OpenGLBackend::DrawData(const simData_t & data, double scaleFactor)
@@ -80,6 +84,7 @@ namespace solar
 	void OpenGLBackend::CreateShaders()
 	{
 		unitS = std::make_unique<openGLBackend::Shader>(GetUnitVertSource(), GetUnitFragSource());
+		unitS->SetUniform2f("AR", {aspectRatio,1.0});
 	}
 
 
@@ -90,10 +95,10 @@ namespace solar
 			layout(location = 0) in vec2 position;
 
 			uniform vec2 offset;
-
+			uniform vec2 AR;
 			void main()
 			{
-				gl_Position = vec4(position.x + offset.x, position.y + offset.y, 0.0, 1.0);
+				gl_Position = vec4(position.x + offset.x,AR.x*( position.y + offset.y), 0.0, 1.0);
 			})";
 	}
 

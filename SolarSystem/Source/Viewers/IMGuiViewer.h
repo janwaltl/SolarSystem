@@ -11,7 +11,9 @@ namespace solar
 	class IMGuiViewer :public Viewer
 	{
 	public:
-		IMGuiViewer();
+		// Properties of created window
+		IMGuiViewer(int width, int height, const std::string& title = "Simulation", float circleSize = 0.01f,
+					size_t circleRes = 32);
 		~IMGuiViewer();
 
 		void operator()(simData_t& data) override final;

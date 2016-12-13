@@ -1,7 +1,12 @@
 =====================================IN THIS COMMIT=====================================
-Implemented normalization of units.
- - Simulation is running in AU,years,suns masses.
+Cleaning...
+Added few parameter options to IMGUIViewer and OpenGLBackend.
+Got Aspect ratio working.
+
 ========================================IMPLEMENTING PLAN========================================
+Next:
+	
+
 - About OpenGL
 	- Buffers - 
 	- There should be circles for each planet, they need to be moving
@@ -21,14 +26,6 @@ Implemented normalization of units.
 - Make proper IMGUIBackend
 ========================================THOUGHTS========================================
 
-Coordinates 
-	- Input will probably be in actual units - like KM, AU or something
-	- It can be simulated with doubles just fine, I guess. 
-	  But OpenGL won't draw it, needs to be normalized a little.
-		- Hope doubles can handle that too.
-OpenGL
-	- will need StartUp method - constructor might be fine
-		- maybe with static flag to do it just once
 Controlling the simulation
 	- By viewer - ability to Stop(End), Pause the simulation as well controlling its speed
 					- Pause = just render

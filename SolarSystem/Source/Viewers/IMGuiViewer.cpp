@@ -7,8 +7,9 @@
 
 namespace solar
 {
-	IMGuiViewer::IMGuiViewer():
-		openGL(640, 640, "Simulation"),scaleFactor(1.0)
+	IMGuiViewer::IMGuiViewer(int width, int height, const std::string& title /*= "Simulation"*/,
+							 float circleSize /*= 0.01f*/, size_t circleRes /*= 32*/) :
+		openGL(width, height, title,circleSize,circleRes), scaleFactor(1.0)
 	{
 		ImGui_ImplGlfwGL3_Init(openGL.GetWin(), true);
 	}
@@ -28,17 +29,17 @@ namespace solar
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		//Render Data
-		openGL.DrawData(data,scaleFactor*0.8);//To fit data into <-0.8,0.8>
-		ImGui_ImplGlfwGL3_NewFrame();
+		openGL.DrawData(data, scaleFactor*0.8);//To fit data into <-0.8,0.8>
 
 		//Render GUI
 		{
+			ImGui_ImplGlfwGL3_NewFrame();
 			ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Always);
 			ImGui::Begin("Window", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 			ImGui::Text(std::to_string(length(data[2].pos)).c_str());
 			ImGui::End();
+			ImGui::Render();
 		}
-		ImGui::Render();
 	}
 
 	void IMGuiViewer::Prepare(const simData_t & data)
@@ -67,7 +68,7 @@ namespace solar
 
 		auto maxL = length(max);
 		auto minL = length(min);
-		return 1.0 / ( maxL>minL ? maxL : minL);
+		return 1.0 / (maxL > minL ? maxL : minL);
 	}
 
 }
