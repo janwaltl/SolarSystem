@@ -177,10 +177,10 @@
     <ClCompile Include="Source\SimMethods\SemiImplicitEuler.cpp" />
     <ClCompile Include="Source\Simulation.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\GUIDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\ImGuiBackend.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_draw.cpp" />
-    <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\CircleBuffer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\Shader.cpp" />
@@ -200,10 +200,10 @@
     <ClInclude Include="Source\SimMethods\SimMethod.h" />
     <ClInclude Include="Source\Simulation.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\GUIDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\ImGuiBackend.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imconfig.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_impl_glfw_gl3.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_internal.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_rect_pack.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_textedit.h" />

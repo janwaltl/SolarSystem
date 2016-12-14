@@ -4,6 +4,7 @@
 #include "Viewer.h"
 #include "IMGuiViewer/OpenGLBackEnd.h"
 #include "IMGuiViewer/ImGuiBackend.h"
+#include "IMGuiViewer/GUIDrawer.h"
 struct GLFWwindow;
 
 namespace solar
@@ -14,7 +15,7 @@ namespace solar
 		// Properties of created window
 		IMGuiViewer(int width, int height, const std::string& title = "Simulation", float circleSize = 0.01f,
 					size_t circleRes = 32);
-		~IMGuiViewer();
+		~IMGuiViewer() = default;
 
 		void operator()(simData_t& data) override final;
 		void Prepare(const simData_t& data) override final;
@@ -23,6 +24,7 @@ namespace solar
 		double NormalizeData(const simData_t& data);
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT
+		GUIDrawer gui;
 		double scaleFactor;
 	};
 }

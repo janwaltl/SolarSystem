@@ -39,20 +39,7 @@ namespace solar
 		glDeleteVertexArrays(1, &VAO);
 		ImGui::Shutdown();
 	}
-	void IMGuiBackend::DrawGUI()
-	{
-		NewFrame();
 
-		ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Once);
-		ImGui::SetNextWindowSize(ImVec2(150, 400), ImGuiSetCond_Once);
-		ImGui::Begin("Window");
-		ImGui::Text("Text");
-		ImGui::Button("Button");
-		ImGui::End();
-		ImGui::Render();
-
-		Render();
-	}
 	void IMGuiBackend::SetImGUISettings()
 	{
 		ImGuiIO& io = ImGui::GetIO();
@@ -80,7 +67,7 @@ namespace solar
 		glfwGetWindowSize(win, &w, &h);
 		io.DisplaySize = {static_cast<float>(w),static_cast<float>(h)};
 
-		//Register Render function
+		//Register Draw function
 		io.RenderDrawListsFn = IMGuiBackend::RenderFnc;
 
 	}
@@ -231,7 +218,7 @@ namespace solar
 		glDisable(GL_SCISSOR_TEST);
 	}
 
-	void IMGuiBackend::KeyCallback(GLFWwindow* , int key, int, int action, int)
+	void IMGuiBackend::KeyCallback(GLFWwindow*, int key, int, int action, int)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 
@@ -247,13 +234,13 @@ namespace solar
 		//Windows key??
 	}
 
-	void IMGuiBackend::MouseScrollCallback(GLFWwindow* , double , double dy)
+	void IMGuiBackend::MouseScrollCallback(GLFWwindow*, double, double dy)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseWheel += static_cast<float>(dy);
 	}
 
-	void IMGuiBackend::MouseButtonCallback(GLFWwindow* , int button, int action, int )
+	void IMGuiBackend::MouseButtonCallback(GLFWwindow*, int button, int action, int)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 
@@ -267,7 +254,7 @@ namespace solar
 		}
 	}
 
-	void IMGuiBackend::MousePositionCallback(GLFWwindow* , double xpos, double ypos)
+	void IMGuiBackend::MousePositionCallback(GLFWwindow*, double xpos, double ypos)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 

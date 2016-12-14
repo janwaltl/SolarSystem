@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-New IMGuiBackend. Seems working fine.
-
+Refactoring - Created separated class for rendering of GUI
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	

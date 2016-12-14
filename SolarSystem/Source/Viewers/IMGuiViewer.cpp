@@ -1,7 +1,6 @@
 #include "IMGuiViewer.h"
 
 #include "IMGuiViewer/OpenGLBackEnd.h"
-#include "IMGuiViewer/IMGuiLibrary/imgui_impl_glfw_gl3.h"
 #include <GLFW/glfw3.h>
 #include <algorithm>
 
@@ -9,15 +8,10 @@ namespace solar
 {
 	IMGuiViewer::IMGuiViewer(int width, int height, const std::string& title /*= "Simulation"*/,
 							 float circleSize /*= 0.01f*/, size_t circleRes /*= 32*/) :
-		openGL(width, height, title,circleSize,circleRes),imguiBackend(openGL.GetWin()), scaleFactor(1.0)
+		openGL(width, height, title, circleSize, circleRes), imguiBackend(openGL.GetWin()), scaleFactor(1.0)
 	{
-		//ImGui_ImplGlfwGL3_Init(openGL.GetWin(), true);
 	}
 
-	IMGuiViewer::~IMGuiViewer()
-	{
-		//ImGui_ImplGlfwGL3_Shutdown();
-	}
 
 	void IMGuiViewer::operator()(simData_t & data)
 	{
@@ -28,12 +22,11 @@ namespace solar
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//Render Data
+		//Draw Data
 		openGL.DrawData(data, scaleFactor*0.8);//To fit data into <-0.8,0.8>
-		
-		//Render GUI
-		imguiBackend.DrawGUI();
-		//	ImGui_ImplGlfwGL3_NewFrame();
+		imguiBackend.NewFrame();
+		gui.Draw(data);//Draw GUI
+		imguiBackend.Render();
 	}
 
 	void IMGuiViewer::Prepare(const simData_t & data)
