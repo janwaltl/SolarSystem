@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Cleaning...
-Added few parameter options to IMGUIViewer and OpenGLBackend.
-Got Aspect ratio working.
+New IMGuiBackend. Seems working fine.
 
 ========================================IMPLEMENTING PLAN========================================
 Next:

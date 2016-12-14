@@ -57,6 +57,9 @@
     <ClCompile Include="Source\SimMethods\RK4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Viewers\IMGuiViewer\ImGuiBackend.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Simulation.h">
@@ -132,6 +135,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\SimMethods\RK4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\ImGuiBackend.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

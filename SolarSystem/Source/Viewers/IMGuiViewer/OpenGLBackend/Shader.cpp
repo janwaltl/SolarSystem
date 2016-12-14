@@ -73,6 +73,11 @@ namespace solar
 		{
 			glUseProgram(0);
 		}
+		void Shader::SetUniform1i(const std::string & name, int i) const
+		{
+			this->Bind();
+			glUniform1i(uniforms.at(name), i);
+		}
 		void Shader::SetUniform2f(const std::string& name, float x, float y) const
 		{
 			this->Bind();
@@ -90,6 +95,11 @@ namespace solar
 		void Shader::SetUniform4f(const std::string & name, const Vec4 & vec) const
 		{
 			SetUniform4f(name, vec.X(), vec.Y(), vec.Z(), vec.W());
+		}
+		void Shader::SetUniform4Mat(const std::string & name, const float mat[4][4]) const
+		{
+			this->Bind();
+			glUniformMatrix4fv(uniforms.at(name), 1, false, *mat);
 		}
 		void Shader::LoadUniforms()
 		{

@@ -9,14 +9,14 @@ namespace solar
 {
 	IMGuiViewer::IMGuiViewer(int width, int height, const std::string& title /*= "Simulation"*/,
 							 float circleSize /*= 0.01f*/, size_t circleRes /*= 32*/) :
-		openGL(width, height, title,circleSize,circleRes), scaleFactor(1.0)
+		openGL(width, height, title,circleSize,circleRes),imguiBackend(openGL.GetWin()), scaleFactor(1.0)
 	{
-		ImGui_ImplGlfwGL3_Init(openGL.GetWin(), true);
+		//ImGui_ImplGlfwGL3_Init(openGL.GetWin(), true);
 	}
 
 	IMGuiViewer::~IMGuiViewer()
 	{
-		ImGui_ImplGlfwGL3_Shutdown();
+		//ImGui_ImplGlfwGL3_Shutdown();
 	}
 
 	void IMGuiViewer::operator()(simData_t & data)
@@ -30,16 +30,10 @@ namespace solar
 
 		//Render Data
 		openGL.DrawData(data, scaleFactor*0.8);//To fit data into <-0.8,0.8>
-
+		
 		//Render GUI
-		{
-			ImGui_ImplGlfwGL3_NewFrame();
-			ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Always);
-			ImGui::Begin("Window", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-			ImGui::Text(std::to_string(length(data[2].pos)).c_str());
-			ImGui::End();
-			ImGui::Render();
-		}
+		imguiBackend.DrawGUI();
+		//	ImGui_ImplGlfwGL3_NewFrame();
 	}
 
 	void IMGuiViewer::Prepare(const simData_t & data)

@@ -3,7 +3,7 @@
 
 #include "Viewer.h"
 #include "IMGuiViewer/OpenGLBackEnd.h"
-
+#include "IMGuiViewer/ImGuiBackend.h"
 struct GLFWwindow;
 
 namespace solar
@@ -21,7 +21,8 @@ namespace solar
 	private:
 		// Returns such scale factor, which when applied on all positions, yields positions between <-1,1>
 		double NormalizeData(const simData_t& data);
-		OpenGLBackend openGL;
+		OpenGLBackend openGL;	  //ORDER-DEPENDENT
+		IMGuiBackend imguiBackend;//ORDER-DEPENDENT
 		double scaleFactor;
 	};
 }
