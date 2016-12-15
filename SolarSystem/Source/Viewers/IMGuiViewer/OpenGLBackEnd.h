@@ -25,7 +25,7 @@ namespace solar
 		// Creates VAOs for Units(CircleBuffer) and line trails
 		void CreateBufferObjects(size_t numUnits);
 		// Draws simulated data
-		void DrawData(const simData_t& data, double scaleFactor);
+		void DrawData(const simData_t& data, double scaleFactor,const Vec2& offset);
 	private:
 		static void ErrorCallback(int err, const char* description);
 

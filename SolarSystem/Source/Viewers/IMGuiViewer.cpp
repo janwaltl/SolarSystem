@@ -8,7 +8,8 @@ namespace solar
 {
 	IMGuiViewer::IMGuiViewer(int width, int height, const std::string& title /*= "Simulation"*/,
 							 float circleSize /*= 0.01f*/, size_t circleRes /*= 32*/) :
-		openGL(width, height, title, circleSize, circleRes), imguiBackend(openGL.GetWin()), scaleFactor(1.0)
+		openGL(width, height, title, circleSize, circleRes), imguiBackend(openGL.GetWin()), gui(this),
+		scaleFactor(1.0),offset(0.0,0.0)
 	{
 	}
 
@@ -22,22 +23,42 @@ namespace solar
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//Draw Data
-		openGL.DrawData(data, scaleFactor*0.8);//To fit data into <-0.8,0.8>
 		imguiBackend.NewFrame();
 		gui.Draw(data);//Draw GUI
 		imguiBackend.Render();
+		//Draw Data
+		openGL.DrawData(data, scaleFactor,offset);
 	}
 
 	void IMGuiViewer::Prepare(const simData_t & data)
 	{
 		openGL.CreateBufferObjects(data.size());
-		scaleFactor = NormalizeData(data);
+		ResetZoom(data);
+		scaleFactor *= 0.8;//To fit data into <-0.8,0.8> initially
 	}
 
-	double IMGuiViewer::NormalizeData(const simData_t & data)
+	double IMGuiViewer::ScaleFactor()
 	{
+		return scaleFactor;
+	}
 
+	void IMGuiViewer::ScaleFactor(double newFactor)
+	{
+		scaleFactor = newFactor;
+	}
+
+	void IMGuiViewer::Move(const Vec2 newOffset)
+	{
+		offset = newOffset;
+	}
+
+	Vec2 IMGuiViewer::GetOffset()
+	{
+		return offset;
+	}
+
+	void IMGuiViewer::ResetZoom(const simData_t & data)
+	{
 		Vec2 max {std::numeric_limits<double>::min(),std::numeric_limits<double>::min()};
 		Vec2 min {std::numeric_limits<double>::max(),std::numeric_limits<double>::max()};
 
@@ -55,7 +76,7 @@ namespace solar
 
 		auto maxL = length(max);
 		auto minL = length(min);
-		return 1.0 / (maxL > minL ? maxL : minL);
+		scaleFactor =  1.0 / (maxL > minL ? maxL : minL);
 	}
 
 }

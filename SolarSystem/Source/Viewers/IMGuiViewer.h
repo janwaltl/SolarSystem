@@ -19,13 +19,21 @@ namespace solar
 
 		void operator()(simData_t& data) override final;
 		void Prepare(const simData_t& data) override final;
+
+		double ScaleFactor();
+		void ScaleFactor(double newFactor);
+
+		void Move(const Vec2 newOffset);
+		Vec2 GetOffset();
+		// Zooms enough to see whole solar system
+		// Sets such scale factor, which when applied on all positions, yields positions between <-1,1>
+		void ResetZoom(const simData_t& data);
 	private:
-		// Returns such scale factor, which when applied on all positions, yields positions between <-1,1>
-		double NormalizeData(const simData_t& data);
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT
 		GUIDrawer gui;
 		double scaleFactor;
+		Vec2 offset;
 	};
 }
 

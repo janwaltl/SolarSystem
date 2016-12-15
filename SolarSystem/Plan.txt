@@ -1,5 +1,12 @@
 =====================================IN THIS COMMIT=====================================
-Refactoring - Created separated class for rendering of GUI
+Working on the GUI:
+-Added option to follow a planet.
+-Made IMGuiViewer::NormalizeData() public and renamed to ResetZoom().
+
+- Will need refactoring into more object-oriented code.
+	- Links between functions and objects seem clumsy.
+		- data from Drawer stored, yet passed every frame...
+		- maybe could be cleaned up by adding GUIDrawer::Prepare method.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	

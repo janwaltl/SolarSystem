@@ -35,5 +35,5 @@ int main()
 	{
 		std::cout << "UNCAUGHT EXCEPTION";
 	}
-	return false;
+	return true;
 }

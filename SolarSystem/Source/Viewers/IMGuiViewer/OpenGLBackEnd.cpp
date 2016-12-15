@@ -69,13 +69,13 @@ namespace solar
 		circleB = std::make_unique<openGLBackend::CircleBuffer>(cResolution, cSize);
 	}
 
-	void OpenGLBackend::DrawData(const simData_t & data, double scaleFactor)
+	void OpenGLBackend::DrawData(const simData_t & data, double scaleFactor, const Vec2& offset)
 	{
 		unitS->Bind();
 		for (const auto& unit : data)
 		{
 			unitS->SetUniform4f("col", unit.color);
-			unitS->SetUniform2f("offset", scaleFactor*unit.pos);
+			unitS->SetUniform2f("offset", scaleFactor*unit.pos + offset);
 			circleB->Draw();
 		}
 		unitS->UnBind();
