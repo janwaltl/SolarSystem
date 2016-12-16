@@ -6,7 +6,7 @@
 namespace solar
 {
 	GUIDrawer::GUIDrawer(IMGuiViewer * parent) :
-		viewer(parent),follow(false)
+		viewer(parent), follow(false)
 	{
 		assert(viewer);
 	}
@@ -16,20 +16,32 @@ namespace solar
 		ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Once);
 		ImGui::SetNextWindowSize(ImVec2(150, 400), ImGuiSetCond_Once);
 
-		ImGui::Begin("Window");
-		ImGui::Text(std::to_string(length(data[3].pos)).c_str());
-		ImGui::Button("Button");
-		ZoomControl();
-		if (!follow)
-		{
-			ManualControls();
-			OfferFollow();
-		}
-		else//following a planet
-			Following();
-
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, {0.0f,0.0f,0.0f,0.0f});
+		ImGui::Begin("Window",NULL,ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoCollapse);
+		ImGui::Text("%.6f",length(data[3].pos));
 		ImGui::End();
-		ImGui::Render();
+		ImGui::PopStyleColor();
+
+		ControlsWin();
+
+	}
+	void GUIDrawer::ControlsWin()
+	{
+		ImGui::SetNextWindowPos(ImVec2(1000, 10), ImGuiSetCond_Once);
+		ImGui::SetNextWindowSize(ImVec2(200, 200), ImGuiSetCond_Once);
+
+		if (ImGui::Begin("Controls"))
+		{
+			ZoomControl();
+			if (!follow)
+			{
+				ManualControls();
+				OfferFollow();
+			}
+			else//following a planet
+				Following();
+			ImGui::End();
+		}
 	}
 	void GUIDrawer::ManualControls()
 	{
@@ -46,7 +58,7 @@ namespace solar
 		//10.0f means, that slider acts like f(x)=x^10, thus being more smooth around zero, which allows for
 		//"slower" and more precise zoom on planet-scale.
 		float tmp = static_cast<float>(viewer->ScaleFactor());
-		ImGui::SliderFloat("Zoom", &tmp, 0.0001f, 100.0f,"%.4f",10.0f);
+		ImGui::SliderFloat("Zoom", &tmp, 0.0001f, 100.0f, "%.4f", 10.0f);
 		viewer->ScaleFactor(tmp);
 	}
 	void GUIDrawer::Following()

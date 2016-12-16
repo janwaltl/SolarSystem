@@ -14,6 +14,7 @@ namespace solar
 		GUIDrawer(IMGuiViewer* parent);
 		void Draw(simData_t& data);
 	private:
+		void ControlsWin();
 		//Manually control position of the simulation
 		void ManualControls();
 		void ZoomControl();

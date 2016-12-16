@@ -9,7 +9,7 @@ namespace solar
 	IMGuiViewer::IMGuiViewer(int width, int height, const std::string& title /*= "Simulation"*/,
 							 float circleSize /*= 0.01f*/, size_t circleRes /*= 32*/) :
 		openGL(width, height, title, circleSize, circleRes), imguiBackend(openGL.GetWin()), gui(this),
-		scaleFactor(1.0),offset(0.0,0.0)
+		scaleFactor(1.0), offset(0.0, 0.0)
 	{
 	}
 
@@ -23,11 +23,13 @@ namespace solar
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		// Order dependent
+		// Process GUI, then render Units, THEN render GUI.
+		// So GUI is rendered over the Units, but processed before them to be able to set correct scaleFactor, offset
 		imguiBackend.NewFrame();
-		gui.Draw(data);//Draw GUI
+		gui.Draw(data);
+		openGL.DrawData(data, scaleFactor, offset);
 		imguiBackend.Render();
-		//Draw Data
-		openGL.DrawData(data, scaleFactor,offset);
 	}
 
 	void IMGuiViewer::Prepare(const simData_t & data)
@@ -76,7 +78,7 @@ namespace solar
 
 		auto maxL = length(max);
 		auto minL = length(min);
-		scaleFactor =  1.0 / (maxL > minL ? maxL : minL);
+		scaleFactor = 1.0 / (maxL > minL ? maxL : minL);
 	}
 
 }

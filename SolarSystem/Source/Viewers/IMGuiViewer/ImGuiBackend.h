@@ -23,6 +23,7 @@ namespace solar
 		void Render();
 	private:
 		void SetImGUISettings();
+		void SetStyle();
 		void LoadShader();
 		void CreateBuffers();
 		void LoadFontTexture();
