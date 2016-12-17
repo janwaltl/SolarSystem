@@ -8,8 +8,8 @@ namespace solar
 {
 	IMGuiViewer::IMGuiViewer(int width, int height, const std::string& title /*= "Simulation"*/,
 							 float circleSize /*= 0.01f*/, size_t circleRes /*= 32*/) :
-		openGL(width, height, title, circleSize, circleRes), imguiBackend(openGL.GetWin()), gui(this),
-		scaleFactor(1.0), offset(0.0, 0.0)
+		openGL(width, height, title, circleSize, circleRes), imguiBackend(openGL.GetWin()),
+		gui(this), scaleFactor(1.0), offset(0.0, 0.0)
 	{
 	}
 

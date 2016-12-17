@@ -15,9 +15,9 @@ namespace solar
 		parser(std::move(parser)), simMethod(std::move(simMethod)), viewer(std::move(viewer)),
 		running(false)
 	{
-		this->parser->Link(this);
-		this->viewer->Link(this);
-		this->simMethod->Link(this);
+		LinkUnitAndSim(*this->parser.get(), *this);
+		LinkUnitAndSim(*this->viewer.get(), *this);
+		LinkUnitAndSim(*this->simMethod.get(), *this);
 	}
 
 	void Simulation::Start(stepTime_t dt, std::chrono::seconds maxSimT /*= 0s*/)
@@ -38,6 +38,11 @@ namespace solar
 		running = false;
 	}
 
+	double Simulation::GetDtime()
+	{
+		return ToSecs(dtime);
+	}
+
 	void Simulation::Loop()
 	{
 		ResetTimers();
@@ -49,7 +54,7 @@ namespace solar
 			auto tmp = acc;///LOGGING
 			while (acc > dtime)
 			{
-				for (int i = 0; i < 10; i++)
+				for (int i = 0; i < 1; i++)
 				{
 					(*simMethod)(data, ToSecs(10min)/physicsUnits::YtoS);//Step in years
 					simTime += 10min;

@@ -18,7 +18,8 @@ namespace solar
 		void Start(stepTime_t dt, std::chrono::seconds maxSimTime = std::chrono::seconds::zero());
 		//Breaks the loop, called internally by parsers,view
 		void StopSimulation();
-
+		//Returns deltaTime in seconds
+		double GetDtime();
 	private:
 		void Loop();
 		//Clear timers before start of simulation's loop

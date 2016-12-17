@@ -14,16 +14,22 @@ namespace solar
 		GUIDrawer(IMGuiViewer* parent);
 		void Draw(simData_t& data);
 	private:
+		// Window with simulation's controls
 		void ControlsWin();
-		//Manually control position of the simulation
+		// Manually control position of the simulation
 		void ManualControls();
+		// Zooms in and out using wheel mouse button
 		void ZoomControl();
-		//Following a Unit -> automatically set pos
+		// Following a Unit (Planet)
 		void Following();
+		// Offer to follow a Unit
 		void OfferFollow();
+		// Translating vectors
+		Vec2 offset, drag;
+
 		bool follow;
 		IMGuiViewer* viewer;
-		simData_t* data;
+		simData_t* simData;
 	};
 }
 

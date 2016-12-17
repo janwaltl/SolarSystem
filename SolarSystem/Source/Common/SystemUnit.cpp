@@ -3,14 +3,15 @@
 
 namespace solar
 {
-	void SystemUnit::Link(Simulation* s)
-	{
-		assert(s);
-		sim = s;
-	}
+
 	void SystemUnit::StopSimulation()
 	{
 		assert(sim);
 		sim->StopSimulation();
+	}
+	double SystemUnit::GetDtime()
+	{
+		assert(sim);
+		return sim->GetDtime();
 	}
 }

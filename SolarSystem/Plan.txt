@@ -1,9 +1,23 @@
 =====================================IN THIS COMMIT=====================================
-Formatted IMGUI library.
-Playing with GUI...
+- Simulation's screen is fully controlled by mouse now.
+	- Zooming and translating.
+- SystemUnit::Link is now friend function LinkUnitAndSim()
+- new Simulation::GetDtime().
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	
+	I.Controlling speed of simulation.
+		- Probably pause, play , speed up/down, one step method.
+	II.List the Units in left window. Allow following them.
+	III. Show some metrics.
+			- SimTime, DTime, current speed.
+			- allow measuring distances between Units
+	IV. Make it prettier
+		- add trails behind Units
+		- maybe add grid for better orientation, but make it optional
+	V. Document it & ship it
+		- Write all the comments, probably v èeštinì
+		- Constants instead of magic values
+		- SORT all compile warnings
 
 - About OpenGL
 	- Buffers - 
@@ -15,13 +29,7 @@ Next:
 		- Lets say 50 line segments for each unit
 		- Sort of queue like system that would push old lines out and new lines in
 
-- Really needs normalization
-	- scaleFactor and IMGuiViewer::NormalizeData()
-		- ensures that all data is normalized
-		- can be called by GUI whenever needed(such when one object gets out of view)
-		- can by multiplied to achieve zooming out/in
-	- can add offset, which can be applied after scale factor to allow for moving the view(eg. by mouse drag)
-- Make proper IMGUIBackend
+
 ========================================THOUGHTS========================================
 
 Controlling the simulation
@@ -59,7 +67,7 @@ Controlling the simulation
 	- In cases where Viewer takes so much time, it can be configured so it is called only so many times a second.
 		Because calling it fewer times does not break simulation, only slows responsivnes and "precision of viewing".
 
-========================================Documentaion Draft========================================
+========================================Documentation's Draft========================================
 Uživatel
 - README navod jak program použít
 	- komentáø na formát vstupu
