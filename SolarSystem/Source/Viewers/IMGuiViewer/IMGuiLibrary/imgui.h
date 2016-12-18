@@ -476,6 +476,7 @@ namespace ImGui
 
 	void TextTooltipOnHover(const char* text);
 	bool StateButtonWithTooltip(const char* buttonText, const char* tooltipText, bool pressed);
+	bool StateSmallButtonWithTooltip(const char* buttonText, const char* tooltipText, bool pressed);
 
 } // namespace ImGui
 

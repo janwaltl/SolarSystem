@@ -50,30 +50,55 @@ namespace solar
 	}
 	void GUIDrawer::SimControls()
 	{
-
-		if (viewer->IsRunning())
-		{
-			if (ImGui::StateButtonWithTooltip("|>##Running", "Pause", false))
-				viewer->PauseSimulation();
-		}
-		else
-			if (ImGui::StateButtonWithTooltip("||##Paused", "Resume", true))
-				viewer->ResumeSimulation();
-		ImGui::SameLine();
-
-		ImGui::Button("<<##Slow-down");
-		ImGui::TextTooltipOnHover("Slow down");	ImGui::SameLine();
-		ImGui::Button(">>##Speed-up");
-		ImGui::TextTooltipOnHover("Speed up");	ImGui::SameLine();
-		if (viewer->IsPaused())
-		{
-			ImGui::Button("->##Step");
-			ImGui::TextTooltipOnHover("Makes one step forwards");	ImGui::SameLine();
-		}
-		ImGui::NewLine();
+		ImGui::Text("Speed controls:");
+		SpeedControl();
+		ImGui::Separator();
 		ImGui::NewLine();
 		ImGui::Text("Metrics:");
 		SimMetrics();
+	}
+	void GUIDrawer::SpeedControl()
+	{
+		ImGui::Text("Simulation is "); ImGui::SameLine();
+		if (viewer->IsRunning())
+		{
+			if (ImGui::StateSmallButtonWithTooltip("Running", "Pause", false))
+				viewer->PauseSimulation();
+		}
+		else
+			if (ImGui::StateSmallButtonWithTooltip("Paused", "Resume", true))
+				viewer->ResumeSimulation();
+		
+		ImGui::Text("Raw speed: "); 
+		ImGui::TextTooltipOnHover("Controls speed via rawMultiplier");	ImGui::SameLine();
+
+		ImGui::SmallButton("-##RAW Slow-down");
+		ImGui::TextTooltipOnHover("Slow down ten times");	ImGui::SameLine();
+		ImGui::SmallButton("+##RAW Speed-up");
+		ImGui::TextTooltipOnHover("Speed up ten times");	ImGui::SameLine();
+		ImGui::SmallButton("Edit##RAW");
+		ImGui::TextTooltipOnHover("Directly changes rawMultiplier");
+
+		ImGui::Text("DT speed: ");
+		ImGui::TextTooltipOnHover("Controls speed via DTMultiplier");	ImGui::SameLine();
+
+		ImGui::SmallButton("-##DT Slow-down");
+		ImGui::TextTooltipOnHover("Slow down ten times");	ImGui::SameLine();
+		ImGui::SmallButton("+##DT Speed-up");
+		ImGui::TextTooltipOnHover("Speed up ten times");	ImGui::SameLine();
+		ImGui::SmallButton("Edit##DT");
+		ImGui::TextTooltipOnHover("Directly changes DTMultiplier");
+
+
+		if (viewer->IsPaused())
+		{
+			ImGui::Text("Stepping:");
+			ImGui::TextTooltipOnHover("Steps simulation.");	ImGui::SameLine();
+
+			ImGui::SmallButton("->##Step");
+			ImGui::TextTooltipOnHover("Makes one step forwards");	ImGui::SameLine();
+		}
+		ImGui::NewLine();
 	}
 	void GUIDrawer::SimMetrics()
 	{

@@ -16,8 +16,9 @@ namespace solar
 	private:
 		// Window with simulation's controls
 		void ControlsWin();
-		// Controls speed of simulation
 		void SimControls();
+		// Controls speed of simulation
+		void SpeedControl();
 		// Shows dTime, frameTime, simTime and other statistics of the simulation
 		void SimMetrics();
 		// Manually control position of the simulation
