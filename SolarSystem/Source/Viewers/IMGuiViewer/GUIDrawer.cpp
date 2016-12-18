@@ -50,23 +50,14 @@ namespace solar
 	}
 	void GUIDrawer::SimControls()
 	{
-		auto stateButtonWithTooltip = [=](const char* buttonText, const char* tooltipText, bool pressed)->bool
-		{
-			ImGuiStyle * style = &ImGui::GetStyle();
-			ImGui::PushStyleColor(ImGuiCol_Button,
-								  pressed ? style->Colors[ImGuiCol_ButtonHovered] : style->Colors[ImGuiCol_Button]);
-			bool state = ImGui::Button(buttonText);
-			ImGui::TextTooltipOnHover(tooltipText);
-			ImGui::PopStyleColor();
-			return state;
-		};
+
 		if (viewer->IsRunning())
 		{
-			if (stateButtonWithTooltip("|>##Running", "Pause", false))
+			if (ImGui::StateButtonWithTooltip("|>##Running", "Pause", false))
 				viewer->PauseSimulation();
 		}
 		else
-			if (stateButtonWithTooltip("||##Paused", "Resume", true))
+			if (ImGui::StateButtonWithTooltip("||##Paused", "Resume", true))
 				viewer->ResumeSimulation();
 		ImGui::SameLine();
 
@@ -93,7 +84,7 @@ namespace solar
 		ImGui::TextTooltipOnHover("For each Dtime passed time, simMethod will be called this many times.\n"
 								  "Controls speed of the simulation at expense of CPU power.");
 		ImGui::Text("%10i ", viewer->GetRawMultiplier()); ImGui::NextColumn();
-
+		
 		ImGui::Text("DTMultiplier"); ImGui::NextColumn();
 		ImGui::TextTooltipOnHover("dTime*this will be passed to simMethod as dTime.\n"
 								  "Controls speed of the simulation at expense of precision.");

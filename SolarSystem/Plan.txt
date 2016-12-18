@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-- Added TextTooltipOnHover fnc to ImGui.
-- Added tooltips with explanations to GUI.
-- Added DTMultiplier,RawMultiplier to control speed of simulation.
+Added StateButtonWithTooltip directly to ImGui.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	I.Controlling speed of simulation.
@@ -29,7 +27,8 @@ Next:
 		- Lets say 50 line segments for each unit
 		- Sort of queue like system that would push old lines out and new lines in
 
-
+SystemUnit is starting to have too many forwarding functions. Maybe give direct pointer to sim, but someway restrict
+calling Start.
 ========================================THOUGHTS========================================
 
 Controlling the simulation

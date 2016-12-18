@@ -9795,6 +9795,16 @@ namespace ImGui//Added functions
 			ImGui::EndTooltip();
 		}
 	}
+	bool StateButtonWithTooltip(const char* buttonText, const char* tooltipText, bool pressed)
+	{
+		ImGuiStyle * style = &ImGui::GetStyle();
+		ImGui::PushStyleColor(ImGuiCol_Button,
+							  pressed ? style->Colors[ImGuiCol_ButtonHovered] : style->Colors[ImGuiCol_Button]);
+		bool state = ImGui::Button(buttonText);
+		ImGui::TextTooltipOnHover(tooltipText);
+		ImGui::PopStyleColor();
+		return state;
+	};
 } // namespace ImGui
 //-----------------------------------------------------------------------------
 
