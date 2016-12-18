@@ -13,7 +13,7 @@ namespace solar
 
 	Simulation::Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer) :
 		parser(std::move(parser)), simMethod(std::move(simMethod)), viewer(std::move(viewer)),
-		running(false)
+		state(notRunning)
 	{
 		LinkUnitAndSim(*this->parser.get(), *this);
 		LinkUnitAndSim(*this->viewer.get(), *this);
@@ -35,7 +35,28 @@ namespace solar
 
 	void Simulation::StopSimulation()
 	{
-		running = false;
+		state = notRunning;
+	}
+
+	void Simulation::PauseSimulation()
+	{
+		state = paused;
+	}
+
+	void Simulation::ResumeSimulation()
+	{
+		assert(state == paused); //Only paused sim can be resumed
+		state = running;
+	}
+
+	bool Simulation::IsPaused()
+	{
+		return state==paused;
+	}
+
+	bool Simulation::IsRunnig()
+	{
+		return state==running;
 	}
 
 	double Simulation::GetDtime()
@@ -43,32 +64,42 @@ namespace solar
 		return ToSecs(dtime);
 	}
 
+	double Simulation::GetRunTime()
+	{
+		return ToSecs(runTime);
+	}
+
+	double Simulation::GetSimTime()
+	{
+		return ToSecs(simTime);
+	}
+
+	double Simulation::GetFrameTime()
+	{
+		return ToSecs(frameTime);
+	}
+
 	void Simulation::Loop()
 	{
 		ResetTimers();
 
-		running = true;
-		while (running && IsNotRunningForTooLong())
+		state = running;
+		while (state != notRunning && IsNotRunningForTooLong())
 		{
 			TickTime();
-			auto tmp = acc;///LOGGING
 			while (acc > dtime)
 			{
-				for (int i = 0; i < 1; i++)
+				for (int i = 0; i < 100; i++)
 				{
-					(*simMethod)(data, ToSecs(10min)/physicsUnits::YtoS);//Step in years
-					simTime += 10min;
+					(*simMethod)(data, ToSecs(30min) / physicsUnits::YtoS);//Step in years
+					simTime += 30min;
 				}
 				acc -= dtime;
 			}
-			///LOGGING
-			//std::cout << "\t Simulated Time" << ToSecs(tmp - acc) << std::endl;
 
 			(*viewer)(data);
 		}
-		running = false;
-		///LOGGING
-		std::cout << "RunTime" << ToSecs(runTime) << "s  Simulated amount " << ToSecs(simTime) << "s\n";
+		state = notRunning;
 		parser->Save(data);
 	}
 
@@ -80,19 +111,19 @@ namespace solar
 		begining = prevTime = clock_t::now();
 	}
 
-	Simulation::stepTime_t Simulation::TickTime()
+	void Simulation::TickTime()
 	{
 		auto now = clock_t::now();
-		auto frameTime = now - prevTime;
+		frameTime = now - prevTime;
 		prevTime = now;
 		runTime = now - begining;
-		if (frameTime > 1s)
+
+		if (state == paused)
+			acc = acc.zero();
+		else if (frameTime > 1s)
 			acc += 1s;
 		else
 			acc += frameTime;
-		///LOGGING
-		//std::cout << "FrameTime: " << frameTime.count() / double(decltype(frameTime)::period::den) << "secs\n";
-		return frameTime;
 	}
 
 	bool Simulation::IsNotRunningForTooLong()

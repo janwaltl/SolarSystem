@@ -1,8 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-- Simulation's screen is fully controlled by mouse now.
-	- Zooming and translating.
-- SystemUnit::Link is now friend function LinkUnitAndSim()
-- new Simulation::GetDtime().
+Added Simulation's controls
+	- ability to pause/resume simulation
+	- shows metrics - dTime,frameTime, simTime, runTime....
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	I.Controlling speed of simulation.
@@ -12,6 +11,7 @@ Next:
 			- SimTime, DTime, current speed.
 			- allow measuring distances between Units
 	IV. Make it prettier
+		- linear interpolation for rendering.
 		- add trails behind Units
 		- maybe add grid for better orientation, but make it optional
 	V. Document it & ship it

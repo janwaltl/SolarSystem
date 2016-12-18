@@ -14,8 +14,21 @@ namespace solar
 	{
 	public:
 		void StopSimulation();
-		//Get DeltaTime of simulation in seconds
+		//Pauses the simulation
+		void PauseSimulation();
+		//Resumes paused simulation
+		void ResumeSimulation();
+		bool IsRunning();
+		bool IsPaused();
+		//Returns deltaTime in seconds
 		double GetDtime();
+		//Returns elapsed realTime in seconds
+		double GetRunTime();
+		//Returns elapsed simTime in seconds
+		double GetSimTime();
+		//Returns last's frame time
+		double GetFrameTime();
+		
 	private:
 		friend void LinkUnitAndSim(SystemUnit& unit, Simulation& sim);
 
