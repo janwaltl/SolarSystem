@@ -50,22 +50,13 @@ namespace solar
 	}
 	void GUIDrawer::SimControls()
 	{
-		auto tooltip = [](const auto* text)
-		{
-			if (ImGui::IsItemHovered())
-			{
-				ImGui::BeginTooltip();
-				ImGui::Text(text);
-				ImGui::EndTooltip();
-			}
-		};
-		auto stateButtonWithTooltip = [=](const auto* buttonText, const auto* tooltipText, bool pressed)->bool
+		auto stateButtonWithTooltip = [=](const char* buttonText, const char* tooltipText, bool pressed)->bool
 		{
 			ImGuiStyle * style = &ImGui::GetStyle();
 			ImGui::PushStyleColor(ImGuiCol_Button,
 								  pressed ? style->Colors[ImGuiCol_ButtonHovered] : style->Colors[ImGuiCol_Button]);
 			bool state = ImGui::Button(buttonText);
-			tooltip(tooltipText);
+			ImGui::TextTooltipOnHover(tooltipText);
 			ImGui::PopStyleColor();
 			return state;
 		};
@@ -79,43 +70,70 @@ namespace solar
 				viewer->ResumeSimulation();
 		ImGui::SameLine();
 
-
 		ImGui::Button("<<##Slow-down");
-		tooltip("Slow down");	ImGui::SameLine();
+		ImGui::TextTooltipOnHover("Slow down");	ImGui::SameLine();
 		ImGui::Button(">>##Speed-up");
-		tooltip("Speed up");	ImGui::SameLine();
+		ImGui::TextTooltipOnHover("Speed up");	ImGui::SameLine();
 		if (viewer->IsPaused())
 		{
 			ImGui::Button("->##Step");
-			tooltip("Makes one step forwards");	ImGui::SameLine();
+			ImGui::TextTooltipOnHover("Makes one step forwards");	ImGui::SameLine();
 		}
-
+		ImGui::NewLine();
+		ImGui::NewLine();
 		ImGui::Text("Metrics:");
 		SimMetrics();
 	}
 	void GUIDrawer::SimMetrics()
 	{
 		ImGui::Columns(2);
-		ImGui::SetColumnOffset(1, 140.0f);
-		ImGui::Text("Speed ratio"); ImGui::NextColumn();
-		ImGui::Text("10s to 1s"); ImGui::NextColumn();
+		ImGui::SetColumnOffset(1, 120.0f);
 
+		ImGui::Text("RawMultiplier"); ImGui::NextColumn();
+		ImGui::TextTooltipOnHover("For each Dtime passed time, simMethod will be called this many times.\n"
+								  "Controls speed of the simulation at expense of CPU power.");
+		ImGui::Text("%10i ", viewer->GetRawMultiplier()); ImGui::NextColumn();
+
+		ImGui::Text("DTMultiplier"); ImGui::NextColumn();
+		ImGui::TextTooltipOnHover("dTime*this will be passed to simMethod as dTime.\n"
+								  "Controls speed of the simulation at expense of precision.");
+		ImGui::Text("%10i ", viewer->GetDTMultiplier()); ImGui::NextColumn();
+
+
+		ImGui::Text("Speed ratio"); ImGui::NextColumn();
+		ImGui::TextTooltipOnHover("This amount of time is simulated each passed second.");
+		size_t speedRatio = viewer->GetRawMultiplier()*viewer->GetDTMultiplier();
+		auto spDays = (speedRatio % 31'536'000) / 86'400;
+		auto spHours = (speedRatio % 86'400) / 3600;
+		auto spMins = (speedRatio % 3600) / 60;
+		auto spSecs = speedRatio % 60;
+		ImGui::Text("%id %ih %im %is", spDays, spHours, spMins, spSecs); ImGui::NextColumn();
 		ImGui::Text("Stable"); ImGui::NextColumn();
-		ImGui::TextColored({0.0f,1.0f,0.0f,1.0f}, "YES"); ImGui::NextColumn();
+		ImGui::TextTooltipOnHover("Whether the simulation can run at set speed at real-time."
+								  " \nMeans that it is not lagging behind = frameTime<dTime ");
+		if (viewer->GetDtime() > viewer->GetFrameTime())
+			ImGui::TextColored({0.0f,1.0f,0.0f,1.0f}, "YES");
+		else
+			ImGui::TextColored({1.0f,0.0f,0.0f,1.0f}, "NO");
+		ImGui::NextColumn();
 
 		ImGui::Text("Delta time"); ImGui::NextColumn();
+		ImGui::TextTooltipOnHover("Basic unit of simulated time.");
 		ImGui::Text("%07.4f ms", viewer->GetDtime()*1000.0); ImGui::NextColumn();
 
 		ImGui::Text("Frame time"); ImGui::NextColumn();
+		ImGui::TextTooltipOnHover("Amount of time last frame(sim + viewer) took.");
 		ImGui::Text("%07.4f ms", viewer->GetFrameTime()*1000.0); ImGui::NextColumn();
 
-		ImGui::Text("Elapsed real-time"); ImGui::NextColumn();
+		ImGui::Text("Real-time"); ImGui::NextColumn();
+		ImGui::TextTooltipOnHover("How long has been the simulation running.");
 		auto runTime = viewer->GetRunTime();
 		auto mins = floor(runTime / 60);
 		runTime -= mins * 60;
 		ImGui::Text("%3.0fm %02.1fs", mins, runTime); ImGui::NextColumn();
 
-		ImGui::Text("Elapsed sim-time"); ImGui::NextColumn();
+		ImGui::Text("Sim-time"); ImGui::NextColumn();
+		ImGui::TextTooltipOnHover("Amount of time simulated.");
 		auto simTime = viewer->GetSimTime();
 		auto years = floor(simTime / 31'536'000);
 		simTime -= years * 31'536'000;

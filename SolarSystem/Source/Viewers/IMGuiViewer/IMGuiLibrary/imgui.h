@@ -141,9 +141,6 @@ namespace ImGui
 	IMGUI_API bool          IsWindowCollapsed();
 	IMGUI_API void          SetWindowFontScale(float scale);                                    // per-window font scale. Adjust IO.FontGlobalScale if you want to scale all windows
 
-	bool GoxTab(const char *text, bool *active);
-	bool GoxTab(const char *text, bool *active, ImVec4 textColor);
-
 	IMGUI_API void          SetNextWindowPos(const ImVec2& pos, ImGuiSetCond cond = 0);         // set next window position. call before Begin()
 	IMGUI_API void          SetNextWindowPosCenter(ImGuiSetCond cond = 0);                      // set next window position to be centered on screen. call before Begin()
 	IMGUI_API void          SetNextWindowSize(const ImVec2& size, ImGuiSetCond cond = 0);       // set next window size. set axis to 0.0f to force an auto-fit on this axis. call before Begin()
@@ -475,6 +472,9 @@ namespace ImGui
 	static inline bool      IsRectClipped(const ImVec2& size) { return !IsRectVisible(size); } // OBSOLETE 1.39+
 #endif
 
+	//ADDED FUNCTIONS
+
+	void TextTooltipOnHover(const char* text);
 } // namespace ImGui
 
 // Flags for ImGui::Begin()

@@ -28,7 +28,9 @@ namespace solar
 		double GetSimTime();
 		//Returns last's frame time
 		double GetFrameTime();
-		
+
+		size_t GetDTMultiplier();
+		size_t GetRawMultiplier();
 	private:
 		friend void LinkUnitAndSim(SystemUnit& unit, Simulation& sim);
 

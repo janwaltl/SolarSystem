@@ -14,8 +14,14 @@ namespace solar
 		using stepTime_t = clock_t::duration;
 		Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer);
 		//Starts simulation - loops until stopped, or maxSimulationTime is reached
-		//Throws Exception(std::logic_error) on invalid input
-		void Start(stepTime_t dt, std::chrono::seconds maxSimTime = std::chrono::seconds::zero());
+		//Throws Exception(std::logic_error) on invalid input or if any other SystemUnit throws.
+		//dTime - how often simMethod is called 
+		//rawMult - how many times is simMethod called for each dTime
+		//DTMult - how many dTimes are passed to simMethod.
+		//example: dTime=1ms; rawMult=20;DTMult=5
+		//			 Means that each 1ms simMethod will be called 20times with 5ms being passed as dTime to it
+		void Start(stepTime_t dt, size_t rawMult = 1, size_t DTMult = 1,
+				   std::chrono::seconds maxSimTime = std::chrono::seconds::zero());
 		//Ends the simulation
 		void StopSimulation();
 		//Pauses simMethod, only calls viewer
@@ -32,6 +38,8 @@ namespace solar
 		double GetSimTime();
 		//Returns last's frame time
 		double GetFrameTime();
+		size_t GetRawMultiplier();
+		size_t GetDTMultiplier();
 	private:
 		enum simState
 		{
@@ -46,7 +54,7 @@ namespace solar
 		void TickTime();
 		bool IsNotRunningForTooLong();
 		template<typename Rep, typename Per>
-		//Converts passed time duration to seconds
+		//Converts time duration to seconds
 		inline double ToSecs(const std::chrono::duration<Rep, Per>& time)
 		{
 			using type = std::chrono::duration<Rep, Per>;
@@ -55,7 +63,10 @@ namespace solar
 		parser_p parser;
 		simMethod_p simMethod;
 		viewer_p viewer;
-
+		//Controls speed of simulation, for each DT pass, simMethod will get called this times
+		size_t rawMultiplier;
+		//Controls speed of simulation, passes this*dTime to simMethod.
+		size_t DTMultiplier;
 		//Size of step
 		stepTime_t dtime;
 		//Time bank, created by real time, consumed by physics simulation

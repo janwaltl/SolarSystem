@@ -26,6 +26,14 @@ namespace solar
 	{
 		return sim->GetFrameTime();;
 	}
+	size_t SystemUnit::GetDTMultiplier()
+	{
+		return sim->GetDTMultiplier();
+	}
+	size_t SystemUnit::GetRawMultiplier()
+	{
+		return sim->GetRawMultiplier();;
+	}
 	void SystemUnit::PauseSimulation()
 	{
 		sim->PauseSimulation();

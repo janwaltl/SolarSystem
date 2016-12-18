@@ -1,7 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Added Simulation's controls
-	- ability to pause/resume simulation
-	- shows metrics - dTime,frameTime, simTime, runTime....
+- Added TextTooltipOnHover fnc to ImGui.
+- Added tooltips with explanations to GUI.
+- Added DTMultiplier,RawMultiplier to control speed of simulation.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	I.Controlling speed of simulation.
