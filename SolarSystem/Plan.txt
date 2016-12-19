@@ -1,10 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Added ability to step paused simulation.
-Added controls to change speed of simulation via rawMult and DTMult
+Small refactoring of GUI.
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	I.Controlling speed of simulation.
-		- Probably pause, play , speed up/down, one step method.
 	II.List the Units in left window. Allow following them.
 	III. Show some metrics.
 			- SimTime, DTime, current speed.

@@ -25,6 +25,8 @@ namespace solar
 		ImGui::End();
 		ImGui::PopStyleColor();
 
+		ViewControl();
+
 		ControlsWin();
 	}
 	void GUIDrawer::ControlsWin()
@@ -37,14 +39,7 @@ namespace solar
 		{
 			SimControls();
 			ImGui::Separator();
-			ZoomControl();
-			if (!follow)
-			{
-				ManualControls();
-				OfferFollow();
-			}
-			else
-				Following();
+			UnitsViewer();
 			ImGui::End();
 		}
 	}
@@ -115,7 +110,7 @@ namespace solar
 			ImGui::InputInt("", &tempRawSpeed, 1, 1000);
 			if (tempRawSpeed < 1)
 				tempRawSpeed = 1;
-			if (tempRawSpeed > viewer->GetRawMultiplier())
+			if (static_cast<size_t>(tempRawSpeed) > viewer->GetRawMultiplier())
 				ImGui::TextColored({1.0f,0.0f,0.0f,1.0f}, "High values may result higher frameTimes "
 								   "and higher CPU costs which might result in loss of responsivness(FPS&UPS).");
 
@@ -139,7 +134,7 @@ namespace solar
 			if (tempDTSpeed < 1)
 				tempDTSpeed = 1;
 
-			if (tempDTSpeed > viewer->GetDTMultiplier())
+			if (static_cast<size_t>(tempDTSpeed) > viewer->GetDTMultiplier())
 				ImGui::TextColored({1.0f,0.0f,0.0f,1.0f}, "High values may result in lost of precision "
 								   "and stability of simulated system.");
 			if (ImGui::SmallButton("Set"))
@@ -152,6 +147,19 @@ namespace solar
 				ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
 		}
+	}
+
+	void GUIDrawer::ViewControl()
+	{
+		//Always allow zoom by mouse
+		ZoomControl();
+		//If we are not following, give translating control to mouse, else we give control to Following()
+		if (!follow)
+		{
+			ManualControls();
+		}
+		else
+			Following();
 	}
 
 	void GUIDrawer::SimMetrics()
@@ -212,13 +220,19 @@ namespace solar
 
 		ImGui::Columns(1);
 	}
+	void GUIDrawer::UnitsViewer()
+	{
+		//Shows list of all units and offers some things to do with them
+		ImGui::Text("Testing text.");
+
+	}
 	void GUIDrawer::ManualControls()
 	{
 		//If mouse will be dragged, get current offset
 		if (ImGui::IsMouseClicked(0))
 			offset = viewer->GetOffset();
 		//Only count dragging in the center of the screen(not in side windows)
-		if (ImGui::IsMouseHoveringRect({210.0f,0.0f}, {1200.0f,700.0f}, false) && ImGui::IsMouseDragging(0, 5.0f))
+		if (ImGui::IsMouseHoveringRect({260.0f,0.0f}, {1200.0f,700.0f}, false) && ImGui::IsMouseDragging(0, 5.0f))
 		{
 			ImGuiIO& io = ImGui::GetIO();
 			auto val = ImGui::GetMouseDragDelta();
@@ -263,8 +277,5 @@ namespace solar
 			viewer->ResetZoom(*simData);//Zooms to see whole solar system
 		}
 	}
-	void GUIDrawer::OfferFollow()
-	{
-		ImGui::Checkbox("Follow Mars", &follow);
-	}
+
 }
