@@ -10,11 +10,21 @@ namespace solar
 	{
 	public:
 		//Operates on data, makes one physical time step
-		virtual void operator()(simData_t& data, double step) = 0;
-		//Optional methods for preparation, called once before start of simulation
+		virtual void operator()(double step) = 0;
+		//Method for preparation, called once before start of simulation
 		// - used for creating temp object, or initializing of state which depends on for eg. size of data
-		virtual void Prepare(const simData_t&) {};
+		virtual void Prepare()=0;
 		virtual ~SimMethod() = default;
+	
+		//Captures data, called only from Simulation itself
+		void _Prepare(simData_t* data)
+		{
+			assert(data);
+			this->data = data;
+			this->Prepare(*data);
+		}
+	protected:
+		simData_t* data;
 	};
 }
 

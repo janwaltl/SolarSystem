@@ -11,9 +11,12 @@ namespace solar
 	{
 		assert(viewer);
 	}
-	void GUIDrawer::Draw(simData_t& data)
+	void GUIDrawer::Prepare(simData_t * data)
 	{
-		this->simData = &data;
+		simData = data;
+	}
+	void GUIDrawer::Draw()
+	{
 
 		//Testing transparent window
 		ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Once);
@@ -21,7 +24,7 @@ namespace solar
 
 		ImGui::PushStyleColor(ImGuiCol_WindowBg, {0.0f,0.0f,0.0f,0.0f});
 		ImGui::Begin("Window", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse);
-		ImGui::Text("%.6f", length(data[3].pos - data[0].pos));
+		ImGui::Text("%.6f", length((*simData)[3].pos - (*simData)[0].pos));
 		ImGui::End();
 		ImGui::PopStyleColor();
 
@@ -274,7 +277,7 @@ namespace solar
 		{
 			follow = false;
 			viewer->Move({});//Centers around the 0,0
-			viewer->ResetZoom(*simData);//Zooms to see whole solar system
+			viewer->ResetZoom();//Zooms to see whole solar system
 		}
 	}
 

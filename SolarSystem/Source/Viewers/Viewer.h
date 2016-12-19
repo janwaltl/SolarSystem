@@ -9,12 +9,25 @@ namespace solar
 	class Viewer :public SystemUnit
 	{
 	public:
+
 		//View data, called each frame
-		virtual void operator()(simData_t&) = 0;
+		virtual void operator()() = 0;
 		//Gives access to freshly loaded data before simulation starts
-		virtual void Prepare(const simData_t&) {}
+		virtual void Prepare() {}
 		virtual ~Viewer() = default;
+	public:
+		//Captures data, called only from Simulation itself
+		void _Prepare(simData_t* data)
+		{
+			assert(data);
+			this->data = data;
+			this->Prepare();
+		}
+	protected:
+		simData_t* data;
 	};
+
+
 }
 
 #endif

@@ -10,8 +10,8 @@ namespace solar
 	class RK4 : public SimMethod
 	{
 	public:
-		void Prepare(const simData_t& data) override final;
-		void operator()(simData_t& data,double step) override final;
+		void Prepare() override final;
+		void operator()(double step) override final;
 	private:
 		struct AccVel//Helper class just to clear up notation, can be replaced with pair
 		{

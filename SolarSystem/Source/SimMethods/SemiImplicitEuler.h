@@ -8,7 +8,7 @@ namespace solar
 	class SemiImplicitEuler :public SimMethod
 	{
 	public:
-		void operator()(simData_t& data, double step) override final;
+		void operator()(double step) override final;
 	private:
 	};
 }

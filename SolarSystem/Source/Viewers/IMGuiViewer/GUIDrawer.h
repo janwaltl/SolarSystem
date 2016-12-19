@@ -12,7 +12,9 @@ namespace solar
 	{
 	public:
 		GUIDrawer(IMGuiViewer* parent);
-		void Draw(simData_t& data);
+		//Obtains copy of SimData and stores it
+		void Prepare(simData_t* data);
+		void Draw();
 	private:
 		// Control viewing of simulation - moving(following) and zooming
 		void ViewControl();

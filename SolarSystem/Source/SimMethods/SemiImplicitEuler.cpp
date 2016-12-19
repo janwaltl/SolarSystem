@@ -3,12 +3,12 @@
 
 namespace solar
 {
-	void SemiImplicitEuler::operator()(simData_t & data, double step)
+	void SemiImplicitEuler::operator()( double step)
 	{
 		//Go through all pairs
-		for (auto left = data.begin(); left != data.end(); ++left)
+		for (auto left = data->begin(); left != data->end(); ++left)
 		{
-			for (auto right = left + 1; right != data.end(); ++right)
+			for (auto right = left + 1; right != data->end(); ++right)
 			{
 				auto distLR = dist(left->pos, right->pos);
 				distLR = distLR*distLR*distLR;

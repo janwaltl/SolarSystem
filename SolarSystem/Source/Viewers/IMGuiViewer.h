@@ -17,8 +17,8 @@ namespace solar
 					size_t circleRes = 32);
 		~IMGuiViewer() = default;
 
-		void operator()(simData_t& data) override final;
-		void Prepare(const simData_t& data) override final;
+		void operator()() override final;
+		void Prepare() override final;
 
 		double ScaleFactor();
 		void ScaleFactor(double newFactor);
@@ -27,7 +27,7 @@ namespace solar
 		Vec2 GetOffset();
 		// Zooms enough to see whole solar system
 		// Sets such scale factor, which when applied on all positions, yields positions between <-1,1>
-		void ResetZoom(const simData_t& data);
+		void ResetZoom();
 	private:
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT

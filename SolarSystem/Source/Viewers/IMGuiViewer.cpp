@@ -14,7 +14,7 @@ namespace solar
 	}
 
 
-	void IMGuiViewer::operator()(simData_t & data)
+	void IMGuiViewer::operator()()
 	{
 		if (glfwWindowShouldClose(openGL.GetWin()))
 			StopSimulation();
@@ -27,15 +27,16 @@ namespace solar
 		// Process GUI, then render Units, THEN render GUI.
 		// So GUI is rendered over the Units, but processed before them to be able to set correct scaleFactor, offset
 		imguiBackend.NewFrame();
-		gui.Draw(data);
-		openGL.DrawData(data, scaleFactor, offset);
+		gui.Draw();
+		openGL.DrawData(*data, scaleFactor, offset);
 		imguiBackend.Render();
 	}
 
-	void IMGuiViewer::Prepare(const simData_t & data)
+	void IMGuiViewer::Prepare()
 	{
-		openGL.CreateBufferObjects(data.size());
-		ResetZoom(data);
+		openGL.CreateBufferObjects(data->size());
+		ResetZoom();
+		gui.Prepare(data);
 		scaleFactor *= 0.8;//To fit data into <-0.8,0.8> initially
 	}
 
@@ -59,7 +60,7 @@ namespace solar
 		return offset;
 	}
 
-	void IMGuiViewer::ResetZoom(const simData_t & data)
+	void IMGuiViewer::ResetZoom()
 	{
 		Vec2 max {std::numeric_limits<double>::min(),std::numeric_limits<double>::min()};
 		Vec2 min {std::numeric_limits<double>::max(),std::numeric_limits<double>::max()};
@@ -74,7 +75,7 @@ namespace solar
 			if (u.pos.Y() < min.Y())
 				min.Y(u.pos.Y());
 		};
-		std::for_each(data.begin(), data.end(), find);
+		std::for_each(data->begin(), data->end(), find);
 
 		auto maxL = length(max);
 		auto minL = length(min);

@@ -29,8 +29,8 @@ namespace solar
 
 		//Obtain the data, throws on invalid input(format)
 		data = parser->Load();
-		simMethod->Prepare(data);
-		viewer->Prepare(data);
+		simMethod->_Prepare(&data);
+		viewer->_Prepare(&data);
 		Loop();
 	}
 
@@ -117,7 +117,7 @@ namespace solar
 			{
 				for (int i = 0; i < rawMultiplier; i++)
 				{
-					(*simMethod)(data, ToSecs(dtime * DTMultiplier) / physicsUnits::YtoS);//Step in years
+					(*simMethod)(ToSecs(dtime * DTMultiplier) / physicsUnits::YtoS);//Step in years
 					simTime += dtime*DTMultiplier;
 				}
 				acc -= dtime;
@@ -126,7 +126,7 @@ namespace solar
 					state = paused;
 			}
 
-			(*viewer)(data);
+			(*viewer)();
 		}
 		state = notRunning;
 		parser->Save(data);
