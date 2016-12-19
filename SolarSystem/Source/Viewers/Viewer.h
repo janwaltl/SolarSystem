@@ -24,6 +24,8 @@ namespace solar
 			this->Prepare();
 		}
 	protected:
+		// Pointer to simulated data, valid in operator() and Prepare().
+		// IT IS NOT SET IN constructor of derived classed
 		simData_t* data;
 	};
 
