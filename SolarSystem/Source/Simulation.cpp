@@ -50,6 +50,11 @@ namespace solar
 		state = running;
 	}
 
+	void Simulation::StepSimulation()
+	{
+		state = stepping;
+	}
+
 	bool Simulation::IsPaused()
 	{
 		return state == paused;
@@ -90,6 +95,16 @@ namespace solar
 		return DTMultiplier;
 	}
 
+	void Simulation::SetRawMultiplier(size_t newRawMult)
+	{
+		rawMultiplier = newRawMult;
+	}
+
+	void Simulation::SetDTMultiplier(size_t newDTMult)
+	{
+		DTMultiplier = newDTMult;
+	}
+
 	void Simulation::Loop()
 	{
 		ResetTimers();
@@ -98,7 +113,7 @@ namespace solar
 		while (state != notRunning && IsNotRunningForTooLong())
 		{
 			TickTime();
-			while (acc > dtime)
+			while (acc > dtime && state!=paused)
 			{
 				for (int i = 0; i < rawMultiplier; i++)
 				{
@@ -106,6 +121,9 @@ namespace solar
 					simTime += dtime*DTMultiplier;
 				}
 				acc -= dtime;
+
+				if (state == stepping)// If we were stepping, we just made a step, so pause a simulation
+					state = paused;
 			}
 
 			(*viewer)(data);
@@ -129,9 +147,7 @@ namespace solar
 		prevTime = now;
 		runTime = now - begining;
 
-		if (state == paused)
-			acc = acc.zero();
-		else if (frameTime > 1s)
+		if (frameTime > 1s)
 			acc += 1s;
 		else
 			acc += frameTime;

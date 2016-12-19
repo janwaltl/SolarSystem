@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-More GUI tweaks.
+Added ability to step paused simulation.
+Added controls to change speed of simulation via rawMult and DTMult
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	I.Controlling speed of simulation.

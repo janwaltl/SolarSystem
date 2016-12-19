@@ -18,6 +18,8 @@ namespace solar
 		void PauseSimulation();
 		//Resumes paused simulation
 		void ResumeSimulation();
+		//Simulates one step of the simulation, then pauses again
+		void StepSimulation();
 		bool IsRunning();
 		bool IsPaused();
 		//Returns deltaTime in seconds
@@ -31,6 +33,9 @@ namespace solar
 
 		size_t GetDTMultiplier();
 		size_t GetRawMultiplier();
+
+		void SetRawMultiplier(size_t newRawMult);
+		void SetDTMultiplier(size_t newDTMult);
 	private:
 		friend void LinkUnitAndSim(SystemUnit& unit, Simulation& sim);
 

@@ -34,6 +34,14 @@ namespace solar
 	{
 		return sim->GetRawMultiplier();;
 	}
+	void SystemUnit::SetRawMultiplier(size_t newRawMult)
+	{
+		sim->SetRawMultiplier(newRawMult);
+	}
+	void SystemUnit::SetDTMultiplier(size_t newDTMult)
+	{
+		sim->SetDTMultiplier(newDTMult);
+	}
 	void SystemUnit::PauseSimulation()
 	{
 		sim->PauseSimulation();
@@ -41,6 +49,10 @@ namespace solar
 	void SystemUnit::ResumeSimulation()
 	{
 		sim->ResumeSimulation();
+	}
+	void SystemUnit::StepSimulation()
+	{
+		sim->StepSimulation();
 	}
 	bool SystemUnit::IsRunning()
 	{

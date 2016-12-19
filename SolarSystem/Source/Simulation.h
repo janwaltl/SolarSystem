@@ -28,6 +28,8 @@ namespace solar
 		void PauseSimulation();
 		//Resumes paused simulation
 		void ResumeSimulation();
+		//Makes one step of simulation, then pauses again
+		void StepSimulation();
 		bool IsPaused();
 		bool IsRunnig();
 		//Returns deltaTime in seconds
@@ -40,12 +42,15 @@ namespace solar
 		double GetFrameTime();
 		size_t GetRawMultiplier();
 		size_t GetDTMultiplier();
+		void SetRawMultiplier(size_t newRawMult);
+		void SetDTMultiplier(size_t newDTMult);
 	private:
 		enum simState
 		{
 			notRunning,
 			paused,
 			running,
+			stepping,
 		};
 		void Loop();
 		//Clear timers before start of simulation's loop
@@ -86,6 +91,7 @@ namespace solar
 		simData_t data;
 		//Whether the simulation is running or not
 		simState state;
+
 	};
 }
 

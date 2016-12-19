@@ -19,6 +19,8 @@ namespace solar
 		void SimControls();
 		// Controls speed of simulation
 		void SpeedControl();
+		void EditRawMultPopUp();
+		void EditDTMultPopUp();
 		// Shows dTime, frameTime, simTime and other statistics of the simulation
 		void SimMetrics();
 		// Manually control position of the simulation
@@ -29,10 +31,15 @@ namespace solar
 		void Following();
 		// Offer to follow a Unit
 		void OfferFollow();
-		// Translating vectors
+		// Translating vectors for manualControls
 		Vec2 offset, drag;
-
+		// Whether a unit is being followed
 		bool follow;
+		// Speed control
+		const char* editRawMultPopUp = "EditRawMult";
+		const char* editDTMultPopUp="EditDTMult";
+		int tempRawSpeed, tempDTSpeed;
+
 		IMGuiViewer* viewer;
 		simData_t* simData;
 	};
