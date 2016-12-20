@@ -25,6 +25,11 @@ namespace solar
 	}
 	void IMGuiBackend::NewFrame()
 	{
+		//Fill mouse position
+		ImGuiIO& io = ImGui::GetIO();
+		double x, y;
+		glfwGetCursorPos(win, &x, &y);
+		io.MousePos = {static_cast<float>(x),static_cast<float>(y)};
 		ImGui::NewFrame();
 	}
 	void IMGuiBackend::Render()
@@ -226,7 +231,7 @@ namespace solar
 	{
 		glfwSetCharCallback(win, IMGuiBackend::CharacterCallback);
 		glfwSetKeyCallback(win, IMGuiBackend::KeyCallback);
-		glfwSetCursorPosCallback(win, IMGuiBackend::MousePositionCallback);
+		//glfwSetCursorPosCallback(win, IMGuiBackend::MousePositionCallback);
 		glfwSetMouseButtonCallback(win, IMGuiBackend::MouseButtonCallback);
 		glfwSetScrollCallback(win, IMGuiBackend::MouseScrollCallback);
 		glfwSetCursorEnterCallback(win, IMGuiBackend::MouseEnterCallback);
@@ -314,14 +319,6 @@ namespace solar
 				io.MouseDown[button] = false;
 
 		}
-	}
-
-	void IMGuiBackend::MousePositionCallback(GLFWwindow*, double xpos, double ypos)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-
-		io.MousePos = {static_cast<float>(xpos),static_cast<float>(ypos)};
-
 	}
 
 	void IMGuiBackend::CharacterCallback(GLFWwindow*, unsigned int ch)

@@ -3,11 +3,12 @@
 #include "IMGuiLibrary/imgui.h"
 #include "../IMGuiViewer.h"
 #include <algorithm>
+#include <iostream>
 
 namespace solar
 {
 	GUIDrawer::GUIDrawer(IMGuiViewer * parent) :
-		viewer(parent), follow(false), tempRawSpeed(1), tempDTSpeed(1), simData(nullptr)
+		viewer(parent), follow(false), tempRawSpeed(1), tempDTSpeed(1), simData(nullptr), selectedUnit(0)
 	{
 		assert(viewer);
 	}
@@ -36,7 +37,7 @@ namespace solar
 	{
 
 		ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Once);
-		ImGui::SetNextWindowSize(ImVec2(250, 500), ImGuiSetCond_Once);
+		ImGui::SetNextWindowSize(ImVec2(250, 690), ImGuiSetCond_Once);
 		if (ImGui::Begin("Simulation's controls", NULL, ImGuiWindowFlags_NoCollapse |
 						 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize))
 		{
@@ -51,7 +52,6 @@ namespace solar
 		ImGui::Text("Speed controls:");
 		SpeedControl();
 		ImGui::Separator();
-		ImGui::NewLine();
 		ImGui::Text("Metrics:");
 		SimMetrics();
 	}
@@ -226,8 +226,71 @@ namespace solar
 	void GUIDrawer::UnitsViewer()
 	{
 		//Shows list of all units and offers some things to do with them
-		ImGui::Text("Testing text.");
+		ImGui::Text("Show info about selected unit:");
 
+		//Returns char* string representing name of the selected Unit by its index in simData vector
+		auto unitNameGetter = [](void* data, int index, const char** result)->bool {
+			//simData can also be captured, but might as well use this intended argument
+			auto simData = reinterpret_cast<simData_t*>(data);
+			*result = simData->at(index).name.c_str();//does not throw, correct index is ensured by ImGui::Combo call
+			return true;
+		};
+		//0 = center system, index>0 gets simData(index-1) unit's name
+		auto refSystemGetter = [](void* data, int index, const char** result)->bool {
+			//simData can also be captured, but might as well use this intended argument
+			auto simData = reinterpret_cast<simData_t*>(data);
+			const static char* centerSystem = "(0,0) coordinates";
+			if (index == 0)
+				*result = centerSystem;
+			else
+				*result = simData->at(index-1).name.c_str();//does not throw, correct index is ensured by ImGui::Combo call
+			
+			return true;
+		};
+		
+		ImGui::Combo("##SelectedUnit", &selectedUnit, unitNameGetter, simData, simData->size(), 5);
+		ImGui::Text("Reference system:");
+		ImGui::TextTooltipOnHover("Physical units are relative with respect to selected reference system.");
+		//Zero index is reserved for 0,0 coordinates, so there is one more than data->size()
+		ImGui::Combo("##SelectedRefSystem", &selectedRefSystem, refSystemGetter, simData, simData->size() + 1, 5);
+		
+		ImGui::Text("Properties:");
+		auto& refUnit = selectedRefSystem > 0 ? simData->at(selectedRefSystem - 1) : centerSystem;
+		if (0 <= selectedUnit && selectedUnit < simData->size())
+		{
+			auto& unit = (*simData)[selectedUnit];
+			ImGui::Columns(2, "##UnitsCol", false);
+			ImGui::SetColumnOffset(1, 80.0f);
+			ImGui::Text("Position:"); ImGui::NextColumn();
+			ImGui::Text("X %2.6f AU", unit.pos.X()-refUnit.pos.X()); ImGui::NextColumn();
+			if (ImGui::SmallButton(!follow? "Follow" : "Cancel")) follow = !follow;
+			ImGui::TextTooltipOnHover(!follow ? "Follow selected unit around" : "Stop following selected unit");
+			ImGui::NextColumn();
+			ImGui::Text("Y %2.6f AU", unit.pos.Y()-refUnit.pos.Y()); ImGui::NextColumn();
+
+			ImGui::Text("Distance:"); ImGui::NextColumn();
+			ImGui::TextTooltipOnHover("Distance from center of reference system.");
+			ImGui::Text(" %2.6f AU", length(unit.pos - refUnit.pos)); 
+			ImGui::NextColumn();
+
+			ImGui::Text("Velocity:"); ImGui::NextColumn();
+			//Convert to km/s
+			ImGui::Text("X %+2.6f km/s", (unit.vel.X()-refUnit.vel.X())*physicsUnits::AUpYtoMpS / 1000.0);
+			ImGui::Text("Y %+2.6f km/s", (unit.vel.Y()-refUnit.vel.Y())*physicsUnits::AUpYtoMpS / 1000.0); 
+			ImGui::NextColumn();
+
+			ImGui::Text("Speed:"); ImGui::NextColumn();
+			ImGui::Text(" %2.6f km/s", length(unit.vel-refUnit.vel)*physicsUnits::AUpYtoMpS / 1000.0); 
+			ImGui::NextColumn();
+
+			ImGui::Text("Mass:"); ImGui::NextColumn();
+			ImGui::Text(" %1.4e kg", unit.mass * physicsUnits::SMtoKG); ImGui::NextColumn();
+			ImGui::Columns(1);
+		}
+		else
+			ImGui::TextColored({1.0f,0.0f,0.0f,1.0f}, "No unit is selected.");
+
+		
 	}
 	void GUIDrawer::ManualControls()
 	{
@@ -252,8 +315,11 @@ namespace solar
 
 		ImGuiIO& io = ImGui::GetIO();
 		//Zoom based on mouse scrolling this frame
+		//Allow scrolling only in center region, not in the left window
 		//Also zooms faster for already zoomed screen
-		currentZoom += static_cast<float>(5*io.MouseWheel*viewer->GetFrameTime()*std::max(currentZoom, 0.0f));
+		if (ImGui::IsMouseHoveringRect({260.0f,0.0f}, {1200.0f,700.0f}, false))
+			currentZoom += static_cast<float>(5 * io.MouseWheel*viewer->GetFrameTime()*std::max(currentZoom, 0.0f));
+		
 		//Clamp between 0 and 1000.0f, this works for AU units
 		currentZoom = std::min(1000.0f, std::max(0.0f, currentZoom));
 
@@ -270,15 +336,10 @@ namespace solar
 	}
 	void GUIDrawer::Following()
 	{
-		// Move to this position to move followed Unit to screen's
-		viewer->Move(-1.0*viewer->ScaleFactor()*(*simData)[8].pos);
-
-		if (ImGui::Button("Cancel"))//Revert to manual controls
-		{
-			follow = false;
-			viewer->Move({});//Centers around the 0,0
-			viewer->ResetZoom();//Zooms to see whole solar system
-		}
+		//Follow can begin only by clicking follow button with selected unit
+		assert(simData->size() > selectedUnit && selectedUnit >= 0);
+		// Move to this position to move followed Unit to screen's center
+		viewer->Move(-1.0*viewer->ScaleFactor()*(*simData)[selectedUnit].pos);
 	}
 
 }

@@ -33,7 +33,7 @@ namespace solar
 				void EditDTMultPopUp();
 			// Shows dTime, frameTime, simTime and other statistics of the simulation
 			void SimMetrics();
-			// Shows list of all units
+			// Shows list of all units and their properties
 			void UnitsViewer();
 		// Translating vectors for ManualControls
 		Vec2 offset, drag;
@@ -44,6 +44,12 @@ namespace solar
 		const char* editDTMultPopUp="EditDTMult";
 		int tempRawSpeed, tempDTSpeed;
 
+		//Currently selected Unit in comboBox
+		int selectedUnit;//-1 if none
+		int selectedRefSystem;//To which reference system are Unit's properties displayed
+		//Unit that serves as default centered reference system to which are Unit's units displayed
+		Unit centerSystem;
+		
 		IMGuiViewer* viewer;
 		simData_t* simData;
 	};

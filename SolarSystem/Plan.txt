@@ -1,8 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Refactoring - gave SimMethod and Viewer implicit simData pointer. It is initialized by _Prepare method.
-					- which is called by Simulation itself.
-			- Operators() and Prepare() now dont need to have data beiing passed as argument, because it is 
-				accessible by member pointer to simData;
+-Finished Unit's properties in GUI.
+-Deleted MousePos callback, because for some reason mouse position gets overwritten by garbage each frame, so
+	it must be also set each frame
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	II.List the Units in left window. Allow following them.

@@ -32,7 +32,6 @@ namespace solar
 		void static KeyCallback(GLFWwindow* win, int key, int, int action, int mods);
 		void static MouseScrollCallback(GLFWwindow* win, double dx, double dy);
 		void static MouseButtonCallback(GLFWwindow* win, int button, int action, int mods);
-		void static MousePositionCallback(GLFWwindow* win, double xpos, double ypos);
 		void static CharacterCallback(GLFWwindow* win, unsigned int ch);
 		void static MouseEnterCallback(GLFWwindow* win, int enter);
 		GLFWwindow* win;
