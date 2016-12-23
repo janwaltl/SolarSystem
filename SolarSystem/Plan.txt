@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
--Finished Unit's properties in GUI.
--Deleted MousePos callback, because for some reason mouse position gets overwritten by garbage each frame, so
-	it must be also set each frame
+Is commiting broken?
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	II.List the Units in left window. Allow following them.
