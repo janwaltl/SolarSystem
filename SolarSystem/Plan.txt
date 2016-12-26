@@ -1,29 +1,21 @@
 =====================================IN THIS COMMIT=====================================
-Is commiting broken?
+Fixed zoom getting stuck at zero.
+Added line trails!
+	- new UnitTrail class used by OpenGLBackend for each Unit.
+	- trail is updated each n rendered frames.
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	II.List the Units in left window. Allow following them.
-	III. Show some metrics.
-			- SimTime, DTime, current speed.
-			- allow measuring distances between Units
+	
 	IV. Make it prettier
 		- linear interpolation for rendering.
-		- add trails behind Units
 		- maybe add grid for better orientation, but make it optional
+		- add settings struct in Common.h
 	V. Document it & ship it
 		- Write all the comments, probably v èeštinì
 		- Constants instead of magic values
 		- SORT all compile warnings
 
-- About OpenGL
-	- Buffers - 
-	- There should be circles for each planet, they need to be moving
-		- So, fixed VBO for them, reused by each unit
-			- would store circle
-			- color and position would be controlled by uniforms
-	- There should be line trails behind the planets
-		- Lets say 50 line segments for each unit
-		- Sort of queue like system that would push old lines out and new lines in
 
 SystemUnit is starting to have too many forwarding functions. Maybe give direct pointer to sim, but someway restrict
 calling Start.

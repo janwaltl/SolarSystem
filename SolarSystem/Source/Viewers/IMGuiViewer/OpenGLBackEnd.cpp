@@ -5,6 +5,7 @@
 #include "../../Exception.h"
 #include "OpenGLBackend/Shader.h"
 #include "OpenGLBackend/CircleBuffer.h"
+#include "OpenGLBackend/UnitTrail.h"
 
 namespace solar
 {
@@ -12,7 +13,7 @@ namespace solar
 
 	OpenGLBackend::OpenGLBackend(int width, int height, const std::string & title, float circleSize,
 								 size_t circleResolution) :
-		unitS(nullptr)
+		unitS(nullptr), trailFrameCounter(0)
 	{
 		aspectRatio = double(width) / height;
 		cSize = circleSize;
@@ -67,24 +68,34 @@ namespace solar
 	void OpenGLBackend::CreateBufferObjects(size_t numUnits)
 	{
 		circleB = std::make_unique<openGLBackend::CircleBuffer>(cResolution, cSize);
+		unitTrails.resize(numUnits);
 	}
 
 	void OpenGLBackend::DrawData(const simData_t & data, double scaleFactor, const Vec2& offset)
 	{
 		unitS->Bind();
+		size_t i = 0;
 		for (const auto& unit : data)
 		{
+			if (!trailFrameCounter)
+				unitTrails[i].Push(unit.pos);
+
 			unitS->SetUniform4f("col", unit.color);
+			unitS->SetUniform2f("scale", 1.0f, 1.0f);
 			unitS->SetUniform2f("offset", scaleFactor*unit.pos + offset);
 			circleB->Draw();
+			unitS->SetUniform2f("offset", offset);
+			unitS->SetUniform2f("scale", scaleFactor, scaleFactor);
+			unitTrails[i++].Draw();
 		}
+		++trailFrameCounter %= trailResolution;
 		unitS->UnBind();
 	}
 
 	void OpenGLBackend::CreateShaders()
 	{
 		unitS = std::make_unique<openGLBackend::Shader>(GetUnitVertSource(), GetUnitFragSource());
-		unitS->SetUniform2f("AR", {aspectRatio,1.0});
+		unitS->SetUniform2f("AR", 1.0f, aspectRatio);
 	}
 
 
@@ -94,11 +105,13 @@ namespace solar
 			#version 330 core
 			layout(location = 0) in vec2 position;
 
-			uniform vec2 offset;
-			uniform vec2 AR;
+			uniform vec2 offset;// offset pos by this amount, should be normalized
+			uniform vec2 scale;// Scaling for position
+			uniform vec2 AR;//Aspect ratio
 			void main()
 			{
-				gl_Position = vec4(position.x + offset.x,AR.x*( position.y + offset.y), 0.0, 1.0);
+				vec2 pos = scale * position + offset;
+				gl_Position = vec4(AR * pos, 0.0, 1.0);
 			})";
 	}
 

@@ -321,7 +321,7 @@ namespace solar
 			currentZoom += static_cast<float>(5 * io.MouseWheel*viewer->GetFrameTime()*std::max(currentZoom, 0.0f));
 		
 		//Clamp between 0 and 1000.0f, this works for AU units
-		currentZoom = std::min(1000.0f, std::max(0.0f, currentZoom));
+		currentZoom = std::min(1000.0f, std::max(0.001f, currentZoom));
 
 		//Zoom to center of the screen
 		// - If we are not following a unit, screen is probably not centered,

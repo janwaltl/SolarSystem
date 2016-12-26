@@ -184,6 +184,7 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\CircleBuffer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\Shader.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\UnitTrail.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\SystemUnit.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\CircleBuffer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\Shader.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\UnitTrail.h" />
     <ClInclude Include="Source\Viewers\Viewer.h" />
   </ItemGroup>
   <ItemGroup>
