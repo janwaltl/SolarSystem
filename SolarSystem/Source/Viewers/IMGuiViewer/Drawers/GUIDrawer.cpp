@@ -9,14 +9,10 @@ namespace solar
 {
 	namespace drawers
 	{
-		GUIDrawer::GUIDrawer(IMGuiViewer * parent) :
-			Drawer(parent), follow(false), tempRawSpeed(1), tempDTSpeed(1), simData(nullptr), selectedUnit(0)
+		GUIDrawer::GUIDrawer(IMGuiViewer * parent, simData_t* data) :
+			Drawer(parent), follow(false), tempRawSpeed(1), tempDTSpeed(1), simData(data), selectedUnit(0)
 		{
 			assert(viewer);
-		}
-		void GUIDrawer::Prepare(simData_t * data)
-		{
-			simData = data;
 		}
 		void GUIDrawer::Draw()
 		{

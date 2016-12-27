@@ -9,7 +9,7 @@ namespace solar
 {
 	IMGuiViewer::IMGuiViewer(int width, int height, const std::string& title /*= "Simulation"*/) :
 		openGL(width, height, title), imguiBackend(openGL.GetWin()),
-		scaleFactor(1.0), offset(0.0, 0.0), AR(width / (double)height), gui(this)
+		scaleFactor(1.0), offset(0.0, 0.0), AR(width / (double)height)
 	{
 	}
 
@@ -27,16 +27,17 @@ namespace solar
 		// Process GUI, then render Units, THEN render GUI.
 		// So GUI is rendered over the Units, but processed before them to be able to set correct scaleFactor, offset
 		imguiBackend.NewFrame();
-		gui.Draw();
+		GUIDrawer->Draw();
 		simDataDrawer->Draw();
+		lineTrailsDrawer->Draw();
 		imguiBackend.Render();
 	}
 
 	void IMGuiViewer::Prepare()
 	{
-		gui.Prepare(data);
 		simDataDrawer = std::make_unique<drawers::SimDataDrawer>(this, data);
-
+		GUIDrawer = std::make_unique<drawers::GUIDrawer>(this, data);
+		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(this, data);
 		ResetZoom();
 		scaleFactor *= 0.8;//To fit data into <-0.8,0.8> initially
 	}

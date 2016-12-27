@@ -6,6 +6,7 @@
 #include "IMGuiViewer/ImGuiBackend.h"
 #include "IMGuiViewer/Drawers/GUIDrawer.h"
 #include "IMGuiViewer/Drawers/SimDataDrawer.h"
+#include "IMGuiViewer/Drawers/LineTrailsDrawer.h"
 
 struct GLFWwindow;
 
@@ -34,8 +35,9 @@ namespace solar
 	private:
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT
-		drawers::GUIDrawer gui;
+		std::unique_ptr<drawers::GUIDrawer> GUIDrawer;
 		std::unique_ptr<drawers::SimDataDrawer> simDataDrawer;
+		std::unique_ptr<drawers::LineTrailsDrawer> lineTrailsDrawer;
 		double scaleFactor;
 		Vec2 offset;
 		double AR;

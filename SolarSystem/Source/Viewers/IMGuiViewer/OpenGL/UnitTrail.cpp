@@ -9,7 +9,7 @@
 
 namespace solar
 {
-	namespace openGLBackend
+	namespace openGL
 	{
 		unsigned int UnitTrail::IBO = 0;
 		size_t UnitTrail::refCount = 0;
@@ -100,7 +100,7 @@ namespace solar
 			curIndex %= maxLength;
 		}
 
-		void UnitTrail::Draw()
+		void UnitTrail::Draw() const
 		{
 			//If line's buffer is not full yet, render from beginning. Or the point are eing overwritten, then use
 			//curIndex to mark first index to be rendered(explained in ctor)

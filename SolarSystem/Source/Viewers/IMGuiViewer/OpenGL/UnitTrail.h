@@ -5,7 +5,7 @@
 
 namespace solar
 {
-	namespace openGLBackend
+	namespace openGL
 	{
 		//Line trail behind unit
 		//Stores and renders maxLength amount of points as line strip behind the unit
@@ -25,7 +25,7 @@ namespace solar
 			void Push(const Vec2& newPos);
 			//Draws UnitTrail, appropriate shader MUST be bind before call
 			// - unitS from OpenGLBackend for now
-			void Draw();
+			void Draw() const;
 			friend void swap(UnitTrail& left, UnitTrail& right) noexcept;
 
 			const static size_t maxLength = 4'000;//Max amount of points in trail

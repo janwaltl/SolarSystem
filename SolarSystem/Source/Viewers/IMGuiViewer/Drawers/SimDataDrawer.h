@@ -13,6 +13,7 @@ namespace solar
 	namespace drawers
 	{
 		//Draws simulated units on screen
+		//Require GL context at the point of creation
 		class SimDataDrawer :public Drawer
 		{
 		public:

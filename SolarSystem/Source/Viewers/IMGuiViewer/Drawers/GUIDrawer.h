@@ -14,9 +14,7 @@ namespace solar
 		class GUIDrawer :public Drawer
 		{
 		public:
-			GUIDrawer(IMGuiViewer* parent);
-			//Obtains copy of SimData and stores it
-			void Prepare(simData_t* data);
+			GUIDrawer(IMGuiViewer* parent, simData_t* data);
 			void Draw() override final;
 		private:
 			// Control viewing of simulation - moving(following) and zooming

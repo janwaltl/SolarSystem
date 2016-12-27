@@ -66,6 +66,9 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\LineTrailsDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Simulation.h">
@@ -153,6 +156,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\LineTrailsDrawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
