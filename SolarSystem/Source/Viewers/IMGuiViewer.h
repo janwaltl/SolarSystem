@@ -4,7 +4,9 @@
 #include "Viewer.h"
 #include "IMGuiViewer/OpenGLBackEnd.h"
 #include "IMGuiViewer/ImGuiBackend.h"
-#include "IMGuiViewer/GUIDrawer.h"
+#include "IMGuiViewer/Drawers/GUIDrawer.h"
+#include "IMGuiViewer/Drawers/SimDataDrawer.h"
+
 struct GLFWwindow;
 
 namespace solar
@@ -13,8 +15,7 @@ namespace solar
 	{
 	public:
 		// Properties of created window
-		IMGuiViewer(int width, int height, const std::string& title = "Simulation", float circleSize = 0.01f,
-					size_t circleRes = 32);
+		IMGuiViewer(int width, int height, const std::string& title = "Simulation");
 		~IMGuiViewer() = default;
 
 		void operator()() override final;
@@ -28,12 +29,16 @@ namespace solar
 		// Zooms enough to see whole solar system
 		// Sets such scale factor, which when applied on all positions, yields positions between <-1,1>
 		void ResetZoom();
+
+		double GetAspectRatio();
 	private:
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT
-		GUIDrawer gui;
+		drawers::GUIDrawer gui;
+		std::unique_ptr<drawers::SimDataDrawer> simDataDrawer;
 		double scaleFactor;
 		Vec2 offset;
+		double AR;
 	};
 }
 

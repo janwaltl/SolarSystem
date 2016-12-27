@@ -5,7 +5,7 @@
 #include <cmath>
 namespace solar
 {
-	namespace openGLBackend
+	namespace openGL
 	{
 		CircleBuffer::CircleBuffer(size_t numVertices, float radius)
 		{

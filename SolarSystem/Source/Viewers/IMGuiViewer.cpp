@@ -1,15 +1,15 @@
 #include "IMGuiViewer.h"
 
-#include "IMGuiViewer/OpenGLBackEnd.h"
 #include <GLFW/glfw3.h>
 #include <algorithm>
 
+#include "IMGuiViewer/OpenGLBackEnd.h"
+
 namespace solar
 {
-	IMGuiViewer::IMGuiViewer(int width, int height, const std::string& title /*= "Simulation"*/,
-							 float circleSize /*= 0.01f*/, size_t circleRes /*= 32*/) :
-		openGL(width, height, title, circleSize, circleRes), imguiBackend(openGL.GetWin()),
-		gui(this), scaleFactor(1.0), offset(0.0, 0.0)
+	IMGuiViewer::IMGuiViewer(int width, int height, const std::string& title /*= "Simulation"*/) :
+		openGL(width, height, title), imguiBackend(openGL.GetWin()),
+		scaleFactor(1.0), offset(0.0, 0.0), AR(width / (double)height), gui(this)
 	{
 	}
 
@@ -28,15 +28,16 @@ namespace solar
 		// So GUI is rendered over the Units, but processed before them to be able to set correct scaleFactor, offset
 		imguiBackend.NewFrame();
 		gui.Draw();
-		openGL.DrawData(*data, scaleFactor, offset);
+		simDataDrawer->Draw();
 		imguiBackend.Render();
 	}
 
 	void IMGuiViewer::Prepare()
 	{
-		openGL.CreateBufferObjects(data->size());
-		ResetZoom();
 		gui.Prepare(data);
+		simDataDrawer = std::make_unique<drawers::SimDataDrawer>(this, data);
+
+		ResetZoom();
 		scaleFactor *= 0.8;//To fit data into <-0.8,0.8> initially
 	}
 
@@ -80,6 +81,11 @@ namespace solar
 		auto maxL = length(max);
 		auto minL = length(min);
 		scaleFactor = 1.0 / (maxL > minL ? maxL : minL);
+	}
+
+	double IMGuiViewer::GetAspectRatio()
+	{
+		return AR;
 	}
 
 }

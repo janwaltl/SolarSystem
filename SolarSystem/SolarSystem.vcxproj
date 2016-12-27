@@ -73,7 +73,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)intermediate\$(Configuration)-$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Libraries\include;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Libraries\include;$(ProjectDir)</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(SolutionDir)Libraries\lib\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -83,7 +83,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)intermediate\$(Configuration)-$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\Libraries\include;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Libraries\include;$(ProjectDir)</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(SolutionDir)Libraries\lib\$(Configuration)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -177,14 +177,15 @@
     <ClCompile Include="Source\SimMethods\SemiImplicitEuler.cpp" />
     <ClCompile Include="Source\Simulation.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer.cpp" />
-    <ClCompile Include="Source\Viewers\IMGuiViewer\GUIDrawer.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\SimDataDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\ImGuiBackend.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_draw.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp" />
-    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\CircleBuffer.cpp" />
-    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\Shader.cpp" />
-    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\UnitTrail.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\SystemUnit.h" />
@@ -201,7 +202,9 @@
     <ClInclude Include="Source\SimMethods\SimMethod.h" />
     <ClInclude Include="Source\Simulation.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\GUIDrawer.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\Drawer.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\SimDataDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\ImGuiBackend.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imconfig.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.h" />
@@ -210,9 +213,9 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_textedit.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_truetype.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\CircleBuffer.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\Shader.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\UnitTrail.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.h" />
     <ClInclude Include="Source\Viewers\Viewer.h" />
   </ItemGroup>
   <ItemGroup>

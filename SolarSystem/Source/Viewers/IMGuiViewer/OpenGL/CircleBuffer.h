@@ -1,9 +1,9 @@
-#ifndef OPENGLBACKEND_CIRCLE_BUFFER_HEADER
-#define OPENGLBACKEND_CIRCLE_BUFFER_HEADER
+#ifndef OPENGL_CIRCLE_BUFFER_HEADER
+#define OPENGL_CIRCLE_BUFFER_HEADER
 
 namespace solar
 {
-	namespace openGLBackend
+	namespace openGL
 	{
 		//VAO buffer containing centered circle of given resolution and radius
 		class CircleBuffer

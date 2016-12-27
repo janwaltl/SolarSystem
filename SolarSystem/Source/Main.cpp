@@ -17,7 +17,7 @@ int main()
 		try
 		{
 			auto parser = std::make_unique<FormattedFileParser>("vstup.txt");
-			auto viewer = std::make_unique<IMGuiViewer>(1200, 700, "Title", 0.005f, 12);
+			auto viewer = std::make_unique<IMGuiViewer>(1200, 700, "Title");
 			auto method = std::make_unique<RK4>();
 
 			Simulation sim(std::move(parser), std::move(method), std::move(viewer));

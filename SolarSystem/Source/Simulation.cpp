@@ -115,7 +115,7 @@ namespace solar
 			TickTime();
 			while (acc > dtime && state!=paused)
 			{
-				for (int i = 0; i < rawMultiplier; i++)
+				for (size_t i = 0; i < rawMultiplier; i++)
 				{
 					(*simMethod)(ToSecs(dtime * DTMultiplier) / physicsUnits::YtoS);//Step in years
 					simTime += dtime*DTMultiplier;

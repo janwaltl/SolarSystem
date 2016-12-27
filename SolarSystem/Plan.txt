@@ -1,12 +1,18 @@
 =====================================IN THIS COMMIT=====================================
-Fixed zoom getting stuck at zero.
-Added line trails!
-	- new UnitTrail class used by OpenGLBackend for each Unit.
-	- trail is updated each n rendered frames.
+Big refactoring:
+	- Renamed OpenGLBackend to just OpenGL
+	- Added abstract base class Drawer - that draws stuff
+		- IMGuiViewer stores all drawers and they have access to it
+	- Extracted SimDataDrawer from OpenGLBackend class
+	- GUIDrawer inherits from Drawer
 
+- UniTrails are not working for now. Will get their separate drawer.
+- Added ProjectDir to INCLUDE path, so relative paths can be changed to Source/XXX/YYY paths
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	
+	Pimpl GUIDrawer in IMGuiViewer, get rid of GUIDrawer::Prepare, move to ctor.
+	Add trails back.
+
 	IV. Make it prettier
 		- linear interpolation for rendering.
 		- maybe add grid for better orientation, but make it optional

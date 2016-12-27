@@ -2,14 +2,14 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "IMGuiLibrary/imgui.h"
 
-#include "OpenGLBackend/Shader.h"
+#include "IMGuiLibrary/imgui.h"
+#include "OpenGL/Shader.h"
 
 namespace solar
 {
 	unsigned int IMGuiBackend::textID, IMGuiBackend::VAO, IMGuiBackend::IBO, IMGuiBackend::VBO;
-	std::unique_ptr<openGLBackend::Shader> IMGuiBackend::shader;
+	std::unique_ptr<openGL::Shader> IMGuiBackend::shader;
 
 	IMGuiBackend::IMGuiBackend(GLFWwindow * win)
 	{
@@ -173,7 +173,7 @@ namespace solar
 				outCol = fragCol * texture(text,fragUV.st);
 			})";
 
-		shader = std::make_unique<openGLBackend::Shader>(vertSource, fragSource);
+		shader = std::make_unique<openGL::Shader>(vertSource, fragSource);
 
 		ImGuiIO& io = ImGui::GetIO();
 		const float ortho[4][4] =

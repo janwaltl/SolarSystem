@@ -6,6 +6,7 @@
 #include <numeric>
 #include <algorithm>
 #include "Shader.h"
+
 namespace solar
 {
 	namespace openGLBackend
@@ -72,6 +73,7 @@ namespace solar
 		UnitTrail & UnitTrail::operator=(UnitTrail && other)
 		{
 			swap(*this, other);
+			return *this;
 		}
 
 		UnitTrail::~UnitTrail()

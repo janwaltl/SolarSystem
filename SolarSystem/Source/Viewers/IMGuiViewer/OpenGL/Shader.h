@@ -3,11 +3,11 @@
 
 #include <string>
 #include <map>
-#include "../../../Math/Math.h"
+#include "Source/Math/Math.h"
 
 namespace solar
 {
-	namespace openGLBackend
+	namespace openGL
 	{
 		//Manager for OpenGL's shader
 		class Shader

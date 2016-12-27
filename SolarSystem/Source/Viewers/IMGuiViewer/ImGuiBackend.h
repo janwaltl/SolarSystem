@@ -8,7 +8,7 @@ struct ImDrawData;
 
 namespace solar
 {
-	namespace openGLBackend
+	namespace openGL
 	{
 		class Shader;
 	}
@@ -35,7 +35,7 @@ namespace solar
 		void static CharacterCallback(GLFWwindow* win, unsigned int ch);
 		void static MouseEnterCallback(GLFWwindow* win, int enter);
 		GLFWwindow* win;
-		static std::unique_ptr<openGLBackend::Shader> shader;
+		static std::unique_ptr<openGL::Shader> shader;
 		static unsigned int textID, VAO, IBO, VBO;
 	};
 }

@@ -45,22 +45,25 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\CircleBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\SimMethods\RK4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Viewers\IMGuiViewer\ImGuiBackend.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Viewers\IMGuiViewer\GUIDrawer.cpp">
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackend\UnitTrail.cpp">
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\SimDataDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,12 +128,6 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\CircleBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Math\Vec4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -140,10 +137,22 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\ImGuiBackend.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\GUIDrawer.h">
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\Drawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackend\UnitTrail.h">
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\SimDataDrawer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
