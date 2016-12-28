@@ -32,8 +32,12 @@ namespace solar
 		// Zooms enough to see whole solar system
 		// Sets such scale factor, which when applied on all positions, yields positions between <-1,1>
 		void ResetZoom();
-
+		//
 		double GetAspectRatio();
+		//Gives access to drawer
+		//-used mainly by other drawers(GUI)
+		drawers::LineTrailsDrawer* GetTrailsDrawer();
+
 	private:
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT

@@ -89,4 +89,10 @@ namespace solar
 		return AR;
 	}
 
+	drawers::LineTrailsDrawer * IMGuiViewer::GetTrailsDrawer()
+	{
+		assert(lineTrailsDrawer.get());
+		return lineTrailsDrawer.get();
+	}
+
 }

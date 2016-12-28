@@ -26,6 +26,8 @@ namespace solar
 			//Draws UnitTrail, appropriate shader MUST be bind before call
 			// - unitS from OpenGLBackend for now
 			void Draw() const;
+			//Removes all points from trail
+			void Clear();
 			friend void swap(UnitTrail& left, UnitTrail& right) noexcept;
 		private:
 			// #instances of this class, for managing lifetime of IBO

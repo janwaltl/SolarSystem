@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Added settings.
+Added control of lineTrails via GUI.
+	- enable/reset/disable specific/all
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	- do small wrapper around opengl::geterror to atleast check memory errors

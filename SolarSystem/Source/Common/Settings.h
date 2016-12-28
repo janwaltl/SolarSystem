@@ -31,6 +31,8 @@ namespace solar
 			// How often get trails updated, counted in viewer's frames
 			// Higher values result in more frequent updates and more precise but shorter-lasting trails
 			const static size_t resolution;
+			// Whether are lineTrails rendered by default for all units
+			const static bool enabledByDefault;
 		};
 		struct circleBuffer
 		{

@@ -295,26 +295,38 @@ namespace solar
 		{
 			ImGui::SetNextWindowPos(ImVec2(1000, 10), ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(ImVec2(200, 690), ImGuiSetCond_Once);
-			if (ImGui::Begin("LineTrails", NULL, ImGuiWindowFlags_NoCollapse |
+			if (ImGui::Begin("Visuals", NULL, ImGuiWindowFlags_NoCollapse |
 							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize))
 			{
-				if (ImGui::CollapsingHeader("Visuals:", nullptr, false, true))
+				if (ImGui::CollapsingHeader("Line Trails:", nullptr, false, true))
 				{
-					if (ImGui::BeginChild("Line Trails", ImVec2(0, 300), false, ImGuiWindowFlags_AlwaysUseWindowPadding))
-					{
-						static bool check[16];
-						for (size_t i = 0; i < simData->size(); ++i)
-							ImGui::Checkbox((*simData)[i].name.c_str(), check + i);
-						ImGui::EndChild();
-					}
-					ImGui::SmallButton("Enable all"); ImGui::SameLine();
-					ImGui::SmallButton("Disable all");
-					if (ImGui::Button("Reset all trails"))
-						ImGui::Text("reset");
+					LineTrailsSwitching();
+
+					if (ImGui::SmallButton("Enable all"))
+						this->viewer->GetTrailsDrawer()->SwitchAll(true);
+					//ImGui::SameLine();
+					if (ImGui::SmallButton("Disable all"))
+						this->viewer->GetTrailsDrawer()->SwitchAll(false);
+
+					if (ImGui::SmallButton("Reset all"))
+						this->viewer->GetTrailsDrawer()->ClearAll();
 					ImGui::TextTooltipOnHover("Deletes all drawn trails.");
 				}
 
 				ImGui::End();
+			}
+		}
+		void GUIDrawer::LineTrailsSwitching()
+		{
+			if (ImGui::BeginChild("Line Trails", ImVec2(0, 300), false, ImGuiWindowFlags_AlwaysUseWindowPadding))
+			{
+				for (size_t i = 0; i < simData->size(); ++i)
+				{
+					bool checked = this->viewer->GetTrailsDrawer()->IsTrailEnabled(i);
+					if (ImGui::Checkbox((*simData)[i].name.c_str(), &checked))
+						this->viewer->GetTrailsDrawer()->SwitchTrail(i, checked);
+				}
+				ImGui::EndChild();
 			}
 		}
 		void GUIDrawer::ManualControls()

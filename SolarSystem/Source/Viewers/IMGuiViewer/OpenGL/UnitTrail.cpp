@@ -112,5 +112,10 @@ namespace solar
 			glDrawElements(GL_LINE_STRIP, length, GL_UNSIGNED_INT, firstIndexOffset);
 			glBindVertexArray(0);
 		}
+		void UnitTrail::Clear()
+		{
+			//Just mark it as clear, no need to clear VBO, it will overwrite itself by new data
+			length = curIndex = 0;
+		}
 	}
 }

@@ -2,7 +2,7 @@
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/UnitTrail.h"
 #include "Source/Viewers/IMGuiViewer.h"
-
+#include <algorithm>
 namespace solar
 {
 	namespace drawers
@@ -24,20 +24,51 @@ namespace solar
 		void LineTrailsDrawer::Draw()
 		{
 			UpdateTrails();
-			assert(trails.size() == simData->size());
+			assert(trails.size() == simData->size() && trails.size() == trailsControls.size());
 
 			shader->Bind();
 			auto trailIT = trails.begin();
-			for (auto unitIT = simData->begin(); unitIT != simData->end(); ++unitIT, ++trailIT)
+			auto trailCtrlIT = trailsControls.begin();
+			for (auto unitIT = simData->begin(); unitIT != simData->end(); ++unitIT, ++trailIT, ++trailCtrlIT)
 			{
 				shader->SetUniform4f("col", unitIT->color);
-
-				float scale = static_cast<float>(viewer->ScaleFactor());
-				shader->SetUniform2f("scale", scale, scale);
-				shader->SetUniform2f("offset", viewer->GetOffset());
-				trailIT->Draw();
+				if (*trailCtrlIT)
+				{
+					float scale = static_cast<float>(viewer->ScaleFactor());
+					shader->SetUniform2f("scale", scale, scale);
+					shader->SetUniform2f("offset", viewer->GetOffset());
+					trailIT->Draw();
+				}
 			}
 			shader->UnBind();
+		}
+
+		void LineTrailsDrawer::SwitchTrail(size_t index, bool enable)
+		{
+			assert(index < trailsControls.size());
+
+			trailsControls[index] = enable;
+			if (!enable)//Disabling trail also clears it
+				trails[index].Clear();
+
+		}
+
+		void LineTrailsDrawer::SwitchAll(bool enable)
+		{
+			std::fill(trailsControls.begin(), trailsControls.end(), enable);
+			if (!enable)//Disabling
+				ClearAll();
+		}
+
+		void LineTrailsDrawer::ClearAll()
+		{
+			std::for_each(trails.begin(), trails.end(), [](openGL::UnitTrail& trail) {trail.Clear(); });
+		}
+
+		bool LineTrailsDrawer::IsTrailEnabled(size_t index)
+		{
+			assert(index < trailsControls.size());
+			return trailsControls[index];
 		}
 
 		void LineTrailsDrawer::CreateShader()
@@ -74,18 +105,22 @@ namespace solar
 		void LineTrailsDrawer::CreateTrails()
 		{
 			trails.resize(simData->size());
+			trailsControls.resize(simData->size(), settings::lineTrail::enabledByDefault);
 		}
 
 		void LineTrailsDrawer::UpdateTrails()
 		{
-			assert(simData->size() == trails.size());
+			assert(simData->size() == trails.size() && trails.size() == trailsControls.size());
+
 			++frameCounter %= settings::lineTrail::resolution;
 			if (!frameCounter)//Only update trails every trailRes frames
 			{
 				auto trailIT = trails.begin();
-				for (auto unitIT = simData->begin(); unitIT != simData->end(); ++unitIT, ++trailIT)
+				auto trailsCtrlIT = trailsControls.begin();
+				for (auto unitIT = simData->begin(); unitIT != simData->end(); ++unitIT, ++trailIT, ++trailsCtrlIT)
 				{
-					trailIT->Push(unitIT->pos);
+					if (*trailsCtrlIT)
+						trailIT->Push(unitIT->pos);
 				}
 
 			}

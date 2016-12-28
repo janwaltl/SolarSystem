@@ -20,6 +20,14 @@ namespace solar
 			LineTrailsDrawer(IMGuiViewer* parent, simData_t* data);
 			~LineTrailsDrawer();
 			void Draw() override final;
+			//Enables/disables simData[index] unit's trail
+			// - disabling also clears the trail
+			void SwitchTrail(size_t index, bool enable);
+			//Enables/disables all units' trails
+			void SwitchAll(bool enable);
+			//Clears all units' trails
+			void ClearAll();
+			bool IsTrailEnabled(size_t index);
 		private:
 			void CreateShader();
 			void CreateTrails();
@@ -30,6 +38,7 @@ namespace solar
 			
 			std::unique_ptr<openGL::Shader> shader;
 			std::vector<openGL::UnitTrail> trails;
+			std::vector<bool> trailsControls;
 			simData_t* simData;
 		};
 	}
