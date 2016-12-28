@@ -32,7 +32,8 @@ namespace solar
 			{
 				shader->SetUniform4f("col", unitIT->color);
 
-				shader->SetUniform2f("scale", viewer->ScaleFactor(), viewer->ScaleFactor());
+				float scale = static_cast<float>(viewer->ScaleFactor());
+				shader->SetUniform2f("scale", scale, scale);
 				shader->SetUniform2f("offset", viewer->GetOffset());
 				trailIT->Draw();
 			}

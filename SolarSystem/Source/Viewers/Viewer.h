@@ -17,10 +17,10 @@ namespace solar
 		virtual ~Viewer() = default;
 	public:
 		//Captures data, called only from Simulation itself
-		void _Prepare(simData_t* data)
+		void _Prepare(simData_t* simData)
 		{
-			assert(data);
-			this->data = data;
+			assert(simData);
+			this->data = simData;
 			this->Prepare();
 		}
 	protected:

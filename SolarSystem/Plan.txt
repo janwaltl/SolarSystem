@@ -1,8 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-- IMGuiViewer hold GUIDrawer by pointer, simplified its interface,more RAII
-- Brought back lineTrails!
-	- created separate LineTrailsDrawer for them, held by IMGuiViewer.
-
+Warning fixes...
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	GUI control of lineTrails.

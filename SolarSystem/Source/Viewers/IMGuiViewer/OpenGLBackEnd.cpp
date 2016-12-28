@@ -52,7 +52,7 @@ namespace solar
 
 	void OpenGLBackend::ErrorCallback(int err, const char * description)
 	{
-		error = std::string(description);
+		error = "ERR " + std::to_string(err) + ": " + description;
 	}
 
 /*
