@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Added control of lineTrails via GUI.
-	- enable/reset/disable specific/all
+Added openGL::Error exception class.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	- do small wrapper around opengl::geterror to atleast check memory errors
