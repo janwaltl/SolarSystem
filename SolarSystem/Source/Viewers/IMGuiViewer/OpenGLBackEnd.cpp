@@ -2,7 +2,8 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "../../Exception.h"
+#include "Source/Exception.h"
+#include "OpenGL/Error.h"
 
 namespace solar
 {
@@ -27,10 +28,12 @@ namespace solar
 
 		glfwSetWindowPos(win, settings::win::pos::x, settings::win::pos::y);
 		glfwMakeContextCurrent(win);
-		glewExperimental = GL_TRUE; // on some machines OpenGL crashes when this is at false
+		glewExperimental = GL_TRUE; // Can crash without
 
 		if (glewInit() != GLEW_OK) // tries to initialize glew
 			throw Exception("GLEW initialization failed.");
+
+		openGL::CheckForError();//glewInit causes INVALID_ENUM for some reason...
 
 		glViewport(0, 0, width, height); // sets correct coordinate viewport
 		glfwSwapInterval(0);

@@ -17,6 +17,7 @@ namespace solar
 		class LineTrailsDrawer :public Drawer
 		{
 		public:
+			//Throws GLError on OpenGL error(i.e out of GPU memory)
 			LineTrailsDrawer(IMGuiViewer* parent, simData_t* data);
 			~LineTrailsDrawer();
 			void Draw() override final;

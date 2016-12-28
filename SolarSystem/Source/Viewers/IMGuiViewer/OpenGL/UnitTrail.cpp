@@ -6,6 +6,7 @@
 #include <numeric>
 #include <algorithm>
 #include "Shader.h"
+#include "Error.h"
 
 namespace solar
 {
@@ -62,6 +63,8 @@ namespace solar
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			glBindVertexArray(0);
 
+			//Throws if something failed, cleans up anything that might have been created.
+			ThrowOnError([this]() {this->DeleteBuffers(); });
 			++refCount;
 		}
 
@@ -79,12 +82,7 @@ namespace solar
 
 		UnitTrail::~UnitTrail()
 		{
-			glDeleteBuffers(1, &VBO);
-			glDeleteVertexArrays(1, &VAO);
-			if (refCount == 1)//If this was last instance of this class, delete IBO buffer
-			{
-				glDeleteBuffers(1, &IBO);
-			}
+			DeleteBuffers();
 			--refCount;
 		}
 
@@ -116,6 +114,13 @@ namespace solar
 		{
 			//Just mark it as clear, no need to clear VBO, it will overwrite itself by new data
 			length = curIndex = 0;
+		}
+		void UnitTrail::DeleteBuffers()
+		{
+			glDeleteBuffers(1, &VBO);
+			glDeleteVertexArrays(1, &VAO);
+			if (refCount == 1)//If this was last instance of this class, delete IBO buffer
+				glDeleteBuffers(1, &IBO);
 		}
 	}
 }

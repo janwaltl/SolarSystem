@@ -3,6 +3,8 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 #include <cmath>
+#include "Error.h"
+
 namespace solar
 {
 	namespace openGL
@@ -45,18 +47,25 @@ namespace solar
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			glBindVertexArray(0);
+
+			//Throws if something failed, cleans up anything that might have been created.
+			ThrowOnError([this]() {this->DeleteBuffers(); });
 		}
 		CircleBuffer::~CircleBuffer()
 		{
-			glDeleteBuffers(1, &VBO);
-			glDeleteBuffers(1, &IBO);
-			glDeleteVertexArrays(1, &VAO);
+			DeleteBuffers();
 		}
 		void CircleBuffer::Draw()
 		{
 			glBindVertexArray(VAO);
 			glDrawElements(GL_TRIANGLE_FAN, numIndices, GL_UNSIGNED_INT, NULL);
 			glBindVertexArray(0);
+		}
+		void CircleBuffer::DeleteBuffers()
+		{
+			glDeleteBuffers(1, &VBO);
+			glDeleteBuffers(1, &IBO);
+			glDeleteVertexArrays(1, &VAO);
 		}
 	}
 }

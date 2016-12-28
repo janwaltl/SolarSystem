@@ -1,8 +1,10 @@
 #include "LineTrailsDrawer.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/UnitTrail.h"
+#include "Source/Viewers/IMGuiViewer/OpenGL/Error.h"
 #include "Source/Viewers/IMGuiViewer.h"
 #include <algorithm>
+
 namespace solar
 {
 	namespace drawers
@@ -104,8 +106,20 @@ namespace solar
 
 		void LineTrailsDrawer::CreateTrails()
 		{
+			try
+			{
 			trails.resize(simData->size());
 			trailsControls.resize(simData->size(), settings::lineTrail::enabledByDefault);
+
+			}
+			catch (openGL::GLError& e)
+			{
+				if (e.GetErrType() == openGL::errors::outOfMemory)
+					throw Exception("Failed to create lineTrails' buffers because there is not enough GPU memory."
+									"Lowering settings::lineTrail::maxLength value might help with that.");
+				else
+				throw Exception("Failed to create lineTrails, reason:" + std::string(e.what()));
+			}
 		}
 
 		void LineTrailsDrawer::UpdateTrails()

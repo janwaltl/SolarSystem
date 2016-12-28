@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Source/Exception.h"
-
+#include "Error.h"
 
 namespace solar
 {
@@ -60,6 +60,9 @@ namespace solar
 			//They are not needed anymore
 			glDeleteShader(fragShader);
 			glDeleteShader(vertShader);
+
+			//Throws if something failed, but it mostly should be covered by above checks...
+			ThrowOnError();
 		}
 		Shader::~Shader()
 		{

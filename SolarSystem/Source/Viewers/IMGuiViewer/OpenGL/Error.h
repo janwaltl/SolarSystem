@@ -22,34 +22,51 @@ namespace solar
 			stackOverflow = GL_STACK_OVERFLOW,
 		};
 
+		//Translates enum to string
+		std::string TranslateError(errors err) noexcept;
+
 		//Exception class for signaling OpenGL errors
 		class GLError : public Exception
 		{
 		public:
-			using Exception::Exception;
-			GLError(errors err);
+			///Dont use string ctors for now
+			//using Exception::Exception;
+			GLError::GLError(errors err) :Exception(TranslateError(err)),error(err) {}
+			errors GetErrType() { return error; }
+		private:
+			errors error;
 		};
-
-		//Translates enum to string
-		std::string Translate(errors err) noexcept;
 
 		errors CheckForError();
 		//Throws GLError
-		void ThrowOnError();
+		template<typename... CleanUp> void ThrowOnError(CleanUp&&... callBeforeThrow)
+		{
+			auto err = CheckForError();
+			if (err != errors::noError)
+			{
+				using expand = bool[];
+				//Calls all passed functions
+				expand{true,((void)callBeforeThrow(), true) ...};
+				throw GLError(err);
+			}
+		}
 
 		//DEBUG ONLY
 		inline errors CheckErrorDBG()
 		{
 #ifdef _DEBUG
 			return CheckForError();
+#else
+			return errors::noError;
 #endif
 		}
 
 		//DEBUG ONLY, throws GLError
-		inline void ThrowErrorDBG()
+		template<typename... CleanUp>
+		inline void ThrowOnErrorDBG(CleanUp&&... callBeforeThrow)
 		{
 #ifdef _DEBUG
-			ThrowOnError();
+			ThrowOnError(std::forward<CleanUp...>(callBeforeThrow)...);
 #endif
 		}
 	}

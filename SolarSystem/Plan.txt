@@ -1,5 +1,11 @@
 =====================================IN THIS COMMIT=====================================
-Added openGL::Error exception class.
+Refactoring of Error.h
+	- moved more stuff into header
+	- ThrowOnError accepts functions/ors which get called before throwing.
+		- Because openGL might actually need it and won't clean itself.
+
+- Added checks into code for those GLErrors.
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	- do small wrapper around opengl::geterror to atleast check memory errors

@@ -30,6 +30,7 @@ namespace solar
 			void Clear();
 			friend void swap(UnitTrail& left, UnitTrail& right) noexcept;
 		private:
+			void DeleteBuffers();
 			// #instances of this class, for managing lifetime of IBO
 			static size_t refCount;
 			//Indices buffer for the trail

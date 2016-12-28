@@ -27,9 +27,9 @@ int main()
 			//std::cin.get();
 			//std::cin.get();
 		}
-		catch (const Exception& e)
+		catch (const std::exception& e)
 		{
-			std::cout << "Simulation failed, reason:" << e.what();
+			std::cout << "Simulation failed, reason:\n" << e.what();
 			system("PAUSE");
 		}
 	}

@@ -14,6 +14,7 @@ namespace solar
 
 			void Draw();
 		private:
+			void DeleteBuffers();
 			unsigned int VBO, VAO, IBO;
 			size_t numIndices;
 		};

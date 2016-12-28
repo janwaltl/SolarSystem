@@ -9,9 +9,8 @@ namespace solar
 {
 	namespace openGL
 	{
-		GLError::GLError(errors err) :Exception(Translate(err)) {}
 
-		std::string Translate(errors err) noexcept
+		std::string TranslateError(errors err) noexcept
 		{
 			//Helper map to do the translation
 			const static std::map<errors, std::string> enumToText = {
@@ -41,12 +40,6 @@ namespace solar
 			return static_cast<errors>(err);
 		}
 
-		void ThrowOnError()
-		{
-			auto err = CheckForError();
-			if (err != errors::noError)
-				throw GLError(err);
-		}
 
 	}
 }

@@ -8,7 +8,7 @@ namespace solar
 	const size_t settings::win::size::x = 1200;
 	const size_t settings::win::size::y = 700;
 
-	const size_t settings::lineTrail::maxLength = 4'000;
+	const size_t settings::lineTrail::maxLength = 40'000;
 	const size_t settings::lineTrail::resolution = 10;
 	const bool settings::lineTrail::enabledByDefault = true;
 

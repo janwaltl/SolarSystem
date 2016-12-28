@@ -5,7 +5,7 @@
 
 #include "IMGuiLibrary/imgui.h"
 #include "OpenGL/Shader.h"
-
+#include "OpenGL/Error.h"
 namespace solar
 {
 	unsigned int IMGuiBackend::textID, IMGuiBackend::VAO, IMGuiBackend::IBO, IMGuiBackend::VBO;
@@ -22,6 +22,9 @@ namespace solar
 		LoadFontTexture();
 		SetCallbacks();
 
+		auto err = openGL::CheckForError();
+		if (err != openGL::errors::noError)
+			throw Exception("Failed to initialized IMGUI, because of following GL error: " + openGL::TranslateError(err));
 	}
 	void IMGuiBackend::NewFrame()
 	{
@@ -207,6 +210,7 @@ namespace solar
 		glEnableVertexAttribArray(2);//UV
 #undef OFFSETOF
 		glBindVertexArray(0);
+
 	}
 
 	void IMGuiBackend::LoadFontTexture()
@@ -283,6 +287,10 @@ namespace solar
 			}
 		}
 		glDisable(GL_SCISSOR_TEST);
+
+		auto err = openGL::CheckErrorDBG();
+		if (err != openGL::errors::noError)
+			throw Exception("IMGUI::Render failed, because of following GL error: " + openGL::TranslateError(err));
 	}
 
 	void IMGuiBackend::KeyCallback(GLFWwindow*, int key, int, int action, int)
