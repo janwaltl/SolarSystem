@@ -21,8 +21,6 @@ namespace solar
 			~LineTrailsDrawer();
 			void Draw() override final;
 		private:
-			//How often are trails updated
-			size_t trailRes;
 			void CreateShader();
 			void CreateTrails();
 			//Adds new points(from current units' positions) to trails every 'trailRes' frames

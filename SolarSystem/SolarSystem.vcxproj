@@ -170,6 +170,7 @@
     <Text Include="Plan.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Common\Settings.cpp" />
     <ClCompile Include="Source\Common\SystemUnit.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Parsers\FormattedFileParser.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Common\Settings.h" />
     <ClInclude Include="Source\Common\SystemUnit.h" />
     <ClInclude Include="Source\Common\Common.h" />
     <ClInclude Include="Source\Math\Vec4.h" />

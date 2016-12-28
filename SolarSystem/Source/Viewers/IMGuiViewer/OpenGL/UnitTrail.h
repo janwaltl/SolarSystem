@@ -27,8 +27,6 @@ namespace solar
 			// - unitS from OpenGLBackend for now
 			void Draw() const;
 			friend void swap(UnitTrail& left, UnitTrail& right) noexcept;
-
-			const static size_t maxLength = 4'000;//Max amount of points in trail
 		private:
 			// #instances of this class, for managing lifetime of IBO
 			static size_t refCount;

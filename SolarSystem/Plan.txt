@@ -1,13 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Warning fixes...
+Added settings.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	GUI control of lineTrails.
-	Really do the settings
-		- private (non-static if possible) variables in classes, initialized to global const static Settings:: values
-			specified somewhere.
-		- So GUI can change them, but they are configurable from source too.
-		- Also try to remove more magic values, do more documenting on variables...
+	- do small wrapper around opengl::geterror to atleast check memory errors
 
 	IV. Make it prettier
 		- linear interpolation for rendering.

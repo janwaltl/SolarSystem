@@ -8,7 +8,7 @@ namespace solar
 {
 	std::string OpenGLBackend::error;
 
-	OpenGLBackend::OpenGLBackend(int width, int height, const std::string & title)
+	OpenGLBackend::OpenGLBackend(size_t width, size_t height, const std::string & title)
 	{
 		if (glfwInit() == GL_FALSE)
 			throw Exception("Cannot initialize GLFW library.");
@@ -25,7 +25,7 @@ namespace solar
 		if (win == nullptr) // if that fails
 			throw Exception("Unable to create Window,reason: " + error);
 
-		glfwSetWindowPos(win, 5, 20);
+		glfwSetWindowPos(win, settings::win::pos::x, settings::win::pos::y);
 		glfwMakeContextCurrent(win);
 		glewExperimental = GL_TRUE; // on some machines OpenGL crashes when this is at false
 
@@ -54,28 +54,4 @@ namespace solar
 	{
 		error = "ERR " + std::to_string(err) + ": " + description;
 	}
-
-/*
-	void OpenGLBackend::DrawData(const simData_t & data, double scaleFactor, const Vec2& offset)
-	{
-		unitS->Bind();
-		size_t i = 0;
-		for (const auto& unit : data)
-		{
-			if (!trailFrameCounter)
-				unitTrails[i].Push(unit.pos);
-
-			unitS->SetUniform4f("col", unit.color);
-			unitS->SetUniform2f("scale", 1.0f, 1.0f);
-			unitS->SetUniform2f("offset", scaleFactor*unit.pos + offset);
-			circleB->Draw();
-			unitS->SetUniform2f("offset", offset);
-			unitS->SetUniform2f("scale", scaleFactor, scaleFactor);
-			unitTrails[i++].Draw();
-		}
-		++trailFrameCounter %= trailResolution;
-		unitS->UnBind();
-	}
-*/
-
 }

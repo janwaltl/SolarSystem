@@ -38,14 +38,15 @@ namespace solar
 				//		- one for old line(after curIndex) and one for new overwritten line(before curIndex indices)
 
 				std::vector<GLuint> indices;
-				indices.resize(2 * maxLength);
-				std::iota(indices.begin(), indices.begin() + maxLength, 0);
-				std::iota(indices.begin() + maxLength, indices.end(), 0);
+				indices.resize(2 * settings::lineTrail::maxLength);
+				std::iota(indices.begin(), indices.begin() + settings::lineTrail::maxLength, 0);
+				std::iota(indices.begin() + settings::lineTrail::maxLength, indices.end(), 0);
 
 				glCreateBuffers(1, &IBO);
 
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-				glBufferData(GL_ELEMENT_ARRAY_BUFFER, 2 * maxLength * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, 2 * settings::lineTrail::maxLength * sizeof(GLuint),
+							 indices.data(), GL_STATIC_DRAW);
 
 			}
 			glGenVertexArrays(1, &VAO);
@@ -54,7 +55,7 @@ namespace solar
 			glBindVertexArray(VAO);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
-			glBufferData(GL_ARRAY_BUFFER, 2 * maxLength * sizeof(GLfloat), nullptr, GL_DYNAMIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, 2 * settings::lineTrail::maxLength * sizeof(GLfloat), nullptr, GL_DYNAMIC_DRAW);
 			//Positions are Vec2 of floats at location=0 in shader
 			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
 			glEnableVertexAttribArray(0);
@@ -95,16 +96,17 @@ namespace solar
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
 			glBufferSubData(GL_ARRAY_BUFFER, 2 * sizeof(GLfloat)*curIndex, 2 * sizeof(GLfloat), data);
 
-			length = std::min(length + 1, maxLength);
+			length = std::min(length + 1, settings::lineTrail::maxLength);
 			++curIndex;
-			curIndex %= maxLength;
+			curIndex %= settings::lineTrail::maxLength;
 		}
 
 		void UnitTrail::Draw() const
 		{
 			//If line's buffer is not full yet, render from beginning. Or the point are eing overwritten, then use
 			//curIndex to mark first index to be rendered(explained in ctor)
-			void* firstIndexOffset = length != maxLength ? nullptr : reinterpret_cast<void*>(curIndex * sizeof(GLuint));
+			void* firstIndexOffset = length != settings::lineTrail::maxLength ?
+				nullptr : reinterpret_cast<void*>(curIndex * sizeof(GLuint));
 
 			glBindVertexArray(VAO);
 			glDrawElements(GL_LINE_STRIP, length, GL_UNSIGNED_INT, firstIndexOffset);

@@ -18,13 +18,9 @@ namespace solar
 		{
 		public:
 			SimDataDrawer(IMGuiViewer* parent, simData_t* data);
-			~SimDataDrawer();//For unique ptrs
+			~SimDataDrawer();
 			void Draw() override final;
 		private:
-			//Settings
-			static float cSize;
-			static size_t cRes;
-
 			void CreateShader();
 			std::unique_ptr<openGL::Shader> shader;
 			std::unique_ptr<openGL::CircleBuffer> circle;

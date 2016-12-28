@@ -21,7 +21,7 @@ namespace solar
 	{
 	public:
 		//Initializes OpenGL(GLFW & GLEW) and creates GLFWwindow
-		OpenGLBackend(int width, int height, const std::string& title);
+		OpenGLBackend(size_t width, size_t height, const std::string& title);
 		//Destroys OpenGL context and GLFW window
 		~OpenGLBackend();
 		GLFWwindow* GetWin();

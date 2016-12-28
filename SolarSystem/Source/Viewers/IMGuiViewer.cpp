@@ -7,7 +7,7 @@
 
 namespace solar
 {
-	IMGuiViewer::IMGuiViewer(int width, int height, const std::string& title /*= "Simulation"*/) :
+	IMGuiViewer::IMGuiViewer(size_t width, size_t height, const std::string& title) :
 		openGL(width, height, title), imguiBackend(openGL.GetWin()),
 		scaleFactor(1.0), offset(0.0, 0.0), AR(width / (double)height)
 	{

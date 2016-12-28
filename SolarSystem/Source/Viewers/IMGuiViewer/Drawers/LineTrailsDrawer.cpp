@@ -8,7 +8,7 @@ namespace solar
 	namespace drawers
 	{
 		LineTrailsDrawer::LineTrailsDrawer(IMGuiViewer * parent, simData_t * data) :
-			Drawer(parent), simData(data), trailRes(10), frameCounter(0)
+			Drawer(parent), simData(data), frameCounter(0)
 		{
 			assert(data);
 
@@ -79,7 +79,7 @@ namespace solar
 		void LineTrailsDrawer::UpdateTrails()
 		{
 			assert(simData->size() == trails.size());
-			++frameCounter %= trailRes;
+			++frameCounter %= settings::lineTrail::resolution;
 			if (!frameCounter)//Only update trails every trailRes frames
 			{
 				auto trailIT = trails.begin();

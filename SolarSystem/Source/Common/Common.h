@@ -5,7 +5,9 @@
 #include <vector>
 #include <cassert>
 #include "../Units/Unit.h"
+#include "Settings.h"
 #include <math.h>
+
 namespace solar
 {
 	class Parser;

@@ -8,18 +8,17 @@ namespace solar
 {
 	namespace drawers
 	{
-		float SimDataDrawer::cSize = 0.005f;
-		size_t SimDataDrawer::cRes = 12;
-
 		SimDataDrawer::SimDataDrawer(IMGuiViewer * parent, simData_t * data) :
 			Drawer(parent), simData(data)
 		{
-			circle = std::make_unique<openGL::CircleBuffer>(cRes, cSize);
+			circle = std::make_unique<openGL::CircleBuffer>(settings::circleBuffer::resolution,
+															settings::circleBuffer::radius);
 			CreateShader();
 		}
 
 		SimDataDrawer::~SimDataDrawer()
 		{
+			//For unique ptrs' destructors
 		}
 
 		void SimDataDrawer::Draw()

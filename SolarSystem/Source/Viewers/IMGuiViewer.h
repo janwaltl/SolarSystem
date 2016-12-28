@@ -16,7 +16,9 @@ namespace solar
 	{
 	public:
 		// Properties of created window
-		IMGuiViewer(int width, int height, const std::string& title = "Simulation");
+		IMGuiViewer(size_t width = settings::win::size::x,
+					size_t height = settings::win::size::y,
+					const std::string& title = settings::win::title);
 		~IMGuiViewer() = default;
 
 		void operator()() override final;
