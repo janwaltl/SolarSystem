@@ -1,17 +1,9 @@
 =====================================IN THIS COMMIT=====================================
-Refactoring of Error.h
-	- moved more stuff into header
-	- ThrowOnError accepts functions/ors which get called before throwing.
-		- Because openGL might actually need it and won't clean itself.
-
-- Added checks into code for those GLErrors.
-
+-Linear interpolation looks way worse, apparently not very well suited for circular movement
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	- do small wrapper around opengl::geterror to atleast check memory errors
 
 	IV. Make it prettier
-		- linear interpolation for rendering.
 		- maybe add grid for better orientation, but make it optional
 			- maybe not, maybe its maybeline.
 	V. Document it & ship it
@@ -27,6 +19,7 @@ Next:
 
 SystemUnit is starting to have too many forwarding functions. Maybe give direct pointer to sim, but someway restrict
 calling Start.
+Fix 270years limit.
 ========================================THOUGHTS========================================
 
 Controlling the simulation

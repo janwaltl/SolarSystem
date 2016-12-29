@@ -27,8 +27,7 @@ namespace solar
 			for (const auto& unit : *simData)
 			{
 				shader->SetUniform4f("col", unit.color);
-				shader->SetUniform2f("scale", 1.0f, 1.0f);
-				shader->SetUniform2f("offset", viewer->ScaleFactor() *unit.pos + viewer->GetOffset());
+				shader->SetUniform2f("unitPos", viewer->ScaleFactor() *unit.pos + viewer->GetOffset());
 				circle->Draw();
 			}
 			shader->UnBind();
@@ -40,12 +39,11 @@ namespace solar
 			#version 330 core
 			layout(location = 0) in vec2 position;
 
-			uniform vec2 offset;// offset pos by this amount, should be normalized
-			uniform vec2 scale;// Scaling for position
+			uniform vec2 unitPos;
 			uniform vec2 AR;//Aspect ratio
 			void main()
 			{
-				vec2 pos = scale * position + offset;
+				vec2 pos = position + unitPos;
 				gl_Position = vec4(AR * pos, 0.0, 1.0);
 			})";
 			const std::string fSource = R"(
