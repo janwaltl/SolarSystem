@@ -1,0 +1,98 @@
+% !TeX spellcheck = cs_CZ
+\documentclass[a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{listingsutf8}
+\usepackage{xcolor}
+\usepackage{inconsolata}
+\usepackage{nameref}
+\usepackage[a4paper,includeheadfoot,margin=3.5cm]{geometry}
+
+%Vkladani source kodu
+\lstdefinestyle{codeInput} { %
+	language=C++,
+	basicstyle=\ttfamily\footnotesize,
+	numberstyle=\scriptsize,
+	numbers=left,
+	backgroundcolor=\color{gray!10},
+	frame=single,
+	keepspaces=true,  
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=4,
+	rulecolor=\color{black!30},
+	escapeinside={\%*}{*)},
+	breaklines=true,
+	breakatwhitespace=true,
+	framextopmargin=2pt,
+	framexbottommargin=2pt,
+	inputencoding=utf8/latin2,
+	extendedchars=true,
+	literate=
+	{á}{{\'a}}1
+	{í}{{\'i}}1
+	{é}{{\'e}}1
+	{ý}{{\'y}}1
+	{ú}{{\'u}}1
+	{ó}{{\'o}}1
+	{ě}{{\v{e}}}1
+	{š}{{\v{s}}}1
+	{č}{{\v{c}}}1
+	{ř}{{\v{r}}}1
+	{ž}{{z}}1
+	{ď}{{\v{d}}}1
+	{ť}{{\v{t}}}1
+	{ň}{{\v{n}}}1                
+	{ů}{{\r{u}}}1
+	{Á}{{\'A}}1
+	{Í}{{\'I}}1
+	{É}{{\'E}}1
+	{Ý}{{\'Y}}1
+	{Ú}{{\'U}}1
+	{Ó}{{\'O}}1
+	{Ě}{{\v{E}}}1
+	{Š}{{\v{S}}}1
+	{Č}{{\v{C}}}1
+	{Ř}{{\v{R}}}1
+	{Ž}{{\v{Z}}}1
+	{Ď}{{\v{D}}}1
+	{Ť}{{\v{T}}}1
+	{Ň}{{\v{N}}}1                
+	{Ů}{{\r{U}}}1    	
+}
+\lstset{style=codeInput}
+\renewcommand{\lstlistingname}{Zdrojový kód}
+\renewcommand{\lstlistlistingname}{Seznam zdrojových kódů}
+\newcommand{\includecode}[3][default]
+{\lstinputlisting[caption=#3 (#2),label=lst:#1, style=codeInput]{#2}}
+
+
+\title{Simulace Sluneční soustavy}
+\date{10.ledna 2017}
+\author{Jan Waltl}
+
+\begin{document}
+	\include{titlePage}
+	\newpage
+	\tableofcontents
+	\lstlistoflistings
+	\newpage
+	\include{organizace}
+	\include{specifikace}
+	\include{implementace}
+	\input{moduly}
+	\input{implParsers}
+	\input{implSimMethods}
+	\input{implViewers}
+	\input{extensions}
+	\input{compSimMethods}
+	\include{uzivatelPrirucka}
+
+	
+\end{document}

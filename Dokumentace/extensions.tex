@@ -1,0 +1,22 @@
+\chapter{Rozšířitelnost a co se dalo udělat lépe.}
+\textbf{Poznámka autora: }\textit{Následující sekce popisuje rozšíření programu o novou funkci a to přehrávání uložených simulací. I když je tato myšlenka plně implementována a je funkční, tak celkem zneužívá design třídy \texttt{Simulation}, což nebylo nutné. Lepší verze je vložena jako sekce \ref{sec:extV2} \nameref{sec:extV2}, ale rozhodl jsem se zde ponechat i původní verzi. }
+\section{Praktický příklad rozšíření programu V1.0}
+
+Pokud jste už zkusili výsledný program spustit a samou radostí nad skvělou simulací vám něco uniklo a vy jste v panice začali hledat tlačítko na vrácení o krok zpět, tak jste zjistili, že tam žádné není. Bohužel program v aktuální verzi neprovádí žádné cachování výsledků, takže se nelze vrátit zpět. Což je určitě užitečné rozšíření, ale my zkusíme něco trochu jiného - \textbf{přehrávač simulací}.
+Přehrávač by měl umět zaznamenat probíhající simulaci a poté ji přehrát jako video. Tedy včetně přeskakování na libovolné místo simulace, zastavení a zpětné přehrávání.
+Jak by se takový přehrávač dal implementovat?
+Co kdybychom vytvořili následující třídy:
+\begin{enumerate}
+	\item Třída \texttt{ViewAndRecord}, která se chová jako \texttt{viewer}, ale navíc simulaci zaznamenává do souboru. 
+	\item Trojice tříd \texttt{ReplayerParser} \texttt{ReplayerMethod} a \texttt{ReplayerViewer}, které by se starali o přehrávání simulace.
+\end{enumerate}
+\ref{lst:extIdea} ukazuje výše zmíněnou myšlenku převedenou do C++ a  \ref{lst:extIdeaUsage} pak jak by se pak dala použít v hlavním programu.
+\includecode[extIdea]{Source/extIdea.cpp}{Návrh přehrávače simulací} 
+\includecode[extIdeaUsage]{Source/extIdeaUsage.cpp}{Příklad použití přehrávače}
+Díky návrhu celého programu se zaznamenávání simulace docílí velmi jednoduše, protože jediné co musíme změnit je, že "zabalíme" zvolený \textbf{viewer} do třídy \texttt{ViewerAndRecord} a poté ho předáme jako obyčejný \textbf{viewer} simulaci. Zabalení znamená, že ho předáme jako parametr pro šablonu \texttt{ViewerAndRecord}. Při běhu simulace bude pak volán \texttt{ViewerAndRecord}, který ale také zavolá předaný viewer a navíc bude na pozadí ukládat probíhající simulaci.
+
+Přehrávání pak docílíme tím, že simulaci budeme podstrkovat data, která si přečteme ze souboru místo toho abychom je simulovaly. Tento podvod bude zajišťovat právě třída \texttt{ReplayerMethod}. Technicky potřebujeme ještě \textbf{parser} - \texttt{ReplayerParser}, ale ten jediné co udělá je, že přečte první data ze stejného souboru. Pro zobrazení použijeme třídu \texttt{ReplayerViewer}, který využívá pracně vytvořený \texttt{IMGuiViewer}. Pomocí knihovny ImGui můžeme pak dokreslit potřebné ovládání simulace.
+
+Bohužel narazíme na problém. \texttt{Simulation} neumí měnit libovolně čas. \texttt{deltaT} je pevně dané, takže nemůžeme simulaci přehrávat pozpátku. Což se dá vyřešit tím, že čas simulace budeme do jisté míry ignorovat a \texttt{ReplayerViewer} si přímo řekne \texttt{ReplayerMethod}, že by měl nyní vracet data pozpátku.
+\section{Praktický příklad rozšíření programu V2.0}
+\label{sec:extV2}

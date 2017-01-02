@@ -1,0 +1,19 @@
+% !TeX spellcheck = cs_CZ
+
+\chapter{Návrh programu}
+\label{chap:implementace}
+Tato kapitola se zabývá návrhem programu - jak celý program vypadá a popisuje jeho hlavní třídu - \texttt{Simulation}. V rámci které si představíme \textbf{moduly}, které se objevují v dalších kapitolách.
+Na úvod se podívejme jak by mohl vypadat jednoduchý \textbf{main.cpp} 
+
+\includecode{Source/main.cpp}{Hlavní program}
+
+Celý program je zabalen do jmenného prostoru \texttt{solar}. \texttt{Simulation} je hlavní třída, která se stará o celkový průběh simulace. Dále jsou zde vidět tři \textbf{moduly}, které jsou předány simulaci.Jejich detailní popis přijde později.
+
+\texttt{Simulation} poté zajišťuje jejich vzájemnou spolupráci. Metoda \texttt{Simulation::Start()} následně spustí samotnou simulaci podle předepsaných parametrů.
+Pokud někde nastane chyba, dojde k vyvolání výjimky v podobě třídy \texttt{solar::Exception}, popřípadě jiných výjimek z rodiny \texttt{std::exception}.
+
+
+\input{classSimulation}
+
+\section{Výjimky}
+Nyní se povídáme na to, které výjimky může uživatel potencionálně očekávat od našeho programu.

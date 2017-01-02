@@ -5,7 +5,7 @@
 
 namespace solar
 {
-	//Methods that is used to simulate the data
+	//Method that is used to simulate the data
 	class SimMethod : public SystemUnit
 	{
 	public:

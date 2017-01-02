@@ -1,0 +1,49 @@
+\chapter{Implementované viewery}
+No, tak holt budeme tu angličtinu skloňovat.
+\section{IMGuiViewer}
+je \textbf{viewer}, který vykresluje simulaci do okna. Jeho implementace je rozdělena do relativně velkého množství tříd. Následuje jejich úplný výčet:
+\begin{description}
+	\item[třída \texttt{IMGuiViewer}] hlavní třída, která váže ostatní do funkčního celku.
+	\item[třída \texttt{OpenGLBackend}] se stará o inicializaci \textbf{OpenGL}.
+	\item[třída \texttt{ImGuiBackend}] zajišťuje integraci knihovny \textbf{ImGui}, která poskytuje nástroje k tvorbě uživatelského rozhraní.
+	\item[třídy používající \textbf{OpenGL}] :
+	\begin{description}
+		\item[\texttt{CircleBuffer}] kreslí kruh o určitém poloměru na určenou pozici.
+		\item[\texttt{Shader}] vytváří rozhraní pro tvorbu a použití shaderů.
+		\item[\texttt{UnitTrail}] kreslí lomenou čáru.
+		\item[\texttt{GLError}] překládá chybové kódy generované OpenGL na vyjímky.
+	\end{description}
+	\item[třídy dědící z \texttt{Drawer}] vykreslují jednotlivé části simulace:
+	\begin{description}
+		\item[\texttt{GUIDrawer}]vykresluje pomocí \textbf{ImGui} uživatelské rozhraní.
+		\item[\texttt{SimDataDrawer}] zobrazuje samotná simulovaná data na obrazovku, používá k tomu \texttt{Shader} a \texttt{CircleBuffer}
+		\item[\texttt{LineTrailsDrawer}]  kreslí dráhy simulovaný objektů pomocí \texttt{UnitTrail}.
+	\end{description}
+\end{description}
+Pojďme si teď některé z nich představit podrobněji.
+\subsection{\texttt{OpenGLBackend}}
+Tento program používá k vykreslování grafiky OpenGL, tato třída má na starosti jeho správnou inicializaci. Používá k tomu knihovnu \textbf{GLFW} a \textbf{GLEW}.
+GLFW poskytuje funkce k vytvoření okna do kterého může poté OpenGL kreslit.
+GLEW se stará o získání OpenGL funkcí, které se musí načíst za běhu aplikace z aktuálních ovladačů na cílovém počítači.
+Přesná implementace je znovu dostupná ve zdrojových kódech programu. Ale jedná se ve větší míře o přepsání doporučené implementace na stránkách obou knihoven.
+\subsection{\texttt{ImGuiBackend}}
+Jak už bylo psáno, tak tato třída inicializuje knihovnu ImGui. Její implemetance byla také vytvořena na základě implementace uvedené na stránkách knihovny a dokumentací v souboru \texttt{imgui.cpp}.
+Zmínit newframe, render - k čemu jsou a tak...Pak ještě callbacky do GLFLW.
+\subsection{Třídy používající OpenGL}
+OpenGL je psané v duchu jazyka C, takže neobsahuje objektově orientované prvky. Což je škoda, páč je to nepřehledný. Tyhle třídy se to snaží napravit.
+\paragraph{Shader} zabaluje shader. Což jsou malé programy určené pro grafickou kartu, které říkají jak má grafická data interpretovat a vykreslit.
+\paragraph{CircleBuffer} zabaluje VAO,VBO,IBO. Je předpřipravená třída, která vyvolá sadu OpenGL funkcí, které kreslí kruh...
+\paragraph{UnitTrail} zabaluje VAO,VBO,IBO. Dokáže kreslit lomenou čáru, kde body jsou něco jako fronta- first in, first drawn(and overwritten).
+\paragraph{GLError} je vyjímka pro OpenGL, protože OpenGL ji samo nemá, tak pokud volání nějaké funkce selže, tak se jen nastaví enum na nějaký error, na což se musíme zeptat. Což dělá funkce za nás a rovnou vyjímku vyhodí. Prostě wrapper na glGetError...
+\subsection{Drawer}
+abstraktní třída, která něco kreslí, existuje kvůli čistějšímu přístupu k simulaci a třídě ImGuiViewer.
+\subsection{GUIDrawer}
+Třída s relativně dlouho draw metodou, která pomocí ImGUI kreslí celé uživatelské rozhraní. Což by stálo za to trochu ukázat a popsat.
+\subsection{SimDataDrawer}
+Kreslí prostě planety jako tečky no.
+\subsection{LineTrailsDrawer}
+Dokresluje ocásek za planetama aby bylo vidět kde byly. Chtělo by popsat algoritmus jak se stará o VBO a IBO.
+\subsection{IMGuiViewer}
+By se mohlo postnout celý a vysvětlit na tom zoom, normalized coordinate system, offset, move...
+
+

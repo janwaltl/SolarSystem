@@ -244,6 +244,7 @@ namespace solar
 	void IMGuiBackend::RenderFnc(ImDrawData * draw_data)
 	{
 		// Setup render state: alpha-blending enabled, no face culling, no depth testing, scissor enabled
+		//Move to Init
 		glEnable(GL_BLEND);
 		glBlendEquation(GL_FUNC_ADD);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -286,7 +287,7 @@ namespace solar
 				idx_buffer_offset += pcmd->ElemCount;
 			}
 		}
-		glDisable(GL_SCISSOR_TEST);
+		glDisable(GL_SCISSOR_TEST);// We dont use it in rest of our aplication.
 
 		auto err = openGL::CheckErrorDBG();
 		if (err != openGL::errors::noError)

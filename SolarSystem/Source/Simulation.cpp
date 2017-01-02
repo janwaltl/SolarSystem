@@ -32,6 +32,8 @@ namespace solar
 		simMethod->_Prepare(&data);
 		viewer->_Prepare(&data);
 		Loop();
+		parser->Save(data);
+
 	}
 
 	void Simulation::StopSimulation()
@@ -129,7 +131,6 @@ namespace solar
 			(*viewer)();
 		}
 		state = notRunning;
-		parser->Save(data);
 	}
 
 	void Simulation::ResetTimers()
@@ -147,8 +148,8 @@ namespace solar
 		prevTime = now;
 		runTime = now - begining;
 
-		if (frameTime > 1s)
-			acc += 1s;
+		if (frameTime > 500ms)
+			acc += 500ms;
 		else
 			acc += frameTime;
 	}

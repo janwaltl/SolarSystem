@@ -10,12 +10,6 @@ struct GLFWwindow;
 
 namespace solar
 {
-	namespace openGLBackend
-	{
-		class Shader;
-		class CircleBuffer;
-		class UnitTrail;
-	}
 	//Handles stuff related to OpenGL
 	class OpenGLBackend
 	{

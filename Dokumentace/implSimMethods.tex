@@ -1,0 +1,109 @@
+\chapter{Implementované simulační metody}
+\section{SemiImplicitEuler}
+\label{sec:implEuler}
+\subsection{Teorie}
+Při představení numerické integrace jsme si ukázali explicitní Eulerovu metodu pro numerické řešení obyčejné diferenciální rovnice. Ještě existuje implicitní verze \ref{eq:implicitEuler} této metody, která je shodná s explicitní až na to, že derivaci vyčíslíme v čase $t + \Delta t $.
+\begin{align} \label{eq:implicitEuler}
+y(t+\Delta t) = y(t) + \Delta t . y'(t+\Delta t)
+\end{align}
+Implicitní verze dává při stejném $ \Delta t $ přesnější, protože dochází k interpolaci, která na rozdíl od extrapolace neakumuluje chybu.
+Nyní se podívejme jak bychom řešili jednoduchou diferenciální rovnici \ref{eq:secDer}. Na ní nelze Eulerovu metodu přímo použít neboť ta řeší jen rovnice s první derivaci. Ale pomůžeme si XXX a rovnici z \eqref{eq:secDer} si upravíme na dvě rovnice \eqref{eq:secDer2} a \eqref{eq:secDer3}
+\begin{align} \label{eq:secDer}
+\ddot{x}(t) &= k.x(t) \quad \\
+\text{s počátečními podmínkami:}& \quad x(0)=x_0, \quad \dot{x}(0)=v_0\nonumber
+\end{align}
+\begin{align}
+\label{eq:secDer2}
+\dot x(t)&= v(t) \\
+\label{eq:secDer3}
+\dot v(t)&=k.x(t)
+\end{align}
+Toto jsou sice dvě rovnice, ale obě obsahují pouze první derivaci, jde na ně tedy Euler použít. Tak to zkusme nejdříve s \eqref{eq:secDer3} a implicitní verzí. Tím dostaneme rovnici \eqref{eq:secDer4}. Teď použijeme stejný postup i na \eqref{eq:secDer2} a dostaneme rovnici \eqref{eq:secDer5}. Nyní stačí dosadit první rovnici do druhé a po úpravě dostaneme hledaný výsledek v podobě rovnice \eqref{eq::secDer6}.
+\begin{align}
+\label{eq:secDer4}
+ v(t + \Delta t)&=v(t) + \Delta t . \dot{v}(t + \Delta t)  
+ =  v(t) + \Delta t . k.x(t + \Delta)\\
+ \label{eq:secDer5}
+ x(t+\Delta t) &= x(t) + \Delta t. \dot{x}(t+ \Delta t) = x(t) + \Delta t.v(t+ \Delta t) \\
+ \label{eq::secDer6}
+ x(t+\Delta t) &= x(t) + \Delta t. \left[ v(t) + \Delta t . k.x(t + \Delta)\right]  \nonumber\\
+ x(t+\Delta t) - \Delta t^2 .k.x(t+\Delta t) &=x(t) + \Delta t.  v(t) \nonumber\\
+  x(t+\Delta t) &= \frac{x(t) + \Delta t.  v(t)}{1 - \Delta t^2 k}
+\end{align}
+To sice dalo určitou práci, ale dostali jsme správné řešení. Na pravé straně \eqref{eq::secDer6} máme proměnné pouze v čase $ t $. Ty už umíme spočítat, protože $ x(t) $ dostaneme z předchozího integračního kroku a $ v(t) $ spočítáme z levé strany \eqref{eq:secDer4}, kde napravo budeme mít  $ v(t-\Delta t) $ a $ x(t) $. Obě tyto hodnoty jsou také známy z předchozího integračního kroku.
+
+Naše soustava rovnic \eqref{eq:soustava} je nápadně podobná předchozí rovnicí. Což samozřejmě není náhoda. Pokud se ale nyní budeme stejný postup snažit aplikovat na naší soustavu rovnic, tak zjistíme, že to nebude fungovat. Narazíme totiž na to, že po dosazení obou rovnic nebudeme schopni explicitně vyjádřit $ x(t + \Delta t) $. Problém je v tom, že u implicitní metody je potřeba  ke spočítání polohy v čase $ t + \Delta t $ znát zrychlení v čase $ t + \Delta t $, které ale zpětně závisí na poloze v čase $ t + \Delta t $ kterou ještě neznáme. Dostáváme tedy problém vejce a slepice, který se nám u předchozí soustavy podařilo vyřešit dosazením a přímým vyjádřením, což ale právě u složitější soustavy nemusí být možné.
+
+Zde nastupuje semi-implicitní Eulerova metoda. Místo dvojitého použití implicitní metody použijeme implicitní pro \ref{eq:secDer8} a explicitní verzi pro \ref{eq:secDer7} . Explicitní verze nám dovolí snadno spočítat $ v(t + \Delta t) $ neboť hodnoty v čase $ t $ už známe. Tím jsme ale získali i potřebnou hodnotu $ v(t + \Delta t) $ pro implicitní verzi druhé rovnice. Vlastně jsme z obou metod vzali to nejlepší - jednoduchost explicitní a větší přesnost implicitní metody. Výsledný mix je metoda, která je jednoduchá na implementaci a relativně přesná pro naše účely. $ \Delta t $.
+\begin{align}
+\label{eq:secDer7}
+v(t + \Delta t)&=v(t) + \Delta t . \dot{v}(t)\\
+\label{eq:secDer8}
+x(t+\Delta t) &= x(t) + \Delta t. \dot{x}(t + \Delta t) = x(t) + \Delta t.v(t + \Delta t)\quad
+\end{align}
+Naše finální soustava \eqref{eq:soustava} po použití této metody bude \eqref{eq:soustavaEuler} pro $ i=1 \dots N $
+\begin{subequations}\label{eq:soustavaEuler}
+\begin{align}
+\boldsymbol {v}_i(t+\Delta t) &=\boldsymbol{{v}}_i(t)  - \Delta t . \kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_i}
+{\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] ^3} . 
+\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] \\
+\boldsymbol {x}_i(t+\Delta t)& =\boldsymbol{{x}}_i(t)  +\boldsymbol {v}_i(t+\Delta t)
+\end{align}
+\end{subequations}
+\subsection{Implementace}
+Když jsme si metodu pracně teoreticky popsali, tak se nyní podívejme na to, jak bychom ji implementovali do našeho programu. Implementace by mohla vypadat například jako v \ref{lst:methodEuler}
+\includecode[methodEuler]{Source/euler.cpp}
+{Semi-implicitní Eulerova integrační metoda}
+Soustava \ref{eq:soustavaEuler} nám říká, že nejdříve musíme spočítat novou rychlost objektu, která ale záleží na polohách všech ostatních. Takže musíme projít všechny dvojice, což nám zajistí dvojitá \texttt{for} smyčka. Dále potřebuje sečíst sumu, což se děje právě ve vnitřní smyčce. Protože je silové působení symetrické a pouze opačného směru, tak to můžeme udělat pro celou dvojici najednou.
+Vnitřní smyčka nám spočítala správnou rychlost levého(\texttt{left}) objektu.
+Můžeme tedy spočítat jeho novou polohu dle \eqref{eq:soustavaEuler}.
+
+Důležité je ověřit, že opravdu počítáme správně veličiny a hlavně ve správný čas. A skutečně je to takto správně, protože pozice levého objektu už v dalších smyčkách není použita a zároveň vnitřní smyčka opravdu správně spočítala novou rychlost levého objektu, kde pozice pravých objektů ještě upraveny nebyly a jsou tedy v čase $ t $.
+
+
+\section{RK4}
+\label{sec:implRK4}
+\subsection{Teorie}
+\paragraph{}
+
+V předchozí sekci jsme implementovali semi-implicitní Eulerovu integrační metodu. Tato metoda lokálně aproximovala hledanou funkci pomocí úseček. Což znamenalo, že jsme na intervalu $ \left[ t,t+\Delta t\right]  $ považovali derivaci za konstantu, a to samozřejmě nemusí být pravda. Proto se podívejme na další metodu -  \textbf{Runge-Kutta čtvrtého řádu(RK4)} . Která počítá derivaci vícekrát v různých bodech časového intervalu $ \left[ t,t+\Delta t\right]  $ a poté provede vážený průměr ze kterého poté dopočítá novou hodnotu hledané funkce. Mějme rovnici \eqref{eq:RK4Ex}, pak RK4 dává numerické řešení ve formě rovnice \eqref{eq:RK4Ex2}. Jedná se o explicitní verzi, ke které existuje ještě varianta implicitní, kterou ale implementovat nebudeme a její znění proto zůstane utajeno.
+\begin{align}
+\label{eq:RK4Ex}
+\dot y (t) &= f(y,t) \quad y(0)=y_0\\
+\label{eq:RK4Ex2}
+y(t + \Delta t) &= y(t) + \frac{\Delta t}{6}\left[ k_1 + 2k_2 + 2k_3 + k_4\right] \\
+k_1 &= f(y(t),t)\nonumber\\
+k_2 &= f(y(t) + \Delta t\frac{k_1}{2}, t+\frac{\Delta t}{2})\nonumber \\
+k_3 &= f(y(t) + \Delta t\frac{k_2}{2}, t+\frac{\Delta t}{2})\nonumber \\
+k_4 &= f(y(t) + \Delta t. k_3, t+\Delta t)\nonumber
+\end{align}
+
+Zkusme tedy tuto metodu aplikovat na naši soustavu \eqref{eq:soustava}. Použijeme stejný trik jako u Eulerovy metody a z jedné rovnice druhého řádu uděláme dvě rovnice první řádu \eqref{eq:RK4}.
+\begin{subequations}
+	\label{eq:RK4}
+	\begin{align}
+	\label{eq:RK4pos}
+	\dot{\boldsymbol{x}}(t)&=\boldsymbol{v}(t)\\
+	\label{eq:RK4vel}
+	\dot{\boldsymbol{v}}(t)&=-  \kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_i}
+	{\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] ^3} . 
+	\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] 
+	\end{align}
+\end{subequations}
+Zapsat pořádně vektorově, ono to z toho nějak vyplyne
+\begin{align}
+u(t) &= (x(t),v(t)) \quad \dot{u}(t)=(v(t),a(x(t)))\\
+u(t+\Delta t) &= u(x(t),v(t)) + \frac{\Delta t}{6}\left[ k_1 + 2k_2 + 2k_3 + k_4\right] \\
+k_1 &= (v(t),a(x(t)))\nonumber\\
+k_2 &= (v(t) +k_{1,1},a(x(t) + k_{1,2}))\nonumber\\
+k_3 &= (v(t) +k_{2,1},a(x(t) + k_{2,2}))\nonumber\\
+k_4 &= (v(t) +k_{3,1},a(x(t) + k_{3,2}))\nonumber
+\end{align}
+
+\subsection{Implementace}
+Nyní se budeme věnovat tomu, jak by se RK4 dalo zakomponovat do našeho programu.
+\section{MultiStep}
+\label{sec:implMultiStep}
+Tak to nevim jestli se mi chce psát...
+\subsection{Teorie}
+\subsection{Implementace}

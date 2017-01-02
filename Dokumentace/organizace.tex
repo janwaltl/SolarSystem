@@ -1,0 +1,35 @@
+% !TeX spellcheck = cs_CZ
+
+\chapter*{Organizace dokumentu}
+Tento text je organizován do následujících kapitol:
+\begin{description}
+	\item[\nameref{chap:uvod}] - Zadání zápočtového programu a teoretická část
+	\item[\nameref{chap:implementace}] - Hlavní část dokumentace, které popisuje jak design celého programu, tak jednotlivých částí. Zaměřuje se na použité algoritmy a jejich implementaci včetně zdrojových kódů C++.
+	Také zmiňuje možnosti rozšíření programu.
+	\item[\nameref{chap:userGuide}] - Část popisující jak program spustit a jak s ním pracovat z neprogramátorského pohledu.
+	
+\end{description}
+Text není nutné číst od začátku do konce, pro první spuštění by mělo stačit poslední kapitolu. Naopak, ale pro pochopení implementace RK4 metody je dobré vědět něco o numerické integraci a o co se vlastně program vůbec snaží. Což popisuje teoritická část v úvodní kapitole. Programátorská část vyžaduje znalost C++ a OpenGL, ale je zde snaha důležitější koncepty vysvětlit  i bez těchto znalostí. V tomto textu se nachází  zdrojové kódy s příklady, které jsou psány následujícím formátem:
+\begin{lstlisting}
+\caption{Text vystihující příklad (Název souboru)}
+#include <iostream>
+
+int main()
+{
+	std::cout<<"Hello World!\n";
+	return 0;
+}
+\end{lstlisting}
+Všechny další uvedené zdrojové kódy se nachází ve složce \texttt{Source/}, která
+by měla být připojena k této dokumentaci. Z praktických důvodů \textbf{nemusí} být tyto soubory zkompilovatelné, popřípadě mohou být z části v pseudo-kódu. Také se \textbf{nejedná} o zdrojové kódy samotného programu. Primární účel je \textbf{popisný}. Ovšem často bude uvedený kód přímo nebo částečně odpovídat kódu někde uvnitř programu.
+Zdrojové kódy samotného programu se přímo v tomto dokumentu nenachází, avšak jsou také součástí dokumentace a obsahují komentáře, které mohou stát za přečtení.
+\vfill
+\begin{center}
+\textbf{	
+Tato dokumentace spolu se zdrojovými kódy programu je dostupná na:\\
+\texttt{https://bitbucket.org/Quimby/solar/src}\\
+Popřípadě přímo stažitelná pomocí git:	\\
+\texttt{https://Quimby@bitbucket.org/Quimby/solar.git}\\
+V případě problému mne můžete kontaktovat na adrese: waltl.jan@gmail.com
+}
+\end{center}

@@ -9,6 +9,9 @@ namespace solar
 {
 	std::string OpenGLBackend::error;
 
+
+	//Following usage of GLFW library is  based on their tutorial
+	// at http://www.glfw.org/docs/latest/quick.html .
 	OpenGLBackend::OpenGLBackend(size_t width, size_t height, const std::string & title)
 	{
 		if (glfwInit() == GL_FALSE)
@@ -22,7 +25,7 @@ namespace solar
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		//Do not allow rezising, because it's too much work to make it nice
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-		win = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr); // creates actual window
+		win = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr); // create actual window
 		if (win == nullptr) // if that fails
 			throw Exception("Unable to create Window,reason: " + error);
 

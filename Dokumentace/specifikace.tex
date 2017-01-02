@@ -1,0 +1,82 @@
+% !TeX spellcheck = cs_CZ
+
+\chapter{Úvod}
+\label{chap:uvod}
+
+\section{Specifikace}
+Program simuluje Sluneční soustavu za využití numerické integrace a Newtonova gravitačního zákona. Fyzikálně se jedná řešení problému n-těles - tzn. každé těleso gravitačně působí na všechna ostatní. Tento problém je velmi těžko řešitelný analytickým metodami. Vypočetní síla počítačů spolu s metodami numerické integrace tak nabízí alternativní řešení tohoto problému.
+
+\paragraph{}
+Vstupem programu jsou strukturovaná data uložená v textovém souboru, která definují fyzikální veličiny simulované soustavy.Tedy polohy, rychlosti a hmotnosti simulovaných objektů. 
+\paragraph{}
+Výstup je 2D grafická reprezentace simulované soustavy v reálném čase. Uživatelské rozhraní dovoluje měnit rychlost a přesnost simulace. Dále zobrazuje užitečné informace, jako jsou aktuální pozice, rychlosti pro každý simulovaný objekt vzhledem k jiným objektům.
+\paragraph{}
+Při vývoji programu byl kladen co největší důraz na pozdější rozšířitelnost. Výsledný program tedy poskytuje několik simulačních metod a možností výstupu. Detaily jsou uvedeny v kapitole \ref{chap:implementace} a Návod k použití.
+
+\section{Teorie}
+\subsection{Analytický popis}
+Newtonův Gravitační zákon (dále NGZ) popisuje vzájemné silové působení $ \boldsymbol{F}_g $ dvou hmotných bodů, kde výsledná síla je přitažlivá.
+\footnote{Jedná se o myšlené těleso, kde jeho veškerá hmotnost je soustředěna do jednoho místa - \textbf{hmotného bodu}. }
+
+\begin{equation}
+	\boldsymbol{F}_g= \kappa \dfrac{m_1 m_2}{\boldsymbol{r}^3} {\boldsymbol{r}}
+\end{equation}
+Kde $ m_1,m_2 $ jsou hmotnosti obou bodů a $ \boldsymbol{r} $ jejich vzájemná vzdálenost.
+Dále budeme pokládat simulované objekty za hmotné body,což je vzhledem k rozměrům hvězd,planet, měsíců a jejich vzdálenostem rozumná aproximace.
+\paragraph{}
+Nyní nám NGZ spolu s principem superpozice
+\footnote{Princip superpozize říká, že výsledné silové účinky na těleso jsou dány součtem všech sil, které na něj působí.}
+ a Newtonovým Zákonem síly \eqref{eq:sila} dává pro $ n $ těles následující \eqref{eq:soustava} soustavu  $ n $ obyčejných diferenciálních rovnic. 
+ Kde neznámé $ \boldsymbol {x}_i, \boldsymbol{\ddot x}_i $ jsou vektory polohy, resp. zrychlení simulovaných těles. Vektor $\boldsymbol r_{i,j} $ je vzájemná vzdálenost i-tého a j-tého tělesa.
+\begin{equation}
+F= m  \boldsymbol {\ddot x}
+\label{eq:sila}
+\end{equation}
+\begin{align}\label{eq:soustava}
+\boldsymbol {\ddot x}_i = - \kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_i}
+{\boldsymbol{r}_{i,j}^2} 
+\quad \text{pro } i=1 \dots n
+\end{align}
+
+Kde mínus je kvůli přitažlivosti výsledné síly.
+Analytické řešení této soustavy rovnic by nám dalo možnost zjistit polohu, rychlost a zrychlení libovolného simulovaného objektu v libovolném čase na základě počátečních podmínek.
+\paragraph{}
+Bohužel vyřešit tuto soustavu je pro $ n=>3 $ velmi těžké.
+
+\subsection{Numerické řešení}
+Pokud se soustava nedá vyřešit analyticky, můžeme se alespoň pokusit získat aproximativní řešení. Numerická integrace využívá toho, že většinou není problém spočítat derivace v libovolném bodě, neboť nimi je soustava zadána. Navíc to dnešní počítače dokáží udělat velmi rychle. Pokud tedy dokážeme zjistit derivaci v každém bodě, tak bychom mohli původní funkci zrekonstruovat pomocí těchto derivací. Např. bychom mohli výslednou funkci aproximovat úsečkami, kde jejich směrnice je derivace hledané funkce. Toto přesně dělá nejjednodušší integrační metoda - Eulerova explicitní metoda\eqref{eq:euler}.
+Mějme jednoduchou soustavu rovnic \eqref{eq:ex} . Je vidět, že řešením je funkce$ y=e^x $, což se snadno ověří zpětnou derivací. 
+\begin{align} \label{eq:ex}
+\dot	y = e^t, y(0)=1
+\end{align}
+Zkusme tuto rovnici vyřešit numericky Eulerovou metodou \eqref{eq:euler}. 
+Výsledné hodnoty jsou uvedeny v tabulce \ref{tab:numer}, kde bylo použito $ \Delta t = 1;\> 0.1;\> 0.01$ respektive.
+\begin{align} \label{eq:euler}
+	y(t+\Delta t) = y(t) + \Delta t . y'(t)
+\end{align}
+\begin{table}[h!]
+	\centering
+	\label{tab:numer}
+	\begin{tabular}{c||c|c}
+	$ \boldsymbol t $ & $\boldsymbol{ e^x} $  &\textbf{	 Euler}\\
+		
+		\hline
+		1 & 1 & 1\\
+		1.1 & 1.254 & 1.255
+	\end{tabular}
+\caption{Caption for the table.}
+\end{table}
+\paragraph{}
+Z tabulky je vidět, že pro dostatečně malé $ \Delta t$ dostáváme dostatečně přesné hodnoty.
+Eulerova metoda se dá použít i k řešení naší soustavy \eqref{eq:parcialni}, což je podrobněji popsáno u její implementace v sekci \ref{sec:implEuler}. Také další integrační metody RK4 a MultiStep jsou popsány u svých implementací \ref{sec:implRK4} a \ref{sec:implMultiStep} respektive.
+
+
+
+
+
+
+
+
+
+
+
