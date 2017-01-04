@@ -7,6 +7,11 @@
 #include <array>
 namespace solar
 {
+	//Simulates data using fourth order of Runge-Kutta integration method
+	//Expects data to be in following units:
+	//		-pos in AU units
+	//		-vel in AU/Earth year
+	//		-mass in multiples of Sun's masses
 	class RK4 : public SimMethod
 	{
 	public:

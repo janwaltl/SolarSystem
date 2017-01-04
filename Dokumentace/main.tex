@@ -1,5 +1,5 @@
 % !TeX spellcheck = cs_CZ
-\documentclass[a4paper]{report}
+\documentclass[a4paper,hidelinks]{report}
 
 \usepackage[utf8]{inputenc}
 \usepackage[czech]{babel}
@@ -76,6 +76,26 @@
 \title{Simulace Sluneční soustavy}
 \date{10.ledna 2017}
 \author{Jan Waltl}
+
+
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{ \markboth{\thechapter \ #1}{} }
+\renewcommand{\sectionmark}[1]{ \markright{\thesection \ #1} }
+
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[L]{\textit{ \expandafter\MakeUppercase\expandafter{\leftmark}} }
+\fancyhead[R]{\textit{ {\rightmark}} }
+
+\fancypagestyle{plain}{ %
+	\fancyhf{} % remove everything
+	\renewcommand{\headrulewidth}{0pt} % remove lines as well
+	\renewcommand{\footrulewidth}{0pt}
+}
 
 \begin{document}
 	\include{titlePage}

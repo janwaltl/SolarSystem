@@ -146,6 +146,8 @@ namespace solar
 			tmp = tmp.substr(pos);
 			unit.color.W(std::stod(tmp));
 		}
+		else
+			unit.color = {1.0,1.0,1.0,1.0};
 	}
 
 	void FormattedFileParser::ParseName(Unit & unit, const std::string & val)

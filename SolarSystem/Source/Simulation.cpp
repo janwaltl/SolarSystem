@@ -13,19 +13,19 @@ namespace solar
 
 	Simulation::Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer) :
 		parser(std::move(parser)), simMethod(std::move(simMethod)), viewer(std::move(viewer)),
-		state(notRunning)
+		state(notRunning),dtime(0),rawMultiplier(0),DTMultiplier(0)
 	{
 		LinkUnitAndSim(*this->parser.get(), *this);
 		LinkUnitAndSim(*this->viewer.get(), *this);
 		LinkUnitAndSim(*this->simMethod.get(), *this);
 	}
 
-	void Simulation::Start(stepTime_t dt, size_t rawMult /*= 1*/, size_t DTMult /*= 1*/, std::chrono::seconds maxSimT /*= 0s*/)
+	void Simulation::Start(stepTime_t dt, size_t rawMult /*= 1*/, size_t DTMult /*= 1*/, std::chrono::seconds maxRunT /*= 0s*/)
 	{
 		dtime = dt;
-		maxSimTime = maxSimT;
-		rawMultiplier = rawMult;
-		DTMultiplier = DTMult;
+		maxRunTime = maxRunT;
+		SetRawMultiplier(rawMult);
+		SetDTMultiplier(DTMult);
 
 		//Obtain the data, throws on invalid input(format)
 		data = parser->Load();
@@ -34,6 +34,39 @@ namespace solar
 		Loop();
 		parser->Save(data);
 
+	}
+
+	void Simulation::StartNotTimed(stepTime_t dt, size_t rawMult, std::chrono::seconds maxRunT)
+	{
+		dtime = dt;
+		maxRunTime = maxRunT;
+		SetRawMultiplier(rawMult);
+		ResetTimers();
+
+		//Load and prepare data
+		data = parser->Load();
+		simMethod->_Prepare(&data);
+		viewer->_Prepare(&data);
+
+		state = running;
+		while (state != notRunning && IsNotRunningForTooLong())
+		{
+			//Update time
+			auto now = clock_t::now();
+			runTime = now - begining;
+
+			if (state != paused)
+				for (size_t i = 0; i < rawMultiplier; i++)
+				{
+					(*simMethod)(ToSecs(dtime));
+					simTime += dtime*DTMultiplier;
+				}
+
+			(*viewer)();
+		}
+		state = notRunning;
+
+		parser->Save(data);
 	}
 
 	void Simulation::StopSimulation()
@@ -115,11 +148,11 @@ namespace solar
 		while (state != notRunning && IsNotRunningForTooLong())
 		{
 			TickTime();
-			while (acc > dtime && state!=paused)
+			while (acc > dtime && state != paused)
 			{
 				for (size_t i = 0; i < rawMultiplier; i++)
 				{
-					(*simMethod)(ToSecs(dtime * DTMultiplier) / physicsUnits::YtoS);//Step in years
+					(*simMethod)(ToSecs(dtime * DTMultiplier));
 					simTime += dtime*DTMultiplier;
 				}
 				acc -= dtime;
@@ -156,6 +189,8 @@ namespace solar
 
 	bool Simulation::IsNotRunningForTooLong()
 	{
-		return (maxSimTime == decltype(maxSimTime)::zero() || runTime < maxSimTime);
+		//Either maxRunTime=0 -> not bounded
+		//Or non zero-> bounded
+		return (maxRunTime == decltype(maxRunTime)::zero() || runTime < maxRunTime);
 	}
 }

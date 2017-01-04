@@ -10,6 +10,7 @@ namespace solar
 	{
 	public:
 		//Operates on data, makes one physical time step
+		//step is in seconds
 		virtual void operator()(double step) = 0;
 		//Method for preparation, called once before start of simulation
 		// - used for creating temp object, or initializing of state which depends on for eg. size of data

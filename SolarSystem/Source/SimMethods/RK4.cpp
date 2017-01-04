@@ -20,6 +20,7 @@ namespace solar
 	}
 	void RK4::operator()(double step)
 	{
+		step /= physicsUnits::YtoS;
 		//Go through all pairs
 		auto computeKx = [&](size_t x, double mult)
 		{

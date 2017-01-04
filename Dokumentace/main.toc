@@ -68,8 +68,9 @@
 \contentsline {subsection}{\numberline {6.1.6}SimDataDrawer}{25}{subsection.6.1.6}
 \contentsline {subsection}{\numberline {6.1.7}LineTrailsDrawer}{26}{subsection.6.1.7}
 \contentsline {subsection}{\numberline {6.1.8}IMGuiViewer}{26}{subsection.6.1.8}
-\contentsline {chapter}{\numberline {7}Roz\IeC {\v s}\IeC {\'\i }\IeC {\v r}itelnost a co se dalo ud\IeC {\v e}lat l\IeC {\'e}pe.}{27}{chapter.7}
+\contentsline {chapter}{\numberline {7}Roz\IeC {\v s}\IeC {\'\i }\IeC {\v r}itelnost a vylep\IeC {\v s}en\IeC {\'\i }}{27}{chapter.7}
 \contentsline {section}{\numberline {7.1}Praktick\IeC {\'y} p\IeC {\v r}\IeC {\'\i }klad roz\IeC {\v s}\IeC {\'\i }\IeC {\v r}en\IeC {\'\i } programu V1.0}{27}{section.7.1}
 \contentsline {section}{\numberline {7.2}Praktick\IeC {\'y} p\IeC {\v r}\IeC {\'\i }klad roz\IeC {\v s}\IeC {\'\i }\IeC {\v r}en\IeC {\'\i } programu V2.0}{29}{section.7.2}
+\contentsline {section}{\numberline {7.3}Vylep\IeC {\v s}en\IeC {\'\i }}{29}{section.7.3}
 \contentsline {chapter}{\numberline {8}Porovn\IeC {\'a}n\IeC {\'\i } integra\IeC {\v c}n\IeC {\'\i }ch metod}{30}{chapter.8}
 \contentsline {chapter}{\numberline {9}U\IeC {\v z}ivatelsk\IeC {\'a} p\IeC {\v r}\IeC {\'\i }ru\IeC {\v c}ka}{31}{chapter.9}

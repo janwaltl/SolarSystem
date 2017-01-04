@@ -1,19 +1,17 @@
 =====================================IN THIS COMMIT=====================================
-First draft of documentation
+Added comments...especially regarding units.
+Added NotTimed method.
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Add:
-	- UnTimedStart method
 	- replace _Prepare with friend method
-	- default color in parser should be white
-	- note: output from fileParser are not SI units
 
 	V. Document it & ship it
 		- Write all the comments, probably v èeštinì
 		- Constants instead of magic values
 		- SORT all compile warnings
 	VI. OPTIONAL
-		
 		- Hustý by bylo zprovoznit multiStep øádu 8,9, udìlat textViewer, kterej všechno uloží do souboru.
 			Nechat to bìžet na stolním PC pøes noc, pak udìlat ReplaySimMethod, který by jen podle simTime èasu nakopíroval
 			správný údaje do simData, ktrý by pak IMGUIViewer v pohodì zobrazoval.

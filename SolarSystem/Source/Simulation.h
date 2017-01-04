@@ -10,10 +10,10 @@ namespace solar
 	class Simulation
 	{
 	public:
-		using clock_t = std::chrono::high_resolution_clock;
+		using clock_t = std::chrono::steady_clock;
 		using stepTime_t = clock_t::duration;
 		Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer);
-		//Starts simulation - loops until stopped, or maxSimulationTime is reached
+		//Starts simulation - loops until stopped, or maxRunTime is reached
 		//Throws Exception(std::logic_error) on invalid input or if any other SystemUnit throws.
 		//dTime - how often simMethod is called 
 		//rawMult - how many times is simMethod called for each dTime
@@ -21,7 +21,13 @@ namespace solar
 		//example: dTime=1ms; rawMult=20;DTMult=5
 		//			 Means that each 1ms simMethod will be called 20times with 5ms being passed as dTime to it
 		void Start(stepTime_t dt, size_t rawMult = 1, size_t DTMult = 1,
-				   std::chrono::seconds maxSimTime = std::chrono::seconds::zero());
+				   std::chrono::seconds maxRunTime = std::chrono::seconds::zero());
+		//Starts simulation - loops until stopped, or maxRunTime is reached.
+		//Throws Exception(std::logic_error) on invalid input or if any other SystemUnit throws.
+		//dTime - how often simMethod is called
+		//rawMult - how many times is simMethod called for each viewer call.
+		void StartNotTimed(stepTime_t dt, size_t rawMult = 1,
+						   std::chrono::seconds maxRunTime = std::chrono::seconds::zero());
 		//Ends the simulation
 		void StopSimulation();
 		//Pauses simMethod, only calls viewer
@@ -29,6 +35,7 @@ namespace solar
 		//Resumes paused simulation
 		void ResumeSimulation();
 		//Makes one step of simulation, then pauses again
+		//Does NOT work in NotTimed Start
 		void StepSimulation();
 		bool IsPaused();
 		bool IsRunnig();
@@ -37,8 +44,10 @@ namespace solar
 		//Returns elapsed realTime in seconds
 		double GetRunTime();
 		//Returns elapsed simTime in seconds
+		//Does NOT work in NotTimed Start
 		double GetSimTime();
 		//Returns last's frame time
+		//Does NOT work in NotTimed Start
 		double GetFrameTime();
 		size_t GetRawMultiplier();
 		size_t GetDTMultiplier();
@@ -58,6 +67,7 @@ namespace solar
 		//Updates time in the loop
 		void TickTime();
 		bool IsNotRunningForTooLong();
+
 		template<typename Rep, typename Per>
 		//Converts time duration to seconds
 		inline double ToSecs(const std::chrono::duration<Rep, Per>& time)
@@ -65,10 +75,13 @@ namespace solar
 			using type = std::chrono::duration<Rep, Per>;
 			return  time.count() * type::period::num / double(type::period::den);
 		}
+
 		parser_p parser;
 		simMethod_p simMethod;
 		viewer_p viewer;
-		//Controls speed of simulation, for each DT pass, simMethod will get called this times
+
+		//Start: Controls speed of simulation, for each DT pass, simMethod will get called this times
+		//StartNotTimed: how many times is simMethod called for each viewer call
 		size_t rawMultiplier;
 		//Controls speed of simulation, passes this*dTime to simMethod.
 		size_t DTMultiplier;
@@ -83,7 +96,7 @@ namespace solar
 		//How long has been the simulation running in real time
 		stepTime_t runTime;
 		//How long can the simulation run in real time
-		stepTime_t maxSimTime;///With step time being in nanosecs and represented by long long, max is at around 270 years...
+		stepTime_t maxRunTime;
 		//Helper variables to compute frameTime
 		clock_t::time_point prevTime, begining;
 
@@ -91,7 +104,6 @@ namespace solar
 		simData_t data;
 		//Whether the simulation is running or not
 		simState state;
-
 	};
 }
 

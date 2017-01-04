@@ -11,6 +11,9 @@ namespace solar
 	public:
 		//Including extensions, leave outFileName empty if you don't want to save finished simulation
 		FormattedFileParser(const std::string& inputFileName,const std::string& outputFileName="");
+		//Data's values are NOT in SI units,
+		//pos is in AU units, velocity in AU/Earth years and mass in multiples of Sun's mass
+		//Default color is white and pos, mass, vel=0
 		simData_t Load() override final;
 		void Save(const simData_t& data) override final;
 	private:
