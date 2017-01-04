@@ -1,5 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Replaced _prepare with friend method.
+Simplified map class
+	- no need to be private, seems fine
+Breaking coupling of drawers
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	V. Document it & ship it

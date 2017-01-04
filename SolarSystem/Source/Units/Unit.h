@@ -9,8 +9,7 @@ namespace solar
 	class Unit
 	{
 	public:
-		Unit(const Vec2& pos, const Vec2&vel, double mass) :pos(pos), vel(vel), mass(mass) {}
-		Unit() :Unit({0.0,0.0}, {0.0,0.0}, 0.0) {}
+		explicit Unit(const Vec2& pos=Vec2(), const Vec2&vel=Vec2(), double mass=0.0) :pos(pos), vel(vel), mass(mass) {}
 		Vec2 pos, vel;
 		double mass;
 		Vec4 color;

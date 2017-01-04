@@ -9,7 +9,7 @@ namespace solar
 {
 	inline double lengthsq(const Vec2& vec)
 	{
-		return vec.X()*vec.X() + vec.Y()*vec.Y();
+		return vec.x*vec.x + vec.y*vec.y;
 	}
 	inline double length(const Vec2& vec)
 	{

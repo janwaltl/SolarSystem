@@ -89,7 +89,7 @@ namespace solar
 		void UnitTrail::Push(const Vec2 & newPos)
 		{
 			//newPos could be maybe passed directly into glCall, but class's padding...
-			GLfloat data[2] = {static_cast<GLfloat>(newPos.X()),static_cast<GLfloat>(newPos.Y())};
+			GLfloat data[2] = {static_cast<GLfloat>(newPos.x),static_cast<GLfloat>(newPos.y)};
 			//Uploads newPos into VBO
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
 			glBufferSubData(GL_ARRAY_BUFFER, 2 * sizeof(GLfloat)*curIndex, 2 * sizeof(GLfloat), data);

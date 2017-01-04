@@ -88,7 +88,7 @@ namespace solar
 		}
 		void Shader::SetUniform2f(const std::string & name, const Vec2 & vec) const
 		{
-			SetUniform2f(name, static_cast<float>(vec.X()), static_cast<float>(vec.Y()));
+			SetUniform2f(name, static_cast<float>(vec.x), static_cast<float>(vec.y));
 		}
 		void Shader::SetUniform4f(const std::string& name, float x, float y, float z, float w) const
 		{
@@ -98,10 +98,10 @@ namespace solar
 		void Shader::SetUniform4f(const std::string & name, const Vec4 & vec) const
 		{
 			SetUniform4f(name,
-						 static_cast<float>(vec.X()), 
-						 static_cast<float>(vec.Y()),
-						 static_cast<float>(vec.Z()),
-						 static_cast<float>(vec.W()));
+						 static_cast<float>(vec.x), 
+						 static_cast<float>(vec.y),
+						 static_cast<float>(vec.z),
+						 static_cast<float>(vec.w));
 		}
 		void Shader::SetUniform4Mat(const std::string & name, const float mat[4][4]) const
 		{

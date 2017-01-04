@@ -261,11 +261,11 @@ namespace solar
 				ImGui::Columns(2, "##UnitsCol", false);
 				ImGui::SetColumnOffset(1, 80.0f);
 				ImGui::Text("Position:"); ImGui::NextColumn();
-				ImGui::Text("X %2.6f AU", unit.pos.X() - refUnit.pos.X()); ImGui::NextColumn();
+				ImGui::Text("X %2.6f AU", unit.pos.x - refUnit.pos.x); ImGui::NextColumn();
 				if (ImGui::SmallButton(!follow ? "Follow" : "Cancel")) follow = !follow;
 				ImGui::TextTooltipOnHover(!follow ? "Follow selected unit around" : "Stop following selected unit");
 				ImGui::NextColumn();
-				ImGui::Text("Y %2.6f AU", unit.pos.Y() - refUnit.pos.Y()); ImGui::NextColumn();
+				ImGui::Text("Y %2.6f AU", unit.pos.y - refUnit.pos.y); ImGui::NextColumn();
 
 				ImGui::Text("Distance:"); ImGui::NextColumn();
 				ImGui::TextTooltipOnHover("Distance from center of reference system.");
@@ -274,8 +274,8 @@ namespace solar
 
 				ImGui::Text("Velocity:"); ImGui::NextColumn();
 				//Convert to km/s
-				ImGui::Text("X %+2.6f km/s", (unit.vel.X() - refUnit.vel.X())*physicsUnits::AUpYtoMpS / 1000.0);
-				ImGui::Text("Y %+2.6f km/s", (unit.vel.Y() - refUnit.vel.Y())*physicsUnits::AUpYtoMpS / 1000.0);
+				ImGui::Text("X %+2.6f km/s", (unit.vel.x - refUnit.vel.x)*physicsUnits::AUpYtoMpS / 1000.0);
+				ImGui::Text("Y %+2.6f km/s", (unit.vel.y - refUnit.vel.y)*physicsUnits::AUpYtoMpS / 1000.0);
 				ImGui::NextColumn();
 
 				ImGui::Text("Speed:"); ImGui::NextColumn();
@@ -342,7 +342,7 @@ namespace solar
 				//Normalize values
 				val.x /= io.DisplaySize.x;
 				val.y /= io.DisplaySize.x;// .x is correct
-				drag = {val.x * 2,-val.y * 2};
+				drag = Vec2(val.x * 2,-val.y * 2);
 				viewer->Move(drag + offset);
 			}
 		}

@@ -8,12 +8,11 @@ namespace solar
 {
 	namespace drawers
 	{
-		SimDataDrawer::SimDataDrawer(IMGuiViewer * parent, simData_t * data) :
-			Drawer(parent), simData(data)
+		SimDataDrawer::SimDataDrawer(double aspectRatio)
 		{
 			circle = std::make_unique<openGL::CircleBuffer>(settings::circleBuffer::resolution,
 															settings::circleBuffer::radius);
-			CreateShader();
+			CreateShader(aspectRatio);
 		}
 
 		SimDataDrawer::~SimDataDrawer()
@@ -21,19 +20,19 @@ namespace solar
 			//For unique ptrs' destructors
 		}
 
-		void SimDataDrawer::Draw()
+		void SimDataDrawer::Draw(const simData_t& data, double scaleFactor,const Vec2& offset)
 		{
 			shader->Bind();
-			for (const auto& unit : *simData)
+			for (const auto& unit : data)
 			{
 				shader->SetUniform4f("col", unit.color);
-				shader->SetUniform2f("unitPos", viewer->ScaleFactor() *unit.pos + viewer->GetOffset());
+				shader->SetUniform2f("unitPos", scaleFactor *unit.pos + offset);
 				circle->Draw();
 			}
 			shader->UnBind();
 		}
 
-		void SimDataDrawer::CreateShader()
+		void SimDataDrawer::CreateShader(double aspectRatio)
 		{
 			const std::string vSource = R"(
 			#version 330 core
@@ -59,7 +58,7 @@ namespace solar
 
 			shader = std::make_unique<openGL::Shader>(vSource, fSource);
 			//Set aspect ratio, main axis is X and scale the Y axis 
-			shader->SetUniform2f("AR", 1.0f, static_cast<float>(viewer->GetAspectRatio()));
+			shader->SetUniform2f("AR", 1.0f, static_cast<float>(aspectRatio));
 		}
 	}
 }

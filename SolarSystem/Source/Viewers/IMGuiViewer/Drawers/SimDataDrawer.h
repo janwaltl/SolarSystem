@@ -14,18 +14,16 @@ namespace solar
 	{
 		//Draws simulated units on screen
 		//Require GL context at the point of creation
-		class SimDataDrawer :public Drawer
+		class SimDataDrawer
 		{
 		public:
-			SimDataDrawer(IMGuiViewer* parent, simData_t* data);
+			SimDataDrawer(double aspectRatio);
 			~SimDataDrawer();
-			void Draw() override final;
+			void Draw(const simData_t& data, double scaleFactor, const Vec2& offset);
 		private:
-			void CreateShader();
+			void CreateShader(double aspectRatio);
 			std::unique_ptr<openGL::Shader> shader;
 			std::unique_ptr<openGL::CircleBuffer> circle;
-
-			simData_t* simData;
 		};
 	}
 }

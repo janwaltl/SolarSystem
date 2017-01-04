@@ -13,10 +13,10 @@ namespace solar
 			temps.push_back({unit.vel,unit.pos});
 
 		//Zero all coefficients
-		kXs[0] = {data->size(), {{0.0,0.0}, {0.0,0.0}}};
-		kXs[1] = {data->size(), {{0.0,0.0}, {0.0,0.0}}};
-		kXs[2] = {data->size(), {{0.0,0.0}, {0.0,0.0}}};
-		kXs[3] = {data->size(), {{0.0,0.0},{0.0,0.0}}};
+		kXs[0].resize(data->size());
+		kXs[1].resize(data->size());
+		kXs[2].resize(data->size());
+		kXs[3].resize(data->size());
 	}
 	void RK4::operator()(double step)
 	{
@@ -57,10 +57,10 @@ namespace solar
 			(*data)[i].pos += step / 6.0 *(kXs[0][i].vel + 2 * kXs[1][i].vel + 2 * kXs[2][i].vel + kXs[3][i].vel);
 			temps[i] = {(*data)[i].vel,(*data)[i].pos}; //Reinitialize temps for next integration step
 			//Clear coefficients for next step
-			kXs[0][i] = {{},{}};
-			kXs[1][i] = {{},{}};
-			kXs[2][i] = {{},{}};
-			kXs[3][i] = {{},{}};
+			kXs[0][i] = {Vec2(),Vec2()};
+			kXs[1][i] = {Vec2(),Vec2()};
+			kXs[2][i] = {Vec2(),Vec2()};
+			kXs[3][i] = {Vec2(),Vec2()};
 		}
 
 	}

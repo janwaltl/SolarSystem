@@ -21,8 +21,8 @@ namespace solar
 					const std::string& title = settings::win::title);
 		~IMGuiViewer() = default;
 
-		void operator()() override final;
 		void Prepare() override final;
+		void operator()() override final;
 
 		double ScaleFactor();
 		void ScaleFactor(double newFactor);

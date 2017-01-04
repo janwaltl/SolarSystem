@@ -6,7 +6,7 @@ namespace solar
 	//Two dimensional vector of doubles
 	struct Vec2
 	{
-		Vec2(double x = 0.0, double y = 0.0) :x(x), y(y) {}
+		explicit Vec2(double x = 0.0, double y = 0.0) :x(x), y(y) {}
 		Vec2& operator+=(const Vec2& other)
 		{
 			this->x += other.x;
@@ -39,12 +39,7 @@ namespace solar
 			this->y *= val;
 			return *this;
 		}
-
-		double X() const { return x; }
-		double Y() const { return y; }
-		void X(double newX) { x = newX; }
-		void Y(double newY) { y = newY; }
-	private:
+	public:
 		double x {}, y {};
 	};
 

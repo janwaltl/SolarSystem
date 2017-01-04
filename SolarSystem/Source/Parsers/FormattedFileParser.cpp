@@ -112,8 +112,8 @@ namespace solar
 		if (!val.empty())
 		{
 			size_t pos {};
-			unit.pos.X(std::stod(val, &pos)/physicsUnits::AUtoM);
-			unit.pos.Y(std::stod(val.substr(pos))/physicsUnits::AUtoM);
+			unit.pos.x = std::stod(val, &pos) / physicsUnits::AUtoM;
+			unit.pos.y = std::stod(val.substr(pos)) / physicsUnits::AUtoM;
 		}
 	}
 
@@ -122,8 +122,8 @@ namespace solar
 		if (!val.empty())
 		{
 			size_t pos {};
-			unit.vel.X(std::stod(val, &pos)/physicsUnits::AUpYtoMpS);
-			unit.vel.Y(std::stod(val.substr(pos))/physicsUnits::AUpYtoMpS);
+			unit.vel.x = std::stod(val, &pos) / physicsUnits::AUpYtoMpS;
+			unit.vel.y = std::stod(val.substr(pos)) / physicsUnits::AUpYtoMpS;
 		}
 	}
 
@@ -138,16 +138,16 @@ namespace solar
 		if (!val.empty())
 		{
 			size_t pos {};
-			unit.color.X(std::stod(val, &pos));
+			unit.color.x=std::stod(val, &pos);
 			std::string tmp = val.substr(pos);
-			unit.color.Y(std::stod(tmp, &pos));
+			unit.color.y=std::stod(tmp, &pos);
 			tmp = tmp.substr(pos);
-			unit.color.Z(std::stod(tmp, &pos));
+			unit.color.z=std::stod(tmp, &pos);
 			tmp = tmp.substr(pos);
-			unit.color.W(std::stod(tmp));
+			unit.color.w=std::stod(tmp);
 		}
 		else
-			unit.color = {1.0,1.0,1.0,1.0};
+			unit.color = Vec4 {1.0,1.0,1.0,1.0};
 	}
 
 	void FormattedFileParser::ParseName(Unit & unit, const std::string & val)
@@ -160,8 +160,8 @@ namespace solar
 		std::string str;
 
 		//str += "name<" + unit.name + ">\n";
-		str += "position<" + std::to_string(unit.pos.X()) + " " + std::to_string(unit.pos.Y()) + ">\n";
-		str += "  velocity<" + std::to_string(unit.vel.X()) + " " + std::to_string(unit.vel.Y()) + ">\n";
+		str += "position<" + std::to_string(unit.pos.x) + " " + std::to_string(unit.pos.y) + ">\n";
+		str += "  velocity<" + std::to_string(unit.vel.x) + " " + std::to_string(unit.vel.y) + ">\n";
 		str += "  mass<" + std::to_string(unit.mass) + ">";
 
 		return str;

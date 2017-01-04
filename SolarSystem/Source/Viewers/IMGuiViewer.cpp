@@ -13,6 +13,14 @@ namespace solar
 	{
 	}
 
+	void IMGuiViewer::Prepare()
+	{
+		simDataDrawer = std::make_unique<drawers::SimDataDrawer>(this->GetAspectRatio());
+		GUIDrawer = std::make_unique<drawers::GUIDrawer>(this, data);
+		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(this, data);
+		ResetZoom();
+		scaleFactor *= 0.8;//To fit data into <-0.8,0.8> initially
+	}
 
 	void IMGuiViewer::operator()()
 	{
@@ -28,18 +36,9 @@ namespace solar
 		// So GUI is rendered over the Units, but processed before them to be able to set correct scaleFactor, offset
 		imguiBackend.NewFrame();
 		GUIDrawer->Draw();
-		simDataDrawer->Draw();
+		simDataDrawer->Draw(*data, scaleFactor, offset);
 		lineTrailsDrawer->Draw();
 		imguiBackend.Render();
-	}
-
-	void IMGuiViewer::Prepare()
-	{
-		simDataDrawer = std::make_unique<drawers::SimDataDrawer>(this, data);
-		GUIDrawer = std::make_unique<drawers::GUIDrawer>(this, data);
-		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(this, data);
-		ResetZoom();
-		scaleFactor *= 0.8;//To fit data into <-0.8,0.8> initially
 	}
 
 	double IMGuiViewer::ScaleFactor()
@@ -68,14 +67,14 @@ namespace solar
 		Vec2 min {std::numeric_limits<double>::max(),std::numeric_limits<double>::max()};
 
 		auto find = [&](const Unit& u) {
-			if (u.pos.X() > max.X())
-				max.X(u.pos.X());
-			if (u.pos.Y() > max.Y())
-				max.Y(u.pos.Y());
-			if (u.pos.X() < min.X())
-				min.X(u.pos.X());
-			if (u.pos.Y() < min.Y())
-				min.Y(u.pos.Y());
+			if (u.pos.x > max.x)
+				max.x = u.pos.x;
+			if (u.pos.y > max.y)
+				max.y=u.pos.y;
+			if (u.pos.x < min.x)
+				min.x = u.pos.x;
+			if (u.pos.y < min.y)
+				min.y=u.pos.y;
 		};
 		std::for_each(data->begin(), data->end(), find);
 
