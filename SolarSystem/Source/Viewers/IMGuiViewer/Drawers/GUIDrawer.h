@@ -3,19 +3,19 @@
 
 
 #include "Source/Common/Common.h"
-#include "Drawer.h"
 
 namespace solar
 {
+	class IMGuiViewer;
 
 	namespace drawers
 	{
 		//Renders User interface via ImGUI
-		class GUIDrawer :public Drawer
+		class GUIDrawer
 		{
 		public:
 			GUIDrawer(IMGuiViewer* parent, simData_t* data);
-			void Draw() override final;
+			void Draw();
 		private:
 			// Control viewing of simulation - moving(following) and zooming
 			void ViewControl();
@@ -56,6 +56,7 @@ namespace solar
 			Unit centerSystem;
 
 			simData_t* simData;
+			IMGuiViewer* viewer;
 		};
 	}
 }

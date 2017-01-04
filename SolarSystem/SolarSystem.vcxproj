@@ -206,7 +206,6 @@
     <ClInclude Include="Source\SimMethods\SimMethod.h" />
     <ClInclude Include="Source\Simulation.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\Drawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\LineTrailsDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\SimDataDrawer.h" />

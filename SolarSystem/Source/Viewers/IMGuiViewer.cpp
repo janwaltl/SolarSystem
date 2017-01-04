@@ -17,7 +17,7 @@ namespace solar
 	{
 		simDataDrawer = std::make_unique<drawers::SimDataDrawer>(this->GetAspectRatio());
 		GUIDrawer = std::make_unique<drawers::GUIDrawer>(this, data);
-		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(this, data);
+		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(data->size(), this->GetAspectRatio());
 		ResetZoom();
 		scaleFactor *= 0.8;//To fit data into <-0.8,0.8> initially
 	}
@@ -37,7 +37,7 @@ namespace solar
 		imguiBackend.NewFrame();
 		GUIDrawer->Draw();
 		simDataDrawer->Draw(*data, scaleFactor, offset);
-		lineTrailsDrawer->Draw();
+		lineTrailsDrawer->Draw(*data, scaleFactor, offset);
 		imguiBackend.Render();
 	}
 
@@ -70,11 +70,11 @@ namespace solar
 			if (u.pos.x > max.x)
 				max.x = u.pos.x;
 			if (u.pos.y > max.y)
-				max.y=u.pos.y;
+				max.y = u.pos.y;
 			if (u.pos.x < min.x)
 				min.x = u.pos.x;
 			if (u.pos.y < min.y)
-				min.y=u.pos.y;
+				min.y = u.pos.y;
 		};
 		std::for_each(data->begin(), data->end(), find);
 

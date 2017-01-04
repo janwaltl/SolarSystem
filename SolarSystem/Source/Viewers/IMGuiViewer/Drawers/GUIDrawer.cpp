@@ -10,7 +10,7 @@ namespace solar
 	namespace drawers
 	{
 		GUIDrawer::GUIDrawer(IMGuiViewer * parent, simData_t* data) :
-			Drawer(parent), follow(false), tempRawSpeed(1), tempDTSpeed(1), simData(data), selectedUnit(0)
+			viewer(parent), follow(false), tempRawSpeed(1), tempDTSpeed(1), simData(data), selectedUnit(0)
 		{
 			assert(viewer);
 		}
@@ -342,7 +342,7 @@ namespace solar
 				//Normalize values
 				val.x /= io.DisplaySize.x;
 				val.y /= io.DisplaySize.x;// .x is correct
-				drag = Vec2(val.x * 2,-val.y * 2);
+				drag = Vec2(val.x * 2, -val.y * 2);
 				viewer->Move(drag + offset);
 			}
 		}

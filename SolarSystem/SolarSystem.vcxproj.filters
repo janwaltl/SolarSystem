@@ -146,9 +146,6 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\ImGuiBackend.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\Drawer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>

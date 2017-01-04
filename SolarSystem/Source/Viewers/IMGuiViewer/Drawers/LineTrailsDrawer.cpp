@@ -9,13 +9,10 @@ namespace solar
 {
 	namespace drawers
 	{
-		LineTrailsDrawer::LineTrailsDrawer(IMGuiViewer * parent, simData_t * data) :
-			Drawer(parent), simData(data), frameCounter(0)
+		LineTrailsDrawer::LineTrailsDrawer(size_t dataSize, double aspectRatio) :frameCounter(0)
 		{
-			assert(data);
-
-			CreateShader();
-			CreateTrails();
+			CreateShader(aspectRatio);
+			CreateTrails(dataSize);
 		}
 
 		LineTrailsDrawer::~LineTrailsDrawer()
@@ -23,22 +20,22 @@ namespace solar
 			//Because of shader pointer type's completness
 		}
 
-		void LineTrailsDrawer::Draw()
+		void LineTrailsDrawer::Draw(const simData_t& data, double scaleFactor, const Vec2& offset)
 		{
-			UpdateTrails();
+			UpdateTrails(data);
 			assert(trails.size() == simData->size() && trails.size() == trailsControls.size());
 
 			shader->Bind();
 			auto trailIT = trails.begin();
 			auto trailCtrlIT = trailsControls.begin();
-			for (auto unitIT = simData->begin(); unitIT != simData->end(); ++unitIT, ++trailIT, ++trailCtrlIT)
+			for (auto unitIT = data.begin(); unitIT != data.end(); ++unitIT, ++trailIT, ++trailCtrlIT)
 			{
 				shader->SetUniform4f("col", unitIT->color);
 				if (*trailCtrlIT)
 				{
-					float scale = static_cast<float>(viewer->ScaleFactor());
+					float scale = static_cast<float>(scaleFactor);
 					shader->SetUniform2f("scale", scale, scale);
-					shader->SetUniform2f("offset", viewer->GetOffset());
+					shader->SetUniform2f("offset", offset);
 					trailIT->Draw();
 				}
 			}
@@ -73,7 +70,7 @@ namespace solar
 			return trailsControls[index];
 		}
 
-		void LineTrailsDrawer::CreateShader()
+		void LineTrailsDrawer::CreateShader(double aspectRatio)
 		{
 			const std::string vSource = R"(
 			#version 330 core
@@ -100,16 +97,16 @@ namespace solar
 
 			shader = std::make_unique<openGL::Shader>(vSource, fSource);
 			//Set aspect ratio, main axis is X and scale the Y axis 
-			shader->SetUniform2f("AR", 1.0f, static_cast<float>(viewer->GetAspectRatio()));
+			shader->SetUniform2f("AR", 1.0f, static_cast<float>(aspectRatio));
 
 		}
 
-		void LineTrailsDrawer::CreateTrails()
+		void LineTrailsDrawer::CreateTrails(size_t dataSize)
 		{
 			try
 			{
-			trails.resize(simData->size());
-			trailsControls.resize(simData->size(), settings::lineTrail::enabledByDefault);
+				trails.resize(dataSize);
+				trailsControls.resize(dataSize, settings::lineTrail::enabledByDefault);
 
 			}
 			catch (openGL::GLError& e)
@@ -118,11 +115,11 @@ namespace solar
 					throw Exception("Failed to create lineTrails' buffers because there is not enough GPU memory."
 									"Lowering settings::lineTrail::maxLength value might help with that.");
 				else
-				throw Exception("Failed to create lineTrails, reason:" + std::string(e.what()));
+					throw Exception("Failed to create lineTrails, reason:" + std::string(e.what()));
 			}
 		}
 
-		void LineTrailsDrawer::UpdateTrails()
+		void LineTrailsDrawer::UpdateTrails(const simData_t& data)
 		{
 			assert(simData->size() == trails.size() && trails.size() == trailsControls.size());
 
@@ -130,8 +127,8 @@ namespace solar
 			if (!frameCounter)//Only update trails every trailRes frames
 			{
 				auto trailIT = trails.begin();
-				auto trailsCtrlIT = trailsControls.begin();
-				for (auto unitIT = simData->begin(); unitIT != simData->end(); ++unitIT, ++trailIT, ++trailsCtrlIT)
+				auto trailsCtrlIT = trailsControls.cbegin();
+				for (auto unitIT = data.cbegin(); unitIT != data.cend(); ++unitIT, ++trailIT, ++trailsCtrlIT)
 				{
 					if (*trailsCtrlIT)
 						trailIT->Push(unitIT->pos);

@@ -1,8 +1,7 @@
 #ifndef DRAWERS_SIMDATA_DRAWER_HEADER
 #define DRAWERS_SIMDATA_DRAWER_HEADER
 
-#include "Drawer.h"
-
+#include "Source/Common/Common.h"
 namespace solar
 {
 	namespace openGL

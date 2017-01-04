@@ -1,6 +1,4 @@
 =====================================IN THIS COMMIT=====================================
-Simplified map class
-	- no need to be private, seems fine
 Breaking coupling of drawers
 ========================================IMPLEMENTING PLAN========================================
 Next:

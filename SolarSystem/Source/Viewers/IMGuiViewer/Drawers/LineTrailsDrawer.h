@@ -1,7 +1,6 @@
 #ifndef DRAWERS_LINE_TRAILS_DRAWER_HEADER
 #define DRAWERS_LINE_TRAILS_DRAWER_HEADER
 
-#include "Drawer.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/UnitTrail.h"
 
 namespace solar
@@ -14,13 +13,13 @@ namespace solar
 	{
 		//Draws line trails behind the simulated Units
 		//Require GL context at the point of creation
-		class LineTrailsDrawer :public Drawer
+		class LineTrailsDrawer
 		{
 		public:
 			//Throws GLError on OpenGL error(i.e out of GPU memory)
-			LineTrailsDrawer(IMGuiViewer* parent, simData_t* data);
+			LineTrailsDrawer(size_t dataSize, double aspectRatio);
 			~LineTrailsDrawer();
-			void Draw() override final;
+			void Draw(const simData_t& data, double scaleFactor, const Vec2& offset);
 			//Enables/disables simData[index] unit's trail
 			// - disabling also clears the trail
 			void SwitchTrail(size_t index, bool enable);
@@ -30,17 +29,16 @@ namespace solar
 			void ClearAll();
 			bool IsTrailEnabled(size_t index);
 		private:
-			void CreateShader();
-			void CreateTrails();
+			void CreateShader(double aspectRatio);
+			void CreateTrails(size_t dataSize);
 			//Adds new points(from current units' positions) to trails every 'trailRes' frames
-			void UpdateTrails();
+			void UpdateTrails(const simData_t& data);
 
 			size_t frameCounter;
 			
 			std::unique_ptr<openGL::Shader> shader;
 			std::vector<openGL::UnitTrail> trails;
 			std::vector<bool> trailsControls;
-			simData_t* simData;
 		};
 	}
 }
