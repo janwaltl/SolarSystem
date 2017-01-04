@@ -13,11 +13,13 @@ namespace solar
 
 	Simulation::Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer) :
 		parser(std::move(parser)), simMethod(std::move(simMethod)), viewer(std::move(viewer)),
-		state(notRunning),dtime(0),rawMultiplier(0),DTMultiplier(0)
+		state(notRunning), dtime(0), rawMultiplier(0), DTMultiplier(0)
 	{
+		//Links together all SystemUnits.
+		//gives viewers and simMethods access to simulated data
 		LinkUnitAndSim(*this->parser.get(), *this);
-		LinkUnitAndSim(*this->viewer.get(), *this);
-		LinkUnitAndSim(*this->simMethod.get(), *this);
+		LinkUnitAndSim(*this->viewer.get(), *this, &data);
+		LinkUnitAndSim(*this->simMethod.get(), *this, &data);
 	}
 
 	void Simulation::Start(stepTime_t dt, size_t rawMult /*= 1*/, size_t DTMult /*= 1*/, std::chrono::seconds maxRunT /*= 0s*/)
@@ -29,11 +31,10 @@ namespace solar
 
 		//Obtain the data, throws on invalid input(format)
 		data = parser->Load();
-		simMethod->_Prepare(&data);
-		viewer->_Prepare(&data);
+		simMethod->Prepare();
+		viewer->Prepare();
 		Loop();
 		parser->Save(data);
-
 	}
 
 	void Simulation::StartNotTimed(stepTime_t dt, size_t rawMult, std::chrono::seconds maxRunT)
@@ -45,8 +46,8 @@ namespace solar
 
 		//Load and prepare data
 		data = parser->Load();
-		simMethod->_Prepare(&data);
-		viewer->_Prepare(&data);
+		simMethod->Prepare();
+		viewer->Prepare();
 
 		state = running;
 		while (state != notRunning && IsNotRunningForTooLong())

@@ -14,21 +14,22 @@ namespace solar
 		virtual void operator()(double step) = 0;
 		//Method for preparation, called once before start of simulation
 		// - used for creating temp object, or initializing of state which depends on for eg. size of data
-		virtual void Prepare()=0;
+		virtual void Prepare() {};
 		virtual ~SimMethod() = default;
-	
-		//Captures data, called only from Simulation itself
-		void _Prepare(simData_t* simData)
-		{
-			assert(simData);
-			this->data = simData;
-			this->Prepare();
-		}
+
+		friend void LinkUnitAndSim(SimMethod& unit, Simulation& sim, simData_t* data);
 	protected:
 		// Pointer to simulated data, valid in operator() and Prepare().
 		// IT IS NOT SET IN constructor of derived classed
 		simData_t* data;
 	};
+	//Links SimMethod and simulation together, so it has access to simData
+	inline void LinkUnitAndSim(SimMethod& unit, Simulation& sim, simData_t* data)
+	{
+		assert(simData);
+		LinkUnitAndSim(static_cast<SystemUnit&>(unit), sim);
+		unit.data = data;
+	}
 }
 
 #endif

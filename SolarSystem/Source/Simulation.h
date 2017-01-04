@@ -101,6 +101,7 @@ namespace solar
 		clock_t::time_point prevTime, begining;
 
 		//Data to be simulated
+		//Pointed to by viewer and simMethod
 		simData_t data;
 		//Whether the simulation is running or not
 		simState state;

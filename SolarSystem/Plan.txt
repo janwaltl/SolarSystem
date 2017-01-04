@@ -1,14 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Added comments...especially regarding units.
-Added NotTimed method.
-
+Replaced _prepare with friend method.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Add:
-	- replace _Prepare with friend method
-
 	V. Document it & ship it
-		- Write all the comments, probably v èeštinì
 		- Constants instead of magic values
 		- SORT all compile warnings
 	VI. OPTIONAL

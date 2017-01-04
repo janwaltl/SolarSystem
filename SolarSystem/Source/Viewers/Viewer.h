@@ -15,20 +15,20 @@ namespace solar
 		//Gives access to freshly loaded data before simulation starts
 		virtual void Prepare() {}
 		virtual ~Viewer() = default;
-	public:
-		//Captures data, called only from Simulation itself
-		void _Prepare(simData_t* simData)
-		{
-			assert(simData);
-			this->data = simData;
-			this->Prepare();
-		}
+
+		friend void LinkUnitAndSim(Viewer& unit, Simulation& sim, simData_t* data);
 	protected:
 		// Pointer to simulated data, valid in operator() and Prepare().
 		// IT IS NOT SET IN constructor of derived classed
 		simData_t* data;
 	};
-
+	//Links SimMethod and simulation together, so it has access to simData
+	inline void LinkUnitAndSim(Viewer& unit, Simulation& sim, simData_t* data)
+	{
+		assert(simData);
+		LinkUnitAndSim(static_cast<SystemUnit&>(unit), sim);
+		unit.data = data;
+	}
 
 }
 
