@@ -62,10 +62,12 @@ namespace solar
 			stepping,
 		};
 		void Loop();
+		void LoopNotTimed();
 		//Clear timers before start of simulation's loop
 		void ResetTimers();
 		//Updates time in the loop
 		void TickTime();
+		void UpdateSimTime();
 		bool IsNotRunningForTooLong();
 
 		template<typename Rep, typename Per>
@@ -92,7 +94,9 @@ namespace solar
 		//Last frame's time
 		stepTime_t frameTime;
 		//Amount of simulated time
-		stepTime_t simTime;///Can actually count only to 270 years, which might be a problem, might need another in years...
+		///Can actually count only to 270 years, which might be a problem, might need another in years...
+		stepTime_t simTimePrecise;//Store fraction of seconds 
+		std::chrono::seconds simTimeSecs;//store whole seconds
 		//How long has been the simulation running in real time
 		stepTime_t runTime;
 		//How long can the simulation run in real time
@@ -105,6 +109,8 @@ namespace solar
 		simData_t data;
 		//Whether the simulation is running or not
 		simState state;
+
+		bool justUnpaused;
 	};
 }
 

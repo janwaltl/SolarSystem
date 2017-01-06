@@ -23,7 +23,7 @@ int main()
 			Simulation sim(std::move(parser), std::move(method), std::move(viewer));
 			//Start with timeStep of 10ms, speed it up 100 times and pass 10ms*180 000=30min dTime
 			// Thus effectively running 3000min simTime for each 10ms realTime = 208days per second
-			sim.Start(10ms, 100, 180'000, 300s);
+			sim.Start(10ms, 50, 180'000, 300s);
 			//std::cin.get();
 			//std::cin.get();
 		}

@@ -13,7 +13,7 @@ namespace solar
 
 	Simulation::Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer) :
 		parser(std::move(parser)), simMethod(std::move(simMethod)), viewer(std::move(viewer)),
-		state(notRunning), dtime(0), rawMultiplier(0), DTMultiplier(0)
+		state(notRunning), dtime(0), rawMultiplier(1), DTMultiplier(1), justUnpaused(false)
 	{
 		//Links together all SystemUnits.
 		//gives viewers and simMethods access to simulated data
@@ -48,7 +48,12 @@ namespace solar
 		data = parser->Load();
 		simMethod->Prepare();
 		viewer->Prepare();
+		LoopNotTimed();
+		parser->Save(data);
+	}
 
+	void Simulation::LoopNotTimed()
+	{
 		state = running;
 		while (state != notRunning && IsNotRunningForTooLong())
 		{
@@ -57,17 +62,17 @@ namespace solar
 			runTime = now - begining;
 
 			if (state != paused)
+			{
 				for (size_t i = 0; i < rawMultiplier; i++)
 				{
 					(*simMethod)(ToSecs(dtime));
-					simTime += dtime*DTMultiplier;
 				}
+				UpdateSimTime();
+			}
 
 			(*viewer)();
 		}
 		state = notRunning;
-
-		parser->Save(data);
 	}
 
 	void Simulation::StopSimulation()
@@ -84,6 +89,7 @@ namespace solar
 	{
 		assert(state == paused); //Only paused sim can be resumed
 		state = running;
+		justUnpaused = true;
 	}
 
 	void Simulation::StepSimulation()
@@ -113,7 +119,7 @@ namespace solar
 
 	double Simulation::GetSimTime()
 	{
-		return ToSecs(simTime);
+		return ToSecs(simTimePrecise) + ToSecs(simTimeSecs);
 	}
 
 	double Simulation::GetFrameTime()
@@ -154,8 +160,8 @@ namespace solar
 				for (size_t i = 0; i < rawMultiplier; i++)
 				{
 					(*simMethod)(ToSecs(dtime * DTMultiplier));
-					simTime += dtime*DTMultiplier;
 				}
+				UpdateSimTime();
 				acc -= dtime;
 
 				if (state == stepping)// If we were stepping, we just made a step, so pause a simulation
@@ -169,9 +175,10 @@ namespace solar
 
 	void Simulation::ResetTimers()
 	{
-		acc = decltype(acc)::zero();
-		simTime = decltype(simTime)::zero();
-		runTime = decltype(runTime)::zero();
+		acc = acc.zero();
+		simTimePrecise = simTimePrecise.zero();
+		simTimeSecs = simTimeSecs.zero();
+		runTime = runTime.zero();
 		begining = prevTime = clock_t::now();
 	}
 
@@ -182,10 +189,29 @@ namespace solar
 		prevTime = now;
 		runTime = now - begining;
 
-		if (frameTime > 500ms)
-			acc += 500ms;
+		if (!justUnpaused)
+		{
+			if (frameTime > 500ms)
+				acc += 500ms;
+			else
+				acc += frameTime;
+		}
 		else
-			acc += frameTime;
+		{
+			acc = acc.zero();
+			justUnpaused = false;
+		}
+	}
+
+	void Simulation::UpdateSimTime()
+	{
+		simTimePrecise += dtime*DTMultiplier*rawMultiplier;
+		auto secs = std::chrono::duration_cast<std::chrono::seconds>(simTimePrecise);
+		if (secs >= 1s)
+		{
+			simTimePrecise -= secs;
+			simTimeSecs += secs;
+		}
 	}
 
 	bool Simulation::IsNotRunningForTooLong()

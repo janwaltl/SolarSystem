@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Breaking coupling of drawers
+More precise simTime = no more 270(292)years restriction.
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	V. Document it & ship it
@@ -14,7 +15,6 @@ Next:
 
 SystemUnit is starting to have too many forwarding functions. Maybe give direct pointer to sim, but someway restrict
 calling Start.
-Fix 270years limit.
 ========================================THOUGHTS========================================
 
 Controlling the simulation

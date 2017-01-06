@@ -10,6 +10,7 @@ namespace solar
 	//		-pos in AU units
 	//		-vel in AU/Earth year
 	//		-mass in multiples of Sun's masses
+	//http://www.math.kit.edu/ianm3/lehre/geonumint2009s/media/gni_by_stoermer-verlet.pdf
 	class SemiImplicitEuler :public SimMethod
 	{
 	public:
