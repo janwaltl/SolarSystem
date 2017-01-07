@@ -23,7 +23,7 @@ namespace solar
 
 		struct lineTrail
 		{
-			// Maximum number of points in one lineTrails.
+			// Maximum number of points in one lineTrail.
 			// GPU Memory footprint:
 			// - maxLength*4KB for indices
 			// - numUnits* maxLength*8KB for vertices

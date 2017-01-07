@@ -189,10 +189,11 @@ namespace solar
 		prevTime = now;
 		runTime = now - begining;
 
+		//Do not accumulate time for first frame after pause
 		if (!justUnpaused)
 		{
-			if (frameTime > 500ms)
-				acc += 500ms;
+			if (frameTime > 200ms)
+				acc += 200ms;
 			else
 				acc += frameTime;
 		}
@@ -206,9 +207,10 @@ namespace solar
 	void Simulation::UpdateSimTime()
 	{
 		simTimePrecise += dtime*DTMultiplier*rawMultiplier;
-		auto secs = std::chrono::duration_cast<std::chrono::seconds>(simTimePrecise);
-		if (secs >= 1s)
+		//Transfers full seconds from simTimePrecise time to simTimeSecs time
+		if (simTimePrecise >= 1s)
 		{
+			auto secs = std::chrono::duration_cast<std::chrono::seconds>(simTimePrecise);
 			simTimePrecise -= secs;
 			simTimeSecs += secs;
 		}

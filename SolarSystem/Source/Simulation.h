@@ -93,10 +93,11 @@ namespace solar
 		stepTime_t acc;
 		//Last frame's time
 		stepTime_t frameTime;
+
 		//Amount of simulated time
-		///Can actually count only to 270 years, which might be a problem, might need another in years...
 		stepTime_t simTimePrecise;//Store fraction of seconds 
 		std::chrono::seconds simTimeSecs;//store whole seconds
+
 		//How long has been the simulation running in real time
 		stepTime_t runTime;
 		//How long can the simulation run in real time
@@ -109,7 +110,7 @@ namespace solar
 		simData_t data;
 		//Whether the simulation is running or not
 		simState state;
-
+		//If sim was unpaused last frame
 		bool justUnpaused;
 	};
 }

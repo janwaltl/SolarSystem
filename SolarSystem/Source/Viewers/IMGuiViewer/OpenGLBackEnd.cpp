@@ -39,7 +39,7 @@ namespace solar
 		openGL::CheckForError();//glewInit causes INVALID_ENUM for some reason...
 
 		glViewport(0, 0, width, height); // sets correct coordinate viewport
-		glfwSwapInterval(0);
+		glfwSwapInterval(0);//turn off VSYNC if possible - to prevent useless slow-down
 
 	}
 
