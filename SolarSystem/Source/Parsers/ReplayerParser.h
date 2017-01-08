@@ -4,18 +4,20 @@
 #include "Parser.h"
 namespace solar
 {
+	//Responsible for loading correct replay file and initializing data based on it.
 	class ReplayerParser : public Parser
 	{
 	public:
-		//replayFile - filename including path and extension
-		//				must be .replay file containing proper replay
+		//replayFile= filename including path and extension
+		//			- file must contain proper replay, .replay extension is not needed
+		//				- IS checked by constructor and Exception class is thrown on error
 		ReplayerParser(const std::string& replayFileName);
 		//Loads data from replayFile
 		simData_t Load() override final;
 		//No save
 
 	private:
-		std::string replayFile;
+		std::string inFile;
 	};
 }
 

@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Laid out basic structure of replayer's classes.
-Fixed errors in asserts, because apparently I do not compile Debug version often enough.
+Almost finished parser. Missing simParams.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	
