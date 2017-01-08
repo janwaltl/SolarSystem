@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Plan.txt" />
+    <Text Include="FileFormats\ReplayerFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -168,6 +169,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\ReplayerViewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SimMethods\ReplayerMethod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Parsers\ReplayerParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\ViewAndRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

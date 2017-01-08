@@ -1,7 +1,9 @@
 =====================================IN THIS COMMIT=====================================
-Commenting...
+Laid out basic structure of replayer's classes.
+Fixed errors in asserts, because apparently I do not compile Debug version often enough.
 ========================================IMPLEMENTING PLAN========================================
 Next:
+	
 	V. Document it & ship it
 		- Constants instead of magic values
 		- SORT all compile warnings

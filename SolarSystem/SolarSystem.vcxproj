@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="FileFormats\ReplayerFile.txt" />
     <Text Include="Plan.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +197,8 @@
     <ClInclude Include="Source\Common\Common.h" />
     <ClInclude Include="Source\Math\Vec4.h" />
     <ClInclude Include="Source\Parsers\FormattedFileParser.h" />
+    <ClInclude Include="Source\Parsers\ReplayerParser.h" />
+    <ClInclude Include="Source\SimMethods\ReplayerMethod.h" />
     <ClInclude Include="Source\SimMethods\RK4.h" />
     <ClInclude Include="Source\SimMethods\SemiImplicitEuler.h" />
     <ClInclude Include="Source\Units\Unit.h" />
@@ -221,6 +224,8 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Error.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.h" />
+    <ClInclude Include="Source\Viewers\ReplayerViewer.h" />
+    <ClInclude Include="Source\Viewers\ViewAndRecord.h" />
     <ClInclude Include="Source\Viewers\Viewer.h" />
   </ItemGroup>
   <ItemGroup>

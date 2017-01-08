@@ -26,7 +26,7 @@ namespace solar
 	//Links SimMethod and simulation together, so it has access to simData
 	inline void LinkUnitAndSim(SimMethod& unit, Simulation& sim, simData_t* data)
 	{
-		assert(simData);
+		assert(data);
 		LinkUnitAndSim(static_cast<SystemUnit&>(unit), sim);
 		unit.data = data;
 	}

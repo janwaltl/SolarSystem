@@ -23,7 +23,7 @@ namespace solar
 		void LineTrailsDrawer::Draw(const simData_t& data, double scaleFactor, const Vec2& offset)
 		{
 			UpdateTrails(data);
-			assert(trails.size() == simData->size() && trails.size() == trailsControls.size());
+			assert(trails.size() == data.size() && trails.size() == trailsControls.size());
 
 			shader->Bind();
 			auto trailIT = trails.begin();
@@ -121,7 +121,7 @@ namespace solar
 
 		void LineTrailsDrawer::UpdateTrails(const simData_t& data)
 		{
-			assert(simData->size() == trails.size() && trails.size() == trailsControls.size());
+			assert(data.size() == trails.size() && trails.size() == trailsControls.size());
 
 			++frameCounter %= settings::lineTrail::resolution;
 			if (!frameCounter)//Only update trails every trailRes frames
