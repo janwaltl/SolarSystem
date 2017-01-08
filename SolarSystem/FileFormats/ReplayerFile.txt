@@ -8,6 +8,7 @@ NAME																SIZE IN BYTES				INTENDED TYPE
 HEADER
 
 Magic constant 'RE'													2							uint8_t[2] 
+deltaT						(duration of timeTick in secs)			8							double
 Number of simulated Units											4							uint32_t(size_t)
 For each unit:
 	Length of name													1							uint8_t
@@ -15,8 +16,6 @@ For each unit:
 	Color of unit(RGBA)												4*8							double[4]
 	Mass of unit													8							double
 
-//Sim params
-// dTime,RawMult,DTMult
 CONTENT
 
 for each time tick:

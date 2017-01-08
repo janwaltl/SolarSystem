@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Almost finished parser. Missing simParams.
+Worked on ViewAndRecord viewer.
+	- Might be working, needs testing.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	
