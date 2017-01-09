@@ -1,13 +1,31 @@
 =====================================IN THIS COMMIT=====================================
-Worked on ViewAndRecord viewer.
-	- Might be working, needs testing.
+Planning...
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	
+	Finish parser.
+		- resolve dTime,DTMult,RawMult.
+			- discard RawMult.
+			- store dTime and DTMult.
+				- DTMult=DTMult*RawMult to have correct simTime in both sims.???
+			- on load set it that way and enforce it. Speeding up can be done by changing DTMult
+				-enforce RawMult=1.
+
+		- needs end boundary on time.
+			- number of entries.
+	Finish method.
+		- pick correct entry based on simTime
+			- offsetts by simTime/tickTime
+	Test it.
+	Make GUI for viewer.
+		- rewind/pause/resume/speed up buttons
+		- as well as clickable timeline
+		- even better would be to break down GUIDrawer and reconstruct IMGUIViewer without controls.
+			- Just metrics really
 	V. Document it & ship it
 		- Constants instead of magic values
 		- SORT all compile warnings
 	VI. OPTIONAL
+		- Names floating near units.(maybe just for the selected one & reference system)
 		- Hustý by bylo zprovoznit multiStep øádu 8,9, udìlat textViewer, kterej všechno uloží do souboru.
 			Nechat to bìžet na stolním PC pøes noc, pak udìlat ReplaySimMethod, který by jen podle simTime èasu nakopíroval
 			správný údaje do simData, ktrý by pak IMGUIViewer v pohodì zobrazoval.
