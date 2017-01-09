@@ -1,5 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Planning...
+Finished parser and ViewAndRecord.
+	- That should make recording part finished hopefully.
+Added ability to set DTime. Maybe not wise thing to change it too often, but hey it's optional.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Finish parser.

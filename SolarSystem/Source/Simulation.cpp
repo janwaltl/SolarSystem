@@ -112,6 +112,11 @@ namespace solar
 		return ToSecs(dtime);
 	}
 
+	void Simulation::SetDTime(double newDT)
+	{
+		dtime = std::chrono::duration<long long,std::nano>(static_cast<long long>(newDT));
+	}
+
 	double Simulation::GetRunTime()
 	{
 		return ToSecs(runTime);

@@ -9,6 +9,8 @@ HEADER
 
 Magic constant 'RE'													2							uint8_t[2] 
 deltaT						(duration of timeTick in secs)			8							double
+multiplier															4							uint32_t(size_t)
+numRecords															4							uint32_t(size_t)
 Number of simulated Units											4							uint32_t(size_t)
 For each unit:
 	Length of name													1							uint8_t

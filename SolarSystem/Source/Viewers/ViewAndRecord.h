@@ -13,6 +13,7 @@ namespace solar
 	public:
 		template<typename... someViewerArgs>
 		ViewAndRecord(const std::string& outFileName, someViewerArgs&&... args);
+		~ViewAndRecord()override final;
 		void Prepare() override final;
 		void operator()() override final;
 	private:
@@ -21,6 +22,7 @@ namespace solar
 		someViewer viewer;
 		std::string outFile;
 		std::ofstream out;
+		uint32_t numRecords;
 	};
 }
 
@@ -32,10 +34,20 @@ namespace solar
 	ViewAndRecord<someViewer>::ViewAndRecord(const std::string & outFileName, someViewerArgs && ...args) :
 		outFile(outFileName), viewer(std::forward<someViewerArgs...>(args...))
 	{
+		//Tests if the file exists and can be opened
 		out.open(outFileName, std::ios::out | std::ios::binary);
 		if (!out.is_open())
 			throw Exception("Cannot open replay file: \'" + replayFileName + "\'.");
 		out.close();//Close it for now
+	}
+
+	template<typename someViewer>
+	ViewAndRecord<someViewer>::~ViewAndRecord()
+	{
+		//Write correct number of records
+		out.seekp(14);//Offset in header(see fileFormat)
+		out.write(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));
+		out.close();
 	}
 
 	template<typename someViewer>
@@ -50,8 +62,7 @@ namespace solar
 			throw Exception("Cannot create replay file: \'" + replayFileName + "\'.");
 
 		CreateHeader();
-		//move to first tick
-		//keep it open
+		//Keep file open for recording.
 	}
 	template<typename someViewer>
 	void ViewAndRecord<someViewer>::operator()()
@@ -67,8 +78,12 @@ namespace solar
 		assert(out.is_open());
 		out.write("RE", 2);
 
-		double deltaT = sim->GetDtime()*sim->GetDTMultiplier();
+		double deltaT = sim->GetDtime();
 		out.write(reinterpret_cast<char*>(&deltaT), sizeof(deltaT));
+		uint32_t multiplier = sim->GetDTMultiplier()*sim->GetRawMultiplier();
+		out.write(reinterpret_cast<char*>(&multiplier), sizeof(multiplier));
+		numRecords = 0;
+		out.write(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));
 
 		uint32_t numUnits = data->size();
 		out.write(reinterpret_cast<char*>(&numUnits), sizeof(numUnits));
@@ -97,6 +112,7 @@ namespace solar
 			out.write(reinterpret_cast<char*>(&(*data)[i].vel.x, sizeof((*data)[i].vel.x));
 			out.write(reinterpret_cast<char*>(&(*data)[i].pos.y, sizeof((*data)[i].pos.y));
 		}
+		++numRecords;
 	}
 }
 

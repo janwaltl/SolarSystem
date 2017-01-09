@@ -14,6 +14,10 @@ namespace solar
 		assert(sim);
 		return sim->GetDtime();
 	}
+	void SystemUnit::SetDTime(double newDT)
+	{
+		sim->SetDTime(newDT);
+	}
 	double SystemUnit::GetRunTime()
 	{
 		return sim->GetRunTime();

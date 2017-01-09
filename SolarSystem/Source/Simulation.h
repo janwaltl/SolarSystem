@@ -41,6 +41,7 @@ namespace solar
 		bool IsRunnig();
 		//Returns deltaTime in seconds
 		double GetDtime();
+		void SetDTime(double newDT);
 		//Returns elapsed realTime in seconds
 		double GetRunTime();
 		//Returns elapsed simTime in seconds

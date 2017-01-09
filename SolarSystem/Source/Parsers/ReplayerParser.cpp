@@ -38,8 +38,17 @@ namespace solar
 
 		uint32_t numUnits = 0;
 		in.read(reinterpret_cast<char*>(&numUnits), sizeof(numUnits));
+		double deltaT = 0.0;
+		in.read(reinterpret_cast<char*>(&deltaT), sizeof(deltaT));
+		uint32_t multiplier = 0;
+		in.read(reinterpret_cast<char*>(&multiplier), sizeof(multiplier));
 
-		simData_t data (numUnits,Unit());
+		in.seekg(sizeof(uint32_t), std::ios::cur);//Skip numRecords
+		this->SetDTime(deltaT);
+		this->SetDTMultiplier(multiplier);
+		this->SetRawMultiplier(1);
+		
+		simData_t data(numUnits, Unit());
 
 		for (decltype(numUnits) i = 0; i < numUnits; ++i)
 		{
@@ -59,10 +68,6 @@ namespace solar
 			in.read(reinterpret_cast<char*>(&mass), sizeof(mass));
 			data[i].mass = mass;
 		}
-
-		//Skip parameters and go to first time tick
-		//in.seekg(XXX);
-
 		//Initialize them to their intial value
 		for (decltype(numUnits) i = 0; i < numUnits; ++i)
 		{
