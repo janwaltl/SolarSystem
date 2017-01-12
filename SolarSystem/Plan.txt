@@ -1,28 +1,29 @@
 =====================================IN THIS COMMIT=====================================
-Finished parser and ViewAndRecord.
-	- That should make recording part finished hopefully.
-Added ability to set DTime. Maybe not wise thing to change it too often, but hey it's optional.
+Refactoring:
+	Replaced templates in ViewAndRecord class with pointers and virtual calls.
+		- Won't be much slower, but allows easier implementation of RecordedSimulation.
+			- Because viewer still can be chosen at run-time.
+	Fixed few errors in its implementation.
+	Add LinkUnitAndLinkedUnit - allows to share internal sim pointer.
+		- To allow nested viewers, but still somewhat hide sim itself.
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Finish parser.
-		- resolve dTime,DTMult,RawMult.
-			- discard RawMult.
-			- store dTime and DTMult.
-				- DTMult=DTMult*RawMult to have correct simTime in both sims.???
-			- on load set it that way and enforce it. Speeding up can be done by changing DTMult
-				-enforce RawMult=1.
+	Create sim method - test syncing of times, selecting correct entry...
+	- or maybe create wrappers around Simulation - RecordedSimulation and ReplayedSimulation
 
-		- needs end boundary on time.
-			- number of entries.
+	Test recording.
+
 	Finish method.
 		- pick correct entry based on simTime
-			- offsetts by simTime/tickTime
-	Test it.
+			- offsets by simTime/tickTime
+	Test viewing.
+
 	Make GUI for viewer.
 		- rewind/pause/resume/speed up buttons
 		- as well as clickable timeline
 		- even better would be to break down GUIDrawer and reconstruct IMGUIViewer without controls.
-			- Just metrics really
+			- Just metrics and info really
 	V. Document it & ship it
 		- Constants instead of magic values
 		- SORT all compile warnings

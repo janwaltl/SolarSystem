@@ -39,6 +39,7 @@ namespace solar
 		void SetDTMultiplier(size_t newDTMult);
 	private:
 		friend void LinkUnitAndSim(SystemUnit& unit, Simulation& sim);
+		friend void LinkUnitAndLinkedUnit(SystemUnit& linkedUnit, SystemUnit& toBeLinkedUnit);
 
 		Simulation* sim {};
 	};
@@ -46,6 +47,12 @@ namespace solar
 	inline void LinkUnitAndSim(SystemUnit& unit, Simulation& sim)
 	{
 		unit.sim = &sim;
+	}
+	//Links toBeLinked unit to same simulation as linkedUnit is linked
+	///(Currently here because of replaying(=nested viewers), and making sim accessible seemed too weird)
+	inline void LinkUnitAndLinkedUnit(SystemUnit& linkedUnit, SystemUnit& toBeLinkedUnit)
+	{
+		toBeLinkedUnit.sim = linkedUnit.sim;
 	}
 }
 

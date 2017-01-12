@@ -191,6 +191,7 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Error.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.cpp" />
+    <ClCompile Include="Source\Viewers\ViewAndRecord.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\Settings.h" />
