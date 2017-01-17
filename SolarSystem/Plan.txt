@@ -1,8 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Timed recording = Makes record for each DTime tick.
+Plenty of small fixes,tweaks in parser, recording.
 
-Added RecordedSimulation wrapper class to record simulation more easily.
-
+As well as more work on ReplayerMethod.
+	- Not working yet, but there's already plenty in this commit.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Create sim method - test syncing of times, selecting correct entry...

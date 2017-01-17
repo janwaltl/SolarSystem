@@ -21,6 +21,8 @@ namespace solar
 		void CreateHeader();
 		//Makes record each DTime
 		void Record();
+		//Write position and velocity of each unit into file
+		void SavePosVel();
 		viewer_p viewer;
 		std::string outFile;
 		std::ofstream out;

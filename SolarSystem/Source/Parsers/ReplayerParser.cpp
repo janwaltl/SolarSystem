@@ -21,6 +21,7 @@ namespace solar
 
 		//Correct file
 		inFile = replayFileName;
+		in.close();//Close for now
 	}
 
 	simData_t ReplayerParser::Load()
@@ -36,20 +37,21 @@ namespace solar
 		in.exceptions(std::ifstream::failbit | std::ifstream::eofbit | std::ifstream::badbit);
 		in.seekg(2);//Skip magic
 
-		uint32_t numUnits = 0;
-		in.read(reinterpret_cast<char*>(&numUnits), sizeof(numUnits));
 		double deltaT = 0.0;
 		in.read(reinterpret_cast<char*>(&deltaT), sizeof(deltaT));
 		uint32_t multiplier = 0;
 		in.read(reinterpret_cast<char*>(&multiplier), sizeof(multiplier));
 
-		in.seekg(sizeof(uint32_t), std::ios::cur);//Skip numRecords
 		this->SetDTime(deltaT);
 		this->SetDTMultiplier(multiplier);
 		this->SetRawMultiplier(1);
-		
+
+		in.seekg(sizeof(uint32_t), std::ios::cur);//Skip numRecords
+		uint32_t numUnits = 0;
+		in.read(reinterpret_cast<char*>(&numUnits), sizeof(numUnits));
 		simData_t data(numUnits, Unit());
 
+		//Read units' properties
 		for (decltype(numUnits) i = 0; i < numUnits; ++i)
 		{
 			uint8_t nameL;
@@ -68,7 +70,7 @@ namespace solar
 			in.read(reinterpret_cast<char*>(&mass), sizeof(mass));
 			data[i].mass = mass;
 		}
-		//Initialize them to their intial value
+		//Initialize them to their intial value = first record
 		for (decltype(numUnits) i = 0; i < numUnits; ++i)
 		{
 			//PosX,PosY,VelX,VelY
@@ -80,6 +82,9 @@ namespace solar
 			data[i].vel.x = posVel[2];
 			data[i].vel.y = posVel[3];
 		}
+
+		in.close();
+
 		return data;
 	}
 

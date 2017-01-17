@@ -26,6 +26,8 @@ namespace solar
 			throw Exception("Cannot create replay file: \'" + outFile + "\'.");
 
 		CreateHeader();
+		//Save initial positions and velocities of each unit
+		SavePosVel();
 		//Keep file open for recording.
 
 		//Because viewer has not been linked to simulation, but this class(also a viewer) has been.
@@ -55,6 +57,11 @@ namespace solar
 
 		uint32_t numUnits = data->size();
 		out.write(reinterpret_cast<char*>(&numUnits), sizeof(numUnits));
+
+		uint32_t offset = 0;//No offset yet
+		auto offsetPos = out.tellp();
+		out.write(reinterpret_cast<char*>(&offset), sizeof(offset));
+
 		for (decltype(numUnits) i = 0; i < numUnits; ++i)
 		{
 			uint8_t nameL = (*data)[i].name.length();
@@ -68,6 +75,12 @@ namespace solar
 
 			out.write(reinterpret_cast<char*>(&(*data)[i].mass), sizeof((*data)[i].mass));
 		}
+		//Write offset now
+		offset = out.tellp();
+		out.seekp(offsetPos);
+		out.write(reinterpret_cast<char*>(&offset), sizeof(offset));
+		out.seekp(offset);//Return back
+
 	}
 	void ViewAndRecord::Record()
 	{
@@ -79,15 +92,19 @@ namespace solar
 		//Make record for each DTime tick
 		while (acc > this->GetDtime())
 		{
-			for (size_t i = 0; i < data->size(); ++i)
-			{
-				out.write(reinterpret_cast<char*>(&(*data)[i].pos.x), sizeof((*data)[i].pos.x));
-				out.write(reinterpret_cast<char*>(&(*data)[i].pos.y), sizeof((*data)[i].pos.y));
-				out.write(reinterpret_cast<char*>(&(*data)[i].vel.x), sizeof((*data)[i].vel.x));
-				out.write(reinterpret_cast<char*>(&(*data)[i].pos.y), sizeof((*data)[i].pos.y));
-			}
+			SavePosVel();
 			acc -= this->GetDtime();
-			++numRecords;
 		}
+	}
+	void ViewAndRecord::SavePosVel()
+	{
+		for (size_t i = 0; i < data->size(); ++i)
+		{
+			out.write(reinterpret_cast<char*>(&(*data)[i].pos.x), sizeof((*data)[i].pos.x));
+			out.write(reinterpret_cast<char*>(&(*data)[i].pos.y), sizeof((*data)[i].pos.y));
+			out.write(reinterpret_cast<char*>(&(*data)[i].vel.x), sizeof((*data)[i].vel.x));
+			out.write(reinterpret_cast<char*>(&(*data)[i].vel.y), sizeof((*data)[i].vel.y));
+		}
+		++numRecords;
 	}
 }

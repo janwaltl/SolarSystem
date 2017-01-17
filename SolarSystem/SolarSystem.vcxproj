@@ -176,6 +176,7 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Parsers\FormattedFileParser.cpp" />
     <ClCompile Include="Source\Parsers\ReplayerParser.cpp" />
+    <ClCompile Include="Source\SimMethods\ReplayerMethod.cpp" />
     <ClCompile Include="Source\SimMethods\RK4.cpp" />
     <ClCompile Include="Source\SimMethods\SemiImplicitEuler.cpp" />
     <ClCompile Include="Source\Simulation.cpp" />
