@@ -2,12 +2,13 @@
 #include "ViewAndRecord.h"
 #include "Source/Exception.h"
 
+
 namespace solar
 {
-	ViewAndRecord::ViewAndRecord(const std::string& outFileName, std::unique_ptr<Viewer> viewer) :
+	ViewAndRecord::ViewAndRecord(const std::string& outFileName, viewer_p viewer) :
 		outFile(outFileName), viewer(std::move(viewer))
 	{
-		assert(viewer);
+		assert(this->viewer);
 	}
 
 	ViewAndRecord::~ViewAndRecord()
@@ -30,6 +31,8 @@ namespace solar
 		//Because viewer has not been linked to simulation, but this class(also a viewer) has been.
 		LinkUnitAndLinkedUnit(*this, *viewer);
 		viewer->Prepare();
+
+		prevTime = this->GetRunTime();
 	}
 	void ViewAndRecord::operator()()
 	{
@@ -69,13 +72,22 @@ namespace solar
 	void ViewAndRecord::Record()
 	{
 		assert(out.is_open());
-		for (size_t i = 0; i < data->size(); ++i)
+
+		auto now = this->GetRunTime();
+		acc += now - prevTime;
+		prevTime = now;
+		//Make record for each DTime tick
+		while (acc > this->GetDtime())
 		{
-			out.write(reinterpret_cast<char*>(&(*data)[i].pos.x), sizeof((*data)[i].pos.x));
-			out.write(reinterpret_cast<char*>(&(*data)[i].pos.y), sizeof((*data)[i].pos.y));
-			out.write(reinterpret_cast<char*>(&(*data)[i].vel.x), sizeof((*data)[i].vel.x));
-			out.write(reinterpret_cast<char*>(&(*data)[i].pos.y), sizeof((*data)[i].pos.y));
+			for (size_t i = 0; i < data->size(); ++i)
+			{
+				out.write(reinterpret_cast<char*>(&(*data)[i].pos.x), sizeof((*data)[i].pos.x));
+				out.write(reinterpret_cast<char*>(&(*data)[i].pos.y), sizeof((*data)[i].pos.y));
+				out.write(reinterpret_cast<char*>(&(*data)[i].vel.x), sizeof((*data)[i].vel.x));
+				out.write(reinterpret_cast<char*>(&(*data)[i].pos.y), sizeof((*data)[i].pos.y));
+			}
+			acc -= this->GetDtime();
+			++numRecords;
 		}
-		++numRecords;
 	}
 }

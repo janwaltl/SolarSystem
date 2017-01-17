@@ -7,6 +7,8 @@
 #include "SimMethods/RK4.h"
 #include "SimMethods/SemiImplicitEuler.h"
 #include "Exception.h"
+
+#include "RecordedSimulation.h"
 int main()
 {
 	using namespace solar;
@@ -19,11 +21,17 @@ int main()
 			auto parser = std::make_unique<FormattedFileParser>("vstup.txt");
 			auto viewer = std::make_unique<IMGuiViewer>(1200, 700, "Title");
 			auto method = std::make_unique<RK4>();
-
+			
 			Simulation sim(std::move(parser), std::move(method), std::move(viewer));
 			//Start with timeStep of 10ms, speed it up 100 times and pass 10ms*180 000=30min dTime
 			// Thus effectively running 3000min simTime for each 10ms realTime = 208days per second
 			sim.Start(10ms, 50, 180'000, 300s);
+
+			///Recorded simulation
+			/*RecordedSimulation recSim(std::move(parser), std::move(method), std::move(viewer),
+			"out.replay");
+			recSim.Start(10ms, 1, 180'000, 300s);*/
+
 			//std::cin.get();
 			//std::cin.get();
 		}

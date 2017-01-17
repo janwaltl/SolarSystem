@@ -200,6 +200,7 @@
     <ClInclude Include="Source\Math\Vec4.h" />
     <ClInclude Include="Source\Parsers\FormattedFileParser.h" />
     <ClInclude Include="Source\Parsers\ReplayerParser.h" />
+    <ClInclude Include="Source\RecordedSimulation.h" />
     <ClInclude Include="Source\SimMethods\ReplayerMethod.h" />
     <ClInclude Include="Source\SimMethods\RK4.h" />
     <ClInclude Include="Source\SimMethods\SemiImplicitEuler.h" />

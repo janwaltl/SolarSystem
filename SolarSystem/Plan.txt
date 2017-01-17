@@ -1,11 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Refactoring:
-	Replaced templates in ViewAndRecord class with pointers and virtual calls.
-		- Won't be much slower, but allows easier implementation of RecordedSimulation.
-			- Because viewer still can be chosen at run-time.
-	Fixed few errors in its implementation.
-	Add LinkUnitAndLinkedUnit - allows to share internal sim pointer.
-		- To allow nested viewers, but still somewhat hide sim itself.
+Timed recording = Makes record for each DTime tick.
+
+Added RecordedSimulation wrapper class to record simulation more easily.
 
 ========================================IMPLEMENTING PLAN========================================
 Next:
