@@ -47,8 +47,13 @@ namespace solar
 		this->SetRawMultiplier(1);
 
 		in.seekg(sizeof(uint32_t), std::ios::cur);//Skip numRecords
+
 		uint32_t numUnits = 0;
 		in.read(reinterpret_cast<char*>(&numUnits), sizeof(numUnits));
+
+		in.seekg(sizeof(uint32_t), std::ios::cur);//Skip byteOffset
+
+
 		simData_t data(numUnits, Unit());
 
 		//Read units' properties

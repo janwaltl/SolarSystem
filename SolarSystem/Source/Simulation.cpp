@@ -114,7 +114,7 @@ namespace solar
 
 	void Simulation::SetDTime(double newDT)
 	{
-		dtime = std::chrono::duration<long long,std::nano>(static_cast<long long>(newDT));
+		dtime = std::chrono::duration<long long,std::nano>(static_cast<long long>(newDT*std::nano::den));
 	}
 
 	double Simulation::GetRunTime()

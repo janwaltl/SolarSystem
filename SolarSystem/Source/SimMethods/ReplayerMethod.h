@@ -19,6 +19,8 @@ namespace solar
 		std::ifstream in;
 		//Byte offset to first record at time zero
 		uint32_t offset;
+		uint32_t numRecords;
+		uint32_t multiplier;
 	};
 }
 

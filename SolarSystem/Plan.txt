@@ -1,19 +1,12 @@
 =====================================IN THIS COMMIT=====================================
-Plenty of small fixes,tweaks in parser, recording.
+ReplayedMethod is finished.
+Seems to work just fine, even with linear interpolation.
 
-As well as more work on ReplayerMethod.
-	- Not working yet, but there's already plenty in this commit.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Create sim method - test syncing of times, selecting correct entry...
-	- or maybe create wrappers around Simulation - RecordedSimulation and ReplayedSimulation
-
-	Test recording.
-
-	Finish method.
-		- pick correct entry based on simTime
-			- offsets by simTime/tickTime
-	Test viewing.
+	Recording and replaing is working, yay.
+	Work on GUI, and do longer recording to see stability for higher values of SimTime(),
+	 might become unstable and start skipping. In that case, it would need to expose integer counter.
 
 	Make GUI for viewer.
 		- rewind/pause/resume/speed up buttons
