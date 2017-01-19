@@ -9,8 +9,7 @@
 #include "Exception.h"
 
 #include "RecordedSimulation.h"
-#include "Parsers/ReplayerParser.h"
-#include "SimMethods/ReplayerMethod.h"
+#include "ReplayedSimulation.h"
 
 int main()
 {
@@ -36,9 +35,8 @@ int main()
 			recSim.Start(10ms, 1, 180'000, 300s);*/
 
 			///Replayed sim
-			Simulation repSim(std::make_unique<ReplayerParser>("out.replay"),
-					   std::make_unique<ReplayerSimMethod>("out.replay"),
-					   std::move(viewer));
+			ReplayedSimulation repSim("out.replay", std::move(viewer));
+
 			repSim.Start(10ms, 1, 1, 300s);
 			//std::cin.get();
 			//std::cin.get();

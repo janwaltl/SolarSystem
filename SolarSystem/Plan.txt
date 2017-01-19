@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-ReplayedMethod is finished.
-Seems to work just fine, even with linear interpolation.
-
+Added ReplayedSimulation class. Currently uses whatherver viewer has been passed.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Recording and replaing is working, yay.
