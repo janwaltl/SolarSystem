@@ -7,12 +7,12 @@
 #include "IMGuiViewer/Drawers/GUIDrawer.h"
 #include "IMGuiViewer/Drawers/SimDataDrawer.h"
 #include "IMGuiViewer/Drawers/LineTrailsDrawer.h"
-
+#include "IMGuiViewer/OMSARPolicy.h"
 struct GLFWwindow;
 
 namespace solar
 {
-	class IMGuiViewer :public Viewer
+	class IMGuiViewer :public Viewer, public OMSAR
 	{
 	public:
 		// Properties of created window
@@ -24,16 +24,6 @@ namespace solar
 		void Prepare() override final;
 		void operator()() override final;
 
-		double ScaleFactor();
-		void ScaleFactor(double newFactor);
-
-		void Move(const Vec2 newOffset);
-		Vec2 GetOffset();
-		// Zooms enough to see whole solar system
-		// Sets such scale factor, which when applied on all positions, yields positions between <-1,1>
-		void ResetZoom();
-		//
-		double GetAspectRatio();
 		//Gives access to drawer
 		//-used mainly by other drawers(GUI)
 		drawers::LineTrailsDrawer* GetTrailsDrawer();
@@ -44,9 +34,6 @@ namespace solar
 		std::unique_ptr<drawers::GUIDrawer> GUIDrawer;
 		std::unique_ptr<drawers::SimDataDrawer> simDataDrawer;
 		std::unique_ptr<drawers::LineTrailsDrawer> lineTrailsDrawer;
-		double scaleFactor;
-		Vec2 offset;
-		double AR;
 	};
 }
 

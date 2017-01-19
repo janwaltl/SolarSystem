@@ -187,6 +187,7 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\ImGuiBackend.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_draw.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OMSARPolicy.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Error.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_rect_pack.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_textedit.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_truetype.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OMSARPolicy.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Error.h" />

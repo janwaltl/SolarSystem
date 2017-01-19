@@ -1,7 +1,7 @@
 #include "ReplayerMethod.h"
 
 #include "Source/Exception.h"
-#include <iostream>
+
 namespace solar
 {
 	ReplayerSimMethod::ReplayerSimMethod(const std::string & inFileName) :
@@ -70,6 +70,6 @@ namespace solar
 			(*data)[i].vel.y += lambda*posVel[3];
 		}
 
-		std::cout << recordNum << "/" << numRecords << "/" << lambda << std::endl;
+		//std::cout << recordNum << "/" << numRecords << "/" << lambda << std::endl;
 	}
 }

@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Created ReplayerViewer, currently using just IMGuiViewer, so no extra controlls.
-IMGuiViewer needs refactoring.
+Extracted OSMARPolicy from ImGuiViewer
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	REFACTOR IMGUIVIEWER:
