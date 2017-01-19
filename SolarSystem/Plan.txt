@@ -1,8 +1,21 @@
 =====================================IN THIS COMMIT=====================================
-Added ReplayedSimulation class. Currently uses whatherver viewer has been passed.
+Created ReplayerViewer, currently using just IMGuiViewer, so no extra controlls.
+IMGuiViewer needs refactoring.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Recording and replaing is working, yay.
+	REFACTOR IMGUIVIEWER:
+		Break it down:
+			OffsetScaler base class
+			break GUIDrawer into static methods:
+				SimControls - needs just general viewer as argument to operate on
+				Metrics - same 
+				Units' properties - needs units, selectedU, selectedRefSystem, follow
+									- so units,&selU,&selRef as parametres
+									- and follow needs OffsetScaler
+				Visuals - lineDrawer as argument to operate on
+				- will be more task-oriented, but that might just work
+
+	Recording and replaying is working, yay.
 	Work on GUI, and do longer recording to see stability for higher values of SimTime(),
 	 might become unstable and start skipping. In that case, it would need to expose integer counter.
 

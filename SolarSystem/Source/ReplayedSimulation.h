@@ -5,7 +5,7 @@
 #include "Simulation.h"
 #include "Parsers/ReplayerParser.h"
 #include "SimMethods/ReplayerMethod.h"
-
+#include "Viewers/ReplayerViewer.h"
 namespace solar
 {
 	//Replays recorded simulations
@@ -13,10 +13,10 @@ namespace solar
 	{
 	public:
 		//replaFile - name of file containing replay, including path and extension
-		ReplayedSimulation(const std::string& replayFile, viewer_p viewer) :
+		ReplayedSimulation(const std::string& replayFile) :
 			Simulation(std::make_unique<ReplayerParser>(replayFile),
 					   std::make_unique<ReplayerSimMethod>(replayFile),
-					   std::move(viewer))
+					   std::make_unique<ReplayerViewer>())
 		{
 		}
 	};

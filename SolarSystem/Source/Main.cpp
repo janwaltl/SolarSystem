@@ -21,7 +21,7 @@ int main()
 		try
 		{
 			auto parser = std::make_unique<FormattedFileParser>("vstup.txt");
-			auto viewer = std::make_unique<IMGuiViewer>(1200, 700, "Title");
+			//auto viewer = std::make_unique<IMGuiViewer>(1200, 700, "Title");
 			auto method = std::make_unique<RK4>();
 
 			//Simulation sim(std::move(parser), std::move(method), std::move(viewer));
@@ -35,7 +35,7 @@ int main()
 			recSim.Start(10ms, 1, 180'000, 300s);*/
 
 			///Replayed sim
-			ReplayedSimulation repSim("out.replay", std::move(viewer));
+			ReplayedSimulation repSim("out.replay");
 
 			repSim.Start(10ms, 1, 1, 300s);
 			//std::cin.get();
