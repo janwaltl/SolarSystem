@@ -182,6 +182,7 @@
     <ClCompile Include="Source\Simulation.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\MouseControls.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\SimProperties.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\UnitsProperties.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Visuals.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="Source\SimMethods\SimMethod.h" />
     <ClInclude Include="Source\Simulation.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\MouseControls.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\SimProperties.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\UnitsProperties.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Visuals.h" />

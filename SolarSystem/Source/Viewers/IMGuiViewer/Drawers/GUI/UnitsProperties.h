@@ -2,14 +2,13 @@
 #define IMGUIVIEWER_GUI_UNITS_PROPERTIES_HEADER
 
 #include "Source/Common/Common.h"
-#include <Source/Viewers/IMGuiViewer/OMSARPolicy.h>
+
 namespace solar
 {
-	class SystemUnit;
+	class OMSAR;
 
 	namespace gui
 	{
-
 		//Window showing information about simulatedUnits.
 		//Also offers support for following a selected unit if OMSAR is passed
 		//	following = sets such offset to center selectedUnit
@@ -24,8 +23,9 @@ namespace solar
 			// index=0 is center system, index>0 gets simData(index-1) unit's name
 			// Helper functions for combo box with reference units' names
 			static bool RefUnitNameGetter(void* data, int index, const char** result);
-
+			// Sets such offset to center selectedUnit on the screen
 			void Follow(const simData_t& data, OMSAR& follow);
+
 			//Name of center reference system
 			constexpr static char* centerSystem = "(0,0) coordinates";
 			//Unit for (0,0) coordinates , created for convience and simplicity

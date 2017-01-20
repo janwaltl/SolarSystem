@@ -97,6 +97,9 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\UnitsProperties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\MouseControls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Simulation.h">
@@ -220,6 +223,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\UnitsProperties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\MouseControls.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

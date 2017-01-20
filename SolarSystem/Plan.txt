@@ -1,7 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Extracted UnitsProperties.
-	- Remains a class, because it needs state.
-Zoomming, Dragging might not work correctly for now.
+Extracted MouseControls.
+UnitsPropertis are now drawn in window.
+GUIDrawer is now just a clean manager.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	REFACTOR IMGUIVIEWER:

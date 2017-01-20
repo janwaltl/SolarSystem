@@ -21,9 +21,9 @@ namespace solar
 			// Control viewing of simulation - moving(following) and zooming
 			void ViewControl();
 			// Zooms in and out using wheel mouse button
-			void ZoomControl();
+			//void ZoomControl();
 			// Manually control position of the simulation
-			void ManualControls();
+			//void ManualControls();
 
 			// Window with simulation's controls
 			void ControlsWin();
