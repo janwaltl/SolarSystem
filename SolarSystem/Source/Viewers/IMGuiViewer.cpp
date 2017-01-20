@@ -11,7 +11,7 @@ namespace solar
 	void IMGuiViewer::Prepare()
 	{
 		simDataDrawer = std::make_unique<drawers::SimDataDrawer>(this->AspectRatio());
-		GUIDrawer = std::make_unique<drawers::GUIDrawer>(this, data);
+		GUIDrawer = std::make_unique<drawers::GUIDrawer>();
 		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(data->size(), this->AspectRatio());
 
 		ResetZoom(*data, 0.8);
@@ -25,7 +25,7 @@ namespace solar
 		// Process GUI, then render Units, THEN render GUI.
 		// So GUI is rendered over the Units, but processed before them to be able to set correct scaleFactor, offset
 		imguiBackend.NewFrame();
-		GUIDrawer->Draw();
+		GUIDrawer->Draw(*data, *this);
 		simDataDrawer->Draw(*data, ScaleFactor(), GetOffset());
 		lineTrailsDrawer->Draw(*data, ScaleFactor(), GetOffset());
 		imguiBackend.Render();

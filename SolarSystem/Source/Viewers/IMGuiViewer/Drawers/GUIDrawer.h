@@ -15,25 +15,8 @@ namespace solar
 		class GUIDrawer
 		{
 		public:
-			GUIDrawer(IMGuiViewer* parent, simData_t* data);
-			void Draw();
+			void Draw(simData_t& data, IMGuiViewer& viewer);
 		private:
-			// Control viewing of simulation - moving(following) and zooming
-			void ViewControl();
-			// Zooms in and out using wheel mouse button
-			//void ZoomControl();
-			// Manually control position of the simulation
-			//void ManualControls();
-
-			// Window with simulation's controls
-			void ControlsWin();
-
-
-			// Translating vectors for ManualControls
-			Vec2 offset, drag;
-			// Whether an unit is being followed
-			bool follow;
-			
 			gui::UnitsViewer unitsViewer;
 
 			simData_t* simData;

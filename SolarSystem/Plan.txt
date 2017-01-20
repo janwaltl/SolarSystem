@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Extracted MouseControls.
-UnitsPropertis are now drawn in window.
-GUIDrawer is now just a clean manager.
+Final cleanup of GUIDrawer.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	REFACTOR IMGUIVIEWER:
