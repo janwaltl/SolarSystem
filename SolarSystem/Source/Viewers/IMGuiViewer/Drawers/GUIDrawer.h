@@ -32,8 +32,6 @@ namespace solar
 			void SpeedControl();
 			void EditRawMultPopUp();
 			void EditDTMultPopUp();
-			// Shows dTime, frameTime, simTime and other statistics of the simulation
-			void SimMetrics();
 			// Shows list of all units and their properties
 			void UnitsViewer();
 

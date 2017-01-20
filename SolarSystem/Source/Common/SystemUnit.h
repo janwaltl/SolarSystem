@@ -23,17 +23,17 @@ namespace solar
 		bool IsRunning();
 		bool IsPaused();
 		//Returns deltaTime in seconds
-		double GetDtime();
+		double GetDtime() const;
 		void SetDTime(double newDT);
 		//Returns elapsed realTime in seconds
-		double GetRunTime();
+		double GetRunTime() const;
 		//Returns elapsed simTime in seconds
-		double GetSimTime();
+		double GetSimTime() const;
 		//Returns last's frame time
-		double GetFrameTime();
+		double GetFrameTime() const;
 
-		size_t GetDTMultiplier();
-		size_t GetRawMultiplier();
+		size_t GetDTMultiplier() const;
+		size_t GetRawMultiplier() const;
 
 		void SetRawMultiplier(size_t newRawMult);
 		void SetDTMultiplier(size_t newDTMult);

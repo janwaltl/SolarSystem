@@ -40,18 +40,18 @@ namespace solar
 		bool IsPaused();
 		bool IsRunnig();
 		//Returns deltaTime in seconds
-		double GetDtime();
+		double GetDtime() const;
 		void SetDTime(double newDT);
 		//Returns elapsed realTime in seconds
-		double GetRunTime();
+		double GetRunTime() const;
 		//Returns elapsed simTime in seconds
 		//Does NOT work in NotTimed Start
-		double GetSimTime();
+		double GetSimTime() const;
 		//Returns last's frame time
 		//Does NOT work in NotTimed Start
-		double GetFrameTime();
-		size_t GetRawMultiplier();
-		size_t GetDTMultiplier();
+		double GetFrameTime() const;
+		size_t GetRawMultiplier() const;
+		size_t GetDTMultiplier() const;
 		void SetRawMultiplier(size_t newRawMult);
 		void SetDTMultiplier(size_t newDTMult);
 	private:
@@ -73,7 +73,7 @@ namespace solar
 
 		template<typename Rep, typename Per>
 		//Converts time duration to seconds
-		inline double ToSecs(const std::chrono::duration<Rep, Per>& time)
+		inline static double ToSecs(const std::chrono::duration<Rep, Per>& time)
 		{
 			using type = std::chrono::duration<Rep, Per>;
 			return  time.count() * type::period::num / double(type::period::den);

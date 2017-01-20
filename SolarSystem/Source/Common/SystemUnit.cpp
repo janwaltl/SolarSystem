@@ -9,7 +9,7 @@ namespace solar
 		assert(sim);
 		sim->StopSimulation();
 	}
-	double SystemUnit::GetDtime()
+	double SystemUnit::GetDtime() const
 	{
 		assert(sim);
 		return sim->GetDtime();
@@ -18,25 +18,25 @@ namespace solar
 	{
 		sim->SetDTime(newDT);
 	}
-	double SystemUnit::GetRunTime()
+	double SystemUnit::GetRunTime() const
 	{
 		return sim->GetRunTime();
 	}
-	double SystemUnit::GetSimTime()
+	double SystemUnit::GetSimTime() const
 	{
 		return sim->GetSimTime();
 	}
-	double SystemUnit::GetFrameTime()
+	double SystemUnit::GetFrameTime() const
 	{
 		return sim->GetFrameTime();;
 	}
-	size_t SystemUnit::GetDTMultiplier()
+	size_t SystemUnit::GetDTMultiplier() const
 	{
 		return sim->GetDTMultiplier();
 	}
-	size_t SystemUnit::GetRawMultiplier()
+	size_t SystemUnit::GetRawMultiplier() const
 	{
-		return sim->GetRawMultiplier();;
+		return sim->GetRawMultiplier();
 	}
 	void SystemUnit::SetRawMultiplier(size_t newRawMult)
 	{

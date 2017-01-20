@@ -107,7 +107,7 @@ namespace solar
 		return state == running;
 	}
 
-	double Simulation::GetDtime()
+	double Simulation::GetDtime() const
 	{
 		return ToSecs(dtime);
 	}
@@ -117,27 +117,27 @@ namespace solar
 		dtime = std::chrono::duration<long long,std::nano>(static_cast<long long>(newDT*std::nano::den));
 	}
 
-	double Simulation::GetRunTime()
+	double Simulation::GetRunTime() const
 	{
 		return ToSecs(runTime);
 	}
 
-	double Simulation::GetSimTime()
+	double Simulation::GetSimTime() const
 	{
 		return ToSecs(simTimePrecise) + ToSecs(simTimeSecs);
 	}
 
-	double Simulation::GetFrameTime()
+	double Simulation::GetFrameTime() const
 	{
 		return ToSecs(frameTime);
 	}
 
-	size_t Simulation::GetRawMultiplier()
+	size_t Simulation::GetRawMultiplier() const
 	{
 		return rawMultiplier;
 	}
 
-	size_t Simulation::GetDTMultiplier()
+	size_t Simulation::GetDTMultiplier() const
 	{
 		return DTMultiplier;
 	}

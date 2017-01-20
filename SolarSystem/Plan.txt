@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Extracted Visuals-LineTrails GUI to GUI/Visuals.
+Extracted SimMetrics from GUIDrawer.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	REFACTOR IMGUIVIEWER:
