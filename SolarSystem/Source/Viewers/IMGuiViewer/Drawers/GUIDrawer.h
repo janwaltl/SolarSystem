@@ -27,11 +27,6 @@ namespace solar
 			void Following();
 			// Window with simulation's controls
 			void ControlsWin();
-			// Controls speed of simulation
-			void SimControls();
-			void SpeedControl();
-			void EditRawMultPopUp();
-			void EditDTMultPopUp();
 			// Shows list of all units and their properties
 			void UnitsViewer();
 

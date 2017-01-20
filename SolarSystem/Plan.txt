@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Extracted SimMetrics from GUIDrawer.
+Extracted SimControls and Metrics.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	REFACTOR IMGUIVIEWER:

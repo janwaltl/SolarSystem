@@ -37,120 +37,15 @@ namespace solar
 		}
 		void GUIDrawer::ControlsWin()
 		{
+			gui::SimProperties(*viewer);
 
-			ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(250, 690), ImGuiSetCond_Once);
-			if (ImGui::Begin("Simulation's controls", NULL, ImGuiWindowFlags_NoCollapse |
+			ImGui::SetNextWindowPos(ImVec2(10, 310), ImGuiSetCond_Once);
+			ImGui::SetNextWindowSize(ImVec2(250, 390), ImGuiSetCond_Once);
+			if (ImGui::Begin("Units' properties", NULL, ImGuiWindowFlags_NoCollapse |
 							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize))
 			{
-				SimControls();
-				ImGui::Separator();
 				UnitsViewer();
 				ImGui::End();
-			}
-		}
-		void GUIDrawer::SimControls()
-		{
-			ImGui::Text("Speed controls:");
-			SpeedControl();
-			ImGui::Separator();
-			ImGui::Text("Metrics:");
-			gui::SimMetrics(*viewer);
-		}
-		void GUIDrawer::SpeedControl()
-		{
-			//Pause/Resume buttons
-
-			ImGui::Text("Simulation is "); ImGui::SameLine();
-			if (viewer->IsRunning())
-			{
-				if (ImGui::StateSmallButtonWithTooltip("Running", "Pause", false))
-					viewer->PauseSimulation();
-			}
-			else
-				if (ImGui::StateSmallButtonWithTooltip("Paused", "Resume", true))
-					viewer->ResumeSimulation();
-
-			//Speed control
-
-			ImGui::Text("Raw speed: ");
-			ImGui::TextTooltipOnHover("Controls speed via rawMultiplier");	ImGui::SameLine();
-
-			if (ImGui::SmallButton("Change##RAW"))
-			{
-				ImGui::OpenPopup(editRawMultPopUp);
-				tempRawSpeed = viewer->GetRawMultiplier();
-			}
-
-			EditRawMultPopUp();//PopUp, because of ImGui immediate architecture must be called even if not opened
-
-			ImGui::Text("DT speed: ");
-			ImGui::TextTooltipOnHover("Controls speed via DTMultiplier");	ImGui::SameLine();
-
-			if (ImGui::SmallButton("Change##DT"))
-			{
-				ImGui::OpenPopup(editDTMultPopUp);
-				tempDTSpeed = viewer->GetDTMultiplier();
-			}
-
-			EditDTMultPopUp();//PopUp, because of ImGui immediate architecture must be called even if not opened
-
-			if (viewer->IsPaused())//Stepping simulation
-			{
-
-				ImGui::Text("Stepping:");
-				ImGui::TextTooltipOnHover("Steps simulation.");	ImGui::SameLine();
-
-				if (ImGui::SmallButton("->##Step"))
-					viewer->StepSimulation();
-				ImGui::TextTooltipOnHover("Makes one step forwards");	ImGui::SameLine();
-			}
-			ImGui::NewLine();
-		}
-
-		void GUIDrawer::EditRawMultPopUp()
-		{
-			if (ImGui::BeginPopup(editRawMultPopUp))
-			{
-				ImGui::InputInt("", &tempRawSpeed, 1, 1000);
-				if (tempRawSpeed < 1)
-					tempRawSpeed = 1;
-				if (static_cast<size_t>(tempRawSpeed) > viewer->GetRawMultiplier())
-					ImGui::TextColored({1.0f,0.0f,0.0f,1.0f}, "High values may result higher frameTimes "
-									   "and higher CPU costs which might result in loss of responsivness(FPS&UPS).");
-
-				if (ImGui::SmallButton("Set"))
-				{
-					viewer->SetRawMultiplier(static_cast<size_t>(tempRawSpeed));
-					ImGui::CloseCurrentPopup();
-				}
-				ImGui::SameLine();
-				if (ImGui::SmallButton("Cancel"))
-					ImGui::CloseCurrentPopup();
-				ImGui::EndPopup();
-			}
-		}
-
-		void GUIDrawer::EditDTMultPopUp()
-		{
-			if (ImGui::BeginPopup(editDTMultPopUp))
-			{
-				ImGui::InputInt("", &tempDTSpeed, 100, 10'000);
-				if (tempDTSpeed < 1)
-					tempDTSpeed = 1;
-
-				if (static_cast<size_t>(tempDTSpeed) > viewer->GetDTMultiplier())
-					ImGui::TextColored({1.0f,0.0f,0.0f,1.0f}, "High values may result in lost of precision "
-									   "and stability of simulated system.");
-				if (ImGui::SmallButton("Set"))
-				{
-					viewer->SetDTMultiplier(static_cast<size_t>(tempDTSpeed));
-					ImGui::CloseCurrentPopup();
-				}
-				ImGui::SameLine();
-				if (ImGui::SmallButton("Cancel"))
-					ImGui::CloseCurrentPopup();
-				ImGui::EndPopup();
 			}
 		}
 

@@ -5,11 +5,16 @@
 namespace solar
 {
 	class SystemUnit;
+
 	namespace gui
 	{
 		//Window containing SimControls and SimMetrics
-		void SimProperties();
-		void SimControls();
+		void SimProperties(SystemUnit& sys);
+
+		//Collection of buttons that allow control over simulation
+		//	- resume/pause/step
+		//	- change raw,DT speed
+		void SimControls(SystemUnit& sys);
 
 		//Two columns that show various information about current simulation
 		void SimMetrics(const SystemUnit& sys);
