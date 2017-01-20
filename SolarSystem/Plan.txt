@@ -1,5 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Extracted SimControls and Metrics.
+Extracted UnitsProperties.
+	- Remains a class, because it needs state.
+Zoomming, Dragging might not work correctly for now.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	REFACTOR IMGUIVIEWER:

@@ -3,6 +3,7 @@
 
 
 #include "Source/Common/Common.h"
+#include "GUI/UnitsProperties.h"
 
 namespace solar
 {
@@ -23,27 +24,17 @@ namespace solar
 			void ZoomControl();
 			// Manually control position of the simulation
 			void ManualControls();
-			// Following a Unit (Planet)
-			void Following();
+
 			// Window with simulation's controls
 			void ControlsWin();
-			// Shows list of all units and their properties
-			void UnitsViewer();
+
 
 			// Translating vectors for ManualControls
 			Vec2 offset, drag;
 			// Whether an unit is being followed
 			bool follow;
-			// Speed control
-			const char* editRawMultPopUp = "EditRawMult";
-			const char* editDTMultPopUp = "EditDTMult";
-			int tempRawSpeed, tempDTSpeed;
-
-			//Currently selected Unit in comboBox
-			int selectedUnit;//-1 if none
-			int selectedRefSystem;//To which reference system are Unit's properties displayed
-								  //Unit that serves as default centered reference system to which are Unit's units displayed
-			Unit centerSystem;
+			
+			gui::UnitsViewer unitsViewer;
 
 			simData_t* simData;
 			IMGuiViewer* viewer;
