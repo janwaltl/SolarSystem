@@ -17,7 +17,7 @@ namespace solar
 		public:
 			void Draw(simData_t& data, IMGuiViewer& viewer);
 		private:
-			gui::UnitsViewer unitsViewer;
+			gui::UnitsProperties unitsProps;
 
 			simData_t* simData;
 			IMGuiViewer* viewer;

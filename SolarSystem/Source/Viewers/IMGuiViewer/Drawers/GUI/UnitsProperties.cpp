@@ -8,9 +8,9 @@ namespace solar
 {
 	namespace gui
 	{
-		const Unit UnitsViewer::centerRefSystem {};
+		const Unit UnitsProperties::centerRefSystem {};
 
-		void UnitsViewer::operator()(simData_t & data, OMSAR * follow)
+		void UnitsProperties::operator()(simData_t & data, OMSAR * follow)
 		{
 			ImGui::SetNextWindowPos(ImVec2(10, 310), ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(ImVec2(250, 390), ImGuiSetCond_Once);
@@ -75,14 +75,14 @@ namespace solar
 				Follow(data, *follow);
 		}
 
-		bool UnitsViewer::UnitNameGetter(void * data, int index, const char ** result)
+		bool UnitsProperties::UnitNameGetter(void * data, int index, const char ** result)
 		{
 			auto& simData = *reinterpret_cast<simData_t*>(data);
 			*result = simData[index].name.c_str();// correct index is ensured by ImGui::Combo call
 			return true;
 		}
 
-		bool UnitsViewer::RefUnitNameGetter(void * data, int index, const char ** result)
+		bool UnitsProperties::RefUnitNameGetter(void * data, int index, const char ** result)
 		{
 			auto& simData = *reinterpret_cast<simData_t*>(data);
 			if (index == 0)
@@ -92,7 +92,7 @@ namespace solar
 			return true;
 		}
 
-		void UnitsViewer::Follow(const simData_t& data, OMSAR & follow)
+		void UnitsProperties::Follow(const simData_t& data, OMSAR & follow)
 		{
 			assert(data.size() > selectedUnit && selectedUnit >= 0);
 

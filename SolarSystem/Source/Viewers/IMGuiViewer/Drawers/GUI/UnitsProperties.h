@@ -12,7 +12,7 @@ namespace solar
 		//Window showing information about simulatedUnits.
 		//Also offers support for following a selected unit if OMSAR is passed
 		//	following = sets such offset to center selectedUnit
-		class UnitsViewer
+		class UnitsProperties
 		{
 		public:
 			void operator()(simData_t& data, OMSAR* follow = nullptr);
