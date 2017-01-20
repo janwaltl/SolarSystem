@@ -36,9 +36,6 @@ namespace solar
 			void SimMetrics();
 			// Shows list of all units and their properties
 			void UnitsViewer();
-			void UnitTrailsWin();
-			//Checkboxes that offer enabling/disabling lineTrails for each unit
-			void LineTrailsSwitching();
 
 			// Translating vectors for ManualControls
 			Vec2 offset, drag;

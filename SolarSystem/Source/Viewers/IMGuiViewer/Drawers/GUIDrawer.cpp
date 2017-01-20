@@ -5,6 +5,8 @@
 #include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
 #include "Source/Viewers/IMGuiViewer.h"
 
+#include "GUI/Visuals.h"
+
 namespace solar
 {
 	namespace drawers
@@ -30,7 +32,8 @@ namespace solar
 			ViewControl();
 
 			ControlsWin();
-			UnitTrailsWin();
+			gui::Visuals(*viewer->GetTrailsDrawer(), *simData);
+
 		}
 		void GUIDrawer::ControlsWin()
 		{
@@ -290,44 +293,6 @@ namespace solar
 				ImGui::TextColored({1.0f,0.0f,0.0f,1.0f}, "No unit is selected.");
 
 
-		}
-		void GUIDrawer::UnitTrailsWin()
-		{
-			ImGui::SetNextWindowPos(ImVec2(1000, 10), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(200, 690), ImGuiSetCond_Once);
-			if (ImGui::Begin("Visuals", NULL, ImGuiWindowFlags_NoCollapse |
-							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize))
-			{
-				if (ImGui::CollapsingHeader("Line Trails:", nullptr, false, true))
-				{
-					LineTrailsSwitching();
-
-					if (ImGui::SmallButton("Enable all"))
-						this->viewer->GetTrailsDrawer()->SwitchAll(true);
-					//ImGui::SameLine();
-					if (ImGui::SmallButton("Disable all"))
-						this->viewer->GetTrailsDrawer()->SwitchAll(false);
-
-					if (ImGui::SmallButton("Reset all"))
-						this->viewer->GetTrailsDrawer()->ClearAll();
-					ImGui::TextTooltipOnHover("Deletes all drawn trails.");
-				}
-
-				ImGui::End();
-			}
-		}
-		void GUIDrawer::LineTrailsSwitching()
-		{
-			if (ImGui::BeginChild("Line Trails", ImVec2(0, 300), false, ImGuiWindowFlags_AlwaysUseWindowPadding))
-			{
-				for (size_t i = 0; i < simData->size(); ++i)
-				{
-					bool checked = this->viewer->GetTrailsDrawer()->IsTrailEnabled(i);
-					if (ImGui::Checkbox((*simData)[i].name.c_str(), &checked))
-						this->viewer->GetTrailsDrawer()->SwitchTrail(i, checked);
-				}
-				ImGui::EndChild();
-			}
 		}
 		void GUIDrawer::ManualControls()
 		{

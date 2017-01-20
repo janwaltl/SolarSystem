@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Cleaned up IMGuiViewer a little bit.
-Planning.
+Extracted Visuals-LineTrails GUI to GUI/Visuals.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	REFACTOR IMGUIVIEWER:

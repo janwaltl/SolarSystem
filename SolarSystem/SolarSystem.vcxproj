@@ -182,6 +182,7 @@
     <ClCompile Include="Source\Simulation.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Visuals.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\LineTrailsDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\SimDataDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\ImGuiBackend.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Source\SimMethods\SimMethod.h" />
     <ClInclude Include="Source\Simulation.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Visuals.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\LineTrailsDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\SimDataDrawer.h" />
