@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Extracted OSMARPolicy from ImGuiViewer
+Cleaned up IMGuiViewer a little bit.
+Planning.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	REFACTOR IMGUIVIEWER:
@@ -13,6 +14,8 @@ Next:
 									- and follow needs OffsetScaler
 				Visuals - lineDrawer as argument to operate on
 				- will be more task-oriented, but that might just work
+		- move these methods into GUI folder, then construct GUIDrawer just using them.
+			Create ReplayGUIDrawer same way. Then just templatize IMGuiViewer by drawer, where GUIDrawer will be default.
 
 	Recording and replaying is working, yay.
 	Work on GUI, and do longer recording to see stability for higher values of SimTime(),

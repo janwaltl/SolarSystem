@@ -8,7 +8,6 @@
 #include "IMGuiViewer/Drawers/SimDataDrawer.h"
 #include "IMGuiViewer/Drawers/LineTrailsDrawer.h"
 #include "IMGuiViewer/OMSARPolicy.h"
-struct GLFWwindow;
 
 namespace solar
 {
@@ -27,7 +26,6 @@ namespace solar
 		//Gives access to drawer
 		//-used mainly by other drawers(GUI)
 		drawers::LineTrailsDrawer* GetTrailsDrawer();
-
 	private:
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT

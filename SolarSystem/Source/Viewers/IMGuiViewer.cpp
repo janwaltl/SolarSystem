@@ -1,10 +1,5 @@
 #include "IMGuiViewer.h"
 
-#include <GLFW/glfw3.h>
-#include <algorithm>
-
-#include "IMGuiViewer/OpenGLBackEnd.h"
-
 namespace solar
 {
 	IMGuiViewer::IMGuiViewer(size_t width, size_t height, const std::string& title) :
@@ -18,18 +13,14 @@ namespace solar
 		simDataDrawer = std::make_unique<drawers::SimDataDrawer>(this->AspectRatio());
 		GUIDrawer = std::make_unique<drawers::GUIDrawer>(this, data);
 		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(data->size(), this->AspectRatio());
+
 		ResetZoom(*data, 0.8);
 	}
 
 	void IMGuiViewer::operator()()
 	{
-		if (glfwWindowShouldClose(openGL.GetWin()))
+		if (openGL.NewFrame())
 			StopSimulation();
-		glfwSwapBuffers(openGL.GetWin());
-		glfwPollEvents();
-		glClearColor(0.0, 0.0, 0.0, 1.0);
-		glClear(GL_COLOR_BUFFER_BIT);
-
 		// Order dependent
 		// Process GUI, then render Units, THEN render GUI.
 		// So GUI is rendered over the Units, but processed before them to be able to set correct scaleFactor, offset

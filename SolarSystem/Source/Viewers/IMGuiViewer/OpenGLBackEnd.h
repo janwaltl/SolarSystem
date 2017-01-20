@@ -19,6 +19,8 @@ namespace solar
 		//Destroys OpenGL context and GLFW window
 		~OpenGLBackend();
 		GLFWwindow* GetWin();
+		//Returns whether window should be closed
+		bool NewFrame();
 	private:
 		static void ErrorCallback(int err, const char* description);
 		//Stores error message
