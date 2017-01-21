@@ -114,7 +114,7 @@ namespace solar
 
 	void Simulation::SetDTime(double newDT)
 	{
-		dtime = std::chrono::duration<long long,std::nano>(static_cast<long long>(newDT*std::nano::den));
+		dtime = std::chrono::nanoseconds(static_cast<long long>(newDT*std::nano::den));
 	}
 
 	double Simulation::GetRunTime() const
@@ -125,6 +125,18 @@ namespace solar
 	double Simulation::GetSimTime() const
 	{
 		return ToSecs(simTimePrecise) + ToSecs(simTimeSecs);
+	}
+
+	void Simulation::SetSimTime(double newSimTime)
+	{
+		using secs_t = decltype(simTimeSecs)::rep;
+		using precise_t = decltype(simTimePrecise)::rep;
+
+		auto secs = static_cast<secs_t>(newSimTime);
+		auto frac = static_cast<precise_t>((newSimTime - secs)*decltype(simTimePrecise)::period::den);
+
+		simTimeSecs = decltype(simTimeSecs)(secs);
+		simTimePrecise = decltype(simTimePrecise)(frac);
 	}
 
 	double Simulation::GetFrameTime() const

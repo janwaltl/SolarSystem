@@ -1,24 +1,16 @@
 =====================================IN THIS COMMIT=====================================
-Parametrized UnitsProperties by window's position and size.
-Added conversion between math vectors and ImGui vectors.
+Got ReplayControls all working up. Maybe even finished.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 
-		Also has ReplayControls	- small window containing info about replay:
-			- pause/resume, rewind. If possible then clickable timeline
-			- numRecords, simTime timeline
-			- general info? - timestamp, description?, filename
-	
 
 	Recording and replaying is working, yay.
-	Work on GUI, and do longer recording to see stability for higher values of SimTime(),
+	Do longer recording to see stability for higher values of SimTime(),
 	 might become unstable and start skipping. In that case, it would need to expose integer counter.
+		- or long double atleast
+	
+	RESOLVE: Simulation is little jumpy on slow speeds. Maybe something with lerp.
 
-	Make GUI for viewer.
-		- rewind/pause/resume/speed up buttons
-		- as well as clickable timeline
-		- even better would be to break down GUIDrawer and reconstruct IMGUIViewer without controls.
-			- Just metrics and info really
 	V. Document it & ship it
 		- Constants instead of magic values
 		- SORT all compile warnings

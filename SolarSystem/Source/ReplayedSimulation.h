@@ -16,7 +16,7 @@ namespace solar
 		ReplayedSimulation(const std::string& replayFile) :
 			Simulation(std::make_unique<ReplayerParser>(replayFile),
 					   std::make_unique<ReplayerSimMethod>(replayFile),
-					   std::make_unique<ReplayerViewer>())
+					   std::make_unique<ReplayerViewer>(replayFile))
 		{
 		}
 	};

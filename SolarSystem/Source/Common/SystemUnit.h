@@ -24,11 +24,14 @@ namespace solar
 		bool IsPaused();
 		//Returns deltaTime in seconds
 		double GetDtime() const;
+		//Sets new delta time in seconds
 		void SetDTime(double newDT);
 		//Returns elapsed realTime in seconds
 		double GetRunTime() const;
 		//Returns elapsed simTime in seconds
 		double GetSimTime() const;
+		//Sets new sim time in seconds
+		void SetSimTime(double newSimTime);
 		//Returns last's frame time
 		double GetFrameTime() const;
 

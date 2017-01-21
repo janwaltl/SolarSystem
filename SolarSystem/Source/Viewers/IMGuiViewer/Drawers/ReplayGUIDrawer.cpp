@@ -1,14 +1,13 @@
 #include "ReplayGUIDrawer.h"
+#include "Source/Viewers/ReplayerViewer.h"
 #include "GUI/Visuals.h"
 #include "GUI/MouseControls.h"
-#include "Source/Viewers/ReplayerViewer.h"
-
 namespace solar
 {
 	namespace drawers
 	{
-		ReplayGUIDrawer::ReplayGUIDrawer() :
-			unitsProps(Vec2(10, 10))
+		ReplayGUIDrawer::ReplayGUIDrawer(const std::string& replayFileName) :
+			unitsProps(Vec2(10, 10)), replayControls(replayFileName)
 		{
 		}
 
@@ -17,6 +16,7 @@ namespace solar
 			gui::GrabControl(viewer);
 			gui::ZoomControl(viewer, viewer.GetFrameTime());
 			unitsProps(data, &viewer);
+			replayControls(viewer);
 			gui::Visuals(lineTrails, data);
 		}
 	}

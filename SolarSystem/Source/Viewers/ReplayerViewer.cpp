@@ -2,15 +2,16 @@
 
 namespace solar
 {
-	ReplayerViewer::ReplayerViewer(size_t width, size_t height, const std::string& title):
-		OMSAR(1.0, width / double(height), Vec2(0.0, 0.0)),
+	ReplayerViewer::ReplayerViewer(const std::string& replayFileName, size_t width, size_t height,
+								   const std::string& title) :
+		OMSAR(1.0, width / double(height), Vec2(0.0, 0.0)), replayFileName(replayFileName),
 		openGL(width, height, title), imguiBackend(openGL.GetWin())
 	{
 	}
 	void ReplayerViewer::Prepare()
 	{
 		simDataDrawer = std::make_unique<drawers::SimDataDrawer>(this->AspectRatio());
-		replayGUIDrawer = std::make_unique<drawers::ReplayGUIDrawer>();
+		replayGUIDrawer = std::make_unique<drawers::ReplayGUIDrawer>(replayFileName);
 		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(data->size(), this->AspectRatio());
 
 		ResetZoom(*data, 0.8);

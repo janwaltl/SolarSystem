@@ -26,6 +26,10 @@ namespace solar
 	{
 		return sim->GetSimTime();
 	}
+	void SystemUnit::SetSimTime(double newSimTime)
+	{
+		sim->SetSimTime(newSimTime);
+	}
 	double SystemUnit::GetFrameTime() const
 	{
 		return sim->GetFrameTime();;

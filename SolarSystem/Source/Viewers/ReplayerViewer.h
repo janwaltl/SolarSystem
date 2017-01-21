@@ -10,15 +10,17 @@
 #include "IMGuiViewer/Drawers/ReplayGUIDrawer.h"
 namespace solar
 {
-	class ReplayerViewer : public Viewer,public OMSAR
+	class ReplayerViewer : public Viewer, public OMSAR
 	{
 	public:
-		ReplayerViewer(size_t width = settings::win::size::x,
+		ReplayerViewer(const std::string& replayFileName,
+					   size_t width = settings::win::size::x,
 					   size_t height = settings::win::size::y,
 					   const std::string& title = settings::win::title);
 		void Prepare() override final;
 		void operator()() override final;
 	private:
+		const std::string replayFileName;
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT
 		std::unique_ptr<drawers::ReplayGUIDrawer> replayGUIDrawer;

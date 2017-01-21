@@ -47,6 +47,8 @@ namespace solar
 		//Returns elapsed simTime in seconds
 		//Does NOT work in NotTimed Start
 		double GetSimTime() const;
+		//Sets new simTime in seconds
+		void SetSimTime(double newSimTime);
 		//Returns last's frame time
 		//Does NOT work in NotTimed Start
 		double GetFrameTime() const;
