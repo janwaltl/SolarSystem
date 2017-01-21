@@ -6,7 +6,6 @@ namespace solar
 		OMSAR(1.0, width / double(height), Vec2(0.0, 0.0)),
 		openGL(width, height, title), imguiBackend(openGL.GetWin())
 	{
-
 	}
 	void ReplayerViewer::Prepare()
 	{

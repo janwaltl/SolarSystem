@@ -14,10 +14,10 @@ namespace solar
 		class ReplayGUIDrawer
 		{
 		public:
+			ReplayGUIDrawer();
 			void Draw(simData_t& data, ReplayerViewer& viewer, drawers::LineTrailsDrawer& lineTrails);
 		private:
 			gui::UnitsProperties unitsProps;
-
 		};
 	}
 }

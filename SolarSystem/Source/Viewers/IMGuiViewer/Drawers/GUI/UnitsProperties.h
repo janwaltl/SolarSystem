@@ -15,6 +15,7 @@ namespace solar
 		class UnitsProperties
 		{
 		public:
+			explicit UnitsProperties(Vec2 winPos = Vec2(10, 310), Vec2 winSize = Vec2(250, 390));
 			void operator()(simData_t& data, OMSAR* follow = nullptr);
 		private:
 			// Returns char* string representing name of the selected Unit by its index in simData vector
@@ -37,6 +38,7 @@ namespace solar
 			int selectedRefUnit {0};
 			//whether the selectedUnit is being followed
 			bool following {false};
+			Vec2 winPos, winSize;
 		};
 
 	}

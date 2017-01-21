@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Updated ReplayerViewer using extracted parts from IMGuiViewer.
+Parametrized UnitsProperties by window's position and size.
+Added conversion between math vectors and ImGui vectors.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 

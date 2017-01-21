@@ -10,15 +10,18 @@ namespace solar
 	{
 		const Unit UnitsProperties::centerRefSystem {};
 
+		UnitsProperties::UnitsProperties(Vec2 winPos, Vec2 winSize) :
+			winPos(winPos), winSize(winSize)
+		{
+		}
+
 		void UnitsProperties::operator()(simData_t & data, OMSAR * follow)
 		{
-			ImGui::SetNextWindowPos(ImVec2(10, 310), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(250, 390), ImGuiSetCond_Once);
+			ImGui::SetNextWindowPos(winPos, ImGuiSetCond_Once);
+			ImGui::SetNextWindowSize(winSize, ImGuiSetCond_Once);
 			if (ImGui::Begin("Units' properties", NULL, ImGuiWindowFlags_NoCollapse |
 							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize))
 			{
-
-
 				if (data.size() > 0)//If there are units
 				{
 					assert(0 <= selectedUnit && selectedUnit < data.size());
