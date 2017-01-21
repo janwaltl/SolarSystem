@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Planning.
-Renamed UnitsViewer to UnitsProperties, in order to not to be confused with ordinary viewers.
+Still more tidying up
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Create ReplayGUIDrawer same way. Then just templatize IMGuiViewer by drawer, where GUIDrawer will be default.

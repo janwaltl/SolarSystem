@@ -22,10 +22,6 @@ namespace solar
 
 		void Prepare() override final;
 		void operator()() override final;
-
-		//Gives access to drawer
-		//-used mainly by other drawers(GUI)
-		drawers::LineTrailsDrawer* GetTrailsDrawer();
 	private:
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT

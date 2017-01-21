@@ -25,16 +25,9 @@ namespace solar
 		// Process GUI, then render Units, THEN render GUI.
 		// So GUI is rendered over the Units, but processed before them to be able to set correct scaleFactor, offset
 		imguiBackend.NewFrame();
-		GUIDrawer->Draw(*data, *this);
+		GUIDrawer->Draw(*data, *this, *lineTrailsDrawer);
 		simDataDrawer->Draw(*data, ScaleFactor(), GetOffset());
 		lineTrailsDrawer->Draw(*data, ScaleFactor(), GetOffset());
 		imguiBackend.Render();
 	}
-
-	drawers::LineTrailsDrawer * IMGuiViewer::GetTrailsDrawer()
-	{
-		assert(lineTrailsDrawer.get());
-		return lineTrailsDrawer.get();
-	}
-
 }
