@@ -1,10 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Still more tidying up
+Updated ReplayerViewer using extracted parts from IMGuiViewer.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Create ReplayGUIDrawer same way. Then just templatize IMGuiViewer by drawer, where GUIDrawer will be default.
-	ReplayGUIDrawer:
-		Has Unit's properties, Visuals.
+
 		Also has ReplayControls	- small window containing info about replay:
 			- pause/resume, rewind. If possible then clickable timeline
 			- numRecords, simTime timeline

@@ -100,6 +100,12 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\MouseControls.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Viewers\ReplayerViewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\ReplayGUIDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Simulation.h">
@@ -226,6 +232,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\MouseControls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\ReplayGUIDrawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

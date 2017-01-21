@@ -187,6 +187,7 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\UnitsProperties.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Visuals.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\LineTrailsDrawer.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\ReplayGUIDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\SimDataDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\ImGuiBackend.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.cpp" />
@@ -197,6 +198,7 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Error.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.cpp" />
+    <ClCompile Include="Source\Viewers\ReplayerViewer.cpp" />
     <ClCompile Include="Source\Viewers\ViewAndRecord.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +227,7 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Visuals.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\LineTrailsDrawer.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\ReplayGUIDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\SimDataDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\ImGuiBackend.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imconfig.h" />
