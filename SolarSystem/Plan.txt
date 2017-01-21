@@ -1,27 +1,35 @@
 =====================================IN THIS COMMIT=====================================
-Got ReplayControls all working up. Maybe even finished.
+Jumpinnes is caused by record being jumpy in the first place.
+	= Should be resolved with recording based on SimTime.
+Does not wrongly interpolate on last record anymore.
+Planning, commenting...
 ========================================IMPLEMENTING PLAN========================================
 Next:
-
+	Base recording on SimTime, not RunTime.
+		- Which also solves 'not taking records while paused' thing.
 
 	Recording and replaying is working, yay.
 	Do longer recording to see stability for higher values of SimTime(),
-	 might become unstable and start skipping. In that case, it would need to expose integer counter.
+	 might become unstable and start skipping. In that case, it would need to expose integer counters.
 		- or long double atleast
 	
 	RESOLVE: Simulation is little jumpy on slow speeds. Maybe something with lerp.
-
+		- something wit changing DTMultiplier
+		
 	V. Document it & ship it
 		- Constants instead of magic values
 		- SORT all compile warnings
+		- go through all files, look for temp comments, includes, anything that is obsolete...
 	VI. OPTIONAL
 		- Names floating near units.(maybe just for the selected one & reference system)
 		- Hustý by bylo zprovoznit multiStep øádu 8,9, udìlat textViewer, kterej všechno uloží do souboru.
 			Nechat to bìžet na stolním PC pøes noc, pak udìlat ReplaySimMethod, který by jen podle simTime èasu nakopíroval
 			správný údaje do simData, ktrý by pak IMGUIViewer v pohodì zobrazoval.
-
 			- By mohlo bejt jako pøíklad v dokumentaci jak je to super rozšíøitelný.
-
+			
+			= Skoro hotovo, až na ten multistep.
+		- Little bit nicer/cleaner GUI.
+			- Positions of windows. Allow different winSizes.
 SystemUnit is starting to have too many forwarding functions. Maybe give direct pointer to sim, but someway restrict
 calling Start.
 ========================================THOUGHTS========================================

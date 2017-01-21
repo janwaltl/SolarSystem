@@ -9,6 +9,7 @@ namespace solar
 
 	namespace gui
 	{
+		//Renders window with that contains controls for replaying a simulation
 		class ReplayControls
 		{
 		public:
@@ -18,18 +19,20 @@ namespace solar
 			void ControlButtons(SystemUnit& sys);
 			void ReplayInfo(SystemUnit& sys);
 			void ProgressBar();
-			//Gets recordNumber based on simulation time
+			//Gets recordNumber based on simulated time
 			uint32_t GetRecordNum(double simTime);
 			void SetSimTimeBasedOnRecordNum(SystemUnit& sys, uint32_t recordNum);
-			
+
 			double dTime;
 			uint32_t numRecords;
 			uint32_t multiplier;
 			uint32_t recordNum;
+			//For ImGui::InputInt
 			int tmpRecordNum;
+			//Controls speed of replaying, multiples of multiplier
 			double speed;
+			//Replay's filename
 			std::string fileName;
-
 		};
 	}
 }

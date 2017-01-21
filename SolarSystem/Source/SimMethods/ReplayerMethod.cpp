@@ -1,7 +1,7 @@
 #include "ReplayerMethod.h"
 
 #include "Source/Exception.h"
-
+//#include <iostream>
 namespace solar
 {
 	ReplayerSimMethod::ReplayerSimMethod(const std::string & inFileName) :
@@ -52,6 +52,10 @@ namespace solar
 
 		double posVel[4];//pos.x,pos.y,vel.x,vel.y
 
+		bool last = numRecords - recordNum == 1;
+		if (last)//Do not interpolate on last record
+			lambda = 0.0;
+
 		for (size_t i = 0; i < data->size(); ++i)
 		{
 			in.read(reinterpret_cast<char*>(posVel), sizeof(posVel));
@@ -60,8 +64,7 @@ namespace solar
 			(*data)[i].vel.x = (1 - lambda)*posVel[2];
 			(*data)[i].vel.y = (1 - lambda)*posVel[3];
 		}
-		bool last = numRecords - recordNum == 1;
-		for (size_t i = 0; i < data->size() && !last; ++i)
+		for (size_t i = 0; !last && i < data->size(); ++i)
 		{
 			in.read(reinterpret_cast<char*>(posVel), sizeof(posVel));
 			(*data)[i].pos.x += lambda*posVel[0];
@@ -70,6 +73,6 @@ namespace solar
 			(*data)[i].vel.y += lambda*posVel[3];
 		}
 
-		//std::cout << recordNum << "/" << numRecords << "/" << lambda << std::endl;
+		//std::cout << recordNum +1<< "/" << numRecords << "\t\t" << lambda << std::endl;
 	}
 }

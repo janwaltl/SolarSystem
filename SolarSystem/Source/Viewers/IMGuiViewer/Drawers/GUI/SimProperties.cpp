@@ -90,7 +90,7 @@ namespace solar
 			else
 				firstOpen = true;
 		}
-		
+
 		void SimProperties(SystemUnit& sys)
 		{
 			ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Once);
@@ -191,7 +191,7 @@ namespace solar
 			runTime -= mins * 60;
 			ImGui::Text("%3.0fm %02.1fs", mins, runTime); ImGui::NextColumn();
 
-			ImGui::Text("Sim-time"); ImGui::NextColumn();
+			ImGui::Text("SimTime"); ImGui::NextColumn();
 			ImGui::TextTooltipOnHover("Amount of time simulated.");
 			auto simTime = sys.GetSimTime();
 			auto years = floor(simTime / 31'536'000);

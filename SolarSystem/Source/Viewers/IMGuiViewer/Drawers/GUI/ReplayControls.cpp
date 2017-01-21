@@ -27,6 +27,7 @@ namespace solar
 			in.read(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));
 			in.close();
 		}
+
 		void ReplayControls::operator()(SystemUnit & sys)
 		{
 			recordNum = GetRecordNum(sys.GetSimTime());
@@ -37,7 +38,7 @@ namespace solar
 							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar))
 			{
 				ImGui::Columns(2, "##ReplayInfo", false);
-				ImGui::SetColumnOffset(1, 500.0f);
+				ImGui::SetColumnOffset(1, 520.0f);//To fit ControlButtons
 				ControlButtons(sys);
 				ImGui::NextColumn();
 				ReplayInfo(sys);
@@ -59,7 +60,7 @@ namespace solar
 				sys.IsPaused() ? sys.ResumeSimulation() : sys.PauseSimulation();
 			ImGui::SameLine();
 
-			if(ImGui::Button("Speed up"))
+			if (ImGui::Button("Speed up"))
 			{
 				speed *= 2.0;
 				sys.SetDTMultiplier(multiplier*speed);
@@ -69,7 +70,9 @@ namespace solar
 			ImGui::Text("Jump To Record:"); ImGui::SameLine();
 			ImGui::PushItemWidth(100);
 			ImGui::InputInt("", &tmpRecordNum); ImGui::SameLine();
-			tmpRecordNum = std::max(1, std::min(tmpRecordNum, (int)numRecords));
+
+			tmpRecordNum = std::max(1, std::min(tmpRecordNum, (int)numRecords));//Clamp the value
+
 			if (ImGui::Button("Jump"))
 				SetSimTimeBasedOnRecordNum(sys, tmpRecordNum);
 			ImGui::PopItemWidth();
@@ -91,7 +94,11 @@ namespace solar
 			uint32_t hours = simTime / 3'600;
 			ImGui::TextColored(whiteCol, "%3iy %3id %3ih", years, days, hours);
 			ImGui::SameLine();
-			ImGui::Text("Speed: %.2fx",speed);
+			ImGui::Text("Speed:"); ImGui::SameLine();
+			if (speed >= 0.99f)//>=1.0
+				ImGui::TextColored(whiteCol, "%.0fx", speed);
+			else
+				ImGui::TextColored(whiteCol, "1/%.0fx", 1.0 / speed);
 		}
 
 		void ReplayControls::ProgressBar()
