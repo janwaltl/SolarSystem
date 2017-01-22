@@ -1,9 +1,11 @@
 =====================================IN THIS COMMIT=====================================
-Better main file.
-Recording is based on SimTime.
+Floating name near selected unit. Can be easily generalized to all units if needed.
+Seems like mouseControl is already corrected for frameTime.
+Indented title's text by little bit more.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Still, exposing integral counting of SimTime seems like a lot cleaner design.
+	Well, stopping replay at the end wouldn't be a terrible idea.
 
 	Do proper command line interface
 		- to atleast allow quick switching between simulating/recording/replaying

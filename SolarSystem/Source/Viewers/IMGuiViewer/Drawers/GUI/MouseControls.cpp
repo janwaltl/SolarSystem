@@ -8,12 +8,12 @@ namespace solar
 {
 	namespace gui
 	{
-		void MouseControl(OMSAR & sys, double frameTime)
+		void MouseControl(OMSAR & sys)
 		{
-			ZoomControl(sys, frameTime);
+			ZoomControl(sys);
 			GrabControl(sys);
 		}
-		void ZoomControl(OMSAR& sys, double frameTime)
+		void ZoomControl(OMSAR& sys)
 		{
 			float currentZoom = static_cast<float>(sys.ScaleFactor());
 
@@ -22,9 +22,8 @@ namespace solar
 			//Zoom based on mouse scrolling this frame
 			//Allow scrolling only in center region, not in the left window
 			//Also zooms faster for already zoomed screen
-
 			if (ImGui::IsMouseHoveringRect({260.0f,0.0f}, {950.0f,620.0f}, false))
-				currentZoom += static_cast<float>(io.MouseWheel * frameTime*currentZoom);
+				currentZoom += static_cast<float>(io.MouseWheel *currentZoom / 30.0f);
 
 			//Clamp between 0.01 and 1000.0f, this works for AU units
 			currentZoom = std::min(1000.0f, std::max(0.01f, currentZoom));
@@ -44,7 +43,7 @@ namespace solar
 				offset = sys.GetOffset();
 			//Only count dragging in the center of the screen(not in side windows)
 			//Also only count dragging longer than 5 pixels 
-			if (ImGui::IsMouseHoveringRect ({260.0f,0.0f}, {950.0f,620.0f}, false) && ImGui::IsMouseDragging(0, 5.0f))
+			if (ImGui::IsMouseHoveringRect({260.0f,0.0f}, {950.0f,620.0f}, false) && ImGui::IsMouseDragging(0, 5.0f))
 			{
 				ImGuiIO& io = ImGui::GetIO();
 				auto val = ImGui::GetMouseDragDelta();

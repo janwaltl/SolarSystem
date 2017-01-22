@@ -15,7 +15,7 @@
 #include "RecordedSimulation.h"
 #include "ReplayedSimulation.h"
 
-#define RECORD
+#define REPLAY
 
 int main()
 {

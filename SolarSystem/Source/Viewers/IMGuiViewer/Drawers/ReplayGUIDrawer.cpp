@@ -14,7 +14,7 @@ namespace solar
 		void ReplayGUIDrawer::Draw(simData_t & data, ReplayerViewer & viewer, drawers::LineTrailsDrawer & lineTrails)
 		{
 			gui::GrabControl(viewer);
-			gui::ZoomControl(viewer, viewer.GetFrameTime());
+			gui::ZoomControl(viewer);
 			unitsProps(data, &viewer);
 			replayControls(viewer, lineTrails);
 			gui::Visuals(lineTrails, data);

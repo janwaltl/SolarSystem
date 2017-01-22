@@ -9,9 +9,9 @@ namespace solar
 	namespace gui
 	{
 		//Zoom & Grab controls
-		void MouseControl(OMSAR& sys, double frameTime);
+		void MouseControl(OMSAR& sys);
 		//Zooms the screen base on mouse's wheel scrolling
-		void ZoomControl(OMSAR& sys, double frameTime);
+		void ZoomControl(OMSAR& sys);
 		//Drags the screen via mouse
 		void GrabControl(OMSAR& sys);
 	}

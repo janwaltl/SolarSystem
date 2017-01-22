@@ -3,7 +3,7 @@
 #include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
 #include "Source/Viewers/IMGuiViewer/OMSARPolicy.h"
 
-
+#include <iostream>
 namespace solar
 {
 	namespace gui
@@ -77,6 +77,34 @@ namespace solar
 
 			if (following && follow)
 				Follow(data, *follow);
+
+			SelectedUnitTextLabel(data, follow);
+		}
+
+		void UnitsProperties::SelectedUnitTextLabel(solar::simData_t & data, solar::OMSAR * follow)
+		{
+			//Normalized position on the screen
+			auto tmp = data[selectedUnit].pos*follow->ScaleFactor() + follow->GetOffset();
+			tmp.x *= 600;
+			tmp.y *= -350 * follow->AspectRatio();
+			tmp += Vec2 {600,350 - 6};//Half window's size and 6px higher
+			//tmp is now position in pixels
+
+			ImGui::SetNextWindowPos(tmp, ImGuiSetCond_Always);
+			auto flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar
+				| ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoInputs;
+
+			auto style = ImGui::GetStyle();
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, {10,0});
+			ImGui::PushStyleColor(ImGuiCol_WindowBg, {0.0,0.0,0.0,0.0});
+
+			if (ImGui::Begin("Planet", nullptr, flags))
+			{
+				ImGui::TextColored({1.0,1.0,1.0,1.0}, data[selectedUnit].name.c_str());
+				ImGui::End();
+			}
+			ImGui::PopStyleColor();
+			ImGui::PopStyleVar();
 		}
 
 		bool UnitsProperties::UnitNameGetter(void * data, int index, const char ** result)
