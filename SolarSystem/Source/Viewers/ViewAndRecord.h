@@ -28,8 +28,8 @@ namespace solar
 		std::ofstream out;
 
 		uint32_t numRecords;
-		//In seconds, used to keep track of time, to make timed records
-		double prevTime, acc;
+		double simTime;
+		double timeStep;
 	};
 }
 #endif

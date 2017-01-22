@@ -1,17 +1,12 @@
 =====================================IN THIS COMMIT=====================================
-Added EmptyViewer.
-Reset lineTrails on jumping.
-Little rearranging of GUI.
+Better main file.
+Recording is based on SimTime.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Base recording on SimTime, not RunTime.
-		- Which also solves 'not taking records while paused' thing.
+	Still, exposing integral counting of SimTime seems like a lot cleaner design.
 
-	Recording and replaying is working, yay.
-	Do longer recording to see stability for higher values of SimTime(),
-	 might become unstable and start skipping. In that case, it would need to expose integer counters.
-		- or long double atleast
-	
+	Do proper command line interface
+		- to atleast allow quick switching between simulating/recording/replaying
 	V. Document it & ship it
 		- Constants instead of magic values
 		- SORT all compile warnings

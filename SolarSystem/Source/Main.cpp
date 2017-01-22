@@ -15,6 +15,8 @@
 #include "RecordedSimulation.h"
 #include "ReplayedSimulation.h"
 
+#define RECORD
+
 int main()
 {
 	using namespace solar;
@@ -24,24 +26,24 @@ int main()
 	{
 		try
 		{
-			auto parser = std::make_unique<FormattedFileParser>("vstup.txt");
-			//auto viewer = std::make_unique<IMGuiViewer>(1200, 700, "Title");
-			auto method = std::make_unique<RK4>();
+#ifdef SIMULATE
+			Simulation sim(std::make_unique<FormattedFileParser>("vstup.txt"),
+						   std::make_unique<IMGuiViewer>(1200, 700, "Title"),
+						   std::make_unique<RK4>());
+			sim.Start(10ms, 50, 180'000, 300s);
+#endif
+#ifdef RECORD
+			RecordedSimulation recSim(std::make_unique<FormattedFileParser>("vstup.txt"),
+									  std::make_unique<RK4>(),
+									  std::make_unique<EmptyViewer>(),
+									  "out.replay");
 
-			//Simulation sim(std::move(parser), std::move(method), std::move(viewer));
-			//Start with timeStep of 10ms, speed it up 100 times and pass 10ms*180 000=30min dTime
-			// Thus effectively running 3000min simTime for each 10ms realTime = 208days per second
-			//sim.Start(10ms, 50, 180'000, 300s);
-
-			///Recorded simulation
-			/*RecordedSimulation recSim(std::move(parser), std::move(method),
-									  std::make_unique<EmptyViewer>(), "out.replay");
-			recSim.Start(10ms, 10, 180'000, 300s);*/
-
-			///Replayed sim
+			recSim.Start(10ms, 100, 180'000, 300s);
+#endif
+#ifdef REPLAY
 			ReplayedSimulation repSim("out.replay");
 			repSim.Start(10ms, 1, 1, 300s);
-
+#endif
 			//std::cin.get();
 			//std::cin.get();
 		}

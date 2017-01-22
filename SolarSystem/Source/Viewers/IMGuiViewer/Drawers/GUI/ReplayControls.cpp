@@ -40,7 +40,7 @@ namespace solar
 			{
 				ImGui::Columns(2, "##ReplayInfo", false);
 				ImGui::SetColumnOffset(1, 520.0f);//To fit ControlButtons
-				ControlButtons(sys,lineTrails);
+				ControlButtons(sys, lineTrails);
 				ImGui::NextColumn();
 				ReplayInfo(sys);
 				ImGui::Columns(1);

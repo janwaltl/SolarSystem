@@ -37,7 +37,7 @@ namespace solar
 		LinkUnitAndLinkedUnit(*this, *viewer);
 		viewer->Prepare();
 
-		prevTime = this->GetRunTime();
+		simTime = this->GetSimTime();
 	}
 	void ViewAndRecord::operator()()
 	{
@@ -54,6 +54,7 @@ namespace solar
 		double deltaT = this->GetDtime();
 		out.write(reinterpret_cast<char*>(&deltaT), sizeof(deltaT));
 		uint32_t multiplier = this->GetDTMultiplier()*this->GetRawMultiplier();
+		timeStep = deltaT*multiplier;
 		out.write(reinterpret_cast<char*>(&multiplier), sizeof(multiplier));
 		numRecords = 0;
 		out.write(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));
@@ -88,16 +89,14 @@ namespace solar
 	void ViewAndRecord::Record()
 	{
 		assert(out.is_open());
-
-		auto now = this->GetRunTime();
-		acc += now - prevTime;
-		prevTime = now;
-		//Make record for each DTime tick
-		while (acc > this->GetDtime())
+		//For each Dtime there should be simulated multiplier*dTime time.
+		auto curSimTime = this->GetSimTime();
+		while (curSimTime - timeStep > simTime)
 		{
 			SavePosVel();
-			acc -= this->GetDtime();
+			simTime += timeStep;
 		}
+
 	}
 	void ViewAndRecord::SavePosVel()
 	{
