@@ -243,6 +243,9 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\ReplayControls.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Viewers\EmptyViewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\LICENSE" />

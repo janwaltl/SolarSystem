@@ -2,10 +2,14 @@
 #include <iostream>
 
 #include "Simulation.h"
-#include "Viewers/IMGuiViewer.h"
 #include "Parsers/FormattedFileParser.h"
+
 #include "SimMethods/RK4.h"
 #include "SimMethods/SemiImplicitEuler.h"
+
+#include "Viewers/IMGuiViewer.h"
+#include "Viewers/EmptyViewer.h"
+
 #include "Exception.h"
 
 #include "RecordedSimulation.h"
@@ -30,14 +34,14 @@ int main()
 			//sim.Start(10ms, 50, 180'000, 300s);
 
 			///Recorded simulation
-			/*RecordedSimulation recSim(std::move(parser), std::move(method), std::move(viewer),
-									  "out.replay");
-			recSim.Start(10ms, 1, 180'000, 300s);*/
+			/*RecordedSimulation recSim(std::move(parser), std::move(method),
+									  std::make_unique<EmptyViewer>(), "out.replay");
+			recSim.Start(10ms, 10, 180'000, 300s);*/
 
 			///Replayed sim
 			ReplayedSimulation repSim("out.replay");
-
 			repSim.Start(10ms, 1, 1, 300s);
+
 			//std::cin.get();
 			//std::cin.get();
 		}

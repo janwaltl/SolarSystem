@@ -23,7 +23,7 @@ namespace solar
 			//Allow scrolling only in center region, not in the left window
 			//Also zooms faster for already zoomed screen
 
-			if (ImGui::IsMouseHoveringRect({260.0f,0.0f}, {1000.0f,700.0f}, false))
+			if (ImGui::IsMouseHoveringRect({260.0f,0.0f}, {950.0f,620.0f}, false))
 				currentZoom += static_cast<float>(io.MouseWheel * frameTime*currentZoom);
 
 			//Clamp between 0.01 and 1000.0f, this works for AU units
@@ -44,7 +44,7 @@ namespace solar
 				offset = sys.GetOffset();
 			//Only count dragging in the center of the screen(not in side windows)
 			//Also only count dragging longer than 5 pixels 
-			if (ImGui::IsMouseHoveringRect({260.0f,0.0f}, {1000.0f,700.0f}, false) && ImGui::IsMouseDragging(0, 5.0f))
+			if (ImGui::IsMouseHoveringRect ({260.0f,0.0f}, {950.0f,620.0f}, false) && ImGui::IsMouseDragging(0, 5.0f))
 			{
 				ImGuiIO& io = ImGui::GetIO();
 				auto val = ImGui::GetMouseDragDelta();

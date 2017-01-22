@@ -1,0 +1,16 @@
+#ifndef VIEWERS_EMPTY_VIEWER_HEADER
+#define VIEWERS_EMPTY_VIEWER_HEADER
+
+
+#include "Viewer.h"
+
+namespace solar
+{
+	//Do nothing
+	class EmptyViewer :public Viewer
+	{
+	public:
+		void operator()() override final {}
+	};
+}
+#endif

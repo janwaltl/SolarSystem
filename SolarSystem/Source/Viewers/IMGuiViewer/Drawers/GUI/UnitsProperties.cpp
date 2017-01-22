@@ -41,9 +41,6 @@ namespace solar
 					auto& unit = data[selectedUnit];
 
 					ImGui::Text("Properties:");
-					if (ImGui::SmallButton(!following ? "Follow" : "Cancel")) following = !following;
-					ImGui::TextTooltipOnHover(!following ? "Follow selected unit around" : "Stop following selected unit");
-
 					ImGui::Columns(2, "##UnitsCol", false);
 					ImGui::SetColumnOffset(1, 80.0f);
 
@@ -68,6 +65,10 @@ namespace solar
 					ImGui::Text("Mass:"); ImGui::NextColumn();
 					ImGui::Text(" %1.4e kg", unit.mass * physicsUnits::SMtoKG); ImGui::NextColumn();
 					ImGui::Columns(1);
+					ImGui::NewLine();
+					if (ImGui::Button(!following ? "Follow selected unit" : "Cancel following"))
+						following = !following;
+
 				}
 				else
 					ImGui::TextColored({1.0,0.0,0.0,1.0}, "There are no units.");

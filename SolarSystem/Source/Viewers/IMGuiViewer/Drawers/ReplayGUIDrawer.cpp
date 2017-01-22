@@ -16,7 +16,7 @@ namespace solar
 			gui::GrabControl(viewer);
 			gui::ZoomControl(viewer, viewer.GetFrameTime());
 			unitsProps(data, &viewer);
-			replayControls(viewer);
+			replayControls(viewer, lineTrails);
 			gui::Visuals(lineTrails, data);
 		}
 	}

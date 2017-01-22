@@ -2,7 +2,7 @@
 #include "ViewAndRecord.h"
 #include "Source/Exception.h"
 
-
+#include <iostream>
 namespace solar
 {
 	ViewAndRecord::ViewAndRecord(const std::string& outFileName, viewer_p viewer) :
@@ -18,6 +18,9 @@ namespace solar
 		out.seekp(14);//Offset in header(see fileFormat)
 		out.write(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));
 		out.close();
+		std::cout << "Created replay: " << outFile << "\n" << "Total run time: " << GetRunTime() << "s\n";
+		std::cout << "Total sim time: " << GetSimTime() << "s\n";
+		std::cout << "Total number of records: " << numRecords << "\n";
 	}
 	void ViewAndRecord::Prepare()
 	{

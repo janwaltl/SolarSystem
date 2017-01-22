@@ -1,8 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Jumpinnes is caused by record being jumpy in the first place.
-	= Should be resolved with recording based on SimTime.
-Does not wrongly interpolate on last record anymore.
-Planning, commenting...
+Added EmptyViewer.
+Reset lineTrails on jumping.
+Little rearranging of GUI.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Base recording on SimTime, not RunTime.
@@ -13,9 +12,6 @@ Next:
 	 might become unstable and start skipping. In that case, it would need to expose integer counters.
 		- or long double atleast
 	
-	RESOLVE: Simulation is little jumpy on slow speeds. Maybe something with lerp.
-		- something wit changing DTMultiplier
-		
 	V. Document it & ship it
 		- Constants instead of magic values
 		- SORT all compile warnings

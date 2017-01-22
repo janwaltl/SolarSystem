@@ -1,10 +1,11 @@
 #include "ReplayControls.h"
 
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
-#include "Source/Common/SystemUnit.h"
 #include <fstream>
-#include "Source/Exception.h"
 #include <algorithm>
+#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
+#include "Source/Viewers/IMGuiViewer/Drawers/LineTrailsDrawer.h"
+#include "Source/Common/SystemUnit.h"
+#include "Source/Exception.h"
 
 namespace solar
 {
@@ -28,18 +29,18 @@ namespace solar
 			in.close();
 		}
 
-		void ReplayControls::operator()(SystemUnit & sys)
+		void ReplayControls::operator()(SystemUnit & sys, drawers::LineTrailsDrawer& lineTrails)
 		{
 			recordNum = GetRecordNum(sys.GetSimTime());
 
 			ImGui::SetNextWindowPos(ImVec2(10, 620), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(1000, 80), ImGuiSetCond_Once);
+			ImGui::SetNextWindowSize(ImVec2(1200, 80), ImGuiSetCond_Once);
 			if (ImGui::Begin("Replay controls", NULL, ImGuiWindowFlags_NoCollapse |
 							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar))
 			{
 				ImGui::Columns(2, "##ReplayInfo", false);
 				ImGui::SetColumnOffset(1, 520.0f);//To fit ControlButtons
-				ControlButtons(sys);
+				ControlButtons(sys,lineTrails);
 				ImGui::NextColumn();
 				ReplayInfo(sys);
 				ImGui::Columns(1);
@@ -47,8 +48,14 @@ namespace solar
 				ImGui::End();
 			}
 		}
-		void ReplayControls::ControlButtons(SystemUnit & sys)
+		void ReplayControls::ControlButtons(SystemUnit & sys, drawers::LineTrailsDrawer& lineTrails)
 		{
+			if (cleanTrails)
+			{
+				lineTrails.ClearAll();
+				cleanTrails = false;
+			}
+
 			if (ImGui::Button("Slow down"))
 			{
 				speed /= 2.0;
@@ -74,7 +81,14 @@ namespace solar
 			tmpRecordNum = std::max(1, std::min(tmpRecordNum, (int)numRecords));//Clamp the value
 
 			if (ImGui::Button("Jump"))
+			{
 				SetSimTimeBasedOnRecordNum(sys, tmpRecordNum);
+				cleanTrails = true;
+				lineTrails.ClearAll();
+				// Trails must be cleaned frame after this too, because they can be cleared now,
+				// but still created later this frame with soon invalid values.
+			}
+
 			ImGui::PopItemWidth();
 		}
 
@@ -112,9 +126,10 @@ namespace solar
 		{
 			return simTime / multiplier / dTime + 1;
 		}
-		void ReplayControls::SetSimTimeBasedOnRecordNum(SystemUnit & sys, uint32_t recordNum)
+		void ReplayControls::SetSimTimeBasedOnRecordNum(SystemUnit & sys, uint32_t newRecordNum)
 		{
-			sys.SetSimTime((recordNum - 1)*multiplier*dTime);
+			//32bits can overflow when counting in seconds
+			sys.SetSimTime(uint64_t(newRecordNum - 1)*multiplier*dTime);
 		}
 	}
 }
