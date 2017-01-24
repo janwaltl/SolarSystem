@@ -12,7 +12,7 @@ namespace solar
 	namespace gui
 	{
 		ReplayControls::ReplayControls(const std::string & replayFileName) :
-			fileName(replayFileName), recordNum(1), speed(1.0), tmpRecordNum(1)
+			fileName(replayFileName), recordNum(1), speed(1.0), tmpRecordNum(1), jumped(false), cleanTimer(0)
 		{
 			std::ifstream in(fileName, std::ios::binary);
 			if (!in.is_open())
@@ -29,10 +29,15 @@ namespace solar
 			in.close();
 		}
 
-		void ReplayControls::operator()(SystemUnit & sys, drawers::LineTrailsDrawer& lineTrails)
+		void ReplayControls::operator()(SystemUnit & sys, drawers::LineTrailsDrawer* lineTrails)
 		{
 			recordNum = GetRecordNum(sys.GetSimTime());
 
+			if (recordNum >= numRecords)
+			{
+				sys.PauseSimulation();
+				recordNum = numRecords;
+			}
 			ImGui::SetNextWindowPos(ImVec2(10, 620), ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(ImVec2(1200, 80), ImGuiSetCond_Once);
 			if (ImGui::Begin("Replay controls", NULL, ImGuiWindowFlags_NoCollapse |
@@ -47,14 +52,21 @@ namespace solar
 				ProgressBar();
 				ImGui::End();
 			}
+
 		}
-		void ReplayControls::ControlButtons(SystemUnit & sys, drawers::LineTrailsDrawer& lineTrails)
+		void ReplayControls::ControlButtons(SystemUnit & sys, drawers::LineTrailsDrawer* lineTrails)
 		{
-			if (cleanTrails)
+			if (jumped && lineTrails)//BUG FIX, see below
 			{
-				lineTrails.ClearAll();
-				cleanTrails = false;
+				if (cleanTimer > 0)
+				{
+					--cleanTimer;
+					lineTrails->ClearAll();
+				}
+				else
+					jumped = false;
 			}
+
 
 			if (ImGui::Button("Slow down"))
 			{
@@ -63,8 +75,14 @@ namespace solar
 			}
 			ImGui::SameLine();
 
-			if (ImGui::Button(sys.IsPaused() ? "Resume" : "Pause"))
-				sys.IsPaused() ? sys.ResumeSimulation() : sys.PauseSimulation();
+			if (recordNum < numRecords)//Not the last record
+			{
+				if (ImGui::Button(sys.IsPaused() ? "Resume" : "Pause"))
+					sys.IsPaused() ? sys.ResumeSimulation() : sys.PauseSimulation();
+			}
+			else
+				ImGui::Button("Finished");
+
 			ImGui::SameLine();
 
 			if (ImGui::Button("Speed up"))
@@ -83,10 +101,18 @@ namespace solar
 			if (ImGui::Button("Jump"))
 			{
 				SetSimTimeBasedOnRecordNum(sys, tmpRecordNum);
-				cleanTrails = true;
-				lineTrails.ClearAll();
-				// Trails must be cleaned frame after this too, because they can be cleared now,
-				// but still created later this frame with soon invalid values.
+				//BUG FIX?
+				//Sometimes after trails got cleared, there still appeared point with old data, making trail look weird.
+				//This happens, because data get updated only after 'dTime' amount of time has passed.
+				//But, in between there can be unlimited calls to viewer and if there are atleast 'resolution' calls,
+				//then trail will still captures a bad point. So this ensures that first 'resolution+1' calls
+				//are ignored(cleared).
+				//Which is still not good enough in theory, but works in practice for now.
+				//Final fix is to clear after change of simTime, because that means, that simMethod was called
+				//and data have been updated.
+				//But for that kind of precision, even for small simTime changes, integral simTime is needed.
+				cleanTimer = settings::lineTrail::resolution + 1;
+				jumped = true;
 			}
 
 			ImGui::PopItemWidth();

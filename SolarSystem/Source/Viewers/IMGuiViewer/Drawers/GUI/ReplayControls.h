@@ -12,14 +12,17 @@ namespace solar
 	}
 	namespace gui
 	{
-		//Renders window with that contains controls for replaying a simulation
+		//Renders window that contains controls for replaying a simulation
 		class ReplayControls
 		{
 		public:
 			ReplayControls(const std::string& replayFileName);
-			void operator()(SystemUnit& sys, drawers::LineTrailsDrawer& lineTrails);
+			//Draws the window
+			//SystemUnit is used to get info about simulation
+			//lineTrails are cleaned after jumping
+			void operator()(SystemUnit& sys, drawers::LineTrailsDrawer* lineTrails);
 		private:
-			void ControlButtons(SystemUnit& sys, drawers::LineTrailsDrawer& lineTrails);
+			void ControlButtons(SystemUnit& sys, drawers::LineTrailsDrawer* lineTrails);
 			void ReplayInfo(SystemUnit& sys);
 			void ProgressBar();
 			//Gets recordNumber based on simulated time
@@ -36,8 +39,9 @@ namespace solar
 			double speed;
 			//Replay's filename
 			std::string fileName;
-			//cleans trails after jump
-			bool cleanTrails;
+			//cleans trails after jump, BUG FIX see ControlButtons()
+			size_t cleanTimer;
+			bool jumped;
 		};
 	}
 }

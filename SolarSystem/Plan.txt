@@ -1,11 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Floating name near selected unit. Can be easily generalized to all units if needed.
-Seems like mouseControl is already corrected for frameTime.
-Indented title's text by little bit more.
+Hopefully fixed weird bug of leaving old trails when jumping.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Still, exposing integral counting of SimTime seems like a lot cleaner design.
-	Well, stopping replay at the end wouldn't be a terrible idea.
 
 	Do proper command line interface
 		- to atleast allow quick switching between simulating/recording/replaying
@@ -14,7 +11,6 @@ Next:
 		- SORT all compile warnings
 		- go through all files, look for temp comments, includes, anything that is obsolete...
 	VI. OPTIONAL
-		- Names floating near units.(maybe just for the selected one & reference system)
 		- Hustý by bylo zprovoznit multiStep øádu 8,9, udìlat textViewer, kterej všechno uloží do souboru.
 			Nechat to bìžet na stolním PC pøes noc, pak udìlat ReplaySimMethod, který by jen podle simTime èasu nakopíroval
 			správný údaje do simData, ktrý by pak IMGUIViewer v pohodì zobrazoval.
@@ -22,7 +18,7 @@ Next:
 			
 			= Skoro hotovo, až na ten multistep.
 		- Little bit nicer/cleaner GUI.
-			- Positions of windows. Allow different winSizes.
+			- Positions of windows. Allow different winSizes?
 SystemUnit is starting to have too many forwarding functions. Maybe give direct pointer to sim, but someway restrict
 calling Start.
 ========================================THOUGHTS========================================
