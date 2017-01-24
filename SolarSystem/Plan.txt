@@ -1,8 +1,21 @@
 =====================================IN THIS COMMIT=====================================
-Hopefully fixed weird bug of leaving old trails when jumping.
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Still, exposing integral counting of SimTime seems like a lot cleaner design.
+	Command line interface:
+		- All should be optional = defaults to ImGui with RK4 probably?
+		- desired example SolarSystem.exe -Operation ...other args
+			-operations: sim - run standart simulation
+							- args: -i input file(mandatory)
+									-o output file(optional)
+									-m simMethod(optional)
+									-p parser(optional)
+									-v viewer(optional)
+						 record - same as Sim + -r recordFile
+						 replay - replay file
+							-args:	- r replay file
+									- v viewer(optional)
+						(first arg is file)- tries replay for .replay files and sim input for others
 
 	Do proper command line interface
 		- to atleast allow quick switching between simulating/recording/replaying
