@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Implemented replay mode and replaced atoi with stoi.
+Implemented AutoMode.
 ========================================IMPLEMENTING PLAN========================================
 Usage:
 	SolarSystem.exe [-mode] [-argKey argValue]

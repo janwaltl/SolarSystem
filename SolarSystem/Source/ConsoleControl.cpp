@@ -33,10 +33,8 @@ namespace solar
 				std::chrono::seconds maxSimTime;
 			};
 			void PrintHelp();
-
-			//Runs simulation, with parametres based on other arguments
+			//Standard simulation
 			void Simulate(const arguments& cmds);
-			//Returns parser for simulation, based on arguments
 			parser_p GetParser(const arguments& cmds);
 			parser_p MakeFormattedParser(const arguments& cmds);
 			simMethod_p GetSimMethod(const arguments& cmds);
@@ -47,6 +45,8 @@ namespace solar
 			void Record(const arguments& cmds);
 			//Replays recorded simulation
 			void Replay(const arguments& cmds);
+			//Automatically determine which mode to run
+			void AutoMode(const arguments& cmds);
 			//Returns pointer(in cmds array) to argument that is directly after(=value) passed argument(=key).
 			//Nullptr if key or value were not found.
 			const argument* GetValue(const arguments& cmds, const argument& key);
@@ -174,8 +174,35 @@ namespace solar
 				val = GetValue(cmds, "-h");
 				size_t height = val ? std::stoi(*val) : 700;
 
-				ReplayedSimulation sim(*replayFile, width, height, "SolarSystem - replay: " + replayFile);
+				ReplayedSimulation sim(*replayFile, width, height, "SolarSystem - replay: " + *replayFile);
 				sim.Start(10ms, 1, 1, 0s);//Does not matter, will be set internally by parser anyway
+			}
+
+			void AutoMode(const arguments & cmds)
+			{
+				if (cmds.empty())
+				{
+					std::cout << "No arguments have been passed. Default simulation will be started. "
+						"For list of all available modes, run this program with -help argument.\n";
+					Simulate(cmds);
+				}
+				else
+				{
+					std::ifstream file(cmds[0], std::ios::in | std::ios::binary);
+					char magic[2] = {0,0};
+					if (file.is_open())
+						file.read(magic, 2);
+					if (magic[0] == 'R' && magic[1] == 'E')//Is replay
+					{
+						arguments newCmds {"-r",cmds[0]};
+						Replay(newCmds);
+					}
+					else//Is formatted text(hopefully)
+					{
+						arguments newCmds {"-i",cmds[0],"-p","formatted"};
+						Simulate(newCmds);
+					}
+				}
 			}
 
 			const argument* GetValue(const arguments & cmds, const argument & key)
@@ -201,9 +228,7 @@ namespace solar
 			for (int i = 1; i < argc; ++i)//Don't record exe's name
 				cmds.push_back(argv[argc]);
 
-			if (cmds.empty())
-				std::cout << "No argument passed, for help, type -help in arguments\n";
-			else if (IsThere(cmds, "-help"))
+			if (IsThere(cmds, "-help"))
 				PrintHelp();
 			else if (IsThere(cmds, "-sim"))
 				Simulate(cmds);
@@ -211,8 +236,8 @@ namespace solar
 				Record(cmds);
 			else if (IsThere(cmds, "-replay"))
 				Replay(cmds);
-			//else
-			//	AutoFile(coms[0]);
+			else
+				AutoMode(cmds);
 		}
 	}
 }
