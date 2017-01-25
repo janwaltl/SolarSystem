@@ -175,6 +175,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Common\Settings.cpp" />
     <ClCompile Include="Source\Common\SystemUnit.cpp" />
+    <ClCompile Include="Source\ConsoleControl.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Parsers\FormattedFileParser.cpp" />
     <ClCompile Include="Source\Parsers\ReplayerParser.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Source\Common\Settings.h" />
     <ClInclude Include="Source\Common\SystemUnit.h" />
     <ClInclude Include="Source\Common\Common.h" />
+    <ClInclude Include="Source\ConsoleControl.h" />
     <ClInclude Include="Source\Math\Vec4.h" />
     <ClInclude Include="Source\Parsers\FormattedFileParser.h" />
     <ClInclude Include="Source\Parsers\ReplayerParser.h" />

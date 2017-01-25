@@ -109,6 +109,9 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\ReplayControls.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ConsoleControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Simulation.h">
@@ -244,6 +247,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Viewers\EmptyViewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ConsoleControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

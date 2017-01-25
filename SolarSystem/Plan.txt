@@ -1,24 +1,78 @@
 =====================================IN THIS COMMIT=====================================
-
+Started to work on console interface.
+	-Planning.
+	-Simulation mode
 ========================================IMPLEMENTING PLAN========================================
-Next:
-	Command line interface:
-		- All should be optional = defaults to ImGui with RK4 probably?
-		- desired example SolarSystem.exe -Operation ...other args
-			-operations: sim - run standart simulation
-							- args: -i input file(mandatory)
-									-o output file(optional)
-									-m simMethod(optional)
-									-p parser(optional)
-									-v viewer(optional)
-						 record - same as Sim + -r recordFile
-						 replay - replay file
-							-args:	- r replay file
-									- v viewer(optional)
-						(first arg is file)- tries replay for .replay files and sim input for others
+Usage:
+	SolarSystem.exe [-mode] [-argKey argValue]
 
-	Do proper command line interface
-		- to atleast allow quick switching between simulating/recording/replaying
+Available modes:
+    sim = Standrad simulation
+    record = Recorded simulation
+    replay = Replays saved simulation
+    help = Shows this text.
+    [other] = Automatic mode
+
+Following is description of each mode:
+    sim: Standard simulation
+        -i [input filename] - mandatory , specifies which file is used as input
+                            -including path and extension.
+        -o [output filename] - optional, where should output be saved at
+                             -including path and extension.
+        -m [simMethod name] - optional, which method should be used for simulation
+            - available names:
+                euler = explicit euler
+                semiEuler = semi implicit euler
+                RK4 - fourth order RungeKutta (default)
+        -p [parser name] - optional, which parser use for inputted file
+            - available names:
+                solar = hardcoded solar system
+                formatted = FormattedFileParser(default)
+        -v [viewer name] - optional, which viewer is used for viewing of simulation
+            - available names:
+                none = EmptyViewer, does nothing
+                win = ImGUIViewer(default)
+		-w [width of window] - only for 'win' viewer optional, in pixels
+
+		-h [height of window]- only for 'win' viewer optional, in pixels
+
+        -u [] - untimed simulation - see documentation
+
+        -t [delta time] - optional, deltaTime for Simulation, double in seconds
+                        - 10ms default
+        -rm [raw multiplier] - optional, changes simulation's speed
+                            - 1 default
+        -dm [delta time multiplier] - optional, changes simulation's speed
+                                   - 1 default
+        -x [max simTime in seconds] - optional, unlimited by default
+
+    record: all arguments for sim
+           -r [record fileName] - mandatory, name of the file, where replay should be saved at
+
+    replay:-r [record fileName] - mandatory, name of the .replay file
+
+    help: no args, shows this text.
+
+    [other]: If any other mode is inputted, it is treated as fileName.
+             If it has .replay extension OR first two bytes of the file are 'RE' it is assumed to be
+               a replay file and replay mode is called with that record's filename
+             Otherwise it is treated as text file and passed to sim mode as input file.
+
+Following are examples of correct calls to this application:
+    SolarSystem
+        = shows this help
+    SolarSystem vstup.txt
+        = standard timed simulation(using [other]), data is loaded from 'vstup.txt'
+    SolarSystem record -r out.replay -i vstup.txt
+        = standard timed recorded simulation,data loaded from 'vstup.txt',
+          record saved at 'out.replay'.
+    SolarSystem record -r out.replay -v none -m semiEuler -i vstup.txt -o out.txt
+        = recorded timed simulation, data loaded from 'vstup.txt', no viewer,
+          simulated using semiImplicitEuler , record saved into 'out.replay',
+          final data saved to 'out
+
+
+
 	V. Document it & ship it
 		- Constants instead of magic values
 		- SORT all compile warnings
