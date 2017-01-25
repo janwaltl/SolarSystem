@@ -7,6 +7,7 @@
 #include "Common/Common.h"
 #include "Exception.h"
 #include "Simulation.h"
+#include "RecordedSimulation.h"
 #include "Parsers/FormattedFileParser.h"
 #include "SimMethods/SemiImplicitEuler.h"
 #include "SimMethods/RK4.h"
@@ -31,6 +32,7 @@ namespace solar
 				std::chrono::seconds maxSimTime;
 			};
 			void PrintHelp();
+
 			//Runs simulation, with parametres based on other arguments
 			void Simulate(const arguments& cmds);
 			//Returns parser for simulation, based on arguments
@@ -41,6 +43,7 @@ namespace solar
 			viewer_p GetWinViewer(const arguments& cmds);
 			simParams GetSimParams(const arguments& cmds);
 
+			void Record(const arguments& cmds);
 			//Returns pointer(in cmds array) to argument that is directly after(=value) passed argument(=key).
 			//Nullptr if key or value were not found.
 			const argument* GetValue(const arguments& cmds, const argument& key);
@@ -139,6 +142,21 @@ namespace solar
 				params.maxSimTime = std::chrono::seconds(val ? std::atoll(val->c_str()) : 0);
 
 				return params;
+			}
+
+			void Record(const arguments & cmds)
+			{
+				auto replayFile = GetValue(cmds, "-r");
+				if (!replayFile)
+					throw Exception("Recorded simulation needs -r argument followed by output replay filename.");
+
+				auto params = GetSimParams(cmds);
+
+				RecordedSimulation sim(GetParser(cmds), GetSimMethod(cmds), GetViewer(cmds), *replayFile);
+				if (IsThere(cmds, "-u"))
+					sim.StartNotTimed(params.dt, params.rawMult, params.maxSimTime);
+				else
+					sim.Start(params.dt, params.rawMult, params.DTMult, params.maxSimTime);
 			}
 
 			const argument* GetValue(const arguments & cmds, const argument & key)

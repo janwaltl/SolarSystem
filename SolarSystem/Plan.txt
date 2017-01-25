@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Started to work on console interface.
-	-Planning.
-	-Simulation mode
+Implemented record mode.
 ========================================IMPLEMENTING PLAN========================================
 Usage:
 	SolarSystem.exe [-mode] [-argKey argValue]
@@ -13,12 +11,8 @@ Available modes:
     help = Shows this text.
     [other] = Automatic mode
 
-Following is description of each mode:
-    sim: Standard simulation
-        -i [input filename] - mandatory , specifies which file is used as input
-                            -including path and extension.
-        -o [output filename] - optional, where should output be saved at
-                             -including path and extension.
+Following is description of all arguments:
+    args for sim:
         -m [simMethod name] - optional, which method should be used for simulation
             - available names:
                 euler = explicit euler
@@ -32,10 +26,6 @@ Following is description of each mode:
             - available names:
                 none = EmptyViewer, does nothing
                 win = ImGUIViewer(default)
-		-w [width of window] - only for 'win' viewer optional, in pixels
-
-		-h [height of window]- only for 'win' viewer optional, in pixels
-
         -u [] - untimed simulation - see documentation
 
         -t [delta time] - optional, deltaTime for Simulation, double in seconds
@@ -46,12 +36,22 @@ Following is description of each mode:
                                    - 1 default
         -x [max simTime in seconds] - optional, unlimited by default
 
-    record: all arguments for sim
-           -r [record fileName] - mandatory, name of the file, where replay should be saved at
+	additional args for 'formatted' parser:
+        -i [input filename] - mandatory , specifies which file is used as input
+                            -including path and extension.
+        -o [output filename] - optional, where should output be saved at
+                             -including path and extension.
+	additional args for 'win' viewer:
+		-w [width of window] - optional, in pixels
+		-h [height of window]- optional, in pixels
 
-    replay:-r [record fileName] - mandatory, name of the .replay file
+    args for record: 
+		all valid arguments for sim
+		-r [record fileName] - mandatory, name of the file, where replay should be saved at
+    args for replay:
+		-r [record fileName] - mandatory, name of the .replay file
 
-    help: no args, shows this text.
+    help: no additional args
 
     [other]: If any other mode is inputted, it is treated as fileName.
              If it has .replay extension OR first two bytes of the file are 'RE' it is assumed to be
