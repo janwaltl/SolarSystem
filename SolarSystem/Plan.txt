@@ -1,146 +1,24 @@
 =====================================IN THIS COMMIT=====================================
 Implemented AutoMode.
+Updated english help.
+Cleaned this file.
 ========================================IMPLEMENTING PLAN========================================
-Usage:
-	SolarSystem.exe [-mode] [-argKey argValue]
-
-Available modes:
-    sim = Standrad simulation
-    record = Recorded simulation
-    replay = Replays saved simulation
-    help = Shows this text.
-    [other] = Automatic mode
-
-Following is description of all arguments:
-    args for sim:
-        -m [simMethod name] - optional, which method should be used for simulation
-            - available names:
-                euler = explicit euler
-                semiEuler = semi implicit euler
-                RK4 - fourth order RungeKutta (default)
-        -p [parser name] - optional, which parser use for inputted file
-            - available names:
-                solar = hardcoded solar system
-                formatted = FormattedFileParser(default)
-        -v [viewer name] - optional, which viewer is used for viewing of simulation
-            - available names:
-                none = EmptyViewer, does nothing
-                win = ImGUIViewer(default)
-        -u [] - untimed simulation - see documentation
-
-        -t [delta time] - optional, deltaTime for Simulation, double in seconds
-                        - 10ms default
-        -rm [raw multiplier] - optional, changes simulation's speed
-                            - 1 default
-        -dm [delta time multiplier] - optional, changes simulation's speed
-                                   - 1 default
-        -x [max simTime in seconds] - optional, unlimited by default
-
-	additional args for 'formatted' parser:
-        -i [input filename] - mandatory , specifies which file is used as input
-                            -including path and extension.
-        -o [output filename] - optional, where should output be saved at
-                             -including path and extension.
-	additional args for 'win' viewer:
-		-w [width of window] - optional, in pixels
-		-h [height of window]- optional, in pixels
-
-    args for record: 
-		all valid arguments for sim
-		-r [record fileName] - mandatory, name of the file, where replay should be saved at
-    args for replay:
-		-r [record fileName] - mandatory, name of the .replay file
-
-    help: no additional args
-
-    [other]: If any other mode is inputted, it is treated as fileName.
-             If it has .replay extension OR first two bytes of the file are 'RE' it is assumed to be
-               a replay file and replay mode is called with that record's filename
-             Otherwise it is treated as text file and passed to sim mode as input file.
-
-Following are examples of correct calls to this application:
-    SolarSystem
-        = shows this help
-    SolarSystem vstup.txt
-        = standard timed simulation(using [other]), data is loaded from 'vstup.txt'
-    SolarSystem record -r out.replay -i vstup.txt
-        = standard timed recorded simulation,data loaded from 'vstup.txt',
-          record saved at 'out.replay'.
-    SolarSystem record -r out.replay -v none -m semiEuler -i vstup.txt -o out.txt
-        = recorded timed simulation, data loaded from 'vstup.txt', no viewer,
-          simulated using semiImplicitEuler , record saved into 'out.replay',
-          final data saved to 'out
-
-
+Next:
+	Add missing solar parser.
+	ConsoleControl needs to be properly tested.
 
 	V. Document it & ship it
+		- Clean #include dependecies
+		- Rename Settings to Constants.
 		- Constants instead of magic values
 		- SORT all compile warnings
 		- go through all files, look for temp comments, includes, anything that is obsolete...
 	VI. OPTIONAL
-		- Hustý by bylo zprovoznit multiStep øádu 8,9, udìlat textViewer, kterej všechno uloží do souboru.
-			Nechat to bìžet na stolním PC pøes noc, pak udìlat ReplaySimMethod, který by jen podle simTime èasu nakopíroval
-			správný údaje do simData, ktrý by pak IMGUIViewer v pohodì zobrazoval.
-			- By mohlo bejt jako pøíklad v dokumentaci jak je to super rozšíøitelný.
-			
-			= Skoro hotovo, až na ten multistep.
 		- Little bit nicer/cleaner GUI.
 			- Positions of windows. Allow different winSizes?
-SystemUnit is starting to have too many forwarding functions. Maybe give direct pointer to sim, but someway restrict
-calling Start.
-========================================THOUGHTS========================================
-
-Controlling the simulation
-	- By viewer - ability to Stop(End), Pause the simulation as well controlling its speed
-					- Pause = just render
-	Speed Control
-		- DT - time step - to stay deterministic
-		- accumulator - tries to make simulation real-time by multiple calls to simMethod with dt
-						- in the end N.dt should match elapsed real time
-		- speed can be changed by:
-			1. increasing DT - takes bigger steps
-							- well, it doesnt speed up anythings, just roughens or smoothens the simulation
-							- big DT can lead to explosion, chaos, the end
-			2. decrement acc by non-one multiple of DT
-						- that would speed it up if multiple<1
-							- for 1/2, it would simulate two seconds for each real-world-one
-						- slow down if multiple>1
-							- for 2 it would simulate one second for each 2 real-world-ones
-						= but it does it at expense of CPU time, becuase m=1/2 would loop 2times more than default
-							- so it might quickly get bottlenecked
-			3. pass multiples of DT into SimMethod
-						- that would speed it up at the expense of precision
-						- basically it would take bigger leaps, but not trying to catch up to real world
-						- m=60, for each DT siMethod would acts as 60DT was passed
-							- so, for each real/world second, it would simulate one minute
-						- m is conversion ratio between real-world time and simulated-time
-							- for m=60*60*24 each second would be one day.
-							- But simulation might be able to handle it, might result in explosions...
-		- good speed control would employ all two(three).
-			- Probably keep DT constant - everything can be achieved by other two.
-			- and to speed up simulation it would do more loops(2,m<1). If it could not handle it(acc>0.5),
-				it would instead multiply DT(2) and revert 2. Thus loosing bit of precision
-			- That's exactly how transmission works, probably.
-
-	- In cases where Viewer takes so much time, it can be configured so it is called only so many times a second.
-		Because calling it fewer times does not break simulation, only slows responsivnes and "precision of viewing".
-
-========================================Documentation's Draft========================================
-Uživatel
-- README navod jak program použít
-	- komentáø na formát vstupu
-	- komentáø k uživatelskému rozhraní
-	- odkázat na popis ostatních implementovaných modulù
-	- Exception class
-Programátor
-- Krátký popis použitých knihoven IMGUI, GLFW
-- Komentáøe na alogirtmy
-	- timeLoop - zmínit chrono?
-	- virtual methods, interface
-		- že je složen z 3 modulù - Parser,SimMethod,Viewer
-	- Popis modulù k èemu slouží, co musejí implementovat
-		- Popis jednotlivých implementovaných modulù
-			- FormatteFileParser, RK4 probably, IMGUIViewer
-	
-- Jak program rozšíøit
- - popsáno asi u modulù
+		- Create physics unit system
+			- can redefine simData_t to make it a structure with data and in what units they are
+				- would also contain conversion function and all definitions of units
+					- sort of like chrono - period, denominator,numerator
+		- Timing does not feel right
+			- with all the casting, precision...
