@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Implemented record mode.
+Implemented replay mode and replaced atoi with stoi.
 ========================================IMPLEMENTING PLAN========================================
 Usage:
 	SolarSystem.exe [-mode] [-argKey argValue]

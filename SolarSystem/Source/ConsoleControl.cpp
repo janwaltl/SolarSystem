@@ -8,6 +8,7 @@
 #include "Exception.h"
 #include "Simulation.h"
 #include "RecordedSimulation.h"
+#include "ReplayedSimulation.h"
 #include "Parsers/FormattedFileParser.h"
 #include "SimMethods/SemiImplicitEuler.h"
 #include "SimMethods/RK4.h"
@@ -42,8 +43,10 @@ namespace solar
 			viewer_p GetViewer(const arguments& cmds);
 			viewer_p GetWinViewer(const arguments& cmds);
 			simParams GetSimParams(const arguments& cmds);
-
+			//Records simulation
 			void Record(const arguments& cmds);
+			//Replays recorded simulation
+			void Replay(const arguments& cmds);
 			//Returns pointer(in cmds array) to argument that is directly after(=value) passed argument(=key).
 			//Nullptr if key or value were not found.
 			const argument* GetValue(const arguments& cmds, const argument& key);
@@ -114,9 +117,9 @@ namespace solar
 			viewer_p GetWinViewer(const arguments & cmds)
 			{
 				auto val = GetValue(cmds, "-w");
-				size_t width = val ? std::atoi(val->c_str()) : 1200;
+				size_t width = val ? std::stoi(val->c_str()) : 1200;
 				val = GetValue(cmds, "-h");
-				size_t height = val ? std::atoi(val->c_str()) : 700;
+				size_t height = val ? std::stoi(val->c_str()) : 700;
 
 				return std::make_unique<IMGuiViewer>(width, height, "SolarSystem - simulation");
 			}
@@ -133,13 +136,13 @@ namespace solar
 				else
 					params.dt = 10ms;
 				val = GetValue(cmds, "-rm");
-				params.rawMult = val ? std::atoi(val->c_str()) : 1;
+				params.rawMult = val ? std::stoi(val->c_str()) : 1;
 
 				val = GetValue(cmds, "-dm");
-				params.DTMult = val ? std::atoi(val->c_str()) : 1;
+				params.DTMult = val ? std::stoi(val->c_str()) : 1;
 
 				val = GetValue(cmds, "-x");
-				params.maxSimTime = std::chrono::seconds(val ? std::atoll(val->c_str()) : 0);
+				params.maxSimTime = std::chrono::seconds(val ? std::stoll(val->c_str()) : 0);
 
 				return params;
 			}
@@ -157,6 +160,22 @@ namespace solar
 					sim.StartNotTimed(params.dt, params.rawMult, params.maxSimTime);
 				else
 					sim.Start(params.dt, params.rawMult, params.DTMult, params.maxSimTime);
+			}
+
+			void Replay(const arguments & cmds)
+			{
+				using namespace std::chrono_literals;
+
+				auto replayFile = GetValue(cmds, "-r");
+				if (!replayFile)
+					throw Exception("Replayed simulation needs -r argument followed by input replay filename.");
+				auto val = GetValue(cmds, "-w");
+				size_t width = val ? std::stoi(*val) : 1200;
+				val = GetValue(cmds, "-h");
+				size_t height = val ? std::stoi(*val) : 700;
+
+				ReplayedSimulation sim(*replayFile, width, height, "SolarSystem - replay: " + replayFile);
+				sim.Start(10ms, 1, 1, 0s);//Does not matter, will be set internally by parser anyway
 			}
 
 			const argument* GetValue(const arguments & cmds, const argument & key)
@@ -188,10 +207,10 @@ namespace solar
 				PrintHelp();
 			else if (IsThere(cmds, "-sim"))
 				Simulate(cmds);
-			//else if (coms[0] == "-record")
-			//	Record(coms);
-			//else if (coms[0] == "-replay")
-			//	Replay(coms);
+			else if (IsThere(cmds, "-record"))
+				Record(cmds);
+			else if (IsThere(cmds, "-replay"))
+				Replay(cmds);
 			//else
 			//	AutoFile(coms[0]);
 		}
