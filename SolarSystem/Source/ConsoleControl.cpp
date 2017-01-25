@@ -10,6 +10,7 @@
 #include "RecordedSimulation.h"
 #include "ReplayedSimulation.h"
 #include "Parsers/FormattedFileParser.h"
+#include "Parsers/SolarParser.h"
 #include "SimMethods/SemiImplicitEuler.h"
 #include "SimMethods/RK4.h"
 #include "Viewers/EmptyViewer.h"
@@ -66,7 +67,7 @@ namespace solar
 
 			void PrintHelp(const arguments& cmds)
 			{
-				if (IsThere(cmds, "-cz"))
+				if (IsThere(cmds, "cz"))
 					std::cout << "Napoveda\n";
 				else
 					std::cout << R"(Usage:
@@ -129,9 +130,9 @@ Following is description of all arguments(M=mandatory,O=optional):
         -r [record fileName] - M, name of the .replay file
                              - including path and extension.
 
-    4. help: 
-        -cz [] - O, Czech version
-        -en [] - O, English version(default)
+    4. help [language]: 
+                cz Czech version
+                en English version(default)
 
     5. [other]: Any other string instead of mode is treated as filename.
                 If first two bytes of that file are 'R' and 'E' it is assumed to be
@@ -179,7 +180,7 @@ Following are examples of correct calls to this application:
 				if (val && *val == "formatted")
 					return MakeFormattedParser(cmds);
 				else//Default
-					assert(0);//Make solar parser
+					return std::make_unique<SolarParser>();
 			}
 
 			parser_p MakeFormattedParser(const arguments & cmds)
@@ -207,12 +208,12 @@ Following are examples of correct calls to this application:
 
 			viewer_p GetViewer(const arguments & cmds)
 			{
-				auto val = GetValue(cmds, "-s");
+				auto val = GetValue(cmds, "-v");
 
-				if (val && *val == "win")
-					return GetWinViewer(cmds);
-				else
+				if (val && *val == "none")
 					return std::make_unique<EmptyViewer>();
+				else
+					return GetWinViewer(cmds);
 			}
 
 			viewer_p GetWinViewer(const arguments & cmds)
@@ -283,8 +284,9 @@ Following are examples of correct calls to this application:
 			{
 				if (cmds.empty())
 				{
-					std::cout << "No arguments have been passed. Default simulation will be started. "
-						"For list of all available modes, run this program with -help argument.\n";
+					std::cout << "No arguments have been passed. Default solar simulation will be started. \n"
+						"For list of all available modes and their arguments, run this program with -help argument.\n";
+
 					Simulate(cmds);
 				}
 				else
@@ -325,7 +327,7 @@ Following are examples of correct calls to this application:
 		{
 			arguments cmds;
 			for (int i = 1; i < argc; ++i)//Ignore exe's name
-				cmds.push_back(argv[argc]);
+				cmds.push_back(argv[i]);
 
 			if (IsThere(cmds, "-help"))
 				PrintHelp(cmds);

@@ -50,7 +50,7 @@ int main(int argc, char * argv[])
 		}
 		catch (const std::exception& e)
 		{
-			std::cout << "Following exception has been thrown:\n" << e.what();
+			std::cout << "Following exception has been thrown:\n" << e.what()<<"\n";
 			system("PAUSE");
 		}
 	}

@@ -1,16 +1,17 @@
 =====================================IN THIS COMMIT=====================================
-Implemented AutoMode.
-Updated english help.
-Cleaned this file.
+Added SolarParser.
+Some basic testing.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Add missing solar parser.
 	ConsoleControl needs to be properly tested.
-
+	Add some confirmation messages, to know if argument was chosen and it did not defaulted to other...
 	V. Document it & ship it
 		- Clean #include dependecies
 		- Rename Settings to Constants.
 		- Constants instead of magic values
+		- Apparently saving does not work as expected
+			- no name or color
+			- wrong units, needs to convert to SI
 		- SORT all compile warnings
 		- go through all files, look for temp comments, includes, anything that is obsolete...
 	VI. OPTIONAL
