@@ -1,80 +1,27 @@
 =====================================IN THIS COMMIT=====================================
-Converted simTime to integers. - Really, in one commit? No bugs, just like that?
-	- new Timing.h - moved most of the time stuff there
-					- added few general time related functions
-					- maybe deserves its own namespace, but meh...
 
 ========================================IMPLEMENTING PLAN========================================
 Next:
+	ConsoleControl needs to be properly tested.
 
 	V. Document it & ship it
+		- Clean #include dependecies
+		- Rename Settings to Constants.
 		- Constants instead of magic values
-		- SORT all compile warnings
+		- Apparently saving does not work as expected
+			- no name or color
+			- wrong units, needs to convert to SI
+		- SORT all compile warnings 
+			- even double->float ? static cast makes it ugly
 		- go through all files, look for temp comments, includes, anything that is obsolete...
 	VI. OPTIONAL
-		- Hustý by bylo zprovoznit multiStep øádu 8,9, udìlat textViewer, kterej všechno uloží do souboru.
-			Nechat to bìžet na stolním PC pøes noc, pak udìlat ReplaySimMethod, který by jen podle simTime èasu nakopíroval
-			správný údaje do simData, ktrý by pak IMGUIViewer v pohodì zobrazoval.
-			- By mohlo bejt jako pøíklad v dokumentaci jak je to super rozšíøitelný.
-			
-			= Skoro hotovo, až na ten multistep.
 		- Little bit nicer/cleaner GUI.
-			- Positions of windows. Allow different winSizes?
-SystemUnit is starting to have too many forwarding functions. Maybe give direct pointer to sim, but someway restrict
-calling Start.
-========================================THOUGHTS========================================
+			- Movable,scalable GUI windows. Allow different window size.
 
-Controlling the simulation
-	- By viewer - ability to Stop(End), Pause the simulation as well controlling its speed
-					- Pause = just render
-	Speed Control
-		- DT - time step - to stay deterministic
-		- accumulator - tries to make simulation real-time by multiple calls to simMethod with dt
-						- in the end N.dt should match elapsed real time
-		- speed can be changed by:
-			1. increasing DT - takes bigger steps
-							- well, it doesnt speed up anythings, just roughens or smoothens the simulation
-							- big DT can lead to explosion, chaos, the end
-			2. decrement acc by non-one multiple of DT
-						- that would speed it up if multiple<1
-							- for 1/2, it would simulate two seconds for each real-world-one
-						- slow down if multiple>1
-							- for 2 it would simulate one second for each 2 real-world-ones
-						= but it does it at expense of CPU time, becuase m=1/2 would loop 2times more than default
-							- so it might quickly get bottlenecked
-			3. pass multiples of DT into SimMethod
-						- that would speed it up at the expense of precision
-						- basically it would take bigger leaps, but not trying to catch up to real world
-						- m=60, for each DT siMethod would acts as 60DT was passed
-							- so, for each real/world second, it would simulate one minute
-						- m is conversion ratio between real-world time and simulated-time
-							- for m=60*60*24 each second would be one day.
-							- But simulation might be able to handle it, might result in explosions...
-		- good speed control would employ all two(three).
-			- Probably keep DT constant - everything can be achieved by other two.
-			- and to speed up simulation it would do more loops(2,m<1). If it could not handle it(acc>0.5),
-				it would instead multiply DT(2) and revert 2. Thus loosing bit of precision
-			- That's exactly how transmission works, probably.
+		- Create physics unit system
+			- can redefine simData_t to make it a structure with data and in what units they are
+				- would also contain conversion function and all definitions of units
+					- sort of like chrono - period, denominator,numerator
 
-	- In cases where Viewer takes so much time, it can be configured so it is called only so many times a second.
-		Because calling it fewer times does not break simulation, only slows responsivnes and "precision of viewing".
-
-========================================Documentation's Draft========================================
-Uživatel
-- README navod jak program použít
-	- komentáø na formát vstupu
-	- komentáø k uživatelskému rozhraní
-	- odkázat na popis ostatních implementovaných modulù
-	- Exception class
-Programátor
-- Krátký popis použitých knihoven IMGUI, GLFW
-- Komentáøe na alogirtmy
-	- timeLoop - zmínit chrono?
-	- virtual methods, interface
-		- že je složen z 3 modulù - Parser,SimMethod,Viewer
-	- Popis modulù k èemu slouží, co musejí implementovat
-		- Popis jednotlivých implementovaných modulù
-			- FormatteFileParser, RK4 probably, IMGUIViewer
-	
-- Jak program rozšíøit
- - popsáno asi u modulù
+		- Timing does not feel right
+			- with all the casting, precision...

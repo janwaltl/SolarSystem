@@ -14,14 +14,14 @@
 
 #include "RecordedSimulation.h"
 #include "ReplayedSimulation.h"
+#include "ConsoleControl.h"
 
-#define REPLAY
+#define CONSOLE
 
-int main()
+int main(int argc, char * argv[])
 {
 	using namespace solar;
 	using namespace std::chrono_literals;
-	std::ios_base::sync_with_stdio(false);
 	try
 	{
 		try
@@ -44,18 +44,21 @@ int main()
 			ReplayedSimulation repSim("out.replay");
 			repSim.Start(10ms, 1, 1, 300s);
 #endif
-			//std::cin.get();
-			//std::cin.get();
+#ifdef CONSOLE
+			console::Control(argc, argv);
+#endif
 		}
 		catch (const std::exception& e)
 		{
-			std::cout << "Simulation failed, reason:\n" << e.what();
+			std::cout << "Following exception has been thrown:\n" << e.what()<<"\n";
 			system("PAUSE");
 		}
 	}
 	catch (...)
 	{
-		std::cout << "UNCAUGHT EXCEPTION";
+		std::cout << "UNCAUGHT EXCEPTION!";
 	}
-	return true;
+	return 0;
 }
+
+

@@ -175,9 +175,11 @@
   <ItemGroup>
     <ClCompile Include="Source\Common\Settings.cpp" />
     <ClCompile Include="Source\Common\SystemUnit.cpp" />
+    <ClCompile Include="Source\ConsoleControl.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Parsers\FormattedFileParser.cpp" />
     <ClCompile Include="Source\Parsers\ReplayerParser.cpp" />
+    <ClCompile Include="Source\Parsers\SolarParser.cpp" />
     <ClCompile Include="Source\SimMethods\ReplayerMethod.cpp" />
     <ClCompile Include="Source\SimMethods\RK4.cpp" />
     <ClCompile Include="Source\SimMethods\SemiImplicitEuler.cpp" />
@@ -209,9 +211,11 @@
     <ClInclude Include="Source\Common\SystemUnit.h" />
     <ClInclude Include="Source\Common\Common.h" />
     <ClInclude Include="Source\Common\Timing.h" />
+    <ClInclude Include="Source\ConsoleControl.h" />
     <ClInclude Include="Source\Math\Vec4.h" />
     <ClInclude Include="Source\Parsers\FormattedFileParser.h" />
     <ClInclude Include="Source\Parsers\ReplayerParser.h" />
+    <ClInclude Include="Source\Parsers\SolarParser.h" />
     <ClInclude Include="Source\RecordedSimulation.h" />
     <ClInclude Include="Source\ReplayedSimulation.h" />
     <ClInclude Include="Source\SimMethods\ReplayerMethod.h" />

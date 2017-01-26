@@ -13,10 +13,10 @@ namespace solar
 	{
 	public:
 		//replaFile - name of file containing replay, including path and extension
-		ReplayedSimulation(const std::string& replayFile) :
+		ReplayedSimulation(const std::string& replayFile, size_t winWidth, size_t winHeight, const std::string& title) :
 			Simulation(std::make_unique<ReplayerParser>(replayFile),
 					   std::make_unique<ReplayerSimMethod>(replayFile),
-					   std::make_unique<ReplayerViewer>(replayFile))
+					   std::make_unique<ReplayerViewer>(replayFile, winWidth, winHeight, title))
 		{
 		}
 	};

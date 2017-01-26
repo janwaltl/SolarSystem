@@ -13,10 +13,7 @@ namespace solar
 	class ReplayerViewer : public Viewer, public OMSAR
 	{
 	public:
-		ReplayerViewer(const std::string& replayFileName,
-					   size_t width = settings::win::size::x,
-					   size_t height = settings::win::size::y,
-					   const std::string& title = settings::win::title);
+		ReplayerViewer(const std::string& replayFileName, size_t width, size_t height, const std::string& title);
 		void Prepare() override final;
 		void operator()() override final;
 	private:
