@@ -1,11 +1,12 @@
 =====================================IN THIS COMMIT=====================================
-Hopefully fixed weird bug of leaving old trails when jumping.
+Converted simTime to integers. - Really, in one commit? No bugs, just like that?
+	- new Timing.h - moved most of the time stuff there
+					- added few general time related functions
+					- maybe deserves its own namespace, but meh...
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Still, exposing integral counting of SimTime seems like a lot cleaner design.
 
-	Do proper command line interface
-		- to atleast allow quick switching between simulating/recording/replaying
 	V. Document it & ship it
 		- Constants instead of magic values
 		- SORT all compile warnings

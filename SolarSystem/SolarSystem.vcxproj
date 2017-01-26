@@ -208,6 +208,7 @@
     <ClInclude Include="Source\Common\Settings.h" />
     <ClInclude Include="Source\Common\SystemUnit.h" />
     <ClInclude Include="Source\Common\Common.h" />
+    <ClInclude Include="Source\Common\Timing.h" />
     <ClInclude Include="Source\Math\Vec4.h" />
     <ClInclude Include="Source\Parsers\FormattedFileParser.h" />
     <ClInclude Include="Source\Parsers\ReplayerParser.h" />

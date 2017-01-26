@@ -26,7 +26,7 @@ namespace solar
 			void ReplayInfo(SystemUnit& sys);
 			void ProgressBar();
 			//Gets recordNumber based on simulated time
-			uint32_t GetRecordNum(double simTime);
+			uint32_t GetRecordNum(simulatedTime simTime);
 			void SetSimTimeBasedOnRecordNum(SystemUnit& sys, uint32_t recordNum);
 
 			double dTime;

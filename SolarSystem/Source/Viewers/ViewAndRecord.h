@@ -28,8 +28,8 @@ namespace solar
 		std::ofstream out;
 
 		uint32_t numRecords;
-		double simTime;
-		double timeStep;
+		simulatedTime simTime;
+		simulatedTime timeStep;
 	};
 }
 #endif

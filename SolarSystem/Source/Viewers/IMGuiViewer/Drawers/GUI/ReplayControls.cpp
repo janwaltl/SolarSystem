@@ -126,13 +126,8 @@ namespace solar
 			ImGui::TextColored(whiteCol, fileName.c_str()); ImGui::SameLine();
 			ImGui::Text("SimTime:"); ImGui::SameLine();
 			ImGui::TextTooltipOnHover("Amount of simulated time.");
-			auto simTime = sys.GetSimTime();
-			uint32_t years = simTime / 31'536'000;
-			simTime -= years * 31'536'000;
-			uint32_t days = simTime / 86'400;
-			simTime -= days * 86'400;
-			uint32_t hours = simTime / 3'600;
-			ImGui::TextColored(whiteCol, "%3iy %3id %3ih", years, days, hours);
+			auto time = SplitTime(sys.GetSimTime());
+			ImGui::TextColored(whiteCol, "%3iy %3id %3ih", time.Y, time.D, time.H);
 			ImGui::SameLine();
 			ImGui::Text("Speed:"); ImGui::SameLine();
 			if (speed >= 0.99f)//>=1.0
@@ -148,14 +143,14 @@ namespace solar
 			ImGui::ProgressBar(recordNum / float(numRecords), ImVec2(-1, 20), barText.c_str());
 		}
 
-		uint32_t ReplayControls::GetRecordNum(double simTime)
+		uint32_t ReplayControls::GetRecordNum(simulatedTime simTime)
 		{
 			return simTime / multiplier / dTime + 1;
 		}
 		void ReplayControls::SetSimTimeBasedOnRecordNum(SystemUnit & sys, uint32_t newRecordNum)
 		{
 			//32bits can overflow when counting in seconds
-			sys.SetSimTime(uint64_t(newRecordNum - 1)*multiplier*dTime);
+			sys.SetSimTime(simulatedTime(uint64_t(newRecordNum - 1)*multiplier*dTime));
 		}
 	}
 }

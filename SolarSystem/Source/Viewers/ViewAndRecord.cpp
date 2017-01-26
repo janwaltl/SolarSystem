@@ -19,7 +19,7 @@ namespace solar
 		out.write(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));
 		out.close();
 		std::cout << "Created replay: " << outFile << "\n" << "Total run time: " << GetRunTime() << "s\n";
-		std::cout << "Total sim time: " << GetSimTime() << "s\n";
+		std::cout << "Total sim time: " << GetSimTimeSecs() << "s\n";
 		std::cout << "Total number of records: " << numRecords << "\n";
 	}
 	void ViewAndRecord::Prepare()
@@ -54,7 +54,9 @@ namespace solar
 		double deltaT = this->GetDtime();
 		out.write(reinterpret_cast<char*>(&deltaT), sizeof(deltaT));
 		uint32_t multiplier = this->GetDTMultiplier()*this->GetRawMultiplier();
-		timeStep = deltaT*multiplier;
+
+		timeStep = simulatedTime(deltaT*multiplier);
+
 		out.write(reinterpret_cast<char*>(&multiplier), sizeof(multiplier));
 		numRecords = 0;
 		out.write(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));

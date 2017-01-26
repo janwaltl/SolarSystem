@@ -161,12 +161,9 @@ namespace solar
 
 			ImGui::Text("Speed ratio"); ImGui::NextColumn();
 			ImGui::TextTooltipOnHover("This amount of time is simulated each passed second.");
-			size_t speedRatio = sys.GetRawMultiplier()*sys.GetDTMultiplier();
-			auto spDays = (speedRatio % 31'536'000) / 86'400;
-			auto spHours = (speedRatio % 86'400) / 3600;
-			auto spMins = (speedRatio % 3600) / 60;
-			auto spSecs = speedRatio % 60;
-			ImGui::Text("%id %ih %im %is", spDays, spHours, spMins, spSecs); ImGui::NextColumn();
+			auto speedRatio = SplitTime(sys.GetRawMultiplier()*sys.GetDTMultiplier());
+
+			ImGui::Text("%id %ih %im %is", speedRatio.D, speedRatio.H, speedRatio.M, speedRatio.S); ImGui::NextColumn();
 			ImGui::Text("Stable"); ImGui::NextColumn();
 			ImGui::TextTooltipOnHover("Whether the simulation can run at set speed at real-time."
 									  " \nMeans that it is not lagging behind = frameTime<dTime ");
@@ -193,11 +190,8 @@ namespace solar
 
 			ImGui::Text("SimTime"); ImGui::NextColumn();
 			ImGui::TextTooltipOnHover("Amount of time simulated.");
-			auto simTime = sys.GetSimTime();
-			auto years = floor(simTime / 31'536'000);
-			simTime -= years * 31'536'000;
-			auto days = simTime / 86'400;
-			ImGui::Text("%3.0fy %03.0fd", years, days); ImGui::NextColumn();
+			auto simTime = SplitTime(sys.GetSimTime());
+			ImGui::Text("%3.0fy %03.0fd", simTime.Y, simTime.D); ImGui::NextColumn();
 
 			ImGui::Columns(numCols);
 		}
