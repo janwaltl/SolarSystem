@@ -56,6 +56,16 @@ namespace solar
 		return win;
 	}
 
+	bool OpenGLBackend::NewFrame()
+	{
+		glfwSwapBuffers(win);
+		glfwPollEvents();
+		glClearColor(0.0, 0.0, 0.0, 1.0);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		return glfwWindowShouldClose(win);
+	}
+
 	void OpenGLBackend::ErrorCallback(int err, const char * description)
 	{
 		error = "ERR " + std::to_string(err) + ": " + description;

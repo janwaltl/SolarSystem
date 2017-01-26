@@ -75,6 +75,7 @@
     <IntDir>$(SolutionDir)intermediate\$(Configuration)-$(ProjectName)\</IntDir>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Libraries\include;$(ProjectDir)</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(SolutionDir)Libraries\lib\$(Configuration)\</LibraryPath>
+    <CodeAnalysisRuleSet>MixedRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -85,6 +86,7 @@
     <IntDir>$(SolutionDir)intermediate\$(Configuration)-$(ProjectName)\</IntDir>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Libraries\include;$(ProjectDir)</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(SolutionDir)Libraries\lib\$(Configuration)</LibraryPath>
+    <CodeAnalysisRuleSet>MixedRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -167,6 +169,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="FileFormats\ReplayerFile.txt" />
     <Text Include="Plan.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -174,28 +177,44 @@
     <ClCompile Include="Source\Common\SystemUnit.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Parsers\FormattedFileParser.cpp" />
+    <ClCompile Include="Source\Parsers\ReplayerParser.cpp" />
+    <ClCompile Include="Source\SimMethods\ReplayerMethod.cpp" />
     <ClCompile Include="Source\SimMethods\RK4.cpp" />
     <ClCompile Include="Source\SimMethods\SemiImplicitEuler.cpp" />
     <ClCompile Include="Source\Simulation.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\MouseControls.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\ReplayControls.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\SimProperties.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\UnitsProperties.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Visuals.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\LineTrailsDrawer.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\ReplayGUIDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\SimDataDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\ImGuiBackend.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_draw.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OMSARPolicy.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Error.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.cpp" />
+    <ClCompile Include="Source\Viewers\ReplayerViewer.cpp" />
+    <ClCompile Include="Source\Viewers\ViewAndRecord.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\Settings.h" />
     <ClInclude Include="Source\Common\SystemUnit.h" />
     <ClInclude Include="Source\Common\Common.h" />
+    <ClInclude Include="Source\Common\Timing.h" />
     <ClInclude Include="Source\Math\Vec4.h" />
     <ClInclude Include="Source\Parsers\FormattedFileParser.h" />
+    <ClInclude Include="Source\Parsers\ReplayerParser.h" />
+    <ClInclude Include="Source\RecordedSimulation.h" />
+    <ClInclude Include="Source\ReplayedSimulation.h" />
+    <ClInclude Include="Source\SimMethods\ReplayerMethod.h" />
     <ClInclude Include="Source\SimMethods\RK4.h" />
     <ClInclude Include="Source\SimMethods\SemiImplicitEuler.h" />
     <ClInclude Include="Source\Units\Unit.h" />
@@ -205,9 +224,16 @@
     <ClInclude Include="Source\Parsers\Parser.h" />
     <ClInclude Include="Source\SimMethods\SimMethod.h" />
     <ClInclude Include="Source\Simulation.h" />
+    <ClInclude Include="Source\Viewers\EmptyViewer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\MouseControls.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\ReplayControls.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\SimProperties.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\UnitsProperties.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Visuals.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\LineTrailsDrawer.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\ReplayGUIDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\SimDataDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\ImGuiBackend.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imconfig.h" />
@@ -216,11 +242,14 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_rect_pack.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_textedit.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_truetype.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OMSARPolicy.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Error.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.h" />
+    <ClInclude Include="Source\Viewers\ReplayerViewer.h" />
+    <ClInclude Include="Source\Viewers\ViewAndRecord.h" />
     <ClInclude Include="Source\Viewers\Viewer.h" />
   </ItemGroup>
   <ItemGroup>

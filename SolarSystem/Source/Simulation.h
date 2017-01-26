@@ -10,8 +10,6 @@ namespace solar
 	class Simulation
 	{
 	public:
-		using clock_t = std::chrono::steady_clock;
-		using stepTime_t = clock_t::duration;
 		Simulation(parser_p parser, simMethod_p simMethod, viewer_p viewer);
 		//Starts simulation - loops until stopped, or maxRunTime is reached
 		//Throws Exception(std::logic_error) on invalid input or if any other SystemUnit throws.
@@ -40,17 +38,20 @@ namespace solar
 		bool IsPaused();
 		bool IsRunnig();
 		//Returns deltaTime in seconds
-		double GetDtime();
+		double GetDtime() const;
+		void SetDTime(double newDT);
 		//Returns elapsed realTime in seconds
-		double GetRunTime();
+		double GetRunTime() const;
 		//Returns elapsed simTime in seconds
 		//Does NOT work in NotTimed Start
-		double GetSimTime();
+		simulatedTime GetSimTime() const;
+		//Sets new simTime in seconds
+		void SetSimTime(simulatedTime newSimTime);
 		//Returns last's frame time
 		//Does NOT work in NotTimed Start
-		double GetFrameTime();
-		size_t GetRawMultiplier();
-		size_t GetDTMultiplier();
+		double GetFrameTime() const;
+		size_t GetRawMultiplier() const;
+		size_t GetDTMultiplier() const;
 		void SetRawMultiplier(size_t newRawMult);
 		void SetDTMultiplier(size_t newDTMult);
 	private:
@@ -70,14 +71,6 @@ namespace solar
 		void UpdateSimTime();
 		bool IsNotRunningForTooLong();
 
-		template<typename Rep, typename Per>
-		//Converts time duration to seconds
-		inline double ToSecs(const std::chrono::duration<Rep, Per>& time)
-		{
-			using type = std::chrono::duration<Rep, Per>;
-			return  time.count() * type::period::num / double(type::period::den);
-		}
-
 		parser_p parser;
 		simMethod_p simMethod;
 		viewer_p viewer;
@@ -95,9 +88,7 @@ namespace solar
 		stepTime_t frameTime;
 
 		//Amount of simulated time
-		stepTime_t simTimePrecise;//Store fraction of seconds 
-		std::chrono::seconds simTimeSecs;//store whole seconds
-
+		simulatedTime simTime;
 		//How long has been the simulation running in real time
 		stepTime_t runTime;
 		//How long can the simulation run in real time

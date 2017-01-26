@@ -107,32 +107,49 @@ namespace solar
 		return state == running;
 	}
 
-	double Simulation::GetDtime()
+	double Simulation::GetDtime() const
 	{
 		return ToSecs(dtime);
 	}
 
-	double Simulation::GetRunTime()
+	void Simulation::SetDTime(double newDT)
+	{
+		dtime = std::chrono::nanoseconds(static_cast<long long>(newDT*std::nano::den));
+	}
+
+	double Simulation::GetRunTime() const
 	{
 		return ToSecs(runTime);
 	}
 
-	double Simulation::GetSimTime()
+	simulatedTime Simulation::GetSimTime() const
 	{
-		return ToSecs(simTimePrecise) + ToSecs(simTimeSecs);
+		return simTime;
 	}
 
-	double Simulation::GetFrameTime()
+	void Simulation::SetSimTime(simulatedTime newSimTime)
+	{
+		/*using secs_t = decltype(simTimeSecs)::rep;
+		using precise_t = decltype(simTimePrecise)::rep;
+
+		auto secs = static_cast<secs_t>(newSimTime);
+		auto frac = static_cast<precise_t>((newSimTime - secs)*decltype(simTimePrecise)::period::den);
+		simTimeSecs = decltype(simTimeSecs)(secs);
+		simTimePrecise = decltype(simTimePrecise)(frac);*/
+		simTime = newSimTime;
+	}
+
+	double Simulation::GetFrameTime() const
 	{
 		return ToSecs(frameTime);
 	}
 
-	size_t Simulation::GetRawMultiplier()
+	size_t Simulation::GetRawMultiplier() const
 	{
 		return rawMultiplier;
 	}
 
-	size_t Simulation::GetDTMultiplier()
+	size_t Simulation::GetDTMultiplier() const
 	{
 		return DTMultiplier;
 	}
@@ -176,8 +193,8 @@ namespace solar
 	void Simulation::ResetTimers()
 	{
 		acc = acc.zero();
-		simTimePrecise = simTimePrecise.zero();
-		simTimeSecs = simTimeSecs.zero();
+		simTime.seconds = simTime.seconds.zero();
+		simTime.fraction = simTime.fraction.zero();
 		runTime = runTime.zero();
 		begining = prevTime = clock_t::now();
 	}
@@ -206,13 +223,13 @@ namespace solar
 
 	void Simulation::UpdateSimTime()
 	{
-		simTimePrecise += dtime*DTMultiplier*rawMultiplier;
+		simTime.fraction += dtime*DTMultiplier*rawMultiplier;
 		//Transfers full seconds from simTimePrecise time to simTimeSecs time
-		if (simTimePrecise >= 1s)
+		if (simTime.fraction >= 1s)
 		{
-			auto secs = std::chrono::duration_cast<std::chrono::seconds>(simTimePrecise);
-			simTimePrecise -= secs;
-			simTimeSecs += secs;
+			auto secs = std::chrono::duration_cast<std::chrono::seconds>(simTime.fraction);
+			simTime.fraction -= secs;
+			simTime.seconds += secs;
 		}
 	}
 

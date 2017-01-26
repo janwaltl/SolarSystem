@@ -1,17 +1,25 @@
 =====================================IN THIS COMMIT=====================================
-Commenting...
+Converted simTime to integers. - Really, in one commit? No bugs, just like that?
+	- new Timing.h - moved most of the time stuff there
+					- added few general time related functions
+					- maybe deserves its own namespace, but meh...
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
+
 	V. Document it & ship it
 		- Constants instead of magic values
 		- SORT all compile warnings
+		- go through all files, look for temp comments, includes, anything that is obsolete...
 	VI. OPTIONAL
 		- Hustý by bylo zprovoznit multiStep øádu 8,9, udìlat textViewer, kterej všechno uloží do souboru.
 			Nechat to bìžet na stolním PC pøes noc, pak udìlat ReplaySimMethod, který by jen podle simTime èasu nakopíroval
 			správný údaje do simData, ktrý by pak IMGUIViewer v pohodì zobrazoval.
-
 			- By mohlo bejt jako pøíklad v dokumentaci jak je to super rozšíøitelný.
-
+			
+			= Skoro hotovo, až na ten multistep.
+		- Little bit nicer/cleaner GUI.
+			- Positions of windows. Allow different winSizes?
 SystemUnit is starting to have too many forwarding functions. Maybe give direct pointer to sim, but someway restrict
 calling Start.
 ========================================THOUGHTS========================================
