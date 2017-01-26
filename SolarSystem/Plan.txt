@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Added confirmation messsages, more testing. 
-Czech version of help.
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	ConsoleControl needs to be properly tested.
