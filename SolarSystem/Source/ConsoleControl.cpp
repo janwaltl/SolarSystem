@@ -30,7 +30,7 @@ namespace solar
 			//Parametres need for Simulation::Start
 			struct simParams
 			{
-				Simulation::stepTime_t dt;
+				stepTime_t dt;
 				size_t rawMult, DTMult;
 				std::chrono::seconds maxSimTime;
 			};
