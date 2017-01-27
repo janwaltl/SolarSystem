@@ -1,7 +1,6 @@
 #include "LineTrailsDrawer.h"
 
 #include <algorithm>
-#include "Source/Common/Settings.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/UnitTrail.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Error.h"
@@ -11,6 +10,14 @@ namespace solar
 {
 	namespace drawers
 	{
+		namespace
+		{
+			// Whether are lineTrails rendered by default for all units
+			constexpr bool enabledByDefault = true;
+			// How often get trails updated, counted in viewer's frames
+			// Higher values result in more frequent updates and more precise but shorter-lasting trails
+			constexpr size_t resolution = 10;
+		}
 		LineTrailsDrawer::LineTrailsDrawer(size_t dataSize, double aspectRatio) :frameCounter(0)
 		{
 			CreateShader(aspectRatio);
@@ -108,7 +115,7 @@ namespace solar
 			try
 			{
 				trails.resize(dataSize);
-				trailsControls.resize(dataSize, settings::lineTrail::enabledByDefault);
+				trailsControls.resize(dataSize, enabledByDefault);
 
 			}
 			catch (openGL::GLError& e)
@@ -125,7 +132,7 @@ namespace solar
 		{
 			assert(data.size() == trails.size() && trails.size() == trailsControls.size());
 
-			++frameCounter %= settings::lineTrail::resolution;
+			++frameCounter %= resolution;
 			if (!frameCounter)//Only update trails every trailRes frames
 			{
 				auto trailIT = trails.begin();

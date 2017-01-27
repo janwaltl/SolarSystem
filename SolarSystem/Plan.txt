@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-- Removing settings.
-- Actually made something happen on GLFW error
-	- throws Exception from NewFrame()
+- Removed Settings completely.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	ConsoleControl needs to be properly tested.

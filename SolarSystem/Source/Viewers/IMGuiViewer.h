@@ -2,7 +2,6 @@
 #define VIEWERS_IMGUI_VIEWER_HEADER
 
 #include "Viewer.h"
-#include "Source/Common/Settings.h"
 #include "IMGuiViewer/OpenGLBackEnd.h"
 #include "IMGuiViewer/ImGuiBackend.h"
 #include "IMGuiViewer/Drawers/GUIDrawer.h"

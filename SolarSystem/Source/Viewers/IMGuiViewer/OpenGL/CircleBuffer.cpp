@@ -9,6 +9,7 @@ namespace solar
 {
 	namespace openGL
 	{
+
 		CircleBuffer::CircleBuffer(size_t numVertices, float radius)
 		{
 			std::vector<GLfloat> vertices;

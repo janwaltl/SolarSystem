@@ -173,7 +173,6 @@
     <Text Include="Plan.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Common\Settings.cpp" />
     <ClCompile Include="Source\Units\SystemUnit.cpp" />
     <ClCompile Include="Source\ConsoleControl.cpp" />
     <ClCompile Include="Source\Main.cpp" />
@@ -207,7 +206,6 @@
     <ClCompile Include="Source\Viewers\ViewAndRecord.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Common\Settings.h" />
     <ClInclude Include="Source\Units\SystemUnit.h" />
     <ClInclude Include="Source\Units\PhysicsUnits.h" />
     <ClInclude Include="Source\Common\Timing.h" />

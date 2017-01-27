@@ -1,6 +1,5 @@
 #include "SimDataDrawer.h"
 
-#include "Source/Common/Settings.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/CircleBuffer.h"
 #include "Source/Viewers/ImGUIViewer.h"
@@ -9,10 +8,17 @@ namespace solar
 {
 	namespace drawers
 	{
+		namespace
+		{
+			// Number of vertices to aproximate circle with.
+			constexpr size_t resolution=12;
+			// In normalized screen units = <0,1.0>, 1.0 creates circle that spans across whole horizontal axis
+			constexpr float radius=0.005f;
+		}
+
 		SimDataDrawer::SimDataDrawer(double aspectRatio)
 		{
-			circle = std::make_unique<openGL::CircleBuffer>(settings::circleBuffer::resolution,
-															settings::circleBuffer::radius);
+			circle = std::make_unique<openGL::CircleBuffer>(resolution, radius);
 			CreateShader(aspectRatio);
 		}
 
@@ -21,7 +27,7 @@ namespace solar
 			//For unique ptrs' destructors
 		}
 
-		void SimDataDrawer::Draw(const simData_t& data, double scaleFactor,const Vec2& offset)
+		void SimDataDrawer::Draw(const simData_t& data, double scaleFactor, const Vec2& offset)
 		{
 			shader->Bind();
 			for (const auto& unit : data)

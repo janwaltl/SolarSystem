@@ -2,7 +2,6 @@
 
 #include <fstream>
 #include <algorithm>
-#include "Source/Common/Settings.h"
 #include "Source/Units/SystemUnit.h"
 #include "Source/Common/Exception.h"
 
@@ -13,6 +12,10 @@ namespace solar
 {
 	namespace gui
 	{
+		namespace
+		{
+			constexpr size_t framesAfterJump = 20;
+		}
 		ReplayControls::ReplayControls(const std::string & replayFileName) :
 			fileName(replayFileName), recordNum(1), speed(1.0), tmpRecordNum(1), jumped(false), cleanTimer(0)
 		{
@@ -107,13 +110,13 @@ namespace solar
 				//Sometimes after trails got cleared, there still appeared point with old data, making trail look weird.
 				//This happens, because data get updated only after 'dTime' amount of time has passed.
 				//But, in between there can be unlimited calls to viewer and if there are atleast 'resolution' calls,
-				//then trail will still captures a bad point. So this ensures that first 'resolution+1' calls
+				//then trail will still captures a bad point. So this ensures that first 'framesAfterJump+1' calls
 				//are ignored(cleared).
 				//Which is still not good enough in theory, but works in practice for now.
 				//Final fix is to clear after change of simTime, because that means, that simMethod was called
 				//and data have been updated.
 				//But for that kind of precision, even for small simTime changes, integral simTime is needed.
-				cleanTimer = settings::lineTrail::resolution + 1;
+				cleanTimer = framesAfterJump + 1;
 				jumped = true;
 			}
 
