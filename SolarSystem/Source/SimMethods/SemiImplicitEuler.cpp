@@ -4,7 +4,7 @@
 
 namespace solar
 {
-	void SemiImplicitEuler::operator()( double step)
+	void SemiImplicitEuler::operator()(double step)
 	{
 		step /= physicsUnits::YtoS;
 		//Go through all pairs

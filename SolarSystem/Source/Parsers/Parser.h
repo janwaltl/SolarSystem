@@ -6,7 +6,7 @@
 
 namespace solar
 {
-	//Cares about input and output
+	//Loads simulated data for the simulation and optionally also saves them after the simulation finished.
 	class Parser : public SystemUnit
 	{
 	public:

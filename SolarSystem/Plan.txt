@@ -1,11 +1,12 @@
 =====================================IN THIS COMMIT=====================================
-Cleaning files, commenting, removing magic. Part I
-	-Common, Math
+Cleaning files, commenting, removing magic. Part II
+	- Parsers, SimMethods
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	ConsoleControl needs to be properly tested.
 
 	V. Document it & ship it
+		- Make example 'formatted' text file in FileFormats.
 		- Constants instead of magic values
 		- resolve run-time library warning
 		- go through all files, look for temp comments, includes, anything that is obsolete...

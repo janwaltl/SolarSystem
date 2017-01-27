@@ -7,11 +7,12 @@
 
 namespace solar
 {
-	//To print unit in formatted way, valid only for this parser
 	namespace
 	{
+		//To print unit in formatted way, valid only for this parser
 		std::ostream& operator<< (std::ostream& out, const Unit& unit)
 		{
+			//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
 			out << "name<" << unit.name << ">\n";
 			out << "color<" << unit.color.x << " " << unit.color.y << " " << unit.color.z << " " << unit.color.w << ">\n";
 			out << "position<" << unit.pos.x*physicsUnits::AUtoM << " " << unit.pos.y*physicsUnits::AUtoM << ">\n";
@@ -29,6 +30,8 @@ namespace solar
 
 	simData_t FormattedFileParser::Load()
 	{
+		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
+
 		std::ifstream inputF(inFileName);
 
 		if (!inputF.is_open())
@@ -45,7 +48,6 @@ namespace solar
 		simData_t data;
 
 		//Read first unit
-
 		auto beg = input.find_first_of('{');
 		if (beg == input.npos)
 			return data;
@@ -55,16 +57,17 @@ namespace solar
 			throw Exception("Invalid Format: Closing bracket has not been found.");
 
 		data.emplace_back(ParseUnit(input.substr(beg + 1, end - beg - 1)));
-		//If there is more
+		//If there are more units
 		beg = input.find_first_of('{', end);
 		while (beg != input.npos)
 		{
-			//Find the end of it
+			//Find the ending bracket
 			end = input.find_first_of('}', beg);
 			if (end == input.npos)
 				throw Exception("Invalid Format: Closing bracket has not been found.");
+
 			data.emplace_back(ParseUnit(input.substr(beg + 1, end - beg - 1)));
-			//Try to find another
+			//Try to find another unit
 			beg = input.find_first_of('{', end);
 		}
 
@@ -73,6 +76,8 @@ namespace solar
 
 	void FormattedFileParser::Save(const simData_t & data)
 	{
+		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
+
 		if (!outFileName.empty())
 		{
 			std::ofstream outputF(outFileName, std::ios::trunc | std::ios::out);
@@ -90,6 +95,8 @@ namespace solar
 
 	Unit FormattedFileParser::ParseUnit(const std::string& str)
 	{
+		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
+
 		Unit unit;
 		auto parse = [str = str, &unit = unit](auto fnc, const std::string& token) {
 			try
@@ -110,6 +117,8 @@ namespace solar
 	}
 	std::string FormattedFileParser::ParseToken(const std::string&str, const std::string& token)
 	{
+		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
+
 		auto tokenPos = str.find(token);
 		if (tokenPos != str.npos)
 		{
@@ -128,6 +137,8 @@ namespace solar
 
 	void FormattedFileParser::ParsePosition(Unit & unit, const std::string & val)
 	{
+		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
+
 		if (!val.empty())
 		{
 			size_t pos {};
@@ -138,6 +149,8 @@ namespace solar
 
 	void FormattedFileParser::ParseVelocity(Unit & unit, const std::string & val)
 	{
+		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
+
 		if (!val.empty())
 		{
 			size_t pos {};
@@ -148,12 +161,16 @@ namespace solar
 
 	void FormattedFileParser::ParseMass(Unit & unit, const std::string & val)
 	{
+		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
+
 		if (!val.empty())
 			unit.mass = std::stod(val) / physicsUnits::SMtoKG;//Convert to Suns masses
 	}
 
 	void FormattedFileParser::ParseColor(Unit & unit, const std::string & val)
 	{
+		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
+
 		if (!val.empty())
 		{
 			size_t pos {};
@@ -171,6 +188,8 @@ namespace solar
 
 	void FormattedFileParser::ParseName(Unit & unit, const std::string & val)
 	{
+		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
+
 		unit.name = val;
 	}
 

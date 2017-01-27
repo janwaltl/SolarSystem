@@ -6,19 +6,22 @@
 
 namespace solar
 {
+	//Loads simulated data from formatted text files
+	//Outputed simData's values are NOT in SI units,
+	// - pos is in AU units, velocity in AU/Earth years and mass in multiples of Sun's mass
+	// - Default color is white and pos, mass, vel=0
+	//For detailed description of format, see documentation of examples included with binaries.
+	//Throws 'Exception' on any failure
 	class FormattedFileParser :public Parser
 	{
 	public:
-		//Including extensions, leave outFileName empty if you don't want to save finished simulation
-		FormattedFileParser(const std::string& inputFileName,const std::string& outputFileName="");
-		//Data's values are NOT in SI units,
-		//pos is in AU units, velocity in AU/Earth years and mass in multiples of Sun's mass
-		//Default color is white and pos, mass, vel=0
+		//Including path and extension, leave outFileName empty if you don't want to save finished simulation
+		FormattedFileParser(const std::string& inputFileName, const std::string& outputFileName = "");
 		simData_t Load() override final;
 		void Save(const simData_t& data) override final;
 	private:
 		static Unit ParseUnit(const std::string& str);
-		//Str must in format of' token=<val>', where val is returned string
+		//Str must be in format of' token=<val>', where val is returned string
 		//Throws Exception if invalid
 		static std::string ParseToken(const std::string&str, const std::string& token);
 

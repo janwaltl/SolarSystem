@@ -5,7 +5,7 @@
 
 namespace solar
 {
-	//Loads hard-coded data of solarSystem
+	//Loads hard-coded data of solar system
 	class SolarParser :public Parser
 	{
 	public:

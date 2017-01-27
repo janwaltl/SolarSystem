@@ -2,12 +2,13 @@
 
 #include "Source/Common/Exception.h"
 
-//#include <iostream>
 namespace solar
 {
 	ReplayerSimMethod::ReplayerSimMethod(const std::string & inFileName) :
 		inFile(inFileName)
 	{
+		//This function works with replay files whose format is documented in FileFormats/ReplayerFile.txt
+
 		in.open(inFile, std::ios::in | std::ios::binary);
 		if (!in.is_open())
 			throw Exception("Cannot open replay file: \'" + inFile + "\'.");
@@ -24,6 +25,8 @@ namespace solar
 	}
 	void ReplayerSimMethod::Prepare()
 	{
+		//This function works with replay files whose format is documented in FileFormats/ReplayerFile.txt
+
 		in.open(inFile, std::ios::in | std::ios::binary);
 		if (!in.is_open())
 			throw Exception("Cannot open replay file: \'" + inFile + "\'.");
@@ -40,12 +43,13 @@ namespace solar
 	}
 	void ReplayerSimMethod::operator()(double)
 	{
+		//This function works with replay files whose format is documented in FileFormats/ReplayerFile.txt
+
 		double tmp = this->GetSimTime() / this->GetDtime() / double(multiplier);
 		uint32_t recordNum = static_cast<uint32_t>(tmp);
 		double lambda = tmp - recordNum;//For interpolation
 		if (recordNum >= numRecords)//Stop at the end, obviously...
 			recordNum = numRecords - 1;//Because 'recordNum' starts at zero and ends at 'numRecords-1'
-		///Maybe even Pause
 
 		//Reads record number 'recordNum' and the next one.
 		//Then interpolates between them
@@ -73,7 +77,5 @@ namespace solar
 			(*data)[i].vel.x += lambda*posVel[2];
 			(*data)[i].vel.y += lambda*posVel[3];
 		}
-
-		//std::cout << recordNum +1<< "/" << numRecords << "\t\t" << lambda << std::endl;
 	}
 }

@@ -66,7 +66,6 @@ namespace solar
 
 			data[i].name = std::string(name, nameL);
 
-			///Might use Vec4, but padding, constructors, C-casts....
 			double color[4];
 			in.read(reinterpret_cast<char*>(&color), sizeof(color));
 			data[i].color = Vec4(color[0], color[1], color[2], color[3]);
@@ -75,10 +74,11 @@ namespace solar
 			in.read(reinterpret_cast<char*>(&mass), sizeof(mass));
 			data[i].mass = mass;
 		}
-		//Initialize them to their intial value = first record
+
+		//Initialize them to their initial value = first record
 		for (decltype(numUnits) i = 0; i < numUnits; ++i)
 		{
-			//PosX,PosY,VelX,VelY
+			//PosX, PosY, VelX, VelY
 			double posVel[4];
 
 			in.read(reinterpret_cast<char*>(&posVel), sizeof(posVel));
