@@ -42,6 +42,13 @@ namespace solar
 			this->y *= static_cast<double>(val);
 			return *this;
 		}
+		template< typename T>
+		Vec2& operator/=(T val)
+		{
+			this->x /= static_cast<double>(val);
+			this->y /= static_cast<double>(val);
+			return *this;
+		}
 	};
 
 	template<typename T>
@@ -54,6 +61,18 @@ namespace solar
 	Vec2 operator*(T val, Vec2 vec)
 	{
 		vec *= val;
+		return vec;
+	}
+	template<typename T>
+	Vec2 operator/(Vec2 vec, T val)
+	{
+		vec /= val;
+		return vec;
+	}
+	template<typename T>
+	Vec2 operator/(T val, Vec2 vec)
+	{
+		vec /= val;
 		return vec;
 	}
 }

@@ -5,7 +5,8 @@
 
 namespace solar
 {
-	//Exception class to use in project
+	//Exception class used by this program
+	//Derived from std::runtime_error(so from  std::exception too)
 	class Exception : public std::runtime_error
 	{
 		using std::runtime_error::runtime_error;

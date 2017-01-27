@@ -112,6 +112,9 @@
     <ClCompile Include="Source\Units\SystemUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Common\Timing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Simulation.h">

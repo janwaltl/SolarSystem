@@ -9,7 +9,7 @@ namespace solar
 	public:
 		double x, y, z, w;
 
-		explicit Vec4(double x = 0.0, double y = 0.0, double z = 0.0, double w = 0.0) :x(x), y(y), z(z), w(w) {}
+		constexpr explicit Vec4(double x = 0.0, double y = 0.0, double z = 0.0, double w = 0.0) :x(x), y(y), z(z), w(w) {}
 		Vec4& operator+=(const Vec4& other)
 		{
 			this->x += other.x;

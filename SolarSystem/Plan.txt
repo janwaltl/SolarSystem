@@ -1,11 +1,11 @@
 =====================================IN THIS COMMIT=====================================
-- Removed Settings completely.
+Cleaning files, commenting, removing magic. Part I
+	-Common, Math
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	ConsoleControl needs to be properly tested.
 
 	V. Document it & ship it
-		- Rename Settings to Constants.
 		- Constants instead of magic values
 		- resolve run-time library warning
 		- go through all files, look for temp comments, includes, anything that is obsolete...

@@ -173,6 +173,7 @@
     <Text Include="Plan.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Common\Timing.cpp" />
     <ClCompile Include="Source\Units\SystemUnit.cpp" />
     <ClCompile Include="Source\ConsoleControl.cpp" />
     <ClCompile Include="Source\Main.cpp" />
