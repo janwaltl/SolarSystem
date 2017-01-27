@@ -71,7 +71,7 @@ namespace solar
 
 		for (decltype(numUnits) i = 0; i < numUnits; ++i)
 		{
-			uint8_t nameL = (*data)[i].name.length();
+			auto nameL = static_cast<uint8_t>((*data)[i].name.length());
 			out.write(reinterpret_cast<char*>(&nameL), sizeof(nameL));
 			out.write((*data)[i].name.c_str(), nameL * sizeof(std::string::value_type));//Do not encode '\'
 
@@ -83,7 +83,7 @@ namespace solar
 			out.write(reinterpret_cast<char*>(&(*data)[i].mass), sizeof((*data)[i].mass));
 		}
 		//Write offset now
-		offset = out.tellp();
+		offset = static_cast<uint32_t>(out.tellp());
 		out.seekp(offsetPos);
 		out.write(reinterpret_cast<char*>(&offset), sizeof(offset));
 		out.seekp(offset);//Return back

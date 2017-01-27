@@ -1,20 +1,14 @@
 =====================================IN THIS COMMIT=====================================
-Cleaning #includes and files in general. Part II
-	- Renamed Common to PhysicsUnits
-	- Moved PhysicsUnits, SystemUnit to Units folder
-	- Created small file SystemUnitTypes.h storing viewer, parser, simMethod types
-
+Cleaning #includes and files in general. Part III
+	- almost zero warnings build
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	ConsoleControl needs to be properly tested.
 
 	V. Document it & ship it
-		- Clean #include dependecies
-			- remove Common.h
 		- Rename Settings to Constants.
 		- Constants instead of magic values
-		- SORT all compile warnings 
-			- even double->float ? static cast makes it ugly
+		- resolve run-time library warning
 		- go through all files, look for temp comments, includes, anything that is obsolete...
 	VI. OPTIONAL
 		- Little bit nicer/cleaner GUI.

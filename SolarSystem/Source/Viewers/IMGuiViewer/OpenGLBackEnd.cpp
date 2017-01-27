@@ -64,7 +64,7 @@ namespace solar
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		return glfwWindowShouldClose(win);
+		return glfwWindowShouldClose(win)!=0;
 	}
 
 	void OpenGLBackend::ErrorCallback(int err, const char * description)

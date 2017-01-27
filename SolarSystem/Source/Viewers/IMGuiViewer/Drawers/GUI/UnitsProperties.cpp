@@ -24,8 +24,8 @@ namespace solar
 			{
 				if (data.size() > 0)//If there are units
 				{
-					assert(0 <= selectedUnit && selectedUnit < data.size());
-					assert(0 <= selectedRefUnit && selectedRefUnit < data.size() + 1);
+					assert(0 <= selectedUnit && selectedUnit < (int)data.size());
+					assert(0 <= selectedRefUnit && selectedRefUnit < (int)data.size() + 1);
 
 					//Shows list of all units and offers some things to do with them
 					ImGui::Text("Show info about selected unit:");
@@ -126,7 +126,7 @@ namespace solar
 
 		void UnitsProperties::Follow(const simData_t& data, OMSAR & follow)
 		{
-			assert(data.size() > selectedUnit && selectedUnit >= 0);
+			assert((int)data.size() > selectedUnit && selectedUnit >= 0);
 
 			// Move to this position to move followed Unit to screen's center
 			follow.Move(-1.0*follow.ScaleFactor()*data[selectedUnit].pos);

@@ -73,7 +73,7 @@ namespace solar
 			if (ImGui::Button("Slow down"))
 			{
 				speed /= 2.0;
-				sys.SetDTMultiplier(multiplier*speed);
+				sys.SetDTMultiplier(static_cast<uint32_t>(multiplier*speed));
 			}
 			ImGui::SameLine();
 
@@ -90,7 +90,7 @@ namespace solar
 			if (ImGui::Button("Speed up"))
 			{
 				speed *= 2.0;
-				sys.SetDTMultiplier(multiplier*speed);
+				sys.SetDTMultiplier(static_cast<uint32_t>(multiplier*speed));
 			}
 			ImGui::SameLine();
 
@@ -147,7 +147,7 @@ namespace solar
 
 		uint32_t ReplayControls::GetRecordNum(simulatedTime simTime)
 		{
-			return simTime / multiplier / dTime + 1;
+			return static_cast<uint32_t>(simTime / multiplier / dTime) + 1;
 		}
 		void ReplayControls::SetSimTimeBasedOnRecordNum(SystemUnit & sys, uint32_t newRecordNum)
 		{

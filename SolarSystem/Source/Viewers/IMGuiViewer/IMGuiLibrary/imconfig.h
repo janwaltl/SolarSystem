@@ -36,11 +36,12 @@
 //---- Define constructor and implicit cast operators to convert back<>forth from your math types and ImVec2/ImVec4.
 
 #define IM_VEC2_CLASS_EXTRA                                                 \
-        ImVec2(const solar::Vec2& f) { x = f.x; y = f.y; }                       \
+        ImVec2(const solar::Vec2& f) { x = static_cast<float>(f.x); y = static_cast<float>(f.y); }                       \
         operator solar::Vec2() const { return solar::Vec2(x,y); }
 
 #define IM_VEC4_CLASS_EXTRA                                                 \
-        ImVec4(const solar::Vec4& f) { x = f.x; y = f.y; z = f.z; w = f.w; }     \
+        ImVec4(const solar::Vec4& f) { x = static_cast<float>(f.x); y = static_cast<float>(f.y);       \
+									   z = static_cast<float>(f.z); w = static_cast<float>(f.w); }     \
         operator solar::Vec4() const { return solar::Vec4(x,y,z,w); }
 
 
@@ -49,7 +50,7 @@
 /*
 namespace ImGui
 {
-    void    Value(const char* prefix, const MyMatrix44& v, const char* float_format = NULL);
+	void    Value(const char* prefix, const MyMatrix44& v, const char* float_format = NULL);
 }
 */
 

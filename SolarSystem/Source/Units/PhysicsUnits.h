@@ -11,13 +11,13 @@ namespace solar
 	//Conversions between used units and SIUnits
 	namespace physicsUnits
 	{
-		static constexpr long double AUtoM = 149'597'870'700.0; // Astronomical units to meters
-		static constexpr long double YtoS = 31'536'000.0; // Years to seconds
-		static constexpr long double SMtoKG = 1.988435e30; // Solar masses to kilograms
+		static constexpr double AUtoM = 149'597'870'700.0; // Astronomical units to meters
+		static constexpr double YtoS = 31'536'000.0; // Years to seconds
+		static constexpr double SMtoKG = 1.988435e30; // Solar masses to kilograms
 
-		static constexpr long double AUpYtoMpS = AUtoM / YtoS;//AUs per Year to Meters per Second
-		static const long double PI = 4 * atanl(1.0);
-		static const long double G = 4 * PI*PI; // Gravitational constant is 4PI^2 in used units
+		static constexpr double AUpYtoMpS = AUtoM / YtoS;//AUs per Year to Meters per Second
+		static const double PI = 4 * atan(1.0);
+		static const double G = 4 * PI*PI; // Gravitational constant is 4PI^2 in used units
 	};
 }
 

@@ -38,8 +38,8 @@ namespace solar
 		template< typename T>
 		Vec2& operator*=(T val)
 		{
-			this->x *= val;
-			this->y *= val;
+			this->x *= static_cast<double>(val);
+			this->y *= static_cast<double>(val);
 			return *this;
 		}
 	};

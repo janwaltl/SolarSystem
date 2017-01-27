@@ -40,8 +40,8 @@ namespace solar
 	}
 	void ReplayerSimMethod::operator()(double)
 	{
-		auto tmp = this->GetSimTime() / this->GetDtime() / double(multiplier);
-		uint32_t recordNum = tmp;
+		double tmp = this->GetSimTime() / this->GetDtime() / double(multiplier);
+		uint32_t recordNum = static_cast<uint32_t>(tmp);
 		double lambda = tmp - recordNum;//For interpolation
 		if (recordNum >= numRecords)//Stop at the end, obviously...
 			recordNum = numRecords - 1;//Because 'recordNum' starts at zero and ends at 'numRecords-1'
