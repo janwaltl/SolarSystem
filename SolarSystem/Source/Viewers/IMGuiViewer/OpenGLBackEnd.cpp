@@ -8,8 +8,14 @@
 
 namespace solar
 {
-	std::string OpenGLBackend::error;
-
+	namespace
+	{
+		//Stores error message
+		std::string error;
+		bool errTrigger = false;
+		constexpr int winPosX = 5;
+		constexpr int winPosY = 5;
+	}
 
 	//Following usage of GLFW library is  based on their tutorial
 	// at http://www.glfw.org/docs/latest/quick.html .
@@ -30,7 +36,7 @@ namespace solar
 		if (win == nullptr) // if that fails
 			throw Exception("Unable to create Window,reason: " + error);
 
-		glfwSetWindowPos(win, settings::win::pos::x, settings::win::pos::y);
+		glfwSetWindowPos(win, winPosX, winPosY);
 		glfwMakeContextCurrent(win);
 		glewExperimental = GL_TRUE; // Can crash without
 
@@ -64,11 +70,17 @@ namespace solar
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		return glfwWindowShouldClose(win)!=0;
+		if (errTrigger)
+		{
+			errTrigger = false;
+			throw Exception(error);
+		}
+		return glfwWindowShouldClose(win) != 0;
 	}
 
 	void OpenGLBackend::ErrorCallback(int err, const char * description)
 	{
-		error = "ERR " + std::to_string(err) + ": " + description;
+		error = "GLFW error: " + std::to_string(err) + ": " + description;
+		errTrigger = true;
 	}
 }

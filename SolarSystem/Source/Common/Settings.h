@@ -8,19 +8,6 @@ namespace solar
 	// -Now mostly from IMGuiViewer and its subclasses
 	struct settings
 	{
-		struct win
-		{
-			const static std::string title;
-			struct size//Size of created Window in pixels
-			{
-				const static size_t x, y;
-			};
-			struct pos//Position of created Window in pixels
-			{
-				const static size_t x, y;
-			};
-		};
-
 		struct lineTrail
 		{
 			// Maximum number of points in one lineTrail.

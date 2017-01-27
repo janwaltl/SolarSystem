@@ -21,9 +21,6 @@ namespace solar
 		bool NewFrame();
 	private:
 		static void ErrorCallback(int err, const char* description);
-		//Stores error message
-		static std::string error;
-
 		GLFWwindow* win;
 	};
 }

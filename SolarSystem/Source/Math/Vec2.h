@@ -9,7 +9,7 @@ namespace solar
 	public:
 		double x {}, y {};
 
-		explicit Vec2(double x = 0.0, double y = 0.0) :x(x), y(y) {}
+		constexpr explicit Vec2(double x = 0.0, double y = 0.0) :x(x), y(y) {}
 		Vec2& operator+=(const Vec2& other)
 		{
 			this->x += other.x;

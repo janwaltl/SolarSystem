@@ -1,6 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Cleaning #includes and files in general. Part III
-	- almost zero warnings build
+- Removing settings.
+- Actually made something happen on GLFW error
+	- throws Exception from NewFrame()
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	ConsoleControl needs to be properly tested.
@@ -12,7 +13,7 @@ Next:
 		- go through all files, look for temp comments, includes, anything that is obsolete...
 	VI. OPTIONAL
 		- Little bit nicer/cleaner GUI.
-			- Movable,scalable GUI windows. Allow different window size.
+			- Movable, scalable GUI windows. Allow different window size.
 
 		- Create physics unit system
 			- can redefine simData_t to make it a structure with data and in what units they are
