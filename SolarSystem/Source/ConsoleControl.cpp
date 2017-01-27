@@ -298,7 +298,7 @@ Following are examples of correct calls to this application:
 
 				if (outputFile)
 				{
-					std::cout << "; output file:" << *outputFile << "\n";
+					std::cout << "; output file: " << *outputFile << "\n";
 					return std::make_unique<FormattedFileParser>(*inputFile, *outputFile);
 				}
 				else
@@ -376,7 +376,7 @@ Following are examples of correct calls to this application:
 				if (params.maxSimTime == params.maxSimTime.zero())
 					std::cout << " x=unlimited\n";
 				else
-					std::cout << "x=" << params.maxSimTime.count() << "s\n";
+					std::cout << " x=" << params.maxSimTime.count() << "s\n";
 
 				return params;
 			}

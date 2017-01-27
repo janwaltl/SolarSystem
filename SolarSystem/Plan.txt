@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Post-merge fixes.
+Fixed formattedParser's saving.
+Minor tweaks in console.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	ConsoleControl needs to be properly tested.
@@ -8,9 +9,6 @@ Next:
 		- Clean #include dependecies
 		- Rename Settings to Constants.
 		- Constants instead of magic values
-		- Apparently saving does not work as expected
-			- no name or color
-			- wrong units, needs to convert to SI
 		- SORT all compile warnings 
 			- even double->float ? static cast makes it ugly
 		- go through all files, look for temp comments, includes, anything that is obsolete...
@@ -24,4 +22,6 @@ Next:
 					- sort of like chrono - period, denominator,numerator
 
 		- Timing does not feel right
-			- with all the casting, precision...
+			= is better now, probably just fine
+
+		- Solar parser would benefit from saving too(same as formatted?)

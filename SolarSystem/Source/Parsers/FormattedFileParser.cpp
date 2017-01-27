@@ -1,10 +1,25 @@
 #include "FormattedFileParser.h"
 #include <fstream>
 #include <sstream>
+#include <iostream>
 #include "../Exception.h"
-
 namespace solar
 {
+	//To print unit in formatted way, valid only for this parser
+	namespace
+	{
+		std::ostream& operator<< (std::ostream& out, const Unit& unit)
+		{
+			out << "name<" << unit.name << ">\n";
+			out << "color<" << unit.color.x << " " << unit.color.y << " " << unit.color.z << " " << unit.color.w << ">\n";
+			out << "position<" << unit.pos.x*physicsUnits::AUtoM << " " << unit.pos.y*physicsUnits::AUtoM << ">\n";
+			out << "velocity<" << unit.vel.x*physicsUnits::AUpYtoMpS << " " << unit.vel.y*physicsUnits::AUpYtoMpS << ">\n";
+			out << "mass<" << unit.mass*physicsUnits::SMtoKG << ">";//No new line
+
+			return out;
+		}
+	}
+
 	FormattedFileParser::FormattedFileParser(const std::string & inputFileName, const std::string & outputFileName) :
 		inFileName(inputFileName), outFileName(outputFileName)
 	{
@@ -62,10 +77,12 @@ namespace solar
 			if (!outputF.is_open())
 				throw Exception("Output file \'" + outFileName + "\' could not be created/opened.");
 
+			std::cout << "Saving simulated data to file: " << outFileName << '\n';
 			for (const auto& unit : data)
 			{
-				outputF << "{ " << SerializeUnit(unit) << " }\n\n";
+				outputF << "{ " << unit << "}\n\n";
 			}
+			std::cout << data.size() << " units saved.\n";
 		}
 	}
 
@@ -138,13 +155,13 @@ namespace solar
 		if (!val.empty())
 		{
 			size_t pos {};
-			unit.color.x=std::stod(val, &pos);
+			unit.color.x = std::stod(val, &pos);
 			std::string tmp = val.substr(pos);
-			unit.color.y=std::stod(tmp, &pos);
+			unit.color.y = std::stod(tmp, &pos);
 			tmp = tmp.substr(pos);
-			unit.color.z=std::stod(tmp, &pos);
+			unit.color.z = std::stod(tmp, &pos);
 			tmp = tmp.substr(pos);
-			unit.color.w=std::stod(tmp);
+			unit.color.w = std::stod(tmp);
 		}
 		else
 			unit.color = Vec4 {1.0,1.0,1.0,1.0};
@@ -155,15 +172,4 @@ namespace solar
 		unit.name = val;
 	}
 
-	std::string FormattedFileParser::SerializeUnit(const Unit & unit)
-	{
-		std::string str;
-
-		//str += "name<" + unit.name + ">\n";
-		str += "position<" + std::to_string(unit.pos.x) + " " + std::to_string(unit.pos.y) + ">\n";
-		str += "  velocity<" + std::to_string(unit.vel.x) + " " + std::to_string(unit.vel.y) + ">\n";
-		str += "  mass<" + std::to_string(unit.mass) + ">";
-
-		return str;
-	}
 }

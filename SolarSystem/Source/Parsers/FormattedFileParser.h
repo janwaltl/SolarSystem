@@ -27,8 +27,6 @@ namespace solar
 		static void ParseMass(Unit& unit, const std::string& val);
 		static void ParseColor(Unit& unit, const std::string& val);
 		static void ParseName(Unit& unit, const std::string& val);
-		static std::string SerializeUnit(const Unit& unit);
-
 		const std::string inFileName, outFileName;
 		std::string input;
 	};
