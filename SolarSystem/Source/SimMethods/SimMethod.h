@@ -22,8 +22,8 @@ namespace solar
 		friend void LinkUnitAndSim(SimMethod& unit, Simulation& sim, simData_t* data);
 	protected:
 		// Pointer to simulated data, valid in operator() and Prepare().
-		// IT IS NOT SET IN constructor of derived classed
-		simData_t* data;
+		// IT IS NOT VALID IN constructor of derived classed
+		simData_t* data {nullptr};
 	};
 	//Links SimMethod and simulation together, so it has access to simData
 	inline void LinkUnitAndSim(SimMethod& unit, Simulation& sim, simData_t* data)

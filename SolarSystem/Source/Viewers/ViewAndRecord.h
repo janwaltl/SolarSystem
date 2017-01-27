@@ -12,7 +12,7 @@ namespace solar
 	{
 	public:
 		//Passed viewer will be used as ordinary viewer
-		//Recorded simulation is saved in 'outFileName' file, including path and extension
+		//Recorded simulation is saved in 'outFileName' replay file, including path and extension
 		ViewAndRecord(const std::string& outFileName, viewer_p viewer);
 		~ViewAndRecord()override final;
 		void Prepare() override final;

@@ -9,9 +9,9 @@ namespace solar
 	class Simulation;
 	void LinkUnitAndSim(SystemUnit& unit, Simulation& sim);
 
-	//Base class for all modules - Parsers, SimMethods, Viewers
-	//So they can be linked to simulation and can control it
-	//Also indirects control of simulation
+	// Base class for all modules - Parsers, SimMethods, Viewers
+	// So they can be linked to simulation and can control it
+	// Also indirects control of simulation
 	class SystemUnit
 	{
 	public:
@@ -46,7 +46,7 @@ namespace solar
 		friend void LinkUnitAndSim(SystemUnit& unit, Simulation& sim);
 		friend void LinkUnitAndLinkedUnit(SystemUnit& linkedUnit, SystemUnit& toBeLinkedUnit);
 
-		Simulation* sim {};
+		Simulation* sim {nullptr};
 	};
 	//Links SystemUnit and simulation together
 	inline void LinkUnitAndSim(SystemUnit& unit, Simulation& sim)

@@ -14,27 +14,33 @@ namespace solar
 
 	ViewAndRecord::~ViewAndRecord()
 	{
+		//This function works with replay files whose format is documented in FileFormats/ReplayerFile.txt
+
 		assert(out.is_open());
 		//Write correct number of records
 		out.seekp(14);//Offset in header(see fileFormat)
 		out.write(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));
 		out.close();
+
 		std::cout << "Created replay: " << outFile << "\n" << "Total run time: " << GetRunTime() << "s\n";
 		std::cout << "Total sim time: " << GetSimTimeSecs() << "s\n";
 		std::cout << "Total number of records: " << numRecords << "\n";
 	}
 	void ViewAndRecord::Prepare()
 	{
+		//This function works with replay files whose format is documented in FileFormats/ReplayerFile.txt
+
 		out.open(outFile, std::ios::out | std::ios::binary | std::ios::trunc);
 		if (!out.is_open())
 			throw Exception("Cannot create replay file: \'" + outFile + "\'.");
 
+		//Save simulation's parametres
 		CreateHeader();
 		//Save initial positions and velocities of each unit
 		SavePosVel();
 		//Keep file open for recording.
 
-		//Because viewer has not been linked to simulation, but this class(also a viewer) has been.
+		//Because viewer has not been linked to simulation(and needs to be), but this class(also a viewer) has been.
 		LinkUnitAndLinkedUnit(*this, *viewer);
 		viewer->Prepare();
 
@@ -50,6 +56,7 @@ namespace solar
 		//This function works with replay files whose format is documented in FileFormats/ReplayerFile.txt
 
 		assert(out.is_open());
+
 		out.write("RE", 2);
 
 		double deltaT = this->GetDtime();
@@ -103,6 +110,8 @@ namespace solar
 	}
 	void ViewAndRecord::SavePosVel()
 	{
+		//This function works with replay files whose format is documented in FileFormats/ReplayerFile.txt
+
 		for (size_t i = 0; i < data->size(); ++i)
 		{
 			out.write(reinterpret_cast<char*>(&(*data)[i].pos.x), sizeof((*data)[i].pos.x));

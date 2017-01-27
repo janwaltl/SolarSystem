@@ -1,6 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Cleaning files, commenting, removing magic. Part II
-	- Parsers, SimMethods
+Cleaning files, commenting, removing magic. Part III
+	- Units, Viewers(except IMGuiViewer)
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	ConsoleControl needs to be properly tested.

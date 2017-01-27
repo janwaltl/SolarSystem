@@ -7,7 +7,7 @@
 namespace solar
 {
 
-	//Used physics units: AU,years,Sun's weight
+	//Used physics units: AU, Earth's years, Sun's weight
 	//Conversions between used units and SIUnits
 	namespace physicsUnits
 	{

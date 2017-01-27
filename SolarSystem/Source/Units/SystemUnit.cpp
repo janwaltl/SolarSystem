@@ -1,4 +1,6 @@
 #include "SystemUnit.h"
+
+#include <cassert>
 #include "Source/Simulation.h"
 
 namespace solar

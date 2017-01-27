@@ -6,7 +6,7 @@
 
 namespace solar
 {
-	//Do nothing
+	//Does nothing
 	class EmptyViewer :public Viewer
 	{
 	public:
