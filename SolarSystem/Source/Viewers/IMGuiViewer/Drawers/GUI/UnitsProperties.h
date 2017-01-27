@@ -1,7 +1,8 @@
 #ifndef IMGUIVIEWER_GUI_UNITS_PROPERTIES_HEADER
 #define IMGUIVIEWER_GUI_UNITS_PROPERTIES_HEADER
 
-#include "Source/Common/Common.h"
+#include "Source/Math/Math.h"
+#include "Source/Units/Unit.h"
 
 namespace solar
 {

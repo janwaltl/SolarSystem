@@ -2,6 +2,7 @@
 #include <cmath>
 #include <vector>
 #include <array>
+#include "Source/Common/Common.h"
 
 namespace solar
 {

@@ -1,4 +1,5 @@
 #include "SolarParser.h"
+#include "Source/Common/Common.h"
 
 namespace solar
 {

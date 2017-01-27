@@ -1,9 +1,8 @@
 #include "SystemUnit.h"
-#include "../Simulation.h"
+#include "Source/Simulation.h"
 
 namespace solar
 {
-
 	void SystemUnit::StopSimulation()
 	{
 		assert(sim);

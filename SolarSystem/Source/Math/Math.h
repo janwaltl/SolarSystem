@@ -1,10 +1,10 @@
 #ifndef MATH_32572305239_HEADER
 #define MATH_32572305239_HEADER
 
-
 #include <cmath>
 #include "Vec2.h"
 #include "Vec4.h"
+
 namespace solar
 {
 	inline double lengthsq(const Vec2& vec)

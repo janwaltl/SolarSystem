@@ -1,9 +1,9 @@
 #include "UnitsProperties.h"
 
+#include "Source/Common/Common.h"
 #include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
 #include "Source/Viewers/IMGuiViewer/OMSARPolicy.h"
 
-#include <iostream>
 namespace solar
 {
 	namespace gui

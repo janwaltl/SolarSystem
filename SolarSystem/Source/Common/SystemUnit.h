@@ -1,23 +1,22 @@
-#ifndef COMMON_SYSTEMUNIT_HEADER
-#define COMMON_SYSTEMUNIT_HEADER
+#ifndef COMMON_SYSTEM_UNIT_HEADER
+#define COMMON_SYSTEM_UNIT_HEADER
 
-#include "Common.h"
+#include "Timing.h"
 
 namespace solar
 {
 	class SystemUnit;
-
+	class Simulation;
 	void LinkUnitAndSim(SystemUnit& unit, Simulation& sim);
 
-	//Base class for all components - Parsers,SimMethods,Viewers
+	//Base class for all modules - Parsers, SimMethods, Viewers
 	//So they can be linked to simulation and can control it
+	//Also indirects control of simulation
 	class SystemUnit
 	{
 	public:
 		void StopSimulation();
-		//Pauses the simulation
 		void PauseSimulation();
-		//Resumes paused simulation
 		void ResumeSimulation();
 		//Simulates one step of the simulation, then pauses again
 		void StepSimulation();
@@ -33,9 +32,9 @@ namespace solar
 		simulatedTime GetSimTime() const;
 		//Returns simulated time in seconds
 		double GetSimTimeSecs() const;
-		//Sets new sim time in seconds
+		//Sets new sim time
 		void SetSimTime(simulatedTime newSimTime);
-		//Returns last's frame time
+		//Returns last's frame time in seconds
 		double GetFrameTime() const;
 
 		size_t GetDTMultiplier() const;

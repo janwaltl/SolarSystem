@@ -1,7 +1,9 @@
 #ifndef VIEWERS_VIEWER_HEADER
 #define VIEWERS_VIEWER_HEADER
 
-#include "../Common/SystemUnit.h"
+
+#include "Source/Common/SystemUnit.h"
+#include "Source/Units/Unit.h"
 
 namespace solar
 {

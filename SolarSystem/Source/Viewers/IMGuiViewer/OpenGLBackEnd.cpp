@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include "Source/Exception.h"
 #include "OpenGL/Error.h"
+#include "Source/Common/Settings.h"
 
 namespace solar
 {

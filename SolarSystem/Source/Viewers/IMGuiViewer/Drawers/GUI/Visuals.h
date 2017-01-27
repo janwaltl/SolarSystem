@@ -1,7 +1,9 @@
 #ifndef IMGUIVIEWER_GUI_VISUALS_HEADER
 #define IMGUIVIEWER_GUI_VISUALS_HEADER
 
-#include "Source/Common/Common.h"
+
+#include "Source/Units/Unit.h"
+
 namespace solar
 {
 	namespace drawers

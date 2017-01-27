@@ -1,12 +1,15 @@
 =====================================IN THIS COMMIT=====================================
-Fixed formattedParser's saving.
-Minor tweaks in console.
+Cleaning #includes and files in general. Part I
+Getting rid of Common.h
+Removed old setters/getters in Vec4
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	ConsoleControl needs to be properly tested.
 
 	V. Document it & ship it
 		- Clean #include dependecies
+			- remove Common.h
 		- Rename Settings to Constants.
 		- Constants instead of magic values
 		- SORT all compile warnings 

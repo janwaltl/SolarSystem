@@ -2,7 +2,8 @@
 #define OPENGLBACKEND_UNIT_TRAIL_HEADER
 
 #include "Source/Common/Common.h"
-
+#include "Source/Math/Math.h"
+#include <algorithm>
 namespace solar
 {
 	namespace openGL

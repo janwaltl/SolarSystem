@@ -2,7 +2,8 @@
 #define OFFSET_MOVE_SCALE_AR_POLICY_HEADER
 
 #include "Source/Math/Math.h"
-#include "Source/Common/Common.h"
+#include "Source/Units/Unit.h"
+
 namespace solar
 {
 	//Policy that provides Offset-Move-Scale-AR behaviour to child class

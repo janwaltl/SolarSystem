@@ -2,6 +2,7 @@
 #define COMMON_TIMING_HEADER
 
 #include <chrono>
+#include <cassert>
 
 namespace solar
 {
@@ -14,8 +15,8 @@ namespace solar
 	{
 		using secsType = std::chrono::seconds;
 		using fracType = std::chrono::steady_clock::duration;
-		secsType seconds;//store whole seconds
-		fracType fraction;//Store fraction of seconds 
+		secsType seconds;
+		fracType fraction;
 
 		explicit simulatedTime(double secs = 0.0)
 		{
@@ -85,15 +86,15 @@ namespace solar
 		using type = std::chrono::duration<Rep, Per>;
 		return  time.count() * type::period::num / double(type::period::den);
 	}
-
+	//Converts time duration to seconds
 	inline double ToSecs(const simulatedTime& time)
 	{
 		return ToSecs(time.seconds) + ToSecs(time.fraction);
 	}
 
+	// Years,Days,Hours,Minutes,Seconds
 	struct SplittedTime
 	{
-		//Years,Days,Hours,Minutes,Seconds
 		uint32_t Y, D, H, M, S;
 	};
 	inline SplittedTime SplitTime(const simulatedTime& time)

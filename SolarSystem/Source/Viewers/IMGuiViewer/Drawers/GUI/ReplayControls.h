@@ -1,7 +1,9 @@
 #ifndef IMGUIVIEWER_GUI_REPLAY_CONTROLS_HEADER
 #define IMGUIVIEWER_GUI_REPLAY_CONTROLS_HEADER
 
-#include "Source/Common/Common.h"
+#include <string>
+#include "Source/Common/SystemUnit.h"
+#include "Source/Common/Timing.h"
 
 namespace solar
 {

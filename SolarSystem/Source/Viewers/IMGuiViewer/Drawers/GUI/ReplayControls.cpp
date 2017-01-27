@@ -2,10 +2,11 @@
 
 #include <fstream>
 #include <algorithm>
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
-#include "Source/Viewers/IMGuiViewer/Drawers/LineTrailsDrawer.h"
+#include "Source/Common/Settings.h"
 #include "Source/Common/SystemUnit.h"
 #include "Source/Exception.h"
+#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
+#include "Source/Viewers/IMGuiViewer/Drawers/LineTrailsDrawer.h"
 
 namespace solar
 {

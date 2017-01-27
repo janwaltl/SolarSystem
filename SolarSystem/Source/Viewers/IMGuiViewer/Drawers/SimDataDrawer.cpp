@@ -1,5 +1,6 @@
 #include "SimDataDrawer.h"
 
+#include "Source/Common/Settings.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/CircleBuffer.h"
 #include "Source/Viewers/ImGUIViewer.h"

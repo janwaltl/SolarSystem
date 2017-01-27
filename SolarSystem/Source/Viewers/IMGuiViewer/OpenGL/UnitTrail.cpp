@@ -5,6 +5,8 @@
 #include <vector>
 #include <numeric>
 #include <algorithm>
+#include <cassert>
+#include "Source/Common/Settings.h"
 #include "Shader.h"
 #include "Error.h"
 

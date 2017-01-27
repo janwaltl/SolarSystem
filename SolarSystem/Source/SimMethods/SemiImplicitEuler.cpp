@@ -1,5 +1,6 @@
 #include "SemiImplicitEuler.h"
 #include <iostream>
+#include "Source/Common/Common.h"
 
 namespace solar
 {

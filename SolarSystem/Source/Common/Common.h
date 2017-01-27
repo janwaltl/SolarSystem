@@ -1,26 +1,11 @@
 #ifndef COMMON_1345325_HEADER
 #define COMMON_1345325_HEADER
 
-#include <memory>
-#include <vector>
-#include <cassert>
 
-#include "Source/Units/Unit.h"
-#include "Settings.h"
-#include "Timing.h"
-
+#include <cmath>
 
 namespace solar
 {
-	class Parser;
-	class SimMethod;
-	class Viewer;
-	class Simulation;
-
-	using simData_t = std::vector<Unit>;
-	using parser_p = std::unique_ptr<Parser>;
-	using simMethod_p = std::unique_ptr<SimMethod>;
-	using viewer_p = std::unique_ptr<Viewer>;
 
 	//Used physics units: AU,years,Sun's weight
 	//Conversions between used units and SIUnits

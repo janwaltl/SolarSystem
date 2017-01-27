@@ -1,8 +1,10 @@
 #ifndef ELEMENTS_ELEMENT_HEADER
 #define ELEMENTS_ELEMENT_HEADER
 
-#include "../Math/Math.h"
 #include <string>
+#include <vector>
+#include "Source/Math/Math.h"
+
 namespace solar
 {
 	//Basic unit of simulated data - planet, star, moon...
@@ -20,6 +22,8 @@ namespace solar
 		Vec4 color;
 		std::string name;
 	};
+
+	using simData_t = std::vector<Unit>;
 }
 
 

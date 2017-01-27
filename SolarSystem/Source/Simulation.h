@@ -2,10 +2,19 @@
 #define SIMULATION_HEADER
 
 #include <chrono>
-#include "Common/Common.h"
-
+#include <memory>
+#include "Common/Timing.h"
+#include "Units/Unit.h"
 namespace solar
 {
+	class Parser;
+	class SimMethod;
+	class Viewer;
+
+	using parser_p = std::unique_ptr<Parser>;
+	using simMethod_p = std::unique_ptr<SimMethod>;
+	using viewer_p = std::unique_ptr<Viewer>;
+
 	//Simulates solar system
 	class Simulation
 	{

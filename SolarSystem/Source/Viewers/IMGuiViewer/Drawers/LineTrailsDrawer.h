@@ -1,6 +1,9 @@
 #ifndef DRAWERS_LINE_TRAILS_DRAWER_HEADER
 #define DRAWERS_LINE_TRAILS_DRAWER_HEADER
 
+#include <memory>
+#include "Source/Units/Unit.h"
+#include "Source/Math/Math.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/UnitTrail.h"
 
 namespace solar

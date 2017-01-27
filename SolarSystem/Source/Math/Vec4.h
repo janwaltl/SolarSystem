@@ -1,11 +1,14 @@
-#ifndef MATH_VEC4_HEADER
-#define MATH_VEC4_HEADER
+#ifndef MATH_VEC4_4257923752391_HEADER
+#define MATH_VEC4_4257923752391_HEADER
 
 namespace solar
 {
 	//Four-dimensional vector of doubles
 	struct Vec4
 	{
+	public:
+		double x, y, z, w;
+
 		explicit Vec4(double x = 0.0, double y = 0.0, double z = 0.0, double w = 0.0) :x(x), y(y), z(z), w(w) {}
 		Vec4& operator+=(const Vec4& other)
 		{
@@ -45,17 +48,6 @@ namespace solar
 			this->w *= val;
 			return *this;
 		}
-
-		double X() const { return x; }
-		double Y() const { return y; }
-		double Z() const { return z; }
-		double W() const { return w; }
-		void X(double newX) { x = newX; }
-		void Y(double newY) { y = newY; }
-		void Z(double newZ) { z = newZ; }
-		void W(double newW) { w = newW; }
-	public:
-		double x, y, z, w;
 	};
 
 	template<typename T>

@@ -1,11 +1,14 @@
-#ifndef MATH_VEC2_HEADER
-#define MATH_VEC2_HEADER
+#ifndef MATH_VEC2_3562362386348_HEADER
+#define MATH_VEC2_3562362386348_HEADER
 
 namespace solar
 {
 	//Two dimensional vector of doubles
 	struct Vec2
 	{
+	public:
+		double x {}, y {};
+
 		explicit Vec2(double x = 0.0, double y = 0.0) :x(x), y(y) {}
 		Vec2& operator+=(const Vec2& other)
 		{
@@ -39,8 +42,6 @@ namespace solar
 			this->y *= val;
 			return *this;
 		}
-	public:
-		double x {}, y {};
 	};
 
 	template<typename T>
