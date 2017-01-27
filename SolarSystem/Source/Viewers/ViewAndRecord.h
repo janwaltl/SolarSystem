@@ -1,8 +1,9 @@
 #ifndef VIEWERS_VIEW_AND_RECORD_HEADER
 #define VIEWERS_VIEW_AND_RECORD_HEADER
 
-#include "Viewer.h"
 #include <fstream>
+#include "Viewer.h"
+#include "Source/Units/SystemUnitTypes.h"
 
 namespace solar
 {

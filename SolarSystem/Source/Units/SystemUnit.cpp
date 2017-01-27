@@ -27,7 +27,7 @@ namespace solar
 	}
 	double SystemUnit::GetSimTimeSecs() const
 	{
-		auto& time = sim->GetSimTime();
+		const auto& time = sim->GetSimTime();
 		return ToSecs(time);
 	}
 	void SystemUnit::SetSimTime(simulatedTime newSimTime)

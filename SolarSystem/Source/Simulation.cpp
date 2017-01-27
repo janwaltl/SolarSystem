@@ -5,7 +5,7 @@
 #include "SimMethods/SimMethod.h"
 #include "Viewers/Viewer.h"
 #include <thread>
-#include "Exception.h"
+#include "Source/Common/Exception.h"
 
 namespace solar
 {

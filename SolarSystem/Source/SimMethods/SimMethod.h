@@ -2,7 +2,7 @@
 #define SIMMETHODS_SIMMETHOD_HEADER
 
 #include <cassert>
-#include "Source/Common/SystemUnit.h"
+#include "Source/Units/SystemUnit.h"
 #include "Source/Units/Unit.h"
 
 namespace solar

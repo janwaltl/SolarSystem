@@ -4,7 +4,7 @@
 #include <string>
 #include <GL/glew.h>
 #include <map>
-#include "Source/Exception.h"
+#include "Source/Common/Exception.h"
 
 namespace solar
 {

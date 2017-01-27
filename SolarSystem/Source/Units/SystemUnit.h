@@ -1,7 +1,7 @@
 #ifndef COMMON_SYSTEM_UNIT_HEADER
 #define COMMON_SYSTEM_UNIT_HEADER
 
-#include "Timing.h"
+#include "Source/Common/Timing.h"
 
 namespace solar
 {

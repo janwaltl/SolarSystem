@@ -1,6 +1,7 @@
 #include "ReplayerMethod.h"
 
-#include "Source/Exception.h"
+#include "Source/Common/Exception.h"
+
 //#include <iostream>
 namespace solar
 {

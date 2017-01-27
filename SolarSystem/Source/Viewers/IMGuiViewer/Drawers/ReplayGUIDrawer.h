@@ -1,7 +1,7 @@
 #ifndef DRAWERS_REPLAY_GUIDRAWER_HEADER
 #define DRAWERS_REPLAY_GUIDRAWER_HEADER
 
-#include "Source/Common/Common.h"
+
 #include "GUI/UnitsProperties.h"
 #include "GUI/ReplayControls.h"
 #include "LineTrailsDrawer.h"

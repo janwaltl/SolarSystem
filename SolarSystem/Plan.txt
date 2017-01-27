@@ -1,7 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Cleaning #includes and files in general. Part I
-Getting rid of Common.h
-Removed old setters/getters in Vec4
+Cleaning #includes and files in general. Part II
+	- Renamed Common to PhysicsUnits
+	- Moved PhysicsUnits, SystemUnit to Units folder
+	- Created small file SystemUnitTypes.h storing viewer, parser, simMethod types
 
 ========================================IMPLEMENTING PLAN========================================
 Next:

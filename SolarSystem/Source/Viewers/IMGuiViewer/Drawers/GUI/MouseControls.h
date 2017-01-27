@@ -1,8 +1,6 @@
 #ifndef IMGUIVIEWER_GUI_MOUSE_CONTROLS_HEADER
 #define IMGUIVIEWER_GUI_MOUSE_CONTROLS_HEADER
 
-#include "Source/Common/Common.h"
-
 namespace solar
 {
 	class OMSAR;

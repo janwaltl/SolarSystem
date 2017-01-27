@@ -2,12 +2,12 @@
 #define IMGUIVIEWER_GUI_REPLAY_CONTROLS_HEADER
 
 #include <string>
-#include "Source/Common/SystemUnit.h"
 #include "Source/Common/Timing.h"
 
 namespace solar
 {
 	class SystemUnit;
+
 	namespace drawers
 	{
 		class LineTrailsDrawer;

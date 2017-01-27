@@ -1,6 +1,6 @@
 #include "ReplayerParser.h"
 #include <fstream>
-#include "Source/Exception.h"
+#include "Source/Common/Exception.h"
 
 namespace solar
 {

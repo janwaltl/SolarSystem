@@ -1,8 +1,9 @@
-#include "Source/Simulation.h"
 #include "ViewAndRecord.h"
-#include "Source/Exception.h"
 
 #include <iostream>
+#include "Source/Simulation.h"
+#include "Source/Common/Exception.h"
+
 namespace solar
 {
 	ViewAndRecord::ViewAndRecord(const std::string& outFileName, viewer_p viewer) :

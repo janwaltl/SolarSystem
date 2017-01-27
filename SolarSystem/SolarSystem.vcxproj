@@ -174,7 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Settings.cpp" />
-    <ClCompile Include="Source\Common\SystemUnit.cpp" />
+    <ClCompile Include="Source\Units\SystemUnit.cpp" />
     <ClCompile Include="Source\ConsoleControl.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Parsers\FormattedFileParser.cpp" />
@@ -208,8 +208,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\Settings.h" />
-    <ClInclude Include="Source\Common\SystemUnit.h" />
-    <ClInclude Include="Source\Common\Common.h" />
+    <ClInclude Include="Source\Units\SystemUnit.h" />
+    <ClInclude Include="Source\Units\PhysicsUnits.h" />
     <ClInclude Include="Source\Common\Timing.h" />
     <ClInclude Include="Source\ConsoleControl.h" />
     <ClInclude Include="Source\Math\Vec4.h" />
@@ -221,8 +221,9 @@
     <ClInclude Include="Source\SimMethods\ReplayerMethod.h" />
     <ClInclude Include="Source\SimMethods\RK4.h" />
     <ClInclude Include="Source\SimMethods\SemiImplicitEuler.h" />
+    <ClInclude Include="Source\Units\SystemUnitTypes.h" />
     <ClInclude Include="Source\Units\Unit.h" />
-    <ClInclude Include="Source\Exception.h" />
+    <ClInclude Include="Source\Common\Exception.h" />
     <ClInclude Include="Source\Math\Math.h" />
     <ClInclude Include="Source\Math\Vec2.h" />
     <ClInclude Include="Source\Parsers\Parser.h" />

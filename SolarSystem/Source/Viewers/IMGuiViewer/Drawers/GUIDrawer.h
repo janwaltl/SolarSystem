@@ -2,9 +2,10 @@
 #define DRAWERS_GUIDRAWER_HEADER
 
 
-#include "Source/Common/Common.h"
 #include "GUI/UnitsProperties.h"
 #include "LineTrailsDrawer.h"
+#include "Source/Units/Unit.h"
+
 namespace solar
 {
 	class IMGuiViewer;

@@ -2,18 +2,12 @@
 #define SIMULATION_HEADER
 
 #include <chrono>
-#include <memory>
 #include "Common/Timing.h"
 #include "Units/Unit.h"
+#include "Units/SystemUnitTypes.h"
+
 namespace solar
 {
-	class Parser;
-	class SimMethod;
-	class Viewer;
-
-	using parser_p = std::unique_ptr<Parser>;
-	using simMethod_p = std::unique_ptr<SimMethod>;
-	using viewer_p = std::unique_ptr<Viewer>;
 
 	//Simulates solar system
 	class Simulation
@@ -52,7 +46,6 @@ namespace solar
 		//Returns elapsed realTime in seconds
 		double GetRunTime() const;
 		//Returns elapsed simTime in seconds
-		//Does NOT work in NotTimed Start
 		simulatedTime GetSimTime() const;
 		//Sets new simTime in seconds
 		void SetSimTime(simulatedTime newSimTime);
