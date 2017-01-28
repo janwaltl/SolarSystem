@@ -5,7 +5,7 @@ namespace solar
 	ReplayerViewer::ReplayerViewer(const std::string& replayFileName, size_t width, size_t height,
 								   const std::string& title) :
 		OMSAR(1.0, width / double(height), Vec2(0.0, 0.0)), replayFileName(replayFileName),
-		openGL(width, height, title), imguiBackend(openGL.GetWin())
+		openGL(width, height, title), imguiBackend(openGL.GetWin()), w(width), h(height)
 	{
 	}
 	void ReplayerViewer::Prepare()
@@ -24,7 +24,7 @@ namespace solar
 		// Process GUI, then render Units, THEN render GUI.
 		// So GUI is rendered over the Units, but processed before them to be able to set correct scaleFactor, offset
 		imguiBackend.NewFrame(GetFrameTime());
-		replayGUIDrawer->Draw(*data, *this, *lineTrailsDrawer);
+		replayGUIDrawer->Draw(*data, *this, *lineTrailsDrawer, w, h);
 		simDataDrawer->Draw(*data, ScaleFactor(), GetOffset());
 		lineTrailsDrawer->Draw(*data, ScaleFactor(), GetOffset());
 		imguiBackend.Render();

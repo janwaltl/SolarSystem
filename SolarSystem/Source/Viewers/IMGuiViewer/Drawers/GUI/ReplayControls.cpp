@@ -30,7 +30,7 @@ namespace solar
 			in.close();
 		}
 
-		void ReplayControls::operator()(SystemUnit & sys, drawers::LineTrailsDrawer* lineTrails)
+		void ReplayControls::operator()(SystemUnit & sys, drawers::LineTrailsDrawer* lineTrails, size_t w, size_t h)
 		{
 			recordNum = GetRecordNum(sys.GetSimTime());
 
@@ -39,8 +39,8 @@ namespace solar
 				sys.PauseSimulation();
 				recordNum = numRecords;
 			}
-			ImGui::SetNextWindowPos(ImVec2(10, 620), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(1200, 80), ImGuiSetCond_Once);
+			ImGui::SetNextWindowPos(ImVec2(10, h-80), ImGuiSetCond_Once);
+			ImGui::SetNextWindowSize(ImVec2(w-10, 80), ImGuiSetCond_Once);
 			if (ImGui::Begin("Replay controls", NULL, ImGuiWindowFlags_NoCollapse |
 							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar))
 			{

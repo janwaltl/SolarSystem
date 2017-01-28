@@ -1,13 +1,11 @@
 =====================================IN THIS COMMIT=====================================
-Got doubleClick working. Also windows can be moved, resized, collapsed.
+Made some windows' size and positions dynamic.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	V. Document it & ship it
 		- resolve run-time library warning
 		- Apparently decimal comma does not work, so update documentation on that.
 	VI. OPTIONAL
-		- Little bit nicer/cleaner GUI.
-			- Movable, scalable GUI windows. Allow different window size.
 
 		- Create physics unit system
 			- can redefine simData_t to make it a structure with data and in what units they are

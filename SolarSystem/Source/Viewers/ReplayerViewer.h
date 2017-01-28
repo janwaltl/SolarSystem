@@ -21,6 +21,7 @@ namespace solar
 		void Prepare() override final;
 		void operator()() override final;
 	private:
+		size_t w, h;
 		const std::string replayFileName;
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT

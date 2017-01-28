@@ -10,13 +10,14 @@ namespace solar
 {
 	namespace drawers
 	{
-		void GUIDrawer::Draw(simData_t& data, IMGuiViewer& viewer, drawers::LineTrailsDrawer& lineTrails)
+		void GUIDrawer::Draw(simData_t& data, IMGuiViewer& viewer, drawers::LineTrailsDrawer& lineTrails,
+							 size_t w, size_t h)
 		{
 			gui::GrabControl(viewer);
 			gui::ZoomControl(viewer);
 			unitsProps(data, &viewer);
 			gui::SimProperties(viewer);
-			gui::Visuals(lineTrails, data);
+			gui::Visuals(lineTrails, data, w, h);
 		}
 	}
 }

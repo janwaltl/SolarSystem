@@ -15,7 +15,8 @@ namespace solar
 		class GUIDrawer
 		{
 		public:
-			void Draw(simData_t& data, IMGuiViewer& viewer, drawers::LineTrailsDrawer& lineTrails);
+			void Draw(simData_t& data, IMGuiViewer& viewer, drawers::LineTrailsDrawer& lineTrails,
+					  size_t w, size_t h);
 		private:
 			gui::UnitsProperties unitsProps;
 		};

@@ -8,10 +8,11 @@ namespace solar
 {
 	namespace gui
 	{
-		void Visuals(drawers::LineTrailsDrawer & lineTrails, const simData_t & data)
+		void Visuals(drawers::LineTrailsDrawer & lineTrails, const simData_t & data, size_t w, size_t h)
 		{
-			ImGui::SetNextWindowPos(ImVec2(950, 10), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(250, 610), ImGuiSetCond_Once);
+
+			ImGui::SetNextWindowPos(ImVec2(w - 250, 10), ImGuiSetCond_Once);
+			ImGui::SetNextWindowSize(ImVec2(250, std::min(400, (int)h)), ImGuiSetCond_Once);
 			if (ImGui::Begin("Visuals", NULL))
 			{
 				if (ImGui::CollapsingHeader("Line Trails:", nullptr, false, false))

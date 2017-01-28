@@ -22,7 +22,7 @@ namespace solar
 			//Draws the window
 			//SystemUnit is used to get info about simulation
 			//lineTrails are cleaned after jumping
-			void operator()(SystemUnit& sys, drawers::LineTrailsDrawer* lineTrails);
+			void operator()(SystemUnit& sys, drawers::LineTrailsDrawer* lineTrails, size_t w, size_t h);
 		private:
 			void ControlButtons(SystemUnit& sys, drawers::LineTrailsDrawer* lineTrails);
 			void ReplayInfo(SystemUnit& sys);

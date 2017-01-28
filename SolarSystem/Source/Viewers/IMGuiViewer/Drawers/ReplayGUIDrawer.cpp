@@ -12,13 +12,14 @@ namespace solar
 		{
 		}
 
-		void ReplayGUIDrawer::Draw(simData_t & data, ReplayerViewer & viewer, drawers::LineTrailsDrawer & lineTrails)
+		void ReplayGUIDrawer::Draw(simData_t & data, ReplayerViewer & viewer, drawers::LineTrailsDrawer & lineTrails,
+								   size_t w, size_t h)
 		{
 			gui::GrabControl(viewer);
 			gui::ZoomControl(viewer);
 			unitsProps(data, &viewer);
-			replayControls(viewer, &lineTrails);
-			gui::Visuals(lineTrails, data);
+			replayControls(viewer, &lineTrails, w, h);
+			gui::Visuals(lineTrails, data,w,h);
 		}
 	}
 }
