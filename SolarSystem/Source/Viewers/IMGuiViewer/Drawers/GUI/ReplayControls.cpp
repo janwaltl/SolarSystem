@@ -51,8 +51,8 @@ namespace solar
 				ReplayInfo(sys);
 				ImGui::Columns(1);
 				ProgressBar();
-				ImGui::End();
 			}
+			ImGui::End();
 
 		}
 		void ReplayControls::ControlButtons(SystemUnit & sys, drawers::LineTrailsDrawer* lineTrails)

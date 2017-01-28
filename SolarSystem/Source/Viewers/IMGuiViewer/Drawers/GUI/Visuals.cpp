@@ -12,16 +12,15 @@ namespace solar
 		{
 			ImGui::SetNextWindowPos(ImVec2(950, 10), ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(ImVec2(250, 610), ImGuiSetCond_Once);
-			if (ImGui::Begin("Visuals", NULL, ImGuiWindowFlags_NoCollapse |
-							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize))
+			if (ImGui::Begin("Visuals", NULL))
 			{
 				if (ImGui::CollapsingHeader("Line Trails:", nullptr, false, false))
 				{
 					LineTrailsControls(lineTrails);
 					LineTrailsBoxes(lineTrails, data);
 				}
-				ImGui::End();
 			}
+			ImGui::End();
 		}
 		void LineTrailsControls(drawers::LineTrailsDrawer & lineTrails)
 		{

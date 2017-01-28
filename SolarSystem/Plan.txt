@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-OSMAR::ResetZoom is AR-correct.
+Got doubleClick working. Also windows can be moved, resized, collapsed.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	V. Document it & ship it

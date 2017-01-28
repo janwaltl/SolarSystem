@@ -19,8 +19,7 @@ namespace solar
 		{
 			ImGui::SetNextWindowPos(winPos, ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(winSize, ImGuiSetCond_Once);
-			if (ImGui::Begin("Units' properties", NULL, ImGuiWindowFlags_NoCollapse |
-							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize))
+			if (ImGui::Begin("Units' properties", NULL))
 			{
 				if (data.size() > 0)//If there are units
 				{
@@ -72,8 +71,8 @@ namespace solar
 				}
 				else
 					ImGui::TextColored({1.0,0.0,0.0,1.0}, "There are no units.");
-				ImGui::End();
 			}
+			ImGui::End();
 
 			if (following && follow)
 				Follow(data, *follow);

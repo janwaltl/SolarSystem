@@ -21,7 +21,7 @@ namespace solar
 		IMGuiBackend(GLFWwindow* win);
 		~IMGuiBackend();
 
-		void NewFrame();
+		void NewFrame(double lastFrameTime);
 		void Render();
 	private:
 		void SetImGUISettings();

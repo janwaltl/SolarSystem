@@ -23,7 +23,7 @@ namespace solar
 		// Order dependent
 		// Process GUI, then render Units, THEN render GUI.
 		// So GUI is rendered over the Units, but processed before them to be able to set correct scaleFactor, offset
-		imguiBackend.NewFrame();
+		imguiBackend.NewFrame(GetFrameTime());
 		replayGUIDrawer->Draw(*data, *this, *lineTrailsDrawer);
 		simDataDrawer->Draw(*data, ScaleFactor(), GetOffset());
 		lineTrailsDrawer->Draw(*data, ScaleFactor(), GetOffset());

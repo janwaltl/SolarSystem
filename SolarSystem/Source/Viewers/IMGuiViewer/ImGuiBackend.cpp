@@ -31,13 +31,17 @@ namespace solar
 		if (err != openGL::errors::noError)
 			throw Exception("Failed to initialized IMGUI, because of following GL error: " + openGL::TranslateError(err));
 	}
-	void IMGuiBackend::NewFrame()
+	void IMGuiBackend::NewFrame(double lastFrameTime)
 	{
-		//Fill mouse position, because according to documentation needs to be done every frame
+		//Fill mouse position, because according to documentation needs to be done every frame,
+		//Other things seems to work fine just using callbacks.
+
 		ImGuiIO& io = ImGui::GetIO();
 		double x, y;
 		glfwGetCursorPos(win, &x, &y);
 		io.MousePos = {static_cast<float>(x),static_cast<float>(y)};
+		io.DeltaTime = static_cast<float>(lastFrameTime);
+
 		ImGui::NewFrame();
 	}
 	void IMGuiBackend::Render()
@@ -84,7 +88,6 @@ namespace solar
 
 		//Register Draw function
 		io.RenderDrawListsFn = IMGuiBackend::RenderFnc;
-
 		//OpenGL settings
 		glEnable(GL_BLEND);
 		glBlendEquation(GL_FUNC_ADD);

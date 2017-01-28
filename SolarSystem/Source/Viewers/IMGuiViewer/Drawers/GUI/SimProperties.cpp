@@ -95,14 +95,13 @@ namespace solar
 		{
 			ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(ImVec2(250, 300), ImGuiSetCond_Once);
-			if (ImGui::Begin("Simulation's controls", NULL, ImGuiWindowFlags_NoCollapse |
-							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize))
+			if (ImGui::Begin("Simulation's controls", NULL))
 			{
 				SimControls(sys);
 				ImGui::Separator();
 				SimMetrics(sys);
-				ImGui::End();
 			}
+			ImGui::End();
 		}
 
 		void SimControls(SystemUnit& sys)
