@@ -2,6 +2,7 @@
 #include "Source/Viewers/ReplayerViewer.h"
 #include "GUI/Visuals.h"
 #include "GUI/MouseControls.h"
+
 namespace solar
 {
 	namespace drawers

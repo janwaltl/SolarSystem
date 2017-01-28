@@ -4,7 +4,6 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 #include <numeric>
-#include <algorithm>
 #include <cassert>
 #include "Shader.h"
 #include "Error.h"
@@ -44,7 +43,7 @@ namespace solar
 				// - Fourth point ovewrites the first one and line is correctly rendered
 				//	 in order of second, third and fourth point as it should. Thanks to that indices array's structure.
 				// 
-				// It wastes memory a little, but 40KB or 80KB for 10'000 indices is nothing fro GPU memory
+				// It wastes memory a little, but 40KB or 80KB for 10'000 indices is nothing for GPU memory
 				// In dire need it can be done with just 0 to n indices and two draw calls
 				//		- one for old line(after curIndex) and one for new overwritten line(before curIndex indices)
 
@@ -98,7 +97,6 @@ namespace solar
 
 		void UnitTrail::Push(const Vec2 & newPos)
 		{
-			//newPos could be maybe passed directly into glCall, but class's padding...
 			GLfloat data[2] = {static_cast<GLfloat>(newPos.x),static_cast<GLfloat>(newPos.y)};
 			//Uploads newPos into VBO
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -111,7 +109,7 @@ namespace solar
 
 		void UnitTrail::Draw() const
 		{
-			//If line's buffer is not full yet, render from beginning. Or the point are eing overwritten, then use
+			//If line's buffer is not full yet, render from beginning. Or the points are being overwritten, then use
 			//curIndex to mark first index to be rendered(explained in ctor)
 			void* firstIndexOffset = length != maxLength ?
 				nullptr : reinterpret_cast<void*>(curIndex * sizeof(GLuint));

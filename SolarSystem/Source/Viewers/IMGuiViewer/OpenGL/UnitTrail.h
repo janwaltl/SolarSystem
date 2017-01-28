@@ -10,6 +10,7 @@ namespace solar
 		//Line trail behind unit
 		//Stores and renders maxLength amount of points as line strip behind the unit
 		//Each call to Push add new line point, when maxLength is reached, new points overwrite the oldest ones
+		// = like a queue
 		class UnitTrail
 		{
 		public:
@@ -19,12 +20,11 @@ namespace solar
 			UnitTrail(UnitTrail&& other);
 			UnitTrail& operator=(const UnitTrail&) = delete;
 			UnitTrail& operator=(UnitTrail&& other);
-			//Frees VBO,VAO and IBO if this was last instance of class
+			//Frees VBO, VAO and IBO if this was last instance of class
 			~UnitTrail();
 			//Adds new line point to trail
 			void Push(const Vec2& newPos);
 			//Draws UnitTrail, appropriate shader MUST be bind before call
-			// - unitS from OpenGLBackend for now
 			void Draw() const;
 			//Removes all points from trail
 			void Clear();

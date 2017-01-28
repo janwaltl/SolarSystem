@@ -1,10 +1,10 @@
 #include "GUIDrawer.h"
 
-#include "Source/Viewers/IMGuiViewer.h"
 
 #include "GUI/Visuals.h"
 #include "GUI/SimProperties.h"
 #include "GUI/MouseControls.h"
+#include "Source/Viewers/IMGuiViewer.h"
 
 namespace solar
 {

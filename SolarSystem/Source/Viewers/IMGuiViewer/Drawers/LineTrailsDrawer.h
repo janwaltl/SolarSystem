@@ -38,7 +38,7 @@ namespace solar
 			void UpdateTrails(const simData_t& data);
 
 			size_t frameCounter;
-			
+
 			std::unique_ptr<openGL::Shader> shader;
 			std::vector<openGL::UnitTrail> trails;
 			std::vector<bool> trailsControls;

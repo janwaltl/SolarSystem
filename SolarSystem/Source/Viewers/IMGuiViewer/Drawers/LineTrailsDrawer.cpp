@@ -1,10 +1,9 @@
 #include "LineTrailsDrawer.h"
 
 #include <algorithm>
+#include <cassert>
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
-#include "Source/Viewers/IMGuiViewer/OpenGL/UnitTrail.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Error.h"
-#include "Source/Viewers/IMGuiViewer.h"
 
 namespace solar
 {

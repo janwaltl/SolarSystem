@@ -2,7 +2,6 @@
 
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/CircleBuffer.h"
-#include "Source/Viewers/ImGUIViewer.h"
 
 namespace solar
 {
@@ -11,9 +10,9 @@ namespace solar
 		namespace
 		{
 			// Number of vertices to aproximate circle with.
-			constexpr size_t resolution=12;
+			constexpr size_t resolution = 12;
 			// In normalized screen units = <0,1.0>, 1.0 creates circle that spans across whole horizontal axis
-			constexpr float radius=0.005f;
+			constexpr float radius = 0.005f;
 		}
 
 		SimDataDrawer::SimDataDrawer(double aspectRatio)

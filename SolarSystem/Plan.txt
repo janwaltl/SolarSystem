@@ -1,13 +1,12 @@
 =====================================IN THIS COMMIT=====================================
-Cleaning files, commenting, removing magic. Part IV
-	- IMGuiViewer/,OpenGL/(except UnitTrail)
-
-	- that leaves: UnitTrail,ImGuiLibrary,Drawers
+Cleaning files, commenting, removing magic. Part V
+	- UnitTrail, ImGuiLibrary, Drawers
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	ConsoleControl needs to be properly tested.
 
 	V. Document it & ship it
+		- Fix Replay jump weird line with integer simTime.
 		- Test OSMAR::ResetZoom for AR-correctness.
 		- Make example 'formatted' text file in FileFormats.
 		- Constants instead of magic values
