@@ -41,8 +41,7 @@ namespace solar
 			double speed;
 			//Replay's filename
 			std::string fileName;
-			//cleans trails after jump, BUG FIX see ControlButtons()
-			size_t cleanTimer;
+			simulatedTime jumpTime;
 			bool jumped;
 		};
 	}

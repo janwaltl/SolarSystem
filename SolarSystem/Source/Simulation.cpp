@@ -122,7 +122,7 @@ namespace solar
 		return ToSecs(runTime);
 	}
 
-	simulatedTime Simulation::GetSimTime() const
+	const simulatedTime& Simulation::GetSimTime() const
 	{
 		return simTime;
 	}

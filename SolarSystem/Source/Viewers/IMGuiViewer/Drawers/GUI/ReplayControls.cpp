@@ -12,12 +12,8 @@ namespace solar
 {
 	namespace gui
 	{
-		namespace
-		{
-			constexpr size_t framesAfterJump = 20;
-		}
 		ReplayControls::ReplayControls(const std::string & replayFileName) :
-			fileName(replayFileName), recordNum(1), speed(1.0), tmpRecordNum(1), jumped(false), cleanTimer(0)
+			fileName(replayFileName), recordNum(1), speed(1.0), tmpRecordNum(1), jumped(false)
 		{
 			std::ifstream in(fileName, std::ios::binary);
 			if (!in.is_open())
@@ -61,17 +57,21 @@ namespace solar
 		}
 		void ReplayControls::ControlButtons(SystemUnit & sys, drawers::LineTrailsDrawer* lineTrails)
 		{
-			if (jumped && lineTrails)//BUG FIX, see below
+			//BUG FIX:
+			//After changing simTime, old data can still get pushed into lineTrails
+			// because new data will be fetched only after call to simMethod, which can be as much as 'deltaT' time
+			// delayed, but in between, there can be unlimited number of calls to viewer and thus to lineTrails.
+			// This ensures that they are cleared until new data arrive. Because change in simTime implies call to simMethod
+			// and consequently new data.
+			if (jumped && jumpTime == sys.GetSimTime())
 			{
-				if (cleanTimer > 0)
-				{
-					--cleanTimer;
-					lineTrails->ClearAll();
-				}
-				else
-					jumped = false;
+				lineTrails->ClearAll();
 			}
-
+			else if (jumped)
+			{
+				lineTrails->ClearAll();
+				jumped = false;
+			}
 
 			if (ImGui::Button("Slow down"))
 			{
@@ -106,18 +106,9 @@ namespace solar
 			if (ImGui::Button("Jump"))
 			{
 				SetSimTimeBasedOnRecordNum(sys, tmpRecordNum);
-				//BUG FIX?
-				//Sometimes after trails got cleared, there still appeared point with old data, making trail look weird.
-				//This happens, because data get updated only after 'dTime' amount of time has passed.
-				//But, in between there can be unlimited calls to viewer and if there are atleast 'resolution' calls,
-				//then trail will still captures a bad point. So this ensures that first 'framesAfterJump+1' calls
-				//are ignored(cleared).
-				//Which is still not good enough in theory, but works in practice for now.
-				//Final fix is to clear after change of simTime, because that means, that simMethod was called
-				//and data have been updated.
-				//But for that kind of precision, even for small simTime changes, integral simTime is needed.
-				cleanTimer = framesAfterJump + 1;
 				jumped = true;
+				jumpTime = sys.GetSimTime();
+				lineTrails->ClearAll();
 			}
 
 			ImGui::PopItemWidth();

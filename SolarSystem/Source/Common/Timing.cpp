@@ -17,6 +17,10 @@ namespace solar
 	{
 		return right < *this;
 	}
+	bool simulatedTime::operator==(const simulatedTime & right) const
+	{
+		return seconds == right.seconds && fraction == right.fraction;
+	}
 	simulatedTime & simulatedTime::operator+=(const simulatedTime & right)
 	{
 		using namespace std::chrono_literals;

@@ -23,7 +23,7 @@ namespace solar
 	{
 		return sim->GetRunTime();
 	}
-	simulatedTime SystemUnit::GetSimTime() const
+	const simulatedTime& SystemUnit::GetSimTime() const
 	{
 		return sim->GetSimTime();
 	}

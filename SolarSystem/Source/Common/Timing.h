@@ -20,6 +20,7 @@ namespace solar
 		explicit simulatedTime(double secs = 0.0);
 		bool operator<(const simulatedTime& right) const;
 		bool operator>(const simulatedTime& right) const;
+		bool operator==(const simulatedTime& right) const;
 		simulatedTime& operator+=(const simulatedTime& right);
 		simulatedTime& operator-=(const simulatedTime& right);
 		double operator/=(double factor);

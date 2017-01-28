@@ -1,17 +1,14 @@
 =====================================IN THIS COMMIT=====================================
-Cleaning files, commenting, removing magic. Part V
-	- UnitTrail, ImGuiLibrary, Drawers
+Fixed weird lines after replay jump. Hopefully for good.
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	ConsoleControl needs to be properly tested.
 
 	V. Document it & ship it
-		- Fix Replay jump weird line with integer simTime.
 		- Test OSMAR::ResetZoom for AR-correctness.
 		- Make example 'formatted' text file in FileFormats.
-		- Constants instead of magic values
 		- resolve run-time library warning
-		- go through all files, look for temp comments, includes, anything that is obsolete...
 	VI. OPTIONAL
 		- Little bit nicer/cleaner GUI.
 			- Movable, scalable GUI windows. Allow different window size.
@@ -20,8 +17,5 @@ Next:
 			- can redefine simData_t to make it a structure with data and in what units they are
 				- would also contain conversion function and all definitions of units
 					- sort of like chrono - period, denominator,numerator
-
-		- Timing does not feel right
-			= is better now, probably just fine
 
 		- Solar parser would benefit from saving too(same as formatted?)

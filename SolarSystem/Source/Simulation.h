@@ -46,7 +46,7 @@ namespace solar
 		//Returns elapsed realTime in seconds
 		double GetRunTime() const;
 		//Returns elapsed simTime in seconds
-		simulatedTime GetSimTime() const;
+		const simulatedTime& GetSimTime() const;
 		//Sets new simTime in seconds
 		void SetSimTime(simulatedTime newSimTime);
 		//Returns last's frame time
