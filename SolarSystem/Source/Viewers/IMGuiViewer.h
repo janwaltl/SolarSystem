@@ -11,6 +11,8 @@
 
 namespace solar
 {
+	//Renders Graphical interface that allows controlling the simulation
+	//Also shows 2D visualization of simulated data
 	class IMGuiViewer :public Viewer, public OMSAR
 	{
 	public:

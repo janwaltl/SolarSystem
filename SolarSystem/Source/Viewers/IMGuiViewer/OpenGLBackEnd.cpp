@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Source/Common/Exception.h"
+#include "Source/Math/Math.h"
 #include "OpenGL/Error.h"
 
 namespace solar
@@ -13,7 +14,9 @@ namespace solar
 		std::string error;
 		bool errTrigger = false;
 		constexpr int winPosX = 5;
-		constexpr int winPosY = 5;
+		constexpr int winPosY = 20;
+		//Background color
+		constexpr Vec4 bgColor(0.0, 0.0, 0.0, 1.0);
 	}
 
 	//Following usage of GLFW library is  based on their tutorial
@@ -29,7 +32,7 @@ namespace solar
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		//Do not allow rezising, because it's too much work to make it nice
+		//Do not allow rezising
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 		win = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr); // create actual window
 		if (win == nullptr) // if that fails
@@ -42,11 +45,12 @@ namespace solar
 		if (glewInit() != GLEW_OK) // tries to initialize glew
 			throw Exception("GLEW initialization failed.");
 
-		openGL::CheckForError();//glewInit causes INVALID_ENUM for some reason...
+		openGL::CheckForError();//glewInit causes INVALID_ENUM for some reason, this clears it.
 
 		glViewport(0, 0, width, height); // sets correct coordinate viewport
-		glfwSwapInterval(0);//turn off VSYNC if possible - to prevent useless slow-down
-
+		//Turn off VSYNC if possible - makes frameTime inaccurate
+		//Still, might be ingnored by driver's settings
+		glfwSwapInterval(0);
 	}
 
 	OpenGLBackend::~OpenGLBackend()
@@ -65,8 +69,8 @@ namespace solar
 	bool OpenGLBackend::NewFrame()
 	{
 		glfwSwapBuffers(win);
-		glfwPollEvents();
-		glClearColor(0.0, 0.0, 0.0, 1.0);
+		glfwPollEvents();//Get system events, calls registered callbacks
+		glClearColor((GLclampf)bgColor.x, (GLclampf)bgColor.y, (GLclampf)bgColor.z, (GLclampf)bgColor.w);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		if (errTrigger)

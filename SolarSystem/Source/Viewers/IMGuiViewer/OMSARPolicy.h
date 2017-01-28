@@ -6,19 +6,20 @@
 
 namespace solar
 {
-	//Policy that provides Offset-Move-Scale-AR behaviour to child class
+	//Policy that provides Offset-Move-Scale-AR behaviour to child classes
 	class OMSAR
 	{
 	public:
 		OMSAR(double scaleFactor, double AR, Vec2 offset) :
 			scaleFactor(scaleFactor), AR(AR), offset(offset)
-		{
-		}
+		{}
+
 		double ScaleFactor() { return scaleFactor; }
 		void ScaleFactor(double newFactor) { scaleFactor = newFactor; }
 
 		void Move(const Vec2 newOffset) { offset = newOffset; }
 		Vec2 GetOffset() { return offset; }
+
 		//Sets scaleFactor to such value, that all units' positions*scaleFactor falls into <-scale,scale> range
 		void ResetZoom(const simData_t& data, double scale);
 

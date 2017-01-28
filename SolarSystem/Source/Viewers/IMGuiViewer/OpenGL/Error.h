@@ -29,16 +29,18 @@ namespace solar
 		class GLError : public Exception
 		{
 		public:
-			///Dont use string ctors for now
 			//using Exception::Exception;
-			GLError::GLError(errors err) :Exception(TranslateError(err)),error(err) {}
+			GLError::GLError(errors err) :Exception(TranslateError(err)), error(err) {}
 			errors GetErrType() { return error; }
 		private:
 			errors error;
 		};
 
+		//Asks OpenGL for any error that might have happend and returns it
 		errors CheckForError();
-		//Throws GLError
+
+		//Throws GLError on any OpenGL errors
+		//Calls any functions/functor before throwing(ONLY if it WILL throw)
 		template<typename... CleanUp> void ThrowOnError(CleanUp&&... callBeforeThrow)
 		{
 			auto err = CheckForError();
@@ -46,7 +48,7 @@ namespace solar
 			{
 				using expand = bool[];
 				//Calls all passed functions
-				expand{true,((void)callBeforeThrow(), true) ...};
+				expand {true,(std::forward<CleanUp>(callBeforeThrow)(), true) ...};
 				throw GLError(err);
 			}
 		}
@@ -62,11 +64,12 @@ namespace solar
 		}
 
 		//DEBUG ONLY, throws GLError
+		//Calls any functions/functor before throwing(ONLY if it WILL throw)
 		template<typename... CleanUp>
 		inline void ThrowOnErrorDBG(CleanUp&&... callBeforeThrow)
 		{
 #ifdef _DEBUG
-			ThrowOnError(std::forward<CleanUp...>(callBeforeThrow)...);
+			ThrowOnError(std::forward<CleanUp>(callBeforeThrow)...);
 #endif
 		}
 	}

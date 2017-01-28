@@ -8,7 +8,7 @@ struct GLFWwindow;
 
 namespace solar
 {
-	//Handles stuff related to OpenGL
+	//Initializes OpenGL, GLFW and creates a window
 	class OpenGLBackend
 	{
 	public:
@@ -17,9 +17,10 @@ namespace solar
 		//Destroys OpenGL context and GLFW window
 		~OpenGLBackend();
 		GLFWwindow* GetWin();
-		//Returns whether window should be closed
+		//Returns whether window should be closed(Close button pressed for example)
 		bool NewFrame();
 	private:
+		//Callback function to be called on any GLFW error
 		static void ErrorCallback(int err, const char* description);
 		GLFWwindow* win;
 	};

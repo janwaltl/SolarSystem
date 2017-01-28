@@ -9,12 +9,13 @@ namespace solar
 {
 	namespace openGL
 	{
-		//Manager for OpenGL's shader
+		//Wrapper for OpenGL's shader
 		class Shader
 		{
 		public:
 			Shader(const std::string& vertexSource, const std::string& fragSource);
-			//Moving can be enabled, but meh, not needed anyway
+			//Moving can be enabled,but not needed anyway
+			//Either way, just swap programIDs and uniforms
 			Shader(const Shader& shader) = delete;
 			Shader(Shader&& shader) = delete;
 			Shader& operator=(const Shader& shader) = delete;

@@ -7,6 +7,10 @@
 
 namespace solar
 {
+	namespace
+	{
+		constexpr size_t logBufSize = 1024;
+	}
 	namespace openGL
 	{
 		Shader::Shader(const std::string & vertexSource, const std::string & fragSource)
@@ -21,8 +25,8 @@ namespace solar
 			glGetShaderiv(vertShader, GL_COMPILE_STATUS, &success);
 			if (!success)
 			{
-				GLchar log[1024];
-				glGetShaderInfoLog(vertShader, 512, NULL, log);
+				GLchar log[logBufSize];
+				glGetShaderInfoLog(vertShader, logBufSize, NULL, log);
 				throw Exception("Error:Vertex Shader's compilation failed,reason:\n" + std::string(log));
 			}
 
@@ -36,9 +40,9 @@ namespace solar
 			if (!success)
 			{
 				glDeleteShader(vertShader);//Because we will throw
-				GLchar log[1024];
-				glGetShaderInfoLog(fragShader, 512, NULL, log);
-				throw Exception("Error:Fragment Shader's compilation failed,reason:\n" + std::string(log));
+				GLchar log[logBufSize];
+				glGetShaderInfoLog(fragShader, logBufSize, NULL, log);
+				throw Exception("Error:Fragment Shader's compilation failed, reason:\n" + std::string(log));
 			}
 
 			//Link shaders together
@@ -52,17 +56,17 @@ namespace solar
 			{
 				glDeleteShader(vertShader);//Because we will throw
 				glDeleteShader(fragShader);//Because we will throw
-				GLchar log[1024];
-				glGetProgramInfoLog(programID, 512, NULL, log);
-				throw Exception("Error:Shader's linkage has failed,reason:\n" + std::string(log));
+				GLchar log[logBufSize];
+				glGetProgramInfoLog(programID, logBufSize, NULL, log);
+				throw Exception("Error:Shader's linkage has failed, reason:\n" + std::string(log));
 			}
 			LoadUniforms();
 			//They are not needed anymore
 			glDeleteShader(fragShader);
 			glDeleteShader(vertShader);
-
+			
 			//Throws if something failed, but it mostly should be covered by above checks...
-			ThrowOnError();
+			ThrowOnError([this]() {glDeleteProgram(this->programID); });
 		}
 		Shader::~Shader()
 		{
@@ -98,7 +102,7 @@ namespace solar
 		void Shader::SetUniform4f(const std::string & name, const Vec4 & vec) const
 		{
 			SetUniform4f(name,
-						 static_cast<float>(vec.x), 
+						 static_cast<float>(vec.x),
 						 static_cast<float>(vec.y),
 						 static_cast<float>(vec.z),
 						 static_cast<float>(vec.w));

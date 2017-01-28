@@ -12,10 +12,12 @@ namespace solar
 	{
 		class Shader;
 	}
-	//Handles ImGui related stuff, also sets glfw callbacks
+	//Integrates ImGui library into program
+	//Handles its initialization and also sets callbacks for mouse&keyboard
 	class IMGuiBackend
 	{
 	public:
+		//Needs valid GLFWindow to register callbacks
 		IMGuiBackend(GLFWwindow* win);
 		~IMGuiBackend();
 
@@ -34,8 +36,11 @@ namespace solar
 		void static MouseButtonCallback(GLFWwindow* win, int button, int action, int mods);
 		void static CharacterCallback(GLFWwindow* win, unsigned int ch);
 		void static MouseEnterCallback(GLFWwindow* win, int enter);
+
 		GLFWwindow* win;
+		//Shader to use for rendering of ImGui
 		static std::unique_ptr<openGL::Shader> shader;
+		//Font texture and buffer for vertex data
 		static unsigned int textID, VAO, IBO, VBO;
 	};
 }

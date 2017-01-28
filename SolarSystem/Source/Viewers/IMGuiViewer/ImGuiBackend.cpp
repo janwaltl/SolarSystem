@@ -11,10 +11,15 @@ namespace solar
 	unsigned int IMGuiBackend::textID, IMGuiBackend::VAO, IMGuiBackend::IBO, IMGuiBackend::VBO;
 	std::unique_ptr<openGL::Shader> IMGuiBackend::shader;
 
+	// Following code is based on documentation in imgui.h; imgui.cpp and examples 
+	// on library's official page: https://github.com/ocornut/imgui
+
+
 	IMGuiBackend::IMGuiBackend(GLFWwindow * win)
 	{
-		assert(win);//If nullptr, that means this is initializing first, which should not. Or OpenGLBackend failed, which
-					//shouldve thrown.
+		assert(win);//If nullptr, that means this is initializing first, which should not.
+					// Or OpenGLBackend failed, which should've thrown - so does not end up here either.
+
 		this->win = win;
 		SetImGUISettings();
 		LoadShader();
@@ -28,7 +33,7 @@ namespace solar
 	}
 	void IMGuiBackend::NewFrame()
 	{
-		//Fill mouse position
+		//Fill mouse position, because according to documentation needs to be done every frame
 		ImGuiIO& io = ImGui::GetIO();
 		double x, y;
 		glfwGetCursorPos(win, &x, &y);
@@ -51,6 +56,8 @@ namespace solar
 	void IMGuiBackend::SetImGUISettings()
 	{
 		ImGuiIO& io = ImGui::GetIO();
+
+		//Map to translate GLFW keys to ImGui keys
 		io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;
 		io.KeyMap[ImGuiKey_LeftArrow] = GLFW_KEY_LEFT;
 		io.KeyMap[ImGuiKey_RightArrow] = GLFW_KEY_RIGHT;
@@ -78,11 +85,20 @@ namespace solar
 		//Register Draw function
 		io.RenderDrawListsFn = IMGuiBackend::RenderFnc;
 
+		//OpenGL settings
+		glEnable(GL_BLEND);
+		glBlendEquation(GL_FUNC_ADD);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glDisable(GL_CULL_FACE);
+		glDisable(GL_DEPTH_TEST);
+
 		SetStyle();
 	}
 
 	void IMGuiBackend::SetStyle()
 	{
+		//This style is heavily based on https://www.unknowncheats.me/forum/direct3d/189635-imgui-style-settings.html
+
 		ImGuiStyle * style = &ImGui::GetStyle();
 
 		style->WindowPadding = ImVec2(15, 15);
@@ -189,7 +205,6 @@ namespace solar
 		shader->SetUniform4Mat("orthoProjMat", ortho);
 		shader->SetUniform1i("text", 0);
 
-
 	}
 
 	void IMGuiBackend::CreateBuffers()
@@ -201,14 +216,13 @@ namespace solar
 		glBindVertexArray(VAO);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-#define OFFSETOF(TYPE, ELEMENT) ((size_t)&(((TYPE *)0)->ELEMENT))
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, pos));
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)offsetof(ImDrawVert, pos));
 		glEnableVertexAttribArray(0);//Position
-		glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, col));
+		glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(ImDrawVert), (GLvoid*)offsetof(ImDrawVert, col));
 		glEnableVertexAttribArray(1);//Color
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, uv));
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)offsetof(ImDrawVert, uv));
 		glEnableVertexAttribArray(2);//UV
-#undef OFFSETOF
+
 		glBindVertexArray(0);
 
 	}
@@ -243,18 +257,10 @@ namespace solar
 
 	void IMGuiBackend::RenderFnc(ImDrawData * draw_data)
 	{
-		// Setup render state: alpha-blending enabled, no face culling, no depth testing, scissor enabled
-		//Move to Init
-		glEnable(GL_BLEND);
-		glBlendEquation(GL_FUNC_ADD);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glDisable(GL_CULL_FACE);
-		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_SCISSOR_TEST);
 		glActiveTexture(GL_TEXTURE0);
 
 		ImGuiIO& io = ImGui::GetIO();
-
 		shader->Bind();
 		glBindVertexArray(VAO);
 
@@ -264,10 +270,12 @@ namespace solar
 			const ImDrawIdx* idx_buffer_offset = 0;
 
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
-			glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)cmd_list->VtxBuffer.Size * sizeof(ImDrawVert), (GLvoid*)cmd_list->VtxBuffer.Data, GL_STREAM_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)cmd_list->VtxBuffer.Size * sizeof(ImDrawVert),
+				(GLvoid*)cmd_list->VtxBuffer.Data, GL_STREAM_DRAW);
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)cmd_list->IdxBuffer.Size * sizeof(ImDrawIdx), (GLvoid*)cmd_list->IdxBuffer.Data, GL_STREAM_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)cmd_list->IdxBuffer.Size * sizeof(ImDrawIdx),
+				(GLvoid*)cmd_list->IdxBuffer.Data, GL_STREAM_DRAW);
 
 			for (int cmd_i = 0; cmd_i < cmd_list->CmdBuffer.Size; cmd_i++)
 			{
@@ -287,7 +295,7 @@ namespace solar
 				idx_buffer_offset += pcmd->ElemCount;
 			}
 		}
-		glDisable(GL_SCISSOR_TEST);// We dont use it in rest of our aplication.
+		glDisable(GL_SCISSOR_TEST);// We dont use it in rest of our program.
 
 		auto err = openGL::CheckErrorDBG();
 		if (err != openGL::errors::noError)
@@ -344,7 +352,7 @@ namespace solar
 			ImGuiIO& io = ImGui::GetIO();
 			io.MousePos = {-1,-1};
 		}
-		//Enter should be captured by mousePosCallback
+		//On Enter should be captured by mousePosCallback
 	}
 
 }
