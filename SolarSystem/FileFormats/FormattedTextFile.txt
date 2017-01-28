@@ -1,0 +1,49 @@
+File format of formatted text file used by FormattedFilerParser for storing simulated data
+
+
+Description:
+	Each unit must be enclosed withing {} brackets.
+	Each parameter is declared using its name, followed by <> brackets enclosing parameter's value.
+	Decimal numbers can be written with decimal point or in scientific format with exponent.
+	There is no arithmetic, so 100/2 is not interpretted as 50 as IS INVALID input.
+	Parser is quite forgiving. So parity of brackets is not stricly enforced as long as there is atleast one closing brackets.
+	Also there can be more than one space between symbols(except in decimal numbers).
+	Any extra symbols/texts are ignored(except between <>), so comments are allowed.
+	All parametres are optional, so {} is valid unit. But when inputted, they must have correct format.
+
+Following is list of all valid parametres with their format:
+
+	name<string> - Name of the unit, only ASCII symbols are valid.
+				 - Empty by default
+	color<R G B A> - Color of the unit, 4 decimal numbers 0.0 do 1.0 representing color in RGBA format
+				   - White by default.
+	velocity<X Y> - Initial velocity of the unit. 2 decimal numbers without any physics units.
+				  - Values are assumed to be in meters per second.
+				  - (0,0) by default.
+	position<X Y>  Initial position of the unit. 2 decimal numbers without any physics units.
+				  - Values are assumed to be in meters.
+				  - (0,0) by default.
+	mass <X> - Mass of the unit. 1 decimal number without any physics units.
+			 - Value is assumed to be in kilograms.
+			 - 0 by default.
+
+
+Example:
+
+{ name <Sun >
+  color <1.0 0.88 0.0 1.0 >
+  position <0.0 0.0 >
+  velocity <0.0 0.0 >
+  mass <1.98843e30 > }
+
+{ name <Earth >
+  color <0.17 0.63 0.83 1.0 >
+  position < 149.6e9 0.0 >
+  velocity <0 29800.0 >
+  mass <5.9736 e24 > }
+
+{ name <Moon >
+  color <0.2 0.2 0.2 1.0 >
+  position < 150.0e9 0.0 >
+  velocity <0 30822.0 >
+  mass <7.3476e22 > }

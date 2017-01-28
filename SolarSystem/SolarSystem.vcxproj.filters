@@ -17,6 +17,7 @@
   <ItemGroup>
     <Text Include="Plan.txt" />
     <Text Include="FileFormats\ReplayerFile.txt" />
+    <Text Include="FileFormats\FormattedTextFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">

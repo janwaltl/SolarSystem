@@ -1,14 +1,13 @@
 =====================================IN THIS COMMIT=====================================
-Fixed weird lines after replay jump. Hopefully for good.
-
+Added FormattedTextFile example file.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	ConsoleControl needs to be properly tested.
 
 	V. Document it & ship it
 		- Test OSMAR::ResetZoom for AR-correctness.
 		- Make example 'formatted' text file in FileFormats.
 		- resolve run-time library warning
+		- Apparently decimal comma does not work, so update documentation on that.
 	VI. OPTIONAL
 		- Little bit nicer/cleaner GUI.
 			- Movable, scalable GUI windows. Allow different window size.

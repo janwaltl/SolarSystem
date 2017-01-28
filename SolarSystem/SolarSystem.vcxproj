@@ -169,6 +169,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="FileFormats\FormattedTextFile.txt" />
     <Text Include="FileFormats\ReplayerFile.txt" />
     <Text Include="Plan.txt" />
   </ItemGroup>
