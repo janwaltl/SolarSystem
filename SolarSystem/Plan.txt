@@ -1,11 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Added FormattedTextFile example file.
+OSMAR::ResetZoom is AR-correct.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-
 	V. Document it & ship it
-		- Test OSMAR::ResetZoom for AR-correctness.
-		- Make example 'formatted' text file in FileFormats.
 		- resolve run-time library warning
 		- Apparently decimal comma does not work, so update documentation on that.
 	VI. OPTIONAL

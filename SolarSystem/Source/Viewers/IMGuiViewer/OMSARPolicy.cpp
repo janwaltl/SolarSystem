@@ -21,6 +21,10 @@ void solar::OMSAR::ResetZoom(const simData_t& data, double scale)
 	};
 	std::for_each(data.begin(), data.end(), find);
 
+	//Correct for aspect ratio
+	max.y *= AR;
+	min.y *= AR;
+
 	auto maxL = length(max);
 	auto minL = length(min);
 	scaleFactor = 1.0 / (maxL > minL ? maxL : minL);
