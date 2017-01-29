@@ -262,6 +262,9 @@
     <ClInclude Include="Source\Units\SystemUnitTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Parsers\SerializeUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\LICENSE" />

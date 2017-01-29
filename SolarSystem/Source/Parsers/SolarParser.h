@@ -2,6 +2,7 @@
 #define PARSERS_SOLAR_PARSER_HEADER
 
 #include "Parser.h"
+#include <string>
 
 namespace solar
 {
@@ -9,7 +10,11 @@ namespace solar
 	class SolarParser :public Parser
 	{
 	public:
+		explicit SolarParser(const std::string& saveFile = "");
 		simData_t Load() override final;
+		void Save(const simData_t& data) override final;
+	private:
+		const std::string saveFile;
 	};
 }
 

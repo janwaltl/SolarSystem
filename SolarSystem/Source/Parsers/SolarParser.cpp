@@ -1,8 +1,16 @@
 #include "SolarParser.h"
 #include "Source/Units/PhysicsUnits.h"
+#include "SerializeUnit.h"
+#include "Source/Common/Exception.h"
+
+#include <iostream>
 
 namespace solar
 {
+	SolarParser::SolarParser(const std::string & saveFile) :
+		saveFile(saveFile)
+	{
+	}
 	simData_t SolarParser::Load()
 	{
 		simData_t data;
@@ -37,5 +45,24 @@ namespace solar
 			unit.mass /= physicsUnits::SMtoKG;
 		}
 		return data;
+	}
+	void SolarParser::Save(const simData_t & data)
+	{
+		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
+
+		if (!saveFile.empty())
+		{
+
+			std::ofstream outputF(saveFile, std::ios::trunc | std::ios::out);
+			if (!outputF.is_open())
+				throw Exception("Output file \'" + saveFile + "\' could not be created/opened.");
+
+			std::cout << "Saving simulated data to file: " << saveFile << '\n';
+			for (const auto& unit : data)
+			{
+				outputF << unit << "\n";
+			}
+			std::cout << data.size() << " units saved.\n";
+		}
 	}
 }

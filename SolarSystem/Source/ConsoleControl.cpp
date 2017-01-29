@@ -40,6 +40,8 @@ namespace solar
 			void Simulate(const arguments& cmds);
 			parser_p GetParser(const arguments& cmds);
 			parser_p MakeFormattedParser(const arguments& cmds);
+			parser_p MakeSolarParser(const arguments& cmds);
+
 			simMethod_p GetSimMethod(const arguments& cmds);
 			viewer_p GetViewer(const arguments& cmds);
 			viewer_p GetWinViewer(const arguments& cmds);
@@ -90,6 +92,7 @@ Nasleduje vycet veskerych prikazu(P=povinne,N=nepovinne):
         -p [parser] - N, ktery parser ma byt pouzit pro nacteni dat
                     - dostupne moznosti:
                         solar - zabudovana Slunecni soustava(vychozi)
+                              - obsahuje dodatecny prikay, viz.nize
                         formatted - FormattedFileParser,
                                   - potrebuje dodatecne prikazy, viz. nize
         -v [viewer] - N, ktery viewer ma byt pouzit pro pozorovani simulace
@@ -113,8 +116,11 @@ Nasleduje vycet veskerych prikazu(P=povinne,N=nepovinne):
                            - vcetne cesty k souboru a jeho pripony
         -o [jmeno souboru] - N, kam ma byt ulozen vystup
                            - vcetne cesty k souboru a jeho pripony
-
-    1.2 dodatecne prikazy pro'win' viewer:
+    1.2 dodatecny prikaz pro 'solar' parser:
+        -o [jmeno souboru] - N, kam ma byt ulozen vystup
+                           - vcetne cesty k souboru a jeho pripony
+                           - vystup je ulozen ve 'formatted' textovem formatu. 
+    1.3 dodatecne prikazy pro 'win' viewer:
         -w ['nezaporne cislo'] - N, sirka okna v pixelech
                                 - 1200 vychozi, doporuceno minimalne 1000+
         -h ['nezaporne cislo'] - N, vyska okna v pixeles
@@ -183,6 +189,7 @@ Following is description of all arguments(M=mandatory,O=optional):
         -p [parser] - O, which parser use to obtain simulated data
                     - available parsers:
                         solar - hardcoded solar system(default)
+                              - has additional arg - see below
                         formatted - FormattedFileParser,
                                   - has additional args - see below
         -v [viewer] - O, which viewer is used for viewing of simulation
@@ -206,8 +213,11 @@ Following is description of all arguments(M=mandatory,O=optional):
                             - including path and extension.
         -o [output filename] - O, where should output be saved at
                              - including path and extension.
-    
-    1.2 additional arguments for 'win' viewer:
+    1.3 additional argument for 'solar' parser:
+        -o [output filename] - O, where should output be saved at
+                             - including path and extension.
+                             - 'formatted' text format will be used.
+    1.3 additional arguments for 'win' viewer:
         -w ['unsigned integer'] - O, width of window in pixels
                                 - 1200default, 1000+ recommended
         -h ['unsigned integer'] - O, height of window in pixels
@@ -279,21 +289,23 @@ Following are examples of correct calls to this application:
 				auto val = GetValue(cmds, "-p");
 
 				if (val && *val == "formatted")
+				{
+					std::cout << "formatted";
 					return MakeFormattedParser(cmds);
+				}
 				else//Default
 				{
-					std::cout << ((val && *val == "solar") ? (*val) : ("default(solar)")) << '\n';
-					return std::make_unique<SolarParser>();
+					std::cout << ((val && *val == "solar") ? (*val) : ("default(solar)"));
+					return MakeSolarParser(cmds);
 				}
 			}
 
 			parser_p MakeFormattedParser(const arguments & cmds)
 			{
-				std::cout << "formatted - ";
 				auto inputFile = GetValue(cmds, "-i");
 				if (!inputFile)
 					throw Exception("Formatted parser needs -i argument.");
-				std::cout << "input file: " << *inputFile;
+				std::cout << " - input file: " << *inputFile;
 				auto outputFile = GetValue(cmds, "-o");
 
 				if (outputFile)
@@ -308,6 +320,20 @@ Following are examples of correct calls to this application:
 				}
 			}
 
+			parser_p MakeSolarParser(const arguments& cmds)
+			{
+				auto val = GetValue(cmds, "-o");
+				if (val)
+				{
+					std::cout << " - output file: " << *val << '\n';
+					return std::make_unique<SolarParser>(*val);
+				}
+				else
+				{
+					std::cout << '\n';
+					return std::make_unique<SolarParser>();
+				}
+			}
 			simMethod_p GetSimMethod(const arguments & cmds)
 			{
 				std::cout << "\tSimMethod: ";

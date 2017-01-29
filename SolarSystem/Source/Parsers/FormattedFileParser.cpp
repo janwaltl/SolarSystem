@@ -4,24 +4,9 @@
 #include <iostream>
 #include "Source/Common/Exception.h"
 #include "Source/Units/PhysicsUnits.h"
-
+#include "SerializeUnit.h"
 namespace solar
 {
-	namespace
-	{
-		//To print unit in formatted way, valid only for this parser
-		std::ostream& operator<< (std::ostream& out, const Unit& unit)
-		{
-			//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
-			out << "name<" << unit.name << ">\n";
-			out << "color<" << unit.color.x << " " << unit.color.y << " " << unit.color.z << " " << unit.color.w << ">\n";
-			out << "position<" << unit.pos.x*physicsUnits::AUtoM << " " << unit.pos.y*physicsUnits::AUtoM << ">\n";
-			out << "velocity<" << unit.vel.x*physicsUnits::AUpYtoMpS << " " << unit.vel.y*physicsUnits::AUpYtoMpS << ">\n";
-			out << "mass<" << unit.mass*physicsUnits::SMtoKG << ">";//No new line
-
-			return out;
-		}
-	}
 
 	FormattedFileParser::FormattedFileParser(const std::string & inputFileName, const std::string & outputFileName) :
 		inFileName(inputFileName), outFileName(outputFileName)
@@ -87,7 +72,7 @@ namespace solar
 			std::cout << "Saving simulated data to file: " << outFileName << '\n';
 			for (const auto& unit : data)
 			{
-				outputF << "{ " << unit << "}\n\n";
+				outputF << unit << "\n";
 			}
 			std::cout << data.size() << " units saved.\n";
 		}

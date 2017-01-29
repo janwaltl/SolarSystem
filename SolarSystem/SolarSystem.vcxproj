@@ -208,6 +208,7 @@
     <ClCompile Include="Source\Viewers\ViewAndRecord.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Parsers\SerializeUnit.h" />
     <ClInclude Include="Source\Units\SystemUnit.h" />
     <ClInclude Include="Source\Units\PhysicsUnits.h" />
     <ClInclude Include="Source\Common\Timing.h" />
