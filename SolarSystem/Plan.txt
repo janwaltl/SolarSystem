@@ -1,12 +1,42 @@
 =====================================IN THIS COMMIT=====================================
-Added saving to solar parser. Uses same format as 'formatted' parser.
-	- added that as optional argument in consoleControl
-	- pulled operator<< from FormattedFileParser into common SerializeUnit.h header file.
-	- small formatting tweaks.
+New version of documentation.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	V. Document it & ship it
-		- Apparently decimal comma does not work, so update documentation on that.
+		- Add simple explicit Euler?
+		- Test NotTimed properly, try pause, getters...
+
+		Documentation:
+			- make table data in theory part
+			- give credits to last years physics course, numerical recipies
+			- test implicit solution for correctness
+			- viewers - ImGuiViewer
+							- OpenGLBackEnd, ImGuiBackend - show examples of ImGui
+							- explain lineTrails algorithm
+							- somehow summarize GUIs
+							- mention OMSAR in together with SimDataDrawer?
+			- replay DLC
+				- two parts:recording & replaying
+					-record - explain ViewAndRecord concept
+								- binary file, bla bla...see source code...
+					-replaying - Parser,Method,Viewer
+						- parser - only for correct size of data and intial conditions
+						- simMethod - utilizes simTime to pick correct record
+						- replayerViewer - recycles ImGuiViewer
+			- what has not been done
+				- physics unit system
+				- templatize vector
+				- idea on expansion to 3D
+			- user guide
+				- explain consoleControl
+				- compiling for Windows
+					- .sln should be enough
+					- libraries are present
+				- compiled binaries
+					- redist
+				- compiling for Linux
+					- needs to compile GLFW and GLEW
+					- make makefile?
 	VI. OPTIONAL
 
 		- Create physics unit system

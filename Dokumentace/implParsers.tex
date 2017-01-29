@@ -1,12 +1,10 @@
-\chapter{Implementované Parsery}
-\section{FormattedFileParser}
-Jediný implementovaný parser v tomto programu je \texttt{FormattedFileParser}. Což nutně neznamená, že by nebyl zajímavý. Tento parser načítá strukturovaná data ze souboru. 
+\chapter{FormattedFileParser}
+Tento \textbf{parser} načítá strukturovaná data z textového souboru. 
 
-\textbf{Důležité upozornění}: parser očekává základní SI jednotky - metry, sekundy, kilogramy. Ale výstupní \texttt{simData\_t} obsahuje objekty se vzdáleností v AU($ 1,5.10^9 $ m), časem v rocích(pozemské - 365 dní) a hmotností v násobcích hmotnosti Slunce($ 1,988435.10^{30} $ kg přesně). Důvod je ten, že hodnoty v těchto jednotkách jsou více normalizované a dochází k menším zaokrouhlovacím chybám.
+Parser očekává základní SI jednotky - metry, sekundy, kilogramy. Ale výstupní \texttt{simData\_t} obsahuje objekty se vzdáleností v AU($ 1,5.10^9 $ m), časem v rocích(pozemské - 365 dní) a hmotností v násobcích hmotnosti Slunce($ 1,988435.10^{30} $ kg přesně). Důvod je ten, že hodnoty v těchto jednotkách jsou více normalizované a dochází k menším zaokrouhlovacím chybám.
 
-Nejdříve se podíváme na strukturu těchto dat a poté probereme jak je implementováno samotné načítání.
 \subsection{Struktura dat}
-Začneme hned příkladem, takto by například mohl vypadat takový vstupní soubor s daty:
+Začneme hned příkladem, takto by mohl vypadat správný vstupní soubor s daty:
 \begin{lstlisting}
 { name<Sun>
 color<1.0 0.88 0.0 1.0>
@@ -35,10 +33,10 @@ Všechny parametry objektu jsou dobrovolné, čili \lstinline|{}| je validní be
 \paragraph{velocity$ < $X Y$ > $} - počáteční rychlost objektu. Očekává dvě desetinná čísla reprezentující rychlost ve vodorovném a svislém směru. Nesmí zde být napsány fyzikální jednotky - tzn. \texttt{velocity$ < $10e2 m/s 8e3 m/s$ > $} \textbf{není} validní vstup. Ale implicitně by hodnoty měly být v m/s . Pokud není uvedeno, pak je (0,0).
 \paragraph{position$ < $X Y$ > $} - počáteční pozice objektu. Identické s rychlostí, očekávají se hodnoty v metrech.
 \paragraph{mass $ < $hmotnost$ > $ } - hmotnost objektu vyjádřená jedním desetinným číslem v kilogramech. Také zde nesmí být jednotky uvedeny. Pokud není uvedeno, pak je nulová hmotnost.
-\paragraph{Dodatek k číslům} - jsou povoleny jak celá, tak desetinná čísla. Je dovolena jak desetinná tečka, tak čárka. Číslo 104.25 se můžeme zapsat například následujícími způsoby: $ 104.25 \quad 1.0425e2 \quad 1042,5e\text{-}1 $.
-Parser \textbf{neumí} aritmetiku, takže následující \textbf{není} validní vstup: $ 10425/100 \quad 104 + 0.25 \quad 1.0425 * 10^2 $.
+\paragraph{Dodatek k číslům} - jsou povoleny jak celá, tak desetinná čísla. Je dovolena pouze desetinná tečka. Číslo 104.25 můžeme zapsat například následujícími způsoby: $ 104.25 \quad 1.0425e2$.
+\textbf{Parser} ovšem \textbf{neumí} aritmetiku, takže následující \textbf{není} validní vstup: $ 10425/100 \quad 104 + 0.25 \quad 1.0425 * 10^2 $.
 \paragraph{}
-\texttt{FormattedFileParser} je relativně shovívavý k formátování, takže následující je opravdu ekvivalentní k definici objektu \texttt{Sun} z předchozího příkladu, ovšem čitelnost takového vstupu ponecháme bez komentáře. 
+\texttt{FormattedFileParser} je relativně shovívavý k formátování, takže následující je opravdu ekvivalentní definice objektu \texttt{Sun} z předchozího příkladu, ovšem čitelnost takového vstupu ponecháme bez komentáře. 
 \begin{lstlisting}
 				{ name		Bylo nebylo	<Sun> za 
 sedmerocolor	horami <1.0 	   0.88 			0.0 	1.0 a
@@ -52,11 +50,30 @@ sedmerocolor	horami <1.0 	   0.88 			0.0 	1.0 a
 \end{lstlisting}
 
 \subsection{Detaily implementace}
-Takto vypadá declarace konstruktoru: \lstinline|FormattedFileParser(const std::string& inputFileName,const std::string& outputFileName="");|
+Takto vypadá deklarace konstruktoru: \\
+\lstinline|FormattedFileParser(const std::string& inputFileName,const std::string& outputFileName="");|\\
 Parser tedy očekává vstupní a případně výstupní jméno souboru,\textbf{ včetně} cesty a přípony k souboru. Samotné načítání a ukládání probíhá v metodách \texttt{Load()} respektive \texttt{Save()}.
 
-Na vlastní implementaci není koncepčně nic extra zajímavého, přesná implementace je samozřejmě ve zdrojových kódech programu. \texttt{Load()} načte celý soubor do \texttt{std::string} ve kterém si pak vždy najde dvojici \{\} ve které se pokusí najít názvy parametrů. Pokud nějaký najde, pak k němu ještě najde nejbližší dvojici $ <> $  ve které poté očekává správné hodnoty. Tento jednoduchý způsob zajišťuje výše ukázanou flexibilitu formátování. Všechno ostatní, co by se v dokumentu mohlo nacházet prostě ignoruje. \texttt{Save()} vytvoří soubor, pokud byl nějaký zadán, do kterého předaná data uloží. Což se děje podobným způsobem, kde každý parametr "zabalí" do správného formátu.
+Na vlastní implementaci není koncepčně nic extra zajímavého. \texttt{Load()} načte celý soubor do \texttt{std::string} ve kterém si pak vždy najde dvojici \{\}, ve které se pokusí najít názvy parametrů. Pokud nějaký najde, pak k němu ještě najde nejbližší dvojici $ <> $  ve které poté očekává správné hodnoty. Tento jednoduchý způsob zajišťuje výše ukázanou flexibilitu formátování. Všechno ostatní, co by se v dokumentu mohlo nacházet(například komentáře) prostě ignoruje. 
 
-Při nekorektním vstupu, nemožnosti otevřít vstupní soubor nebo vytvořit soubor výstupní vyvolají funkce vyjímku \texttt{Exception}.
+\texttt{Save()} vytvoří soubor, pokud byl nějaký zadán, do kterého předaná data uloží. Což se děje podobným způsobem - každý parametr "zabalí" do správného formátu.
 
-Je pravda, že načítání by nutně nemuselo načítat celý soubor najednou, ale pouze  bloky závorek. Ale při velikosti textových souborů a operační paměti průměrného počítače nebyla paměť nejvyšší prioritou při programování zpracování vstupu.
+Při nekorektním vstupu, nemožnosti otevřít vstupní soubor nebo vytvořit soubor výstupní vyvolají funkce výjimku \texttt{Exception}.
+\\
+\\
+\textbf{Poznámka autora:}
+\textit{Je pravda, že načítání by nutně nemuselo načítat celý soubor najednou, ale pouze  bloky závorek. Ale při velikosti textových souborů a operační paměti průměrného počítače nebyla paměť nejvyšší prioritou při programování zpracování vstupu.}
+
+
+\chapter{SolarParser}
+Tento jednoduchý \textbf{parser} nedělá nic jiného, než načte data o Sluneční soustavě, která má zabudována pevně ve své implementaci.
+Momentálně se jedná o následující objekty:
+\begin{enumerate}
+	\item Hvězdy - Slunce
+	\item Planety - Merkur, Venuše, Země, Mars, Jupiter, Saturn, Uran, Neptun
+	\item Trpasličí planety - Pluto
+	\item Měsíce - Měsíc, Phobos, Deimos, Io, Europa, Ganymed, Callisto
+\end{enumerate}
+Výstupní \texttt{simData\_t} obsahuje objekty se vzdáleností v AU($ 1,5.10^9 $ m), časem v rocích(pozemské - 365 dní) a hmotností v násobcích hmotnosti Slunce($ 1,988435.10^{30} $ kg přesně). Důvod je ten, že hodnoty v těchto jednotkách jsou více normalizované a dochází k menším zaokrouhlovacím chybám.
+
+Také dokáže uložit výsledky simulace do formátovaného textového souboru stejného jako \texttt{FormattedFileParser}.

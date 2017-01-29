@@ -14,33 +14,30 @@
 \BOOKMARK [1][-]{section.3.1}{Parser}{chapter.3}% 14
 \BOOKMARK [1][-]{section.3.2}{SimMethod}{chapter.3}% 15
 \BOOKMARK [1][-]{section.3.3}{Viewer}{chapter.3}% 16
-\BOOKMARK [0][-]{chapter.4}{Implementovan\351 Parsery}{}% 17
-\BOOKMARK [1][-]{section.4.1}{FormattedFileParser}{chapter.4}% 18
-\BOOKMARK [2][-]{subsection.4.1.1}{Struktura dat}{section.4.1}% 19
-\BOOKMARK [2][-]{subsection.4.1.2}{Detaily implementace}{section.4.1}% 20
-\BOOKMARK [0][-]{chapter.5}{Implementovan\351 simulacn\355 metody}{}% 21
-\BOOKMARK [1][-]{section.5.1}{SemiImplicitEuler}{chapter.5}% 22
-\BOOKMARK [2][-]{subsection.5.1.1}{Teorie}{section.5.1}% 23
-\BOOKMARK [2][-]{subsection.5.1.2}{Implementace}{section.5.1}% 24
-\BOOKMARK [1][-]{section.5.2}{RK4}{chapter.5}% 25
-\BOOKMARK [2][-]{subsection.5.2.1}{Teorie}{section.5.2}% 26
-\BOOKMARK [2][-]{subsection.5.2.2}{Implementace}{section.5.2}% 27
-\BOOKMARK [1][-]{section.5.3}{MultiStep}{chapter.5}% 28
-\BOOKMARK [2][-]{subsection.5.3.1}{Teorie}{section.5.3}% 29
-\BOOKMARK [2][-]{subsection.5.3.2}{Implementace}{section.5.3}% 30
-\BOOKMARK [0][-]{chapter.6}{Implementovan\351 viewery}{}% 31
-\BOOKMARK [1][-]{section.6.1}{IMGuiViewer}{chapter.6}% 32
-\BOOKMARK [2][-]{subsection.6.1.1}{OpenGLBackend}{section.6.1}% 33
-\BOOKMARK [2][-]{subsection.6.1.2}{ImGuiBackend}{section.6.1}% 34
-\BOOKMARK [2][-]{subsection.6.1.3}{Tr\355dy pou\236\355vaj\355c\355 OpenGL}{section.6.1}% 35
-\BOOKMARK [2][-]{subsection.6.1.4}{Drawer}{section.6.1}% 36
-\BOOKMARK [2][-]{subsection.6.1.5}{GUIDrawer}{section.6.1}% 37
-\BOOKMARK [2][-]{subsection.6.1.6}{SimDataDrawer}{section.6.1}% 38
-\BOOKMARK [2][-]{subsection.6.1.7}{LineTrailsDrawer}{section.6.1}% 39
-\BOOKMARK [2][-]{subsection.6.1.8}{IMGuiViewer}{section.6.1}% 40
-\BOOKMARK [0][-]{chapter.7}{Roz\235\355ritelnost a vylep\235en\355}{}% 41
-\BOOKMARK [1][-]{section.7.1}{Praktick\375 pr\355klad roz\235\355ren\355 programu V1.0}{chapter.7}% 42
-\BOOKMARK [1][-]{section.7.2}{Praktick\375 pr\355klad roz\235\355ren\355 programu V2.0}{chapter.7}% 43
-\BOOKMARK [1][-]{section.7.3}{Vylep\235en\355}{chapter.7}% 44
-\BOOKMARK [0][-]{chapter.8}{Porovn\341n\355 integracn\355ch metod}{}% 45
-\BOOKMARK [0][-]{chapter.9}{U\236ivatelsk\341 pr\355rucka}{}% 46
+\BOOKMARK [0][-]{chapter.4}{FormattedFileParser}{}% 17
+\BOOKMARK [1][-]{subsection.4.0.1}{Struktura dat}{chapter.4}% 18
+\BOOKMARK [2][-]{subsection.4.0.2}{Detaily implementace}{subsection.4.0.1}% 19
+\BOOKMARK [0][-]{chapter.5}{SolarParser}{}% 20
+\BOOKMARK [0][-]{chapter.6}{Implementovan\351 simulacn\355 metody}{}% 21
+\BOOKMARK [1][-]{section.6.1}{SemiImplicitEuler}{chapter.6}% 22
+\BOOKMARK [2][-]{subsection.6.1.1}{Teorie}{section.6.1}% 23
+\BOOKMARK [2][-]{subsection.6.1.2}{Implementace}{section.6.1}% 24
+\BOOKMARK [1][-]{section.6.2}{RK4}{chapter.6}% 25
+\BOOKMARK [2][-]{subsection.6.2.1}{Teorie}{section.6.2}% 26
+\BOOKMARK [2][-]{subsection.6.2.2}{Implementace}{section.6.2}% 27
+\BOOKMARK [0][-]{chapter.7}{Implementovan\351 viewery}{}% 28
+\BOOKMARK [1][-]{section.7.1}{IMGuiViewer}{chapter.7}% 29
+\BOOKMARK [2][-]{subsection.7.1.1}{OpenGLBackend}{section.7.1}% 30
+\BOOKMARK [2][-]{subsection.7.1.2}{ImGuiBackend}{section.7.1}% 31
+\BOOKMARK [2][-]{subsection.7.1.3}{Tr\355dy pou\236\355vaj\355c\355 OpenGL}{section.7.1}% 32
+\BOOKMARK [2][-]{subsection.7.1.4}{Drawer}{section.7.1}% 33
+\BOOKMARK [2][-]{subsection.7.1.5}{GUIDrawer}{section.7.1}% 34
+\BOOKMARK [2][-]{subsection.7.1.6}{SimDataDrawer}{section.7.1}% 35
+\BOOKMARK [2][-]{subsection.7.1.7}{LineTrailsDrawer}{section.7.1}% 36
+\BOOKMARK [2][-]{subsection.7.1.8}{IMGuiViewer}{section.7.1}% 37
+\BOOKMARK [0][-]{chapter.8}{Roz\235\355ritelnost a vylep\235en\355}{}% 38
+\BOOKMARK [1][-]{section.8.1}{Praktick\375 pr\355klad roz\235\355ren\355 programu V1.0}{chapter.8}% 39
+\BOOKMARK [1][-]{section.8.2}{Praktick\375 pr\355klad roz\235\355ren\355 programu V2.0}{chapter.8}% 40
+\BOOKMARK [1][-]{section.8.3}{Vylep\235en\355}{chapter.8}% 41
+\BOOKMARK [0][-]{chapter.9}{Porovn\341n\355 integracn\355ch metod}{}% 42
+\BOOKMARK [0][-]{chapter.10}{U\236ivatelsk\341 pr\355rucka}{}% 43

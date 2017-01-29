@@ -1,4 +1,4 @@
-void Simulation::Start(time deltaT,time rawMult, time DTMult, time maxSimTime)
+void Simulation::Start(time deltaT, size_t rawMult, size_t DTMult, time maxSimTime)
 {
 	// Připadné uložení parametrů
 
@@ -6,12 +6,10 @@ void Simulation::Start(time deltaT,time rawMult, time DTMult, time maxSimTime)
 	auto data = parser->Load();
 	//Možná si potřebují simMethod a viewer něco připravit ještě před simulací,
 	//ale potřebují k tomu už znát data - např. jejich velikost
-	//Moduly tímto také dostanou přístup k datům.
-	simMethod->_Prepare(&data);
-	viewer->_Prepare(&data);
+	simMethod->_Prepare();
+	viewer->_Prepare();
 
 	auto acc = 0;
-
 	//Simulace může být ukončena uplynutím zadaného času
 	while (!konec && ElapsedTime()<maxSimTime)
 	{
@@ -21,13 +19,12 @@ void Simulation::Start(time deltaT,time rawMult, time DTMult, time maxSimTime)
 		{
 			for (size_t i = 0; i < rawMult; i++)
 			{
-			simMethod->Step(deltaT*); // Uděláme jeden krok simulace
-			acc -= deltaT;
+			simMethod->Step(deltaT*DTMult); // Uděláme jeden krok simulace
+			acc -= deltaT*DTMult;
 			}
 		}
 		viewer->ViewData();// Podíváme se na simulovaná data
 	}
-
 	//Po doběhnutí simulace případně uložíme výsledná data
 	parser->Save(data);
 }

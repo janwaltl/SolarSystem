@@ -1,5 +1,4 @@
-﻿//Takto nějak by mohla vypadat rozumná implementace
-void Simulation::Start(/*Parametry simulace*/)
+﻿void Simulation::Start(/*Parametry simulace*/)
 {
 	//Uložíme si parametry simulace
 
@@ -7,9 +6,8 @@ void Simulation::Start(/*Parametry simulace*/)
 	auto data = parser->Load();
 	//Možná si potřebují simMethod a viewer něco připravit ještě před simulací,
 	//ale potřebují k tomu už znát data - např. jejich velikost
-	//Moduly tímto také dostanou přístup k datům.
-	simMethod->_Prepare(&data);
-	viewer->_Prepare(&data);
+	simMethod->_Prepare();
+	viewer->_Prepare();
 	
 	while(!konec)//Necháme simulaci běžet
 	{

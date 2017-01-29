@@ -2,12 +2,13 @@
 \section{SemiImplicitEuler}
 \label{sec:implEuler}
 \subsection{Teorie}
-Při představení numerické integrace jsme si ukázali explicitní Eulerovu metodu pro numerické řešení obyčejné diferenciální rovnice. Ještě existuje implicitní verze \ref{eq:implicitEuler} této metody, která je shodná s explicitní až na to, že derivaci vyčíslíme v čase $t + \Delta t $.
+Při představení numerické integrace jsme si ukázali explicitní Eulerovu metodu pro numerické řešení obyčejné diferenciální rovnice. Ještě existuje implicitní verze \eqref{eq:implicitEuler} této metody, která je teoreticky shodná s explicitní až na to, že derivaci vyčíslíme v čase $t + \Delta t $.
 \begin{align} \label{eq:implicitEuler}
 y(t+\Delta t) = y(t) + \Delta t . y'(t+\Delta t)
 \end{align}
 Implicitní verze dává při stejném $ \Delta t $ přesnější, protože dochází k interpolaci, která na rozdíl od extrapolace neakumuluje chybu.
-Nyní se podívejme jak bychom řešili jednoduchou diferenciální rovnici \ref{eq:secDer}. Na ní nelze Eulerovu metodu přímo použít neboť ta řeší jen rovnice s první derivaci. Ale pomůžeme si tím, že každá obyčejná diferenciální rovnice $ n $-tého stupně se dá převést na n rovnic prvního stupně. Takže rovnici z \eqref{eq:secDer} si upravíme na dvě rovnice \eqref{eq:secDer2} a \eqref{eq:secDer3}
+
+Nyní se podívejme jak bychom řešili jednoduchou diferenciální rovnici \eqref{eq:secDer}. Na ní nelze Eulerovu metodu přímo použít neboť ta řeší jen rovnice s první derivaci. Ale pomůžeme si tím, že každá obyčejná diferenciální rovnice $ n $-tého stupně se dá převést na n rovnic prvního stupně. Takže rovnici z \eqref{eq:secDer} si upravíme na dvě rovnice \eqref{eq:secDer2} a \eqref{eq:secDer3}
 \begin{align} \label{eq:secDer}
 \ddot{x}(t) &= k.x(t) \quad \\
 \text{s počátečními podmínkami:}& \quad x(0)=x_0, \quad \dot{x}(0)=v_0\nonumber
@@ -22,7 +23,7 @@ Nyní se podívejme jak bychom řešili jednoduchou diferenciální rovnici \ref
 	\end{align}
 \end{subequations}
 
-Toto jsou sice dvě rovnice, ale obě obsahují pouze první derivaci, jde na ně tedy Euler použít. Tak to zkusme nejdříve s \eqref{eq:secDer3} a implicitní verzí. Tím dostaneme rovnici \eqref{eq:secDer4}. Teď použijeme stejný postup i na \eqref{eq:secDer2} a dostaneme rovnici \eqref{eq:secDer5}. Nyní stačí dosadit první rovnici do druhé a po úpravě dostaneme hledaný výsledek v podobě rovnice \eqref{eq::secDer6}.
+Toto jsou sice dvě rovnice, ale obě obsahují pouze první derivaci, už tedy můžeme použít Eulera. Tak to zkusme nejdříve s \eqref{eq:secDer3} a implicitní verzí. Tím dostaneme rovnici \eqref{eq:secDer4}. Teď použijeme stejný postup i na \eqref{eq:secDer2} a výsledkem je \eqref{eq:secDer5}. Nyní stačí dosadit první rovnici do druhé a po úpravě dostaneme hledaný výsledek v podobě rovnice \eqref{eq::secDer6}.
 \begin{align}
 \label{eq:secDer4}
  v(t + \Delta t)&=v(t) + \Delta t . \dot{v}(t + \Delta t)  
@@ -36,9 +37,9 @@ Toto jsou sice dvě rovnice, ale obě obsahují pouze první derivaci, jde na n�
 \end{align}
 To sice dalo určitou práci, ale dostali jsme správné řešení. Na pravé straně \eqref{eq::secDer6} máme proměnné pouze v čase $ t $. Ty už umíme spočítat, protože $ x(t) $ dostaneme z předchozího integračního kroku a $ v(t) $ spočítáme z levé strany \eqref{eq:secDer4}, kde napravo budeme mít  $ v(t-\Delta t) $ a $ x(t) $. Obě tyto hodnoty jsou také známy z předchozího integračního kroku.
 
-Naše soustava rovnic \eqref{eq:soustava} je nápadně podobná předchozí rovnicí. Což samozřejmě není náhoda. Pokud se ale nyní budeme stejný postup snažit aplikovat na naší soustavu rovnic, tak zjistíme, že to nebude fungovat. Narazíme totiž na to, že po dosazení obou rovnic nebudeme schopni explicitně vyjádřit $ x(t + \Delta t) $. Bohužel toto je daň za vyšší stabilitu implicitních metod - nutnost vyřešení další rovnice. V našem případě bychom museli použít numerické řešení i pro samotnou rovnici, což dělat nebudeme.
+Naše soustava rovnic \eqref{eq:soustava} je nápadně podobná předchozí rovnicí, což samozřejmě není náhoda. Pokud se ale nyní budeme stejný postup snažit aplikovat na naší soustavu rovnic, tak zjistíme, že to nebude fungovat. Narazíme totiž na to, že po dosazení obou rovnic nebudeme schopni explicitně vyjádřit $ x(t + \Delta t) $. Bohužel toto je daň za vyšší stabilitu implicitních metod - nutnost vyřešení další rovnice. V našem případě bychom museli použít numerické řešení i pro samotnou rovnici, což dělat nebudeme.
 
-Místo toho použijeme semi-implicitní Eulerova metodu. Místo dvojitého použití implicitní metody použijeme implicitní pro \eqref{eq:secDer8} a explicitní verzi pro \eqref{eq:secDer7} . Explicitní verze nám dovolí snadno spočítat $ v(t + \Delta t) $ neboť hodnoty v čase $ t $ už známe. Tím jsme ale získali i potřebnou hodnotu $ v(t + \Delta t) $ pro implicitní verzi druhé rovnice. Vlastně jsme z obou metod vzali to nejlepší - jednoduchost explicitní a větší přesnost implicitní metody. Výsledný mix je metoda, která je jednoduchá na implementaci a relativně přesná pro naše účely. $ \Delta t $.
+Místo toho použijeme semi-implicitní Eulerovu metodu. Místo dvojitého použití implicitní metody použijeme implicitní pro \eqref{eq:secDer8} a explicitní verzi pro \eqref{eq:secDer7} . Explicitní verze nám dovolí snadno spočítat $ v(t + \Delta t) $ neboť hodnoty v čase $ t $ už známe. Tím jsme ale získali i potřebnou hodnotu $ v(t + \Delta t) $ pro implicitní verzi druhé rovnice. Vlastně jsme z obou metod vzali to nejlepší - jednoduchost explicitní a větší přesnost implicitní metody. Výsledný mix je metoda, která je jednoduchá na implementaci a relativně přesná pro naše účely.
 \begin{align}
 \label{eq:secDer7}
 v(t + \Delta t)&=v(t) + \Delta t . \dot{v}(t)\\
@@ -58,7 +59,7 @@ Naše finální soustava \eqref{eq:soustava} po použití této metody bude \eqr
 Když jsme si metodu pracně teoreticky popsali, tak se nyní podívejme na to, jak bychom ji implementovali do našeho programu. Implementace by mohla vypadat například jako v \ref{lst:methodEuler}
 \includecode[methodEuler]{Source/euler.cpp}
 {Semi-implicitní Eulerova integrační metoda}
-Soustava \ref{eq:soustavaEuler} nám říká, že nejdříve musíme spočítat novou rychlost objektu, která ale záleží na polohách všech ostatních. Takže musíme projít všechny dvojice, což nám zajistí dvojitá \texttt{for} smyčka. Dále potřebuje sečíst sumu, což se děje právě ve vnitřní smyčce. Protože je silové působení symetrické a pouze opačného směru, tak to můžeme udělat pro celou dvojici najednou.
+Soustava \eqref{eq:soustavaEuler} nám říká, že nejdříve musíme spočítat novou rychlost objektu, která ale záleží na polohách všech ostatních. Takže musíme projít všechny dvojice, což nám zajistí dvojitá \texttt{for} smyčka. Dále potřebuje sečíst sumu, což se děje právě ve vnitřní smyčce. Protože je silové působení symetrické a pouze opačného směru, tak to můžeme udělat vždy pro celou dvojici najednou.
 Vnitřní smyčka nám spočítala správnou rychlost levého(\texttt{left}) objektu.
 Můžeme tedy spočítat jeho novou polohu dle \eqref{eq:soustavaEuler}.
 
@@ -108,9 +109,15 @@ Ve výše zmíněném popisu RK4 \eqref{eq:RK4Ex} se žádná soustava na první
 
 \subsection{Implementace}
 Nyní se budeme věnovat tomu, jak by se RK4 dalo zakomponovat do našeho programu.
+Implementace už je trochu delší, ale podrobně si ji vysvětlíme.
+\includecode[method RK4]{Source/RK4.cpp}
+{Runge-Kutta integrační metoda}
 
-\section{MultiStep}
-\label{sec:implMultiStep}
-Tak to nevim jestli se mi chce psát...
-\subsection{Teorie}
-\subsection{Implementace}
+Nejprve si všimneme, že naše soustava nezávisí přímo na čase, ale pouze na aktuální poloze a rychlosti. Budeme také už potřebovat nějaké dočasné proměnné, konkrétně si budeme ukládat všechny 4 koeficienty pro každý objekt. Dále si ještě vytvoříme proměnnou, kam budeme ukládat mezistavy simulace - \texttt{temps}.
+
+Nyní se zaměřme na funkci \texttt{computeKx}, která počítá koeficient. Z toho jak jsou koeficienty definované je musíme počítat postupně, protože do koeficientu $ k_i  $ dosazujeme stav $ y(t)+mult. \Delta t . k_{i-1} $.
+Výpočet koeficientu je vlastně jen jeden krok explicitní Eulerovy metody. Akorát neintegrujeme simulovaná data, ale právě jen dočasný stav. Také nepočítáme posun o $ \Delta t $ ale o jeho násobek - \texttt{mult} argument.
+
+Explicitní metodu už máme vymyšlenou z minula, tomu také odpovídá implementace.
+Na konci nám ale ještě přibude finální integrace dat pomocí \eqref{eq:RK4Ex2}.
+A také musíme nastavit dočasné proměnné pro další volání funkce.

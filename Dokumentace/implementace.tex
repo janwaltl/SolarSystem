@@ -2,12 +2,12 @@
 
 \chapter{Návrh programu}
 \label{chap:implementace}
-Tato kapitola se zabývá návrhem programu - jak celý program vypadá a popisuje jeho hlavní třídu - \texttt{Simulation}. V rámci které si představíme \textbf{moduly}, které se objevují v dalších kapitolách.
+Tato kapitola se zabývá návrhem programu - jak je celý program navržen a popisuje jeho hlavní třídu - \texttt{Simulation}. V rámci které si představíme \textbf{moduly}, které se objevují v dalších kapitolách.
 Na úvod se podívejme jak by mohl vypadat jednoduchý \textbf{main.cpp} 
 
 \includecode{Source/main.cpp}{Hlavní program}
 
-Celý program je zabalen do jmenného prostoru \texttt{solar}. \texttt{Simulation} je hlavní třída, která se stará o celkový průběh simulace. Dále jsou zde vidět tři \textbf{moduly}, které jsou předány simulaci.Jejich detailní popis přijde později.
+Veškeré zdrojové kódy programu jsou zabaleny do jmenného prostoru \texttt{solar}. \texttt{Simulation} je hlavní třída, která se stará o celkový průběh simulace. Dále jsou zde vidět tři \textbf{moduly}, které jsou předány simulaci. Jejich detailní popis přijde později.
 
 \texttt{Simulation} poté zajišťuje jejich vzájemnou spolupráci. Metoda \texttt{Simulation::Start()} následně spustí samotnou simulaci podle předepsaných parametrů.
 Pokud někde nastane chyba, dojde k vyvolání výjimky v podobě třídy \texttt{solar::Exception}, popřípadě jiných výjimek z rodiny \texttt{std::exception}.
@@ -16,4 +16,11 @@ Pokud někde nastane chyba, dojde k vyvolání výjimky v podobě třídy \textt
 \input{classSimulation}
 
 \section{Výjimky}
-Nyní se povídáme na to, které výjimky může uživatel potencionálně očekávat od našeho programu.
+Existují tři druhy výjimek, které program může vyvolat.
+\begin{enumerate}
+	\item Nejčastěji to bude výjimka v podobě třídy \texttt{Exception}, která dědí 
+	z \texttt{std::runtime\_error} a tedy i \texttt{std::exception}. K této výjimce dojde zejména při chybě v otevírání/čtení souborů a inicializace knihoven, ale jedná se o hlavní třídu výjimek v tomto programu, takže je použita i v modulech pro hlášení chyb.
+	\item Na výjimku v podobě třídy \texttt{GLError} můžeme narazit při chybě týkající se OpenGL - nepodařená inicializace, nedostatek paměti a podobně.
+\item Výjimky dědící z \texttt{std::exception} - program využívá standardní C++ knihovny, které můžou potencionálně také vyvolat výjímky.
+\end{enumerate}
+Všechny tři druhy nabízí metodu \texttt{what()}, která vrátí krátký popis vyvolané výjimky.

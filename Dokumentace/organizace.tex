@@ -1,17 +1,15 @@
 % !TeX spellcheck = cs_CZ
 
 \chapter*{Organizace dokumentu}
-Tento text je organizován do následujících kapitol:
+Tento text je organizován do následujících částí:
 \begin{description}
-	\item[\nameref{chap:uvod}] - Zadání zápočtového programu a teoretická část
-	\item[\nameref{chap:implementace}] - Hlavní část dokumentace, které popisuje jak design celého programu, tak jednotlivých částí. Zaměřuje se na použité algoritmy a jejich implementaci včetně zdrojových kódů C++.
-	Také zmiňuje možnosti rozšíření programu.
-	\item[\nameref{chap:userGuide}] - Část popisující jak program spustit a jak s ním pracovat z neprogramátorského pohledu.
+	\item[Úvod] - První kapitola, zde je uvedena specifikace zápočtového programu a vysvětlena teoretická část.
+	\item[Programátorká část] - Kapitoly č.X až Y, které popisují jak design celého programu, tak jednotlivých částí. Zaměřují se na použité algoritmy a jejich implementaci včetně zdrojových kódů C++. Na konci jsou poté zmíněny možnosti dalšího rozšíření.
+	\item[Uživatelská příručka] - Poslední dvě kapitoly popisují jak program správně zkompilovat a také jak s ním pracovat z neprogramátorského pohledu.
 	
 \end{description}
-Text není nutné číst od začátku do konce, pro první spuštění by mělo stačit poslední kapitolu. Naopak, ale pro pochopení implementace RK4 metody je dobré vědět něco o numerické integraci a o co se vlastně program vůbec snaží. Což popisuje teoritická část v úvodní kapitole. Programátorská část vyžaduje znalost C++ a OpenGL, ale je zde snaha důležitější koncepty vysvětlit  i bez těchto znalostí. V tomto textu se nachází  zdrojové kódy s příklady, které jsou psány následujícím formátem:
-\begin{lstlisting}
-\caption{Text vystihující příklad (Název souboru)}
+Programátorská část vyžaduje určitou znalost C++ a OpenGL. Důležité koncepty a algoritmy jsou podrobně vysvětleny a vhodně doplněny zdrojovými kódy, které jsou psány následujícím formátem:
+\begin{lstlisting}[title=Text vystihující příklad (Název souboru)]
 #include <iostream>
 
 int main()
@@ -21,6 +19,7 @@ int main()
 }
 \end{lstlisting}
 Všechny další uvedené zdrojové kódy se nachází ve složce \texttt{Source/}, která
-by měla být připojena k této dokumentaci. Z praktických důvodů \textbf{nemusí} být tyto soubory zkompilovatelné, popřípadě mohou být z části v pseudo-kódu. Také se \textbf{nejedná} o zdrojové kódy samotného programu. Primární účel je \textbf{popisný}. Ovšem často bude uvedený kód přímo nebo částečně odpovídat kódu někde uvnitř programu.
-Zdrojové kódy samotného programu se přímo v tomto dokumentu nenachází, avšak jsou také součástí dokumentace a obsahují komentáře, které mohou stát za přečtení.
+by měla být připojena k této dokumentaci. Z praktických důvodů \textbf{nemusí} být tyto soubory zkompilovatelné, popřípadě mohou být psány z části v pseudo-kódu. \textbf{Nejedná} se o zdrojové kódy samotného programu. Primární účel je pouze \textbf{popisný}, kde snaha je ilustrovat koncepty a algoritmy, které se v programu v nějaké formě skutečně vyskytují.
+
+Zdrojové kódy samotného programu jsou také součástí dokumentace a obsahují komentáře, které mohou stát za přečtení.
 

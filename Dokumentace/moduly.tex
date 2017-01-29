@@ -1,7 +1,7 @@
 \chapter{Popis modulů}
 Následující kapitoly se zabývají moduly popsanými v sekci \ref{sub:moduly}.
 Nejprve si v této kapitole podrobně představíme každý ze 3 druhů modulů.
-V dalších kapitolách se pak podíváme na konkrétní moduly, které byly implementovány, a ukážeme si příklad jak by se dal program rozšířit.
+V dalších kapitolách se pak podíváme na konkrétní moduly, které byly implementovány, včetně toho jak se program dá pomocí nich rozšířit.
 
 Ale ještě před představením modulů musíme udělat malou odbočku a definovat si pár tříd a pojmů, které moduly hojně využívají.
 \paragraph{Třída \texttt{SystemUnit}}
@@ -9,10 +9,10 @@ je jednoduchá třída, ze které dědí veškeré moduly a která modulům zaji
 \paragraph{Matematický aparát}
 ve formě tříd \texttt{Vec2} a \texttt{Vec4} nabízí základní matematické operace s vektory jako je sčítání, odčítání a násobení skalárem. Také jsou k dispozici funkce
 \texttt{length()} a \texttt{lengthsq()}, které počítají délku vektoru respektive její druhou mocninu.
-\paragraph{struktura \texttt{Unit}}
+\paragraph{třída \texttt{Unit}}
 je základní jednotka simulace. Jedná se o jeden simulovaný objekt, který má své vlastnosti - polohu, rychlost, hmotnost, jméno a barvu. Kde poslední dvě jsou dobrovolné a simulace se bez nich obejde, ale jsou zde kvůli zobrazování na obrazovku. Její definice je uvedena v následujícím zdrojovém kódu \ref{lst:unitDef}
 \includecode[unitDef]{Source/unit.cpp}{Definice struktury \texttt{Unit}}
-\paragraph{typ \texttt{simData\_t}} je \texttt{std::vector<T>} , kde \texttt{T} je \texttt{Unit}. Používá jako typ simulovaná data.
+\paragraph{typ \texttt{simData\_t}} je \texttt{std::vector<Unit>} Používá jako typ pro simulovaná data.
 \section{Parser}
 Parser se stará o výrobu vstupních dat, také má přístup k výsledným datům, která tak může uložit. Všechny třídy \textbf{parser} modulů musí dědit z abstraktní třídy \texttt{Parser}, jejíž přesná implementace je zde:
 \includecode[parser]{Source/parser.cpp}{Abstraktní třída \texttt{Parser}} 
@@ -20,7 +20,9 @@ Hlavní funkce, kterou každý \textbf{parser} musí implementovat je \texttt{Lo
 \section{SimMethod}
 Simulační metoda by měla zajistit samotnou simulaci. To jakým způsobem bude měnit data záleží pouze na ní. Může tedy použít libovolnou integrační metodu, ale pokud si bude házet imaginární kostkou, tak to bude fungovat také, ikdyž informační hodnota takové simulace je přinejlepším sporná. Podívejme se na přesnou definici abstraktní třídy \texttt{SimMethod}, která dává základ všem simulačním metodám
 \includecode[simMethod]{Source/simMethod.cpp}{Abstraktní třída \texttt{SimMethod}}
-Všechny zděděné moduly musí implementovat alespoň metodu \texttt{operator()()}, která provede jen krok simulace. Simulovaná si drží pomocí svého ukazatele.
+
+Všechny zděděné moduly musí implementovat alespoň metodu \texttt{operator()()}, která provede jeden krok simulace. Simulovaná data si drží pomocí svého ukazatele,
+který inicializuje \texttt{Simulation} ze svého konstruktoru.
 Pokud potřebuje inicializovat své proměnné v závislosti na vstupních datech, tak může přepsat metodu \texttt{Prepare()}. Tato funkce je volána před startem simulace, ale po načtení dat, takže k ním má metoda už přístup. Což se může hodit pro metody, které potřebují znát velikost dat a podle toho si vytvořit dočasné proměnné.
 \section{Viewer}
 Poslední typ modulu - \textbf{viewer} - má přistup k datům za běhu simulace a  je  reprezentován abstraktní třídou \texttt{Viewer} jejíž definice je zde:
