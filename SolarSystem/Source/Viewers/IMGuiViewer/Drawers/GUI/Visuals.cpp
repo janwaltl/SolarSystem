@@ -11,8 +11,8 @@ namespace solar
 		void Visuals(drawers::LineTrailsDrawer & lineTrails, const simData_t & data, size_t w, size_t h)
 		{
 
-			ImGui::SetNextWindowPos(ImVec2(w - 250, 10), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(250, std::min(400, (int)h)), ImGuiSetCond_Once);
+			ImGui::SetNextWindowPos(ImVec2(float(w - 250.0f), 10.0f), ImGuiSetCond_Once);
+			ImGui::SetNextWindowSize(ImVec2(250.0f, std::min(400.0f, (float)h)), ImGuiSetCond_Once);
 			if (ImGui::Begin("Visuals", NULL))
 			{
 				if (ImGui::CollapsingHeader("Line Trails:", nullptr, false, false))

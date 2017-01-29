@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Updated libraries, added them to git. Solved run-time library warning.
+Forgot to update includes as well.
+Fixed some last warnings. Zero-warning build.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	V. Document it & ship it

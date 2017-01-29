@@ -39,8 +39,8 @@ namespace solar
 				sys.PauseSimulation();
 				recordNum = numRecords;
 			}
-			ImGui::SetNextWindowPos(ImVec2(10, h-80), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(w-10, 80), ImGuiSetCond_Once);
+			ImGui::SetNextWindowPos(ImVec2(10.0f, float(h-80.0f)), ImGuiSetCond_Once);
+			ImGui::SetNextWindowSize(ImVec2(float(w-10.0f), 80.0f), ImGuiSetCond_Once);
 			if (ImGui::Begin("Replay controls", NULL, ImGuiWindowFlags_NoCollapse |
 							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar))
 			{
