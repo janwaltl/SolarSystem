@@ -1,14 +1,32 @@
 \chapter{Uživatelská příručka}
 \label{chap:userGuide}
-Jak program spustit, organizace programu - kde je uloženej a tak...
-Dodatek k linuxu asi...
+\section{Požadavky}
+Vyžaduje verzi OpenGL 3 nebo vyšší, navíc je potřeba MVS redist, které je ve formě .dll přibaleno. Pokud by byly s program problémy, pak doporučuji stáhnout  a nainstalovat oficiální redist balíček z XXX.
+\section{Základní ovladání}
+Při spuštění .exe souboru se program otevře v výchozím grafickém režimu, kde dojde k nahrání Sluneční soustavy. Simulace se ovládá pomocí grafického rozhraní - hlavní je okno vlevo nahoře, které slouží k pozastavení simulace a úpravě její rychlosti. Další okna zobrazují informace o objektech a stavu simulace.\\
+*Obrázek s vysvětlivkama*\\
+\section{Pokročilé možnosti}
+Program také nabízí pokročilejší ovládání pomocí příkazové řádky, s níž je možné načítat simulovaná data ze souboru,také nabízí možnost zaznamenat a následně přehrát uložené simulace.
 
+*Vypsání obsáhlejší nápovědy*
+
+K .exe souboru je přiložen vzorový formátovaný text a také jedna uložená simulace.
+Přesný popis formátovaného vstupního souboru je uveden v sekci \ref{sec:strukturaDat} . Pro detailní vysvětlení parametrů simulace je k dispozici popis v sekci \ref{sec:startMetoda}.
+
+
+
+\chapter{Kompilace programu}
+\section{Git}
+Tato dokumentace spolu se zdrojovými kódy programu je veřejně dostupná na:
 \begin{center}
-	\textbf{	
-		Tato dokumentace spolu se zdrojovými kódy programu je dostupná na:\\
-		\texttt{https://bitbucket.org/Quimby/solar/src}\\
-		Popřípadě přímo stažitelná pomocí git:	\\
-		\texttt{https://Quimby@bitbucket.org/Quimby/solar.git}\\
-		V případě problému mne můžete kontaktovat na adrese: waltl.jan@gmail.com
-	}
+\texttt{https://bitbucket.org/Quimby/solar/src}
 \end{center}
+Popřípadě přímo stažitelná pomocí git:
+\begin{center}
+	\texttt{https://Quimby@bitbucket.org/Quimby/solar.git}
+\end{center}
+\section{Windows}
+Visual studio projekt...knihovny už jsou, stačí zkompilovat
+\section{Linux}
+Potřeba zkompilovat knihovny dle návodu, překopírovat do libraries.
+Udělat makefile?

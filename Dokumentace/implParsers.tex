@@ -3,7 +3,8 @@ Tento \textbf{parser} načítá strukturovaná data z textového souboru.
 
 Parser očekává základní SI jednotky - metry, sekundy, kilogramy. Ale výstupní \texttt{simData\_t} obsahuje objekty se vzdáleností v AU($ 1,5.10^9 $ m), časem v rocích(pozemské - 365 dní) a hmotností v násobcích hmotnosti Slunce($ 1,988435.10^{30} $ kg přesně). Důvod je ten, že hodnoty v těchto jednotkách jsou více normalizované a dochází k menším zaokrouhlovacím chybám.
 
-\subsection{Struktura dat}
+\section{Struktura dat}
+\label{sec:strukturaDat}
 Začneme hned příkladem, takto by mohl vypadat správný vstupní soubor s daty:
 \begin{lstlisting}
 { name<Sun>
@@ -49,7 +50,7 @@ sedmerocolor	horami <1.0 	   0.88 			0.0 	1.0 a
 
 \end{lstlisting}
 
-\subsection{Detaily implementace}
+\section{Detaily implementace}
 Takto vypadá deklarace konstruktoru: \\
 \lstinline|FormattedFileParser(const std::string& inputFileName,const std::string& outputFileName="");|\\
 Parser tedy očekává vstupní a případně výstupní jméno souboru,\textbf{ včetně} cesty a přípony k souboru. Samotné načítání a ukládání probíhá v metodách \texttt{Load()} respektive \texttt{Save()}.
@@ -66,6 +67,7 @@ Při nekorektním vstupu, nemožnosti otevřít vstupní soubor nebo vytvořit s
 
 
 \chapter{SolarParser}
+\section{Popis}
 Tento jednoduchý \textbf{parser} nedělá nic jiného, než načte data o Sluneční soustavě, která má zabudována pevně ve své implementaci.
 Momentálně se jedná o následující objekty:
 \begin{enumerate}

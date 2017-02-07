@@ -34,6 +34,7 @@ namespace solar
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		//Do not allow rezising
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+		glfwWindowHint(GLFW_SAMPLES, 4);//Anti-aliasing
 		win = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr); // create actual window
 		if (win == nullptr) // if that fails
 			throw Exception("Unable to create Window,reason: " + error);
@@ -50,6 +51,7 @@ namespace solar
 		glViewport(0, 0, width, height); // sets correct coordinate viewport
 		//Turn off VSYNC if possible - makes frameTime inaccurate
 		//Still, might be ingnored by driver's settings
+		glEnable(GL_MULTISAMPLE);
 		glfwSwapInterval(0);
 	}
 

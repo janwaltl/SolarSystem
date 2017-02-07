@@ -1,11 +1,16 @@
 =====================================IN THIS COMMIT=====================================
 New version of documentation.
+
+Anti-aliasing.
+	- Much nicer.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	V. Document it & ship it
 		- Add simple explicit Euler?
 		- Test NotTimed properly, try pause, getters...
-
+		- put warning about changing SimTime while recording
+		- Use composition for RecordedSim, ReplayedSim
+		- force DTMult to be atleast one, when replaying
 		Documentation:
 			- make table data in theory part
 			- give credits to last years physics course, numerical recipies
@@ -15,18 +20,6 @@ Next:
 							- explain lineTrails algorithm
 							- somehow summarize GUIs
 							- mention OMSAR in together with SimDataDrawer?
-			- replay DLC
-				- two parts:recording & replaying
-					-record - explain ViewAndRecord concept
-								- binary file, bla bla...see source code...
-					-replaying - Parser,Method,Viewer
-						- parser - only for correct size of data and intial conditions
-						- simMethod - utilizes simTime to pick correct record
-						- replayerViewer - recycles ImGuiViewer
-			- what has not been done
-				- physics unit system
-				- templatize vector
-				- idea on expansion to 3D
 			- user guide
 				- explain consoleControl
 				- compiling for Windows
@@ -37,6 +30,7 @@ Next:
 				- compiling for Linux
 					- needs to compile GLFW and GLEW
 					- make makefile?
+				- bitbucket
 	VI. OPTIONAL
 
 		- Create physics unit system

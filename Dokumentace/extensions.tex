@@ -1,26 +1,64 @@
 \chapter{Rozšířitelnost a vylepšení}
-\textbf{Poznámka autora: }\textit{Následující sekce popisuje rozšíření programu o novou funkci a to přehrávání uložených simulací. I když je tato myšlenka plně implementována a je funkční, tak celkem zneužívá design třídy \texttt{Simulation}, což nebylo nutné. Lepší verze je vložena jako sekce \ref{sec:extV2} \nameref{sec:extV2}, ale rozhodl jsem se zde ponechat i původní verzi. }
-\section{Praktický příklad rozšíření programu V1.0}
 
-Pokud jste už zkusili výsledný program spustit a samou radostí nad skvělou simulací vám něco uniklo a vy jste v panice začali hledat tlačítko na vrácení o krok zpět, tak jste zjistili, že tam žádné není. Bohužel program v aktuální verzi neprovádí žádné cachování výsledků, takže se nelze vrátit zpět. Což je určitě užitečné rozšíření, ale my zkusíme něco trochu jiného - \textbf{přehrávač simulací}.
-Přehrávač by měl umět zaznamenat probíhající simulaci a poté ji přehrát jako video. Tedy včetně přeskakování na libovolné místo simulace, zastavení a zpětné přehrávání.
+Pokud jste už zkusili výsledný program spustit a samou radostí nad skvělou simulací vám něco uniklo a vy jste v panice začali hledat tlačítko na vrácení o krok zpět, tak jste zjistili, že tam žádné není. Simulace ve výchozím stavu neprovádí žádné cachování/ukládání mezivýsledků, takže se nelze vrátit zpět. Což je určitě užitečné rozšíření, ale my zkusíme něco trochu jiného - \textbf{přehrávač simulací}.
+Přehrávač by měl umět zaznamenat probíhající simulaci a poté ji přehrát jako video, tedy včetně přeskakování na libovolné místo simulace a zrychlení/zpomalení přehrávání.
+
+\section{Návrh přehrávače}
 Jak by se takový přehrávač dal implementovat?
 Co kdybychom vytvořili následující třídy:
 \begin{enumerate}
-	\item Třída \texttt{ViewAndRecord}, která se chová jako \texttt{viewer}, ale navíc simulaci zaznamenává do souboru. 
-	\item Trojice tříd \texttt{ReplayerParser} \texttt{ReplayerMethod} a \texttt{ReplayerViewer}, které by se starali o přehrávání simulace.
+	\item Třída \texttt{ViewAndRecord}, která se chová jako libovolný jiný \texttt{viewer}, ale navíc si "tajně" zaznamenává simulaci do souboru. 
+	\item Trojice tříd \texttt{ReplayerParser}, \texttt{ReplayerMethod} a \texttt{ReplayerViewer} které by se starali o samotné přehrávání simulace.
+	\item Dvoji tříd \texttt{RecordedSimulation} a \texttt{ReplayedSimulation} které vše zabalují do funkčního celku.
 \end{enumerate}
-\ref{lst:extIdea} ukazuje výše zmíněnou myšlenku převedenou do C++ a  \ref{lst:extIdeaUsage} pak jak by se pak dala použít v hlavním programu.
-\includecode[extIdea]{Source/extIdea.cpp}{Návrh přehrávače simulací} 
-\includecode[extIdeaUsage]{Source/extIdeaUsage.cpp}{Příklad použití přehrávače}
-Díky návrhu celého programu se zaznamenávání simulace docílí velmi jednoduše, protože jediné co musíme změnit je, že "zabalíme" zvolený \textbf{viewer} do třídy \texttt{ViewerAndRecord} a poté ho předáme jako obyčejný \textbf{viewer} simulaci. Zabalení znamená, že ho předáme jako parametr pro šablonu \texttt{ViewerAndRecord}. Při běhu simulace bude pak volán \texttt{ViewerAndRecord}, který ale také zavolá předaný viewer a navíc bude na pozadí ukládat probíhající simulaci.
+Celý přehrávač je plně funkční a součástí výsledného programu, proto si zde všechny koncepty alespoň přibližně představíme.
+Navíc se v původním programu vlastně koncepčně vůbec nic nezměnilo, vše plyne z flexibility modulů.
+\\
+\\
+\textbf{Poznámka autora:}  \textit{Při pohledu do git
+	\footnote{Viz. Uživatelská příručka}
+historie projektu zjistíte, že je to samozřejmě lež - měnilo se skoro všechno. Za prvé se úplně rozebral \texttt{ImGuiViewer} - vytáhly se z něj jednotlivé části, které se umístily do svých vlastních tříd. \textbf{Viewer} se poté z nich znovu sestavil zpět. Výsledná podoba je ta uvedená v dokumentaci, ve které jsou jednotlivé části co nejvíce nezávislé a hlavně znovupoužitelné.
+Za druhé se zpřehlednilo rozhraní třídy \texttt{Simulation}, hlavně práce s časem, kdy se přešlo od desetinných čísel k celočíselné reprezentaci, která netrpí na zaokrouhlování.
+Obě úpravy nebyly nutné z hlediska původní funkčnosti, ale už při implementaci se mi návrh moc nelíbil(zvlášť GUI bylo nepřehledné), každopádně cíl byl nejdřív dostat funkční kód a pak ho zkrášlovat dle potřeby.
+Ve výsledku se velká část uživatelského rozhraní pro \texttt{ImGuiViewer} použila i pro \texttt{ReplayerViewer}, což by předtím vedlo na ošklivé {\small CTRL+C a  CTRL+V}}.
 
-Přehrávání pak docílíme tím, že simulaci budeme podstrkovat data, která si přečteme ze souboru místo toho abychom je simulovaly. Tento podvod bude zajišťovat právě třída \texttt{ReplayerMethod}. Technicky potřebujeme ještě \textbf{parser} - \texttt{ReplayerParser}, ale ten jediné co udělá je, že přečte první data ze stejného souboru. Pro zobrazení použijeme třídu \texttt{ReplayerViewer}, který využívá pracně vytvořený \texttt{IMGuiViewer}. Pomocí knihovny ImGui můžeme pak dokreslit potřebné ovládání simulace.
+\section{Zaznamenání simulace}
+Ideálně bychom chtěli zaznamenat jakoukoliv simulaci, což můžeme udělat například následujícím způsobem:
+\includecode[recording]{Source/recording.cpp}
+{Návrh jak by se simulace dala zaznamenávat}
+Díky modulům se zaznamenávání simulace docílí velmi jednoduše, protože jediné co musíme změnit je, že \uv{zabalíme} zvolený \textbf{viewer} do třídy \texttt{ViewerAndRecord} a poté ho předáme jako obyčejný \textbf{viewer} simulaci. Při běhu simulace bude pak volán \texttt{ViewerAndRecord}, který ale v rámci své \texttt{operator()()} také zavolá předaný \textbf{viewer} a navíc si bude na pozadí ukládat probíhající simulaci.
 
-Bohužel narazíme na problém. \texttt{Simulation} neumí měnit libovolně čas. \texttt{deltaT} je pevně dané, takže nemůžeme simulaci přehrávat pozpátku. Což se dá vyřešit tím, že čas simulace budeme do jisté míry ignorovat a \texttt{ReplayerViewer} si přímo řekne \texttt{ReplayerMethod}, že by měl nyní vracet data pozpátku.
-\section{Praktický příklad rozšíření programu V2.0}
-\label{sec:extV2}
-templatize SystemUnit
-\section{Vylepšení}
-- Jak by se dal program vylepšit\\
-	- 
+Čili takto jednoduše jsme docílili zaznamenání skoro libovolné simulace.
+Co se týče formátu záznamu, tak se jedná o binární soubor, kde jeho přesná specifikace je popsána u zdrojových kódů v souboru \texttt{FileFormats/ReplayerFile.txt}.
+Zaznamenávání je nastaveno tak, že jeden simulovaný krok odpovídá jednomu záznamu. Odsimulovaný čas si \texttt{ViewAndRecord} snadno zjistí pomocí funkce \texttt{simTime Simulation::GetSimTime()}.
+Slovo \uv{skoro} na začátku odstavce odkazuje na to, že tento postup selže, pokud někdo bude měnit simulovaný čas pomocí \texttt{void Simulation::SetSimTime(simTime)}, což ale klasická simulace dělat nepotřebuje.
+
+
+\section{Přehrávání}
+Přehrávání docílíme tím, že simulaci budeme podstrkovat data, která si přečteme ze souboru se zaznamenanou simulací místo toho abychom je simulovali sami. Tento podvod bude zajišťovat právě třída \texttt{ReplayerMethod}. Technicky potřebujeme ještě \textbf{parser} - \texttt{ReplayerParser}, ale ten jediné co udělá je, že přečte první data ze stejného souboru a tím vytvoří \texttt{simData\_t}, která se od tohoto modulu očekávají. Pro zobrazení použijeme třídu \texttt{ReplayerViewer}, která využívá pracně vytvořené části z modulu \texttt{IMGuiViewer}. Navíc ještě přidává okno, které obsahuje ovládání přehrávání. Mezi funkce patří slíbené zpomalení/zrychlení přehrávání a také přeskočení do libovolného bodu záznamu. 
+
+Jak to funguje? \texttt{ReplayerMethod} si přečte aktuální odsimulovaný čas, podle toho si v souboru najde záznam, který tomu má odpovídat a simulovaná data prostě změní podle tohoto záznamu. Ve skutečnosti ještě provede lineární interpolaci mezi dvěma záznamy, aby byl výsledek plynulejší při menších rychlostech. \texttt{ReplayerMethod} je poté zobrazí bez ohledu na jejich původ. Pokud potřebujeme přehrávání zpomalit, tak využijeme parametru \texttt{DTMultiplier}. A pokud chceme přeskočit někam jinam, tak změníme odsimulovaný čas pomocí \texttt{void Simulation::SetSimTime(simTime)}.
+
+Tím máme vlastně všechny moduly určené, ale nutit uživatele k tomu aby je vytvářel sám je zbytečné. Proto se o toto stará třída \texttt{ReplayedSim}, která obsahuje samotnou simulaci, které předá potřebné moduly.
+\section{Vylepšení a opravy}
+V průběhu prací na programu jsem si vedl v souboru plán toho, na čem budu pracovat, časem se tam objevily různé věci, které se do finálního programu z různých důvodů nedostaly, proto je zmíním alespoň zde jako možná vylepšení a také opravy toho co nebylo ještě opraveno.
+
+\begin{description}
+	\item[Fyzikální jednotky] Asi hlavní věc, která programu momentálně chybí je nějaký ucelený systém fyzikálních jednotek. \texttt{simData\_t} obsahují pouze data, takže záleží na dohodě mezi moduly, v jakém formátu tyto data jsou. Což je samozřejmě nepraktické. Řešení by bylo změnit \texttt{simData\_t} z vektoru na alespoň strukturu, která by měla pomocné proměnné označující v jakých jednotkách data jsou. Například pomocí \textbf{enum}, popřípadě rovnou dvojice (čitatel, jmenovatel) pro převod do jednotek SI, stejně jako používá knihovna \texttt{std::chrono}.
+	\item[Šablony pro vektory] Není potřeba nic extra složitého, ale stálo by za to mít obecný vektor pro libovolný počet prvků a hlavně pro libovolná data. V samotném vektoru není potřeba moc změn, jen přepsání \textbf{double} na \textbf{T} a přidání pár \textbf{template}, ale tím se rozbije valná většina kódu všude možně v programu, takže oprava je zdlouhavá a otravná.
+	Každopádně obecné vektory by se na pár místech v kódu hodily - GUI, OpenGL.
+	\item[Rozšíření do 3D] Pokud bychom měli obecný vektor, tak rozšíření do 3D už je skoro hotové, protože integrační metody fungují pro libovolnou dimenzi a kód v nich by se skoro přepisovat nemusel. Do vykreslení pak stačí přidat projekční matici a \uv{trackball} pro ovládání myší a bylo by hotovo.
+	\item[Zaznamenávání podle \texttt{simMethod}] Momentálně je zaznamenávání simulace vázáno na \textbf{viewer}, což je nepraktické, protože data opravdu mění \textbf{simMethod} a může se stát díky časování, že simulace proběhne vícekrát a my se na mezidata nepodíváme. Toto hodnotím jako špatný návrh, který by se měl opravit. Momentálně je to spíše opravdu jako zaznamenávání obrazovky při přehrávání simulace. Když se přehrávaná simulace bude sekat,tak bude zasekaný i záznam, přitom by stačilo si ukládat samotnou simulaci a ne obrazovku se simulací.
+	\item[Zpomalení přehrávané simulace] Pokud byla simulace zaznamenána v reálném čase, tedy $ DTmult=RawMult=1 $, tak nejde při přehrávání zpomalit, protože to k tomu využívá právě \texttt{DTmult}, který ale nemůže být menší než 1. Bohužel mě nenapadá uspokojivé řešení, ale situace by neměla nastat moc často, protože simulaci přítomnosti moc často nechceme. Navíc zpomalení neposkytuje žádné nové informace, jen dochází k lineární interpolaci mezi záznamy, aby i pomalejší přehrávání bylo plynulé.
+	\item[Lepší než lineární interpolace] Momentálně přehrávání používá lineární interpolaci polohy, což není moc přesné. Dala by se interpolovat i rychlost a zohlednit to v poloze. Aby se např. obíhající měsíc pohyboval po oblouku a ne po přímce mezi záznamy.
+	
+	Jde to vidět například u měsíců Jupitera, které jsou stabilní pro RK4 i při vysokém simulačním kroku a při zpomaleném přehrávání se pohybují spíše po mnohoúhelníku než kružnici. Ale toto je jen vizuální detail, nic podstatného.
+	
+	\item[Lepší GUI] Uživatelské rozhraní je podle mého názoru dostatečné, ale knihovna \textbf{ImGui} je celkem rozsáhlá a nabízí podporu např. pro kreslení grafů. Takže by se dal program rozšířit o velmi detailní statistiky - např. rozložení hmotnosti a rychlostí v soustavě. A také celkové energie systému, se kterou by se dala sledovat chyba integrační metody, protože energie uzavřeného systému je konstantní. Také by si GUI zasloužilo lepší podporu pro různé velikosti okna, což momentálně funguje, ale není to moc hezky napsané.
+	\item[Nějaké zajímavé integrační metody] Toto by neměl být vůbec problém, kvůli tomu přesně existují moduly. Původně jsme chtěl přidat alespoň jednu vícekrokovou metodu, ale upřímně se mi už nechce, program je už dostatečně velký. Ale zajímalo by mě, jak si vedou v poměru přesnost/výkon hlavně vzhledem k RK4.
+	Také využití OpenGL shaderů k simulaci by bylo zajímavý, což by mohlo dovolit simulovat více objektů.
+	\item[Komprese zaznamenaných simulací] Aktuálně nedochází k žádné kompresi záznamu, takže po 5 minutách simulace při zaznamenání každých 10ms má soubor velikost kolem 15MB (30 tisíc záznamů). Avšak těžko říct kolik se bude dát reálně ušetřit, 7Zip tento konkrétní soubor zkomprimuje na 12MB pomocí algoritmu LZMA2, což není nic extra. 
+	
+	Ale malý krok simulace nevolíme většinou kvůli nutnosti znát polohu v každém čase, ale kvůli přesnosti simulace a samotných výsledků, takže řešením by byla možnost změnit ve třídě \texttt{ViewAndRecord} jak často se má zaznamenávat, což je úprava na pár řádku (změna \texttt{timeStep} a \texttt{multiplier} v .cpp by měla stačit).
+	
+\end{description}

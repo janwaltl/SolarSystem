@@ -6,8 +6,6 @@ Při představení numerické integrace jsme si ukázali explicitní Eulerovu me
 \begin{align} \label{eq:implicitEuler}
 y(t+\Delta t) = y(t) + \Delta t . y'(t+\Delta t)
 \end{align}
-Implicitní verze dává při stejném $ \Delta t $ přesnější, protože dochází k interpolaci, která na rozdíl od extrapolace neakumuluje chybu.
-
 Nyní se podívejme jak bychom řešili jednoduchou diferenciální rovnici \eqref{eq:secDer}. Na ní nelze Eulerovu metodu přímo použít neboť ta řeší jen rovnice s první derivaci. Ale pomůžeme si tím, že každá obyčejná diferenciální rovnice $ n $-tého stupně se dá převést na n rovnic prvního stupně. Takže rovnici z \eqref{eq:secDer} si upravíme na dvě rovnice \eqref{eq:secDer2} a \eqref{eq:secDer3}
 \begin{align} \label{eq:secDer}
 \ddot{x}(t) &= k.x(t) \quad \\
@@ -39,7 +37,8 @@ To sice dalo určitou práci, ale dostali jsme správné řešení. Na pravé st
 
 Naše soustava rovnic \eqref{eq:soustava} je nápadně podobná předchozí rovnicí, což samozřejmě není náhoda. Pokud se ale nyní budeme stejný postup snažit aplikovat na naší soustavu rovnic, tak zjistíme, že to nebude fungovat. Narazíme totiž na to, že po dosazení obou rovnic nebudeme schopni explicitně vyjádřit $ x(t + \Delta t) $. Bohužel toto je daň za vyšší stabilitu implicitních metod - nutnost vyřešení další rovnice. V našem případě bychom museli použít numerické řešení i pro samotnou rovnici, což dělat nebudeme.
 
-Místo toho použijeme semi-implicitní Eulerovu metodu. Místo dvojitého použití implicitní metody použijeme implicitní pro \eqref{eq:secDer8} a explicitní verzi pro \eqref{eq:secDer7} . Explicitní verze nám dovolí snadno spočítat $ v(t + \Delta t) $ neboť hodnoty v čase $ t $ už známe. Tím jsme ale získali i potřebnou hodnotu $ v(t + \Delta t) $ pro implicitní verzi druhé rovnice. Vlastně jsme z obou metod vzali to nejlepší - jednoduchost explicitní a větší přesnost implicitní metody. Výsledný mix je metoda, která je jednoduchá na implementaci a relativně přesná pro naše účely.
+Místo toho použijeme semi-implicitní Eulerovu metodu. Místo dvojitého použití implicitní metody použijeme implicitní pro \eqref{eq:secDer8} a explicitní verzi pro \eqref{eq:secDer7} . Explicitní verze nám dovolí snadno spočítat $ v(t + \Delta t) $ neboť hodnoty v čase $ t $ už známe. Tím jsme ale získali i potřebnou hodnotu $ v(t + \Delta t) $ pro implicitní verzi druhé rovnice. Vlastně jsme z obou metod vzali to nejlepší - jednoduchost explicitní a větší stabilitu implicitní metody. Výsledný mix je metoda, která je jednoduchá na implementaci a relativně přesná pro naše účely.
+\footnote{Srovnání explicitní, implicitní a semi-implicitních integračních metod se věnuje kapitola XXX}
 \begin{align}
 \label{eq:secDer7}
 v(t + \Delta t)&=v(t) + \Delta t . \dot{v}(t)\\
