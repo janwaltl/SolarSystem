@@ -160,7 +160,7 @@ namespace solar
 
 			ImGui::Text("Speed ratio"); ImGui::NextColumn();
 			ImGui::TextTooltipOnHover("This amount of time is simulated each passed second.");
-			auto speedRatio = SplitTime(sys.GetRawMultiplier()*sys.GetDTMultiplier());
+			auto speedRatio = SplitTime(uint64_t(sys.GetRawMultiplier())*sys.GetDTMultiplier());
 
 			ImGui::Text("%id %ih %im %is", speedRatio.D, speedRatio.H, speedRatio.M, speedRatio.S); ImGui::NextColumn();
 			ImGui::Text("Stable"); ImGui::NextColumn();
@@ -190,7 +190,7 @@ namespace solar
 			ImGui::Text("SimTime"); ImGui::NextColumn();
 			ImGui::TextTooltipOnHover("Amount of time simulated.");
 			auto simTime = SplitTime(sys.GetSimTime());
-			ImGui::Text("%3.0fy %03.0fd", simTime.Y, simTime.D); ImGui::NextColumn();
+			ImGui::Text("%iy %3id", simTime.Y, simTime.D); ImGui::NextColumn();
 
 			ImGui::Columns(numCols);
 		}

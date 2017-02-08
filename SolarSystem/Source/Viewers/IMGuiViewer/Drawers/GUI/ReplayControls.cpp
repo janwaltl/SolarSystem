@@ -39,8 +39,8 @@ namespace solar
 				sys.PauseSimulation();
 				recordNum = numRecords;
 			}
-			ImGui::SetNextWindowPos(ImVec2(10.0f, float(h-80.0f)), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(float(w-10.0f), 80.0f), ImGuiSetCond_Once);
+			ImGui::SetNextWindowPos(ImVec2(10.0f, float(h - 80.0f)), ImGuiSetCond_Once);
+			ImGui::SetNextWindowSize(ImVec2(float(w - 10.0f), 80.0f), ImGuiSetCond_Once);
 			if (ImGui::Begin("Replay controls", NULL, ImGuiWindowFlags_NoCollapse |
 							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar))
 			{
@@ -72,12 +72,16 @@ namespace solar
 				lineTrails->ClearAll();
 				jumped = false;
 			}
-
-			if (ImGui::Button("Slow down"))
+			if (speed / 2.0 * multiplier > 1.0)//If it can be slow down
 			{
-				speed /= 2.0;
-				sys.SetDTMultiplier(static_cast<uint32_t>(multiplier*speed));
+				if (ImGui::Button("Slow down"))
+				{
+					speed /= 2.0;
+					sys.SetDTMultiplier(static_cast<uint32_t>(multiplier*speed));
+				}
 			}
+			else
+				ImGui::TextDisabled("Slow down");
 			ImGui::SameLine();
 
 			if (recordNum < numRecords)//Not the last record

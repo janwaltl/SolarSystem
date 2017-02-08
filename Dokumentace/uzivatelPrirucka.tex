@@ -1,18 +1,36 @@
 \chapter{Uživatelská příručka}
 \label{chap:userGuide}
 \section{Požadavky}
-Vyžaduje verzi OpenGL 3 nebo vyšší, navíc je potřeba MVS redist, které je ve formě .dll přibaleno. Pokud by byly s program problémy, pak doporučuji stáhnout  a nainstalovat oficiální redist balíček z XXX.
+Vyžaduje verzi OpenGL 3 nebo vyšší, navíc je potřeba balíček Microsoft Visual C++ 2015 Redistributable, který je ve formě .dll přibalen. Pokud by s ním přesto byly problémy, tak doporučuji stáhnout  a nainstalovat jeho aktuální verzi z \url{https://www.microsoft.com/cs-CZ/download/details.aspx?id=53840}
 \section{Základní ovladání}
-Při spuštění .exe souboru se program otevře v výchozím grafickém režimu, kde dojde k nahrání Sluneční soustavy. Simulace se ovládá pomocí grafického rozhraní - hlavní je okno vlevo nahoře, které slouží k pozastavení simulace a úpravě její rychlosti. Další okna zobrazují informace o objektech a stavu simulace.\\
-*Obrázek s vysvětlivkama*\\
+Při spuštění se program otevře v výchozím grafickém režimu, kde dojde k nahrání zabudované Sluneční soustavy. Simulace se ovládá pomocí grafického rozhraní - Obrázek \ref{fig:GUI1}.\\
+\begin{figure}
+	\caption{Grafické rozhraní programu}
+	\label{fig:GUI1} 
+	\centering
+	\includegraphics[scale=0.5]{Figs/GUI1_edited}
+\end{figure}
+\FloatBarrier
 \section{Pokročilé možnosti}
-Program také nabízí pokročilejší ovládání pomocí příkazové řádky, s níž je možné načítat simulovaná data ze souboru,také nabízí možnost zaznamenat a následně přehrát uložené simulace.
+Program také nabízí pokročilejší ovládání pomocí příkazové řádky, s níž je možné načítat simulovaná data ze souboru, vybrat si integrační metody a také možnost zaznamenat a následně přehrát uložené simulace.
+Pro vypsání nápovědy a všech dostupných příkazů v českém jazyce použijte:
+\ \texttt{\textbf{SolarSystem.exe vstup.txt}}
 
-*Vypsání obsáhlejší nápovědy*
-
-K .exe souboru je přiložen vzorový formátovaný text a také jedna uložená simulace.
+Uveďme zde alespoň pár dalších příkladů spuštění:
+\begin{enumerate}
+	\item \texttt{\textbf{SolarSystem.exe vstup.txt}} \\
+	Načte vstupní data z formátovaného souboru \texttt{vstup.txt} a spustí simulaci, která bude běžet v reálném čase a zobrazovat se v okně 1200x700 s uživatelským rozhraním.
+	\item \texttt{\textbf{SolarSystem.exe -sim -p formatted -i vstup.txt -m RK4 -v win}} \\
+	 Ekvivalentní zápis předchozího příkladu. S explicitním použitím modulů.
+	\item \texttt{\textbf{SolarSystem.exe -sim -rm 24 -dm 3600 -x 300}} \\
+	Spustí podobnou simulaci jako v 1. příkladu. Akorát bude mít 3600x větší integrační krok a bude probíhat 10x rychleji. Ve výsledku se tedy odsimuluje jeden den za jednu reálnou sekundu. Simulace se vypne po 5 minutách běhu.
+	\item \texttt{\textbf{SolarSystem.exe -record -r zaznam.replay -p formatted -i vstup.txt -o vystup.txt -m semiEuler -rm 24 -dm 3600 -x 60}}\\
+	Zaznamená 60 sekundovou simulaci do souboru \texttt{zaznam.replay}, vstupní data načte z formátovaného souboru \texttt{vstup.txt} a výsledná data uloží do \texttt{vystup.txt} ve stejném formátu. Simulace bude simulovat jeden den za jednu sekundu pomocí semi-implicitní Eulerovy integrační metody. Simulace se spustí v grafickém prostředí stejně jako v 1. příkladě.
+	\item  \texttt{\textbf{SolarSystem.exe zaznam.replay}}\\
+	Přehraje zaznamenanou simulaci z předchozího příkladu v grafickém prostředí.
+\end{enumerate}
+K .exe souboru je přiložen vzorový formátovaný text \texttt{vstup.txt} a také jeden záznam simulace \texttt{zaznam.replay}.
 Přesný popis formátovaného vstupního souboru je uveden v sekci \ref{sec:strukturaDat} . Pro detailní vysvětlení parametrů simulace je k dispozici popis v sekci \ref{sec:startMetoda}.
-
 
 
 \chapter{Kompilace programu}

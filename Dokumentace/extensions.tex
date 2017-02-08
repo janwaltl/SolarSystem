@@ -16,11 +16,11 @@ Navíc se v původním programu vlastně koncepčně vůbec nic nezměnilo, vše
 \\
 \\
 \textbf{Poznámka autora:}  \textit{Při pohledu do git
-	\footnote{Viz. Uživatelská příručka}
-historie projektu zjistíte, že je to samozřejmě lež - měnilo se skoro všechno. Za prvé se úplně rozebral \texttt{ImGuiViewer} - vytáhly se z něj jednotlivé části, které se umístily do svých vlastních tříd. \textbf{Viewer} se poté z nich znovu sestavil zpět. Výsledná podoba je ta uvedená v dokumentaci, ve které jsou jednotlivé části co nejvíce nezávislé a hlavně znovupoužitelné.
+	\footnote{Viz. \textbf{Kapitola \ref{chap:userGuide} \nameref{chap:userGuide}}}
+historie projektu zjistíte, že je to samozřejmě lež - měnilo se skoro všechno. Za prvé se úplně rozebral \texttt{ImGuiViewer} - vytáhly se z něj jednotlivé části, které se umístily do svých vlastních tříd. \texttt{ImGuiViewer} z nich poté znovu sestavil zpět. Výsledná podoba je ta uvedená v dokumentaci, ve které jsou jednotlivé části co nejvíce nezávislé a hlavně znovupoužitelné.
 Za druhé se zpřehlednilo rozhraní třídy \texttt{Simulation}, hlavně práce s časem, kdy se přešlo od desetinných čísel k celočíselné reprezentaci, která netrpí na zaokrouhlování.
-Obě úpravy nebyly nutné z hlediska původní funkčnosti, ale už při implementaci se mi návrh moc nelíbil(zvlášť GUI bylo nepřehledné), každopádně cíl byl nejdřív dostat funkční kód a pak ho zkrášlovat dle potřeby.
-Ve výsledku se velká část uživatelského rozhraní pro \texttt{ImGuiViewer} použila i pro \texttt{ReplayerViewer}, což by předtím vedlo na ošklivé {\small CTRL+C a  CTRL+V}}.
+Obě úpravy nebyly nutné z hlediska původní funkčnosti, ale už při implementaci se mi návrh moc nelíbil(zvlášť GUI bylo nepřehledné), každopádně cíl ,byl nejdřív dostat funkční kód a pak ho zkrášlovat dle potřeby.
+Ve výsledku se velká část uživatelského rozhraní pro \texttt{ImGuiViewer} použila i pro \texttt{ReplayerViewer}, což by předtím vyžadovalo ošklivé \texttt{\small CTRL+C a  CTRL+V}}.
 
 \section{Zaznamenání simulace}
 Ideálně bychom chtěli zaznamenat jakoukoliv simulaci, což můžeme udělat například následujícím způsobem:

@@ -1,85 +1,88 @@
 \select@language {czech}
-\contentsline {chapter}{\numberline {1}\IeC {\'U}vod}{5}{chapter.1}
-\contentsline {section}{\numberline {1.1}Specifikace}{5}{section.1.1}
-\contentsline {paragraph}{}{5}{section*.4}
-\contentsline {paragraph}{}{5}{section*.5}
+\contentsline {chapter}{\numberline {1}\IeC {\'U}vod}{4}{chapter.1}
+\contentsline {section}{\numberline {1.1}Specifikace}{4}{section.1.1}
+\contentsline {paragraph}{}{4}{section*.3}
+\contentsline {paragraph}{}{4}{section*.4}
+\contentsline {paragraph}{}{4}{section*.5}
+\contentsline {section}{\numberline {1.2}Teorie}{4}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Analytick\IeC {\'y} popis}{4}{subsection.1.2.1}
 \contentsline {paragraph}{}{5}{section*.6}
-\contentsline {section}{\numberline {1.2}Teorie}{5}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Analytick\IeC {\'y} popis}{5}{subsection.1.2.1}
-\contentsline {paragraph}{}{6}{section*.7}
-\contentsline {subsection}{\numberline {1.2.2}Numerick\IeC {\'e} \IeC {\v r}e\IeC {\v s}en\IeC {\'\i }}{6}{subsection.1.2.2}
-\contentsline {chapter}{\numberline {2}N\IeC {\'a}vrh programu}{8}{chapter.2}
-\contentsline {section}{\numberline {2.1}T\IeC {\v r}\IeC {\'\i }da \texttt {Simulation}}{9}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Ve\IeC {\v r}ejn\IeC {\'e} rozhran\IeC {\'\i }}{9}{subsection.2.1.1}
-\contentsline {paragraph}{\IeC {\v R}\IeC {\'\i }d\IeC {\'\i }c\IeC {\'\i } funkce}{9}{section*.8}
-\contentsline {paragraph}{Konstruktor}{9}{section*.9}
-\contentsline {paragraph}{Metoda \texttt {Start()}}{9}{section*.10}
-\contentsline {subsection}{\numberline {2.1.2}Moduly}{10}{subsection.2.1.2}
-\contentsline {subsection}{\numberline {2.1.3}N\IeC {\'a}vrh metody \texttt {Start()}}{10}{subsection.2.1.3}
-\contentsline {paragraph}{}{11}{section*.11}
-\contentsline {paragraph}{\IeC {\v C}asov\IeC {\'a}n\IeC {\'\i }}{11}{section*.12}
-\contentsline {paragraph}{Zm\IeC {\v e}na rychlosti}{12}{section*.13}
-\contentsline {subsection}{\numberline {2.1.4}Implementace metody \texttt {Start()}}{12}{subsection.2.1.4}
-\contentsline {section}{\numberline {2.2}V\IeC {\'y}jimky}{13}{section.2.2}
-\contentsline {chapter}{\numberline {3}Popis modul\IeC {\r u}}{14}{chapter.3}
-\contentsline {paragraph}{T\IeC {\v r}\IeC {\'\i }da \texttt {SystemUnit}}{14}{section*.14}
-\contentsline {paragraph}{Matematick\IeC {\'y} apar\IeC {\'a}t}{14}{section*.15}
-\contentsline {paragraph}{t\IeC {\v r}\IeC {\'\i }da \texttt {Unit}}{14}{section*.16}
-\contentsline {paragraph}{typ \texttt {simData\_t}}{14}{section*.17}
-\contentsline {section}{\numberline {3.1}Parser}{15}{section.3.1}
-\contentsline {section}{\numberline {3.2}SimMethod}{15}{section.3.2}
-\contentsline {section}{\numberline {3.3}Viewer}{16}{section.3.3}
-\contentsline {chapter}{\numberline {4}FormattedFileParser}{17}{chapter.4}
-\contentsline {section}{\numberline {4.1}Struktura dat}{17}{section.4.1}
-\contentsline {paragraph}{name$ < $jm\IeC {\'e}no$ > $ }{17}{section*.18}
-\contentsline {paragraph}{color$ < $R G B A$ > $}{18}{section*.19}
-\contentsline {paragraph}{velocity$ < $X Y$ > $}{18}{section*.20}
-\contentsline {paragraph}{position$ < $X Y$ > $}{18}{section*.21}
-\contentsline {paragraph}{mass $ < $hmotnost$ > $ }{18}{section*.22}
-\contentsline {paragraph}{Dodatek k \IeC {\v c}\IeC {\'\i }sl\IeC {\r u}m}{18}{section*.23}
-\contentsline {paragraph}{}{18}{section*.24}
-\contentsline {section}{\numberline {4.2}Detaily implementace}{18}{section.4.2}
-\contentsline {chapter}{\numberline {5}SolarParser}{20}{chapter.5}
-\contentsline {section}{\numberline {5.1}Popis}{20}{section.5.1}
-\contentsline {chapter}{\numberline {6}Implementovan\IeC {\'e} simula\IeC {\v c}n\IeC {\'\i } metody}{21}{chapter.6}
-\contentsline {section}{\numberline {6.1}SemiImplicitEuler}{21}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Teorie}{21}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Implementace}{22}{subsection.6.1.2}
-\contentsline {section}{\numberline {6.2}RK4}{23}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Teorie}{23}{subsection.6.2.1}
-\contentsline {paragraph}{}{23}{section*.25}
-\contentsline {subsection}{\numberline {6.2.2}Implementace}{24}{subsection.6.2.2}
-\contentsline {chapter}{\numberline {7}Implementovan\IeC {\'e} viewery}{26}{chapter.7}
-\contentsline {section}{\numberline {7.1}IMGuiViewer}{26}{section.7.1}
-\contentsline {subsection}{\numberline {7.1.1}\texttt {OpenGLBackend}}{27}{subsection.7.1.1}
-\contentsline {subsection}{\numberline {7.1.2}\texttt {ImGuiBackend}}{27}{subsection.7.1.2}
-\contentsline {subsection}{\numberline {7.1.3}T\IeC {\v r}\IeC {\'\i }dy pou\IeC {\v z}\IeC {\'\i }vaj\IeC {\'\i }c\IeC {\'\i } OpenGL}{27}{subsection.7.1.3}
-\contentsline {paragraph}{Shader}{27}{section*.26}
-\contentsline {paragraph}{CircleBuffer}{27}{section*.27}
-\contentsline {paragraph}{UnitTrail}{27}{section*.28}
-\contentsline {paragraph}{GLError}{27}{section*.29}
-\contentsline {subsection}{\numberline {7.1.4}Drawer}{27}{subsection.7.1.4}
-\contentsline {subsection}{\numberline {7.1.5}GUIDrawer}{27}{subsection.7.1.5}
-\contentsline {subsection}{\numberline {7.1.6}SimDataDrawer}{27}{subsection.7.1.6}
-\contentsline {subsection}{\numberline {7.1.7}LineTrailsDrawer}{28}{subsection.7.1.7}
-\contentsline {subsection}{\numberline {7.1.8}IMGuiViewer}{28}{subsection.7.1.8}
-\contentsline {chapter}{\numberline {8}Roz\IeC {\v s}\IeC {\'\i }\IeC {\v r}itelnost a vylep\IeC {\v s}en\IeC {\'\i }}{29}{chapter.8}
-\contentsline {section}{\numberline {8.1}N\IeC {\'a}vrh p\IeC {\v r}ehr\IeC {\'a}va\IeC {\v c}e}{29}{section.8.1}
-\contentsline {section}{\numberline {8.2}Zaznamen\IeC {\'a}n\IeC {\'\i } simulace}{30}{section.8.2}
-\contentsline {section}{\numberline {8.3}P\IeC {\v r}ehr\IeC {\'a}v\IeC {\'a}n\IeC {\'\i }}{31}{section.8.3}
-\contentsline {section}{\numberline {8.4}Vylep\IeC {\v s}en\IeC {\'\i } a opravy}{31}{section.8.4}
-\contentsline {chapter}{\numberline {9}Porovn\IeC {\'a}n\IeC {\'\i } integra\IeC {\v c}n\IeC {\'\i }ch metod}{33}{chapter.9}
-\contentsline {section}{\numberline {9.1}Kruhov\IeC {\'y} pohyb}{33}{section.9.1}
-\contentsline {subsection}{\numberline {9.1.1}Explicitn\IeC {\'\i } Euler}{33}{subsection.9.1.1}
-\contentsline {subsection}{\numberline {9.1.2}Implicitn\IeC {\'\i } Euler}{33}{subsection.9.1.2}
-\contentsline {subsection}{\numberline {9.1.3}Semi-implicitn\IeC {\'\i } Euler}{33}{subsection.9.1.3}
-\contentsline {subsection}{\numberline {9.1.4}RK4}{33}{subsection.9.1.4}
+\contentsline {subsection}{\numberline {1.2.2}Numerick\IeC {\'e} \IeC {\v r}e\IeC {\v s}en\IeC {\'\i }}{5}{subsection.1.2.2}
+\contentsline {chapter}{\numberline {2}N\IeC {\'a}vrh programu}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}T\IeC {\v r}\IeC {\'\i }da \texttt {Simulation}}{8}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Ve\IeC {\v r}ejn\IeC {\'e} rozhran\IeC {\'\i }}{8}{subsection.2.1.1}
+\contentsline {paragraph}{\IeC {\v R}\IeC {\'\i }d\IeC {\'\i }c\IeC {\'\i } funkce}{8}{section*.7}
+\contentsline {paragraph}{Konstruktor}{8}{section*.8}
+\contentsline {paragraph}{Metoda \texttt {Start()}}{8}{section*.9}
+\contentsline {subsection}{\numberline {2.1.2}Moduly}{9}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}N\IeC {\'a}vrh metody \texttt {Start()}}{9}{subsection.2.1.3}
+\contentsline {paragraph}{}{10}{section*.10}
+\contentsline {paragraph}{\IeC {\v C}asov\IeC {\'a}n\IeC {\'\i }}{10}{section*.11}
+\contentsline {paragraph}{Zm\IeC {\v e}na rychlosti}{11}{section*.12}
+\contentsline {subsection}{\numberline {2.1.4}Implementace metody \texttt {Start()}}{11}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}V\IeC {\'y}jimky}{12}{section.2.2}
+\contentsline {chapter}{\numberline {3}Popis modul\IeC {\r u}}{13}{chapter.3}
+\contentsline {paragraph}{T\IeC {\v r}\IeC {\'\i }da \texttt {SystemUnit}}{13}{section*.13}
+\contentsline {paragraph}{Matematick\IeC {\'y} apar\IeC {\'a}t}{13}{section*.14}
+\contentsline {paragraph}{t\IeC {\v r}\IeC {\'\i }da \texttt {Unit}}{13}{section*.15}
+\contentsline {paragraph}{typ \texttt {simData\_t}}{13}{section*.16}
+\contentsline {section}{\numberline {3.1}Parser}{14}{section.3.1}
+\contentsline {section}{\numberline {3.2}SimMethod}{14}{section.3.2}
+\contentsline {section}{\numberline {3.3}Viewer}{15}{section.3.3}
+\contentsline {chapter}{\numberline {4}FormattedFileParser}{16}{chapter.4}
+\contentsline {section}{\numberline {4.1}Struktura dat}{16}{section.4.1}
+\contentsline {paragraph}{name$ < $jm\IeC {\'e}no$ > $ }{16}{section*.17}
+\contentsline {paragraph}{color$ < $R G B A$ > $}{17}{section*.18}
+\contentsline {paragraph}{velocity$ < $X Y$ > $}{17}{section*.19}
+\contentsline {paragraph}{position$ < $X Y$ > $}{17}{section*.20}
+\contentsline {paragraph}{mass $ < $hmotnost$ > $ }{17}{section*.21}
+\contentsline {paragraph}{Dodatek k \IeC {\v c}\IeC {\'\i }sl\IeC {\r u}m}{17}{section*.22}
+\contentsline {paragraph}{}{17}{section*.23}
+\contentsline {section}{\numberline {4.2}Detaily implementace}{17}{section.4.2}
+\contentsline {chapter}{\numberline {5}SolarParser}{19}{chapter.5}
+\contentsline {section}{\numberline {5.1}Popis}{19}{section.5.1}
+\contentsline {chapter}{\numberline {6}Implementovan\IeC {\'e} simula\IeC {\v c}n\IeC {\'\i } metody}{20}{chapter.6}
+\contentsline {section}{\numberline {6.1}SemiImplicitEuler}{20}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Teorie}{20}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Implementace}{21}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}RK4}{22}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Teorie}{22}{subsection.6.2.1}
+\contentsline {paragraph}{}{22}{section*.24}
+\contentsline {subsection}{\numberline {6.2.2}Implementace}{23}{subsection.6.2.2}
+\contentsline {chapter}{\numberline {7}Implementovan\IeC {\'e} viewery}{25}{chapter.7}
+\contentsline {section}{\numberline {7.1}IMGuiViewer}{25}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}\texttt {OpenGLBackend}}{26}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}\texttt {ImGuiBackend}}{26}{subsection.7.1.2}
+\contentsline {subsection}{\numberline {7.1.3}T\IeC {\v r}\IeC {\'\i }dy pou\IeC {\v z}\IeC {\'\i }vaj\IeC {\'\i }c\IeC {\'\i } OpenGL}{26}{subsection.7.1.3}
+\contentsline {paragraph}{Shader}{26}{section*.25}
+\contentsline {paragraph}{CircleBuffer}{26}{section*.26}
+\contentsline {paragraph}{UnitTrail}{26}{section*.27}
+\contentsline {paragraph}{GLError}{26}{section*.28}
+\contentsline {subsection}{\numberline {7.1.4}Drawer}{26}{subsection.7.1.4}
+\contentsline {subsection}{\numberline {7.1.5}GUIDrawer}{26}{subsection.7.1.5}
+\contentsline {subsection}{\numberline {7.1.6}SimDataDrawer}{26}{subsection.7.1.6}
+\contentsline {subsection}{\numberline {7.1.7}LineTrailsDrawer}{27}{subsection.7.1.7}
+\contentsline {subsection}{\numberline {7.1.8}IMGuiViewer}{27}{subsection.7.1.8}
+\contentsline {chapter}{\numberline {8}Roz\IeC {\v s}\IeC {\'\i }\IeC {\v r}itelnost a vylep\IeC {\v s}en\IeC {\'\i }}{28}{chapter.8}
+\contentsline {section}{\numberline {8.1}N\IeC {\'a}vrh p\IeC {\v r}ehr\IeC {\'a}va\IeC {\v c}e}{28}{section.8.1}
+\contentsline {section}{\numberline {8.2}Zaznamen\IeC {\'a}n\IeC {\'\i } simulace}{29}{section.8.2}
+\contentsline {section}{\numberline {8.3}P\IeC {\v r}ehr\IeC {\'a}v\IeC {\'a}n\IeC {\'\i }}{30}{section.8.3}
+\contentsline {section}{\numberline {8.4}Vylep\IeC {\v s}en\IeC {\'\i } a opravy}{30}{section.8.4}
+\contentsline {chapter}{\numberline {9}Porovn\IeC {\'a}n\IeC {\'\i } integra\IeC {\v c}n\IeC {\'\i }ch metod}{32}{chapter.9}
+\contentsline {section}{\numberline {9.1}Kruhov\IeC {\'y} pohyb}{32}{section.9.1}
+\contentsline {subsection}{\numberline {9.1.1}Teorie}{32}{subsection.9.1.1}
+\contentsline {subsection}{\numberline {9.1.2}Explicitn\IeC {\'\i } Euler}{32}{subsection.9.1.2}
+\contentsline {subsection}{\numberline {9.1.3}Implicitn\IeC {\'\i } Euler}{33}{subsection.9.1.3}
+\contentsline {subsection}{\numberline {9.1.4}Semi-implicitn\IeC {\'\i } Euler}{33}{subsection.9.1.4}
+\contentsline {subsection}{\numberline {9.1.5}RK4}{33}{subsection.9.1.5}
 \contentsline {section}{\numberline {9.2}Slune\IeC {\v c}n\IeC {\'\i } soustava}{33}{section.9.2}
-\contentsline {chapter}{\numberline {10}U\IeC {\v z}ivatelsk\IeC {\'a} p\IeC {\v r}\IeC {\'\i }ru\IeC {\v c}ka}{34}{chapter.10}
-\contentsline {section}{\numberline {10.1}Po\IeC {\v z}adavky}{34}{section.10.1}
-\contentsline {section}{\numberline {10.2}Ovlad\IeC {\'a}n\IeC {\'\i }}{34}{section.10.2}
-\contentsline {section}{\numberline {10.3}Pokro\IeC {\v c}il\IeC {\'e} mo\IeC {\v z}nosti}{34}{section.10.3}
-\contentsline {chapter}{\numberline {11}Kompilace programu}{35}{chapter.11}
-\contentsline {section}{\numberline {11.1}Git}{35}{section.11.1}
-\contentsline {section}{\numberline {11.2}Windows}{35}{section.11.2}
-\contentsline {section}{\numberline {11.3}Linux}{35}{section.11.3}
+\contentsline {section}{\numberline {9.3}Rychlosti}{33}{section.9.3}
+\contentsline {section}{\numberline {9.4}Z\IeC {\'a}v\IeC {\v e}r}{33}{section.9.4}
+\contentsline {chapter}{\numberline {10}U\IeC {\v z}ivatelsk\IeC {\'a} p\IeC {\v r}\IeC {\'\i }ru\IeC {\v c}ka}{41}{chapter.10}
+\contentsline {section}{\numberline {10.1}Po\IeC {\v z}adavky}{41}{section.10.1}
+\contentsline {section}{\numberline {10.2}Z\IeC {\'a}kladn\IeC {\'\i } ovlad\IeC {\'a}n\IeC {\'\i }}{41}{section.10.2}
+\contentsline {section}{\numberline {10.3}Pokro\IeC {\v c}il\IeC {\'e} mo\IeC {\v z}nosti}{42}{section.10.3}
+\contentsline {chapter}{\numberline {11}Kompilace programu}{44}{chapter.11}
+\contentsline {section}{\numberline {11.1}Git}{44}{section.11.1}
+\contentsline {section}{\numberline {11.2}Windows}{44}{section.11.2}
+\contentsline {section}{\numberline {11.3}Linux}{44}{section.11.3}

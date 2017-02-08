@@ -1,27 +1,22 @@
 =====================================IN THIS COMMIT=====================================
 New version of documentation.
-
-Anti-aliasing.
-	- Much nicer.
+	- comparison of simMethods almost done.
+	- userGuide should be complete.
+Fixed simTime not displaying correctly.
+Put warning about changing SimTime while recording into code
+Used composition for RecordedSim, ReplayedSim instead of inheritance.
+Forced DTMult to be atleast one, when replaying.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	V. Document it & ship it
-		- Add simple explicit Euler?
 		- Test NotTimed properly, try pause, getters...
-		- put warning about changing SimTime while recording
-		- Use composition for RecordedSim, ReplayedSim
-		- force DTMult to be atleast one, when replaying
 		Documentation:
-			- make table data in theory part
 			- give credits to last years physics course, numerical recipies
-			- test implicit solution for correctness
 			- viewers - ImGuiViewer
 							- OpenGLBackEnd, ImGuiBackend - show examples of ImGui
 							- explain lineTrails algorithm
 							- somehow summarize GUIs
 							- mention OMSAR in together with SimDataDrawer?
-			- user guide
-				- explain consoleControl
 				- compiling for Windows
 					- .sln should be enough
 					- libraries are present
@@ -31,9 +26,3 @@ Next:
 					- needs to compile GLFW and GLEW
 					- make makefile?
 				- bitbucket
-	VI. OPTIONAL
-
-		- Create physics unit system
-			- can redefine simData_t to make it a structure with data and in what units they are
-				- would also contain conversion function and all definitions of units
-					- sort of like chrono - period, denominator,numerator

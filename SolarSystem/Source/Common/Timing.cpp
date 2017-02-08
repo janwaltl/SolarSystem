@@ -52,14 +52,14 @@ namespace solar
 	}
 	SplittedTime SplitTime(const simulatedTime & time)
 	{
-		return SplitTime(static_cast<uint32_t>(time.seconds.count()));
+		return SplitTime(static_cast<uint64_t>(time.seconds.count()));
 	}
 	SplittedTime SplitTime(double seconds)
 	{
 		assert(seconds >= 0.0);
-		return SplitTime(static_cast<uint32_t>(seconds));
+		return SplitTime(static_cast<uint64_t>(seconds));
 	}
-	SplittedTime SplitTime(uint32_t seconds)
+	SplittedTime SplitTime(uint64_t seconds)
 	{
 		SplittedTime tmp;
 		tmp.Y = static_cast<uint32_t>(seconds / 31'536'000);

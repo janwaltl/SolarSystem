@@ -62,7 +62,7 @@ namespace solar
 	};
 	SplittedTime SplitTime(const simulatedTime& time);
 	SplittedTime SplitTime(double seconds);
-	SplittedTime SplitTime(uint32_t seconds);
+	SplittedTime SplitTime(uint64_t seconds);
 }
 
 

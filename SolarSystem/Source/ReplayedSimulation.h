@@ -9,15 +9,22 @@
 namespace solar
 {
 	//Replays recorded simulations
-	class ReplayedSimulation :public Simulation
+	class ReplayedSimulation
 	{
 	public:
 		//replaFile - name of file containing replay, including path and extension
 		ReplayedSimulation(const std::string& replayFile, size_t winWidth, size_t winHeight, const std::string& title) :
-			Simulation(std::make_unique<ReplayerParser>(replayFile),
-					   std::make_unique<ReplayerSimMethod>(replayFile),
-					   std::make_unique<ReplayerViewer>(replayFile, winWidth, winHeight, title))
+			sim(std::make_unique<ReplayerParser>(replayFile),
+				std::make_unique<ReplayerSimMethod>(replayFile),
+				std::make_unique<ReplayerViewer>(replayFile, winWidth, winHeight, title))
 		{
 		}
+		void Start()
+		{
+			using namespace std::chrono_literals;
+			sim.Start(10ms);//Does not matter, will be changed by parser to correct one
+		}
+	private:
+		Simulation sim;
 	};
 }

@@ -138,8 +138,8 @@ Nasleduje vycet veskerych prikazu(P=povinne,N=nepovinne):
                            - vcetne cesty k souboru a jeho pripony
 
     4. help [jazyk]: 
-                cz cestina
-                en anglictina(vychozi)
+                -cz cestina
+                -en anglictina(vychozi)
 
     5. [cokoliv jineho]: Jakykoliv jiny text je povazovan za jmeno souboru
                          Pokud jsou prvni dva bajty toho souboru rovny 'R' resp. 'E',
@@ -148,15 +148,15 @@ Nasleduje vycet veskerych prikazu(P=povinne,N=nepovinne):
                          pro rezim simulace s 'formatted' parser.
 
 Nasleduje par prikladu volani techto prikazu pri startu aplikace:
-    1.Example: SolarSystem
-        = Spusti simulaci s 'solar' jako parser,'RK4' jako simMethod a 'win' jako viewer.
+    1.Priklad: SolarSystem [bez argumentu]
+        = Spusti simulaci se 'solar' jako parser,'RK4' jako simMethod a 'win' jako viewer.
           Simulace probiha v realnem case a je zobrazena v 1200x700 oknì s uzivatelskym rozhranim.
-    2.Example: SolarSystem vstup.txt
+    2.Priklad: SolarSystem vstup.txt
         = Spusti simulaci s 'formatted' jako parser,'RK4' jako simMethod a 'win' jako viewer.
-          Simulace probiha v realnem case a je zobrazena v 1200x700 oknì s uzivatelskym r
+          Simulace probiha v realnem case a je zobrazena v 1200x700 oknì s uzivatelskym rozhranim.
           (Pouzil se automaticky rezim a vstup.txt byl rozpoznan jako formatovany text, pokud
            tedy neobsahoval 'R' a 'E' jako prvni dva bajty)
-    3.Example: SolarSystem record -r out.replay -p formatted -i vstup.txt
+    3.Priklad: SolarSystem record -r out.replay -p formatted -i vstup.txt
         = Zaznamenavana simulace, vstupni data jsou nacteny z 'vstup.txt',
           zaznam ulozen do  'out.replay'.
           Zbytek stejny jako v druhem prikladu.
@@ -443,7 +443,7 @@ Following are examples of correct calls to this application:
 				size_t height = val ? std::stoi(*val) : 700;
 				std::cout << "Starting replay simulation";
 				ReplayedSimulation sim(*replayFile, width, height, "SolarSystem - replay: " + *replayFile);
-				sim.Start(10ms, 1, 1, 0s);//Does not matter, will be set internally by parser anyway
+				sim.Start();
 			}
 
 			void AutoMode(const arguments & cmds)

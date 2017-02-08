@@ -45,6 +45,7 @@ Analytické řešení této soustavy rovnic by nám dalo možnost zjistit polohu
 Bohužel vyřešit tuto soustavu je pro $ n=>3 $ velmi těžké.
 
 \subsection{Numerické řešení}
+\label{sec:numReseni}
 Pokud se soustava nedá vyřešit analyticky, můžeme se alespoň pokusit získat aproximativní řešení. Numerická integrace využívá toho, že nemusí být těžké spočítat derivace v libovolném čase. Navíc to dnešní počítače dokáží udělat velmi rychle. Pokud tedy dokážeme zjistit derivaci v každém bodě, tak bychom mohli původní funkci zrekonstruovat pomocí těchto derivací. Např. můžeme výslednou funkci aproximovat úsečkami, kde jejich směrnice je derivace hledané funkce. Toto přesně dělá nejjednodušší integrační metoda - Eulerova explicitní metoda\eqref{eq:euler}.
 Mějme jednoduchou soustavu rovnic \eqref{eq:ex} . Je vidět, že řešením je funkce$ y=e^t $, což se snadno ověří zpětnou derivací. 
 \begin{align} \label{eq:ex}

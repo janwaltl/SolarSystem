@@ -8,10 +8,15 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{listingsutf8}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{inconsolata}
 \usepackage{nameref}
+\usepackage{pifont}
+\usepackage{placeins}
 \usepackage[a4paper,includeheadfoot,margin=3.5cm]{geometry}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
 
 %Vkladani source kodu
 \lstdefinestyle{codeInput} { %
@@ -102,7 +107,6 @@
 	\include{titlePage}
 	\newpage
 	\tableofcontents
-	\lstlistoflistings
 	\newpage
 	\include{organizace}
 	\include{specifikace}
@@ -114,6 +118,8 @@
 	\input{extensions}
 	\input{compSimMethods}
 	\include{uzivatelPrirucka}
-
+	\lstlistoflistings
+	\listoffigures
+	\listoftables
 	
 \end{document}
