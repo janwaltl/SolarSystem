@@ -27,7 +27,7 @@ Explicitní Eulerovu metodu jsme si představili v úvodní teorii \ref{sec:numR
 	\includegraphics[width=\linewidth]{Figs/explicitEuler}
 \end{figure}
 \subsection{Implicitní Euler}
-Implicitní Eulerova metoda byla ukázána v části \ref{sec:implEuler} i z řešením jedné rovnice \eqref{eq:implicitEuler}, které můžeme použít, neboť platí, že $ k=-\omega^2 $. 
+Implicitní Eulerova metoda byla ukázána v části \ref{sec:implEuler} i s řešením jedné rovnice \eqref{eq:implicitEuler}, které můžeme použít, neboť platí, že $ k=-\omega^2 $. 
 Bohužel ani tato metoda není ideální jak ukazuje obrázek \ref{fig:implicitEuler}. Dochází zde k opačnému jevu, což je způsobeno tím, že integrace probíhá po tečně v čase $ t+\Delta t $, což vede k posunu směrem do kružnice. Implicitní metoda nebyla použita, protože se z naší soustavy \eqref{eq:soustava} nedá jednoduše vyjádřit a stejně by nepřinesla užitečné výsledky.
 \begin{figure}
 	\caption{Implicitní Eulerova metoda $ t\in [0,10] $}
@@ -99,8 +99,8 @@ Proč RK4
 	1 000 000&	
 	\cmark&\cmark&\xmark&\xmark&\cmark&\xmark&\cmark&\xmark&\cmark&\xmark&\cmark&\cmark&\cmark&\cmark&
 	\textbf{6}&\textbf{3}\\
-	1 200 000**&	
-	\cmark&\cmark&\xmark&\xmark&\cmark&\xmark&\cmark&\xmark&\xmark&\xmark&\xmark&\cmark&\cmark&\cmark&
+	1 200 000&	
+	\cmark&\cmark&\xmark&\xmark&  \cmark**&\xmark&\cmark&\xmark&  \xmark**&\xmark&  \xmark**&\cmark&\cmark&\cmark&
 	\textbf{4}&\textbf{3}\\
 	1 300 000&	
 	\cmark&\cmark&\xmark&\xmark&\xmark&\xmark&\xmark&\xmark&\xmark&\xmark&\cmark&\cmark&\cmark&\cmark&

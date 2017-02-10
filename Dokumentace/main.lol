@@ -9,4 +9,4 @@
 \contentsline {lstlisting}{\numberline {3.4}Abstraktn\IeC {\'\i } t\IeC {\v r}\IeC {\'\i }da \texttt {Viewer} (Source/viewer.cpp)}{15}{lstlisting.3.4}
 \contentsline {lstlisting}{\numberline {6.1}Semi-implicitn\IeC {\'\i } Eulerova integra\IeC {\v c}n\IeC {\'\i } metoda (Source/euler.cpp)}{21}{lstlisting.6.1}
 \contentsline {lstlisting}{\numberline {6.2}Runge-Kutta integra\IeC {\v c}n\IeC {\'\i } metoda (Source/RK4.cpp)}{23}{lstlisting.6.2}
-\contentsline {lstlisting}{\numberline {8.1}N\IeC {\'a}vrh jak by se simulace dala zaznamen\IeC {\'a}vat (Source/recording.cpp)}{29}{lstlisting.8.1}
+\contentsline {lstlisting}{\numberline {8.1}N\IeC {\'a}vrh jak by se simulace dala zaznamen\IeC {\'a}vat (Source/recording.cpp)}{31}{lstlisting.8.1}

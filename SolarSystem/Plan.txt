@@ -1,28 +1,22 @@
 =====================================IN THIS COMMIT=====================================
-New version of documentation.
-	- comparison of simMethods almost done.
-	- userGuide should be complete.
-Fixed simTime not displaying correctly.
-Put warning about changing SimTime while recording into code
-Used composition for RecordedSim, ReplayedSim instead of inheritance.
-Forced DTMult to be atleast one, when replaying.
+New documentation once again...
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	V. Document it & ship it
-		- Test NotTimed properly, try pause, getters...
+		- Test NotTimed properly, try pause, getters... and recording
 		Documentation:
 			- give credits to last years physics course, numerical recipies
+				- link to simplectic euler in source code
 			- viewers - ImGuiViewer
-							- OpenGLBackEnd, ImGuiBackend - show examples of ImGui
-							- explain lineTrails algorithm
-							- somehow summarize GUIs
-							- mention OMSAR in together with SimDataDrawer?
-				- compiling for Windows
-					- .sln should be enough
-					- libraries are present
-				- compiled binaries
-					- redist
-				- compiling for Linux
-					- needs to compile GLFW and GLEW
-					- make makefile?
-				- bitbucket
+							-show examples of ImGui
+							-introduction to OpenGL
+			- compiling for Windows
+				- .sln should be enough
+				- libraries are present
+			- compiled binaries
+				- redist
+			- compiling for Linux
+				- needs to compile GLFW and GLEW
+				- make makefile?
+			- bitbucket
+			- speed comparison of simMethods
