@@ -1,4 +1,5 @@
 =====================================IN THIS COMMIT=====================================
+Compared speeds of simMethod
 New documentation once again...
 ========================================IMPLEMENTING PLAN========================================
 Next:

@@ -14,9 +14,9 @@ Při spuštění se program otevře v výchozím grafickém režimu, kde dojde k
 \section{Pokročilé možnosti}
 Program také nabízí pokročilejší ovládání pomocí příkazové řádky, s níž je možné načítat simulovaná data ze souboru, vybrat si integrační metody a také možnost zaznamenat a následně přehrát uložené simulace.
 Pro vypsání nápovědy a všech dostupných příkazů v českém jazyce použijte:
-\ \texttt{\textbf{SolarSystem.exe vstup.txt}}
+\ \texttt{\textbf{SolarSystem.exe -help -cz}}
 
-Uveďme zde alespoň pár dalších příkladů spuštění:
+Uveďme zde alespoň pár dalších příkladů různých příkazů:
 \begin{enumerate}
 	\item \texttt{\textbf{SolarSystem.exe vstup.txt}} \\
 	Načte vstupní data z formátovaného souboru \texttt{vstup.txt} a spustí simulaci, která bude běžet v reálném čase a zobrazovat se v okně 1200x700 s uživatelským rozhraním.
@@ -39,12 +39,14 @@ Tato dokumentace spolu se zdrojovými kódy programu je veřejně dostupná na:
 \begin{center}
 \texttt{https://bitbucket.org/Quimby/solar/src}
 \end{center}
-Popřípadě přímo stažitelná pomocí git:
-\begin{center}
-	\texttt{https://Quimby@bitbucket.org/Quimby/solar.git}
-\end{center}
+Popřípadě přímo stažitelná pomocí git HTTPS\eqref{git:https} nebo SSH\eqref{git:ssh}:
+\begin{align}
+	\label{git:https}
+	\texttt{https://Quimby@bitbucket.org/Quimby/solar.git}\\
+	\label{git:ssh}
+	\texttt{git@bitbucket.org:Quimby/solar.git}
+\end{align}
 \section{Windows}
-Visual studio projekt...knihovny už jsou, stačí zkompilovat
+Program byl tvořen v programu Visual Studio 2015 Community Edition, takže je zde už předpřipravený .sln projekt, který by měl obsahovat vše potřebné pro správné zkompilování.
 \section{Linux}
-Potřeba zkompilovat knihovny dle návodu, překopírovat do libraries.
-Udělat makefile?
+Program by zde měl být teoreticky také plně funkční, avšak není zde zatím žádný pomocný projekt ani makefile. Kdyžtak je potřeba nejdříve stáhnout a zkompilovat externí knihovny - GLFW, GLEW. Návod by měl být na jejich oficiálních stránkách . Momentálně obě knihovny nabízí vytvoření potřebných souborů pomocí programu CMake, takže kompilace by neměla být těžká. Dále kompilace samotného programu vyžaduje minimálně flag \texttt{GLEW\_STATIC} a také include path do složky obsahující složku \texttt{Source/}(defaultně se nachází ve složce SolarSystem) a samozřejmě slinkovat obě knihovny, ale pak by už mělo vše fungovat. 

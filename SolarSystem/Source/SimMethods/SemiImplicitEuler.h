@@ -2,7 +2,7 @@
 #define SIMMETHODS_SEMIIMPLICITEULER_HEADER
 
 #include "SimMethod.h"
-
+#include "Source/Common/Timing.h"
 namespace solar
 {
 	//Simulates data using semi-implicit Euler integration method
@@ -14,8 +14,11 @@ namespace solar
 	class SemiImplicitEuler :public SimMethod
 	{
 	public:
+		SemiImplicitEuler() { timing.Reset(); }
 		void operator()(double step) override final;
 	private:
+		TimeMeasurement timing;
+		size_t numTimeSamples;
 	};
 }
 

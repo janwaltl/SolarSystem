@@ -3,7 +3,7 @@
 #include <vector>
 #include <array>
 #include "Source/Units/PhysicsUnits.h"
-
+#include <iostream>
 
 namespace solar
 {
@@ -19,9 +19,12 @@ namespace solar
 		kXs[1].resize(data->size());
 		kXs[2].resize(data->size());
 		kXs[3].resize(data->size());
+		timing.Reset();
+		numTimeSamples = 0;
 	}
 	void RK4::operator()(double step)
 	{
+		timing.Start();
 		step /= physicsUnits::YtoS;
 
 		//Go through all pairs
@@ -47,7 +50,7 @@ namespace solar
 					kXs[x][j].acc -= acc*(*data)[i].mass;
 				}
 				kXs[x][i].vel = left.vel; //Store left's velocity in k1's vel
-				
+
 				//Update left temp unit to next time step
 				//Which can be done now, because it won't be accessed in this loop anymore
 				left.vel = (*data)[i].vel + mult*step*kXs[x][i].acc;
@@ -66,9 +69,9 @@ namespace solar
 
 			(*data)[i].vel += step / 6.0 *(kXs[0][i].acc + 2 * kXs[1][i].acc + 2 * kXs[2][i].acc + kXs[3][i].acc);
 			(*data)[i].pos += step / 6.0 *(kXs[0][i].vel + 2 * kXs[1][i].vel + 2 * kXs[2][i].vel + kXs[3][i].vel);
-			
+
 			//Reinitialize temps for next integration step
-			temps[i] = {(*data)[i].vel,(*data)[i].pos}; 
+			temps[i] = {(*data)[i].vel,(*data)[i].pos};
 
 			//Clear coefficients for next step
 			//(Atleast acc needs to be cleared, because it is additive)
@@ -77,6 +80,11 @@ namespace solar
 			kXs[2][i] = {Vec2(),Vec2()};
 			kXs[3][i] = {Vec2(),Vec2()};
 		}
-
+		timing.End();
+		if (++numTimeSamples == 100'000)
+		{
+			std::cout << "\n RK4:" << (timing.GetMeasurement().count() / 100'000.0) / 10e6 << "ms\n";
+			this->StopSimulation();
+		}
 	}
 }

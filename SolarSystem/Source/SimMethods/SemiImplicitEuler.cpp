@@ -6,6 +6,8 @@ namespace solar
 {
 	void SemiImplicitEuler::operator()(double step)
 	{
+		timing.Start();
+
 		step /= physicsUnits::YtoS;
 		//Go through all pairs
 		for (auto left = data->begin(); left != data->end(); ++left)
@@ -28,6 +30,12 @@ namespace solar
 			//position(t+dt) = position(t) + dt * velocity(t + dt); - implicit Euler
 			//XX->vel is now at time (t+dt)
 			left->pos += step*left->vel;
+		}
+		timing.End();
+		if (++numTimeSamples == 100'000)
+		{
+			std::cout << "\n SemiEuler:" << (timing.GetMeasurement().count() / 100'000.0) / 10e6 << "ms\n";
+			this->StopSimulation();
 		}
 	}
 }

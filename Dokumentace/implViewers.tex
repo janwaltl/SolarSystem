@@ -11,14 +11,13 @@ Přesná implementace je dostupná ve zdrojových kódech programu. Ale jedná s
 Slouží pro jednoduší vytváření OpenGL shaderů, tedy malých programů určených pro grafickou kartu, které říkají jak má interpretovat a kreslit předaná data.
 \subsection{Řešení OpenGL chyb} 
 OpenGL samo nemá výjimky a chyby sděluje pomocí funkce \texttt{glGetError()}, která vrací typ chyby pokud nějaká nastala. Proto byla vytvořena funkce \texttt{ThrowOnError}, která zavolá \texttt{glGetError()} a při jakékoliv chybě vyvolá výjimku právě v podobě třídy \texttt{GLError}.
-\subsection{Úvod do OpenGL}
-... NewFrame, že se prekresluje frame a díky vnější smyčce to funguje...
 \subsection{Třída \texttt{ImGuiBackend} a ImGui}
 Se stará o integraci knihovny \textbf{ImGui}\footnote{https://github.com/ocornut/imgui}, která poskytuje nástroje k vytvoření uživatelského rozhraní.
 Její implementace byla také vytvořena na základě příkladů uvedených na stránkách knihovny a dokumentace v souborech \texttt{imgui.h} a \texttt{imgui.cpp}. 
 Pojďme si v rychlosti představit nějaké funkce knihovny, abychom pak lépe pochopili její použití při tvorbě uživatelského rozhraní.
 
 \textbf{ImGui} je psáno v C++ ale z vnějšího pohledu vypadá spíše jako C, nejsou zde žádné složité třídy a většina prvků je z vnějšku bezstavová. To, co je tím myšleno vysvětluje následující kód
+
 *Draw Button, draw if pressed, 
 *C printf-like text
 *Draw window
@@ -41,10 +40,10 @@ Při simulaci Sluneční soustavy by se nám hodilo nejen vidět aktuální polo
 Mějme dvě pole - bodů velikosti \textbf{n} a indexů o délce \textbf{2n}.
 Dále máme objekt, který postupně projde body \textbf{A-B-C-D-E-F}. Tak pokud za ním chceme vykreslit stopu(lomenou čáru) o maximálně \textbf{n} bodech. Pak vytvoříme funkci \texttt{Push(Bod b)}, která umístí předaný bod do pole bodů. Pokud už je plné tak začne přepisovat body od začátku. Pole indexů vyplníme čísly od \textbf{1} do \textbf{n} dvakrát. Obrázek \ref{fig:lineTrail} popisuje jak bude algoritmus pro náš objekt fungovat při projití všech bodů, kde v každém bodě zavoláme \texttt{Push(bod)} a délka stopy je \textbf{n=3}. Pokud jsou v obrázku černě vyplněné např. indexy 2,3,1. Tak to znamená, že se vykreslí přímka v pořadí: \lstinline|body[2],body[3],body[1]|(což je napsáno vpravo).
 
-Takže jediné co nám stačí je vytvořit indexové pole a posouvat odkud se má číst. Poté můžeme body v bufferu přepisovat, ale nemusíme celé pole posouvat při každém vložení.
+Z obrázku si můžeme všimnout, že si musíme držet pouze ukazatel na prvek v poli bodů, kam budeme vkládat, a ukazatel na index v poli indexů od kterého máme kreslit. Oba ukazatele vždy pouze cyklicky posouvat.Každopádně tím odpadne nutnost přesouvat celé pole při přidání jednoho bodu.
 \\
 
-\textbf{Poznámka:}\textit{Teoreticky žádné indexy nepotřebujeme a mohli bychom kreslit vždy pouze úsečku. Ale zavolání jednoho vykreslení je v OpenGL relativně drahé, proto je lepší kreslit co nejvíce dat jedním příkazem. Proto také máme jeden kontinuální buffer pro body a jeden pro indexy. Tento algoritmus tedy považuji za kompromis mezi rychlostí a čitelností kódu. Teoreticky také stačí index buffer o velikosti \textbf{n} a pak čáru kreslit na dvakrát, protože je v bufferu buď uložená kontinuálně a nebo rozložená do dvou částí. Což by byla rozumná paměťová optimalizace, ale indexy zas tolik místa nezabírají a navíc existuje pouze jeden globální buffer pro všechny instance třídy \texttt{UnitTrail} neboť je jen pro čtení.}
+\textbf{Poznámka:}\textit{Teoreticky žádné indexy nepotřebujeme a mohli bychom kreslit vždy pouze úsečky. Ale zavolání jednoho vykreslení je v OpenGL relativně drahé, proto je lepší kreslit co nejvíce dat jedním příkazem. Proto také máme jeden kontinuální buffer pro všechny body. Tento algoritmus tedy považuji za kompromis mezi rychlostí a čitelností kódu. Teoreticky také stačí index buffer o velikosti \textbf{n} a pak čáru kreslit na dvakrát, protože je v bufferu buď uložená kontinuálně a nebo rozložená do dvou částí. Což by byla rozumná paměťová optimalizace, ale indexy zas tolik místa nezabírají a navíc existuje pouze jeden globální indexový buffer pro všechny instance třídy \texttt{UnitTrail} neboť je jen pro čtení.}
 \begin{figure}
 	\caption{Kreslení stopy za objektem procházejícím body A-B-C-D-E-F}
 	\label{fig:lineTrail} 

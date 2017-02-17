@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <array>
+#include "Source/Common/Timing.h"
 
 namespace solar
 {
@@ -31,7 +32,8 @@ namespace solar
 		std::vector<VelPos> temps;
 		//Coefficients k1,k2,k3,k4 for each unit
 		std::array<std::vector<AccVel>, 4> kXs;
-
+		TimeMeasurement timing;
+		size_t numTimeSamples;
 	};
 }
 

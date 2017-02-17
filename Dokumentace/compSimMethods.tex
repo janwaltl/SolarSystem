@@ -67,10 +67,7 @@ Poslední implementovaná metoda je RK4, která je popsána v sekci \ref{sec:imp
 \section{Sluneční soustava}
 Pojďme se ještě podívat na srovnání stability semi-implicitní a RK4 metody na příkladu naší Sluneční soustavy. Jako indikátor stability použijeme stabilitu oběžných drah měsíců, protože ty mají nejkratší oběžné doby a nestabilita se zde projeví jako první. Samozřejmě toto je pouze nutná a ne postačující podmínka správné simulace, ale pro běžné porovnání by mohla stačit. Naměřené údaje jsou uvedeny v tabulce \ref{tab:stab}. Vyšší hodnoty nejsou podstatné, protože se zde ve velké míře projeví nepřesnost, která vyvolá nestabilitu systému. Každopádně to ukazuje, že semi-implicitní Eulerova metoda je stabilnější, což i trochu naznačovaly obrázky u kruhového pohybu, ale také obrázek \ref{fig:semiImplEulerStab} ukazuje stabilní, avšak nesprávný \uv{orbit}. Na druhou stranu obrázek \ref{fig:RK4Stab} uvádí RK4 jako přesnější metodu pro podobné $ \Delta t $. Přesnost se bohužel pro Sluneční soustavu nedá nijak jednoduše ověřit. 
 
-\section{Rychlosti}
-- pro různé N objektů a různé optimalizace.
-\section{Závěr}
-Proč RK4
+
 \arrayrulewidth 1pt
 \begin{table}[h]
 	\centering
@@ -107,9 +104,33 @@ Proč RK4
 	\textbf{3}&\textbf{3}\\
 	\hline
 \end{tabular}
-	\newline\newline
-	\raggedright
+	\newline
+	\flushleft
 	\textit{S=semi-implicitní; R=RK4 metoda. Krok simulace byl $ DTmult*10 $ms.\\ Stabilita znamená, že měsíc stále obíhal kolem své planety po 5/20/60 letech simulovaného času pro $ DTmult \geq0 /\geq3.10^5/\geq10^6 $ . Tabulka neobsahuje všechny hodnoty, pouze ty, kolem kterých došlo ke změnám.\\
 	*Phobos opisuje 13-úhelník, ale je stabilní.\\
 	**Ganyméd a Europa se nejspíše srazily, Deimos stabilně opisuje 12-úhelník.}
 \end{table}
+\section{Rychlosti a Závěr}
+Srovnání rychlostí obou metod nabízí tabulka \ref{tab:rychlost}. 
+
+Z tabulky plyne, že RK4 je přibližně 3-4x pomalejší než Eulerova metoda. Takže ve výsledku je dle našich měření RK4 pomalejší a nestabilnější, přesto je použita jako výchozí. Důvod je ten, že je podle mne mnohem přesnější, stabilita Eulera vypadá sice dobře, ale silně pochybuji, že v tu chvíli simulace odpovídá realitě. Ale samozřejmě uživatel si může stále vybrat, což byl také účel a tato kapitola měla za cíl toto rozhodnutí alespoň trochu ulehčit. Takže pokud chce spíše stabilní, avšak možná nepřesnou simulaci, tak je lepší Eulerova metoda, pokud dává přednost přesnosti, tak bych volil RK4 nebo jiné. Bohužel \uv{jiné} zde nejsou, což je škoda a proto je to také jedno z možných rozšíření viz. \ref{sec:vylepseni}.
+\begin{table}
+	\centering
+	\label{tab:rychlost}
+	\caption{Srovnání rychlostí semi-implicitní Eulerovy a RK4 metody}
+	\rowcolors{3}{gray!25}{white}
+	\begin{tabular}{l l c c c}
+		\hline\multicolumn{2}{c}{\multirow{2}{*}{\textbf{Metoda}}}& & \textbf{Počet objektů}\\ 
+		&& 10 & 20 & 100\\
+		\hline
+		Euler&Debug&1ms&2ms&3ms\\
+			 &Release&1ms&2ms&3ms\\\hline
+		RK4&Debug&1ms&2ms&3ms\\
+		&Release&1ms&2ms&3ms\\\hline
+	\end{tabular}
+	\newline
+	\flushleft
+	\textit{Přesné nastavení Debug a Release je uvedeno v .sln u zdrojových souborů. Release má zapnuté veškeré optimalizace - inlining, SIMD...;Debug je výchozí režim bez většiny optimalizací. Hodnoty byly vypočteny z 100 000 volání každé funkce na soustavě s procesorem 4320 - 4x3.6Ghz se systémem Win7 64-bit(Ale aplikace je 32-bitová.)}
+\end{table}
+\section{Závěr}
+Proč RK4
