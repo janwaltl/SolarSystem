@@ -16,14 +16,19 @@ Se stará o integraci knihovny \textbf{ImGui}\footnote{https://github.com/ocornu
 Její implementace byla také vytvořena na základě příkladů uvedených na stránkách knihovny a dokumentace v souborech \texttt{imgui.h} a \texttt{imgui.cpp}. 
 Pojďme si v rychlosti představit nějaké funkce knihovny, abychom pak lépe pochopili její použití při tvorbě uživatelského rozhraní.
 
-\textbf{ImGui} je psáno v C++ ale z vnějšího pohledu vypadá spíše jako C, nejsou zde žádné složité třídy a většina prvků je z vnějšku bezstavová. To, co je tím myšleno vysvětluje následující kód
+\textbf{ImGui} je psáno v C++ ale z vnějšího pohledu vypadá spíše jako C, nejsou zde žádné složité třídy a většina prvků je z vnějšku bezstavová až na pár výjimek a např. funkce na výpis textu používá syntaxi podobnou \texttt{printf()}.
 
-*Draw Button, draw if pressed, 
-*C printf-like text
-*Draw window
-*Výjimka jsou comboboxy,selectables - stav si musíme uchovávat sami.
-*Příklady použítí, že je skoro bezestavová - jen to co je mezi newframe a render,
+Zaprvé je ještě nutné zmínit jak OpenGL funguje. Ve zjednodušeném pohledu vykresluje do svého všechny objekty do framebufferu - 2D plátna, které pak zobrazí na obrazovku. Toto plátno si můžeme a musíme mazat sami kdykoliv potřebujeme, pokud bychom ho nemazali, tak na něm zůstanou objekty z \uv{minulého} kreslení.
+\footnote{Například by zde zůstali minulé pozice všech objektů, což je velmi rychlý způsob jak implementovat \ref{sec:unitTrail}, ale časem by to bylo velmi nepřehledné. Na druhou stranu to OpenGL nemůže dělat za nás, protože neví které volání kreslících funkcí ještě patří do \uv{tohoto} času a co by \uv{minule}.} Takže si nejdříve vyčistíme plátno a pak do něj vše nakreslíme a tento postup opakujeme ve smyčce.
 
+\textbf{ImGui} má podobný systém, což je ukázáno na příkladu \ref{lst:imgui1}, na kterém si nyní vysvětlíme jak \textbf{ImGui} funguje.
+\includecode[imgui1]{Source/imgui1.cpp}
+{Příklad použití knihovny ImGui }
+Vnější smyčku nám v programu už obstarává samotná simulace, takže o ní se starat nemusíme. Dále je zde dvojice funkcí \texttt{NewFrame()} a \texttt{Render()}, kde po zavolání \texttt{NewFrame()} si \textbf{ImGui} zaznamenává všechny další volání všech svých funkcí. \texttt{Render()} pak předá zaznamenaná data OpenGL, které je vykreslí na obrazovku. 
+
+Tento konkrétní příklad vykresluje okno s jedním tlačítkem, které po zmáčknutí zobrazí text. Všimněme si, že zde není žádný objekt - tlačíko, okno, ani text. Vše je pouze volaní funkcí, což je klíčové pro pochopení fungování knihovny. Také je to důvod pro \texttt{if}, protože \uv{Foo} text se zobrazí jen a \textbf{pouze při konkrétním průchodu smyčkou}, ve kterém došlo k zmáčknutí tlačítka (reprezentováno návratovou hodnotou). Ve výsledku text na obrazovce jen problikne, samozřejmě v tomto případě asi chceme spíše přepínací tlačítko, k čemuž slouží jiná funkce. Také se vše zobrazí jen a pouze pokud je okno otevřené,což je jedna z výjimek, kde si \textbf{ImGui} uchovává stav. Nic nám ovšem nebrání tuto funkci občas nezavolat, což bude znamenat, že se nám okno občas nevykreslí vůbec. Tento přístup dovoluje rychlý vývoj a velkou dynamičnost uživatelského rozhraní. Ze zdrojového kódu je tedy hned patrné co, kdy a za jakých podmínek se bude kreslit.
+
+Většina funkcí využívající \textbf{ImGui} by teď už měla být koncepčně jasná, pokud ne, tak knihovna je dobře okomentovaná a když tak není problém si najít volné místo v našem kódu, a některé funkce si jen tak vyzkoušet, což je díky bezstavové implementaci velmi snadné.
 \section{Kreslení simulace}
 Nyní představíme pár tříd, které se starají o vykreslení samotných simulovaných dat
 \subsection{třída \texttt{OMSAR}}
@@ -33,6 +38,7 @@ První jmenovaná třída umí vykreslit kruh o zadaném poloměru do středu ob
  
 Druhá jmenovaná třída vykresluje data, kde jednomu objektu odpovídá právě jeden \texttt{CircleBuffer} - kruh. Data vykresluje pomocí funkce \texttt{Draw()}, která zajišťuje správný \textbf{shader} a využívá právě \texttt{OMSAR} k určení polohy jednotlivých kruhů.
 \subsection{třída \texttt{UnitTrail}}
+\label{sec:unitTrail}
 Při simulaci Sluneční soustavy by se nám hodilo nejen vidět aktuální polohu všech objektů, ale i jejich minulé polohy. Tato třída vykresluje lomenou čáru, která pak slouží jako \uv{stopa} za simulovaným objektem. Ideálně bychom tedy chtěli mít pouze funkci, která přidá další bod lomené čáry a to aktuální polohu.O to jak bude stopa uložena a kreslena se starat nechceme. Samozřejmě bude omezená maximální délku, ale to si má také ohlídat sama. Ještě pro úplnost existuje funkce \texttt{Clear}, která uloženou čáru smaže.
 
 \paragraph{Algoritmus}Využijeme toho, že OpenGL přímo podporuje kreslení lomených čar, stačí zadat množinu bodů a ono samo mezi nimi vykreslí lomenou čáru. Navíc použijeme indexované vykreslování, tedy, že řekneme OpenGL v jakém pořadí má body vykreslit, což ve výsledku zajistí, že se celá množina bodů nemusí ležet ve správném pořadí a při přidávání bodů ji nebude nutné celou posunout.
