@@ -1,7 +1,8 @@
 \chapter{Porovnání integračních metod}
+\label{chap:compMethods}
 V této kapitole alespoň zběžně porovnáme implementované integrační metody. Protože potencionálního uživatele by mohlo zajímat, kterou metodu by měl použít pro co nejpřesnější ale i nejrychlejší výsledek.
 
-Srovnání bude probíhat nejdříve na případu kruhového pohybu. Důvod je ten, že je to podobný případ jako gravitace a také už pro něj máme vyřešenou implicitní verzi Eulerovy metody. Budeme hodnotit přesnost, stabilitu v závislost na $ \Delta t $ a výpočetní složitost.
+Srovnání bude probíhat nejdříve na případu kruhového pohybu. Důvod je ten, že objekty v naší soustavě obíhají většinou po kružnicích/elipsách a také už pro něj máme vyřešenou implicitní verzi Eulerovy metody. Budeme hodnotit přesnost, stabilitu v závislost na $ \Delta t $ a rychlost výpočtu.
 
 V dalších sekcích už nebudeme metody znovu vysvětlovat, pouze se odkážeme na odpovídající kapitoly.
 
@@ -19,7 +20,7 @@ Pohyb po kružnici v rovině můžeme zapsat rovnicí \eqref{eq:kruh}, kde $\ome
 \end{align}
 V dalších částech zvolíme $ \omega = 1 $.
 \subsection{Explicitní Euler}
-Explicitní Eulerovu metodu jsme si představili v úvodní teorii \ref{sec:numReseni}. Zde jen připomeneme, že si opět rovnici \eqref{eq:kruhDif} rozdělíme na dvě rovnice prvního řádu a integrujeme je samostatně. Výsledky jsou zobrazeny v grafu na obrázku \ref{fig:explicitEuler}, z něhož je vidět, že explicitní metoda diverguje od správného řešení pro libovolné $ \Delta t $ Což není moc překvapivé, protože považuje derivaci na integračním oboru za konstantní, což je na počátku tečna procházející bodem (1,0) a tím dojde vždy k posunu směrem ven z kružnice. Takže tato metoda není moc vhodná pro naši simulaci, proto není ani implementována.
+Explicitní Eulerovu metodu jsme si představili v úvodní teorii \ref{sec:numReseni}. Výsledky jsou zobrazeny v grafu na obrázku \ref{fig:explicitEuler}, z něhož je vidět, že explicitní metoda diverguje od správného řešení pro libovolné $ \Delta t $ Což není moc překvapivé, protože považuje derivaci na integračním oboru za konstantní, což je na počátku tečna procházející bodem (1,0) a tím dojde vždy k posunu směrem ven z kružnice. Tato metoda tedy nevypadá jako vhodná pro naši simulaci, což lze pozorovat např. u měsíců Marsu, které se i pro malá DT(500+) pomalu oddalují po spirále. Tady by se právě hodilo mít rozšíření na vytváření grafů vzdáleností mezi jednotlivými objekty.
 \begin{figure}
 	\caption{Explicitní Eulerova metoda $ t\in [0,10] $}
 	\label{fig:explicitEuler} 
@@ -28,7 +29,7 @@ Explicitní Eulerovu metodu jsme si představili v úvodní teorii \ref{sec:numR
 \end{figure}
 \subsection{Implicitní Euler}
 Implicitní Eulerova metoda byla ukázána v části \ref{sec:implEuler} i s řešením jedné rovnice \eqref{eq:implicitEuler}, které můžeme použít, neboť platí, že $ k=-\omega^2 $. 
-Bohužel ani tato metoda není ideální jak ukazuje obrázek \ref{fig:implicitEuler}. Dochází zde k opačnému jevu, což je způsobeno tím, že integrace probíhá po tečně v čase $ t+\Delta t $, což vede k posunu směrem do kružnice. Implicitní metoda nebyla použita, protože se z naší soustavy \eqref{eq:soustava} nedá jednoduše vyjádřit a stejně by nepřinesla užitečné výsledky.
+Bohužel ani tato metoda není ideální jak ukazuje obrázek \ref{fig:implicitEuler}. Dochází zde k opačnému jevu, což je způsobeno tím, že integrace probíhá po tečně v čase $ t+\Delta t $, což vede k posunu směrem do kružnice. Implicitní metoda nebyla použita, protože se z naší soustavy \eqref{eq:soustava} nedá jednoduše vyjádřit.
 \begin{figure}
 	\caption{Implicitní Eulerova metoda $ t\in [0,10] $}
 	\label{fig:implicitEuler} 
@@ -64,15 +65,16 @@ Poslední implementovaná metoda je RK4, která je popsána v sekci \ref{sec:imp
 	\centering
 	\includegraphics[width=\linewidth]{Figs/RK4Stab}
 \end{figure}
+\FloatBarrier
 \section{Sluneční soustava}
-Pojďme se ještě podívat na srovnání stability semi-implicitní a RK4 metody na příkladu naší Sluneční soustavy. Jako indikátor stability použijeme stabilitu oběžných drah měsíců, protože ty mají nejkratší oběžné doby a nestabilita se zde projeví jako první. Samozřejmě toto je pouze nutná a ne postačující podmínka správné simulace, ale pro běžné porovnání by mohla stačit. Naměřené údaje jsou uvedeny v tabulce \ref{tab:stab}. Vyšší hodnoty nejsou podstatné, protože se zde ve velké míře projeví nepřesnost, která vyvolá nestabilitu systému. Každopádně to ukazuje, že semi-implicitní Eulerova metoda je stabilnější, což i trochu naznačovaly obrázky u kruhového pohybu, ale také obrázek \ref{fig:semiImplEulerStab} ukazuje stabilní, avšak nesprávný \uv{orbit}. Na druhou stranu obrázek \ref{fig:RK4Stab} uvádí RK4 jako přesnější metodu pro podobné $ \Delta t $. Přesnost se bohužel pro Sluneční soustavu nedá nijak jednoduše ověřit. 
+Pojďme se ještě podívat na srovnání stability semi-implicitní a RK4 metody na příkladu naší Sluneční soustavy. Jako indikátor stability použijeme stabilitu oběžných drah měsíců, protože ty mají nejkratší oběžné doby a nestabilita se zde projeví jako první. Samozřejmě toto je pouze nutná a ne postačující podmínka správné simulace. Naměřené údaje jsou uvedeny v tabulce \ref{tab:stab}. Vyšší hodnoty nejsou podstatné, protože se zde ve velké míře projeví nepřesnost, která vyvolá nestabilitu systému. Každopádně to ukazuje, že semi-implicitní Eulerova metoda je stabilnější, což i trochu naznačovaly obrázky u kruhového pohybu, ale také obrázek \ref{fig:semiImplEulerStab} ukazuje stabilní, avšak nesprávný \uv{orbit}. Na druhou stranu obrázek \ref{fig:RK4Stab} uvádí RK4 jako přesnější metodu pro podobné $ \Delta t $. Přesnost se bohužel pro Sluneční soustavu nedá nijak jednoduše ověřit. 
 
 
 \arrayrulewidth 1pt
 \begin{table}[h]
 	\centering
-	\label{tab:stab}
 	\caption{Stabilita měsíců pro semi-implicitní Eulerovu a RK4 metodu}
+	\label{tab:stab}
 	\rowcolors{3}{gray!25}{white}
 \begin{tabular}{l  *{8}{|c c} }
 	\hline
@@ -112,12 +114,11 @@ Pojďme se ještě podívat na srovnání stability semi-implicitní a RK4 metod
 \end{table}
 \section{Rychlosti a Závěr}
 Srovnání rychlostí obou metod nabízí tabulka \ref{tab:rychlost}. 
-
-Z tabulky plyne, že RK4 je přibližně 3-4x pomalejší než Eulerova metoda. Takže ve výsledku je dle našich měření RK4 pomalejší a nestabilnější, přesto je použita jako výchozí. Důvod je ten, že je podle mne mnohem přesnější, stabilita Eulera vypadá sice dobře, ale silně pochybuji, že v tu chvíli simulace odpovídá realitě. Ale samozřejmě uživatel si může stále vybrat, což byl také účel a tato kapitola měla za cíl toto rozhodnutí alespoň trochu ulehčit. Takže pokud chce spíše stabilní, avšak možná nepřesnou simulaci, tak je lepší Eulerova metoda, pokud dává přednost přesnosti, tak bych volil RK4 nebo jiné. Bohužel \uv{jiné} zde nejsou, což je škoda a proto je to také jedno z možných rozšíření viz. \ref{sec:vylepseni}.
+Z které plyne, že RK4 je přibližně 3-4x pomalejší než Eulerova metoda. Takže ve výsledku je dle našich měření RK4 pomalejší a nestabilnější, přesto je použita jako výchozí. Důvod je ten, že je podle mne mnohem přesnější, stabilita Eulera vypadá sice dobře, ale silně pochybuji, že v tu chvíli simulace odpovídá realitě. Ale samozřejmě uživatel si může stále vybrat, což byl také účel a tato kapitola měla za cíl toto rozhodnutí alespoň trochu ulehčit. Takže pokud chce uživatel spíše stabilní(I když v tom případě bych uvažoval o implementaci Keplerových zákonů), avšak možná nepřesnou simulaci, tak je lepší semi-implicitní Eulerova metoda, pokud dává přednost přesnosti, tak bych volil RK4 nebo jiné. Bohužel \uv{jiné} zde nejsou, což je škoda. Také by se pro lepší porovnání hodilo mít k dispozici přesné grafy rychlostí, vzdáleností, energií už v průběhu simulace. Proto jsou také uveden v možnostech rozšíření viz. \ref{sec:vylepseni}. 
 \begin{table}
 	\centering
-	\label{tab:rychlost}
 	\caption{Srovnání rychlostí semi-implicitní Eulerovy a RK4 metody}
+	\label{tab:rychlost}
 	\rowcolors{3}{gray!25}{white}
 	\begin{tabular}{l l c c c}
 		\hline\multicolumn{2}{c}{\multirow{2}{*}{\textbf{Metoda}}}& & \textbf{Počet objektů}\\ 
@@ -130,5 +131,5 @@ Z tabulky plyne, že RK4 je přibližně 3-4x pomalejší než Eulerova metoda. 
 	\end{tabular}
 	\newline
 	\flushleft
-	\textit{Přesné nastavení Debug a Release je uvedeno v .sln u zdrojových souborů. Release má zapnuté veškeré optimalizace - inlining, SIMD...;Debug je výchozí režim bez většiny optimalizací. Hodnoty byly vypočteny z 100 000 volání každé funkce na soustavě s procesorem 4320 - 4x3.6Ghz se systémem Win7 64-bit(Ale aplikace je 32-bitová.)}
+	\textit{Přesné nastavení Debug a Release je uvedeno v .sln u zdrojových souborů. Release má zapnuté veškeré optimalizace - inlining, SIMD...;Debug je výchozí režim bez většiny optimalizací. Hodnoty byly vypočteny z 100 000 volání každé funkce na soustavě s procesorem AMD FX-4100 - 4x3.6Ghz se systémem Win7 64-bit(Ale aplikace je 32-bitová.)}
 \end{table}

@@ -3,13 +3,13 @@
 \chapter*{Organizace dokumentu}
 Tento text je organizován do následujících částí:
 \begin{description}
-	\item[Úvod] - První kapitola, zde je uvedena specifikace zápočtového programu a vysvětlena teoretická část.
-	\item[Programátorká část] - Kapitoly č.X až Y, které popisují jak design celého programu, tak jednotlivých částí. Zaměřují se na použité algoritmy a jejich implementaci včetně zdrojových kódů C++. Na konci jsou poté zmíněny možnosti dalšího rozšíření.
-	\item[Uživatelská příručka] - Poslední dvě kapitoly popisují jak program správně zkompilovat a také jak s ním pracovat z neprogramátorského pohledu.
-	
+	\item[Úvod] - První kapitola, zde je uvedena specifikace zápočtového programu a také teoretický popis problému.
+	\item[Programátorká část] - Kapitoly č.2 až 8, které popisují jak návrh celého programu, tak jednotlivých částí. Zaměřují se na použité algoritmy a jejich implementaci včetně ukázek zdrojových kódů v C++. Na konci jsou poté zmíněny možnosti dalšího rozšíření.
+	\item[Kapitola \ref{chap:compMethods} ] nabízí srovnání použitých algoritmů pro simulaci.
+	\item[Kapitoly \ref{chap:userGuide} a \ref{chap:kompilace}] popisují jak s programem pracovat z neprogramátorského pohledu a také jak ho zkompilovat.
 \end{description}
 Programátorská část vyžaduje určitou znalost C++ a OpenGL. Důležité koncepty a algoritmy jsou podrobně vysvětleny a vhodně doplněny zdrojovými kódy, které jsou psány následujícím formátem:
-\begin{lstlisting}[title=Text vystihující příklad (Název souboru)]
+\begin{lstlisting}[title=Název vystihující příklad]
 #include <iostream>
 
 int main()
@@ -18,12 +18,9 @@ int main()
 	return 0;
 }
 \end{lstlisting}
-Všechny další uvedené zdrojové kódy se nachází ve složce \texttt{Source/}, která
-by měla být připojena k této dokumentaci. Z praktických důvodů \textbf{nemusí} být tyto soubory zkompilovatelné, popřípadě mohou být psány z části v pseudo-kódu. \textbf{Nejedná} se o zdrojové kódy samotného programu. Primární účel je pouze \textbf{popisný}, kde snaha je ilustrovat koncepty a algoritmy, které se v programu v nějaké formě skutečně vyskytují.
-
-Zdrojové kódy samotného programu jsou také součástí dokumentace a obsahují komentáře, které mohou stát za přečtení.
+Z praktických důvodů nemusí být tyto ukázky zkompilovatelné, popřípadě mohou být psány z části v pseudo-kódu, nejedná se tedy přímo o zdrojové kódy samotného programu. Primární účel je popisný, kde snaha je ilustrovat koncepty a algoritmy, které se v programu v nějaké formě skutečně vyskytují.
 
 \chapter*{Zdroje a Reference}
 Můj hlavní zdroj informací byl předmět NOFY056 Programování pro fyziky 2015/2016 vedený RNDr. Ladislavem Hanykem, Ph.D. a cvičení s Mgr. Tomášem Ledvinkou, Ph.D., kde se vyučují mimo jiné právě numerické metody řešení ODR. 
 
-Zvlášť užitečné byly poznámky z \url{http://geo.mff.cuni.cz/~hanyk/NOFY056/index.htm} k výše zmíněné přednášce. Hlavně pro pochopení RK4 a také jsou zde přehledně napsány vícekrokové metody prediktor-korektor. Každopádně i anglická verze Wikipedie má celkem dobře sepsané všechny zde použité numerické metody.
+Zvlášť užitečné byly poznámky z \url{http://geo.mff.cuni.cz/~hanyk/NOFY056/index.htm} k výše zmíněné přednášce. Hlavně pro pochopení RK4 a také jsou zde přehledně napsány vícekrokové metody prediktor-korektor. Každopádně ale i anglická verze Wikipedie má celkem dobře sepsané všechny zde použité numerické metody.

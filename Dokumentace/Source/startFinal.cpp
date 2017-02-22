@@ -11,7 +11,7 @@ void Simulation::Start(time deltaT, size_t rawMult, size_t DTMult, time maxSimTi
 
 	auto acc = 0;
 	//Simulace může být ukončena uplynutím zadaného času
-	while (!konec && ElapsedTime()<maxSimTime)
+	while (!konec && ElapsedTime() < maxSimTime)
 	{
 		//Akumulátor času
 		acc += LastFrameTime();
@@ -19,8 +19,9 @@ void Simulation::Start(time deltaT, size_t rawMult, size_t DTMult, time maxSimTi
 		{
 			for (size_t i = 0; i < rawMult; i++)
 			{
-			simMethod->Step(deltaT*DTMult); // Uděláme jeden krok simulace
-			acc -= deltaT*DTMult;
+				// Uděláme jeden krok simulace
+				simMethod->Step(deltaT*DTMult);
+				acc -= deltaT*DTMult;
 			}
 		}
 		viewer->ViewData();// Podíváme se na simulovaná data

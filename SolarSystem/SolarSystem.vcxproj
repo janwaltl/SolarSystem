@@ -176,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Timing.cpp" />
+    <ClCompile Include="Source\SimMethods\ExplicitEuler.cpp" />
     <ClCompile Include="Source\Units\SystemUnit.cpp" />
     <ClCompile Include="Source\ConsoleControl.cpp" />
     <ClCompile Include="Source\Main.cpp" />
@@ -210,6 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Parsers\SerializeUnit.h" />
+    <ClInclude Include="Source\SimMethods\ExplicitEuler.h" />
     <ClInclude Include="Source\Units\SystemUnit.h" />
     <ClInclude Include="Source\Units\PhysicsUnits.h" />
     <ClInclude Include="Source\Common\Timing.h" />

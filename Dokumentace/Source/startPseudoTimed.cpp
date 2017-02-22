@@ -2,7 +2,7 @@ void Simulation::Start(time deltaT,/*další parametry*/)
 {
 	//Beze změny
 
-	auto acc = 0;
+	unsigned int acc = 0;
 	while (!konec)//Necháme simulaci běžet
 	{
 		//Akumulátor času

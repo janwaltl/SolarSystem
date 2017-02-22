@@ -6,8 +6,8 @@
 	auto data = parser->Load();
 	//Možná si potřebují simMethod a viewer něco připravit ještě před simulací,
 	//ale potřebují k tomu už znát data - např. jejich velikost
-	simMethod->_Prepare();
-	viewer->_Prepare();
+	simMethod->Prepare();
+	viewer->Prepare();
 	
 	while(!konec)//Necháme simulaci běžet
 	{

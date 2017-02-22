@@ -29,25 +29,21 @@ mass<7.3476e22> }
 
 Každý objekt je popsán uvnitř páru složených závorek \textbf{\texttt{\{\}}}.
 Všechny parametry objektu jsou dobrovolné, čili \lstinline|{}| je validní bezejmenný objekt, který se nachází v klidu na pozici \texttt{(0,0)} a má nulovou hmotnost. Pokud se ale parametr objeví, musí mít správný formát, který je obecně \texttt{název<hodnoty>}. Následuje přesný výčet a formát parametrů:
-\paragraph{name$ < $jméno$ > $ } - jméno objektu. Jsou dovoleny pouze znaky ANSCII, čili bez diakritiky. Pokud není uvedeno, pak je prázdné.
-\paragraph{color$ < $R G B A$ > $} - barva objektu. Očekávají se 4 desetinná čísla v rozmezi od 0.0 do 1.0 představující barvu ve formátu RGBA. Pokud není uvedeno, pak je bíla.
-\paragraph{velocity$ < $X Y$ > $} - počáteční rychlost objektu. Očekává dvě desetinná čísla reprezentující rychlost ve vodorovném a svislém směru. Nesmí zde být napsány fyzikální jednotky - tzn. \texttt{velocity$ < $10e2 m/s 8e3 m/s$ > $} \textbf{není} validní vstup. Ale implicitně by hodnoty měly být v m/s . Pokud není uvedeno, pak je (0,0).
+\paragraph{name$ < $jméno$ > $ } - jméno objektu. Jsou dovoleny pouze znaky ASCII, čili bez diakritiky. Pokud není uvedeno, pak je prázdné.
+\paragraph{color$ < $R G B A$ > $} - barva objektu. Očekávají se 4 desetinná čísla v rozmezi od 0.0 do 1.0 oddělená mezerou představující barvu ve formátu RGBA. Pokud není uvedeno, pak je bíla.
+\paragraph{velocity$ < $X Y$ > $} - počáteční rychlost objektu. Očekává dvě desetinná čísla oddělený mezerou reprezentující rychlost ve vodorovném a svislém směru. Nesmí zde být napsány fyzikální jednotky - tzn. \texttt{velocity$ < $10e2 m/s 8e3 m/s$ > $} \textbf{není} validní vstup. Ale implicitně by hodnoty měly být v m/s . Pokud není uvedeno, pak je (0,0).
 \paragraph{position$ < $X Y$ > $} - počáteční pozice objektu. Identické s rychlostí, očekávají se hodnoty v metrech.
-\paragraph{mass $ < $hmotnost$ > $ } - hmotnost objektu vyjádřená jedním desetinným číslem v kilogramech. Také zde nesmí být jednotky uvedeny. Pokud není uvedeno, pak je nulová hmotnost.
-\paragraph{Dodatek k číslům} - jsou povoleny jak celá, tak desetinná čísla. Je dovolena pouze desetinná tečka. Číslo 104.25 můžeme zapsat například následujícími způsoby: $ 104.25 \quad 1.0425e2$.
-\textbf{Parser} ovšem \textbf{neumí} aritmetiku, takže následující \textbf{není} validní vstup: $ 10425/100 \quad 104 + 0.25 \quad 1.0425 * 10^2 $.
+\paragraph{mass $ < $hmotnost$ > $ } - hmotnost objektu vyjádřená jedním desetinným číslem v kilogramech. Doporučení je zde také neuvádět jednotky, i když to bude fungovat, tak budou ignorovány. Pokud není uvedeno, pak je nulová hmotnost.
+\paragraph{Dodatek k číslům} - jsou povoleny jak celá, tak desetinná čísla. Je dovolena pouze desetinná tečka. Číslo 104.25 můžeme zapsat například takto: $ 104.25 ;\ 1.0425e2$.
+\textbf{Parser} ovšem \textbf{neumí} aritmetiku, takže následující \textbf{není} validní vstup: $ 10425/100 ;\ 104 + 0.25 ;\ 1.0425 * 10^2 $.
 \paragraph{}
-\texttt{FormattedFileParser} je relativně shovívavý k formátování, takže následující je opravdu ekvivalentní definice objektu \texttt{Sun} z předchozího příkladu, ovšem čitelnost takového vstupu ponecháme bez komentáře. 
+\texttt{FormattedFileParser} je relativně shovívavý k formátování, takže následující příklad je ekvivalentní definice objektu \texttt{Sun} z předchozího příkladu.
 \begin{lstlisting}
-				{ name		Bylo nebylo	<Sun> za 
-sedmerocolor	horami <1.0 	   0.88 			0.0 	1.0 a
- 		sedmero
-	velocityrekamiposition		jedno								<
-0.0 
- 0.0  male 		mass	
- <					1.98843e30  kralovstvi
-> }
-
+{ Main star of our Solar system has a name <Sun>. 
+  It's color is usually <1.0 0.88 0.0 1.0 which means yellow in RGBA format.
+  The Sun accounts for 99% mass of our entire system,
+  which makes it nearly 330 thousand times heavier than Earth
+  or to put it in another way it weights < 1.98843e30 kilograms>. }
 \end{lstlisting}
 
 \section{Detaily implementace}
@@ -57,13 +53,8 @@ Parser tedy očekává vstupní a případně výstupní jméno souboru,\textbf{
 
 Na vlastní implementaci není koncepčně nic extra zajímavého. \texttt{Load()} načte celý soubor do \texttt{std::string} ve kterém si pak vždy najde dvojici \{\}, ve které se pokusí najít názvy parametrů. Pokud nějaký najde, pak k němu ještě najde nejbližší dvojici $ <> $  ve které poté očekává správné hodnoty. Tento jednoduchý způsob zajišťuje výše ukázanou flexibilitu formátování. Všechno ostatní, co by se v dokumentu mohlo nacházet(například komentáře) prostě ignoruje. 
 
-\texttt{Save()} vytvoří soubor, pokud byl nějaký zadán, do kterého předaná data uloží. Což se děje podobným způsobem - každý parametr "zabalí" do správného formátu.
-
+\texttt{Save()} vytvoří soubor, pokud byl nějaký zadán, do kterého předaná data uloží. Což se děje podobným způsobem - každý parametr "zabalí" do správného formátu a převede do jednotek SI.
 Při nekorektním vstupu, nemožnosti otevřít vstupní soubor nebo vytvořit soubor výstupní vyvolají funkce výjimku \texttt{Exception}.
-\\
-\\
-\textbf{Poznámka autora:}
-\textit{Je pravda, že načítání by nutně nemuselo načítat celý soubor najednou, ale pouze  bloky závorek. Ale při velikosti textových souborů a operační paměti průměrného počítače nebyla paměť nejvyšší prioritou při programování zpracování vstupu.}
 
 
 \chapter{SolarParser}

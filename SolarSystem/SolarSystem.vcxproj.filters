@@ -116,6 +116,9 @@
     <ClCompile Include="Source\Common\Timing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SimMethods\ExplicitEuler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Simulation.h">
@@ -263,6 +266,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Parsers\SerializeUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SimMethods\ExplicitEuler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

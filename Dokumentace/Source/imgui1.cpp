@@ -11,7 +11,7 @@ while (true)
 			ImGui::Text("Foo");
 		else
 			ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Bar");
-		ImGui::End();//Aby bylo vidět, kdo končí okno a může začít další
+		ImGui::End();//Aby bylo vidět, kde končí okno a může začít další
 	}
 
 	//ImGui si poznamenává všechny vykreslené objekty

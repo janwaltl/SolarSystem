@@ -11,6 +11,7 @@
 #include "ReplayedSimulation.h"
 #include "Parsers/FormattedFileParser.h"
 #include "Parsers/SolarParser.h"
+#include "SimMethods/ExplicitEuler.h"
 #include "SimMethods/SemiImplicitEuler.h"
 #include "SimMethods/RK4.h"
 #include "Viewers/EmptyViewer.h"
@@ -87,7 +88,8 @@ Nasleduje vycet veskerych prikazu(P=povinne,N=nepovinne):
     1. sim:
         -m [metoda] - N, ktera metoda ma byt pouzita k simulaci
                        - dostupne metody:
-                            semiEuler = semi-implicitni euler
+                            euler = explicitni Euler
+                            semiEuler = semi-implicitni Euler
                             RK4 - Runge Kutta ctvrteho radu (vychozi)
         -p [parser] - N, ktery parser ma byt pouzit pro nacteni dat
                     - dostupne moznosti:
@@ -184,7 +186,8 @@ Following is description of all arguments(M=mandatory,O=optional):
     1. sim:
         -m [simMethod] - O, which method should be used for simulation
                        - available simMethods:
-                            semiEuler = semi implicit euler
+                            euler = explicit Euler
+                            semiEuler = semi implicit Euler
                             RK4 - fourth order RungeKutta (default)
         -p [parser] - O, which parser use to obtain simulated data
                     - available parsers:
@@ -343,6 +346,11 @@ Following are examples of correct calls to this application:
 				{
 					std::cout << "semiEuler\n";
 					return std::make_unique<SemiImplicitEuler>();
+				}
+				else if (val && *val == "euler")
+				{
+					std::cout << "explicit euler\n";
+					return std::make_unique<ExplicitEuler>();
 				}
 				else//Default
 				{

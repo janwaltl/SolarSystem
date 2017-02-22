@@ -8,7 +8,7 @@
 \BOOKMARK [2][-]{subsection.2.1.1}{Verejn\351 rozhran\355}{section.2.1}% 8
 \BOOKMARK [2][-]{subsection.2.1.2}{Moduly}{section.2.1}% 9
 \BOOKMARK [2][-]{subsection.2.1.3}{N\341vrh metody Start\(\)}{section.2.1}% 10
-\BOOKMARK [2][-]{subsection.2.1.4}{Implementace metody Start\(\)}{section.2.1}% 11
+\BOOKMARK [2][-]{subsection.2.1.4}{Fin\341ln\355 implementace metody Start\(\)}{section.2.1}% 11
 \BOOKMARK [1][-]{section.2.2}{V\375jimky}{chapter.2}% 12
 \BOOKMARK [0][-]{chapter.3}{Popis modulu}{}% 13
 \BOOKMARK [1][-]{section.3.1}{Parser}{chapter.3}% 14
@@ -20,42 +20,43 @@
 \BOOKMARK [0][-]{chapter.5}{SolarParser}{}% 20
 \BOOKMARK [1][-]{section.5.1}{Popis}{chapter.5}% 21
 \BOOKMARK [0][-]{chapter.6}{Implementovan\351 simulacn\355 metody}{}% 22
-\BOOKMARK [1][-]{section.6.1}{SemiImplicitEuler}{chapter.6}% 23
-\BOOKMARK [2][-]{subsection.6.1.1}{Teorie}{section.6.1}% 24
-\BOOKMARK [2][-]{subsection.6.1.2}{Implementace}{section.6.1}% 25
-\BOOKMARK [1][-]{section.6.2}{RK4}{chapter.6}% 26
-\BOOKMARK [2][-]{subsection.6.2.1}{Teorie}{section.6.2}% 27
-\BOOKMARK [2][-]{subsection.6.2.2}{Implementace}{section.6.2}% 28
-\BOOKMARK [0][-]{chapter.7}{IMGuiViewer}{}% 29
-\BOOKMARK [1][-]{section.7.1}{Tr\355da OpenGLBackend a GLFW\046GLEW}{chapter.7}% 30
-\BOOKMARK [2][-]{subsection.7.1.1}{Tr\355da Shader}{section.7.1}% 31
-\BOOKMARK [2][-]{subsection.7.1.2}{Re\235en\355 OpenGL chyb}{section.7.1}% 32
-\BOOKMARK [2][-]{subsection.7.1.3}{Tr\355da ImGuiBackend a ImGui}{section.7.1}% 33
-\BOOKMARK [1][-]{section.7.2}{Kreslen\355 simulace}{chapter.7}% 34
-\BOOKMARK [2][-]{subsection.7.2.1}{tr\355da OMSAR}{section.7.2}% 35
-\BOOKMARK [2][-]{subsection.7.2.2}{tr\355dy CircleBuffer a SimDataDrawer}{section.7.2}% 36
-\BOOKMARK [2][-]{subsection.7.2.3}{tr\355da UnitTrail}{section.7.2}% 37
-\BOOKMARK [2][-]{subsection.7.2.4}{Tr\355da LineTrailsDrawer}{section.7.2}% 38
-\BOOKMARK [1][-]{section.7.3}{Kreslen\355 u\236ivatelsk\351ho rozhran\355}{chapter.7}% 39
-\BOOKMARK [0][-]{chapter.8}{Roz\235\355ritelnost a vylep\235en\355}{}% 40
-\BOOKMARK [1][-]{section.8.1}{N\341vrh prehr\341vace}{chapter.8}% 41
-\BOOKMARK [1][-]{section.8.2}{Zaznamen\341n\355 simulace}{chapter.8}% 42
-\BOOKMARK [1][-]{section.8.3}{Prehr\341v\341n\355}{chapter.8}% 43
-\BOOKMARK [1][-]{section.8.4}{Vylep\235en\355 a opravy}{chapter.8}% 44
-\BOOKMARK [0][-]{chapter.9}{Porovn\341n\355 integracn\355ch metod}{}% 45
-\BOOKMARK [1][-]{section.9.1}{Kruhov\375 pohyb}{chapter.9}% 46
-\BOOKMARK [2][-]{subsection.9.1.1}{Teorie}{section.9.1}% 47
-\BOOKMARK [2][-]{subsection.9.1.2}{Explicitn\355 Euler}{section.9.1}% 48
-\BOOKMARK [2][-]{subsection.9.1.3}{Implicitn\355 Euler}{section.9.1}% 49
-\BOOKMARK [2][-]{subsection.9.1.4}{Semi-implicitn\355 Euler}{section.9.1}% 50
-\BOOKMARK [2][-]{subsection.9.1.5}{RK4}{section.9.1}% 51
-\BOOKMARK [1][-]{section.9.2}{Slunecn\355 soustava}{chapter.9}% 52
-\BOOKMARK [1][-]{section.9.3}{Rychlosti a Z\341ver}{chapter.9}% 53
-\BOOKMARK [0][-]{chapter.10}{U\236ivatelsk\341 pr\355rucka}{}% 54
-\BOOKMARK [1][-]{section.10.1}{Po\236adavky}{chapter.10}% 55
-\BOOKMARK [1][-]{section.10.2}{Z\341kladn\355 ovlad\341n\355}{chapter.10}% 56
-\BOOKMARK [1][-]{section.10.3}{Pokrocil\351 mo\236nosti}{chapter.10}% 57
-\BOOKMARK [0][-]{chapter.11}{Kompilace programu}{}% 58
-\BOOKMARK [1][-]{section.11.1}{Git}{chapter.11}% 59
-\BOOKMARK [1][-]{section.11.2}{Windows}{chapter.11}% 60
-\BOOKMARK [1][-]{section.11.3}{Linux}{chapter.11}% 61
+\BOOKMARK [1][-]{section.6.1}{Explicitn\355 Eulerova metoda}{chapter.6}% 23
+\BOOKMARK [1][-]{section.6.2}{SemiImplicitEuler}{chapter.6}% 24
+\BOOKMARK [2][-]{subsection.6.2.1}{Teorie}{section.6.2}% 25
+\BOOKMARK [2][-]{subsection.6.2.2}{Implementace}{section.6.2}% 26
+\BOOKMARK [1][-]{section.6.3}{RK4}{chapter.6}% 27
+\BOOKMARK [2][-]{subsection.6.3.1}{Teorie}{section.6.3}% 28
+\BOOKMARK [2][-]{subsection.6.3.2}{Implementace}{section.6.3}% 29
+\BOOKMARK [0][-]{chapter.7}{IMGuiViewer}{}% 30
+\BOOKMARK [1][-]{section.7.1}{Tr\355da OpenGLBackend a GLFW\046GLEW}{chapter.7}% 31
+\BOOKMARK [2][-]{subsection.7.1.1}{Tr\355da Shader}{section.7.1}% 32
+\BOOKMARK [2][-]{subsection.7.1.2}{Re\235en\355 OpenGL chyb}{section.7.1}% 33
+\BOOKMARK [2][-]{subsection.7.1.3}{Tr\355da ImGuiBackend a ImGui}{section.7.1}% 34
+\BOOKMARK [1][-]{section.7.2}{Kreslen\355 simulace}{chapter.7}% 35
+\BOOKMARK [2][-]{subsection.7.2.1}{tr\355da OMSAR}{section.7.2}% 36
+\BOOKMARK [2][-]{subsection.7.2.2}{tr\355dy CircleBuffer a SimDataDrawer}{section.7.2}% 37
+\BOOKMARK [2][-]{subsection.7.2.3}{tr\355da UnitTrail}{section.7.2}% 38
+\BOOKMARK [2][-]{subsection.7.2.4}{Tr\355da LineTrailsDrawer}{section.7.2}% 39
+\BOOKMARK [1][-]{section.7.3}{Kreslen\355 u\236ivatelsk\351ho rozhran\355}{chapter.7}% 40
+\BOOKMARK [0][-]{chapter.8}{Roz\235\355ritelnost a vylep\235en\355}{}% 41
+\BOOKMARK [1][-]{section.8.1}{N\341vrh prehr\341vace}{chapter.8}% 42
+\BOOKMARK [1][-]{section.8.2}{Zaznamen\341n\355 simulace}{chapter.8}% 43
+\BOOKMARK [1][-]{section.8.3}{Prehr\341v\341n\355}{chapter.8}% 44
+\BOOKMARK [1][-]{section.8.4}{Vylep\235en\355 a opravy}{chapter.8}% 45
+\BOOKMARK [0][-]{chapter.9}{Porovn\341n\355 integracn\355ch metod}{}% 46
+\BOOKMARK [1][-]{section.9.1}{Kruhov\375 pohyb}{chapter.9}% 47
+\BOOKMARK [2][-]{subsection.9.1.1}{Teorie}{section.9.1}% 48
+\BOOKMARK [2][-]{subsection.9.1.2}{Explicitn\355 Euler}{section.9.1}% 49
+\BOOKMARK [2][-]{subsection.9.1.3}{Implicitn\355 Euler}{section.9.1}% 50
+\BOOKMARK [2][-]{subsection.9.1.4}{Semi-implicitn\355 Euler}{section.9.1}% 51
+\BOOKMARK [2][-]{subsection.9.1.5}{RK4}{section.9.1}% 52
+\BOOKMARK [1][-]{section.9.2}{Slunecn\355 soustava}{chapter.9}% 53
+\BOOKMARK [1][-]{section.9.3}{Rychlosti a Z\341ver}{chapter.9}% 54
+\BOOKMARK [0][-]{chapter.10}{U\236ivatelsk\341 pr\355rucka}{}% 55
+\BOOKMARK [1][-]{section.10.1}{Po\236adavky}{chapter.10}% 56
+\BOOKMARK [1][-]{section.10.2}{Z\341kladn\355 ovlad\341n\355}{chapter.10}% 57
+\BOOKMARK [1][-]{section.10.3}{Pokrocil\351 mo\236nosti}{chapter.10}% 58
+\BOOKMARK [0][-]{chapter.11}{Kompilace programu}{}% 59
+\BOOKMARK [1][-]{section.11.1}{Git}{chapter.11}% 60
+\BOOKMARK [1][-]{section.11.2}{Windows}{chapter.11}% 61
+\BOOKMARK [1][-]{section.11.3}{Linux}{chapter.11}% 62

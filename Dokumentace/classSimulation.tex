@@ -10,30 +10,30 @@ jsou funkce, které řídí spuštěnou simulaci. Jsou volány z modulů, ne z h
 \paragraph{Konstruktor}
 očekává 3 moduly, které se budou v simulaci používat, podrobněji se na ně podíváme za okamžik. Zde jim také předá odkaz na simulovaná data.
 \paragraph{Metoda \texttt{Start()}}
-provádí samotnou simulaci. V této metodě stráví program většinu času, proto se na ni podrobně podíváme. Nejprve si vysvětlíme její teoretický návrh a poté i jeji implementaci, což nám také objasní její parametry.
+provádí samotnou simulaci. V této metodě stráví program většinu času, popíšeme ji podrobně v sekci\ref{sec:startMetoda} - vysvětluje její teoretický návrh a implementaci, což také objasní její parametry.
 \subsection{Moduly}
 \label{sub:moduly}
 Nyní si vysvětlíme co to \textbf{moduly} jsou a k čemu slouží.
 Zkusme se zaměřit co by měla každá simulace vlastně udělat.
 \begin{enumerate}
 	\item \textbf{Načíst data}, bez nich není co simulovat. Což se dá popsat dvěma slovy a implementovat stovky způsoby. Takže by stálo za to, aby simulace uměla všechny.
-	\item \textbf{Simulovat data}. Z teorie víme, že také neexistuje pouze jedna integrační metoda, takže bychom chtěli mít na výběr. Určitě není moc šťastné řešení zvolit jednu metodu a doufat, že bude stačit na všechny simulace.
-	\item \textbf{Uložit data}. Také se chceme našimi výsledky pochlubit, ale kdyby nám je simulace pracně získala a hned zahodila, tak to půjde těžko.
-	\item \textbf{Prohlížet data}. Představme si situaci: 3:38 ráno, naše nová verze simulace právě doběhla. Přidali jsme do ní nově objevené asteroidy u kterých chceme spočítat trajektorie. Z hrůzou ale zjistíme, že Země není tam kde má být, dokonce tam není vůbec! Co se mohlo asi stát? To je dobrá otázka, proto by mohlo být dobré mít přístup k datům i během simulace a třeba si je někam průběžně ukládat.
+	\item \textbf{Simulovat data}. Z teorie už víme, že také neexistuje pouze jedna integrační metoda, takže bychom chtěli mít na výběr. Určitě totiž není moc šťastné řešení zvolit jednu metodu a doufat, že bude stačit na všechny simulace.
+	\item \textbf{Uložit data}. Také se chceme našimi výsledky pochlubit, ale kdyby nám je simulace pracně získala a hned zahodila, tak to půjde těžko. Ovšem stálo by za to umět je ukládat v různých formátech nebo třeba rovnou odeslat někam po internetu.
+	\item \textbf{Prohlížet data}. Představme si situaci: 3:38 ráno, naše značně vylepšená verze simulace právě doběhla. Přidali jsme do ní nově objevené asteroidy u kterých chceme spočítat trajektorie. Z hrůzou ale zjistíme, že Země není tam kde má být, dokonce tam není vůbec! Co se mohlo asi stát? To je dobrá otázka, proto by mohlo být dobré mít přístup k datům i během simulace a třeba si je někam průběžně ukládat.
 \end{enumerate}
-Teď už víme, co by měla každá simulace zvládnout, ale je vidět, že toho má umět celkem hodně a ještě různými způsoby. Nejlepší tedy bude, aby se simulace opravdu starala jen o to, aby tyto kroky proběhly, ale to jak přesně proběhnou přenecháme někomu jinému -\textbf{ modulům}, které se vyskytují ve 3 druzích:
+Teď už víme, co by měla každá simulace zvládnout, ale je vidět, že toho má umět celkem hodně a ještě různými způsoby. Nejlepší tedy bude, aby se simulace(ve formě třídy \texttt{Simulation}) opravdu starala jen o to, aby tyto kroky proběhly, ale to jak přesně proběhnou přenecháme někomu jinému -\textbf{ modulům}, které se vyskytují ve 3 druzích:
 \begin{description}
 	\item[parser] obstarává výrobu vstupních dat. Také na konci simulace může výsledná data uložit.
 	\item[simMethod] provádí simulaci dat např. pomocí numerické integrace.
 	\item[viewer] má přístup k datům za běhu simulace a může je např. zobrazovat na obrazovku.
 \end{description}
-Práci jsme rozdělili, simulace by to celé měla tedy organizovat, což se děje právě pomocí metody \texttt{Start()}, tak si ji pojďme představit
+Práci jsme rozdělili, simulace by to celé měla tedy organizovat, což se děje právě pomocí metody \texttt{Start()}, tak si ji pojďme představit.
 \subsection{Návrh metody \texttt{Start()}}
 \label{sec:startMetoda}
 Takto nějak by mohla vypadat na první pohled rozumná implementace:
 \includecode[startPseudo]{Source/startPseudo.cpp}{Návrh metody \texttt{Start()}}
 Tato implementace by byla plně funkční, ale možná ne úplně vhodná pro náš cíl. Rádi bychom totiž prováděli a hlavně zobrazovali simulaci v reálném čase. 
-\paragraph{}
+
 Zde ale není žádné časování, \texttt{while} smyčka bude probíhat jak nejrychleji může, bez jakékoliv kontroly. Což není špatné, pokud chceme nechat program běžet a podívat se jen na výsledky, popřípadě mezivýsledky uložené někde v souborech. K tomu přesně slouží metoda \texttt{Simulation::StartNotTimed()}, která má přibližně výše uvedenou implementaci. 
 \paragraph{Časování}
 - K dosažení našeho cíle bude potřeba nějakým způsobem svázat reálný čas s tím simulovaným. Upravíme tedy předchozí příklad \ref{lst:startPseudo} následovně:
@@ -43,14 +43,14 @@ Pokud bychom chtěli opravdu simulaci v reálném čase, tak se v každém průb
 \footnote{Algoritmus, který nemusí nutně vracet stejný výsledek při opakovaném volání se stejnými vstupními hodnotami.}.
 Neboť trvání poslední smyčky je ovlivněno např. aktuálním vytížením počítače, což určitě není předvídatelné. A bohužel při počítaní s desetinnými čísly dochází k zaokrouhlovacím chybám, takže výsledek nezávisí pouze na vstupních datech, ale i na postupu výpočtu.
 
-Řešení \footnote{Zdroj: \url{http://gafferongames.com/game-physics/fix-your-timestep/}}
+Řešení \footnote{Zdroj: \url{http://gafferongames.com/game-physics/fix-your-timestep/} (\today)}
 je naštěstí jednoduché, budeme odečítat pevnou hodnotu \texttt{deltaT}.
 A to tolikrát, abychom odsimulovali potřebný čas uložený v \texttt{acc}. Je pravda,
 že nakonci nemusí platit $ acc=0 $, ale bude platit $ acc\leq deltaT $. A vzhledem k tomu, že \texttt{acc} si zachovává hodnotu mezi průběhy smyčkou, tak se zbytek času neztrácí, ale použije se v dalším průchodu. Takto dostaneme deterministický algoritmus.
 
 \label{par:spiral}
 Navíc máme objasněn první parametr - \textbf{deltaT(dt)} - základní časový krok simulace, který odpovídá $ \Delta t $ z teorie. Čím menší, tím je simulace přesnější, ale dochází k více voláním simulační metody, což může být potencionálně náročné na CPU.
-Pro nízké hodnoty by se mohlo snadno stát, že simulace přestane stíhat, tzn. že simulovat čas \texttt{deltaT} bude reálně trvat déle než \texttt{deltaT}. Např.
+Pro nízké hodnoty by se klidně mohlo snadno stát, že simulace přestane stíhat, tzn. že simulovat čas \texttt{deltaT} bude reálně trvat déle než \texttt{deltaT}. Např.
 simulace \texttt{10ms} bude konstantně trvat \texttt{15ms}, v dalším průběhu smyčkou se tedy bude simulace snažit simulovat uběhlých \texttt{15ms}, což ale může trvat \texttt{22,5ms}. V dalším průběhu se tedy musí odsimulovat \texttt{22,5ms}...takový případ velmi rychle celý program odrovná. Proto je vhodné proměnnou \texttt{acc} omezit nějakou konstantou, např. \texttt{500ms}. Poté sice začne docházet ke zpožďování simulace, ale kontrolovaným způsobem.
 \paragraph{Změna rychlosti} - Nyní bude naše simulace fungovat zcela správně a v reálném čase. Takže máme hotovo? Skoro, naše simulace je sice plně funkční, ale jediné co umí je předpovídat přítomnost a ještě jen s omezenou přesností. To není moc užitečné. Oběh Země kolem Slunce bude skutečně trvat 1 rok a Neptun to zvládne za 165 let. Tolik času nejspíše nemáme, proto by stálo za to najít nějaký způsob jak simulaci urychlit. Existují dva způsoby jak to udělat:
 \begin{enumerate}
@@ -62,8 +62,8 @@ Parametry \texttt{rawMult} a \texttt{DTMult} přesně odpovídají argumentům i
 Poslední parametr, který nebyl ještě vysvětlen je \texttt{maxSimTime}. Vzhledem k tomu, že volání funkce \texttt{Start()} může trvat velmi dlouho, tak je dobré nastavit horní limit, který garantuje přerušení smyčky po překročení zadaného času. \texttt{maxSimTime=0} znamená \texttt{maxSimTime=$ \infty $} ,tzn. simulace se přeruší pouze zavoláním funkce \texttt{Simulation::StopSimulation()}, kterou ale mohou volat pouze moduly, neboť jiné objekty nejsou při simulaci volány.
 Popřípadě se přeruší vyvoláním nějaké vyjímky.
 
-\subsection{Implementace metody \texttt{Start()}}
-Poučeni nutnou dávkou teorie z předchozí části upravíme naši rozpracovanou implementaci \ref{lst:startTimed} na \ref{lst:startFinal}. Což je už velmi podobné skutečné metodě použité v programu. Která navíc umožňuje simulaci pozastavit a také pomocí C++ knihovny \texttt{chrono} implementuje opravdové časování , které zde bylo uvedeno spíše koncepčně.
+\subsection{Finální implementace metody \texttt{Start()}}
+Poučeni z předchozí části upravíme naši rozpracovanou implementaci \ref{lst:startTimed} na \ref{lst:startFinal}. Což je už velmi podobné skutečné metodě použité v programu. Která navíc umožňuje simulaci pozastavit, krokovat a také pomocí C++ knihovny \texttt{chrono} implementuje opravdové časování , které zde bylo uvedeno spíše koncepčně.
 \includecode[startFinal]{Source/startFinal.cpp}
 {Finální verze \texttt{Simulation::Start()}}
 

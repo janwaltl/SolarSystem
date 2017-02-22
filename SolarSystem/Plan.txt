@@ -1,6 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Almost final documentation, updated gitignore.
+Documentation V0.99 ?
 ========================================IMPLEMENTING PLAN========================================
 Next:
+	- Merge to master, comment out timing, mention it in documentation
 	V. Document it & ship it
 		- Test NotTimed properly, try pause, getters... and recording

@@ -76,7 +76,7 @@
 \renewcommand{\lstlistingname}{Zdrojový kód}
 \renewcommand{\lstlistlistingname}{Seznam zdrojových kódů}
 \newcommand{\includecode}[3][default]
-{\lstinputlisting[caption=#3 (#2),label=lst:#1, style=codeInput]{#2}}
+{\lstinputlisting[caption=#3,label=lst:#1, style=codeInput]{#2}}
 
 
 \title{Simulace Sluneční soustavy}
@@ -100,16 +100,21 @@
 
 \fancypagestyle{plain}{ %
 	\fancyhf{} % remove everything
+	\fancyfoot[C]{\thepage}
 	\renewcommand{\headrulewidth}{0pt} % remove lines as well
 	\renewcommand{\footrulewidth}{0pt}
 }
 
 \begin{document}
 	\include{titlePage}
+	\pagenumbering{gobble}
 	\newpage
+	
 	\tableofcontents
 	\newpage
 	\include{organizace}
+	\pagenumbering{arabic}
+	
 	\include{specifikace}
 	\include{implementace}
 	\input{moduly}
