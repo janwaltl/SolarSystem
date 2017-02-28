@@ -63,38 +63,6 @@ namespace solar
 	SplittedTime SplitTime(const simulatedTime& time);
 	SplittedTime SplitTime(double seconds);
 	SplittedTime SplitTime(uint64_t seconds);
-
-	/*
-	//Allows easy measuremnt of time
-	//Measures time between Start() and End() calls
-	//and also supports accumulation of time between those calls.
-	//Measurement is reset via Reset() call and measured time is return via GetMeasurement()
-	class TimeMeasurement
-	{
-	public:
-		using clock_t = std::chrono::steady_clock;
-
-		void Start()
-		{
-			beg = clock.now();
-		}
-		void End()
-		{
-			acc += clock.now() - beg;
-		}
-		clock_t::duration GetMeasurement()
-		{
-			return acc;
-		}
-		void Reset()
-		{
-			acc = acc.zero();
-		}
-	private:
-		clock_t clock;
-		clock_t::duration acc;
-		clock_t::time_point beg;
-	};*/
 }
 
 

@@ -4,8 +4,6 @@
 #include <algorithm>
 void solar::ExplicitEuler::operator()(double step)
 {
-	//timing.Start();
-
 	step /= physicsUnits::YtoS;
 
 	struct VelPos
@@ -41,10 +39,4 @@ void solar::ExplicitEuler::operator()(double step)
 
 		left.pos += step*temps[i].vel;
 	}
-	/*timing.End();
-	if (++numTimeSamples == 100'000)
-	{
-		std::cout << "\n Euler:" << (timing.GetMeasurement().count() / 100'000.0) / 10e6 << "ms\n";
-		//this->StopSimulation();
-	}*/
 }

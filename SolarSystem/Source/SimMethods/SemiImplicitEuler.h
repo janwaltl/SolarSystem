@@ -15,13 +15,7 @@ namespace solar
 	class SemiImplicitEuler :public SimMethod
 	{
 	public:
-		SemiImplicitEuler();
 		void operator()(double step) override final;
-	private:
-		/*TimeMeasurement timing;
-		size_t numTimeSamples;
-		size_t maxSamples;
-		std::ofstream out;*/
 	};
 }
 

@@ -1,9 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Forgot to merge...
-Commented out timing stuff.
+Deleted timing.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	- Merge to master, comment out timing, mention it in documentation
-	V. Document it & ship it
-		- Test NotTimed properly, try pause, getters... and recording
-			- yea, recording is not so good, so switched it off for now for untimed version.
+	Nothing?
