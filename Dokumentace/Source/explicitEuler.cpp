@@ -19,11 +19,10 @@ void ExplicitEuler::operator()(double step)
 			Vec2 dir = temps[i].pos - temps[j].pos;//Vzdálenost
 			Vec2 acc = -physicsUnits::G / distLR * dir;//Zrychlení bez hmotnosti
 			// v(t+dt) = v(t) + dt*a(t); - explicitní Euler
-			left.vel += step*acc*right.mass;// doplněné správné	hmotnosti
-			right.vel -= step*acc*left.mass;// doplněné správné	hmotnosti, opačný směr
+			left.vel += step*acc*right.mass;// správné	hmotnosti
+			right.vel -= step*acc*left.mass;// správné	hmotnosti, opačný směr
 		}
 		// x(t+dt) = x(t) + dt*v(t); - explicitní Euler
-
 		left.pos += step*temps[i].vel;
 	}
 }

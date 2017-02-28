@@ -3,6 +3,8 @@
 
 #include "SimMethod.h"
 #include "Source/Common/Timing.h"
+#include <fstream>
+
 namespace solar
 {
 	//Simulates data using semi-implicit Euler integration method
@@ -13,11 +15,13 @@ namespace solar
 	class SemiImplicitEuler :public SimMethod
 	{
 	public:
-		SemiImplicitEuler() { timing.Reset(); }
+		SemiImplicitEuler();
 		void operator()(double step) override final;
 	private:
-		TimeMeasurement timing;
+		/*TimeMeasurement timing;
 		size_t numTimeSamples;
+		size_t maxSamples;
+		std::ofstream out;*/
 	};
 }
 

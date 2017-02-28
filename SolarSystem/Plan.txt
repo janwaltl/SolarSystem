@@ -1,7 +1,9 @@
 =====================================IN THIS COMMIT=====================================
-Documentation V0.99 ?
+Forgot to merge...
+Commented out timing stuff.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	- Merge to master, comment out timing, mention it in documentation
 	V. Document it & ship it
 		- Test NotTimed properly, try pause, getters... and recording
+			- yea, recording is not so good, so switched it off for now for untimed version.

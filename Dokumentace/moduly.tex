@@ -12,13 +12,13 @@ ve formě tříd \texttt{Vec2} a \texttt{Vec4} nabízí základní matematické 
 \paragraph{třída \texttt{Unit}}
 je základní jednotka simulace. Jedná se o jeden simulovaný objekt, který má své vlastnosti - polohu, rychlost, hmotnost, jméno a barvu. Kde poslední dvě jsou dobrovolné a simulace se bez nich obejde, ale jsou zde kvůli zobrazování na obrazovku. Její definice je uvedena v následujícím zdrojovém kódu \ref{lst:unitDef}
 \includecode[unitDef]{Source/unit.cpp}{Definice struktury \texttt{Unit}}
-\paragraph{typ \texttt{simData\_t}} je \texttt{std::vector<Unit>} Používá jako typ pro simulovaná data.
+\paragraph{typ \texttt{simData\_t}} je \texttt{std::vector<Unit>} Používá se jako typ pro simulovaná data.
 \section{Parser}
 Parser se stará o výrobu vstupních dat, také má přístup k výsledným datům, která tak může uložit. Všechny třídy \textbf{parser} modulů musí dědit z abstraktní třídy \texttt{Parser}, jejíž přesná implementace je zde:
 \includecode[parser]{Source/parser.cpp}{Abstraktní třída \texttt{Parser}} 
 Hlavní funkce, kterou každý \textbf{parser} musí implementovat je \texttt{Load()} . Její úkol je libovolným způsobem načíst data a vrátit je ve formě \texttt{simData\_t}. Dále může přepsat metodu \texttt{Save()}, která je zavolána na konci simulace s výslednými daty.
 \section{SimMethod}
-Simulační metoda by měla zajistit samotnou simulaci. To jakým způsobem bude měnit data záleží pouze na ní. Může tedy použít libovolnou integrační metodu, ale pokud si bude házet imaginární kostkou, tak to bude fungovat také, ikdyž informační hodnota takové simulace je přinejlepším sporná. Podívejme se na přesnou definici abstraktní třídy \texttt{SimMethod}, která dává základ všem simulačním metodám
+Simulační metoda by měla zajistit samotnou simulaci. To jakým způsobem bude měnit data záleží pouze na ní. Může tedy použít libovolnou numerickou metodu, ale pokud si bude házet imaginární kostkou, tak to bude fungovat také, ikdyž informační hodnota takové simulace je přinejlepším sporná. Podívejme se na přesnou definici abstraktní třídy \texttt{SimMethod}, která dává základ všem numerickým metodám
 \includecode[simMethod]{Source/simMethod.cpp}{Abstraktní třída \texttt{SimMethod}}
 
 Všechny zděděné moduly musí implementovat alespoň metodu \texttt{operator()()}, která provede jeden krok simulace. Simulovaná data si drží pomocí svého ukazatele,

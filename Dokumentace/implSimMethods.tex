@@ -2,14 +2,14 @@
 \section{Explicitní Eulerova metoda}
 \label{sec:explEuler}
 Teorie za touto metodou byla popsána v úvodní kapitole. V naší soustavě 
-\eqref{eq:soustava} ale máme i druhé derivace, proto si pomůžeme tím, že každá obyčejná diferenciální rovnice $ n $-tého stupně se dá převést na $ n $ rovnic prvního stupně, takže nám vzniknou dvě rovnice \eqref{eq:secDer23} na které aplikujeme Eulerovu metod \eqref{eq:euler} a dostaneme numerické řešení v podobě \eqref{eq:soustavaExplEuler}
+\eqref{eq:soustava} ale máme i druhé derivace, proto si pomůžeme tím, že každá obyčejná diferenciální rovnice $ n $-tého stupně se dá převést na $ n $ rovnic prvního stupně, takže nám vzniknou dvě rovnice \eqref{eq:secDer23} na které aplikujeme Eulerovu metodu \eqref{eq:euler} a dostaneme numerické řešení v podobě \eqref{eq:soustavaExplEuler}
 \begin{subequations}
 	\label{eq:secDer23}
 	\begin{align}
 	\label{eq:secDer2}
 	\boldsymbol{\dot x}(t)&= \boldsymbol{v}(t) \\
 	\label{eq:secDer3}
-	\boldsymbol{\dot v}(t)&=- \Delta t . \kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_i}
+	\boldsymbol{\dot v}(t)&=- \Delta t . \kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_j}
 	{\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] ^3} . 
 	\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] 
 	\end{align}
@@ -17,7 +17,7 @@ Teorie za touto metodou byla popsána v úvodní kapitole. V naší soustavě
 \begin{subequations}\label{eq:soustavaExplEuler}
 	\begin{align}
 	\boldsymbol {x}_i(t+\Delta t)& =\boldsymbol{{x}}_i(t)  +\boldsymbol {v}_i(t)\\
-	\boldsymbol {v}_i(t+\Delta t) &=\boldsymbol{{v}}_i(t)  - \Delta t . \kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_i}
+	\boldsymbol {v}_i(t+\Delta t) &=\boldsymbol{{v}}_i(t)  - \Delta t . \kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_j}
 	{\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] ^3} . 
 	\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] 
 	\end{align}
@@ -65,7 +65,7 @@ To sice dalo určitou práci, ale dostali jsme správné řešení. Na pravé st
 
 Naše soustava rovnic \eqref{eq:soustava} je nápadně podobná předchozí rovnici \eqref{eq:secDer}, což samozřejmě není náhoda. Pokud se ale nyní budeme stejný postup snažit aplikovat na naší soustavu rovnic, tak zjistíme, že to nebude fungovat. Narazíme totiž na to, že po dosazení obou rovnic nebudeme schopni explicitně vyjádřit $ x(t + \Delta t) $. Bohužel toto je daň za vyšší stabilitu implicitních metod - nutnost vyřešení další rovnice. V našem případě bychom museli použít numerické řešení i pro samotnou rovnici, což dělat nebudeme.
 
-Místo toho použijeme semi-implicitní Eulerovu metodu. Místo dvojitého použití implicitní metody použijeme implicitní pro \eqref{eq:secDer8} a explicitní verzi pro \eqref{eq:secDer7} . Explicitní verze nám dovolí snadno spočítat $ v(t + \Delta t) $ neboť hodnoty v čase $ t $ už známe. Tím jsme ale získali i potřebnou hodnotu $ v(t + \Delta t) $ pro implicitní verzi druhé rovnice. Vlastně jsme z obou metod vzali to nejlepší - jednoduchost explicitní a větší stabilitu implicitní metody. Výsledný mix je metoda, která je jednoduchá na implementaci a relativně přesná pro naše účely. Srovnání explicitní, implicitní a semi-implicitních integračních metod se věnuje kapitola \ref{chap:compMethods}
+Místo toho použijeme semi-implicitní Eulerovu metodu. Místo dvojitého použití implicitní metody použijeme implicitní pro \eqref{eq:secDer8} a explicitní verzi pro \eqref{eq:secDer7} . Explicitní verze nám dovolí snadno spočítat $ v(t + \Delta t) $ neboť hodnoty v čase $ t $ už známe. Tím jsme ale získali i potřebnou hodnotu $ v(t + \Delta t) $ pro implicitní verzi druhé rovnice. Vlastně jsme z obou metod vzali to nejlepší - jednoduchost explicitní a větší stabilitu implicitní metody. Výsledný mix je metoda, která je jednoduchá na implementaci a relativně přesná pro naše účely. Srovnání explicitní, implicitní a semi-implicitní Eulerovy metody se věnuje kapitola \ref{chap:compMethods}
 \begin{align}
 \label{eq:secDer7}
 v(t + \Delta t)&=v(t) + \Delta t . \dot{v}(t)\\
@@ -75,7 +75,7 @@ x(t+\Delta t) &= x(t) + \Delta t. \dot{x}(t + \Delta t) = x(t) + \Delta t.v(t + 
 Naše finální soustava \eqref{eq:soustava} po použití této metody bude \eqref{eq:soustavaEuler} pro $ i=1 \dots N $
 \begin{subequations}\label{eq:soustavaEuler}
 \begin{align}
-\boldsymbol {v}_i(t+\Delta t) &=\boldsymbol{{v}}_i(t)  - \Delta t . \kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_i}
+\boldsymbol {v}_i(t+\Delta t) &=\boldsymbol{{v}}_i(t)  - \Delta t . \kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_j}
 {\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] ^3} . 
 \left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] \\
 \boldsymbol {x}_i(t+\Delta t)& =\boldsymbol{{x}}_i(t)  +\boldsymbol {v}_i(t+\Delta t)
@@ -116,7 +116,7 @@ Zkusme tedy tuto metodu aplikovat na naši soustavu \eqref{eq:soustava}. Použij
 	\label{eq:RK4pos}
 	\dot{\boldsymbol{x}}(t)&=\boldsymbol{v}(t)\\
 	\label{eq:RK4vel}
-	\dot{\boldsymbol{v}}(t)&=-  \kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_i}
+	\dot{\boldsymbol{v}}(t)&=-  \kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_j}
 	{\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] ^3} . 
 	\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] 
 	\end{align}
@@ -127,7 +127,7 @@ Ve výše zmíněném popisu RK4 \eqref{eq:RK4Ex} se žádná soustava na první
 	\boldsymbol{u}(t) &:= (\boldsymbol{x}(t),\boldsymbol{v}(t)) \equiv(x_x,x_y,v_x,v_y)(t)\\
 	\label{eq:defUder}
 	 \boldsymbol{\dot{u}}(t)&=(\dot{\boldsymbol{x}}(t),\dot{\boldsymbol{v}}(t))=
-	 (\boldsymbol{v}(t), -\kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_i\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right]}
+	 (\boldsymbol{v}(t), -\kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_j\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right]}
 	 {\left[ \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right] ^3}
 	  )
 \end{align}
@@ -142,7 +142,7 @@ Implementace už je trochu delší, ale podrobně si ji vysvětlíme.
 Nejprve si všimneme, že naše soustava nezávisí přímo na čase, ale pouze na aktuální poloze a rychlosti. Budeme také už potřebovat nějaké dočasné proměnné, konkrétně si budeme ukládat všechny 4 koeficienty pro každý objekt. Dále si ještě vytvoříme proměnnou, kam budeme ukládat mezistavy kroku - \texttt{temps}. Neboť pro spočítání $ k_{i+1} $ potřebujeme znát $ k_{i} $.
 
 Nyní se zaměřme na funkci \texttt{computeKx}, která počítá koeficient. Z toho jak jsou koeficienty definované je musíme počítat postupně, protože do koeficientu $ k_i  $ dosazujeme stav $ y(t)+mult. \Delta t . k_{i-1} $.
-Výpočet koeficientu je vlastně jen jeden krok explicitní Eulerovy metody. Akorát neintegrujeme simulovaná data, ale právě jen dočasný stav. Také nepočítáme posun o $ \Delta t $ ale o jeho násobek - \texttt{mult} argument.
+Výpočet koeficientu je vlastně jen jeden krok explicitní Eulerovy metody. Akorát nepočítáme přímo simulovaná data, ale právě jen dočasný stav. Také nepočítáme posun o $ \Delta t $ ale o jeho násobek - \texttt{mult} argument.
 
 Explicitní metodu už máme vymyšlenou z minula, tomu také odpovídá implementace.
 Na konci nám ale ještě přibude finální integrace dat pomocí \eqref{eq:RK4Ex2}.

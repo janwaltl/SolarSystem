@@ -15,6 +15,8 @@ void Simulation::Start(time deltaT, size_t rawMult, size_t DTMult, time maxSimTi
 	{
 		//Akumulátor času
 		acc += LastFrameTime();
+		//Omezíme akumulátor na max. 10 volání
+		acc = max(acc, 10 * deltaT);
 		while (acc > deltaT)
 		{
 			for (size_t i = 0; i < rawMult; i++)

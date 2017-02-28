@@ -13,11 +13,11 @@ namespace solar
 	class ExplicitEuler :public SimMethod
 	{
 	public:
-		ExplicitEuler() { timing.Reset(); }
+		//ExplicitEuler() { timing.Reset(); }
 		void operator()(double step) override final;
 	private:
-		TimeMeasurement timing;
-		size_t numTimeSamples;
+		/*TimeMeasurement timing;
+		size_t numTimeSamples;*/
 	};
 }
 

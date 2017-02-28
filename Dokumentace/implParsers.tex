@@ -25,7 +25,7 @@ position< 150.0e9 0.0>
 velocity<0 30822.0>
 mass<7.3476e22> }
 \end{lstlisting}
-\texttt{FormattedFileParser} by z tohoto souboru vytvořil data obsahující 3 objekty pojmenované - Sun, Earth, Moon s určitými vlastnostmi.
+\texttt{FormattedFileParser} by z tohoto souboru vytvořil data obsahující 3 objekty pojmenované Sun, Earth, Moon s určitými vlastnostmi.
 
 Každý objekt je popsán uvnitř páru složených závorek \textbf{\texttt{\{\}}}.
 Všechny parametry objektu jsou dobrovolné, čili \lstinline|{}| je validní bezejmenný objekt, který se nachází v klidu na pozici \texttt{(0,0)} a má nulovou hmotnost. Pokud se ale parametr objeví, musí mít správný formát, který je obecně \texttt{název<hodnoty>}. Následuje přesný výčet a formát parametrů:
@@ -34,7 +34,7 @@ Všechny parametry objektu jsou dobrovolné, čili \lstinline|{}| je validní be
 \paragraph{velocity$ < $X Y$ > $} - počáteční rychlost objektu. Očekává dvě desetinná čísla oddělený mezerou reprezentující rychlost ve vodorovném a svislém směru. Nesmí zde být napsány fyzikální jednotky - tzn. \texttt{velocity$ < $10e2 m/s 8e3 m/s$ > $} \textbf{není} validní vstup. Ale implicitně by hodnoty měly být v m/s . Pokud není uvedeno, pak je (0,0).
 \paragraph{position$ < $X Y$ > $} - počáteční pozice objektu. Identické s rychlostí, očekávají se hodnoty v metrech.
 \paragraph{mass $ < $hmotnost$ > $ } - hmotnost objektu vyjádřená jedním desetinným číslem v kilogramech. Doporučení je zde také neuvádět jednotky, i když to bude fungovat, tak budou ignorovány. Pokud není uvedeno, pak je nulová hmotnost.
-\paragraph{Dodatek k číslům} - jsou povoleny jak celá, tak desetinná čísla. Je dovolena pouze desetinná tečka. Číslo 104.25 můžeme zapsat například takto: $ 104.25 ;\ 1.0425e2$.
+\paragraph{Dodatek k číslům} - jsou povolena jak celá, tak desetinná čísla. Je dovolena pouze desetinná tečka. Číslo 104.25 můžeme zapsat například takto: $ 104.25 ;\ 1.0425e2$.
 \textbf{Parser} ovšem \textbf{neumí} aritmetiku, takže následující \textbf{není} validní vstup: $ 10425/100 ;\ 104 + 0.25 ;\ 1.0425 * 10^2 $.
 \paragraph{}
 \texttt{FormattedFileParser} je relativně shovívavý k formátování, takže následující příklad je ekvivalentní definice objektu \texttt{Sun} z předchozího příkladu.
@@ -59,7 +59,7 @@ Při nekorektním vstupu, nemožnosti otevřít vstupní soubor nebo vytvořit s
 
 \chapter{SolarParser}
 \section{Popis}
-Tento jednoduchý \textbf{parser} nedělá nic jiného, než načte data o Sluneční soustavě, která má zabudována pevně ve své implementaci.
+Tento jednoduchý \textbf{parser} nedělá nic jiného, než že načte data o Sluneční soustavě, která má zabudována pevně ve své implementaci.
 Momentálně se jedná o následující objekty:
 \begin{enumerate}
 	\item Hvězdy - Slunce
@@ -69,4 +69,4 @@ Momentálně se jedná o následující objekty:
 \end{enumerate}
 Výstupní \texttt{simData\_t} obsahuje objekty se vzdáleností v AU($ 1,5.10^9 $ m), časem v rocích(pozemské - 365 dní) a hmotností v násobcích hmotnosti Slunce($ 1,988435.10^{30} $ kg přesně). Důvod je ten, že hodnoty v těchto jednotkách jsou více normalizované a dochází k menším zaokrouhlovacím chybám.
 
-Také dokáže uložit výsledky simulace do formátovaného textového souboru stejného jako \texttt{FormattedFileParser}.
+Také dokáže uložit výsledky simulace do formátovaného textového souboru stejného jako \texttt{FormattedFileParser} v předchozí kapitole

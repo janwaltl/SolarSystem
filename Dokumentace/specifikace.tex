@@ -11,13 +11,14 @@ Vstupem programu jsou strukturovaná data uložená v textovém souboru, která 
 
 Výstup je 2D grafická reprezentace simulované soustavy v reálném čase. Uživatelské rozhraní dovoluje plynule měnit rychlost a přesnost simulace. Dále zobrazuje užitečné informace, jako jsou aktuální pozice a rychlosti pro každý simulovaný objekt vzhledem k jiným objektům. Celou simulaci je také možné nahrát a poté kdykoliv přehrát pomocí zabudovaného přehrávače.
 
-Při vývoji programu byl kladen co největší důraz na pozdější rozšířitelnost. Výsledný program tedy poskytuje několik simulačních metod a lze lehce rozšířit o další metody, popřípadě vstupy/výstupy.
+Při vývoji programu byl kladen co největší důraz na pozdější rozšířitelnost. Výsledný program tedy poskytuje několik simulačních metod a lze jej lehce rozšířit o další metody, popřípadě vstupy/výstupy.
 
 \section{Teorie}
 \subsection{Analytický popis}
-Newtonův Gravitační zákon (NGZ) popisuje vzájemné silové působení $ {F}_g $ dvou hmotných bodů - Myšlené těleso, kde jeho veškerá hmotnost je soustředěna do jednoho místa. Kde výsledná síla je přitažlivá a $ m_1,m_2 $ jsou hmotnosti obou bodů a $ \boldsymbol{x_1,x_2} $ jejich polohy.
+Newtonův Gravitační zákon (NGZ) popisuje vzájemné silové působení $ {F}_g $ dvou hmotných bodů - myšlené těleso, jehož veškerá hmotnost je soustředěna do jednoho místa.NGZ je uveden v rovnici \eqref{eq:NGZ}, kde výsledná síla je přitažlivá a $ m_1,m_2 $ jsou hmotnosti obou bodů, $ \boldsymbol{x_1,x_2} $ jejich polohy.
 
 \begin{equation}
+\label{eq:NGZ}
 	{F}_g= \kappa \dfrac{m_1 m_2}{(\boldsymbol{x_1 - x_2})^2} 
 \end{equation}
 
@@ -33,7 +34,7 @@ F= m  \boldsymbol {\ddot x}
 \label{eq:sila}
 \end{equation}
 \begin{align}\label{eq:soustava}
-\boldsymbol {\ddot x}_i(t)  = -\kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_i\left( \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right)}
+\boldsymbol {\ddot x}_i(t)  = -\kappa \sum_{j=1,j \neq i}^{n}\dfrac{m_j\left( \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right)}
 {\left( \boldsymbol{x_i}(t) - \boldsymbol{x_j}(t)\right) ^3} . 
 \quad \text{pro } i=1 \dots n
 \end{align}
@@ -43,7 +44,7 @@ Analytické řešení této soustavy rovnic by nám dalo možnost zjistit polohu
 \subsection{Numerické řešení}
 \label{sec:numReseni}
 Pokud se soustava nedá vyřešit analyticky, můžeme se alespoň pokusit získat aproximativní řešení. Numerické metody využívají toho, že nemusí být tak těžké spočítat derivace v libovolném čase. Navíc to dnešní počítače dokáží udělat velmi rychle. Pokud tedy dokážeme zjistit derivaci v každém bodě, tak bychom mohli původní funkci zrekonstruovat pomocí těchto derivací. Např. můžeme výslednou funkci aproximovat úsečkami, kde jejich směrnice je derivace hledané funkce. Toto přesně dělá nejjednodušší numerická metoda - Eulerova explicitní metoda\eqref{eq:euler}.
-Mějme jednoduchou soustavu rovnic \eqref{eq:ex} . Je vidět, že řešením je funkce $ y=e^t $, což se případně snadno ověří zpětnou derivací. 
+Mějme jednoduchou rovnici \eqref{eq:ex} . Je vidět, že řešením je funkce $ y=e^t $, což se případně snadno ověří zpětnou derivací. 
 \begin{align} \label{eq:euler}
 y(t+\Delta t) = y(t) + \Delta t . y'(t)
 \end{align}

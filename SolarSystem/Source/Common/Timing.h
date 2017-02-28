@@ -64,7 +64,7 @@ namespace solar
 	SplittedTime SplitTime(double seconds);
 	SplittedTime SplitTime(uint64_t seconds);
 
-
+	/*
 	//Allows easy measuremnt of time
 	//Measures time between Start() and End() calls
 	//and also supports accumulation of time between those calls.
@@ -94,7 +94,7 @@ namespace solar
 		clock_t clock;
 		clock_t::duration acc;
 		clock_t::time_point beg;
-	};
+	};*/
 }
 
 

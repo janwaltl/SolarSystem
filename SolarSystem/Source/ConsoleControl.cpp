@@ -129,7 +129,7 @@ Nasleduje vycet veskerych prikazu(P=povinne,N=nepovinne):
                                 - 700 vyhozi, doporuceno minimalne 700+
 
     2. record: 
-        vsechny argumenty pro rezim 'sim'
+        vsechny argumenty pro rezim 'sim' krome -u, ktery je ignorovan
         -r [jmeno souboru] - P, soubor, kam ma byt simulace zaznamenana
                            - vcetne cesty k souboru a jeho pripony
                            - SMAZE aktualni obsah souboru pokud existuje
@@ -140,8 +140,8 @@ Nasleduje vycet veskerych prikazu(P=povinne,N=nepovinne):
                            - vcetne cesty k souboru a jeho pripony
 
     4. help [jazyk]: 
-                -cz cestina
-                -en anglictina(vychozi)
+                cz cestina
+                en anglictina(vychozi)
 
     5. [cokoliv jineho]: Jakykoliv jiny text je povazovan za jmeno souboru
                          Pokud jsou prvni dva bajty toho souboru rovny 'R' resp. 'E',
@@ -227,7 +227,7 @@ Following is description of all arguments(M=mandatory,O=optional):
                                 - 700 default, 700+ recommended
     
     2. record: 
-        all valid arguments for sim
+        all valid arguments for sim except for -u, which si ignored
         -r [record fileName] - M, name of the file, where replay should be saved at
                              - including path and extension.
                              - OVERWRITES any existing file or creates a new one.
@@ -427,14 +427,11 @@ Following are examples of correct calls to this application:
 				RecordedSimulation sim(GetParser(cmds), GetSimMethod(cmds), GetViewer(cmds), *replayFile);
 				if (IsThere(cmds, "-u"))
 				{
-					std::cout << "Starting untimed recorded simulation\n";
-					sim.StartNotTimed(params.dt, params.rawMult, params.maxSimTime);
+					std::cout << "WARNING: Untimed mode is currently not supported.\n";
 				}
-				else
-				{
-					std::cout << "Starting timed recorded simulation\n";
-					sim.Start(params.dt, params.rawMult, params.DTMult, params.maxSimTime);
-				}
+				std::cout << "Starting timed recorded simulation\n";
+				sim.Start(params.dt, params.rawMult, params.DTMult, params.maxSimTime);
+
 			}
 
 			void Replay(const arguments & cmds)

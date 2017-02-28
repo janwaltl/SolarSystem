@@ -4,7 +4,6 @@
 #include <array>
 #include "Source/Units/PhysicsUnits.h"
 #include <iostream>
-
 namespace solar
 {
 
@@ -19,12 +18,17 @@ namespace solar
 		kXs[1].resize(data->size());
 		kXs[2].resize(data->size());
 		kXs[3].resize(data->size());
-		timing.Reset();
+		/*timing.Reset();
+		std::cout << "Max Samples RK4:";
+		std::cin >> maxSamples;
 		numTimeSamples = 0;
+		out.open("RK4.txt");
+		out.precision(10);*/
+
 	}
 	void RK4::operator()(double step)
 	{
-		timing.Start();
+		//timing.Start();
 		step /= physicsUnits::YtoS;
 
 		//Go through all pairs
@@ -80,11 +84,15 @@ namespace solar
 			kXs[2][i] = {Vec2(),Vec2()};
 			kXs[3][i] = {Vec2(),Vec2()};
 		}
-		timing.End();
-		if (++numTimeSamples == 100'000)
+		/*timing.End();
+		if (numTimeSamples % 100 == 0)
+			std::cout << numTimeSamples << '\n';
+		out << timing.GetMeasurement().count() / 10.0e6 << '\n';
+		timing.Reset();
+		if (++numTimeSamples == maxSamples)
 		{
-			std::cout << "\n RK4:" << (timing.GetMeasurement().count() / 100'000.0) / 10e6 << "ms\n";
+			out.close();
 			this->StopSimulation();
-		}
+		}*/
 	}
 }

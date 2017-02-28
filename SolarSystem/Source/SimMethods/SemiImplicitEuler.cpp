@@ -1,12 +1,21 @@
 #include "SemiImplicitEuler.h"
 #include <iostream>
 #include "Source/Units/PhysicsUnits.h"
-
 namespace solar
 {
+	SemiImplicitEuler::SemiImplicitEuler()
+	{
+		/*timing.Reset();
+		std::cout << "Max Samples SemiEuler:";
+		std::cin >> maxSamples;
+		numTimeSamples = 0;
+		out.open("SemiEuler.txt");
+		out.precision(10);*/
+
+	}
 	void SemiImplicitEuler::operator()(double step)
 	{
-		timing.Start();
+		//timing.Start();
 
 		step /= physicsUnits::YtoS;
 		//Go through all pairs
@@ -31,11 +40,15 @@ namespace solar
 			//XX->vel is now at time (t+dt)
 			left->pos += step*left->vel;
 		}
-		timing.End();
-		if (++numTimeSamples == 100'000)
+		/*timing.End();
+		if (numTimeSamples % 100 == 0)
+			std::cout << numTimeSamples << '\n';
+		out << timing.GetMeasurement().count() / 10.0e6 << '\n';
+		timing.Reset();
+		if (++numTimeSamples == maxSamples)
 		{
-			std::cout << "\n SemiEuler:" << (timing.GetMeasurement().count() / 100'000.0) / 10e6 << "ms\n";
+			out.close();
 			this->StopSimulation();
-		}
+		}*/
 	}
 }
