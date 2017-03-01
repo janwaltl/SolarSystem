@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Cleared up OpenGL versions, added few hopefully helpful messages and comments.
-Also lowered shader version to 1.4 to match OpenGL 3.0, which should still work for sane drivers.
-
+Last fixes.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Nothing?

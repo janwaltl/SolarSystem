@@ -405,7 +405,7 @@ Following are examples of correct calls to this application:
 				val = GetValue(cmds, "-x");
 				params.maxSimTime = std::chrono::seconds(val ? std::stoll(val->c_str()) : 0);
 
-				std::cout << "dt=" << params.dt.count() / time_type::period::den << "s rm=" << params.rawMult;
+				std::cout << "dt=" << params.dt.count() / (double)time_type::period::den << "s rm=" << params.rawMult;
 				std::cout << " dm=" << params.DTMult;
 				if (params.maxSimTime == params.maxSimTime.zero())
 					std::cout << " x=unlimited\n";

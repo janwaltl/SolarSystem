@@ -34,7 +34,7 @@ namespace solar
 		{
 			recordNum = GetRecordNum(sys.GetSimTime());
 
-			if (recordNum >= numRecords)
+			if (recordNum >= numRecords && sys.IsRunning())
 			{
 				sys.PauseSimulation();
 				recordNum = numRecords;
