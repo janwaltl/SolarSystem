@@ -164,7 +164,10 @@ namespace solar
 	void IMGuiBackend::LoadShader()
 	{
 		const std::string vertSource = R"(
-			#version 330
+			#version 140
+			//Might help for lower OpenGL versions
+			#extension GL_ARB_explicit_attrib_location : require
+
 			layout(location=0)in vec2 pos;
 			layout(location=1)in vec4 color;
 			layout(location=2)in vec2 uv;
@@ -182,7 +185,8 @@ namespace solar
 			})";
 
 		const std::string fragSource = R"(
-			#version 330
+			#version 140
+
 			in vec2 fragUV;
 			in vec4 fragCol;
 

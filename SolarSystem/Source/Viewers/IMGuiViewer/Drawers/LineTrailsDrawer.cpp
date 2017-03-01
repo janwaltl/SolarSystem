@@ -81,7 +81,8 @@ namespace solar
 		void LineTrailsDrawer::CreateShader(double aspectRatio)
 		{
 			const std::string vSource = R"(
-			#version 330 core
+			#version 140
+			#extension GL_ARB_explicit_attrib_location : require
 			layout(location = 0) in vec2 position;
 
 			uniform vec2 offset;// offset pos by this amount, should be normalized
@@ -93,7 +94,8 @@ namespace solar
 				gl_Position = vec4(AR * pos, 0.0, 1.0);
 			})";
 			const std::string fSource = R"(
-			#version 330 core
+			#version 140
+
 			out vec4 color;
 
 			uniform vec4 col;

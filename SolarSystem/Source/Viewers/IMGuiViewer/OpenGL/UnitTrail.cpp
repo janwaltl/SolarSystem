@@ -52,7 +52,7 @@ namespace solar
 				std::iota(indices.begin(), indices.begin() + maxLength, 0);
 				std::iota(indices.begin() + maxLength, indices.end(), 0);
 
-				glCreateBuffers(1, &IBO);
+				glGenBuffers(1, &IBO);
 
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 				glBufferData(GL_ELEMENT_ARRAY_BUFFER, 2 * maxLength * sizeof(GLuint),
