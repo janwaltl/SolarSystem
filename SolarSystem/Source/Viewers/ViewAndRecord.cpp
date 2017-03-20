@@ -101,6 +101,8 @@ namespace solar
 		assert(out.is_open());
 		//For each Dtime there should be simulated multiplier*dTime time.
 		auto curSimTime = this->GetSimTime();
+		timeStep = simulatedTime(viewer->GetDtime()*viewer->GetDTMultiplier()*viewer->GetRawMultiplier());
+
 		while (curSimTime - timeStep > simTime)
 		{
 			SavePosVel();

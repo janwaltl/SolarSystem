@@ -1,5 +1,12 @@
 =====================================IN THIS COMMIT=====================================
-Last fixes.
+
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Nothing?
+	Remarks:
+		Acknowledge third parties in documentation.
+		Well, reorganize documentation.
+			- probably not worth the effort.
+			- but move user guide to beggining is doable
+		Resolve speeding/slowing down while recording.
+			- won't be easy - either we loose O(1) search in file or we get wrong replaying speed
+				- went for wrong replaying speed for now
