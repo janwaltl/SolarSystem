@@ -1,12 +1,32 @@
 =====================================IN THIS COMMIT=====================================
-
+Planning.
+Added Vec3 class.
 ========================================IMPLEMENTING PLAN========================================
-Next:
-	Remarks:
-		Acknowledge third parties in documentation.
-		Well, reorganize documentation.
-			- probably not worth the effort.
-			- but move user guide to beggining is doable
-		Resolve speeding/slowing down while recording.
-			- won't be easy - either we loose O(1) search in file or we get wrong replaying speed
-				- went for wrong replaying speed for now
+Remarks:
+	Acknowledge third parties in documentation.
+	Well, reorganize documentation.
+		- probably not worth the effort.
+		- but move user guide to beggining is doable
+	Resolve speeding/slowing down while recording.
+		- won't be easy - either we loose O(1) search in file or we get wrong replaying speed
+			- went for wrong replaying speed for now
+
+Plan:
+	Create math library:
+		- templatized vector
+		- matrix 4x4 - including translation, rotation, projections
+	Convert current 2D to 2D in 3D using vectors, matrices
+		- Create Camera class
+			- with LookAt functionallity
+			- UBO with matrices
+		- Use vectors and matrices for current drawing - lines, points
+		- Controlled by keyboard
+	Add ArcBall controlls
+		- use mouse drag from ImGui
+	Add Camera controlls
+		- ability to follow a planet - both as target and as relative position
+		- UI around planets to select them, target them, go to them
+	Bonuses:
+		Make Planets colored spheres
+		And add shading with sun as lightsource
+			- per-pixel, bloom
