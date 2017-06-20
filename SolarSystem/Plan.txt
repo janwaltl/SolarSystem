@@ -1,20 +1,20 @@
 =====================================IN THIS COMMIT=====================================
-Planning.
-Added Vec3 class.
+Implemented Mat4 - and all MakeMatrix functions(except inverse.)
+	- Needs to be tested.
 ========================================IMPLEMENTING PLAN========================================
 Remarks:
 	Acknowledge third parties in documentation.
 	Well, reorganize documentation.
 		- probably not worth the effort.
-		- but move user guide to beggining is doable
+		- but moving user guide to beggining is doable
 	Resolve speeding/slowing down while recording.
 		- won't be easy - either we loose O(1) search in file or we get wrong replaying speed
 			- went for wrong replaying speed for now
-
+Test:
+	Vector ops correctness.
+	MakeMatrix fcs.
 Plan:
-	Create math library:
-		- templatized vector
-		- matrix 4x4 - including translation, rotation, projections
+	Inverse of matrix if needed. - TODO
 	Convert current 2D to 2D in 3D using vectors, matrices
 		- Create Camera class
 			- with LookAt functionallity

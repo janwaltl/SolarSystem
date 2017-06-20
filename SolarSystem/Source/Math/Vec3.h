@@ -1,22 +1,21 @@
 #ifndef MATH_VEC3_325723905794386_HEADER
 #define MATH_VEC3_325723905794386_HEADER
 
-#include <cmath>
-#include <stdexcept>
+#include "Common.h"
+
 namespace solar
 {
-	template<typename T> constexpr T epsilon = T(1.0e-6);
 	template<typename T>
 	class Vec3
 	{
 	public:
 		T x, y, z;
-		constexpr Vec3() { x = y = z = T(); }
+		Vec3() { x = y = z = T(); }
 		constexpr explicit Vec3(T x, T y = T(), T z = T()) :x(x), y(y), z(z) {}
-		Vec3(const Vec3&) = default;
+		Vec3(const Vec3<T>&) = default;
 		Vec3(Vec3&&) = default;
-		Vec3& operator=(const Vec3&) = default;
-		Vec3& operator=(Vec3&&) = default;
+		Vec3<T>& operator=(const Vec3&) = default;
+		Vec3<T>& operator=(Vec3&&) = default;
 		~Vec3() = default;
 
 		T LengthSq() const
@@ -27,17 +26,17 @@ namespace solar
 		{
 			return static_cast<T>(sqrt(LengthSq()));
 		}
-		Vec3& SetLength(T length)
+		Vec3<T>& SetLength(T length)
 		{
 			this->Normalize();
 			(*this) *= length;
 			return *this;
 		}
-		Vec3& Normalize()
+		Vec3<T>& Normalize()
 		{
 			T length = Length();
 			if (length < epsilon<T>)
-				throw std::runtime_error("Cannot normalize zero-length vector.");
+				throw Exception("Cannot normalize zero-length vector.");
 			else
 			{
 				x /= length;
@@ -46,61 +45,61 @@ namespace solar
 			}
 			return *this;
 		}
-		Vec3& operator+=(T val)
+		Vec3<T>& operator+=(T val)
 		{
 			x += val;
 			y += val;
 			z += val;
 			return *this;
 		}
-		Vec3& operator-=(T val)
+		Vec3<T>& operator-=(T val)
 		{
 			x -= val;
 			y -= val;
 			z -= val;
 			return *this;
 		}
-		Vec3& operator*=(T val)
+		Vec3<T>& operator*=(T val)
 		{
 			x *= val;
 			y *= val;
 			z *= val;
 			return *this;
 		}
-		Vec3& operator/=(T val)
+		Vec3<T>& operator/=(T val)
 		{
 			if (abs(val) < epsilon<T>)
-				throw std::runtime_error("Cannot divide by zero.");
+				throw Exception("Cannot divide by zero.");
 			x /= val;
 			y /= val;
 			z /= val;
 			return *this;
 		}
-		Vec3& operator+=(const Vec3& other)
+		Vec3<T>& operator+=(const Vec3<T>& other)
 		{
 			x += other.x;
 			y += other.y;
 			z += other.z;
 			return *this;
 		}
-		Vec3& operator-=(const Vec3& other)
+		Vec3<T>& operator-=(const Vec3<T>& other)
 		{
 			x -= other.x;
 			y -= other.y;
 			z -= other.z;
 			return *this;
 		}
-		Vec3& operator*=(const Vec3& other)
+		Vec3<T>& operator*=(const Vec3<T>& other)
 		{
 			x *= other.x;
 			y *= other.y;
 			z *= other.z;
 			return *this;
 		}
-		Vec3& operator/=(const Vec3& other)
+		Vec3<T>& operator/=(const Vec3<T>& other)
 		{
 			if (abs(x) < epsilon<T> || abs(y) < epsilon<T> || abs(z) < epsilon<T>)
-				throw std::runtime_error("Cannot divide by a vector containing zero element.");
+				throw Exception("Cannot divide by a vector containing zero element.");
 			x /= other.x;
 			y /= other.y;
 			z /= other.z;
