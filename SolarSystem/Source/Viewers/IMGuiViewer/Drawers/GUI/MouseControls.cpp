@@ -36,7 +36,7 @@ namespace solar
 		void GrabControl(OMSAR & sys)
 		{
 			//Static are fine, because there is only one mouse to be dragged at the moment
-			static Vec2 offset, drag;
+			static Vec2d offset, drag;
 
 			//If mouse will be dragged, store current offset
 			if (ImGui::IsMouseClicked(0))
@@ -50,7 +50,7 @@ namespace solar
 				//Normalize values
 				val.x /= io.DisplaySize.x;
 				val.y /= io.DisplaySize.x;// .x is correct here
-				drag = Vec2(val.x * 2, -val.y * 2);
+				drag = Vec2d(val.x * 2, -val.y * 2);
 				sys.Move(drag + offset);
 			}
 		}

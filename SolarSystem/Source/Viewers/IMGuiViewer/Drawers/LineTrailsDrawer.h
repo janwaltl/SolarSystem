@@ -22,7 +22,7 @@ namespace solar
 			//Throws GLError on OpenGL error(i.e out of GPU memory)
 			LineTrailsDrawer(size_t dataSize, double aspectRatio);
 			~LineTrailsDrawer();
-			void Draw(const simData_t& data, double scaleFactor, const Vec2& offset);
+			void Draw(const simData_t& data, double scaleFactor, const Vec2d& offset);
 			//Enables/disables simData[index] unit's trail
 			// - disabling also clears the trail
 			void SwitchTrail(size_t index, bool enable);

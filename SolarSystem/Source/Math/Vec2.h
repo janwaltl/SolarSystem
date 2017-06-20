@@ -1,79 +1,179 @@
-#ifndef MATH_VEC2_3562362386348_HEADER
-#define MATH_VEC2_3562362386348_HEADER
+#ifndef MATH_Vec2d_3562362386348_HEADER
+#define MATH_Vec2d_3562362386348_HEADER
+
+#include "Common.h"
 
 namespace solar
 {
 	//Two dimensional vector of doubles
-	struct Vec2
+	template<typename T>
+	class Vec2
 	{
 	public:
-		double x {}, y {};
+		T x, y;
+		Vec2() { x = y = T(); }
+		constexpr explicit Vec2(T x, T y = T()) :x(x), y(y) {}
+		Vec2(const Vec2<T>&) = default;
+		Vec2(Vec2&&) = default;
+		Vec2<T>& operator=(const Vec2&) = default;
+		Vec2<T>& operator=(Vec2&&) = default;
+		~Vec2() = default;
 
-		constexpr explicit Vec2(double x = 0.0, double y = 0.0) :x(x), y(y) {}
-		Vec2& operator+=(const Vec2& other)
+		T LengthSq() const
 		{
-			this->x += other.x;
-			this->y += other.y;
+			return static_cast<T>(x*x + y*y);
+		}
+		T Length() const
+		{
+			return static_cast<T>(sqrt(LengthSq()));
+		}
+		Vec2<T>& SetLength(T length)
+		{
+			this->Normalize();
+			(*this) *= length;
 			return *this;
 		}
-		Vec2 operator+(const Vec2& other) const
+		Vec2<T>& Normalize()
 		{
-			Vec2 tmp = *this;
-			tmp += other;
-			return tmp;
+			T length = Length();
+			if (length < epsilon<T>)
+				throw Exception("Cannot normalize zero-length vector.");
+			else
+			{
+				x /= length;
+				y /= length;
+			}
+			return *this;
 		}
+		Vec2<T>& operator+=(T val)
+		{
+			x += val;
+			y += val;
+			return *this;
+		}
+		Vec2<T>& operator-=(T val)
+		{
+			x -= val;
+			y -= val;
+			return *this;
+		}
+		Vec2<T>& operator*=(T val)
+		{
+			x *= val;
+			y *= val;
+			return *this;
+		}
+		Vec2<T>& operator/=(T val)
+		{
+			if (abs(val) < epsilon<T>)
+				throw Exception("Cannot divide by zero.");
+			x /= val;
+			y /= val;
+			return *this;
+		}
+		Vec2<T>& operator+=(const Vec2<T>& other)
+		{
+			x += other.x;
+			y += other.y;
+			return *this;
+		}
+		Vec2<T>& operator-=(const Vec2<T>& other)
+		{
+			x -= other.x;
+			y -= other.y;
+			return *this;
+		}
+		Vec2<T>& operator*=(const Vec2<T>& other)
+		{
+			x *= other.x;
+			y *= other.y;
+			return *this;
+		}
+		Vec2<T>& operator/=(const Vec2<T>& other)
+		{
+			if (abs(other.x) < epsilon<T> || abs(other.y) < epsilon<T>)
+				throw Exception("Cannot divide by a vector containing zero element.");
+			x /= other.x;
+			y /= other.y;
 
-		Vec2& operator-=(const Vec2& other)
-		{
-			this->x -= other.x;
-			this->y -= other.y;
-			return *this;
-		}
-		Vec2 operator-(const Vec2& other) const
-		{
-			Vec2 tmp = *this;
-			tmp -= other;
-			return tmp;
-		}
-		template< typename T>
-		Vec2& operator*=(T val)
-		{
-			this->x *= static_cast<double>(val);
-			this->y *= static_cast<double>(val);
-			return *this;
-		}
-		template< typename T>
-		Vec2& operator/=(T val)
-		{
-			this->x /= static_cast<double>(val);
-			this->y /= static_cast<double>(val);
 			return *this;
 		}
 	};
 
 	template<typename T>
-	Vec2 operator*(Vec2 vec, T val)
+	void swap(Vec2<T>& a, Vec2<T>& b) noexcept
 	{
-		vec *= val;
-		return vec;
+		using std::swap;
+		swap(a.x, b.x);
+		swap(a.y, b.y);
 	}
 	template<typename T>
-	Vec2 operator*(T val, Vec2 vec)
+	T DotProduct(const Vec2<T>& a, const Vec2<T>& b)
 	{
-		vec *= val;
-		return vec;
+		return a.x*b.x + a.y*b.y;
 	}
 	template<typename T>
-	Vec2 operator/(Vec2 vec, T val)
+	Vec2<T> operator+(const Vec2<T>& a, const Vec2<T>& b)
 	{
-		vec /= val;
-		return vec;
+		Vec2<T> temp(a);
+		return temp += b;
 	}
 	template<typename T>
-	Vec2 operator/(T val, Vec2 vec)
+	Vec2<T> operator-(const Vec2<T>& a, const Vec2<T>& b)
 	{
-		vec /= val;
-		return vec;
+		Vec2<T> temp(a);
+		return temp -= b;
+	}
+	template<typename T>
+	Vec2<T> operator*(const Vec2<T>& a, const Vec2<T>& b)
+	{
+		Vec2<T> temp(a);
+		return temp *= b;
+	}
+	template<typename T>
+	Vec2<T> operator/(const Vec2<T>& a, const Vec2<T>& b)
+	{
+		Vec2<T> temp(a);
+		return temp /= b;
+	}
+	template<typename T>
+	Vec2<T> operator+(const Vec2<T>& a, T b)
+	{
+		Vec2<T> temp(a);
+		return temp += b;
+	}
+	template<typename T>
+	Vec2<T> operator-(const Vec2<T>& a, T b)
+	{
+		Vec2<T> temp(a);
+		return temp -= b;
+	}
+	template<typename T>
+	Vec2<T> operator*(const Vec2<T>& a, T b)
+	{
+		Vec2<T> temp(a);
+		return temp *= b;
+	}
+	template<typename T>
+	Vec2<T> operator/(const Vec2<T>& a, T b)
+	{
+		Vec2<T> temp(a);
+		return temp /= b;
+	}
+	template<typename T>
+	Vec2<T> operator+(T a, const Vec2<T>& b)
+	{
+		return b + a;
+	}
+	template<typename T>
+	Vec2<T> operator-(T a, const Vec2<T>& b)
+	{
+		return b - a;
+	}
+	template<typename T>
+	Vec2<T> operator*(T a, const Vec2<T>& b)
+	{
+		return b*a;
 	}
 }
 #endif

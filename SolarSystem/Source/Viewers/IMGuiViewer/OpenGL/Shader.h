@@ -28,9 +28,9 @@ namespace solar
 
 			void SetUniform1i(const std::string& name, int i) const;
 			void SetUniform2f(const std::string& name, float x, float y) const;
-			void SetUniform2f(const std::string& name, const Vec2& vec) const;
+			void SetUniform2f(const std::string& name, const Vec2d& vec) const;
 			void SetUniform4f(const std::string& name, float x, float y, float z, float w) const;
-			void SetUniform4f(const std::string& name, const Vec4& vec) const;
+			void SetUniform4f(const std::string& name, const Vec4d& vec) const;
 			void SetUniform4Mat(const std::string& name, const float mat[4][4]) const;
 		private:
 			//Obtains locations of shader's uniforms and stores them in the map

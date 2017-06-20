@@ -21,7 +21,7 @@ namespace solar
 		public:
 			SimDataDrawer(double aspectRatio);
 			~SimDataDrawer();
-			void Draw(const simData_t& data, double scaleFactor, const Vec2& offset);
+			void Draw(const simData_t& data, double scaleFactor, const Vec2d& offset);
 		private:
 			void CreateShader(double aspectRatio);
 			std::unique_ptr<openGL::Shader> shader;

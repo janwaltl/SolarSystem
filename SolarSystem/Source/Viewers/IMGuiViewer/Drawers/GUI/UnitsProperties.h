@@ -16,7 +16,7 @@ namespace solar
 		class UnitsProperties
 		{
 		public:
-			explicit UnitsProperties(Vec2 winPos = Vec2(10, 310), Vec2 winSize = Vec2(250, 390));
+			explicit UnitsProperties(Vec2d winPos = Vec2d(10, 310), Vec2d winSize = Vec2d(250, 390));
 			void operator()(simData_t& data, OMSAR* follow = nullptr);
 			void SelectedUnitTextLabel(solar::simData_t & data, solar::OMSAR * follow);
 		private:
@@ -40,7 +40,7 @@ namespace solar
 			int selectedRefUnit {0};
 			//whether the selectedUnit is being followed
 			bool following {false};
-			Vec2 winPos, winSize;
+			Vec2d winPos, winSize;
 		};
 
 	}

@@ -2,6 +2,7 @@
 #define MATH_VEC3_325723905794386_HEADER
 
 #include "Common.h"
+#include "Source/Common/Exception.h"
 
 namespace solar
 {
@@ -98,7 +99,7 @@ namespace solar
 		}
 		Vec3<T>& operator/=(const Vec3<T>& other)
 		{
-			if (abs(x) < epsilon<T> || abs(y) < epsilon<T> || abs(z) < epsilon<T>)
+			if (abs(other.x) < epsilon<T> || abs(other.y) < epsilon<T> || abs(other.z) < epsilon<T>)
 				throw Exception("Cannot divide by a vector containing zero element.");
 			x /= other.x;
 			y /= other.y;
@@ -149,7 +150,45 @@ namespace solar
 		Vec3<T> temp(a);
 		return temp /= b;
 	}
-
+	template<typename T>
+	Vec3<T> operator+(const Vec3<T>& a, T b)
+	{
+		Vec3<T> temp(a);
+		return temp += b;
+	}
+	template<typename T>
+	Vec3<T> operator-(const Vec3<T>& a, T b)
+	{
+		Vec3<T> temp(a);
+		return temp -= b;
+	}
+	template<typename T>
+	Vec3<T> operator*(const Vec3<T>& a, T b)
+	{
+		Vec3<T> temp(a);
+		return temp *= b;
+	}
+	template<typename T>
+	Vec3<T> operator/(const Vec3<T>& a, T b)
+	{
+		Vec3<T> temp(a);
+		return temp /= b;
+	}
+	template<typename T>
+	Vec3<T> operator+(T a, const Vec3<T>& b)
+	{
+		return b + a;
+	}
+	template<typename T>
+	Vec3<T> operator-(T a, const Vec3<T>& b)
+	{
+		return b - a;
+	}
+	template<typename T>
+	Vec3<T> operator*(T a, const Vec3<T>& b)
+	{
+		return b*a;
+	}
 }
 
 

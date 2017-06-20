@@ -68,7 +68,7 @@ namespace solar
 
 			double color[4];
 			in.read(reinterpret_cast<char*>(&color), sizeof(color));
-			data[i].color = Vec4(color[0], color[1], color[2], color[3]);
+			data[i].color = Vec4d(color[0], color[1], color[2], color[3]);
 
 			double mass;
 			in.read(reinterpret_cast<char*>(&mass), sizeof(mass));

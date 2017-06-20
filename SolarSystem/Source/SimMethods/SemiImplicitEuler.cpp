@@ -11,14 +11,14 @@ namespace solar
 		{
 			for (auto right = left + 1; right != data->end(); ++right)
 			{
-				auto distLR = dist(left->pos, right->pos);
+				auto distLR = (left->pos- right->pos).Length();
 				distLR = distLR*distLR*distLR;
 
 				// acceleration = - G* R/R^3
 				//Acceleration of left unit gained from attraction to right unit, WITHOUT mass of correct unit
 				//Minus for the force to be attractive, not repulsive
-				Vec2 dir = left->pos - right->pos;
-				Vec2 acc = -physicsUnits::G / distLR * dir;
+				Vec2d dir = left->pos - right->pos;
+				Vec2d acc = -physicsUnits::G / distLR * dir;
 				// velocity(t+dt) = velocity(t) + dt*acc(t); - explicit Euler
 				left->vel += step*acc*right->mass;// with correct mass
 				right->vel -= step*acc*left->mass;// with correct mass, opposite direction

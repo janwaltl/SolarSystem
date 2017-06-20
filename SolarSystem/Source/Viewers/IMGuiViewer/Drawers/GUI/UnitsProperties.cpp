@@ -10,7 +10,7 @@ namespace solar
 	{
 		const Unit UnitsProperties::centerRefSystem {};
 
-		UnitsProperties::UnitsProperties(Vec2 winPos, Vec2 winSize) :
+		UnitsProperties::UnitsProperties(Vec2d winPos, Vec2d winSize) :
 			winPos(winPos), winSize(winSize)
 		{
 		}
@@ -49,7 +49,7 @@ namespace solar
 
 					ImGui::Text("Distance:"); ImGui::NextColumn();
 					ImGui::TextTooltipOnHover("Distance from center of reference system.");
-					ImGui::Text(" %2.6f AU", length(unit.pos - refUnit.pos));
+					ImGui::Text(" %2.6f AU", (unit.pos - refUnit.pos).Length());
 					ImGui::NextColumn();
 
 					ImGui::Text("Velocity:"); ImGui::NextColumn();
@@ -58,7 +58,7 @@ namespace solar
 					ImGui::NextColumn();
 
 					ImGui::Text("Speed:"); ImGui::NextColumn();
-					ImGui::Text(" %2.6f km/s", length(unit.vel - refUnit.vel)*physicsUnits::AUpYtoMpS / 1000.0);
+					ImGui::Text(" %2.6f km/s", (unit.vel - refUnit.vel).Length()*physicsUnits::AUpYtoMpS / 1000.0);
 					ImGui::NextColumn();
 
 					ImGui::Text("Mass:"); ImGui::NextColumn();
@@ -86,7 +86,7 @@ namespace solar
 			auto tmp = data[selectedUnit].pos*follow->ScaleFactor() + follow->GetOffset();
 			tmp.x *= 600;
 			tmp.y *= -350 * follow->AspectRatio();
-			tmp += Vec2 {600,350 - 6};//Half window's size and 6px higher
+			tmp += Vec2d {600,350 - 6};//Half window's size and 6px higher
 			//tmp is now position in pixels
 
 			ImGui::SetNextWindowPos(tmp, ImGuiSetCond_Always);

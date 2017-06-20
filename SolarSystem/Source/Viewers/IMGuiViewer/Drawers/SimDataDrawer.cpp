@@ -26,7 +26,7 @@ namespace solar
 			//For unique ptrs' destructors
 		}
 
-		void SimDataDrawer::Draw(const simData_t& data, double scaleFactor, const Vec2& offset)
+		void SimDataDrawer::Draw(const simData_t& data, double scaleFactor, const Vec2d& offset)
 		{
 			shader->Bind();
 			for (const auto& unit : data)

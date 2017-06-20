@@ -36,10 +36,10 @@ namespace solar
 
 					//Calculate mutual acceleration via Newton
 
-					auto distLR = dist(left.pos, right.pos);
+					auto distLR = (left.pos- right.pos).Length();
 					distLR = distLR*distLR*distLR;
-					Vec2 dir = left.pos - right.pos;
-					Vec2 acc = -physicsUnits::G / distLR * dir;
+					Vec2d dir = left.pos - right.pos;
+					Vec2d acc = -physicsUnits::G / distLR * dir;
 
 					//Update left's and right's accelerations, store them in k1's acc
 					kXs[x][i].acc += acc*(*data)[j].mass;
@@ -63,18 +63,18 @@ namespace solar
 		{
 			//Updates units based on RK4 method
 
-			(*data)[i].vel += step / 6.0 *(kXs[0][i].acc + 2 * kXs[1][i].acc + 2 * kXs[2][i].acc + kXs[3][i].acc);
-			(*data)[i].pos += step / 6.0 *(kXs[0][i].vel + 2 * kXs[1][i].vel + 2 * kXs[2][i].vel + kXs[3][i].vel);
+			(*data)[i].vel += step / 6.0 *(kXs[0][i].acc + 2.0 * kXs[1][i].acc + 2.0 * kXs[2][i].acc + kXs[3][i].acc);
+			(*data)[i].pos += step / 6.0 *(kXs[0][i].vel + 2.0 * kXs[1][i].vel + 2.0 * kXs[2][i].vel + kXs[3][i].vel);
 
 			//Reinitialize temps for next integration step
 			temps[i] = {(*data)[i].vel,(*data)[i].pos};
 
 			//Clear coefficients for next step
 			//(Atleast acc needs to be cleared, because it is additive)
-			kXs[0][i] = {Vec2(),Vec2()};
-			kXs[1][i] = {Vec2(),Vec2()};
-			kXs[2][i] = {Vec2(),Vec2()};
-			kXs[3][i] = {Vec2(),Vec2()};
+			kXs[0][i] = {Vec2d(),Vec2d()};
+			kXs[1][i] = {Vec2d(),Vec2d()};
+			kXs[2][i] = {Vec2d(),Vec2d()};
+			kXs[3][i] = {Vec2d(),Vec2d()};
 		}
 	}
 }

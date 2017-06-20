@@ -10,15 +10,15 @@ namespace solar
 	class OMSAR
 	{
 	public:
-		OMSAR(double scaleFactor, double AR, Vec2 offset) :
+		OMSAR(double scaleFactor, double AR, Vec2d offset) :
 			scaleFactor(scaleFactor), AR(AR), offset(offset)
 		{}
 
 		double ScaleFactor() { return scaleFactor; }
 		void ScaleFactor(double newFactor) { scaleFactor = newFactor; }
 
-		void Move(const Vec2 newOffset) { offset = newOffset; }
-		Vec2 GetOffset() { return offset; }
+		void Move(const Vec2d newOffset) { offset = newOffset; }
+		Vec2d GetOffset() { return offset; }
 
 		//Sets scaleFactor to such value, that all units' positions*scaleFactor falls into <-scale,scale> range
 		void ResetZoom(const simData_t& data, double scale);
@@ -27,7 +27,7 @@ namespace solar
 		void AspectRatio(double newAR) { AR = newAR; }
 	private:
 		double scaleFactor;
-		Vec2 offset;
+		Vec2d offset;
 		double AR;
 	};
 }

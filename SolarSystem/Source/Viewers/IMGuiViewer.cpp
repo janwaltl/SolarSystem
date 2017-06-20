@@ -3,7 +3,7 @@
 namespace solar
 {
 	IMGuiViewer::IMGuiViewer(size_t width, size_t height, const std::string& title) :
-		OMSAR(1.0, width / double(height), Vec2(0.0, 0.0)),
+		OMSAR(1.0, width / double(height), Vec2d(0.0, 0.0)),
 		openGL(width, height, title), imguiBackend(openGL.GetWin()),
 		w(width), h(height)
 	{

@@ -8,7 +8,7 @@ void solar::ExplicitEuler::operator()(double step)
 
 	struct VelPos
 	{
-		Vec2 vel, pos;
+		Vec2d vel, pos;
 	};
 	std::vector<VelPos> temps;
 	temps.reserve(data->size());
@@ -24,14 +24,14 @@ void solar::ExplicitEuler::operator()(double step)
 		for (size_t j = i + 1; j < data->size(); ++j)
 		{
 			auto& right = (*data)[j];
-			auto distLR = dist(temps[i].pos, temps[j].pos);
+			auto distLR = (temps[i].pos- temps[j].pos).Length();
 			distLR = distLR*distLR*distLR;
 
 			// acceleration = - G* R/R^3
 			//Acceleration of left unit gained from attraction to right unit, WITHOUT mass of correct unit
 			//Minus for the force to be attractive, not repulsive
-			Vec2 dir = temps[i].pos - temps[j].pos;
-			Vec2 acc = -physicsUnits::G / distLR * dir;
+			Vec2d dir = temps[i].pos - temps[j].pos;
+			Vec2d acc = -physicsUnits::G / distLR * dir;
 			// velocity(t+dt) = velocity(t) + dt*acc(t); - explicit Euler
 			left.vel += step*acc*right.mass;// with correct mass
 			right.vel -= step*acc*left.mass;// with correct mass, opposite direction

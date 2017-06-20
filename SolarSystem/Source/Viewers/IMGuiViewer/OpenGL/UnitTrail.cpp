@@ -66,7 +66,7 @@ namespace solar
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
 			glBufferData(GL_ARRAY_BUFFER, 2 * maxLength * sizeof(GLfloat), nullptr, GL_DYNAMIC_DRAW);
-			//Positions are Vec2 of floats at location=0 in shader
+			//Positions are Vec2d of floats at location=0 in shader
 			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
 			glEnableVertexAttribArray(0);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -95,7 +95,7 @@ namespace solar
 			--refCount;
 		}
 
-		void UnitTrail::Push(const Vec2 & newPos)
+		void UnitTrail::Push(const Vec2d & newPos)
 		{
 			GLfloat data[2] = {static_cast<GLfloat>(newPos.x),static_cast<GLfloat>(newPos.y)};
 			//Uploads newPos into VBO

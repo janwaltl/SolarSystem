@@ -8,7 +8,7 @@ namespace solar
 	namespace drawers
 	{
 		ReplayGUIDrawer::ReplayGUIDrawer(const std::string& replayFileName) :
-			unitsProps(Vec2(10, 10)), replayControls(replayFileName)
+			unitsProps(Vec2d(10, 10)), replayControls(replayFileName)
 		{
 		}
 

@@ -90,7 +90,7 @@ namespace solar
 			this->Bind();
 			glUniform2f(uniforms.at(name), x, y);
 		}
-		void Shader::SetUniform2f(const std::string & name, const Vec2 & vec) const
+		void Shader::SetUniform2f(const std::string & name, const Vec2d & vec) const
 		{
 			SetUniform2f(name, static_cast<float>(vec.x), static_cast<float>(vec.y));
 		}
@@ -99,7 +99,7 @@ namespace solar
 			this->Bind();
 			glUniform4f(uniforms.at(name), x, y, z, w);
 		}
-		void Shader::SetUniform4f(const std::string & name, const Vec4 & vec) const
+		void Shader::SetUniform4f(const std::string & name, const Vec4d & vec) const
 		{
 			SetUniform4f(name,
 						 static_cast<float>(vec.x),

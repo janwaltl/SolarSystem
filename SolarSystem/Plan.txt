@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Implemented Mat4 - and all MakeMatrix functions(except inverse.)
-	- Needs to be tested.
+Refactored Vec2, Vec4 into template and replaced it in code.
 ========================================IMPLEMENTING PLAN========================================
 Remarks:
 	Acknowledge third parties in documentation.

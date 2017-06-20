@@ -42,7 +42,7 @@ namespace solar
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
 
-			//Positions are Vec2 of floats at location=0
+			//Positions are Vec2d of floats at location=0
 			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
 			glEnableVertexAttribArray(0);
 

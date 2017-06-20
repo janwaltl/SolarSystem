@@ -5,10 +5,10 @@
 void solar::OMSAR::ResetZoom(const simData_t& data, double scale)
 {
 	//Find the furthest position from center in all four directions
-	
-	Vec2 max {std::numeric_limits<double>::min(),std::numeric_limits<double>::min()};
-	Vec2 min {std::numeric_limits<double>::max(),std::numeric_limits<double>::max()};
-	
+
+	Vec2d max {std::numeric_limits<double>::min(),std::numeric_limits<double>::min()};
+	Vec2d min {std::numeric_limits<double>::max(),std::numeric_limits<double>::max()};
+
 	auto find = [&](const Unit& u) {
 		if (u.pos.x > max.x)
 			max.x = u.pos.x;
@@ -25,8 +25,8 @@ void solar::OMSAR::ResetZoom(const simData_t& data, double scale)
 	max.y *= AR;
 	min.y *= AR;
 
-	auto maxL = length(max);
-	auto minL = length(min);
+	auto maxL = max.Length();
+	auto minL = min.Length();
 	scaleFactor = 1.0 / (maxL > minL ? maxL : minL);
 	scaleFactor *= scale;
 }

@@ -17,7 +17,7 @@ namespace solar
 		constexpr int winPosX = 5;
 		constexpr int winPosY = 20;
 		//Background color
-		constexpr Vec4 bgColor(0.0, 0.0, 0.0, 1.0);
+		constexpr Vec4d bgColor(0.0, 0.0, 0.0, 1.0);
 	}
 
 	//Following usage of GLFW library is  based on their tutorial

@@ -28,7 +28,7 @@ namespace solar
 			//Because of shader pointer type's completness
 		}
 
-		void LineTrailsDrawer::Draw(const simData_t& data, double scaleFactor, const Vec2& offset)
+		void LineTrailsDrawer::Draw(const simData_t& data, double scaleFactor, const Vec2d& offset)
 		{
 			UpdateTrails(data);
 			assert(trails.size() == data.size() && trails.size() == trailsControls.size());

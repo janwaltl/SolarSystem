@@ -168,7 +168,7 @@ namespace solar
 			unit.color.w = std::stod(tmp);
 		}
 		else
-			unit.color = Vec4 {1.0,1.0,1.0,1.0};
+			unit.color = Vec4d {1.0,1.0,1.0,1.0};
 	}
 
 	void FormattedFileParser::ParseName(Unit & unit, const std::string & val)

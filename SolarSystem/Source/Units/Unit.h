@@ -11,14 +11,14 @@ namespace solar
 	class Unit
 	{
 	public:
-		explicit Unit(const Vec2& pos = Vec2(), const Vec2&vel = Vec2(), double mass = 0.0, const std::string& name = "",
-					  const Vec4& color = Vec4(1.0, 1.0, 1.0, 1.0))
+		explicit Unit(const Vec2d& pos = Vec2d(), const Vec2d&vel = Vec2d(), double mass = 0.0, const std::string& name = "",
+					  const Vec4d& color = Vec4d(1.0, 1.0, 1.0, 1.0))
 			:pos(pos), vel(vel), mass(mass), name(name), color(color)
 		{}
 
-		Vec2 pos, vel;
+		Vec2d pos, vel;
 		double mass;
-		Vec4 color;
+		Vec4d color;
 		std::string name;
 	};
 

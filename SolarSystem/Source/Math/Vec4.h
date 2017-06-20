@@ -1,66 +1,197 @@
 #ifndef MATH_VEC4_4257923752391_HEADER
 #define MATH_VEC4_4257923752391_HEADER
 
+#include "Common.h"
+
 namespace solar
 {
-	//Four-dimensional vector of doubles
-	struct Vec4
+	template<typename T>
+	class Vec4
 	{
 	public:
-		double x, y, z, w;
+		T x, y, z, w;
+		Vec4() { x = y = z = w = T(); }
+		constexpr explicit Vec4(T x, T y = T(), T z = T(), T w = T()) :x(x), y(y), z(z), w(w) {}
+		Vec4(const Vec4<T>&) = default;
+		Vec4(Vec4&&) = default;
+		Vec4<T>& operator=(const Vec4&) = default;
+		Vec4<T>& operator=(Vec4&&) = default;
+		~Vec4() = default;
 
-		constexpr explicit Vec4(double x = 0.0, double y = 0.0, double z = 0.0, double w = 0.0) :x(x), y(y), z(z), w(w) {}
-		Vec4& operator+=(const Vec4& other)
+		T LengthSq() const
 		{
-			this->x += other.x;
-			this->y += other.y;
-			this->z += other.z;
-			this->w += other.w;
+			return static_cast<T>(x*x + y*y + z*z + w*w);
+		}
+		T Length() const
+		{
+			return static_cast<T>(sqrt(LengthSq()));
+		}
+		Vec4<T>& SetLength(T length)
+		{
+			this->Normalize();
+			(*this) *= length;
 			return *this;
 		}
-		Vec4 operator+(const Vec4& other) const
+		Vec4<T>& Normalize()
 		{
-			Vec4 tmp = *this;
-			tmp += other;
-			return tmp;
-		}
-
-		Vec4& operator-=(const Vec4& other)
-		{
-			this->x -= other.x;
-			this->y -= other.y;
-			this->z -= other.z;
-			this->w -= other.w;
+			T length = Length();
+			if (length < epsilon<T>)
+				throw Exception("Cannot normalize zero-length vector.");
+			else
+			{
+				x /= length;
+				y /= length;
+				z /= length;
+				w /= length;
+			}
 			return *this;
 		}
-		Vec4 operator-(const Vec4& other) const
+		Vec4<T>& operator+=(T val)
 		{
-			Vec4 tmp = *this;
-			tmp -= other;
-			return tmp;
+			x += val;
+			y += val;
+			z += val;
+			w += val;
+			return *this;
 		}
-		template< typename T>
-		Vec4& operator*=(T val)
+		Vec4<T>& operator-=(T val)
 		{
-			this->x *= val;
-			this->y *= val;
-			this->z *= val;
-			this->w *= val;
+			x -= val;
+			y -= val;
+			z -= val;
+			w -= val;
+			return *this;
+		}
+		Vec4<T>& operator*=(T val)
+		{
+			x *= val;
+			y *= val;
+			z *= val;
+			w *= val;
+			return *this;
+		}
+		Vec4<T>& operator/=(T val)
+		{
+			if (abs(val) < epsilon<T>)
+				throw Exception("Cannot divide by zero.");
+			x /= val;
+			y /= val;
+			z /= val;
+			w /= val;
+			return *this;
+		}
+		Vec4<T>& operator+=(const Vec4<T>& other)
+		{
+			x += other.x;
+			y += other.y;
+			z += other.z;
+			w += other.w;
+			return *this;
+		}
+		Vec4<T>& operator-=(const Vec4<T>& other)
+		{
+			x -= other.x;
+			y -= other.y;
+			z -= other.z;
+			w -= other.w;
+			return *this;
+		}
+		Vec4<T>& operator*=(const Vec4<T>& other)
+		{
+			x *= other.x;
+			y *= other.y;
+			z *= other.z;
+			w *= other.w;
+			return *this;
+		}
+		Vec4<T>& operator/=(const Vec4<T>& other)
+		{
+			if (abs(other.x) < epsilon<T> || abs(other.y) < epsilon<T> || abs(other.z) < epsilon<T> || abs(other.w) < epsilon<T>)
+				throw Exception("Cannot divide by a vector containing zero element.");
+			x /= other.x;
+			y /= other.y;
+			z /= other.z;
+			w /= other.w;
 			return *this;
 		}
 	};
 
 	template<typename T>
-	Vec4 operator*(Vec4 vec, T val)
+	void swap(Vec4<T>& a, Vec4<T>& b) noexcept
 	{
-		vec *= val;
-		return vec;
+		using std::swap;
+		swap(a.x, b.x);
+		swap(a.y, b.y);
+		swap(a.z, b.z);
+		swap(a.w, b.w);
 	}
 	template<typename T>
-	Vec4 operator*(T val, Vec4 vec)
+	T DotProduct(const Vec4<T>& a, const Vec4<T>& b)
 	{
-		vec *= val;
-		return vec;
+		return a.x*b.x + a.y*b.y + a.z*b.z + a.w*b.w;
+	}
+	template<typename T>
+	Vec4<T> operator+(const Vec4<T>& a, const Vec4<T>& b)
+	{
+		Vec4<T> temp(a);
+		return temp += b;
+	}
+	template<typename T>
+	Vec4<T> operator-(const Vec4<T>& a, const Vec4<T>& b)
+	{
+		Vec4<T> temp(a);
+		return temp -= b;
+	}
+	template<typename T>
+	Vec4<T> operator*(const Vec4<T>& a, const Vec4<T>& b)
+	{
+		Vec4<T> temp(a);
+		return temp *= b;
+	}
+	template<typename T>
+	Vec4<T> operator/(const Vec4<T>& a, const Vec4<T>& b)
+	{
+		Vec4<T> temp(a);
+		return temp /= b;
+	}
+	template<typename T>
+	Vec4<T> operator+(const Vec4<T>& a, T b)
+	{
+		Vec4<T> temp(a);
+		return temp += b;
+	}
+	template<typename T>
+	Vec4<T> operator-(const Vec4<T>& a, T b)
+	{
+		Vec4<T> temp(a);
+		return temp -= b;
+	}
+	template<typename T>
+	Vec4<T> operator*(const Vec4<T>& a, T b)
+	{
+		Vec4<T> temp(a);
+		return temp *= b;
+	}
+	template<typename T>
+	Vec4<T> operator/(const Vec4<T>& a, T b)
+	{
+		Vec4<T> temp(a);
+		return temp /= b;
+	}
+	template<typename T>
+	Vec4<T> operator+(T a, const Vec4<T>& b)
+	{
+		return b + a;
+	}
+	template<typename T>
+	Vec4<T> operator-(T a, const Vec4<T>& b)
+	{
+		return b - a;
+	}
+	template<typename T>
+	Vec4<T> operator*(T a, const Vec4<T>& b)
+	{
+		return b*a;
 	}
 }
 #endif
