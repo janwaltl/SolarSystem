@@ -112,6 +112,14 @@ namespace solar
 			this->Bind();
 			glUniformMatrix4fv(uniforms.at(name), 1, false, *mat);
 		}
+		size_t Shader::GetUniformBlockIndex(const std::string & blockName) const
+		{
+			return glGetUniformBlockIndex(programID, blockName.c_str());
+		}
+		size_t Shader::GetID() const
+		{
+			return programID;
+		}
 		void Shader::LoadUniforms()
 		{
 			// go through all uniforms and store their location

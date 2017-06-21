@@ -82,6 +82,11 @@ namespace solar
 		{
 			return e[index];
 		}
+		//Access to elements' array. Can be passed to OpenGL
+		T* Data()
+		{
+			return &e[0];
+		}
 	private:
 		T e[16];//Elements
 	};
@@ -94,7 +99,7 @@ namespace solar
 		for (int r = 0; r < 4; ++r)
 			for (int c = 0; c < 4; ++c)
 				for (int k = 0; k < 4; ++k)
-					res[r * 4 + c] = a[r * 4 + k] * b[k * 4 + c];
+					res[r + 4 * c] = a[r + 4 * k] * b[k + 4 * c];
 		return res;
 	}
 
