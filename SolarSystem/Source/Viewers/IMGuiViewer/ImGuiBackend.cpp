@@ -202,16 +202,8 @@ namespace solar
 		shader = std::make_unique<openGL::Shader>(vertSource, fragSource);
 
 		ImGuiIO& io = ImGui::GetIO();
-		const float ortho[4][4] =
-		{
-			{2.0f / io.DisplaySize.x, 0.0f,                   0.0f, 0.0f},
-			{0.0f,                  2.0f / -io.DisplaySize.y, 0.0f, 0.0f},
-			{0.0f,                  0.0f,                  -1.0f, 0.0f},
-			{-1.0f,                  1.0f,                   0.0f, 1.0f},
-		};
-		shader->SetUniform4Mat("orthoProjMat", ortho);
+		shader->SetUniform4Mat("orthoProjMat", MakeOrtho(0.0f, io.DisplaySize.y, 0.0f, io.DisplaySize.x, -1.0f, 1.0f));
 		shader->SetUniform1i("text", 0);
-
 	}
 
 	void IMGuiBackend::CreateBuffers()

@@ -107,10 +107,10 @@ namespace solar
 						 static_cast<float>(vec.z),
 						 static_cast<float>(vec.w));
 		}
-		void Shader::SetUniform4Mat(const std::string & name, const float mat[4][4]) const
+		void Shader::SetUniform4Mat(const std::string & name, const Mat4f& mat) const
 		{
 			this->Bind();
-			glUniformMatrix4fv(uniforms.at(name), 1, false, *mat);
+			glUniformMatrix4fv(uniforms.at(name), 1, false, mat.Data());
 		}
 		size_t Shader::GetUniformBlockIndex(const std::string & blockName) const
 		{

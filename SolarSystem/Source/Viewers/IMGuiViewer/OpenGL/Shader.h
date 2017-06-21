@@ -31,7 +31,7 @@ namespace solar
 			void SetUniform2f(const std::string& name, const Vec2d& vec) const;
 			void SetUniform4f(const std::string& name, float x, float y, float z, float w) const;
 			void SetUniform4f(const std::string& name, const Vec4d& vec) const;
-			void SetUniform4Mat(const std::string& name, const float mat[4][4]) const;
+			void SetUniform4Mat(const std::string& name, const Mat4f& mat) const;
 			size_t GetUniformBlockIndex(const std::string& blockName) const;
 			size_t GetID() const;
 		private:

@@ -18,5 +18,6 @@ namespace solar
 	using Vec4f = Vec4<float>;
 	using Mat4d = Mat4<double>;
 	using Mat4f = Mat4<float>;
+
 }
 #endif

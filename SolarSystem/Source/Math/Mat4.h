@@ -87,6 +87,10 @@ namespace solar
 		{
 			return &e[0];
 		}
+		const T* Data() const
+		{
+			return &e[0];
+		}
 	private:
 		T e[16];//Elements
 	};
@@ -192,18 +196,32 @@ namespace solar
 		return MakeRotation(axis.x, axis.y, axis.z, angle);
 	}
 	//Perspective projection matrix
-	//Horizontal field of view, aspect ratio(w/h)
+	//Horizontal field of view in degrees, aspect ratio(w/h)
 	//near<far
 	template<typename T>
 	Mat4<T> MakePerspective(T FOV, T AR, T near, T far)
 	{
-		T t = tan(FOV * pi<T> / static_cast<T>(180));
-		T halfW = near*t / static_cast<T>(2);
+		T halfW = near*tan(DegToRad(FOV / T(2)));
 		T halfH = halfW / AR;
 		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
 		Mat4<T> res;
 		res[0] = near / halfW;
 		res[5] = near / halfH;
+		res[10] = -(far + near) / (far - near);
+		res[11] = -static_cast<T>(1);
+		res[14] = -2 * far*near / (far - near);
+	}
+	template<typename T>
+	Mat4<T> MakePerspective(T top, T bottom, T left, T right, T near, T far)
+	{
+		T height = top - bottom;
+		T width = right - left;
+		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
+		Mat4<T> res;
+		res[0] = T(2)*near / width;
+		res[5] = T(2)*near / height;
+		res[8] = (left + right) / width;
+		res[9] = (top + left) / height;
 		res[10] = -(far + near) / (far - near);
 		res[11] = -static_cast<T>(1);
 		res[14] = -2 * far*near / (far - near);
@@ -215,15 +233,32 @@ namespace solar
 	{
 		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
 		Mat4<T> res;
-		res[0] = static_cast<T>(2) / width;
-		res[5] = static_cast<T>(2) / height;
-		res[10] = -static_cast<T>(2)*(far - near);
+		res[0] = static_cast<T>(1) / width;
+		res[5] = static_cast<T>(1) / height;
+		res[10] = static_cast<T>(-2)*(far - near);
 		res[14] = -(far + near) / (far - near);
 		res[15] = static_cast<T>(1);
 
 		return res;
 	}
-
+	//Orthogonal projection matrix
+	//near<far
+	template<typename T>
+	Mat4<T> MakeOrtho(T top, T bottom, T left, T right, T near, T far)
+	{
+		T width = right - left;
+		T height = top - bottom;
+		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
+		Mat4<T> res;
+		res[0] = static_cast<T>(2) / width;		  //Normalize
+		res[5] = static_cast<T>(2) / height;	  //Normalize
+		res[10] = static_cast<T>(-2)*(far - near);//Normalize
+		res[12] = -(right + left) / width;	   //Move to center
+		res[13] = -(top + bottom) / height;	   //Move to center
+		res[14] = -(far + near) / (far - near);//Move to center
+		res[15] = static_cast<T>(1);
+		return res;
+	}
 }
 
 #endif

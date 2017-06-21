@@ -1,11 +1,11 @@
 =====================================IN THIS COMMIT=====================================
-Implemented Camera class.
+Few tweaks in Math, ImGuiBackend uses new Ortho matrix.
 ========================================IMPLEMENTING PLAN========================================
 Remarks:
 	Acknowledge third parties in documentation.
 	Well, reorganize documentation.
 		- probably not worth the effort.
-		- but moving user guide to beggining is doable
+		- but moving user guide to beggining is doable.
 	Resolve speeding/slowing down while recording.
 		- won't be easy - either we loose O(1) search in file or we get wrong replaying speed
 			- went for wrong replaying speed for now
