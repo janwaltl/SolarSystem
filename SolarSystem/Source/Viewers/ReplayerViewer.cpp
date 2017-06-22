@@ -10,7 +10,7 @@ namespace solar
 	}
 	void ReplayerViewer::Prepare()
 	{
-		simDataDrawer = std::make_unique<drawers::SimDataDrawer>(this->AspectRatio());
+		//simDataDrawer = std::make_unique<drawers::SimDataDrawer>(this->AspectRatio());
 		replayGUIDrawer = std::make_unique<drawers::ReplayGUIDrawer>(replayFileName);
 		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(data->size(), this->AspectRatio());
 

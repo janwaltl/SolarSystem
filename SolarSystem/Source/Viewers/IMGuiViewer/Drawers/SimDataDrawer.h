@@ -12,6 +12,7 @@ namespace solar
 		class Shader;
 		class CircleBuffer;
 	}
+	class Camera;
 	namespace drawers
 	{
 		//Draws simulated units on screen
@@ -19,11 +20,11 @@ namespace solar
 		class SimDataDrawer
 		{
 		public:
-			SimDataDrawer(double aspectRatio);
+			SimDataDrawer(const Camera& cam);
 			~SimDataDrawer();
 			void Draw(const simData_t& data, double scaleFactor, const Vec2d& offset);
 		private:
-			void CreateShader(double aspectRatio);
+			void CreateShader(const Camera& cam);
 			std::unique_ptr<openGL::Shader> shader;
 			std::unique_ptr<openGL::CircleBuffer> circle;
 		};

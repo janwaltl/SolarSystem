@@ -99,11 +99,10 @@ namespace solar
 	Mat4<T> operator*(const Mat4<T>& a, const Mat4<T>& b)
 	{
 		Mat4<T> res;
-
 		for (int r = 0; r < 4; ++r)
 			for (int c = 0; c < 4; ++c)
 				for (int k = 0; k < 4; ++k)
-					res[r + 4 * c] = a[r + 4 * k] * b[k + 4 * c];
+					res[r + 4 * c] += a[r + 4 * k] * b[k + 4 * c];
 		return res;
 	}
 
@@ -210,6 +209,7 @@ namespace solar
 		res[10] = -(far + near) / (far - near);
 		res[11] = -static_cast<T>(1);
 		res[14] = -2 * far*near / (far - near);
+		return res;
 	}
 	template<typename T>
 	Mat4<T> MakePerspective(T top, T bottom, T left, T right, T near, T far)
@@ -225,6 +225,7 @@ namespace solar
 		res[10] = -(far + near) / (far - near);
 		res[11] = -static_cast<T>(1);
 		res[14] = -2 * far*near / (far - near);
+		return res;
 	}
 	//Orthogonal projection matrix
 	//near<far
@@ -235,7 +236,7 @@ namespace solar
 		Mat4<T> res;
 		res[0] = static_cast<T>(1) / width;
 		res[5] = static_cast<T>(1) / height;
-		res[10] = static_cast<T>(-2)*(far - near);
+		res[10] = static_cast<T>(-2)/(far - near);
 		res[14] = -(far + near) / (far - near);
 		res[15] = static_cast<T>(1);
 
@@ -252,7 +253,7 @@ namespace solar
 		Mat4<T> res;
 		res[0] = static_cast<T>(2) / width;		  //Normalize
 		res[5] = static_cast<T>(2) / height;	  //Normalize
-		res[10] = static_cast<T>(-2)*(far - near);//Normalize
+		res[10] = static_cast<T>(-2)/(far - near);//Normalize
 		res[12] = -(right + left) / width;	   //Move to center
 		res[13] = -(top + bottom) / height;	   //Move to center
 		res[14] = -(far + near) / (far - near);//Move to center

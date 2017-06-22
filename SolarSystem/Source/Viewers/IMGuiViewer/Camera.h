@@ -40,7 +40,7 @@ namespace solar
 						mat4 invView;
 						mat4 invProjView;
 				} **instanceName**;*/
-		Camera& Subscribe(const openGL::Shader& shader, const std::string& blockName = "CameraMatrices");
+		const Camera& Subscribe(const openGL::Shader& shader, const std::string& blockName = "CameraMatrices") const;
 		//Binds this camera for next drawing.
 		//Should be used before drawing if there are more than one camera object.
 		//IMPROVE: UBOs can be indexed by uniqued index based on refCount.

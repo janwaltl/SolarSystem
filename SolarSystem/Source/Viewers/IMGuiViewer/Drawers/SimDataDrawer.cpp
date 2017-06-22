@@ -2,7 +2,7 @@
 
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/CircleBuffer.h"
-
+#include "Source/Viewers/IMGuiViewer/Camera.h"
 namespace solar
 {
 	namespace drawers
@@ -12,13 +12,13 @@ namespace solar
 			// Number of vertices to aproximate circle with.
 			constexpr size_t resolution = 12;
 			// In normalized screen units = <0,1.0>, 1.0 creates circle that spans across whole horizontal axis
-			constexpr float radius = 0.005f;
+			constexpr float radius = 0.0f;
 		}
 
-		SimDataDrawer::SimDataDrawer(double aspectRatio)
+		SimDataDrawer::SimDataDrawer(const Camera& cam)
 		{
 			circle = std::make_unique<openGL::CircleBuffer>(resolution, radius);
-			CreateShader(aspectRatio);
+			CreateShader(cam);
 		}
 
 		SimDataDrawer::~SimDataDrawer()
@@ -32,26 +32,38 @@ namespace solar
 			for (const auto& unit : data)
 			{
 				shader->SetUniform4f("col", unit.color);
-				shader->SetUniform2f("unitPos", scaleFactor *unit.pos + offset);
+				shader->SetUniform2f("unitPos", unit.pos);
 				circle->Draw();
 			}
 			shader->UnBind();
 		}
 
-		void SimDataDrawer::CreateShader(double aspectRatio)
+		void SimDataDrawer::CreateShader(const Camera& cam)
 		{
 			const std::string vSource = R"(
 			#version 140
 			#extension GL_ARB_explicit_attrib_location : require
-
+			//Vertices of a circle
 			layout(location = 0) in vec2 position;
 
+			std140 uniform CameraMatrices
+			{
+					mat4 projection;
+					mat4 view;
+					mat4 projView;
+					mat4 invProj;
+					mat4 invView;
+					mat4 invProjView;
+			} cam;
+
 			uniform vec2 unitPos;
-			uniform vec2 AR;//Aspect ratio
+
 			void main()
 			{
-				vec2 pos = position + unitPos;
-				gl_Position = vec4(AR * pos, 0.0, 1.0);
+				//Aspect ratio of screen(Valid both for ortho and perspective matrices)
+				vec2 AR = vec2(1.0, cam.projection[1][1]/cam.projection[0][0]);
+				vec4 unitPosEye = cam.view* vec4(unitPos, 0.0, 1.0);
+				gl_Position = vec4(position*AR, 0.0, 1.0) + cam.projection*unitPosEye/unitPosEye.w;
 			})";
 			const std::string fSource = R"(
 			#version 140
@@ -65,8 +77,7 @@ namespace solar
 			})";
 
 			shader = std::make_unique<openGL::Shader>(vSource, fSource);
-			//Set aspect ratio, main axis is X and scale the Y axis 
-			shader->SetUniform2f("AR", 1.0f, static_cast<float>(aspectRatio));
+			cam.Subscribe(*shader);
 		}
 	}
 }

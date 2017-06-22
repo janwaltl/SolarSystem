@@ -1,5 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Few tweaks in Math, ImGuiBackend uses new Ortho matrix.
+Refactored SimDataDrawer into using newly added camera.
+	- few fixes in matrices.
+Temporarely disabled ReplayerViewer.
 ========================================IMPLEMENTING PLAN========================================
 Remarks:
 	Acknowledge third parties in documentation.
@@ -15,6 +17,7 @@ Test:
 TODOs:
 	Inverse of matrix if needed.
 		- UBO in camera class
+	Fix ReplayerViewer.
 Plan:
 	Convert current 2D to 2D in 3D using vectors, matrices
 		- Use vectors and matrices for current drawing - lines, points

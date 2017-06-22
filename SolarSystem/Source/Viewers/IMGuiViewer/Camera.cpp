@@ -27,6 +27,7 @@ namespace solar
 		LazyInit();
 		projection = solar::MakeOrtho<float>(width, height, near, far);
 		SubmitMatrices();
+
 		return *this;
 	}
 
@@ -43,10 +44,10 @@ namespace solar
 		LazyInit();
 		auto dir = (camPos - targetPos).Normalize();
 
-		auto left = CrossProduct(dir, upDir).Normalize();
-		auto up = CrossProduct(dir, left);
+		auto right = CrossProduct(upDir, dir).Normalize();
+		auto up = CrossProduct(dir, right);
 
-		view[0] = left.x;		view[4] = left.y;		view[8] = left.z;		view[12] = -DotProduct(camPos, left);
+		view[0] = right.x;		view[4] = right.y;		view[8] = right.z;		view[12] = -DotProduct(camPos, right);
 		view[1] = up.x;			view[5] = up.y;			view[9] = up.z;			view[13] = -DotProduct(camPos, up);
 		view[2] = dir.x;		view[6] = dir.y;		view[10] = dir.z;		view[14] = -DotProduct(camPos, dir);
 		view[3] = 0;			view[7] = 0;			view[11] = 0;			view[15] = 1;
@@ -61,9 +62,8 @@ namespace solar
 		return *this;
 	}
 
-	Camera & Camera::Subscribe(const openGL::Shader & shader, const std::string & blockName)
+	const Camera & Camera::Subscribe(const openGL::Shader & shader, const std::string & blockName) const
 	{
-		LazyInit();
 		size_t blockIndex = shader.GetUniformBlockIndex(blockName);
 		//Bind it to correct index
 		glUniformBlockBinding(shader.GetID(), blockIndex, UBOBinding);
@@ -83,6 +83,7 @@ namespace solar
 			glGenBuffers(1, &UBO);
 			glBindBuffer(GL_UNIFORM_BUFFER, UBO);
 			glBufferData(GL_UNIFORM_BUFFER, (GLsizeiptr)bufferSize, nullptr, GL_STREAM_DRAW);
+			Bind();
 		}
 	}
 
