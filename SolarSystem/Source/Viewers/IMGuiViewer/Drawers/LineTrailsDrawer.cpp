@@ -4,7 +4,7 @@
 #include <cassert>
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Error.h"
-
+#include "Source/Viewers/IMGuiViewer/Camera.h"
 namespace solar
 {
 	namespace drawers
@@ -17,9 +17,9 @@ namespace solar
 			// Higher values result in more frequent updates and more precise but shorter-lasting trails
 			constexpr size_t resolution = 10;
 		}
-		LineTrailsDrawer::LineTrailsDrawer(size_t dataSize, double aspectRatio) :frameCounter(0)
+		LineTrailsDrawer::LineTrailsDrawer(size_t dataSize, const Camera& cam) :frameCounter(0)
 		{
-			CreateShader(aspectRatio);
+			CreateShader(cam);
 			CreateTrails(dataSize);
 		}
 
@@ -28,7 +28,7 @@ namespace solar
 			//Because of shader pointer type's completness
 		}
 
-		void LineTrailsDrawer::Draw(const simData_t& data, double scaleFactor, const Vec2d& offset)
+		void LineTrailsDrawer::Draw(const simData_t& data)
 		{
 			UpdateTrails(data);
 			assert(trails.size() == data.size() && trails.size() == trailsControls.size());
@@ -40,12 +40,7 @@ namespace solar
 			{
 				shader->SetUniform4f("col", unitIT->color);
 				if (*trailCtrlIT)
-				{
-					float scale = static_cast<float>(scaleFactor);
-					shader->SetUniform2f("scale", scale, scale);
-					shader->SetUniform2f("offset", offset);
 					trailIT->Draw();
-				}
 			}
 			shader->UnBind();
 		}
@@ -78,20 +73,26 @@ namespace solar
 			return trailsControls[index];
 		}
 
-		void LineTrailsDrawer::CreateShader(double aspectRatio)
+		void LineTrailsDrawer::CreateShader(const Camera& cam)
 		{
 			const std::string vSource = R"(
 			#version 140
 			#extension GL_ARB_explicit_attrib_location : require
 			layout(location = 0) in vec2 position;
 
-			uniform vec2 offset;// offset pos by this amount, should be normalized
-			uniform vec2 scale;// Scaling for position
-			uniform vec2 AR;//Aspect ratio
+			std140 uniform CameraMatrices
+			{
+					mat4 projection;
+					mat4 view;
+					mat4 projView;
+					mat4 invProj;
+					mat4 invView;
+					mat4 invProjView;
+			} cam;
+
 			void main()
 			{
-				vec2 pos = scale * position + offset;
-				gl_Position = vec4(AR * pos, 0.0, 1.0);
+				gl_Position = cam.projection* cam.view * vec4(position, 0.0, 1.0);
 			})";
 			const std::string fSource = R"(
 			#version 140
@@ -106,9 +107,7 @@ namespace solar
 			})";
 
 			shader = std::make_unique<openGL::Shader>(vSource, fSource);
-			//Set aspect ratio, main axis is X and scale the Y axis 
-			shader->SetUniform2f("AR", 1.0f, static_cast<float>(aspectRatio));
-
+			cam.Subscribe(*shader);
 		}
 
 		void LineTrailsDrawer::CreateTrails(size_t dataSize)

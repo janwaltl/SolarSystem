@@ -72,6 +72,8 @@ namespace solar
 
 		//Enable multisampling to make lineTrails nicer.
 		glEnable(GL_MULTISAMPLE);
+		glEnable(GL_DEPTH_TEST);
+
 		glfwSwapInterval(0);
 	}
 
@@ -93,7 +95,7 @@ namespace solar
 		glfwSwapBuffers(win);
 		glfwPollEvents();//Get system events, calls registered callbacks
 		glClearColor((GLclampf)bgColor.x, (GLclampf)bgColor.y, (GLclampf)bgColor.z, (GLclampf)bgColor.w);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		if (errTrigger)
 		{

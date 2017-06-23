@@ -232,14 +232,22 @@ namespace solar
 	template<typename T>
 	Mat4<T> MakeOrtho(T width, T height, T near, T far)
 	{
-		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
+		/*//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
 		Mat4<T> res;
 		res[0] = static_cast<T>(1) / width;
 		res[5] = static_cast<T>(1) / height;
 		res[10] = static_cast<T>(-2)/(far - near);
 		res[14] = -(far + near) / (far - near);
-		res[15] = static_cast<T>(1);
+		res[15] = static_cast<T>(1);*/
 
+		//Projection onto near plane. instead of center of box.
+		///TODO why is it better?
+		Mat4<T> res;
+		res[0] = static_cast<T>(1) / width;
+		res[5] = static_cast<T>(1) / height;
+		res[10] = static_cast<T>(1) / (far - near);
+		res[14] = -(near) / (far - near);
+		res[15] = static_cast<T>(1);
 		return res;
 	}
 	//Orthogonal projection matrix

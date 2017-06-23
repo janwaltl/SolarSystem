@@ -12,7 +12,7 @@ namespace solar
 	{
 		//simDataDrawer = std::make_unique<drawers::SimDataDrawer>(this->AspectRatio());
 		replayGUIDrawer = std::make_unique<drawers::ReplayGUIDrawer>(replayFileName);
-		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(data->size(), this->AspectRatio());
+		//lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(data->size(), this->AspectRatio());
 
 		ResetZoom(*data, 0.8);
 	}
@@ -25,8 +25,8 @@ namespace solar
 		// So GUI is rendered over the Units, but processed before them to be able to set correct scaleFactor, offset
 		imguiBackend.NewFrame(GetFrameTime());
 		replayGUIDrawer->Draw(*data, *this, *lineTrailsDrawer, w, h);
-		simDataDrawer->Draw(*data, ScaleFactor(), GetOffset());
-		lineTrailsDrawer->Draw(*data, ScaleFactor(), GetOffset());
+		//simDataDrawer->Draw(*data, ScaleFactor(), GetOffset());
+		//lineTrailsDrawer->Draw(*data, ScaleFactor(), GetOffset());
 		imguiBackend.Render();
 	}
 }

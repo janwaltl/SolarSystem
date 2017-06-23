@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Refactored SimDataDrawer into using newly added camera.
-	- few fixes in matrices.
+LineTrails now use the camera too.
 Temporarely disabled ReplayerViewer.
 ========================================IMPLEMENTING PLAN========================================
 Remarks:
@@ -18,6 +17,7 @@ TODOs:
 	Inverse of matrix if needed.
 		- UBO in camera class
 	Fix ReplayerViewer.
+	Why is Ortho weirdly clipped when projecting to the center?
 Plan:
 	Convert current 2D to 2D in 3D using vectors, matrices
 		- Use vectors and matrices for current drawing - lines, points
@@ -27,8 +27,11 @@ Plan:
 	Add Camera controlls
 		- ability to follow a planet - both as target and as relative position
 		- UI around planets to select them, target them, go to them
+	UI overhaul.
+		- 
 	Bonuses:
 		Make Planets colored spheres
 		And add shading with sun as lightsource
 			- per-pixel, bloom
 		OpenGL state machine - OpenGLSM
+		Kepler with all trajectories

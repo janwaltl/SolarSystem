@@ -22,7 +22,7 @@ namespace solar
 		public:
 			SimDataDrawer(const Camera& cam);
 			~SimDataDrawer();
-			void Draw(const simData_t& data, double scaleFactor, const Vec2d& offset);
+			void Draw(const simData_t& data);
 		private:
 			void CreateShader(const Camera& cam);
 			std::unique_ptr<openGL::Shader> shader;

@@ -12,7 +12,7 @@ namespace solar
 			// Number of vertices to aproximate circle with.
 			constexpr size_t resolution = 12;
 			// In normalized screen units = <0,1.0>, 1.0 creates circle that spans across whole horizontal axis
-			constexpr float radius = 0.0f;
+			constexpr float radius = 0.01f;
 		}
 
 		SimDataDrawer::SimDataDrawer(const Camera& cam)
@@ -26,7 +26,7 @@ namespace solar
 			//For unique ptrs' destructors
 		}
 
-		void SimDataDrawer::Draw(const simData_t& data, double scaleFactor, const Vec2d& offset)
+		void SimDataDrawer::Draw(const simData_t& data)
 		{
 			shader->Bind();
 			for (const auto& unit : data)
@@ -40,6 +40,7 @@ namespace solar
 
 		void SimDataDrawer::CreateShader(const Camera& cam)
 		{
+			
 			const std::string vSource = R"(
 			#version 140
 			#extension GL_ARB_explicit_attrib_location : require
@@ -62,8 +63,8 @@ namespace solar
 			{
 				//Aspect ratio of screen(Valid both for ortho and perspective matrices)
 				vec2 AR = vec2(1.0, cam.projection[1][1]/cam.projection[0][0]);
-				vec4 unitPosEye = cam.view* vec4(unitPos, 0.0, 1.0);
-				gl_Position = vec4(position*AR, 0.0, 1.0) + cam.projection*unitPosEye/unitPosEye.w;
+				vec4 centerEye = cam.projection * cam.view * vec4(unitPos, 0.0, 1.0);
+				gl_Position = vec4(position*AR, 0.0,0.0) + centerEye/centerEye.w;
 			})";
 			const std::string fSource = R"(
 			#version 140

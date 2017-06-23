@@ -72,6 +72,7 @@ namespace solar
 
 	Camera & Camera::Bind()
 	{
+		LazyInit();
 		glBindBufferBase(GL_UNIFORM_BUFFER, UBOBinding, UBO);
 		return *this;
 	}
@@ -82,8 +83,8 @@ namespace solar
 		{
 			glGenBuffers(1, &UBO);
 			glBindBuffer(GL_UNIFORM_BUFFER, UBO);
-			glBufferData(GL_UNIFORM_BUFFER, (GLsizeiptr)bufferSize, nullptr, GL_STREAM_DRAW);
 			Bind();
+			glBufferData(GL_UNIFORM_BUFFER, (GLsizeiptr)bufferSize, nullptr, GL_STREAM_DRAW);
 		}
 	}
 

@@ -12,6 +12,9 @@ namespace solar
 	{
 		class Shader;
 	}
+	
+	class Camera;
+
 	namespace drawers
 	{
 		//Draws line trails behind the simulated Units
@@ -20,9 +23,9 @@ namespace solar
 		{
 		public:
 			//Throws GLError on OpenGL error(i.e out of GPU memory)
-			LineTrailsDrawer(size_t dataSize, double aspectRatio);
+			LineTrailsDrawer(size_t dataSize, const Camera& cam);
 			~LineTrailsDrawer();
-			void Draw(const simData_t& data, double scaleFactor, const Vec2d& offset);
+			void Draw(const simData_t& data);
 			//Enables/disables simData[index] unit's trail
 			// - disabling also clears the trail
 			void SwitchTrail(size_t index, bool enable);
@@ -32,7 +35,7 @@ namespace solar
 			void ClearAll();
 			bool IsTrailEnabled(size_t index);
 		private:
-			void CreateShader(double aspectRatio);
+			void CreateShader(const Camera& cam);
 			void CreateTrails(size_t dataSize);
 			//Adds new points(from current units' positions) to trails every 'trailRes' frames
 			void UpdateTrails(const simData_t& data);
