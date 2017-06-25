@@ -2,7 +2,7 @@
 #define MATH_VEC4_4257923752391_HEADER
 
 #include "Common.h"
-
+#include "Vec3.h"
 namespace solar
 {
 	template<typename T>
@@ -12,6 +12,7 @@ namespace solar
 		T x, y, z, w;
 		Vec4() { x = y = z = w = T(); }
 		constexpr explicit Vec4(T x, T y = T(), T z = T(), T w = T()) :x(x), y(y), z(z), w(w) {}
+		Vec4(const Vec3<T>& vec, T w = T()) :x(vec.x), y(vec.y), z(vec.z), w(w) {}
 		Vec4(const Vec4<T>&) = default;
 		Vec4(Vec4&&) = default;
 		Vec4<T>& operator=(const Vec4&) = default;

@@ -36,8 +36,8 @@
 //---- Define constructor and implicit cast operators to convert back<>forth from your math types and ImVec2/ImVec4.
 
 #define IM_VEC2_CLASS_EXTRA                                                 \
-        ImVec2(const solar::Vec2d& f) { x = static_cast<float>(f.x); y = static_cast<float>(f.y); }                       \
-        operator solar::Vec2d() const { return solar::Vec2d(x,y); }
+        template<typename T> ImVec2(const solar::Vec2<T>& f) { x = static_cast<float>(f.x); y = static_cast<float>(f.y); }                       \
+        template<typename T> operator solar::Vec2<T>() const { return solar::Vec2<T>(x,y); }
 
 #define IM_VEC4_CLASS_EXTRA                                                 \
         ImVec4(const solar::Vec4d& f) { x = static_cast<float>(f.x); y = static_cast<float>(f.y);       \

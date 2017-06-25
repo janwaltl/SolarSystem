@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-LineTrails now use the camera too.
-Temporarely disabled ReplayerViewer.
+Working on trackball. TBC
 ========================================IMPLEMENTING PLAN========================================
 Remarks:
 	Acknowledge third parties in documentation.
@@ -18,12 +17,20 @@ TODOs:
 		- UBO in camera class
 	Fix ReplayerViewer.
 	Why is Ortho weirdly clipped when projecting to the center?
+		- now projecting to near clipping plane, need to resolve it there's typo or bug in matrices somewhere.
 Plan:
-	Convert current 2D to 2D in 3D using vectors, matrices
-		- Use vectors and matrices for current drawing - lines, points
-		- Controlled by keyboard
 	Add ArcBall controlls
-		- use mouse drag from ImGui
+		- amount is controlled by mouse movement and action based on pressed buttons:
+			- LeftMouse: rotate around center of screen
+				- or camera's target
+			- RightMouse: Panning to sides 
+						- on plane with normal given by view direction and position by camera's position
+						- move camera nad its target location
+			- WheelMouse: Zooming
+				- zoom to cam's target
+			- MiddleMouse: LookAround
+				- rotate using trackball from camera's position
+
 	Add Camera controlls
 		- ability to follow a planet - both as target and as relative position
 		- UI around planets to select them, target them, go to them

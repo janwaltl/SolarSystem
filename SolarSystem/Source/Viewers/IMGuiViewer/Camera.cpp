@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include "OpenGL/Shader.h"
 #include "OpenGL/Error.h"
-
+#include <iostream>
 namespace solar
 {
 	namespace
@@ -42,11 +42,13 @@ namespace solar
 	Camera & Camera::LookAt(const Vec3d & camPos, const Vec3d & targetPos, const Vec3d & upDir)
 	{
 		LazyInit();
+		this->camPos = camPos;
+		this->targetPos = targetPos;
 		auto dir = (camPos - targetPos).Normalize();
 
 		auto right = CrossProduct(upDir, dir).Normalize();
 		auto up = CrossProduct(dir, right);
-
+		this->upDir = up;
 		view[0] = right.x;		view[4] = right.y;		view[8] = right.z;		view[12] = -DotProduct(camPos, right);
 		view[1] = up.x;			view[5] = up.y;			view[9] = up.z;			view[13] = -DotProduct(camPos, up);
 		view[2] = dir.x;		view[6] = dir.y;		view[10] = dir.z;		view[14] = -DotProduct(camPos, dir);
@@ -75,6 +77,21 @@ namespace solar
 		LazyInit();
 		glBindBufferBase(GL_UNIFORM_BUFFER, UBOBinding, UBO);
 		return *this;
+	}
+
+	Vec3d Camera::CamPos()
+	{
+		return camPos;
+	}
+
+	Vec3d Camera::TargetPos()
+	{
+		return targetPos;
+	}
+
+	Vec3d Camera::UpDir()
+	{
+		return upDir;
 	}
 
 	void Camera::LazyInit()

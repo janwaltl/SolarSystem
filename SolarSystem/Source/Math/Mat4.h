@@ -117,6 +117,19 @@ namespace solar
 		return res;
 	}
 	template<typename T>
+	Mat4<T> Transpose(const Mat4<T>& matrix)
+	{
+		using std::swap;
+		Mat4<T> res(matrix);
+		swap(res[1], res[4]);
+		swap(res[2], res[8]);
+		swap(res[3], res[12]);
+		swap(res[6], res[9]);
+		swap(res[7], res[13]);
+		swap(res[11], res[14]);
+		return res;
+	}
+	template<typename T>
 	Mat4<T> MakeIdentity()
 	{
 		Mat4<T> res;
@@ -261,7 +274,7 @@ namespace solar
 		Mat4<T> res;
 		res[0] = static_cast<T>(2) / width;		  //Normalize
 		res[5] = static_cast<T>(2) / height;	  //Normalize
-		res[10] = static_cast<T>(-2)/(far - near);//Normalize
+		res[10] = static_cast<T>(-2) / (far - near);//Normalize
 		res[12] = -(right + left) / width;	   //Move to center
 		res[13] = -(top + bottom) / height;	   //Move to center
 		res[14] = -(far + near) / (far - near);//Move to center

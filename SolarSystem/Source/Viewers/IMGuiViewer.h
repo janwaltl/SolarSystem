@@ -22,6 +22,8 @@ namespace solar
 
 		void Prepare() override final;
 		void operator()() override final;
+
+		Camera& GetCamera();
 	private:
 		size_t w, h;
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT

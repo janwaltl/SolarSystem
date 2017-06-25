@@ -4,14 +4,15 @@
 namespace solar
 {
 	class OMSAR;
+	class Camera;
 	namespace gui
 	{
 		//Zoom & Grab controls
-		void MouseControl(OMSAR& sys);
+		//void MouseControl(OMSAR& sys);
 		//Zooms the screen base on mouse's wheel scrolling
 		void ZoomControl(OMSAR& sys);
 		//Drags the screen via mouse
-		void GrabControl(OMSAR& sys);
+		void GrabControl(Camera& cam);
 	}
 }
 

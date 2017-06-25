@@ -19,5 +19,17 @@ namespace solar
 	using Mat4d = Mat4<double>;
 	using Mat4f = Mat4<float>;
 
+	template<typename T, typename J>
+	auto operator*(const Mat4<T>& mat, const Vec4<J>& vec) -> Vec4<decltype(T()*J())>
+	{
+		Vec4<decltype(T()*J())> res;
+
+		res.x = mat[0] * vec.x + mat[4] * vec.y + mat[8] * vec.z + mat[12] * vec.w;
+		res.y = mat[1] * vec.x + mat[5] * vec.y + mat[9] * vec.z + mat[13] * vec.w;
+		res.z = mat[2] * vec.x + mat[6] * vec.y + mat[10] * vec.z + mat[14] * vec.w;
+		res.w = mat[3] * vec.x + mat[7] * vec.y + mat[11] * vec.z + mat[15] * vec.w;
+
+		return res;
+	}
 }
 #endif
