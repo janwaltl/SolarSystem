@@ -94,6 +94,17 @@ namespace solar
 		return upDir;
 	}
 
+	Mat4f Camera::ViewMatrix()
+	{
+		return view;
+	}
+
+	void Camera::ViewMatrix(const Mat4f & newView)
+	{
+		view = newView;
+		SubmitMatrices();
+	}
+
 	void Camera::LazyInit()
 	{
 		if (UBO == 0)

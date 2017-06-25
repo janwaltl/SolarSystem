@@ -1,5 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Working on trackball. TBC
+Got TrackBall working.
+Added matrix inverse.
+Implemented TestDrawer, which currently draws a cube.
+Some more planning.
 ========================================IMPLEMENTING PLAN========================================
 Remarks:
 	Acknowledge third parties in documentation.
@@ -9,12 +12,8 @@ Remarks:
 	Resolve speeding/slowing down while recording.
 		- won't be easy - either we loose O(1) search in file or we get wrong replaying speed
 			- went for wrong replaying speed for now
-Test:
-	Vector ops correctness.
-	MakeMatrix fcs.
 TODOs:
-	Inverse of matrix if needed.
-		- UBO in camera class
+	Inverse of matrices in UBO in camera class if needed.
 	Fix ReplayerViewer.
 	Why is Ortho weirdly clipped when projecting to the center?
 		- now projecting to near clipping plane, need to resolve it there's typo or bug in matrices somewhere.
@@ -29,13 +28,46 @@ Plan:
 			- WheelMouse: Zooming
 				- zoom to cam's target
 			- MiddleMouse: LookAround
-				- rotate using trackball from camera's position
+				- rotate using trackball from camera's position changing cam's target
+	Design and implemented unit system
+		- based on ratio in chrono would be best?
 
-	Add Camera controlls
-		- ability to follow a planet - both as target and as relative position
-		- UI around planets to select them, target them, go to them
-	UI overhaul.
-		- 
+	UI overhaul:
+		- Top-bar with dropdown windows
+			- SimControls
+				- just current SimControls
+				- usage statistics
+				- save/load/restart
+				- name of current simMethod?
+				- tickbox for break on collision?
+				- graph of frameTime,FPS?
+					- with stability line
+			- SimData
+				- Big window
+				- choose reference frame and units
+				- Tabs:
+					- List of all simulated objects
+						- with name, mass, position, distance, velocity, speed
+							- ability to change them ( in stopped sim only?)
+						- select on click( higlights it in view), ability to focus it
+					- Graphs
+						- conservation of energy
+						- pos, dist, vel, speed
+			- CameraControls
+				- pos, targetPos, upDir
+					- with ability to set 
+				- Controls explained, maybe dynamic button and key mapping
+				- status - free or following something
+			- Visuals
+				- maybe together with CameraControls
+				- controls visual guidances:
+					- grid with dynamic resolution
+						- individual grid planes as well as 3D grid
+						- ability to switch parts of it on/off, maybe change colors
+					- pinheads with planets = projection on xz grid
+						- ability to switch on/of, choose plane of projection
+					- visual trackball - make it smaller to allow easier rolling
+						- change size, position? (But keep it in screen coords)
 	Bonuses:
 		Make Planets colored spheres
 		And add shading with sun as lightsource

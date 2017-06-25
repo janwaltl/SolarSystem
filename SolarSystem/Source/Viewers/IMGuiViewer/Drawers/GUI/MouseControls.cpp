@@ -11,27 +11,27 @@ namespace solar
 	{
 		namespace
 		{
-			//Returns rotation matrix to rotate from startPoint around origin to endPoint
+			//Returns rotation matrix to rotate from startPoint around origin to endPoint (in world coords)
 			//Both points are in [-1,1] box range
-			Mat4d TrackBall(Vec2d startPoint, Vec2d endPoint)
+			Mat4d TrackBall(Vec2d startPoint, Vec2d endPoint, const Mat4f& viewToWorld)
 			{
+				//Screen->Sphere
 				float startLength = startPoint.LengthSq();
 				Vec3d startVector(startPoint.x, startPoint.y, startLength >= 1.0f ? 0.0f : sqrt(1.0f - startLength));
 				float endLength = endPoint.LengthSq();
 				Vec3d endVector(endPoint.x, endPoint.y, endLength >= 1.0f ? 0.0f : sqrt(1.0f - endLength));
-
+				//If length > 1.0
 				startVector.Normalize();
 				endVector.Normalize();
-				//a.b=cos angle between them
-				//axb = rotation axis
+				//angle is immune to coord transformations
 				double angle = acos(DotProduct(startVector, endVector));
-				if (angle > 0.01)
+				if (angle > 0.01)//So the axis is well defined
 				{
-					auto axis = CrossProduct(endVector, startVector);
-					axis.Normalize();
-					return MakeRotation(axis, angle);
+					auto axis = CrossProduct(endVector, startVector).Normalize();
+					auto axis4 = viewToWorld*Vec4d(axis, 0.0);//So returned matrix is in world coordinates
+					return MakeRotation(Vec3d(axis4.x, axis4.y, axis4.z), angle);
 				}
-				else
+				else//Do not rotate
 					return MakeIdentity<double>();
 			}
 		}
@@ -57,12 +57,13 @@ namespace solar
 			sys.Move(sys.GetOffset()*(currentZoom / sys.ScaleFactor()));
 			sys.ScaleFactor(currentZoom);
 		}
+
 		void GrabControl(Camera& cam)
 		{
-			//Static are fine, because there is only one mouse to be dragged at the moment
-			static Vec2d offset, drag;
+			//Statics are fine, because there is only one mouse to be dragged at the moment
 			static Vec3d cachedCamPos, cachedCamUp;
 			static Vec2d cachedStartPoint;
+			static Mat4f cachedinvView;
 			auto io = ImGui::GetIO();
 
 			//If mouse has just been pressed
@@ -70,24 +71,31 @@ namespace solar
 			{
 				cachedCamPos = cam.CamPos();
 				cachedCamUp = cam.UpDir();
+				cachedinvView = Inverse(cam.ViewMatrix());
+				//Map to -1,1
 				cachedStartPoint = 2.0*(Vec2d(ImGui::GetMousePos()) - 0.5*Vec2d(io.DisplaySize)) / Vec2d(io.DisplaySize);
-				cachedStartPoint.y *= -1.0;
+				cachedStartPoint.y *= -1.0;//So plus is up instead of down
 			}
 			//Only count dragging in the center of the screen(not in side windows)
-			//Also only count dragging longer than 5 pixels(just error margin)
-			//RESOLVE: Why 5px? It can't be mistaken for clicking cause it must happen inside a window
 			if (!ImGui::IsMouseHoveringAnyWindow())
 			{
-				if (ImGui::IsMouseDragging(0, 10.0))//Left button
+				if (ImGui::IsMouseDragging(0, 5.0))//Left button = Trackball
 				{
 					Vec2d endPoint = 2.0*Vec2d(ImGui::GetMouseDragDelta()) / Vec2d(io.DisplaySize);
 					endPoint.y *= -1.0;
 					endPoint += cachedStartPoint;
 
-					Mat4d rotMatrix = TrackBall(cachedStartPoint, endPoint);
-					auto delta4 = rotMatrix*Vec4d(cachedCamPos - cam.TargetPos(), 1.0);
-					auto up4 = (rotMatrix)*Vec4d(cachedCamUp, 0.0);
+					Mat4d rotMatrix = TrackBall(cachedStartPoint, endPoint, cachedinvView);
+					//Rotate point around target
+					auto delta4 = rotMatrix*(Vec4d(cachedCamPos - cam.TargetPos(), 1.0));
+					//Compute new up vector to enable camera roll
+					auto up4 = rotMatrix*Vec4d(cachedCamUp, 0.0);
+
 					cam.LookAt(cam.TargetPos() + Vec3d(delta4.x, delta4.y, delta4.z), cam.TargetPos(), Vec3d(up4.x, up4.y, up4.z));
+				}
+				else if (ImGui::IsMouseDragging(1, 5.0))//Right button = panning
+				{
+
 				}
 			}
 		}

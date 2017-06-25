@@ -50,11 +50,13 @@ namespace solar
 		Vec3d CamPos();
 		Vec3d TargetPos();
 		Vec3d UpDir();
+		Mat4f ViewMatrix();
+		void ViewMatrix(const Mat4f& newView);
 	private:
 		void LazyInit();
 		void SubmitMatrices();
 		uint32_t UBO;
-		Mat4<float> projection, view;
+		Mat4f projection, view;
 		Vec3d camPos, targetPos, upDir;
 	};
 }

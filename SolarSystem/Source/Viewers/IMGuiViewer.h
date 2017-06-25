@@ -9,6 +9,8 @@
 #include "IMGuiViewer/Drawers/LineTrailsDrawer.h"
 #include "IMGuiViewer/OMSARPolicy.h"
 #include "IMGuiViewer/Camera.h"
+//#include "IMGuiViewer/Drawers/TestDrawer.h"
+
 namespace solar
 {
 	//Renders Graphical interface that allows controlling the simulation
@@ -31,6 +33,7 @@ namespace solar
 		Camera cam;
 		std::unique_ptr<drawers::GUIDrawer> GUIDrawer;
 		std::unique_ptr<drawers::SimDataDrawer> simDataDrawer;
+		//std::unique_ptr<drawers::TestDrawer> testDrawer;
 		std::unique_ptr<drawers::LineTrailsDrawer> lineTrailsDrawer;
 	};
 }
