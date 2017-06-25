@@ -1,8 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Got TrackBall working.
-Added matrix inverse.
-Implemented TestDrawer, which currently draws a cube.
-Some more planning.
+Zooming and panning done. Little bit of planning.
 ========================================IMPLEMENTING PLAN========================================
 Remarks:
 	Acknowledge third parties in documentation.
@@ -17,18 +14,14 @@ TODOs:
 	Fix ReplayerViewer.
 	Why is Ortho weirdly clipped when projecting to the center?
 		- now projecting to near clipping plane, need to resolve it there's typo or bug in matrices somewhere.
+	Removed OMSAR when done with Trackball.
 Plan:
 	Add ArcBall controlls
 		- amount is controlled by mouse movement and action based on pressed buttons:
-			- LeftMouse: rotate around center of screen
-				- or camera's target
-			- RightMouse: Panning to sides 
-						- on plane with normal given by view direction and position by camera's position
-						- move camera nad its target location
-			- WheelMouse: Zooming
-				- zoom to cam's target
 			- MiddleMouse: LookAround
 				- rotate using trackball from camera's position changing cam's target
+	Make MouseControls into class?
+		- it does have state 
 	Design and implemented unit system
 		- based on ratio in chrono would be best?
 
@@ -47,27 +40,38 @@ Plan:
 				- choose reference frame and units
 				- Tabs:
 					- List of all simulated objects
-						- with name, mass, position, distance, velocity, speed
+						- with name, color, mass, position, distance, velocity, speed
 							- ability to change them ( in stopped sim only?)
 						- select on click( higlights it in view), ability to focus it
+						- show/hide
+						- stop tracking?
+							- would store any addition data per untracked objects. Just draw them as points without trails and any visual guidance
+								- perhaps show in specific colour(gray)
+							- for many-body simulations where individual objects don't matter
 					- Graphs
 						- conservation of energy
 						- pos, dist, vel, speed
 			- CameraControls
 				- pos, targetPos, upDir
 					- with ability to set 
+				- zoom, panning speed, (maybe trackbal rot speed for finer control)
 				- Controls explained, maybe dynamic button and key mapping
 				- status - free or following something
 			- Visuals
 				- maybe together with CameraControls
 				- controls visual guidances:
-					- grid with dynamic resolution
+					- grid with dynamic resolution (located at ref frame with selected units)
 						- individual grid planes as well as 3D grid
 						- ability to switch parts of it on/off, maybe change colors
 					- pinheads with planets = projection on xz grid
 						- ability to switch on/of, choose plane of projection
 					- visual trackball - make it smaller to allow easier rolling
 						- change size, position? (But keep it in screen coords)
+					- camTarget indicator
+					- UI for object
+						- shows name of hover
+						- when selected(on click) shows small window
+							- Name, set as target(follow), set as ref frame
 	Bonuses:
 		Make Planets colored spheres
 		And add shading with sun as lightsource

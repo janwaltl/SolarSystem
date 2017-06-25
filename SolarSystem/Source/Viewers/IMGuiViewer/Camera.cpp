@@ -49,6 +49,7 @@ namespace solar
 		auto right = CrossProduct(upDir, dir).Normalize();
 		auto up = CrossProduct(dir, right);
 		this->upDir = up;
+		this->rightDir = right;
 		view[0] = right.x;		view[4] = right.y;		view[8] = right.z;		view[12] = -DotProduct(camPos, right);
 		view[1] = up.x;			view[5] = up.y;			view[9] = up.z;			view[13] = -DotProduct(camPos, up);
 		view[2] = dir.x;		view[6] = dir.y;		view[10] = dir.z;		view[14] = -DotProduct(camPos, dir);
@@ -92,6 +93,11 @@ namespace solar
 	Vec3d Camera::UpDir()
 	{
 		return upDir;
+	}
+
+	Vec3d Camera::RightDir()
+	{
+		return rightDir;
 	}
 
 	Mat4f Camera::ViewMatrix()

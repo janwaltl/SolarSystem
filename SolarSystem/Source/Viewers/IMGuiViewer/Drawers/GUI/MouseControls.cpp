@@ -4,6 +4,7 @@
 #include "Source/Viewers/IMGuiViewer/Camera.h"
 #include "Source/Math/Math.h"
 
+#include <iostream>
 #include <algorithm>
 namespace solar
 {
@@ -61,27 +62,28 @@ namespace solar
 		void GrabControl(Camera& cam)
 		{
 			//Statics are fine, because there is only one mouse to be dragged at the moment
-			static Vec3d cachedCamPos, cachedCamUp;
+			static Vec3d cachedCamPos, cachedCamUp, cachedTargetPos;
 			static Vec2d cachedStartPoint;
 			static Mat4f cachedinvView;
 			auto io = ImGui::GetIO();
 
-			//If mouse has just been pressed
-			if (ImGui::IsMouseClicked(0))
+			//If any mouse button has just been pressed
+			if (ImGui::IsMouseClicked(0) || ImGui::IsMouseClicked(1) || ImGui::IsMouseClicked(2))
 			{
 				cachedCamPos = cam.CamPos();
 				cachedCamUp = cam.UpDir();
+				cachedTargetPos = cam.TargetPos();
 				cachedinvView = Inverse(cam.ViewMatrix());
 				//Map to -1,1
 				cachedStartPoint = 2.0*(Vec2d(ImGui::GetMousePos()) - 0.5*Vec2d(io.DisplaySize)) / Vec2d(io.DisplaySize);
 				cachedStartPoint.y *= -1.0;//So plus is up instead of down
 			}
-			//Only count dragging in the center of the screen(not in side windows)
+			//Only count dragging in the center of the screen(not in GUI windows) and don't bother with small angles
 			if (!ImGui::IsMouseHoveringAnyWindow())
 			{
-				if (ImGui::IsMouseDragging(0, 5.0))//Left button = Trackball
+				if (ImGui::IsMouseDragging(0, 5.0f))//Left button = Trackball
 				{
-					Vec2d endPoint = 2.0*Vec2d(ImGui::GetMouseDragDelta()) / Vec2d(io.DisplaySize);
+					Vec2d endPoint = 2.0*Vec2d(ImGui::GetMouseDragDelta(0)) / Vec2d(io.DisplaySize);
 					endPoint.y *= -1.0;
 					endPoint += cachedStartPoint;
 
@@ -93,9 +95,29 @@ namespace solar
 
 					cam.LookAt(cam.TargetPos() + Vec3d(delta4.x, delta4.y, delta4.z), cam.TargetPos(), Vec3d(up4.x, up4.y, up4.z));
 				}
-				else if (ImGui::IsMouseDragging(1, 5.0))//Right button = panning
+				else if (ImGui::IsMouseDragging(1, 5.0f))//Right button = panning
+				{
+					Vec2d drag = 2.0*Vec2d(ImGui::GetMouseDragDelta(1)) / Vec2d(io.DisplaySize);
+					drag.y *= -io.DisplaySize.y / io.DisplaySize.x;//ImGui has reversed Y and correct for aspect ratio
+
+					//Map to camera's coords
+					Vec3d delta = cam.RightDir()*drag.x + cam.UpDir()*drag.y;
+					cam.LookAt(cachedCamPos - delta, cachedTargetPos - delta, cam.UpDir());
+				}
+				else if (ImGui::IsMouseDragging(2, 5.0f))//Middle button = 1st-person cam
 				{
 
+				}
+				else if (abs(io.MouseWheel) > epsilon<float>)// Wheel = zooming
+				{
+					constexpr float speed = 0.1f;
+					constexpr float max = 2.0f;
+
+					std::cout << io.MouseWheel << '\t';
+					//clamp and map to 0.0,max
+					double scroll = (std::max(std::min(max, io.MouseWheel*speed), -1.0f*max) + max)*0.5f;//Clamp
+					auto vec = (cam.CamPos() - cam.TargetPos())*scroll;
+					cam.LookAt(cam.TargetPos() + vec, cam.TargetPos(), cam.UpDir());
 				}
 			}
 		}
