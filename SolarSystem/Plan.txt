@@ -1,6 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Zooming and panning done. Little bit of planning.
+Finished 1st person camera for Trackball.
 ========================================IMPLEMENTING PLAN========================================
+
 Remarks:
 	Acknowledge third parties in documentation.
 	Well, reorganize documentation.
@@ -10,7 +11,7 @@ Remarks:
 		- won't be easy - either we loose O(1) search in file or we get wrong replaying speed
 			- went for wrong replaying speed for now
 TODOs:
-	Inverse of matrices in UBO in camera class if needed.
+	Add Inverses of matrices in UBO in camera class if needed.
 	Fix ReplayerViewer.
 	Why is Ortho weirdly clipped when projecting to the center?
 		- now projecting to near clipping plane, need to resolve it there's typo or bug in matrices somewhere.
@@ -73,8 +74,15 @@ Plan:
 						- when selected(on click) shows small window
 							- Name, set as target(follow), set as ref frame
 	Bonuses:
+		Kepler with all trajectories
+			- would require hiearchy system in simData and input files
+				- wouldn't be too hard
+		Dynamic addition of objects
+			- could be done for stopped simulation
+				- would require viewer, simMethods and parser respond to these changes
+					- probably SystemUnit::UnitAdded/Removed(index) would be fine
 		Make Planets colored spheres
 		And add shading with sun as lightsource
 			- per-pixel, bloom
 		OpenGL state machine - OpenGLSM
-		Kepler with all trajectories
+			- maybe little bit of overkill for now

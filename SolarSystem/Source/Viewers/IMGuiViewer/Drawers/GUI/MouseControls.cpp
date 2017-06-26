@@ -14,13 +14,15 @@ namespace solar
 		{
 			//Returns rotation matrix to rotate from startPoint around origin to endPoint (in world coords)
 			//Both points are in [-1,1] box range
-			Mat4d TrackBall(Vec2d startPoint, Vec2d endPoint, const Mat4f& viewToWorld)
+			//Whether should points be projection onto front side of sphere or backside
+			Mat4d TrackBall(Vec2d startPoint, Vec2d endPoint, const Mat4f& viewToWorld, bool onFront)
 			{
+				float sign = onFront ? 1.0f : -1.0f;
 				//Screen->Sphere
 				float startLength = startPoint.LengthSq();
-				Vec3d startVector(startPoint.x, startPoint.y, startLength >= 1.0f ? 0.0f : sqrt(1.0f - startLength));
+				Vec3d startVector(startPoint.x, startPoint.y, startLength >= 1.0f ? 0.0f : sign * sqrt(1.0f - startLength));
 				float endLength = endPoint.LengthSq();
-				Vec3d endVector(endPoint.x, endPoint.y, endLength >= 1.0f ? 0.0f : sqrt(1.0f - endLength));
+				Vec3d endVector(endPoint.x, endPoint.y, endLength >= 1.0f ? 0.0f : sign* sqrt(1.0f - endLength));
 				//If length > 1.0
 				startVector.Normalize();
 				endVector.Normalize();
@@ -87,13 +89,13 @@ namespace solar
 					endPoint.y *= -1.0;
 					endPoint += cachedStartPoint;
 
-					Mat4d rotMatrix = TrackBall(cachedStartPoint, endPoint, cachedinvView);
-					//Rotate point around target
-					auto delta4 = rotMatrix*(Vec4d(cachedCamPos - cam.TargetPos(), 1.0));
+					Mat4d rotMatrix = TrackBall(cachedStartPoint, endPoint, cachedinvView, true);
+					//Rotate point around camera's target
+					auto delta4 = rotMatrix*(Vec4d(cachedCamPos - cachedTargetPos, 1.0));
 					//Compute new up vector to enable camera roll
 					auto up4 = rotMatrix*Vec4d(cachedCamUp, 0.0);
 
-					cam.LookAt(cam.TargetPos() + Vec3d(delta4.x, delta4.y, delta4.z), cam.TargetPos(), Vec3d(up4.x, up4.y, up4.z));
+					cam.LookAt(cachedTargetPos + Vec3d(delta4.x, delta4.y, delta4.z), cachedTargetPos, Vec3d(up4.x, up4.y, up4.z));
 				}
 				else if (ImGui::IsMouseDragging(1, 5.0f))//Right button = panning
 				{
@@ -106,7 +108,17 @@ namespace solar
 				}
 				else if (ImGui::IsMouseDragging(2, 5.0f))//Middle button = 1st-person cam
 				{
+					Vec2d endPoint = 2.0*Vec2d(ImGui::GetMouseDragDelta(2)) / Vec2d(io.DisplaySize);
+					endPoint.y *= -1.0;
+					endPoint += cachedStartPoint;
 
+					Mat4d rotMatrix = TrackBall(cachedStartPoint, endPoint, cachedinvView, false);//Reversed order
+					//Rotate point around camera's position
+					auto delta4 = rotMatrix*(Vec4d(cachedTargetPos - cachedCamPos, 1.0));
+					//Compute new up vector to enable camera roll
+					auto up4 = rotMatrix*Vec4d(cachedCamUp, 0.0);
+
+					cam.LookAt(cachedCamPos, cachedCamPos + Vec3d(delta4.x, delta4.y, delta4.z), Vec3d(up4.x, up4.y, up4.z));
 				}
 				else if (abs(io.MouseWheel) > epsilon<float>)// Wheel = zooming
 				{
