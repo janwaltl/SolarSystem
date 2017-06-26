@@ -17,8 +17,8 @@ namespace solar
 	public:
 		//Including path and extension, leave outFileName empty if you don't want to save finished simulation
 		FormattedFileParser(const std::string& inputFileName, const std::string& outputFileName = "");
-		simData_t Load() override final;
-		void Save(const simData_t& data) override final;
+		SimData Load() override final;
+		void Save(const SimData& data) override final;
 	private:
 		static Unit ParseUnit(const std::string& str);
 		//Str must be in format of' token=<val>', where val is returned string

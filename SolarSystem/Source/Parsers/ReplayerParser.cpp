@@ -24,7 +24,7 @@ namespace solar
 		in.close();//Close for now
 	}
 
-	simData_t ReplayerParser::Load()
+	SimData ReplayerParser::Load()
 	{
 		//This function works with replay files whose format is documented in FileFormats/ReplayerFile.txt
 
@@ -54,7 +54,8 @@ namespace solar
 		in.seekg(sizeof(uint32_t), std::ios::cur);//Skip byteOffset
 
 
-		simData_t data(numUnits, Unit());
+		SimData data;
+		*data = SimData::units_t(numUnits, Unit());
 
 		//Read units' properties
 		for (decltype(numUnits) i = 0; i < numUnits; ++i)
@@ -64,28 +65,30 @@ namespace solar
 			in.read(reinterpret_cast<char*>(&nameL), sizeof(nameL));
 			in.read(name, nameL * sizeof(name[0]));
 
-			data[i].name = std::string(name, nameL);
+			data.Get()[i].name = std::string(name, nameL);
 
 			double color[4];
 			in.read(reinterpret_cast<char*>(&color), sizeof(color));
-			data[i].color = Vec4d(color[0], color[1], color[2], color[3]);
+			data.Get()[i].color = Vec4d(color[0], color[1], color[2], color[3]);
 
 			double mass;
 			in.read(reinterpret_cast<char*>(&mass), sizeof(mass));
-			data[i].mass = mass;
+			data.Get()[i].mass = mass;
 		}
 
 		//Initialize them to their initial value = first record
 		for (decltype(numUnits) i = 0; i < numUnits; ++i)
 		{
-			//PosX, PosY, VelX, VelY
-			double posVel[4];
+			//PosX, PosY, PosZ, VelX, VelY, VelZ
+			double posVel[5];
 
 			in.read(reinterpret_cast<char*>(&posVel), sizeof(posVel));
-			data[i].pos.x = posVel[0];
-			data[i].pos.y = posVel[1];
-			data[i].vel.x = posVel[2];
-			data[i].vel.y = posVel[3];
+			data.Get()[i].pos.x = posVel[0];
+			data.Get()[i].pos.y = posVel[1];
+			data.Get()[i].pos.z = posVel[2];
+			data.Get()[i].vel.x = posVel[3];
+			data.Get()[i].vel.y = posVel[4];
+			data.Get()[i].vel.z = posVel[5];
 		}
 
 		in.close();

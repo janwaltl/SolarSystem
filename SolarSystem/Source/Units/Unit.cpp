@@ -31,9 +31,19 @@ namespace solar
 	}
 	void SimData::SetPhysUnits(PhysUnits::ratio newMass, PhysUnits::ratio newDist, PhysUnits::ratio newTime)
 	{
-		mass = newMass;
-		dist = newDist;
-		time = newTime;
+		physUnits.mass = newMass;
+		physUnits.dist = newDist;
+		physUnits.time = newTime;
+	}
+
+	void SimData::SetPhysUnits(const PhysUnits & newPhysUnits)
+	{
+		physUnits = newPhysUnits;
+	}
+
+	const PhysUnits & SimData::GetPhysUnits() const
+	{
+		return physUnits;
 	}
 
 	void SimData::ConvertTo(PhysUnits::ratio newMass, PhysUnits::ratio newDist, PhysUnits::ratio newTime)
@@ -45,37 +55,37 @@ namespace solar
 
 	void SimData::ConvertMassTo(PhysUnits::ratio newMass)
 	{
-		if (abs(newMass - mass) > epsilon<PhysUnits::ratio>)
+		if (abs(newMass - physUnits.mass) > epsilon<PhysUnits::ratio>)
 		{
-			PhysUnits::ratio ratio = mass / newMass;
+			PhysUnits::ratio ratio = physUnits.mass / newMass;
 			for (auto& unit : units)
 				unit.mass *= ratio;
-			mass = newMass;
+			physUnits.mass = newMass;
 		}
 	}
 
 	void SimData::ConvertDistTo(PhysUnits::ratio newDist)
 	{
-		if (abs(newDist - dist) > epsilon<PhysUnits::ratio>)
+		if (abs(newDist - physUnits.dist) > epsilon<PhysUnits::ratio>)
 		{
-			PhysUnits::ratio ratio = dist / newDist;
+			PhysUnits::ratio ratio = physUnits.dist / newDist;
 			for (auto& unit : units)
 			{
 				unit.pos *= ratio;
 				unit.vel *= ratio;
 			}
-			dist = newDist;
+			physUnits.dist = newDist;
 		}
 	}
 
 	void SimData::ConvertTimeTo(PhysUnits::ratio newTime)
 	{
-		if (abs(newTime - time) > epsilon<PhysUnits::ratio>)
+		if (abs(newTime - physUnits.time) > epsilon<PhysUnits::ratio>)
 		{
-			PhysUnits::ratio ratio = time / newTime;
+			PhysUnits::ratio ratio = physUnits.time / newTime;
 			for (auto& unit : units)
 				unit.vel /= ratio;//speed is in denominator
-			time = newTime;
+			physUnits.time = newTime;
 		}
 	}
 
@@ -94,21 +104,21 @@ namespace solar
 			maxVel = std::max(maxVel, abs(unit.vel.y));
 			maxMass = std::max(maxMass, abs(unit.mass));
 		}
-		ConvertTo(mass*maxMass, dist*maxPos, time* maxPos / maxVel);
+		ConvertTo(physUnits.mass*maxMass, physUnits.dist*maxPos, physUnits.time* maxPos / maxVel);
 	}
 
 	PhysUnits::ratio SimData::RatioOfMassTo(PhysUnits::ratio newMass)
 	{
-		return mass / newMass;
+		return physUnits.mass / newMass;
 	}
 
 	PhysUnits::ratio SimData::RatioOfDistTo(PhysUnits::ratio newDist)
 	{
-		return dist / newDist;
+		return physUnits.dist / newDist;
 	}
 
 	PhysUnits::ratio SimData::RatioOfTimeTo(PhysUnits::ratio newTime)
 	{
-		return time / newTime;
+		return physUnits.time / newTime;
 	}
 }

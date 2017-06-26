@@ -186,6 +186,7 @@
     <ClCompile Include="Source\SimMethods\RK4.cpp" />
     <ClCompile Include="Source\SimMethods\SemiImplicitEuler.cpp" />
     <ClCompile Include="Source\Simulation.cpp" />
+    <ClCompile Include="Source\Units\Unit.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Camera.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.cpp" />

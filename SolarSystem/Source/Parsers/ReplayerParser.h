@@ -14,7 +14,7 @@ namespace solar
 		//				- IS checked by constructor and Exception class is thrown on error
 		ReplayerParser(const std::string& replayFileName);
 		//Loads data from replayFile
-		simData_t Load() override final;
+		SimData Load() override final;
 		//No save
 	private:
 		std::string inFile;

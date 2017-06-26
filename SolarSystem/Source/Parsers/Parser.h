@@ -11,9 +11,9 @@ namespace solar
 	{
 	public:
 		//Loads input from whethever
-		virtual simData_t Load() = 0;
+		virtual SimData Load() = 0;
 		//Save them after end of simulation
-		virtual void Save(const simData_t&) {};
+		virtual void Save(const SimData&) {};
 		virtual ~Parser() = default;
 	};
 }

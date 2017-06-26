@@ -41,6 +41,9 @@ namespace solar
 		static constexpr ratio meter {1.0};
 		static constexpr ratio kilometer {1e3};
 		static constexpr ratio AU {149'597'870'700.0};
+
+		ratio mass, time, dist;
+		PhysUnits(ratio mass = 1.0, ratio time = 1.0, ratio dist = 1.0) :mass(mass), time(time), dist(dist) {}
 	};
 }
 

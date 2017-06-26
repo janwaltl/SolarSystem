@@ -13,7 +13,7 @@ namespace solar
 	{
 	}
 
-	simData_t FormattedFileParser::Load()
+	SimData FormattedFileParser::Load()
 	{
 		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
 
@@ -30,8 +30,7 @@ namespace solar
 		input = buffer.str();
 		buffer.clear();
 
-		simData_t data;
-
+		SimData data;
 		//Read first unit
 		auto beg = input.find_first_of('{');
 		if (beg == input.npos)
@@ -41,7 +40,7 @@ namespace solar
 		if (end == input.npos)
 			throw Exception("Invalid Format: Closing bracket has not been found.");
 
-		data.emplace_back(ParseUnit(input.substr(beg + 1, end - beg - 1)));
+		data->emplace_back(ParseUnit(input.substr(beg + 1, end - beg - 1)));
 		//If there are more units
 		beg = input.find_first_of('{', end);
 		while (beg != input.npos)
@@ -51,15 +50,16 @@ namespace solar
 			if (end == input.npos)
 				throw Exception("Invalid Format: Closing bracket has not been found.");
 
-			data.emplace_back(ParseUnit(input.substr(beg + 1, end - beg - 1)));
+			data->emplace_back(ParseUnit(input.substr(beg + 1, end - beg - 1)));
 			//Try to find another unit
 			beg = input.find_first_of('{', end);
 		}
 
+		data.ConvertTo(PhysUnits::sun, PhysUnits::AU, PhysUnits::year);
 		return data;
 	}
 
-	void FormattedFileParser::Save(const simData_t & data)
+	void FormattedFileParser::Save(const SimData & data)
 	{
 		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
 
@@ -70,11 +70,11 @@ namespace solar
 				throw Exception("Output file \'" + outFileName + "\' could not be created/opened.");
 
 			std::cout << "Saving simulated data to file: " << outFileName << '\n';
-			for (const auto& unit : data)
+			for (const auto& unit : data.Get())
 			{
 				outputF << unit << "\n";
 			}
-			std::cout << data.size() << " units saved.\n";
+			std::cout << data->size() << " units saved.\n";
 		}
 	}
 

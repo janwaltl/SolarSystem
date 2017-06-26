@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Working on physics units and conversion to 3D.
+Working on conversion to 3D Part I - parsers. Won't compile.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:

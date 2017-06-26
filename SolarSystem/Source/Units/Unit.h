@@ -38,6 +38,8 @@ namespace solar
 		const units_t& Get() const;
 		//Set units in which are simData
 		void SetPhysUnits(PhysUnits::ratio newMass, PhysUnits::ratio newDist, PhysUnits::ratio newTime);
+		void SetPhysUnits(const PhysUnits& newPhysUnits);
+		const PhysUnits& GetPhysUnits() const;
 		//Converts simData to desired physics units
 		void ConvertTo(PhysUnits::ratio newMass, PhysUnits::ratio newDist, PhysUnits::ratio newTime);
 		void ConvertMassTo(PhysUnits::ratio newMass);
@@ -51,7 +53,7 @@ namespace solar
 		PhysUnits::ratio RatioOfTimeTo(PhysUnits::ratio newTime);
 	private:
 		units_t units;
-		PhysUnits::ratio mass, dist, time;
+		PhysUnits physUnits;
 	};
 }
 

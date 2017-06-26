@@ -11,8 +11,8 @@ namespace solar
 	{
 	public:
 		explicit SolarParser(const std::string& saveFile = "");
-		simData_t Load() override final;
-		void Save(const simData_t& data) override final;
+		SimData Load() override final;
+		void Save(const SimData& data) override final;
 	private:
 		const std::string saveFile;
 	};
