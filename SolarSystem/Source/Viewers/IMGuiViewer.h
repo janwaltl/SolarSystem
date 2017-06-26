@@ -7,7 +7,6 @@
 #include "IMGuiViewer/Drawers/GUIDrawer.h"
 #include "IMGuiViewer/Drawers/SimDataDrawer.h"
 #include "IMGuiViewer/Drawers/LineTrailsDrawer.h"
-#include "IMGuiViewer/OMSARPolicy.h"
 #include "IMGuiViewer/Camera.h"
 //#include "IMGuiViewer/Drawers/TestDrawer.h"
 
@@ -15,7 +14,7 @@ namespace solar
 {
 	//Renders Graphical interface that allows controlling the simulation
 	//Also shows 2D visualization of simulated data
-	class IMGuiViewer :public Viewer, public OMSAR
+	class IMGuiViewer :public Viewer
 	{
 	public:
 		// Properties of created window

@@ -2,7 +2,6 @@
 
 #include "Source/Units/PhysicsUnits.h"
 #include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
-#include "Source/Viewers/IMGuiViewer/OMSARPolicy.h"
 
 namespace solar
 {
@@ -15,7 +14,7 @@ namespace solar
 		{
 		}
 
-		void UnitsProperties::operator()(simData_t & data, OMSAR * follow)
+		void UnitsProperties::operator()(simData_t & data)
 		{
 			ImGui::SetNextWindowPos(winPos, ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(winSize, ImGuiSetCond_Once);
@@ -74,15 +73,15 @@ namespace solar
 			}
 			ImGui::End();
 
-			if (following && follow)
-				Follow(data, *follow);
+			//if (following && follow)
+			//	Follow(data, *follow);
 
-			SelectedUnitTextLabel(data, follow);
+			//SelectedUnitTextLabel(data, follow);
 		}
 
-		void UnitsProperties::SelectedUnitTextLabel(solar::simData_t & data, solar::OMSAR * follow)
+		void UnitsProperties::SelectedUnitTextLabel(solar::simData_t & data/*, solar::OMSAR * follow*/)
 		{
-			//Normalized position on the screen
+			/*//Normalized position on the screen
 			auto tmp = data[selectedUnit].pos*follow->ScaleFactor() + follow->GetOffset();
 			tmp.x *= 600;
 			tmp.y *= -350 * follow->AspectRatio();
@@ -103,7 +102,7 @@ namespace solar
 				ImGui::End();
 			}
 			ImGui::PopStyleColor();
-			ImGui::PopStyleVar();
+			ImGui::PopStyleVar();*/
 		}
 
 		bool UnitsProperties::UnitNameGetter(void * data, int index, const char ** result)
@@ -125,10 +124,10 @@ namespace solar
 
 		void UnitsProperties::Follow(const simData_t& data, OMSAR & follow)
 		{
-			assert((int)data.size() > selectedUnit && selectedUnit >= 0);
+			/*assert((int)data.size() > selectedUnit && selectedUnit >= 0);
 
 			// Move to this position to move followed Unit to screen's center
-			follow.Move(-1.0*follow.ScaleFactor()*data[selectedUnit].pos);
+			follow.Move(-1.0*follow.ScaleFactor()*data[selectedUnit].pos);*/
 		}
 	}
 }

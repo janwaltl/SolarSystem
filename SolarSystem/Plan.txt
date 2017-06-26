@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Refactored Mousecontrols into a class.
+Removed OMSAR class and fixed ReplayerViewer(=added camera to it).
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
@@ -10,19 +10,20 @@ Remarks:
 	Resolve speeding/slowing down while recording.
 		- won't be easy - either we loose O(1) search in file or we get wrong replaying speed
 			- went for wrong replaying speed for now
-TODOs:
+TODOs/IDEAS:
 	Add Inverses of matrices in UBO in camera class if needed.
-	Fix ReplayerViewer.
 	Why is Ortho weirdly clipped when projecting to the center?
 		- now projecting to near clipping plane, need to resolve it there's typo or bug in matrices somewhere.
-	Removed OMSAR when done with Trackball.
+
+	Two forms of zooming???
+		- forward movement - moves camera and its target in view direction
+		- zooming to target - moves camera closer to its target pos(needs lower bound=maxZoom)
+		- Go to two-button setup with ALT?
+			- left Trackball, altLeft 1st person cam(instead of middleButton)
+			- scroll zoom to target, altScroll forward movement
+			- right,altRight moves to sides
+
 Plan:
-	Add ArcBall controlls
-		- amount is controlled by mouse movement and action based on pressed buttons:
-			- MiddleMouse: LookAround
-				- rotate using trackball from camera's position changing cam's target
-	Make MouseControls into class?
-		- it does have state 
 	Design and implemented unit system
 		- based on ratio in chrono would be best?
 

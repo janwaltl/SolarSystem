@@ -17,8 +17,8 @@ namespace solar
 		{
 		public:
 			explicit UnitsProperties(Vec2d winPos = Vec2d(10, 310), Vec2d winSize = Vec2d(250, 390));
-			void operator()(simData_t& data, OMSAR* follow = nullptr);
-			void SelectedUnitTextLabel(solar::simData_t & data, solar::OMSAR * follow);
+			void operator()(simData_t& data);
+			void SelectedUnitTextLabel(solar::simData_t & data);
 		private:
 			// Returns char* string representing name of the selected Unit by its index in simData vector
 			// Helper functions for combo box with units' names

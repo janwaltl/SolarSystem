@@ -2,17 +2,18 @@
 #define VIEWERS_REPLAY_VIEWER_HEADER
 
 #include "Viewer.h"
-#include "IMGuiViewer/OMSARPolicy.h"
 #include "IMGuiViewer/OpenGLBackEnd.h"
 #include "IMGuiViewer/ImGuiBackend.h"
 #include "IMGuiViewer/Drawers/SimDataDrawer.h"
 #include "IMGuiViewer/Drawers/LineTrailsDrawer.h"
 #include "IMGuiViewer/Drawers/ReplayGUIDrawer.h"
+#include "IMGuiViewer/Camera.h"
+
 namespace solar
 {
 	//Part of replaying a simulation mode.
 	//Draws GUI that allows controlling the replaying of a replay
-	class ReplayerViewer : public Viewer, public OMSAR
+	class ReplayerViewer : public Viewer
 	{
 	public:
 		// File including path and extension
@@ -25,6 +26,7 @@ namespace solar
 		const std::string replayFileName;
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT
+		Camera cam;
 		std::unique_ptr<drawers::ReplayGUIDrawer> replayGUIDrawer;
 		std::unique_ptr<drawers::SimDataDrawer> simDataDrawer;
 		std::unique_ptr<drawers::LineTrailsDrawer> lineTrailsDrawer;
