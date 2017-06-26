@@ -23,11 +23,11 @@ namespace solar
 	private:
 		struct AccVel//Helper class just to clear up notation, can be replaced with pair
 		{
-			Vec2d acc, vel;
+			Vec3d acc, vel;
 		};
 		struct VelPos//Helper clas just to clear up notation, can be replaced with pair
 		{
-			Vec2d vel, pos;
+			Vec3d vel, pos;
 		};
 		//Temporary object for each unit, holds vel, pos for individual RK4 substeps
 		std::vector<VelPos> temps;

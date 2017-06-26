@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Working on conversion to 3D Part I - parsers. Won't compile.
+Working on conversion to 3D Part II - simMethods. Won't compile.
+Fix in FormattedFileParser.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:

@@ -127,8 +127,9 @@ namespace solar
 		if (!val.empty())
 		{
 			size_t pos {};
-			unit.pos.x = std::stod(val, &pos) / physicsUnits::AUtoM;
-			unit.pos.y = std::stod(val.substr(pos)) / physicsUnits::AUtoM;
+			unit.pos.x = std::stod(val, &pos);
+			unit.pos.y = std::stod(val.substr(pos),&pos);
+			unit.pos.z = std::stod(val.substr(pos));
 		}
 	}
 
@@ -139,8 +140,9 @@ namespace solar
 		if (!val.empty())
 		{
 			size_t pos {};
-			unit.vel.x = std::stod(val, &pos) / physicsUnits::AUpYtoMpS;
-			unit.vel.y = std::stod(val.substr(pos)) / physicsUnits::AUpYtoMpS;
+			unit.vel.x = std::stod(val, &pos) ;
+			unit.vel.y = std::stod(val.substr(pos), &pos);
+			unit.vel.z = std::stod(val.substr(pos));
 		}
 	}
 
@@ -149,7 +151,7 @@ namespace solar
 		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
 
 		if (!val.empty())
-			unit.mass = std::stod(val) / physicsUnits::SMtoKG;//Convert to Suns masses
+			unit.mass = std::stod(val);
 	}
 
 	void FormattedFileParser::ParseColor(Unit & unit, const std::string & val)

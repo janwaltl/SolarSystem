@@ -18,8 +18,6 @@ namespace solar
 		static constexpr double SMtoKG = 1.988435e30; // Solar masses to kilograms
 
 		static constexpr double AUpYtoMpS = AUtoM / YtoS;//AUs per Year to Meters per Second
-		static const double PI = 4 * atan(1.0);
-		static const double G = 4 * PI*PI; // Gravitational constant is 4PI^2 in used units
 	};
 	class PhysUnits
 	{
@@ -43,7 +41,7 @@ namespace solar
 		static constexpr ratio AU {149'597'870'700.0};
 
 		ratio mass, time, dist;
-		PhysUnits(ratio mass = 1.0, ratio time = 1.0, ratio dist = 1.0) :mass(mass), time(time), dist(dist) {}
+		PhysUnits(ratio mass = kilogram, ratio time = second, ratio dist = meter) :mass(mass), time(time), dist(dist) {}
 	};
 }
 

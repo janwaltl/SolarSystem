@@ -20,7 +20,7 @@ namespace solar
 		return out;
 	}
 	//Serializes passed Unit, values are written in desired outputUnits
-	inline void PrintUnit(std::ostream& out, const Unit& unit, const PhysUnits& currUnits, PhysUnits& outputUnits)
+	inline void PrintUnit(std::ostream& out, const Unit& unit, const PhysUnits& currUnits, const PhysUnits& outputUnits)
 	{
 		auto massRatio = currUnits.mass / outputUnits.mass;
 		auto velRatio = currUnits.dist / currUnits.time / (outputUnits.dist / outputUnits.time);

@@ -51,31 +51,35 @@ namespace solar
 		if (recordNum >= numRecords)//Stop at the end, obviously...
 			recordNum = numRecords - 1;//Because 'recordNum' starts at zero and ends at 'numRecords-1'
 
+		double posVel[6];//pos.x,pos.y,pos.z,vel.x,vel.y,vel.z
 		//Reads record number 'recordNum' and the next one.
 		//Then interpolates between them
-		in.seekg(offset + recordNum * 32 * data->size());
+		in.seekg(offset + recordNum * sizeof(posVel) * data->Get().size());
 
-		double posVel[4];//pos.x,pos.y,vel.x,vel.y
 
 		bool last = numRecords - recordNum == 1;
 		if (last)//Do not interpolate on last record
 			lambda = 0.0;
 
-		for (size_t i = 0; i < data->size(); ++i)
+		for (size_t i = 0; i < data->Get().size(); ++i)
 		{
 			in.read(reinterpret_cast<char*>(posVel), sizeof(posVel));
-			(*data)[i].pos.x = (1 - lambda)*posVel[0];
-			(*data)[i].pos.y = (1 - lambda)*posVel[1];
-			(*data)[i].vel.x = (1 - lambda)*posVel[2];
-			(*data)[i].vel.y = (1 - lambda)*posVel[3];
+			data->Get()[i].pos.x = (1 - lambda)*posVel[0];
+			data->Get()[i].pos.y = (1 - lambda)*posVel[1];
+			data->Get()[i].pos.z = (1 - lambda)*posVel[2];
+			data->Get()[i].vel.x = (1 - lambda)*posVel[3];
+			data->Get()[i].vel.y = (1 - lambda)*posVel[4];
+			data->Get()[i].vel.z = (1 - lambda)*posVel[5];
 		}
-		for (size_t i = 0; !last && i < data->size(); ++i)
+		for (size_t i = 0; !last && i < data->Get().size(); ++i)
 		{
 			in.read(reinterpret_cast<char*>(posVel), sizeof(posVel));
-			(*data)[i].pos.x += lambda*posVel[0];
-			(*data)[i].pos.y += lambda*posVel[1];
-			(*data)[i].vel.x += lambda*posVel[2];
-			(*data)[i].vel.y += lambda*posVel[3];
+			data->Get()[i].pos.x = lambda*posVel[0];
+			data->Get()[i].pos.y = lambda*posVel[1];
+			data->Get()[i].pos.z = lambda*posVel[2];
+			data->Get()[i].vel.x = lambda*posVel[3];
+			data->Get()[i].vel.y = lambda*posVel[4];
+			data->Get()[i].vel.z = lambda*posVel[5];
 		}
 	}
 }

@@ -23,5 +23,5 @@ CONTENT
 
 for each time tick:
 	for each unit:
-		Position													2*8							double[2]
-		Velocity													2*8							double[2]
+		Position													3*8							double[3]
+		Velocity													3*8							double[3]
