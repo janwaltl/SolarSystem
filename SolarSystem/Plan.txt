@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Removed OMSAR class and fixed ReplayerViewer(=added camera to it).
+Working on physics units and conversion to 3D.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
@@ -25,8 +25,16 @@ TODOs/IDEAS:
 
 Plan:
 	Design and implemented unit system
-		- based on ratio in chrono would be best?
-
+		- simData also contains in which units the data are.
+		- ability to convert between units in run-time
+		- supported units
+			- distance: meters, kilometers, AU
+			- time: seconds, minute, hours, days, years
+			- mass: kg, earthMass, sunMass
+		- general ratio class
+		- Factory functions for supported units
+		- conversion for values
+		- unitSystem to convert whole Unit
 	UI overhaul:
 		- Top-bar with dropdown windows
 			- SimControls
