@@ -4,6 +4,7 @@
 
 #include "GUI/UnitsProperties.h"
 #include "GUI/ReplayControls.h"
+#include "GUI/MouseControls.h"
 #include "LineTrailsDrawer.h"
 
 namespace solar
@@ -21,6 +22,7 @@ namespace solar
 					  size_t w, size_t h);
 		private:
 			gui::UnitsProperties unitsProps;
+			gui::MouseControls mouseControls;
 			gui::ReplayControls replayControls;
 		};
 	}

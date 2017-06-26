@@ -13,9 +13,7 @@ namespace solar
 		void GUIDrawer::Draw(simData_t& data, IMGuiViewer& viewer, drawers::LineTrailsDrawer& lineTrails,
 							 size_t w, size_t h)
 		{
-
-			gui::GrabControl(viewer.GetCamera());
-			gui::ZoomControl(viewer);
+			mouseControls(viewer.GetCamera());
 			unitsProps(data, &viewer);
 			gui::SimProperties(viewer);
 			gui::Visuals(lineTrails, data, w, h);

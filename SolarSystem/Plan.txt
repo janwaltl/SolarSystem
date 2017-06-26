@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Finished 1st person camera for Trackball.
+Refactored Mousecontrols into a class.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:

@@ -47,18 +47,17 @@ namespace solar
 		//			That would allow multiple bound cameras at same time. Minimum binding points is 24 which is more than enough for all camera which will probably be the only use for UBOs anyway.
 		//			Might get messy. With OpenGLSM and with shader remembering its UBO it can bind correct camera with its own Bind() which is already called before draw calls.
 		Camera& Bind();
-		Vec3d CamPos();
-		Vec3d TargetPos();
-		Vec3d UpDir();
-		Vec3d RightDir();
-		Mat4f ViewMatrix();
-		void ViewMatrix(const Mat4f& newView);
+		const Vec3d& CamPos() const;
+		const Vec3d& TargetPos() const;
+		const Vec3d& UpDir() const;
+		const Vec3d& RightDir() const;
+		const Mat4f& ViewMatrix() const;
 	private:
 		void LazyInit();
 		void SubmitMatrices();
 		uint32_t UBO;
 		Mat4f projection, view;
-		Vec3d camPos, targetPos, upDir,rightDir;
+		Vec3d camPos, targetPos, upDir, rightDir;
 	};
 }
 

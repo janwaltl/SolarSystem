@@ -3,6 +3,7 @@
 
 
 #include "GUI/UnitsProperties.h"
+#include "GUI/MouseControls.h"
 #include "LineTrailsDrawer.h"
 #include "Source/Units/Unit.h"
 
@@ -19,6 +20,7 @@ namespace solar
 					  size_t w, size_t h);
 		private:
 			gui::UnitsProperties unitsProps;
+			gui::MouseControls mouseControls;
 		};
 	}
 }

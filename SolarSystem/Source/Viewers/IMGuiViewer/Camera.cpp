@@ -80,35 +80,29 @@ namespace solar
 		return *this;
 	}
 
-	Vec3d Camera::CamPos()
+	const Vec3d& Camera::CamPos() const
 	{
 		return camPos;
 	}
 
-	Vec3d Camera::TargetPos()
+	const Vec3d& Camera::TargetPos() const
 	{
 		return targetPos;
 	}
 
-	Vec3d Camera::UpDir()
+	const Vec3d& Camera::UpDir() const
 	{
 		return upDir;
 	}
 
-	Vec3d Camera::RightDir()
+	const Vec3d& Camera::RightDir() const
 	{
 		return rightDir;
 	}
 
-	Mat4f Camera::ViewMatrix()
+	const Mat4f & Camera::ViewMatrix() const
 	{
 		return view;
-	}
-
-	void Camera::ViewMatrix(const Mat4f & newView)
-	{
-		view = newView;
-		SubmitMatrices();
 	}
 
 	void Camera::LazyInit()
