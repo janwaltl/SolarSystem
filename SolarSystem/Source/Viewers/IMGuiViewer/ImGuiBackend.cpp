@@ -34,7 +34,7 @@ namespace solar
 	void IMGuiBackend::NewFrame(double lastFrameTime)
 	{
 		//Fill mouse position, because according to documentation needs to be done every frame,
-		//Other things seems to work fine just using callbacks.
+		//Other things seem to work fine just using callbacks.
 
 		ImGuiIO& io = ImGui::GetIO();
 		double x, y;

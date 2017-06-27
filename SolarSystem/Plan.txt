@@ -1,5 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Changed style of GUI.
+Working on UnitsProperties.
+Added operator[] to SimData.
+Fixed wrong mass of Venus in SolarParser.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
@@ -69,7 +71,7 @@ Plan:
 						- change size, position? (But keep it in screen coords)
 					- camTarget indicator
 					- UI for object
-						- shows name of hover
+						- shows name on hover
 						- when selected(on click) shows small window
 							- Name, set as target(follow), set as ref frame
 	Bonuses:

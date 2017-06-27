@@ -7,11 +7,24 @@ namespace solar
 {
 	namespace gui
 	{
-		const Unit UnitsProperties::centerRefSystem {};
-
+		const Unit UnitsProperties::center(Vec3d(), Vec3d(), 0.0, "Center");
+		namespace
+		{
+			void InfoBox(const char* text)
+			{
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(0.3f, 0.3f, 0.3f, 1.0f), "(?)");
+				ImGui::TextTooltipOnHover(text);
+			}
+		}
 		UnitsProperties::UnitsProperties(Vec2d winPos, Vec2d winSize) :
-			winPos(winPos), winSize(winSize)
-		{}
+			winPos(winPos), winSize(winSize), refUnit(&center)
+		{
+			this->winSize = Vec2d(800, 300);
+			this->winPos = Vec2d(200, 200);
+			distPosCombo = speedVelCombo = timeCombo = massCombo = lenCombo = 0;
+			massRatio = timeRatio = lenRatio = 1.0;
+		}
 
 		void UnitsProperties::operator()(SimData & data)
 		{
@@ -19,116 +32,154 @@ namespace solar
 			ImGui::SetNextWindowSize(winSize, ImGuiSetCond_Once);
 			if (ImGui::Begin("Units' properties", NULL))
 			{
-				if (data->size() > 0)//If there are units
+				ListHeader(data);
+
+				if (ImGui::BeginChild("Units", ImVec2 {}, false, ImGuiWindowFlags_AlwaysUseWindowPadding))
 				{
-					assert(0 <= selectedUnit && selectedUnit < (int)data->size());
-					assert(0 <= selectedRefUnit && selectedRefUnit < (int)data->size() + 1);
+					ImGui::Columns(4);
+					ImGui::SetColumnOffset(1, 90);
+					ImGui::SetColumnOffset(2, 370);
+					ImGui::SetColumnOffset(3, 650);
 
-					//Shows list of all units and offers some things to do with them
-					ImGui::Text("Show info about selected unit:");
-
-					ImGui::Combo("##SelectedUnit", &selectedUnit, UnitNameGetter, &data, data->size(), 5);
-					ImGui::Text("Reference system:");
-					ImGui::TextTooltipOnHover("Physical units are relative with respect to selected reference system.");
-
-					//Zero index is reserved for centerSystem, so there is one more than data->size()
-					ImGui::Combo("##SelectedRefSystem", &selectedRefUnit, RefUnitNameGetter, &data, data->size() + 1, 5);
-
-					auto& refUnit = selectedRefUnit > 0 ? data.Get()[selectedRefUnit - 1] : centerRefSystem;
-					auto& unit = data.Get()[selectedUnit];
-					auto distRatio = data.RatioOfDistTo(PhysUnits::AU);
-					auto speedRatio = data.RatioOfDistTo(PhysUnits::kilometer) / data.RatioOfTimeTo(PhysUnits::second);
-					auto massRatio = data.RatioOfMassTo(PhysUnits::kilogram);
-					ImGui::Text("Properties:");
-					ImGui::Columns(2, "##UnitsCol", false);
-					ImGui::SetColumnOffset(1, 80.0f);
-
-					ImGui::Text("Position:"); ImGui::NextColumn();
-					ImGui::Text("X %2.6f AU", (unit.pos.x - refUnit.pos.x)*distRatio);
-					ImGui::Text("Y %2.6f AU", (unit.pos.y - refUnit.pos.y)*distRatio); ImGui::NextColumn();
-
-					ImGui::Text("Distance:"); ImGui::NextColumn();
-					ImGui::TextTooltipOnHover("Distance from center of reference system.");
-					ImGui::Text(" %2.6f AU", (unit.pos - refUnit.pos).Length()*distRatio);
+					ImGui::Text("Name"); InfoBox("Right click on names of units for more actions");
 					ImGui::NextColumn();
+					ImGui::Combo("##DistPos", &distPosCombo, "Distance\0Position\0"); ImGui::NextColumn();
+					ImGui::Combo("##SpeedVel", &speedVelCombo, "Speed\0Velocity\0"); ImGui::NextColumn();
+					ImGui::Text("Mass"); ImGui::NextColumn();
+					ImGui::Separator();
+					ImGui::Separator();
 
-					ImGui::Text("Velocity:"); ImGui::NextColumn();
-					ImGui::Text("X %+2.6f km/s", (unit.vel.x - refUnit.vel.x)*speedRatio);
-					ImGui::Text("Y %+2.6f km/s", (unit.vel.y - refUnit.vel.y)*speedRatio);
-					ImGui::NextColumn();
+					for (size_t i = 0; i < data->size(); ++i)
+					{
+						ImGui::PushID(i);
+						ImGui::Text(data[i].name.c_str());
+						if (ImGui::BeginPopupContextItem("UnitDetails"))
+						{
+							if (ImGui::Selectable("Set as frame of reference"))
+								frameOfRef = i + 1;
+							ImGui::Text("Edit values");
+							ImGui::Text("Focus");
+							ImGui::Text("Set as grid's frame of reference");
+							ImGui::Text("Other cool buttons");
+							ImGui::EndPopup();
+						}
+						ImGui::NextColumn();
 
-					ImGui::Text("Speed:"); ImGui::NextColumn();
-					ImGui::Text(" %2.6f km/s", (unit.vel - refUnit.vel).Length()*speedRatio);
-					ImGui::NextColumn();
+						Vec3d relPos = data[i].pos - refUnit->pos;
+						Vec3d relVel = data[i].vel - refUnit->vel;
 
-					ImGui::Text("Mass:"); ImGui::NextColumn();
-					ImGui::Text(" %1.4e kg", unit.mass * massRatio); ImGui::NextColumn();
-					ImGui::Columns(1);
-					ImGui::NewLine();
-					if (ImGui::Button(!following ? "Follow selected unit" : "Cancel following"))
-						following = !following;
+						if (distPosCombo == 1)
+							ImGui::Text("(%9.3g, %9.3g, %9.3g) %s", relPos.x*lenRatio, relPos.y*lenRatio, relPos.z*lenRatio, lenSuff);
+						else
+							ImGui::Text("%9.3g %s ", relPos.Length()*lenRatio, lenSuff);
+						ImGui::NextColumn();
 
+						if (speedVelCombo == 1)
+							ImGui::Text("(%+9.3g, %9.3g, %9.3g) %s/%s", relVel.x*lenRatio / timeRatio, relVel.y*lenRatio / timeRatio,
+										relVel.z*lenRatio / timeRatio, lenSuff, timeSuff);
+						else
+							ImGui::Text("%9.3g %s/%s", relVel.Length()*lenRatio / timeRatio, lenSuff, timeSuff);
+
+						ImGui::NextColumn();
+
+						ImGui::Text("%9.3g %s", data[i].mass*massRatio, massSuff); ImGui::NextColumn();
+						ImGui::Separator();
+						ImGui::PopID();
+					}
+					ImGui::EndChild();
 				}
-				else
-					ImGui::TextColored({1.0,0.0,0.0,1.0}, "There are no units.");
-			}
-			ImGui::End();
-
-			//if (following && follow)
-			//	Follow(data, *follow);
-
-			//SelectedUnitTextLabel(data, follow);
-		}
-
-		void UnitsProperties::SelectedUnitTextLabel(solar::SimData & data/*, solar::OMSAR * follow*/)
-		{
-			/*//Normalized position on the screen
-			auto tmp = data[selectedUnit].pos*follow->ScaleFactor() + follow->GetOffset();
-			tmp.x *= 600;
-			tmp.y *= -350 * follow->AspectRatio();
-			tmp += Vec2d {600,350 - 6};//Half window's size and 6px higher
-			//tmp is now position in pixels
-
-			ImGui::SetNextWindowPos(tmp, ImGuiSetCond_Always);
-			auto flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar
-				| ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoInputs;
-
-			auto style = ImGui::GetStyle();
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, {10,0});
-			ImGui::PushStyleColor(ImGuiCol_WindowBg, {0.0,0.0,0.0,0.0});
-
-			if (ImGui::Begin("Planet", nullptr, flags))
-			{
-				ImGui::TextColored({1.0,1.0,1.0,1.0}, data[selectedUnit].name.c_str());
 				ImGui::End();
 			}
-			ImGui::PopStyleColor();
-			ImGui::PopStyleVar();*/
 		}
+		void UnitsProperties::ListHeader(solar::SimData & data)
+		{
+			SetLenUnits(data);
+			SetTimeUnits(data);
+			SetMassUnits(data);
+			SetFrameOfRef(data);
 
+			ImGui::PushItemWidth(100);
+
+			ImGui::Text("Frame of reference:"); InfoBox("Point against which are speed(velocity) and position(distance) measured.");
+			ImGui::SameLine();
+			if (ImGui::Combo("##FrameOfRef", &frameOfRef, UnitNameGetter, &data, data->size() + 1, 10))
+				SetFrameOfRef(data);
+
+			ImGui::SameLine(0.0f, 50.0f);
+
+			ImGui::Text("Time:"); ImGui::SameLine();
+			if (ImGui::Combo("##Time", &timeCombo, "Seconds\0Minutes\0Hours\0Days\0Years\0"))
+				SetTimeUnits(data);
+			ImGui::SameLine();
+			ImGui::PopItemWidth();
+			ImGui::PushItemWidth(100);
+			ImGui::Text("Length:"); ImGui::SameLine();
+			if (ImGui::Combo("##Length", &lenCombo, "Meters\0Kilometers\0AU\0"))
+				SetLenUnits(data);
+			ImGui::SameLine();
+			ImGui::PopItemWidth();
+			ImGui::PushItemWidth(120);
+			ImGui::Text("Mass:"); ImGui::SameLine();
+			if (ImGui::Combo("##Mass", &massCombo, "Kilograms\0Earth masses\0Solar masses\0Relative\0"))
+				SetMassUnits(data);
+			ImGui::TextTooltipOnHover("Relative means relative to frame of reference object");
+			ImGui::PopItemWidth();
+		}
+		void UnitsProperties::SetFrameOfRef(solar::SimData & data)
+		{
+			if (frameOfRef != 0)
+				refUnit = &data[frameOfRef - 1];
+			else
+				refUnit = &center;
+		}
+		void UnitsProperties::SetMassUnits(solar::SimData & data)
+		{
+			switch (massCombo)
+			{
+			case 3:
+				if (frameOfRef != 0)
+				{
+					massRatio = 100.0 / refUnit->mass;						massSuff = "%";			break;
+				}
+				else
+					massCombo = 0;
+			case 0: massRatio = data.RatioOfMassTo(PhysUnits::kilogram);	massSuff = "kg";		break;
+			case 1: massRatio = data.RatioOfMassTo(PhysUnits::earth);		massSuff = "Earths";	break;
+			case 2: massRatio = data.RatioOfMassTo(PhysUnits::sun);			massSuff = "Suns";		break;
+			}
+		}
+		void UnitsProperties::SetLenUnits(solar::SimData & data)
+		{
+			switch (lenCombo)
+			{
+			case 0: lenRatio = data.RatioOfDistTo(PhysUnits::meter);		lenSuff = "m";		break;
+			case 1: lenRatio = data.RatioOfDistTo(PhysUnits::kilometer);	lenSuff = "km";		break;
+			case 2: lenRatio = data.RatioOfDistTo(PhysUnits::AU); 			lenSuff = "AU";		break;
+			}
+		}
+		void UnitsProperties::SetTimeUnits(solar::SimData & data)
+		{
+			switch (timeCombo)
+			{
+			case 0: timeRatio = data.RatioOfTimeTo(PhysUnits::second);		timeSuff = "s";		break;
+			case 1: timeRatio = data.RatioOfTimeTo(PhysUnits::minute);		timeSuff = "min";	break;
+			case 2: timeRatio = data.RatioOfTimeTo(PhysUnits::hour); 		timeSuff = "h";		break;
+			case 3: timeRatio = data.RatioOfTimeTo(PhysUnits::day); 		timeSuff = "d";		break;
+			case 4: timeRatio = data.RatioOfTimeTo(PhysUnits::year); 		timeSuff = "y";		break;
+			}
+		}
 		bool UnitsProperties::UnitNameGetter(void * data, int index, const char ** result)
 		{
-			auto& simData = *reinterpret_cast<SimData*>(data);
-			*result = simData.Get()[index].name.c_str();// correct index is ensured by ImGui::Combo call
-			return true;
-		}
 
-		bool UnitsProperties::RefUnitNameGetter(void * data, int index, const char ** result)
-		{
-			auto& simData = *reinterpret_cast<SimData*>(data);
 			if (index == 0)
-				*result = centerSystem;
+				*result = center.name.c_str();
 			else
-				*result = simData.Get()[index - 1].name.c_str();// correct index is ensured by ImGui::Combo call
+			{
+				auto& simData = *reinterpret_cast<SimData*>(data);
+				*result = simData[index - 1].name.c_str();// correct index is ensured by ImGui::Combo call
+			}
 			return true;
 		}
 
-		void UnitsProperties::Follow(const SimData& data, OMSAR & follow)
-		{
-			/*assert((int)data->size() > selectedUnit && selectedUnit >= 0);
-
-			// Move to this position to move followed Unit to screen's center
-			follow.Move(-1.0*follow.ScaleFactor()*data[selectedUnit].pos);*/
-		}
 	}
 }

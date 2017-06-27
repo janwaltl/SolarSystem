@@ -18,7 +18,7 @@ namespace solar
 		data->push_back(Unit(Vec3d(0.0, 0.0), Vec3d(0.0, 0.0), 1.98843e30, "Sun", Vec4d(1.0, 1.0, 0.0, 1.0)));
 		//Planets
 		data->push_back(Unit(Vec3d(57.909e9, 0.0), Vec3d(0.0, 47362.0), 3.3011e23, "Mercury", Vec4d(0.2, 0.3, 0.2, 1.0)));
-		data->push_back(Unit(Vec3d(108.208e9, 0.0), Vec3d(0.0, 35020.0), 3.3011e23, "Venus", Vec4d(0.5, 0.2, 0.2, 1.0)));
+		data->push_back(Unit(Vec3d(108.208e9, 0.0), Vec3d(0.0, 35020.0), 4.8675e24, "Venus", Vec4d(0.5, 0.2, 0.2, 1.0)));
 		data->push_back(Unit(Vec3d(149.6e9, 0.0), Vec3d(0.0, 29800.0), 5.9736e24, "Earth", Vec4d(0.17, 0.63, 0.83, 1.0)));
 		data->push_back(Unit(Vec3d(225.6e9, 0.0), Vec3d(0.0, 24100.0), 6.4185e23, "Mars", Vec4d(1.0, 0.46, 0.0, 1.0)));
 		data->push_back(Unit(Vec3d(778.5e9, 0.0), Vec3d(0.0, 13050.0), 1.899e27, "Jupiter", Vec4d(0.86, 0.76, 0.57, 1.0)));

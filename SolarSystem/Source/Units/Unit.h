@@ -33,6 +33,8 @@ namespace solar
 		//Quick access to vector of simulated units
 		units_t& operator*();
 		const units_t& operator*() const;
+		Unit& operator[](size_t index);
+		const Unit& operator[](size_t index) const;
 		//Access to vector of simulated units
 		units_t& Get();
 		const units_t& Get() const;

@@ -21,6 +21,14 @@ namespace solar
 	{
 		return units;
 	}
+	Unit & SimData::operator[](size_t index)
+	{
+		return units[index];
+	}
+	const Unit & SimData::operator[](size_t index) const
+	{
+		return units[index];
+	}
 	SimData::units_t & SimData::Get()
 	{
 		return units;
