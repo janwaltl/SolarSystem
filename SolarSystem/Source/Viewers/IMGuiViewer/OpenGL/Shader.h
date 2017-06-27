@@ -28,8 +28,15 @@ namespace solar
 
 			void SetUniform1i(const std::string& name, int i) const;
 			void SetUniform2f(const std::string& name, float x, float y) const;
+			//Still sets vec2 of floats, just less casting
 			void SetUniform2f(const std::string& name, const Vec2d& vec) const;
+			void SetUniform2f(const std::string& name, const Vec2f& vec) const;
+			void SetUniform3f(const std::string& name, float x, float y, float z) const;
+			//Still sets vec3 of floats, just less casting
+			void SetUniform3f(const std::string& name, const Vec3d& vec) const;
+			void SetUniform3f(const std::string& name, const Vec3f& vec) const;
 			void SetUniform4f(const std::string& name, float x, float y, float z, float w) const;
+			//Still sets vec4 of floats, just less casting
 			void SetUniform4f(const std::string& name, const Vec4d& vec) const;
 			void SetUniform4Mat(const std::string& name, const Mat4f& mat) const;
 			size_t GetUniformBlockIndex(const std::string& blockName) const;

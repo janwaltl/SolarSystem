@@ -16,8 +16,8 @@ namespace solar
 		{
 			// Maximum number of points in one lineTrail.
 			// GPU Memory footprint:
-			// - maxLength*4KB for indices
-			// - numUnits* maxLength*8KB for vertices
+			// - maxLength*2*4B for indices
+			// - numUnits* maxLength*3*4B for vertices
 			constexpr size_t maxLength = 40'000;
 		}
 
@@ -35,11 +35,11 @@ namespace solar
 				// Together with curIndex this creates sort of sliding window which renderes correct line trail
 				// that pushes new indices at the end if there's space. If there's not, then it overwrites the oldest ones
 				// on the beginning. These double indices ensure correct rendering order for the whole line strip(trail)
-				//  -example: maxLength 3
-				// Push({x1,y1}) -			VBO: x1,y1					rendered indices: 0
-				// Push({x2,y2})			VBO: x1,y1,x2,y2			rendered indices: 0,1
-				// Push({x3,y3})			VBO: x1,y1,x2,y2,x3,y3		rendered indices: 0,1,2
-				// Push({x4,y4})			VBO: x4,y4,x2,y2,x3,y3		rendered indices: 1,2,0
+				//  -example: maxLength 3 ( and in 2D)
+				// Push({x1,y1,}) -			VBO: x1,y1					rendered indices: 0
+				// Push({x2,y2,})			VBO: x1,y1,x2,y2			rendered indices: 0,1
+				// Push({x3,y3,})			VBO: x1,y1,x2,y2,x3,y3		rendered indices: 0,1,2
+				// Push({x4,y4,})			VBO: x4,y4,x2,y2,x3,y3		rendered indices: 1,2,0
 				// - Fourth point ovewrites the first one and line is correctly rendered
 				//	 in order of second, third and fourth point as it should. Thanks to that indices array's structure.
 				// 
@@ -65,9 +65,9 @@ namespace solar
 			glBindVertexArray(VAO);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
-			glBufferData(GL_ARRAY_BUFFER, 2 * maxLength * sizeof(GLfloat), nullptr, GL_DYNAMIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, 3 * maxLength * sizeof(GLfloat), nullptr, GL_DYNAMIC_DRAW);
 			//Positions are Vec2d of floats at location=0 in shader
-			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 			glEnableVertexAttribArray(0);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			glBindVertexArray(0);
@@ -95,12 +95,12 @@ namespace solar
 			--refCount;
 		}
 
-		void UnitTrail::Push(const Vec2d & newPos)
+		void UnitTrail::Push(const Vec3d & newPos)
 		{
-			GLfloat data[2] = {static_cast<GLfloat>(newPos.x),static_cast<GLfloat>(newPos.y)};
+			GLfloat data[3] = {static_cast<GLfloat>(newPos.x),static_cast<GLfloat>(newPos.y),static_cast<GLfloat>(newPos.z)};
 			//Uploads newPos into VBO
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
-			glBufferSubData(GL_ARRAY_BUFFER, 2 * sizeof(GLfloat)*curIndex, 2 * sizeof(GLfloat), data);
+			glBufferSubData(GL_ARRAY_BUFFER, 3 * sizeof(GLfloat)*curIndex, 3 * sizeof(GLfloat), data);
 
 			length = std::min(length + 1, maxLength);
 			++curIndex;

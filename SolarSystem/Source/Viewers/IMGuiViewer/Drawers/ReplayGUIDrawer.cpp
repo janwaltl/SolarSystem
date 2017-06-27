@@ -11,7 +11,7 @@ namespace solar
 			unitsProps(Vec2d(10, 10)), replayControls(replayFileName)
 		{}
 
-		void ReplayGUIDrawer::Draw(simData_t & data, ReplayerViewer & viewer, drawers::LineTrailsDrawer & lineTrails,
+		void ReplayGUIDrawer::Draw(SimData & data, ReplayerViewer & viewer, drawers::LineTrailsDrawer & lineTrails,
 								   size_t w, size_t h)
 		{
 			//mouseControls(viewer.GetCamera());

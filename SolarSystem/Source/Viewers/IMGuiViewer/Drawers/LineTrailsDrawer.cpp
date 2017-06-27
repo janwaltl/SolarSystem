@@ -28,15 +28,15 @@ namespace solar
 			//Because of shader pointer type's completness
 		}
 
-		void LineTrailsDrawer::Draw(const simData_t& data)
+		void LineTrailsDrawer::Draw(const SimData& data)
 		{
 			UpdateTrails(data);
-			assert(trails.size() == data.size() && trails.size() == trailsControls.size());
+			assert(trails.size() == data->size() && trails.size() == trailsControls.size());
 
 			shader->Bind();
 			auto trailIT = trails.begin();
 			auto trailCtrlIT = trailsControls.begin();
-			for (auto unitIT = data.begin(); unitIT != data.end(); ++unitIT, ++trailIT, ++trailCtrlIT)
+			for (auto unitIT = data->begin(); unitIT != data->end(); ++unitIT, ++trailIT, ++trailCtrlIT)
 			{
 				shader->SetUniform4f("col", unitIT->color);
 				if (*trailCtrlIT)
@@ -78,7 +78,7 @@ namespace solar
 			const std::string vSource = R"(
 			#version 140
 			#extension GL_ARB_explicit_attrib_location : require
-			layout(location = 0) in vec2 position;
+			layout(location = 0) in vec3 position;
 
 			std140 uniform CameraMatrices
 			{
@@ -92,7 +92,7 @@ namespace solar
 
 			void main()
 			{
-				gl_Position = cam.projection* cam.view * vec4(position, 0.0, 1.0);
+				gl_Position = cam.projection* cam.view * vec4(position, 1.0);
 			})";
 			const std::string fSource = R"(
 			#version 140
@@ -128,21 +128,18 @@ namespace solar
 			}
 		}
 
-		void LineTrailsDrawer::UpdateTrails(const simData_t& data)
+		void LineTrailsDrawer::UpdateTrails(const SimData& data)
 		{
-			assert(data.size() == trails.size() && trails.size() == trailsControls.size());
+			assert(data->size() == trails.size() && trails.size() == trailsControls.size());
 
 			++frameCounter %= resolution;
 			if (!frameCounter)//Only update trails every trailRes frames
 			{
 				auto trailIT = trails.begin();
 				auto trailsCtrlIT = trailsControls.cbegin();
-				for (auto unitIT = data.cbegin(); unitIT != data.cend(); ++unitIT, ++trailIT, ++trailsCtrlIT)
-				{
+				for (auto unitIT = data->cbegin(); unitIT != data->cend(); ++unitIT, ++trailIT, ++trailsCtrlIT)
 					if (*trailsCtrlIT)
 						trailIT->Push(unitIT->pos);
-				}
-
 			}
 		}
 

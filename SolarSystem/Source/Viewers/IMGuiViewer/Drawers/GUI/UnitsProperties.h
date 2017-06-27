@@ -17,8 +17,8 @@ namespace solar
 		{
 		public:
 			explicit UnitsProperties(Vec2d winPos = Vec2d(10, 310), Vec2d winSize = Vec2d(250, 390));
-			void operator()(simData_t& data);
-			void SelectedUnitTextLabel(solar::simData_t & data);
+			void operator()(SimData& data);
+			void SelectedUnitTextLabel(solar::SimData & data);
 		private:
 			// Returns char* string representing name of the selected Unit by its index in simData vector
 			// Helper functions for combo box with units' names
@@ -27,7 +27,7 @@ namespace solar
 			// Helper functions for combo box with reference units' names
 			static bool RefUnitNameGetter(void* data, int index, const char** result);
 			// Sets such offset to center selectedUnit on the screen
-			void Follow(const simData_t& data, OMSAR& follow);
+			void Follow(const SimData& data, OMSAR& follow);
 
 			//Name of center reference system
 			constexpr static char* centerSystem = "(0,0) coordinates";

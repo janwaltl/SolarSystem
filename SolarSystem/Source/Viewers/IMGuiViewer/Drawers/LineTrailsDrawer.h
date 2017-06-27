@@ -25,7 +25,7 @@ namespace solar
 			//Throws GLError on OpenGL error(i.e out of GPU memory)
 			LineTrailsDrawer(size_t dataSize, const Camera& cam);
 			~LineTrailsDrawer();
-			void Draw(const simData_t& data);
+			void Draw(const SimData& data);
 			//Enables/disables simData[index] unit's trail
 			// - disabling also clears the trail
 			void SwitchTrail(size_t index, bool enable);
@@ -38,7 +38,7 @@ namespace solar
 			void CreateShader(const Camera& cam);
 			void CreateTrails(size_t dataSize);
 			//Adds new points(from current units' positions) to trails every 'trailRes' frames
-			void UpdateTrails(const simData_t& data);
+			void UpdateTrails(const SimData& data);
 
 			size_t frameCounter;
 

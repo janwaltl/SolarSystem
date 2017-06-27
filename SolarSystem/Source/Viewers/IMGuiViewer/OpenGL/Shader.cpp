@@ -94,6 +94,26 @@ namespace solar
 		{
 			SetUniform2f(name, static_cast<float>(vec.x), static_cast<float>(vec.y));
 		}
+		void Shader::SetUniform2f(const std::string & name, const Vec2f & vec) const
+		{
+			SetUniform2f(name, vec.x, vec.y);
+		}
+		void Shader::SetUniform3f(const std::string& name, float x, float y, float z) const
+		{
+			this->Bind();
+			glUniform3f(uniforms.at(name), x, y, z);
+		}
+		void Shader::SetUniform3f(const std::string & name, const Vec3d & vec) const
+		{
+			SetUniform3f(name,
+						 static_cast<float>(vec.x),
+						 static_cast<float>(vec.y),
+						 static_cast<float>(vec.z));
+		}
+		void Shader::SetUniform3f(const std::string & name, const Vec3f & vec) const
+		{
+			SetUniform3f(name, vec.x, vec.y, vec.z);
+		}
 		void Shader::SetUniform4f(const std::string& name, float x, float y, float z, float w) const
 		{
 			this->Bind();

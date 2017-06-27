@@ -18,7 +18,7 @@ namespace solar
 		{
 		public:
 			ReplayGUIDrawer(const std::string& replayFileName);
-			void Draw(simData_t& data, ReplayerViewer& viewer, drawers::LineTrailsDrawer& lineTrails,
+			void Draw(SimData& data, ReplayerViewer& viewer, drawers::LineTrailsDrawer& lineTrails,
 					  size_t w, size_t h);
 		private:
 			gui::UnitsProperties unitsProps;

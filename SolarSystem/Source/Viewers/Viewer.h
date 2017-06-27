@@ -18,15 +18,15 @@ namespace solar
 		virtual void Prepare() {}
 		virtual ~Viewer() = default;
 
-		friend void LinkUnitAndSim(Viewer& unit, Simulation& sim, simData_t* data);
+		friend void LinkUnitAndSim(Viewer& unit, Simulation& sim, SimData* data);
 		friend void LinkUnitAndLinkedUnit(Viewer& linkedUnit, Viewer& toBeLinkedUnit);
 	protected:
 		// Pointer to simulated data, valid in operator() and Prepare().
 		// IT IS NOT VALID IN constructor of derived classed
-		simData_t* data {nullptr};
+		SimData* data {nullptr};
 	};
 	//Links SimMethod and simulation together, so it has access to simData
-	inline void LinkUnitAndSim(Viewer& unit, Simulation& sim, simData_t* data)
+	inline void LinkUnitAndSim(Viewer& unit, Simulation& sim, SimData* data)
 	{
 		assert(data);
 		LinkUnitAndSim(static_cast<SystemUnit&>(unit), sim);

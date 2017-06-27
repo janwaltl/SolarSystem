@@ -23,7 +23,7 @@ namespace solar
 			//Frees VBO, VAO and IBO if this was last instance of class
 			~UnitTrail();
 			//Adds new line point to trail
-			void Push(const Vec2d& newPos);
+			void Push(const Vec3d& newPos);
 			//Draws UnitTrail, appropriate shader MUST be bind before call
 			void Draw() const;
 			//Removes all points from trail

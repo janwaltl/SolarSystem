@@ -10,7 +10,7 @@ namespace solar
 {
 	namespace drawers
 	{
-		void GUIDrawer::Draw(simData_t& data, IMGuiViewer& viewer, drawers::LineTrailsDrawer& lineTrails,
+		void GUIDrawer::Draw(SimData& data, IMGuiViewer& viewer, drawers::LineTrailsDrawer& lineTrails,
 							 size_t w, size_t h)
 		{
 			mouseControls(viewer.GetCamera());

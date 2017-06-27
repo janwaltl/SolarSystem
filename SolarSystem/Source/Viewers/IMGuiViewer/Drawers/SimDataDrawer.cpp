@@ -26,13 +26,13 @@ namespace solar
 			//For unique ptrs' destructors
 		}
 
-		void SimDataDrawer::Draw(const simData_t& data)
+		void SimDataDrawer::Draw(const SimData& data)
 		{
 			shader->Bind();
-			for (const auto& unit : data)
+			for (const auto& unit : data.Get())
 			{
 				shader->SetUniform4f("col", unit.color);
-				shader->SetUniform2f("unitPos", unit.pos);
+				shader->SetUniform3f("unitPos", unit.pos);
 				circle->Draw();
 			}
 			shader->UnBind();
@@ -57,13 +57,13 @@ namespace solar
 					mat4 invProjView;
 			} cam;
 
-			uniform vec2 unitPos;
+			uniform vec3 unitPos;
 
 			void main()
 			{
 				//Aspect ratio of screen(Valid both for ortho and perspective matrices)
 				vec2 AR = vec2(1.0, cam.projection[1][1]/cam.projection[0][0]);
-				vec4 centerEye = cam.projection * cam.view * vec4(unitPos, 0.0, 1.0);
+				vec4 centerEye = cam.projection * cam.view * vec4(unitPos, 1.0);
 				gl_Position = vec4(position*AR, 0.0,0.0) + centerEye/centerEye.w;
 			})";
 			const std::string fSource = R"(

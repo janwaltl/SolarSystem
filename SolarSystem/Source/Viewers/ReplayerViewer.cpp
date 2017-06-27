@@ -10,7 +10,7 @@ namespace solar
 	{
 		simDataDrawer = std::make_unique<drawers::SimDataDrawer>(cam);
 		replayGUIDrawer = std::make_unique<drawers::ReplayGUIDrawer>(replayFileName);
-		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(data->size(), cam);
+		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(data->Get().size(), cam);
 
 		//cam.MakeOrtho(17*2,10*2, 0.1f, 10000.0f);
 		cam.MakePerspective(90, 1.7f, 0.1f, 10000.0f);

@@ -1,7 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Working on conversion to 3D Part III
- - removed physicsUnits namespace
- - added Ratio class, but may be overkill for now, so commented it out
+Working on conversion to 3D Part IV - viewers
+	- just fixed GUI to the point that it compiles. Will be reworked anyway.
+
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:

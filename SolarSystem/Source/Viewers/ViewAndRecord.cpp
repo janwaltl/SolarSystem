@@ -69,25 +69,26 @@ namespace solar
 		numRecords = 0;
 		out.write(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));
 
-		uint32_t numUnits = data->size();
+		uint32_t numUnits = data->Get().size();
 		out.write(reinterpret_cast<char*>(&numUnits), sizeof(numUnits));
 
 		uint32_t offset = 0;//No offset yet
 		auto offsetPos = out.tellp();
 		out.write(reinterpret_cast<char*>(&offset), sizeof(offset));
 
+		const auto& simData = data->Get();
 		for (decltype(numUnits) i = 0; i < numUnits; ++i)
 		{
-			auto nameL = static_cast<uint8_t>((*data)[i].name.length());
+			auto nameL = static_cast<uint8_t>(simData[i].name.length());
 			out.write(reinterpret_cast<char*>(&nameL), sizeof(nameL));
-			out.write((*data)[i].name.c_str(), nameL * sizeof(std::string::value_type));//Do not encode '\'
+			out.write(simData[i].name.c_str(), nameL * sizeof(std::string::value_type));//Do not encode '\'
 
-			out.write(reinterpret_cast<char*>(&(*data)[i].color.x), sizeof((*data)[i].color.x));
-			out.write(reinterpret_cast<char*>(&(*data)[i].color.y), sizeof((*data)[i].color.y));
-			out.write(reinterpret_cast<char*>(&(*data)[i].color.z), sizeof((*data)[i].color.z));
-			out.write(reinterpret_cast<char*>(&(*data)[i].color.w), sizeof((*data)[i].color.w));
+			out.write(reinterpret_cast<const char*>(&simData[i].color.x), sizeof(simData[i].color.x));
+			out.write(reinterpret_cast<const char*>(&simData[i].color.y), sizeof(simData[i].color.y));
+			out.write(reinterpret_cast<const char*>(&simData[i].color.z), sizeof(simData[i].color.z));
+			out.write(reinterpret_cast<const char*>(&simData[i].color.w), sizeof(simData[i].color.w));
 
-			out.write(reinterpret_cast<char*>(&(*data)[i].mass), sizeof((*data)[i].mass));
+			out.write(reinterpret_cast<const char*>(&simData[i].mass), sizeof(simData[i].mass));
 		}
 		//Write offset now
 		offset = static_cast<uint32_t>(out.tellp());
@@ -114,12 +115,15 @@ namespace solar
 	{
 		//This function works with replay files whose format is documented in FileFormats/ReplayerFile.txt
 
-		for (size_t i = 0; i < data->size(); ++i)
+		const auto& simData = data->Get();
+		for (size_t i = 0; i < data->Get().size(); ++i)
 		{
-			out.write(reinterpret_cast<char*>(&(*data)[i].pos.x), sizeof((*data)[i].pos.x));
-			out.write(reinterpret_cast<char*>(&(*data)[i].pos.y), sizeof((*data)[i].pos.y));
-			out.write(reinterpret_cast<char*>(&(*data)[i].vel.x), sizeof((*data)[i].vel.x));
-			out.write(reinterpret_cast<char*>(&(*data)[i].vel.y), sizeof((*data)[i].vel.y));
+			out.write(reinterpret_cast<const char*>(&simData[i].pos.x), sizeof(simData[i].pos.x));
+			out.write(reinterpret_cast<const char*>(&simData[i].pos.y), sizeof(simData[i].pos.y));
+			out.write(reinterpret_cast<const char*>(&simData[i].pos.z), sizeof(simData[i].pos.z));
+			out.write(reinterpret_cast<const char*>(&simData[i].vel.x), sizeof(simData[i].vel.x));
+			out.write(reinterpret_cast<const char*>(&simData[i].vel.y), sizeof(simData[i].vel.y));
+			out.write(reinterpret_cast<const char*>(&simData[i].vel.z), sizeof(simData[i].vel.z));
 		}
 		++numRecords;
 	}
