@@ -17,7 +17,7 @@ namespace solar
 		constexpr int winPosX = 5;
 		constexpr int winPosY = 20;
 		//Background color
-		constexpr Vec4d bgColor(0.0, 0.0, 0.0, 1.0);
+		constexpr Vec4d bgColor(5/255.0, 10/255.0, 10/255.0, 1.0);
 	}
 
 	//Following usage of GLFW library is  based on their tutorial
@@ -74,6 +74,7 @@ namespace solar
 		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
 
+		glClearColor((GLclampf)bgColor.x, (GLclampf)bgColor.y, (GLclampf)bgColor.z, (GLclampf)bgColor.w);
 		glfwSwapInterval(0);
 	}
 
@@ -94,7 +95,6 @@ namespace solar
 	{
 		glfwSwapBuffers(win);
 		glfwPollEvents();//Get system events, calls registered callbacks
-		glClearColor((GLclampf)bgColor.x, (GLclampf)bgColor.y, (GLclampf)bgColor.z, (GLclampf)bgColor.w);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		if (errTrigger)

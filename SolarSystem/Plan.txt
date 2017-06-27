@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Working on conversion to 3D Part IV - viewers
-	- just fixed GUI to the point that it compiles. Will be reworked anyway.
-
+Changed style of GUI.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
@@ -25,19 +23,8 @@ TODOs/IDEAS:
 			- scroll zoom to target, altScroll forward movement
 			- right,altRight moves to sides
 	Decide on Ratio class
-		- too much work with operators, but i distinguishes it from simple double
+		- too much work with operators, but it distinguishes it from simple double
 Plan:
-	Design and implemented unit system
-		- simData also contains in which units the data are.
-		- ability to convert between units in run-time
-		- supported units
-			- distance: meters, kilometers, AU
-			- time: seconds, minute, hours, days, years
-			- mass: kg, earthMass, sunMass
-		- general ratio class
-		- Factory functions for supported units
-		- conversion for values
-		- unitSystem to convert whole Unit
 	UI overhaul:
 		- Top-bar with dropdown windows
 			- SimControls
