@@ -100,7 +100,7 @@ namespace solar
 
 		//Data to be simulated
 		//Pointed to by viewer and simMethod
-		simData_t data;
+		SimData data;
 		//Whether the simulation is running or not
 		simState state;
 		//If sim was unpaused last frame

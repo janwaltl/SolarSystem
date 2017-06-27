@@ -3,28 +3,91 @@
 
 
 #include <cmath>
-#include <ratio>
-
 
 namespace solar
 {
-
-	//Used physics units: AU, Earth's years, Sun's weight
-	//Conversions between used units and SIUnits
-	namespace physicsUnits
+	/*
+	//Multiplication of ratios is ratio
+	//Multiplication with value is value
+	class Ratio
 	{
-		static constexpr double AUtoM = 149'597'870'700.0; // Astronomical units to meters
-		static constexpr double YtoS = 31'536'000.0; // Years to seconds
-		static constexpr double SMtoKG = 1.988435e30; // Solar masses to kilograms
+	public:
+		using type = double;
 
-		static constexpr double AUpYtoMpS = AUtoM / YtoS;//AUs per Year to Meters per Second
+		constexpr Ratio(type r = type(1.0)) :ratio(r) {}
+		constexpr Ratio(const Ratio&) = default;
+		constexpr Ratio(Ratio&&) = default;
+		Ratio& operator=(const Ratio&) = default;
+		Ratio& operator=(Ratio&&) = default;
+		~Ratio() = default;
+
+		void operator*=(const Ratio& r) { ratio *= r.ratio; }
+		void operator/=(const Ratio& r) { ratio /= r.ratio; }
+		//Apply ratio to value = post-multiplication
+		template<typename U>
+		auto Mult(const U& value) ->decltype(U()*type()) { return value*ratio; }
+		template<typename U>
+		auto Div(const U& value)  ->decltype(U() / type()) { return value / ratio; }
+		type Get() { return ratio; }
+	private:
+		type ratio;
 	};
+
+	inline Ratio operator*(const Ratio& left, const Ratio& right)
+	{
+		auto res = left;
+		res *= right;
+		return res;
+	}
+	inline Ratio operator/(const Ratio& left, const Ratio& right)
+	{
+		auto res = left;
+		res /= right;
+		return res;
+	}
+	template<typename T>
+	Ratio operator*(const Ratio& ratio, const T& val)
+	{
+		auto res = ratio;
+		res.apply(val);
+		return res;
+	}
+	template<typename T>
+	Ratio operator*(const T& val, const Ratio& ratio)
+	{
+		auto res = ratio;
+		res.Mult(val);
+		return res;
+	}
+	template<typename T>
+	Ratio operator/(const Ratio& ratio, const T& val)
+	{
+		auto res = ratio;
+		res.Div(val);
+		return res;
+	}
+	template<typename T>
+	void operator *=(T& val, const Ratio& ratio)
+	{
+		val = ratio.Mult(val);
+	}
+	template<typename T>
+	void operator /=(T& val, const Ratio& ratio)
+	{
+		val = ratio.Div(val);
+	}
+	template<typename T>
+	Ratio
+		pow(const Ratio& ratio, const T& val)
+	{
+		return pow(ratio.Get(), val);
+	}*/
+
 	class PhysUnits
 	{
 	public:
 		//Cannot use num/den because there isn't enough precision(especially for mass)
 		using ratio = double;
-
 		//Time
 		static constexpr ratio second {1.0};
 		static constexpr ratio minute {60.0};

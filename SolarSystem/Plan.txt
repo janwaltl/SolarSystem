@@ -1,6 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Working on conversion to 3D Part II - simMethods. Won't compile.
-Fix in FormattedFileParser.
+Working on conversion to 3D Part III
+ - removed physicsUnits namespace
+ - added Ratio class, but may be overkill for now, so commented it out
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
@@ -23,7 +24,8 @@ TODOs/IDEAS:
 			- left Trackball, altLeft 1st person cam(instead of middleButton)
 			- scroll zoom to target, altScroll forward movement
 			- right,altRight moves to sides
-
+	Decide on Ratio class
+		- too much work with operators, but i distinguishes it from simple double
 Plan:
 	Design and implemented unit system
 		- simData also contains in which units the data are.
