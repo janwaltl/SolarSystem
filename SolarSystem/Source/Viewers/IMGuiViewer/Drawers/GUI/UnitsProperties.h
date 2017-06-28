@@ -18,6 +18,8 @@ namespace solar
 		public:
 			explicit UnitsProperties(Vec2d winPos = Vec2d(10, 310), Vec2d winSize = Vec2d(500, 400));
 			void operator()(SimData& data);
+			void UnitDetails(const size_t &i);
+			void UnitColorPopUp(solar::SimData & data, const size_t &i);
 			void ListHeader(solar::SimData & data);
 			void SetFrameOfRef(solar::SimData & data);
 			void SetMassUnits(solar::SimData & data);
@@ -34,6 +36,7 @@ namespace solar
 			char * massSuff, *timeSuff, *lenSuff;
 			const static  Unit center;//Center of coordinate
 			const Unit* refUnit;
+			float tempCol[3];
 		};
 
 	}

@@ -1,7 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Working on UnitsProperties.
-Added operator[] to SimData.
-Fixed wrong mass of Venus in SolarParser.
+Changed color selection in UnitProperties.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:

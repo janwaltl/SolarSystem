@@ -106,10 +106,10 @@ namespace solar
 		style.WindowPadding = ImVec2(6, 6);
 		style.WindowRounding = 2.0f;
 		style.ChildWindowRounding = 2.0f;
-		style.FramePadding = ImVec2(5, 5);
+		style.FramePadding = ImVec2(6,6);
 		style.FrameRounding = 2.0f;
-		style.ItemSpacing = ImVec2(5, 2);
-		style.ItemInnerSpacing = ImVec2(5, 2);
+		style.ItemSpacing = ImVec2(5, 5);
+		style.ItemInnerSpacing = ImVec2(5, 5);
 		style.IndentSpacing = 20.0f;
 		style.ScrollbarSize = 12.0f;
 		style.ScrollbarRounding = 2.0f;

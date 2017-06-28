@@ -20,27 +20,29 @@ namespace solar
 		UnitsProperties::UnitsProperties(Vec2d winPos, Vec2d winSize) :
 			winPos(winPos), winSize(winSize), refUnit(&center)
 		{
-			this->winSize = Vec2d(800, 300);
+			this->winSize = Vec2d(900, 300);
 			this->winPos = Vec2d(200, 200);
 			distPosCombo = speedVelCombo = timeCombo = massCombo = lenCombo = 0;
 			massRatio = timeRatio = lenRatio = 1.0;
+			tempCol[0] = tempCol[1] = tempCol[2] = 0.0f;
 		}
 
 		void UnitsProperties::operator()(SimData & data)
 		{
 			ImGui::SetNextWindowPos(winPos, ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(winSize, ImGuiSetCond_Once);
-			if (ImGui::Begin("Units' properties", NULL))
+			if (ImGui::Begin("Units' properties", NULL, ImGuiWindowFlags_NoCollapse))
 			{
 				ListHeader(data);
 
 				if (ImGui::BeginChild("Units", ImVec2 {}, false, ImGuiWindowFlags_AlwaysUseWindowPadding))
 				{
-					ImGui::Columns(4);
-					ImGui::SetColumnOffset(1, 90);
-					ImGui::SetColumnOffset(2, 370);
-					ImGui::SetColumnOffset(3, 650);
-
+					ImGui::Columns(5);
+					ImGui::SetColumnOffset(1, 35);
+					ImGui::SetColumnOffset(2, 150);
+					ImGui::SetColumnOffset(3, 450);
+					ImGui::SetColumnOffset(4, 750);
+					InfoBox("Left click to change"); ImGui::NextColumn();
 					ImGui::Text("Name"); InfoBox("Right click on names of units for more actions");
 					ImGui::NextColumn();
 					ImGui::Combo("##DistPos", &distPosCombo, "Distance\0Position\0"); ImGui::NextColumn();
@@ -52,17 +54,10 @@ namespace solar
 					for (size_t i = 0; i < data->size(); ++i)
 					{
 						ImGui::PushID(i);
+						ImGui::ColorButton(data[i].color, true); ImGui::NextColumn();
+						UnitColorPopUp(data, i);
 						ImGui::Text(data[i].name.c_str());
-						if (ImGui::BeginPopupContextItem("UnitDetails"))
-						{
-							if (ImGui::Selectable("Set as frame of reference"))
-								frameOfRef = i + 1;
-							ImGui::Text("Edit values");
-							ImGui::Text("Focus");
-							ImGui::Text("Set as grid's frame of reference");
-							ImGui::Text("Other cool buttons");
-							ImGui::EndPopup();
-						}
+						UnitDetails(i);
 						ImGui::NextColumn();
 
 						Vec3d relPos = data[i].pos - refUnit->pos;
@@ -88,7 +83,37 @@ namespace solar
 					}
 					ImGui::EndChild();
 				}
-				ImGui::End();
+			}
+			ImGui::End();
+		}
+		void UnitsProperties::UnitDetails(const size_t &i)
+		{
+			if (ImGui::BeginPopupContextItem("UnitDetails"))
+			{
+				if (ImGui::Selectable("Set as frame of reference"))
+					frameOfRef = i + 1;
+				ImGui::Text("Edit values");
+				ImGui::Text("Focus");
+				ImGui::Text("Set as grid's frame of reference");
+				ImGui::Text("Other cool buttons");
+				ImGui::EndPopup();
+			}
+		}
+		void UnitsProperties::UnitColorPopUp(solar::SimData & data, const size_t &i)
+		{
+			if (ImGui::BeginPopupContextItem("##changeCol", 0))
+			{
+				ImGui::Text("Edit color");
+				tempCol[0] = data[i].color.x;
+				tempCol[1] = data[i].color.y;
+				tempCol[2] = data[i].color.z;
+				ImGui::ColorEdit3("##edit", (float*)&tempCol);
+				data[i].color.x = tempCol[0];
+				data[i].color.y = tempCol[1];
+				data[i].color.z = tempCol[2];
+				if (ImGui::Button("Set"))
+					ImGui::CloseCurrentPopup();
+				ImGui::EndPopup();
 			}
 		}
 		void UnitsProperties::ListHeader(solar::SimData & data)
