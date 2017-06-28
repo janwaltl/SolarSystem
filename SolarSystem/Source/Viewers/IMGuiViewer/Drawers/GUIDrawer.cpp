@@ -3,7 +3,7 @@
 
 #include "GUI/Visuals.h"
 #include "GUI/SimProperties.h"
-#include "GUI/MouseControls.h"
+#include "GUI/CameraControls.h"
 #include "Source/Viewers/IMGuiViewer.h"
 
 namespace solar
@@ -13,8 +13,8 @@ namespace solar
 		void GUIDrawer::Draw(SimData& data, IMGuiViewer& viewer, drawers::LineTrailsDrawer& lineTrails,
 							 size_t w, size_t h)
 		{
-			mouseControls(viewer.GetCamera());
-			unitsProps(data);
+			camControls(viewer.GetCamera(),data);
+			//unitsProps(data);
 			gui::SimProperties(viewer);
 			gui::Visuals(lineTrails, data, w, h);
 		}

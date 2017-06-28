@@ -29,4 +29,8 @@ namespace solar
 		lineTrailsDrawer->Draw(*data);
 		imguiBackend.Render();
 	}
+	Camera & ReplayerViewer::GetCamera()
+	{
+		return cam;
+	}
 }

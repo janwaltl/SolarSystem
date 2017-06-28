@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Changed color selection in UnitProperties.
+Reworked MouseControls into CameraControls.
+	- Made its own window.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
@@ -14,14 +15,8 @@ TODOs/IDEAS:
 	Add Inverses of matrices in UBO in camera class if needed.
 	Why is Ortho weirdly clipped when projecting to the center?
 		- now projecting to near clipping plane, need to resolve it there's typo or bug in matrices somewhere.
-
-	Two forms of zooming???
-		- forward movement - moves camera and its target in view direction
-		- zooming to target - moves camera closer to its target pos(needs lower bound=maxZoom)
-		- Go to two-button setup with ALT?
-			- left Trackball, altLeft 1st person cam(instead of middleButton)
-			- scroll zoom to target, altScroll forward movement
-			- right,altRight moves to sides
+	Camera's aspect ratio?
+	Fix all Begin/End for windows
 	Decide on Ratio class
 		- too much work with operators, but it distinguishes it from simple double
 Plan:
@@ -35,28 +30,8 @@ Plan:
 				- tickbox for break on collision?
 				- graph of frameTime,FPS?
 					- with stability line
-			- SimData
-				- Big window
-				- choose reference frame and units
-				- Tabs:
-					- List of all simulated objects
-						- with name, color, mass, position, distance, velocity, speed
-							- ability to change them ( in stopped sim only?)
-						- select on click( higlights it in view), ability to focus it
-						- show/hide
-						- stop tracking?
-							- would store any addition data per untracked objects. Just draw them as points without trails and any visual guidance
-								- perhaps show in specific colour(gray)
-							- for many-body simulations where individual objects don't matter
-					- Graphs
-						- conservation of energy
-						- pos, dist, vel, speed
-			- CameraControls
-				- pos, targetPos, upDir
-					- with ability to set 
-				- zoom, panning speed, (maybe trackbal rot speed for finer control)
-				- Controls explained, maybe dynamic button and key mapping
-				- status - free or following something
+			- SimData - Done
+			- CameraControls - Done
 			- Visuals
 				- maybe together with CameraControls
 				- controls visual guidances:

@@ -1,21 +1,26 @@
-#ifndef IMGUIVIEWER_GUI_MOUSE_CONTROLS_HEADER
-#define IMGUIVIEWER_GUI_MOUSE_CONTROLS_HEADER
+#ifndef IMGUIVIEWER_GUI_CAMERA_CONTROLS_HEADER
+#define IMGUIVIEWER_GUI_CAMERA_CONTROLS_HEADER
 
 #include "Source/Math/Math.h"
 
 namespace solar
 {
-	class OMSAR;
 	class Camera;
+	class SimData;
 
 	namespace gui
 	{
-		class MouseControls
+		class CameraControls
 		{
 		public:
-			MouseControls& operator()(Camera& cam);
+			CameraControls();
+			CameraControls& operator()(Camera& cam, SimData& data);
+			void SetCamType(solar::Camera & cam);
 		private:
+			static bool UnitNameGetter(void * data, int index, const char ** result);
+			void MouseControls(solar::Camera & cam, SimData& data);
 			void Zooming(solar::Camera & cam);
+			void ForwBackMovement(solar::Camera & cam);
 			void FirstPersonCam(solar::Camera & cam);
 			void SideMovement(solar::Camera & cam);
 			void Trackball(solar::Camera & cam);
@@ -31,7 +36,11 @@ namespace solar
 				Mat4f invView;
 				Vec2d displaySize;
 			}cache;
-			float zoomSpeed = 0.1f;
+			float zoomSpeed;
+			float forwSpeed;
+			int camTypeCombo;
+			int camTargetCombo;
+			int camPosCombo;
 		};
 	}
 }

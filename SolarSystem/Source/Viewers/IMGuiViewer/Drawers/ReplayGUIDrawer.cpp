@@ -1,7 +1,6 @@
 #include "ReplayGUIDrawer.h"
 #include "Source/Viewers/ReplayerViewer.h"
 #include "GUI/Visuals.h"
-#include "GUI/MouseControls.h"
 
 namespace solar
 {
@@ -14,7 +13,7 @@ namespace solar
 		void ReplayGUIDrawer::Draw(SimData & data, ReplayerViewer & viewer, drawers::LineTrailsDrawer & lineTrails,
 								   size_t w, size_t h)
 		{
-			//mouseControls(viewer.GetCamera());
+			camControls(viewer.GetCamera(), data);
 			unitsProps(data);
 			replayControls(viewer, &lineTrails, w, h);
 			gui::Visuals(lineTrails, data, w, h);

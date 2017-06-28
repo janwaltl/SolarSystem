@@ -81,8 +81,8 @@ namespace solar
 						ImGui::Separator();
 						ImGui::PopID();
 					}
-					ImGui::EndChild();
 				}
+				ImGui::EndChild();
 			}
 			ImGui::End();
 		}

@@ -21,6 +21,7 @@ namespace solar
 		ReplayerViewer(const std::string& replayFileName, size_t width, size_t height, const std::string& title);
 		void Prepare() override final;
 		void operator()() override final;
+		Camera& GetCamera();
 	private:
 		size_t w, h;
 		const std::string replayFileName;
