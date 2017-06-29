@@ -1,6 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Reworked MouseControls into CameraControls.
-	- Made its own window.
+Few tweaks in UnitsProperties.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
@@ -33,7 +32,6 @@ Plan:
 			- SimData - Done
 			- CameraControls - Done
 			- Visuals
-				- maybe together with CameraControls
 				- controls visual guidances:
 					- grid with dynamic resolution (located at ref frame with selected units)
 						- individual grid planes as well as 3D grid

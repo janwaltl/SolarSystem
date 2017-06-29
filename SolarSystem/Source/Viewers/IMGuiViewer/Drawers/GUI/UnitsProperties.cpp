@@ -42,11 +42,14 @@ namespace solar
 					ImGui::SetColumnOffset(2, 150);
 					ImGui::SetColumnOffset(3, 450);
 					ImGui::SetColumnOffset(4, 750);
+					ImGui::AlignFirstTextHeightToWidgets();
 					InfoBox("Left click to change"); ImGui::NextColumn();
+					ImGui::AlignFirstTextHeightToWidgets();
 					ImGui::Text("Name"); InfoBox("Right click on names of units for more actions");
 					ImGui::NextColumn();
 					ImGui::Combo("##DistPos", &distPosCombo, "Distance\0Position\0"); ImGui::NextColumn();
 					ImGui::Combo("##SpeedVel", &speedVelCombo, "Speed\0Velocity\0"); ImGui::NextColumn();
+					ImGui::AlignFirstTextHeightToWidgets();
 					ImGui::Text("Mass"); ImGui::NextColumn();
 					ImGui::Separator();
 					ImGui::Separator();
@@ -56,8 +59,9 @@ namespace solar
 						ImGui::PushID(i);
 						ImGui::ColorButton(data[i].color, true); ImGui::NextColumn();
 						UnitColorPopUp(data, i);
-						ImGui::Text(data[i].name.c_str());
+						ImGui::Selectable(data[i].name.c_str(), false, ImGuiSelectableFlags_SpanAllColumns);
 						UnitDetails(i);
+
 						ImGui::NextColumn();
 
 						Vec3d relPos = data[i].pos - refUnit->pos;
@@ -124,7 +128,7 @@ namespace solar
 			SetFrameOfRef(data);
 
 			ImGui::PushItemWidth(100);
-
+			ImGui::AlignFirstTextHeightToWidgets();
 			ImGui::Text("Frame of reference:"); InfoBox("Point against which are speed(velocity) and position(distance) measured.");
 			ImGui::SameLine();
 			if (ImGui::Combo("##FrameOfRef", &frameOfRef, UnitNameGetter, &data, data->size() + 1, 10))
