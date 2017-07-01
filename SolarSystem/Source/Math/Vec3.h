@@ -106,6 +106,11 @@ namespace solar
 			z /= other.z;
 			return *this;
 		}
+		template<typename U>
+		explicit operator Vec3<U>()
+		{
+			return Vec3<U>(static_cast<U>(x), static_cast<U>(y), static_cast<U>(z));
+		}
 	};
 
 	template<typename T>

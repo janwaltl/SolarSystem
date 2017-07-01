@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Few tweaks in UnitsProperties.
+Added casting between vectors and VecXi,Mat4i aliases.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
@@ -21,6 +21,10 @@ TODOs/IDEAS:
 Plan:
 	UI overhaul:
 		- Top-bar with dropdown windows
+			- TopBar
+				- StateButtons to open individual windows
+				- Center:
+					- play, pause, resume
 			- SimControls
 				- just current SimControls
 				- usage statistics
@@ -31,6 +35,30 @@ Plan:
 					- with stability line
 			- SimData - Done
 			- CameraControls - Done
+			- Graphs
+				- ability to plot various functions of SimData
+					- distance, speed between two objects or origin
+						- x=time,y=value
+					- total energy of system
+						- tracks kinetic,
+				- line graph - working on now
+					- PushBack - adds new x,y pair
+					- Clear - removes data
+					- plot area can be moved by dragging and zoomed by wheel
+					- SetLabels - for axes
+					- ShowAll - zoom enough to se plotted data
+					- ChangeRanges
+					- top buttons: ShowAll, Go to origin, Clear, show/hide grid
+					- multiple lines in one graph - AddLine
+						- choose color, name
+						- show legend, PushBack needs index to determine to which line append
+							-SetLegend
+				- general window
+					- list of currently tracked graphs
+						- show/hide their separate windows
+						- export them??
+						- create new one/rename/ delete them
+				
 			- Visuals
 				- controls visual guidances:
 					- grid with dynamic resolution (located at ref frame with selected units)

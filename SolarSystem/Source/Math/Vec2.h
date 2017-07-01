@@ -98,6 +98,11 @@ namespace solar
 
 			return *this;
 		}
+		template<typename U>
+		explicit operator Vec2<U>()
+		{
+			return Vec2<U>(static_cast<U>(x), static_cast<U>(y));
+		}
 	};
 
 	template<typename T>
