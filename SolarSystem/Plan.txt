@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Added casting between vectors and VecXi,Mat4i aliases.
+Extended ImGui - Vertical text and LineGraph.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
