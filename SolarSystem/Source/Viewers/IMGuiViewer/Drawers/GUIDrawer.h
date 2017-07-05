@@ -4,6 +4,7 @@
 
 #include "GUI/UnitsProperties.h"
 #include "GUI/CameraControls.h"
+#include "GUI/Graphs.h"
 #include "LineTrailsDrawer.h"
 #include "Source/Units/Unit.h"
 
@@ -21,6 +22,7 @@ namespace solar
 		private:
 			gui::UnitsProperties unitsProps;
 			gui::CameraControls camControls;
+			gui::Graphs graphs;
 		};
 	}
 }

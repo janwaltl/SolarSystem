@@ -84,7 +84,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)intermediate\$(Configuration)-$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Libraries\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Libraries\include;$(ProjectDir)</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(SolutionDir)Libraries\lib\$(Configuration)</LibraryPath>
     <CodeAnalysisRuleSet>MixedRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -99,8 +99,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -191,6 +190,7 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\Camera.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\CameraControls.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Graphs.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\ReplayControls.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\SimProperties.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\UnitsProperties.cpp" />
@@ -201,6 +201,7 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\TestDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\ImGuiBackend.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imguiExtended\LineGraph.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_draw.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Camera.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\CameraControls.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Graphs.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\ReplayControls.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\SimProperties.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\UnitsProperties.h" />
@@ -253,6 +255,8 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\ImGuiBackend.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imconfig.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imguiExtended.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imguiExtended\LineGraph.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_internal.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_rect_pack.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_textedit.h" />

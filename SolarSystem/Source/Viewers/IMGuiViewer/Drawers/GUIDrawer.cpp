@@ -14,9 +14,10 @@ namespace solar
 							 size_t w, size_t h)
 		{
 			//camControls(viewer.GetCamera(),data);
-			unitsProps(data);
+			//unitsProps(data);
+			graphs(data);
 			gui::SimProperties(viewer);
-			gui::Visuals(lineTrails, data, w, h);
+			//gui::Visuals(lineTrails, data, w, h);
 		}
 	}
 }

@@ -17,7 +17,7 @@ namespace ImGuiE
 		line.lastIndex = 0;
 	}
 
-	void LineGraph::operator()()
+	void LineGraph::Draw()
 	{
 		SetCoords();
 
@@ -148,13 +148,13 @@ namespace ImGuiE
 			if (hLine)
 				drawList->AddLine(ImVec2(pos.x, linePos.y), ImVec2(pos.x + size.x, linePos.y), ImGui::GetColorU32(ImGuiCol_Border, 0.3f));
 			//Draw text only for every other line  - for clarity
-			if (hLine && int(count.x) % 2 == 0)
+			if (hLine && int(count.x) % 4 == 0)
 			{
 				std::stringstream sVal;
 				sVal << std::fixed << std::setprecision(1) << (linePos.x - origin.x)*scale.x;
 				drawList->AddText(ImVec2(linePos.x - 15, pos.y - fontSize*1.5f), ImGui::GetColorU32(ImGuiCol_Text), sVal.str().c_str());
 			}
-			if (vLine &&  int(count.y) % 2 == 0)
+			if (vLine &&  int(count.y) % 4 == 0)
 			{
 				const ImVec2 val(count.x / (2.0f*gridRes)*size.x*scale.x, count.x / (2.0f*gridRes)*size.y*scale.y);
 				std::stringstream sVal;

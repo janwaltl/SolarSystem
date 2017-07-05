@@ -17,7 +17,7 @@ namespace ImGuiE
 		//Size of canvas in pixels
 		//Range of plotted values
 		LineGraph(const ImVec2& size, const ImVec2& XRange, const ImVec2& YRange, size_t capacity = 1'000, const std::string& xLabel = "X", const std::string& yLabel = "Y");
-		void operator()();
+		void Draw();
 
 		void AddPoint(const point& p);
 	private:
