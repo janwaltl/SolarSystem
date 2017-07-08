@@ -44,7 +44,8 @@ namespace solar
 		double GetDtime() const;
 		void SetDTime(double newDT);
 		//Returns elapsed realTime in seconds
-		double GetRunTime() const;
+		double GetRunTimeSecs() const;
+		stepTime_t GetRunTime() const;
 		//Returns elapsed simTime in seconds
 		const simulatedTime& GetSimTime() const;
 		//Sets new simTime in seconds

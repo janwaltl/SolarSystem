@@ -22,7 +22,7 @@ namespace solar
 		out.write(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));
 		out.close();
 
-		std::cout << "Created replay: " << outFile << "\n" << "Total run time: " << GetRunTime() << "s\n";
+		std::cout << "Created replay: " << outFile << "\n" << "Total run time: " << GetRunTimeSecs() << "s\n";
 		std::cout << "Total sim time: " << GetSimTimeSecs() << "s\n";
 		std::cout << "Total number of records: " << numRecords << "\n";
 	}

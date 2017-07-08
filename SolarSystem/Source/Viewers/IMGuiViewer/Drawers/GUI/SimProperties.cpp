@@ -182,7 +182,7 @@ namespace solar
 
 			ImGui::Text("Real-time"); ImGui::NextColumn();
 			ImGui::TextTooltipOnHover("How long has been the simulation running.");
-			auto runTime = sys.GetRunTime();
+			auto runTime = sys.GetRunTimeSecs();
 			auto mins = floor(runTime / 60);
 			runTime -= mins * 60;
 			ImGui::Text("%3.0fm %02.1fs", mins, runTime); ImGui::NextColumn();

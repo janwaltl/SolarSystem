@@ -117,9 +117,14 @@ namespace solar
 		dtime = std::chrono::nanoseconds(static_cast<long long>(newDT*std::nano::den));
 	}
 
-	double Simulation::GetRunTime() const
+	double Simulation::GetRunTimeSecs() const
 	{
 		return ToSecs(runTime);
+	}
+
+	stepTime_t Simulation::GetRunTime() const
+	{
+		return runTime;
 	}
 
 	const simulatedTime& Simulation::GetSimTime() const

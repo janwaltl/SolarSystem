@@ -15,7 +15,7 @@ namespace solar
 		{
 			//camControls(viewer.GetCamera(),data);
 			//unitsProps(data);
-			graphs(data);
+			graphs(data, viewer.GetRunTime(), viewer.GetSimTime());
 			gui::SimProperties(viewer);
 			//gui::Visuals(lineTrails, data, w, h);
 		}

@@ -19,7 +19,11 @@ namespace solar
 	{
 		sim->SetDTime(newDT);
 	}
-	double SystemUnit::GetRunTime() const
+	double SystemUnit::GetRunTimeSecs() const
+	{
+		return sim->GetRunTimeSecs();
+	}
+	stepTime_t SystemUnit::GetRunTime() const
 	{
 		return sim->GetRunTime();
 	}

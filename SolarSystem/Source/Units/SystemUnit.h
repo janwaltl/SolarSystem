@@ -27,7 +27,8 @@ namespace solar
 		//Sets new delta time in seconds
 		void SetDTime(double newDT);
 		//Returns elapsed realTime in seconds
-		double GetRunTime() const;
+		double GetRunTimeSecs() const;
+		stepTime_t GetRunTime() const;
 		//Returns precise simulated time
 		const simulatedTime& GetSimTime() const;
 		//Returns simulated time in seconds

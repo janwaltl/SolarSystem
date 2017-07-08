@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Started to work on Graphs window. Commit to save.
+Added GetRuntime which returns stepTime.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
