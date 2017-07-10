@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Added GetRuntime which returns stepTime.
+Finished AddNewGraphPopUp.(Calling it good for now)
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:

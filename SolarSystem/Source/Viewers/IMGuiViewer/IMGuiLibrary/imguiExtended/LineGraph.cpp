@@ -123,8 +123,8 @@ namespace ImGuiE
 		if (IsInGraph(ImVec2(origin.x, center.y)))//Y axis
 			drawList->AddLine(ImVec2(origin.x, pos.y), ImVec2(origin.x, pos.y + size.y), ImGui::GetColorU32(ImGuiCol_Border));
 
-		drawList->AddText(ImVec2(center.x, pos.y + size.y), ImGui::GetColorU32(ImGuiCol_Text), xLabel.c_str());
-		ImGuiE::VerticalText(yLabel.c_str(), ImVec2(pos.x, center.y), ImVec2(0.5f, 0.0f));
+		drawList->AddText(ImVec2(pos.x, pos.y + size.y), ImGui::GetColorU32(ImGuiCol_Text), xLabel.c_str());
+		ImGuiE::VerticalText(yLabel.c_str(), ImVec2(pos.x, pos.y + size.y), ImVec2(0.5f, 0.0f));
 	}
 
 	void LineGraph::DrawGrid(size_t gridRes)

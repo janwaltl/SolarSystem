@@ -115,17 +115,17 @@ namespace solar
 		ConvertTo(physUnits.mass*maxMass, physUnits.dist*maxPos, physUnits.time* maxPos / maxVel);
 	}
 
-	PhysUnits::ratio SimData::RatioOfMassTo(PhysUnits::ratio newMass)
+	PhysUnits::ratio SimData::RatioOfMassTo(PhysUnits::ratio newMass) const
 	{
 		return physUnits.mass / newMass;
 	}
 
-	PhysUnits::ratio SimData::RatioOfDistTo(PhysUnits::ratio newDist)
+	PhysUnits::ratio SimData::RatioOfDistTo(PhysUnits::ratio newDist) const
 	{
 		return physUnits.dist / newDist;
 	}
 
-	PhysUnits::ratio SimData::RatioOfTimeTo(PhysUnits::ratio newTime)
+	PhysUnits::ratio SimData::RatioOfTimeTo(PhysUnits::ratio newTime) const
 	{
 		return physUnits.time / newTime;
 	}
