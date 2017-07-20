@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Finished AddNewGraphPopUp.(Calling it good for now)
+Finished the whole graph thing.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
@@ -13,11 +13,18 @@ Remarks:
 TODOs/IDEAS:
 	Add Inverses of matrices in UBO in camera class if needed.
 	Why is Ortho weirdly clipped when projecting to the center?
-		- now projecting to near clipping plane, need to resolve it there's typo or bug in matrices somewhere.
+		- now projecting to near clipping plane, need to resolve it - there's typo or bug in matrices somewhere.
 	Camera's aspect ratio?
 	Fix all Begin/End for windows
 	Decide on Ratio class
 		- too much work with operators, but it distinguishes it from simple double
+!!	Graphs - object's energy is not implemented 
+	Graphs tweaks
+		- better grid system, this one looks weird when zooming
+		- Scientific notation - labels and input ranges, checkbox for autoscale 
+		- maybe preview on hover over the list instead of side window
+		- csv export would be too hard
+		- separate window resizing - part of whole UI resize thing
 Plan:
 	UI overhaul:
 		- Top-bar with dropdown windows
@@ -36,25 +43,15 @@ Plan:
 			- SimData - Done
 			- CameraControls - Done
 			- Graphs
-				- ability to plot various functions of SimData
-					- distance, speed between two objects or origin
-						- x=time,y=value
-					- total energy of system
-						- tracks kinetic,
-				- line graph - working on now
-					- PushBack - adds new x,y pair
-					- Clear - removes data
-					- plot area can be moved by dragging and zoomed by wheel
-					- SetLabels - for axes
-					- ShowAll - zoom enough to se plotted data
-					- ChangeRanges
-					- top buttons: ShowAll, Go to origin, Clear, show/hide grid
-				- general window
-					- list of currently tracked graphs
-						- show/hide their separate windows
-						- export them??
-						- create new one/rename/ delete them
-				
+				- make size changeable 
+				- ignore preview, work on separate window
+				- separate window 
+					- test window limits
+					- resize based on it
+					- controls:
+						- show all - call AutoScale once
+						- pause/resume
+						- clear
 			- Visuals
 				- controls visual guidances:
 					- grid with dynamic resolution (located at ref frame with selected units)
@@ -82,3 +79,28 @@ Plan:
 			- per-pixel, bloom
 		OpenGL state machine - OpenGLSM
 			- maybe little bit of overkill for now
+
+Ne - finish graphs
+		- autoscale - test it
+		- mouse controls - zoom to center of the range
+Po,Ut - start working on grid
+		- buffer with 100x100 grid, offset, scale uniforms
+		- z-fade?
+		- controls - switch between grid planes
+		- add pin-heads
+			- draw lines
+			- draw circles
+		- visualize cam's target?
+St - finish grid
+	- controls - Top Menu bar shows size ratio of both grid tiles
+Ct,Pa,So,Ne
+	- top menu bar
+		-integrate simControls and rest of windows
+	- icons?
+	- proper winSize boundaries, test scaling on big PC
+	- mouse picking
+		- needs inverses of matrices
+		- on hover show just name?
+		- on right - center, follow
+	-smaller, visible trackball
+3D planets or Kepler

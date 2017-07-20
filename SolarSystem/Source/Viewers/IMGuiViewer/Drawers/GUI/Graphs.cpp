@@ -3,9 +3,6 @@
 #include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imguiExtended.h"
 
 #include <sstream>
-#include <iomanip>
-#include <algorithm>
-#include <iostream>
 
 namespace solar
 {
@@ -66,6 +63,7 @@ namespace solar
 			};
 		}
 		const char* xAxisStr = "RealTime\0SimTime\0";
+
 		bool UnitNameGetter(void * data, int index, const char ** result)
 		{
 			auto& simData = *reinterpret_cast<SimData*>(data);
@@ -110,6 +108,8 @@ namespace solar
 		tempGraph.combo.target = 0;
 		tempGraph.combo.xAxis = xAxis::realTime;
 		tempGraph.combo.xAxisUnits = timeUnits::secs;
+		tempGraph.xRange[0] = tempGraph.yRange[0] = -1.0f;
+		tempGraph.xRange[1] = tempGraph.yRange[1] = +1.0f;
 		strcpy_s(tempGraph.name, "New graph");
 	}
 	void gui::Graphs::operator()(SimData & data, const stepTime_t& realTime, const simulatedTime& simTime)
@@ -139,6 +139,41 @@ namespace solar
 			}
 		}
 		ImGui::End();
+
+		DrawSeparateGraphWindows();
+	}
+
+	void gui::Graphs::DrawSeparateGraphWindows()
+	{
+		for (auto& graph : graphs)
+		{
+			if (graph.separateWindow)
+			{
+				if (ImGui::Begin(graph.name.c_str(), nullptr, ImGuiWindowFlags_AlwaysAutoResize))
+				{
+					graph.graph->SetSize(ImVec2 {300.0f,300.0f});
+					graph.graph->Draw();
+
+					ImGui::AlignFirstTextHeightToWidgets(); ImGui::Text("Autoscale:");
+					ImGui::SameLine();
+					if (ImGui::Checkbox("X", &graph.autoScale.x))
+						graph.graph->Autoscale(graph.autoScale.x, graph.autoScale.y);
+					ImGui::SameLine();
+					if (ImGui::Checkbox("Y", &graph.autoScale.y))
+						graph.graph->Autoscale(graph.autoScale.x, graph.autoScale.y);
+
+					if (ImGui::Button("Show all"))
+						graph.graph->ShowAll();
+					ImGui::SameLine();
+					if (ImGui::Button("Clear"))
+						graph.graph->Clear();
+					ImGui::SameLine();
+					if (ImGui::Button("Close"))
+						graph.separateWindow = false;
+				}
+				ImGui::End();
+			}
+		}
 	}
 
 	void gui::Graphs::SelectedGraphControls()
@@ -156,7 +191,8 @@ namespace solar
 					showPreview = false;
 			}
 			ImGui::SameLine();
-			ImGui::Button("Open in separate window");
+			if (ImGui::Button("Open in separate window"))
+				graphs[selected].separateWindow = true;
 			ImGui::SameLine(395);
 			if (ImGui::Button(showPreview ? "Hide preview" : "Show preview"))
 				showPreview = !showPreview;
@@ -170,12 +206,11 @@ namespace solar
 			{
 				auto point = ImVec2(graph.xSampler(realTime, simTime), graph.ySampler(data));
 				graph.graph->AddPoint(point);
-				///REMOVE
-				std::cout << "Adding point:" << point.x << '\t' << point.y << '\n';
 			}
 	}
 	void gui::Graphs::Preview()
 	{
+		graphs[selected].graph->SetSize(ImVec2 {150.0f,150.0f});
 		graphs[selected].graph->Draw();
 	}
 	void gui::Graphs::NewGraphPopUp(SimData & data, const stepTime_t& realTime, const simulatedTime& simTime)
@@ -214,11 +249,13 @@ namespace solar
 			ImGui::Text("Graph's name");
 			ImGui::SameLine(comboOffset);
 			ImGui::InputText("##NameOfGraph", tempGraph.name, sizeof(tempGraph.name) / sizeof(tempGraph.name[0]));
+			ImGui::Text("XRange"); ImGui::SameLine(comboOffset); ImGui::InputFloat2("##XRange", tempGraph.xRange);
+			ImGui::Text("YRange"); ImGui::SameLine(comboOffset); ImGui::InputFloat2("##YRange", tempGraph.yRange);
 
 			if (ImGui::Button("Create"))
 			{
-				ResetTempGraph();
 				CreateNewGraph(data, realTime, simTime);
+				ResetTempGraph();
 				ImGui::CloseCurrentPopup();
 			}
 			ImGui::SameLine();
@@ -346,38 +383,38 @@ namespace solar
 	}
 	void gui::Graphs::CreateNewGraph(solar::SimData & data, const stepTime_t& realTime, const simulatedTime& simTime)
 	{
-
 		graphData newGraph;
 		std::string xLabel, yLabel;
 
 		newGraph.name = tempGraph.name;
+		newGraph.autoScale = {false,false};
 		switch (tempGraph.combo.plottedQuantity)//Create sampler for chosen quantity
 		{
 		case plottedQuantity::systemEnergy:
 		{
 			yLabel = "Energy of system";
 			auto currentEnergy = ComputeSystemEnergy(data);
-			newGraph.ySampler = [currentEnergy, units = tempGraph.units.energy](const SimData& data) {
-				return (ComputeSystemEnergy(data) - currentEnergy)*units; };
+			newGraph.ySampler = [currentEnergy, units = tempGraph.units.energy](const SimData& data) ->float {
+				return static_cast<float>((ComputeSystemEnergy(data) - currentEnergy)*units); };
 			break;
 		}
 		case plottedQuantity::objectEnergy:
 			yLabel = data[tempGraph.combo.target].name + "'s energy";
-			newGraph.ySampler = [units = tempGraph.units.energy](const SimData& data) { return 1.0*units; };
+			///TODO implement
+			newGraph.ySampler = [units = tempGraph.units.energy](const SimData& data)->float { return static_cast<float>(1.0*units); };
 			break;
 		case plottedQuantity::distance:
 			yLabel = data[tempGraph.combo.target].name + "-" + data[tempGraph.combo.refFrame].name + " distance";
-			newGraph.ySampler = [target = tempGraph.combo.target, ref = tempGraph.combo.refFrame, units = tempGraph.units.dist](const SimData& data) {
-				return (data[target].pos - data[ref].pos).Length()*units; };
+			newGraph.ySampler = [target = tempGraph.combo.target, ref = tempGraph.combo.refFrame, units = tempGraph.units.dist](const SimData& data)->float {
+				return static_cast<float>((data[target].pos - data[ref].pos).Length()*units); };
 			break;
 		case plottedQuantity::speed:
 			yLabel = "Speed of " + data[tempGraph.combo.target].name + " w.r.t." + data[tempGraph.combo.refFrame].name;
 
-			newGraph.ySampler = [target = tempGraph.combo.target, ref = tempGraph.combo.refFrame, distUnits = tempGraph.units.dist, timeUnits = tempGraph.units.time](const SimData& data) {
-				return (data[target].vel - data[ref].vel).Length()*distUnits / timeUnits; };
+			newGraph.ySampler = [target = tempGraph.combo.target, ref = tempGraph.combo.refFrame, distUnits = tempGraph.units.dist, timeUnits = tempGraph.units.time](const SimData& data)->float {
+				return static_cast<float>((data[target].vel - data[ref].vel).Length()*distUnits / timeUnits); };
 			break;
 		}
-
 		switch (tempGraph.combo.xAxis)
 		{
 		case xAxis::realTime:
@@ -391,8 +428,8 @@ namespace solar
 				}
 				else
 					return false; };
-			newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t& realTime, const simulatedTime& simTime) {
-				return realTime.count() / double(stepTime_t::period::den) * units; };//Convert to seconds, then to desired units
+			newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t& realTime, const simulatedTime& simTime)->float {
+				return static_cast<float>(realTime.count() / float(stepTime_t::period::den) * units); };//Convert to seconds, then to desired units
 			break;
 		case xAxis::simTIme:
 			xLabel = "SimTime";
@@ -405,15 +442,19 @@ namespace solar
 				}
 				else
 					return false; };
-			newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t& realTime, const simulatedTime& simTime) {
-				return simTime.seconds.count()*units; };//Convert to seconds, then to desired units
+			newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t& realTime, const simulatedTime& simTime)->float {
+				return static_cast<float>(simTime.seconds.count()*units); };//Convert to seconds, then to desired units
 		}
+
 		xLabel = xLabel + "[" + tempGraph.unitLabels.x + "]";
 		yLabel = yLabel + "[" + tempGraph.unitLabels.y + "]";
-		newGraph.graph = std::make_unique<ImGuiE::LineGraph>(ImVec2(150, 150), ImVec2(0, 30), ImVec2(-1.5, 1.5), 1000, xLabel, yLabel);
+		ImVec2 xRange {tempGraph.xRange[0],tempGraph.xRange[1]};
+		ImVec2 yRange {tempGraph.yRange[0],tempGraph.yRange[1]};
+		newGraph.graph = std::make_unique<ImGuiE::LineGraph>(ImVec2(150, 150), xRange, yRange, 1000, xLabel, yLabel);
 		newGraph.active = true;
+		newGraph.separateWindow = false;
 		graphs.emplace_back(std::move(newGraph));
-		newGraph = graphData();
+		selected = graphs.size() - 1;//Select it
 	}
 	void gui::Graphs::ListOfGraphs()
 	{
@@ -437,7 +478,7 @@ namespace solar
 					ImGui::NextColumn();
 					ImGui::Text(g.name.c_str());
 					ImGui::NextColumn();
-					ImGui::Text("Tracking");
+					ImGui::Text(g.active ? "Sampling" : "Paused");
 					ImGui::NextColumn();
 					ImGui::Separator();
 					ImGui::PopID();

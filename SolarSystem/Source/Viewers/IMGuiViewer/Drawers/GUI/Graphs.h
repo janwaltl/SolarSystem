@@ -21,10 +21,12 @@ namespace solar
 		{
 		public:
 			Graphs();
-			//Draws Graph's main window as well as any opened graph windows
+			//Draws Graph's main window as well as any opened separate graph windows
 			void operator()(SimData& data, const stepTime_t& realTime, const simulatedTime& simTime);
-			void SelectedGraphControls();
 		private:
+			//Draws each graph in its own window with enhanced controls if enabled
+			void DrawSeparateGraphWindows();
+			void SelectedGraphControls();
 			//Resets tempGraph variable to its basic state
 			void ResetTempGraph();
 			//Updates active graphs with simulation's data
@@ -43,9 +45,15 @@ namespace solar
 			struct graphData
 			{
 				bool active;//Whether graph is being sampled
+				bool separateWindow;
+				struct
+				{
+					bool x, y;
+				}autoScale;//same as graph's autoscale, but variables are needed so they can be passed to ImGui
+				//Returns whether should be a sample taken this frame
 				std::function<bool(const stepTime_t& realTime, const simulatedTime& simTime)> sampleCond;
-				std::function<double(const stepTime_t& realTime, const simulatedTime& simTime)> xSampler;
-				std::function<double(const SimData&)> ySampler;
+				std::function<float(const stepTime_t& realTime, const simulatedTime& simTime)> xSampler;
+				std::function<float(const SimData&)> ySampler;
 				std::unique_ptr<ImGuiE::LineGraph> graph;
 				std::string name;
 			};
@@ -61,11 +69,9 @@ namespace solar
 					int refFrame;
 					int xAxis;
 					int xAxisUnits;
-
 					int energyUnits;
 					int distUnits;
 					int timeUnits;
-
 				}combo;
 				struct
 				{
@@ -78,7 +84,8 @@ namespace solar
 				{
 					std::string x, y;
 				}unitLabels;
-				char name[200];
+				char name[200];//Buffer for graph's name
+				float xRange[2], yRange[2];//Ranges, [0]=Min, [1]=Max
 			} tempGraph;
 		};
 
