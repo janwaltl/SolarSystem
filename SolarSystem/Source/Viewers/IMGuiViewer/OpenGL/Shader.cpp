@@ -80,6 +80,11 @@ namespace solar
 		{
 			glUseProgram(0);
 		}
+		void Shader::SetUniform1f(const std::string & name, float x) const
+		{
+			this->Bind();
+			glUniform1f(uniforms.at(name), x);
+		}
 		void Shader::SetUniform1i(const std::string & name, int i) const
 		{
 			this->Bind();

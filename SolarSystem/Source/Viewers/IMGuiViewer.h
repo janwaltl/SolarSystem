@@ -7,6 +7,7 @@
 #include "IMGuiViewer/Drawers/GUIDrawer.h"
 #include "IMGuiViewer/Drawers/SimDataDrawer.h"
 #include "IMGuiViewer/Drawers/LineTrailsDrawer.h"
+#include "IMGuiViewer/Drawers/GridDrawer.h"
 #include "IMGuiViewer/Camera.h"
 //#include "IMGuiViewer/Drawers/TestDrawer.h"
 
@@ -24,6 +25,8 @@ namespace solar
 		void Prepare() override final;
 		void operator()() override final;
 
+		void DrawGrid();
+
 		Camera& GetCamera();
 	private:
 		size_t w, h;
@@ -32,6 +35,9 @@ namespace solar
 		Camera cam;
 		std::unique_ptr<drawers::GUIDrawer> GUIDrawer;
 		std::unique_ptr<drawers::SimDataDrawer> simDataDrawer;
+		struct{
+			std::unique_ptr<drawers::GridDrawer> biggerGrid, smallerGrid;
+		}gridDrawer;
 		//std::unique_ptr<drawers::TestDrawer> testDrawer;
 		std::unique_ptr<drawers::LineTrailsDrawer> lineTrailsDrawer;
 	};

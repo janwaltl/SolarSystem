@@ -25,7 +25,7 @@ namespace solar
 
 			void Bind() const;
 			void UnBind() const;
-
+			void SetUniform1f(const std::string& name, float x) const;
 			void SetUniform1i(const std::string& name, int i) const;
 			void SetUniform2f(const std::string& name, float x, float y) const;
 			//Still sets vec2 of floats, just less casting

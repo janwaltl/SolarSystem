@@ -188,6 +188,7 @@
     <ClCompile Include="Source\Units\Unit.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Camera.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GridDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\CameraControls.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Graphs.cpp" />
@@ -206,6 +207,7 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Error.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Grid.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.cpp" />
     <ClCompile Include="Source\Viewers\ReplayerViewer.cpp" />
@@ -241,6 +243,7 @@
     <ClInclude Include="Source\Viewers\EmptyViewer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Camera.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GridDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\CameraControls.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Graphs.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\ReplayControls.h" />
@@ -264,6 +267,7 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Error.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Grid.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.h" />
     <ClInclude Include="Source\Viewers\ReplayerViewer.h" />

@@ -16,6 +16,7 @@ namespace solar
 			CameraControls();
 			CameraControls& operator()(Camera& cam, SimData& data);
 			void SetCamType(solar::Camera & cam);
+			void SetOrthoCamera(solar::Camera & cam);
 		private:
 			static bool UnitNameGetter(void * data, int index, const char ** result);
 			void MouseControls(solar::Camera & cam, SimData& data);

@@ -105,6 +105,11 @@ namespace solar
 		return view;
 	}
 
+	double Camera::GetDistToTarget() const
+	{
+		return (targetPos-camPos).Length();
+	}
+
 	void Camera::LazyInit()
 	{
 		if (UBO == 0)

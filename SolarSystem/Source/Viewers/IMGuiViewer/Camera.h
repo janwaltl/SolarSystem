@@ -52,6 +52,7 @@ namespace solar
 		const Vec3d& UpDir() const;
 		const Vec3d& RightDir() const;
 		const Mat4f& ViewMatrix() const;
+		double GetDistToTarget() const;
 	private:
 		void LazyInit();
 		void SubmitMatrices();

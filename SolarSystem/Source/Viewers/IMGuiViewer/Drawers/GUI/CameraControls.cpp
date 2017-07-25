@@ -47,8 +47,13 @@ namespace solar
 			switch (camTypeCombo)
 			{
 			case 0: cam.MakePerspective(90, 1.7f, 0.001f, 10000.0f); break;
-			case 1: cam.MakeOrtho(17 * 2, 10 * 2, 0.1f, 10000.0f); break;
+			case 1: SetOrthoCamera(cam); break;
 			}
+		}
+		void CameraControls::SetOrthoCamera(solar::Camera & cam)
+		{
+			auto dist = cam.GetDistToTarget();
+			cam.MakeOrtho(dist*1.7, dist, 0.1f, 10000.0f);
 		}
 		bool CameraControls::UnitNameGetter(void * data, int index, const char ** result)
 		{
@@ -115,7 +120,11 @@ namespace solar
 			double scroll = (std::max(std::min(maxSpeed, io.MouseWheel*zoomSpeed), -1.0f*maxSpeed) + maxSpeed)*0.5f;//Clamp
 			auto vec = -1.0*(cam.TargetPos() - cam.CamPos())*scroll;
 			if (vec.Length() > 0.05f)
+			{
+				if (camTypeCombo == 1)
+					SetOrthoCamera(cam);
 				cam.LookAt(cam.TargetPos() + vec, cam.TargetPos(), cam.UpDir());
+			}
 		}
 
 		void CameraControls::ForwBackMovement(solar::Camera & cam)
@@ -150,6 +159,7 @@ namespace solar
 
 																 //Map to camera's coords
 			Vec3d delta = cam.RightDir()*drag.x + cam.UpDir()*drag.y;
+			delta *= (cache.TargetPos - cache.CamPos).Length();
 			cam.LookAt(cache.CamPos - delta, cache.TargetPos - delta, cam.UpDir());
 		}
 

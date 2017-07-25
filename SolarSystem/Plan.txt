@@ -1,5 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Finished the whole graph thing.
+Got Grid somewhat working - needs polishing.
+Small fix to movement speed to sides.
 ========================================IMPLEMENTING PLAN========================================
 
 Remarks:
@@ -25,6 +26,14 @@ TODOs/IDEAS:
 		- maybe preview on hover over the list instead of side window
 		- csv export would be too hard
 		- separate window resizing - part of whole UI resize thing
+	Grid
+		- better resizing, sort that frac,fade mess
+			- use 3 grids, cycle trough them, while always resizing the hidden one
+				- small grid is smaller than bigger
+				- proper fading
+			- or bigger would fade away, smaller will change color to same as bigger
+		- zooming in should behave same
+		- get offset working, place it at cam's target
 Plan:
 	UI overhaul:
 		- Top-bar with dropdown windows
@@ -42,21 +51,12 @@ Plan:
 					- with stability line
 			- SimData - Done
 			- CameraControls - Done
-			- Graphs
-				- make size changeable 
-				- ignore preview, work on separate window
-				- separate window 
-					- test window limits
-					- resize based on it
-					- controls:
-						- show all - call AutoScale once
-						- pause/resume
-						- clear
+			- Graphs - Done
 			- Visuals
 				- controls visual guidances:
 					- grid with dynamic resolution (located at ref frame with selected units)
 						- individual grid planes as well as 3D grid
-						- ability to switch parts of it on/off, maybe change colors
+						
 					- pinheads with planets = projection on xz grid
 						- ability to switch on/of, choose plane of projection
 					- visual trackball - make it smaller to allow easier rolling
@@ -80,9 +80,6 @@ Plan:
 		OpenGL state machine - OpenGLSM
 			- maybe little bit of overkill for now
 
-Ne - finish graphs
-		- autoscale - test it
-		- mouse controls - zoom to center of the range
 Po,Ut - start working on grid
 		- buffer with 100x100 grid, offset, scale uniforms
 		- z-fade?
