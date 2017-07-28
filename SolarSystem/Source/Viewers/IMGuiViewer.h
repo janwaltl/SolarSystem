@@ -35,9 +35,7 @@ namespace solar
 		Camera cam;
 		std::unique_ptr<drawers::GUIDrawer> GUIDrawer;
 		std::unique_ptr<drawers::SimDataDrawer> simDataDrawer;
-		struct{
-			std::unique_ptr<drawers::GridDrawer> biggerGrid, smallerGrid;
-		}gridDrawer;
+		std::unique_ptr<drawers::GridDrawer> gridDrawer;
 		//std::unique_ptr<drawers::TestDrawer> testDrawer;
 		std::unique_ptr<drawers::LineTrailsDrawer> lineTrailsDrawer;
 	};

@@ -1,8 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Got Grid somewhat working - needs polishing.
-Small fix to movement speed to sides.
+Finished grid, moved logic from ImGuiViewer to GridDrawer.
 ========================================IMPLEMENTING PLAN========================================
-
 Remarks:
 	Acknowledge third parties in documentation.
 	Well, reorganize documentation.
@@ -27,13 +25,8 @@ TODOs/IDEAS:
 		- csv export would be too hard
 		- separate window resizing - part of whole UI resize thing
 	Grid
-		- better resizing, sort that frac,fade mess
-			- use 3 grids, cycle trough them, while always resizing the hidden one
-				- small grid is smaller than bigger
-				- proper fading
-			- or bigger would fade away, smaller will change color to same as bigger
-		- zooming in should behave same
-		- get offset working, place it at cam's target
+		- could make fadeRange smoother
+
 Plan:
 	UI overhaul:
 		- Top-bar with dropdown windows
@@ -54,9 +47,6 @@ Plan:
 			- Graphs - Done
 			- Visuals
 				- controls visual guidances:
-					- grid with dynamic resolution (located at ref frame with selected units)
-						- individual grid planes as well as 3D grid
-						
 					- pinheads with planets = projection on xz grid
 						- ability to switch on/of, choose plane of projection
 					- visual trackball - make it smaller to allow easier rolling
@@ -80,24 +70,3 @@ Plan:
 		OpenGL state machine - OpenGLSM
 			- maybe little bit of overkill for now
 
-Po,Ut - start working on grid
-		- buffer with 100x100 grid, offset, scale uniforms
-		- z-fade?
-		- controls - switch between grid planes
-		- add pin-heads
-			- draw lines
-			- draw circles
-		- visualize cam's target?
-St - finish grid
-	- controls - Top Menu bar shows size ratio of both grid tiles
-Ct,Pa,So,Ne
-	- top menu bar
-		-integrate simControls and rest of windows
-	- icons?
-	- proper winSize boundaries, test scaling on big PC
-	- mouse picking
-		- needs inverses of matrices
-		- on hover show just name?
-		- on right - center, follow
-	-smaller, visible trackball
-3D planets or Kepler

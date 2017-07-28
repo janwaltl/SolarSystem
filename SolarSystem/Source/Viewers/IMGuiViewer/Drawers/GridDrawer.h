@@ -14,6 +14,8 @@ namespace solar
 	class Camera;
 	namespace drawers
 	{
+		//Needs OpenGL Context at creation
+		//Class that draws dynamic grid at given plane and position
 		class GridDrawer
 		{
 		public:
@@ -21,13 +23,22 @@ namespace solar
 			{
 				XY = 0, XZ = 1, YZ = 2,
 			};
-			GridDrawer(const Camera& cam, size_t gridRes);
+			//gridRes - number of gridSquare for bigger grid in each dimension, should be suffenciently large to cover whole screen
+			//smallToBig - number of small grid's squares that fit into bigger grid's square 
+			GridDrawer(const Camera& cam, size_t gridRes, size_t smallToBig);
 			~GridDrawer();
+			//Draws the grid
 			//In which plane should the grid be drawn
-			void Draw(plane p, const Vec2f& scale, const Vec4f& col,float fade);
+			//With given scale (size of bigger square) and offset in world coordinates
+			void Draw(const Camera& cam, plane p, const Vec2f& scale, float offset);
 		private:
-			std::unique_ptr<openGL::Shader> CreateShader(const Camera& cam, plane p, size_t gridRes);
-			std::unique_ptr<openGL::Grid> grid;
+			void Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f& scale, const Vec4f& col, const Vec3f& offset, float fadeRange, size_t gridRes);
+
+			std::unique_ptr<openGL::Shader> CreateShader(const Camera& cam, plane p);
+			std::unique_ptr<openGL::Grid> smallerGrid, biggerGrid;
+			size_t smallToBig;
+			float invSTB;
+			size_t gridRes;
 			//Indexed by 'plane' enum
 			std::unique_ptr<openGL::Shader> shaders[3];
 		};

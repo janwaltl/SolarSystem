@@ -14,7 +14,7 @@ namespace solar
 			Grid(size_t gridRes);
 			~Grid();
 
-			void Draw();
+			void Draw() const;
 		private:
 			unsigned int VBO;
 			size_t gridRes;

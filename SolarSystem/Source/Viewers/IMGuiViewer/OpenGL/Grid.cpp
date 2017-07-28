@@ -35,7 +35,7 @@ solar::openGL::Grid::~Grid()
 		glDeleteBuffers(1, &VBO);
 }
 
-void solar::openGL::Grid::Draw()
+void solar::openGL::Grid::Draw() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);

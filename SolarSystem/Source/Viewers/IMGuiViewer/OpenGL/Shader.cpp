@@ -132,6 +132,10 @@ namespace solar
 						 static_cast<float>(vec.z),
 						 static_cast<float>(vec.w));
 		}
+		void Shader::SetUniform4f(const std::string & name, const Vec4f & vec) const
+		{
+			SetUniform4f(name, vec.x, vec.y, vec.z, vec.w);
+		}
 		void Shader::SetUniform4Mat(const std::string & name, const Mat4f& mat) const
 		{
 			this->Bind();
