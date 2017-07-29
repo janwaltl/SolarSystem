@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "Source/Math/Math.h"
+#include "Source/Units/Unit.h"
 
 namespace solar
 {
@@ -10,6 +11,7 @@ namespace solar
 	{
 		class Grid;
 		class Shader;
+		class Pinheads;
 	}
 	class Camera;
 	namespace drawers
@@ -25,17 +27,18 @@ namespace solar
 			};
 			//gridRes - number of gridSquare for bigger grid in each dimension, should be suffenciently large to cover whole screen
 			//smallToBig - number of small grid's squares that fit into bigger grid's square 
-			GridDrawer(const Camera& cam, size_t gridRes, size_t smallToBig);
+			GridDrawer(const SimData& data, const Camera& cam, size_t gridRes, size_t smallToBig);
 			~GridDrawer();
 			//Draws the grid
 			//In which plane should the grid be drawn
 			//With given scale (size of bigger square) and offset in world coordinates
-			void Draw(const Camera& cam, plane p, const Vec2f& scale, float offset);
+			void Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset);
 		private:
 			void Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f& scale, const Vec4f& col, const Vec3f& offset, float fadeRange, size_t gridRes);
 
 			std::unique_ptr<openGL::Shader> CreateShader(const Camera& cam, plane p);
 			std::unique_ptr<openGL::Grid> smallerGrid, biggerGrid;
+			std::unique_ptr<openGL::Pinheads> pinheads;
 			size_t smallToBig;
 			float invSTB;
 			size_t gridRes;

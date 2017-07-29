@@ -18,7 +18,7 @@ namespace solar
 		lineTrailsDrawer = std::make_unique<drawers::LineTrailsDrawer>(data->Get().size(), cam);
 		//testDrawer = std::make_unique<drawers::TestDrawer>(cam);
 
-		gridDrawer = std::make_unique<drawers::GridDrawer>(cam, 50, 10);
+		gridDrawer = std::make_unique<drawers::GridDrawer>(*data, cam, 100, 10);
 
 		//cam.MakeOrtho(17*2,10*2, 0.1f, 10000.0f);
 		cam.MakePerspective(90, 1.7f, 0.01f, 10000.0f);
@@ -43,7 +43,7 @@ namespace solar
 	void IMGuiViewer::DrawGrid()
 	{
 		Vec2f scale(data->RatioOfDistTo(PhysUnits::AU), data->RatioOfDistTo(PhysUnits::AU));
-		gridDrawer->Draw(cam, gridDrawer->XY, scale, 0.0f);
+		gridDrawer->Draw(*data,cam, gridDrawer->YZ, scale, -0.1f);
 	}
 	Camera & IMGuiViewer::GetCamera()
 	{

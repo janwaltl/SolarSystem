@@ -208,6 +208,7 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Error.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Grid.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Pinheads.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.cpp" />
     <ClCompile Include="Source\Viewers\ReplayerViewer.cpp" />
@@ -268,6 +269,7 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Error.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Grid.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Pinheads.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Shader.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.h" />
     <ClInclude Include="Source\Viewers\ReplayerViewer.h" />

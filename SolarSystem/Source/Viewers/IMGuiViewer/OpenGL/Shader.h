@@ -13,7 +13,7 @@ namespace solar
 		class Shader
 		{
 		public:
-			Shader(const std::string& vertexSource, const std::string& fragSource);
+			Shader(const std::string& vertexSource, const std::string& fragSource, const std::string& geomSource="");
 			//Moving can be enabled,but not needed anyway
 			//Either way, just swap programIDs and uniforms
 			Shader(const Shader& shader) = delete;

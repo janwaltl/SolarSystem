@@ -1,5 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Finished grid, moved logic from ImGuiViewer to GridDrawer.
+Added floor to multiple to math functions.
+Implemented pinheads.
+Grid offset remains contanst troughout zooming.
 ========================================IMPLEMENTING PLAN========================================
 Remarks:
 	Acknowledge third parties in documentation.
@@ -26,6 +28,8 @@ TODOs/IDEAS:
 		- separate window resizing - part of whole UI resize thing
 	Grid
 		- could make fadeRange smoother
+		- pinheads base could change smoothly
+!!		- pinheads are hard set to XY plane - extract enums to GridDrawer?
 
 Plan:
 	UI overhaul:
@@ -47,8 +51,6 @@ Plan:
 			- Graphs - Done
 			- Visuals
 				- controls visual guidances:
-					- pinheads with planets = projection on xz grid
-						- ability to switch on/of, choose plane of projection
 					- visual trackball - make it smaller to allow easier rolling
 						- change size, position? (But keep it in screen coords)
 					- camTarget indicator
@@ -57,6 +59,9 @@ Plan:
 						- when selected(on click) shows small window
 							- Name, set as target(follow), set as ref frame
 	Bonuses:
+		Make Planets colored spheres
+		And add shading with sun as lightsource
+			- per-pixel, bloom
 		Kepler with all trajectories
 			- would require hiearchy system in simData and input files
 				- wouldn't be too hard
@@ -64,9 +69,6 @@ Plan:
 			- could be done for stopped simulation
 				- would require viewer, simMethods and parser respond to these changes
 					- probably SystemUnit::UnitAdded/Removed(index) would be fine
-		Make Planets colored spheres
-		And add shading with sun as lightsource
-			- per-pixel, bloom
 		OpenGL state machine - OpenGLSM
 			- maybe little bit of overkill for now
 

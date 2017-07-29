@@ -21,6 +21,21 @@ namespace solar
 	{
 		return rad* T(180) / PI<T>;
 	}
+	//Floors given value to multiple of 'multiple' number
+	//e.g floorToMult(9.2,10.0)=10.0
+	//e.g floorToMult(9.2,100.0)=100.0
+	//e.g floorToMult(9.2,5.0)=5.0
+	//e.g floorToMult(9.2,0)=9.2 = UNCHANGED
+	//e.g floorToMult(9.2,-10)=-10
+
+	template<typename T>
+	T floorToMult(T value, T multiple)
+	{
+		if (multiple == T(0))
+			return value;
+		else
+			return std::floor(value / abs(multiple))*multiple;
+	}
 }
 
 

@@ -1,6 +1,7 @@
 #include "GridDrawer.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Grid.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
+#include "Source/Viewers/IMGuiViewer/OpenGL/Pinheads.h"
 #include "Source/Viewers/IMGuiViewer/Camera.h"
 
 #include <algorithm>
@@ -8,7 +9,7 @@
 namespace solar
 {
 
-	drawers::GridDrawer::GridDrawer(const Camera& cam, size_t gridRes, size_t smallToBig) :
+	drawers::GridDrawer::GridDrawer(const SimData& data, const Camera& cam, size_t gridRes, size_t smallToBig) :
 		smallerGrid(std::make_unique<openGL::Grid>(gridRes*smallToBig)),
 		biggerGrid(std::make_unique<openGL::Grid>(gridRes)),
 		smallToBig(smallToBig),
@@ -18,6 +19,8 @@ namespace solar
 		shaders[XY] = CreateShader(cam, XY);
 		shaders[XZ] = CreateShader(cam, XZ);
 		shaders[YZ] = CreateShader(cam, YZ);
+
+		pinheads = std::make_unique<openGL::Pinheads>(cam, data->size());
 	}
 
 	drawers::GridDrawer::~GridDrawer()
@@ -25,12 +28,13 @@ namespace solar
 		//For unique ptrs
 	}
 
-	void drawers::GridDrawer::Draw(const Camera& cam, plane p, const Vec2f& scale, float offset)
+	void drawers::GridDrawer::Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset)
 	{
-		//Set zoom based on dist to target or dist to grid
+		//Set zoom based on dist to target or dist to grid ( both are linear in the sense that 2xZoom=2xwider view, holds for both perspective and ortho cameras)
 		auto zoomLevel = cam.GetDistToTarget();
 		//auto zoomLevel = cam.CamPos().z - offset;
-
+		//Keeps offset constant troughout all zoom levels
+		auto corrOffset = zoomLevel*offset;
 		//Calculates scale of smaller and bigger grid
 		//Smaller grid is always smallToBig times smaller, when zooming in the bigger one switches to smaller one's scale and smaller shrinks to preserve smallToBig ratio.
 		//Thus only two grids are needed to create grid with infinite resolution.
@@ -43,10 +47,29 @@ namespace solar
 			frac = 1.0f - frac;
 
 		//Always centers grid to screen's center, but snaps it to biggerScale.
-		auto gridOffset = Vec3f(floor(cam.TargetPos().x / biggerScale.x)*biggerScale.x,
-								floor(cam.TargetPos().y / biggerScale.y)*biggerScale.y,
-								offset);
-
+		auto gridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
+								floorToMult(float(cam.TargetPos().y), biggerScale.y),
+								corrOffset);
+		switch (p)
+		{
+		case solar::drawers::GridDrawer::XY:
+			gridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
+							   floorToMult(float(cam.TargetPos().y), biggerScale.y),
+							   corrOffset);
+			break;
+		case solar::drawers::GridDrawer::XZ:
+			gridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
+							   corrOffset,
+							   floorToMult(float(cam.TargetPos().z), biggerScale.y));
+			break;
+		case solar::drawers::GridDrawer::YZ:
+			gridOffset = Vec3f(corrOffset,
+							   floorToMult(float(cam.TargetPos().y), biggerScale.x),
+							   floorToMult(float(cam.TargetPos().z), biggerScale.y));
+			break;
+		default:
+			break;
+		}
 		//Map 0.0-0.5 to 0.0-1.0, clamp 0.5+ to 1.0
 		//So biggerGrid dissappears when zoomed in
 		float bigAlpha = std::min(frac*2.0f, 1.0f);
@@ -58,9 +81,10 @@ namespace solar
 
 		//Map 0.0-1.0 to invSTB-1.0
 		//Scales rendering limit of the grid to preserve smooth transition when switching to next scales
-		float fadeRange = frac*(1 - invSTB) + invSTB;
+		float fadeRange = frac*(1.0f - invSTB) + invSTB;
 		Draw(smallerGrid, p, smallerScale, Vec4f(smallCol*bigAlpha + bigCol*(1.0f - bigAlpha), smallAlpha), gridOffset, fadeRange, gridRes*smallToBig);
 		Draw(biggerGrid, p, biggerScale, Vec4f(bigCol, bigAlpha), gridOffset, fadeRange, gridRes);
+		pinheads->Draw(data, pinheads->XY, corrOffset, smallerScale);
 	}
 
 	void drawers::GridDrawer::Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f & scale, const Vec4f & col, const Vec3f & offset, float fadeRange, size_t gridRes)

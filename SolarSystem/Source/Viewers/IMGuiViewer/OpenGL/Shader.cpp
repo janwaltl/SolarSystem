@@ -13,7 +13,7 @@ namespace solar
 	}
 	namespace openGL
 	{
-		Shader::Shader(const std::string & vertexSource, const std::string & fragSource)
+		Shader::Shader(const std::string & vertexSource, const std::string & fragSource, const std::string& geomSource)
 		{
 			//Compile vertexShader 
 
@@ -27,6 +27,7 @@ namespace solar
 			{
 				GLchar log[logBufSize];
 				glGetShaderInfoLog(vertShader, logBufSize, NULL, log);
+				glDeleteShader(vertShader);//Because we will throw
 				throw Exception("Error:Vertex Shader's compilation failed,reason:\n" + std::string(log));
 			}
 
@@ -39,10 +40,29 @@ namespace solar
 			glGetShaderiv(fragShader, GL_COMPILE_STATUS, &success);
 			if (!success)
 			{
-				glDeleteShader(vertShader);//Because we will throw
 				GLchar log[logBufSize];
 				glGetShaderInfoLog(fragShader, logBufSize, NULL, log);
+				glDeleteShader(vertShader);//Because we will throw
+				glDeleteShader(fragShader);//Because we will throw
 				throw Exception("Error:Fragment Shader's compilation failed, reason:\n" + std::string(log));
+			}
+			GLuint geomShader;
+			if (!geomSource.empty())
+			{
+				geomShader = glCreateShader(GL_GEOMETRY_SHADER);
+				const GLchar* gSource = geomSource.c_str();
+				glShaderSource(geomShader, 1, &gSource, NULL);
+				glCompileShader(geomShader);
+				glGetShaderiv(geomShader, GL_COMPILE_STATUS, &success);
+				if (!success)
+				{
+					GLchar log[logBufSize];
+					glGetShaderInfoLog(geomShader, logBufSize, NULL, log);
+					glDeleteShader(vertShader);//Because we will throw
+					glDeleteShader(fragShader);//Because we will throw
+					glDeleteShader(geomShader);//Because we will throw
+					throw Exception("Error:Geometry Shader's compilation failed, reason:\n" + std::string(log));
+				}
 			}
 
 			//Link shaders together
@@ -50,21 +70,24 @@ namespace solar
 			programID = glCreateProgram();
 			glAttachShader(programID, vertShader);
 			glAttachShader(programID, fragShader);
+			if (!geomSource.empty())
+				glAttachShader(programID, geomShader);
 			glLinkProgram(programID);
 			glGetProgramiv(programID, GL_LINK_STATUS, &success);
 			if (!success)
 			{
-				glDeleteShader(vertShader);//Because we will throw
-				glDeleteShader(fragShader);//Because we will throw
 				GLchar log[logBufSize];
 				glGetProgramInfoLog(programID, logBufSize, NULL, log);
+				glDeleteShader(vertShader);//Because we will throw
+				glDeleteShader(fragShader);//Because we will throw
+				glDeleteProgram(this->programID);
 				throw Exception("Error:Shader's linkage has failed, reason:\n" + std::string(log));
 			}
 			LoadUniforms();
 			//They are not needed anymore
 			glDeleteShader(fragShader);
 			glDeleteShader(vertShader);
-			
+
 			//Throws if something failed, but it mostly should be covered by above checks...
 			ThrowOnError([this]() {glDeleteProgram(this->programID); });
 		}
