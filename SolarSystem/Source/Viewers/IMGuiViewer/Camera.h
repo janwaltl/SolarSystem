@@ -27,9 +27,9 @@ namespace solar
 		//Makes this camera use a perspective projection matrix
 		Camera& MakePerspective(float FOV, float AR, float near, float far);
 		//
-		Camera& LookAt(const Vec3d& camPos, const Vec3d& targetPos, const Vec3d& upDir = Vec3d(0.0, 1.0, 0.0));
+		Camera& LookAt(const Vec3d& newCamPos, const Vec3d& newTargetPos, const Vec3d& newUpDir = Vec3d(0.0, 1.0, 0.0));
 		//
-		Camera& Look(const Vec3d& camPos, const Vec3d& dir, const Vec3d& upDir = Vec3d(0.0, 1.0, 0.0));
+		Camera& Look(const Vec3d& newCamPos, const Vec3d& newViewDir, const Vec3d& newUpDir = Vec3d(0.0, 1.0, 0.0));
 		//If shader wants to draw from this camera's point of view, then it must contain following interface block:
 		/*		std140 uniform **blockName**
 				{

@@ -75,20 +75,20 @@ void solar::drawers::TestDrawer::Draw()
 	glBindVertexArray(VAO);
 	//Close
 	shader->SetUniform3f("scale", Vec3f(1.0f, 1.0f, 1.0f));
-	shader->SetUniform3f("offset", Vec3f(1.0f+1e-2, -1.0f, -1.0f));
+	shader->SetUniform3f("offset", Vec3f(1.0f+1e-2f, -1.0f, -1.0f));
 	shader->SetUniform4f("col", Vec4f(1.0f, 0.0f, 0.0f, 1.0f));
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	shader->SetUniform3f("scale", Vec3f(1.0f, 1.0f, 1.0f));
-	shader->SetUniform3f("offset", Vec3f(10.0f,-1.1f, -1.0f - 1e-4));
+	shader->SetUniform3f("offset", Vec3f(10.0f,-1.1f, -1.0f - 1e-4f));
 	shader->SetUniform4f("col", Vec4f(0.0f, 1.0f, 0.0f, 1.0f));
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 	shader->SetUniform3f("scale", Vec3f(1.0f, 1.0f, 1.0f));
-	shader->SetUniform3f("offset", Vec3f(1, -1.0f, -10));
+	shader->SetUniform3f("offset", Vec3f(1.0f, -1.0f, -10.0f));
 	shader->SetUniform4f("col", Vec4f(1.0f, 0.0f, 0.0f, 1.0f));
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	shader->SetUniform3f("scale", Vec3f(1.0f, 1.0f, 1.0f));
-	shader->SetUniform3f("offset", Vec3f(0.0f, -1.1f, -1.00001f*10e12));
+	shader->SetUniform3f("offset", Vec3f(0.0f, -1.1f, -1.00001f*10e12f));
 	shader->SetUniform4f("col", Vec4f(0.0f, 1.0f, 0.0f, 1.0f));
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 

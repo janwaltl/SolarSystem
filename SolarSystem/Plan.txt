@@ -1,11 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Implemented reversed z-buffer.
-	- Sources https://nlguillemot.wordpress.com/2016/12/07/reversed-z-in-opengl/ , http://dev.theomader.com/depth-precision/
-	- Requires OpenGL 4.5 or GL_NV_depth_buffer_float extension - which should be available even on older HW.
-	- Changed projection matrices accordingly
-	- Test scene in TestDrawer.
-
-
+Zero-warning (except for warnings caused by switched off stuff) build
 ========================================IMPLEMENTING PLAN========================================
 Remarks:
 	Acknowledge third parties in documentation.

@@ -12,7 +12,7 @@ solar::openGL::Grid::Grid(size_t gridRes)
 	std::vector<float> vertices;
 	vertices.reserve(8 * gridRes);
 
-	for (int i = 0; i < gridRes; ++i)
+	for (size_t i = 0; i < gridRes; ++i)
 	{
 		float offset = (i - halfRes);
 		//X line

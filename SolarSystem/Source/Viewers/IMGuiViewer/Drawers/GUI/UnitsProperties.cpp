@@ -108,9 +108,9 @@ namespace solar
 			if (ImGui::BeginPopupContextItem("##changeCol", 0))
 			{
 				ImGui::Text("Edit color");
-				tempCol[0] = data[i].color.x;
-				tempCol[1] = data[i].color.y;
-				tempCol[2] = data[i].color.z;
+				tempCol[0] = float(data[i].color.x);
+				tempCol[1] = float(data[i].color.y);
+				tempCol[2] = float(data[i].color.z);
 				ImGui::ColorEdit3("##edit", (float*)&tempCol);
 				data[i].color.x = tempCol[0];
 				data[i].color.y = tempCol[1];

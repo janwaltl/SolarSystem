@@ -22,7 +22,7 @@ namespace solar
 
 		//cam.MakeOrtho(17 * 2, 10 * 2, 0.1f, 10e15);
 		//cam.MakePerspective(90, 1.7f, 0.01f, 10000.0f);
-		cam.MakePerspective(90, 1.7f, 0.01f, 1e15);
+		cam.MakePerspective(90.0f, 1.7f, 0.01f, 1e15f);
 		cam.LookAt(Vec3d(0, 0, 1.0), Vec3d(0, 0, 0));
 	}
 
@@ -44,7 +44,8 @@ namespace solar
 	}
 	void IMGuiViewer::DrawGrid()
 	{
-		Vec2f scale(data->RatioOfDistTo(PhysUnits::AU), data->RatioOfDistTo(PhysUnits::AU));
+		auto ratio = data->RatioOfDistTo(PhysUnits::AU);
+		Vec2f scale {float(ratio), float(ratio)};
 		gridDrawer->Draw(*data, cam, gridDrawer->XY, scale, -0.1f);
 	}
 	Camera & IMGuiViewer::GetCamera()

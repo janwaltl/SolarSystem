@@ -34,15 +34,15 @@ namespace solar
 		auto zoomLevel = cam.GetDistToTarget();
 		//auto zoomLevel = cam.CamPos().z - offset;
 		//Keeps offset constant troughout all zoom levels
-		auto corrOffset = zoomLevel*offset;
+		float corrOffset = float(zoomLevel*offset);
 		//Calculates scale of smaller and bigger grid
 		//Smaller grid is always smallToBig times smaller, when zooming in the bigger one switches to smaller one's scale and smaller shrinks to preserve smallToBig ratio.
 		//Thus only two grids are needed to create grid with infinite resolution.
 		auto logScale = log(zoomLevel) / log(smallToBig);
-		auto smallerScale = invSTB*scale  * powf(smallToBig, floor(logScale));
+		auto smallerScale = scale * invSTB  * float(pow(smallToBig, floor(logScale)));
 		auto biggerScale = smallerScale*float(smallToBig);
-		float x;
-		auto frac = abs(modff(logScale, &x));
+		double x;
+		float frac = float(abs(modf(logScale, &x)));
 		if (logScale < 0.0f)//So frac is always increasing when zooming out
 			frac = 1.0f - frac;
 
@@ -87,14 +87,14 @@ namespace solar
 		pinheads->Draw(data, pinheads->XY, corrOffset, smallerScale);
 	}
 
-	void drawers::GridDrawer::Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f & scale, const Vec4f & col, const Vec3f & offset, float fadeRange, size_t gridRes)
+	void drawers::GridDrawer::Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f & scale, const Vec4f & col, const Vec3f & offset, float fadeRange, size_t gridResolution)
 	{
 		shaders[p]->Bind();
 		shaders[p]->SetUniform2f("scale", scale);
 		shaders[p]->SetUniform3f("offset", offset);
 		shaders[p]->SetUniform4f("col", col);
 		shaders[p]->SetUniform1f("fade", fadeRange);
-		shaders[p]->SetUniform1i("gridRes", gridRes);
+		shaders[p]->SetUniform1i("gridRes", gridResolution);
 		grid->Draw();
 		shaders[p]->UnBind();
 	}

@@ -39,29 +39,27 @@ namespace solar
 		return *this;
 	}
 
-	Camera & Camera::LookAt(const Vec3d & camPos, const Vec3d & targetPos, const Vec3d & upDir)
+	Camera& Camera::LookAt(const Vec3d& newCamPos, const Vec3d& newTargetPos, const Vec3d& newUpDir)
 	{
 		LazyInit();
-		this->camPos = camPos;
-		this->targetPos = targetPos;
+		camPos = newCamPos;
+		targetPos = newTargetPos;
 		auto dir = (camPos - targetPos).Normalize();
 
-		auto right = CrossProduct(upDir, dir).Normalize();
-		auto up = CrossProduct(dir, right);
-		this->upDir = up;
-		this->rightDir = right;
-		view[0] = right.x;		view[4] = right.y;		view[8] = right.z;		view[12] = -DotProduct(camPos, right);
-		view[1] = up.x;			view[5] = up.y;			view[9] = up.z;			view[13] = -DotProduct(camPos, up);
-		view[2] = dir.x;		view[6] = dir.y;		view[10] = dir.z;		view[14] = -DotProduct(camPos, dir);
-		view[3] = 0;			view[7] = 0;			view[11] = 0;			view[15] = 1;
+		this->rightDir = CrossProduct(newUpDir, dir).Normalize();
+		this->upDir = CrossProduct(dir, rightDir);
+		view[0] = float(rightDir.x); view[4] = float(rightDir.y);	view[8] = float(rightDir.z);	view[12] = -float(DotProduct(camPos, rightDir));
+		view[1] = float(upDir.x);	 view[5] = float(upDir.y);		view[9] = float(upDir.z);		view[13] = -float(DotProduct(camPos, upDir));
+		view[2] = float(dir.x);		 view[6] = float(dir.y);		view[10] = float(dir.z);		view[14] = -float(DotProduct(camPos, dir));
+		view[3] = 0;				 view[7] = 0;					view[11] = 0;					view[15] = 1;
 
 		SubmitMatrices();
 		return *this;
 	}
 
-	Camera & Camera::Look(const Vec3d & camPos, const Vec3d & dir, const Vec3d & upDir)
+	Camera& Camera::Look(const Vec3d& newCamPos, const Vec3d& newViewDir, const Vec3d& newUpDir)
 	{
-		LookAt(camPos, camPos + dir, upDir);
+		LookAt(newCamPos, newCamPos + newViewDir, newUpDir);
 		return *this;
 	}
 
@@ -107,7 +105,7 @@ namespace solar
 
 	double Camera::GetDistToTarget() const
 	{
-		return (targetPos-camPos).Length();
+		return (targetPos - camPos).Length();
 	}
 
 	void Camera::LazyInit()

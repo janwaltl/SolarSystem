@@ -52,8 +52,8 @@ namespace solar
 		}
 		void CameraControls::SetOrthoCamera(solar::Camera & cam)
 		{
-			auto dist = cam.GetDistToTarget();
-			cam.MakeOrtho(dist*1.7, dist, 0.1f, 10000.0f);
+			float dist = float(cam.GetDistToTarget());
+			cam.MakeOrtho(dist*1.7f, dist, 0.1f, 10000.0f);
 		}
 		bool CameraControls::UnitNameGetter(void * data, int index, const char ** result)
 		{

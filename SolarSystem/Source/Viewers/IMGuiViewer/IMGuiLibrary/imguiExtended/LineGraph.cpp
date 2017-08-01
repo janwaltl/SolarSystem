@@ -30,6 +30,9 @@ namespace ImGuiE
 		size(size), xLabel(xLabel), yLabel(yLabel)
 	{
 		autoscale = {true,true};
+		assert(capacity > 0);
+		line.capacity = capacity;
+		line.nextIndex = 0;
 		SetCoords();//To set ranges
 	}
 

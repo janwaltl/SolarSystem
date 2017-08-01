@@ -34,7 +34,7 @@ namespace solar
 			//With given scale (size of bigger square) and offset in world coordinates
 			void Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset);
 		private:
-			void Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f& scale, const Vec4f& col, const Vec3f& offset, float fadeRange, size_t gridRes);
+			void Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f& scale, const Vec4f& col, const Vec3f& offset, float fadeRange, size_t gridResolution);
 
 			std::unique_ptr<openGL::Shader> CreateShader(const Camera& cam, plane p);
 			std::unique_ptr<openGL::Grid> smallerGrid, biggerGrid;
