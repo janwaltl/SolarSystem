@@ -25,6 +25,7 @@ namespace solar
 			void CreateShader(const Camera& cam);
 			std::unique_ptr<openGL::Shader> shader;
 			uint32_t VBO,VAO;
+			
 		};
 	}
 }

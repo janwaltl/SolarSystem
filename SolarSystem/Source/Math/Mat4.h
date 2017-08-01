@@ -243,20 +243,24 @@ namespace solar
 	template<typename T>
 	Mat4<T> MakePerspective(T FOV, T AR, T near, T far)
 	{
-		T halfW = near*tan(DegToRad(FOV / T(2)));
+
+		T halfW = 1*tan(DegToRad(FOV / T(2)));
 		T halfH = halfW / AR;
 		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
+		//Altered to reflect reversed depth buffer
+		//Source http://dev.theomader.com/depth-precision/
 		Mat4<T> res;
-		res[0] = near / halfW;
-		res[5] = near / halfH;
-		res[10] = -(far + near) / (far - near);
-		res[11] = -static_cast<T>(1);
-		res[14] = -2 * far*near / (far - near);
+		res[0] = 1 / halfW;
+		res[5] = 1 / halfH;
+		res[10] = -far / (near - far) - 1;//-(far + near) / (far - near);//0
+		res[11] = -static_cast<T>(1);//-1
+		res[14] = far*near / (far - near);//-2 * far*near / (far - near);//1
 		return res;
 	}
 	template<typename T>
 	Mat4<T> MakePerspective(T top, T bottom, T left, T right, T near, T far)
 	{
+		assert(0);///TODO change to reversed z-buffer
 		T height = top - bottom;
 		T width = right - left;
 		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
@@ -275,21 +279,24 @@ namespace solar
 	template<typename T>
 	Mat4<T> MakeOrtho(T width, T height, T near, T far)
 	{
-		/*//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
-		Mat4<T> res;
+		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
+		/*Mat4<T> res;
 		res[0] = static_cast<T>(1) / width;
 		res[5] = static_cast<T>(1) / height;
-		res[10] = static_cast<T>(-2)/(far - near);
-		res[14] = -(far + near) / (far - near);
-		res[15] = static_cast<T>(1);*/
+		res[10] = static_cast<T>(2)/(far - near);
+		res[14] = (far + near) / (far - near)+1;
+		res[15] = static_cast<T>(1);
+		*/
 
+		//Altered to reflect reversed depth buffer
+		//Source http://dev.theomader.com/depth-precision/
 		//Projection onto near plane. instead of center of box.
 		///TODO why is it better?
 		Mat4<T> res;
 		res[0] = static_cast<T>(1) / width;
 		res[5] = static_cast<T>(1) / height;
-		res[10] = static_cast<T>(1) / (far - near);
-		res[14] = -(near) / (far - near);
+		res[10] = static_cast<T>(-1) / (near + far);
+		res[14] = (far) / (near + far);
 		res[15] = static_cast<T>(1);
 		return res;
 	}
@@ -298,6 +305,7 @@ namespace solar
 	template<typename T>
 	Mat4<T> MakeOrtho(T top, T bottom, T left, T right, T near, T far)
 	{
+		assert(0);///TODO change to reversed z-buffer
 		T width = right - left;
 		T height = top - bottom;
 		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html

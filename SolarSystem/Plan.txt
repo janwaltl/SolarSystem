@@ -1,7 +1,11 @@
 =====================================IN THIS COMMIT=====================================
-Added floor to multiple to math functions.
-Implemented pinheads.
-Grid offset remains contanst troughout zooming.
+Implemented reversed z-buffer.
+	- Sources https://nlguillemot.wordpress.com/2016/12/07/reversed-z-in-opengl/ , http://dev.theomader.com/depth-precision/
+	- Requires OpenGL 4.5 or GL_NV_depth_buffer_float extension - which should be available even on older HW.
+	- Changed projection matrices accordingly
+	- Test scene in TestDrawer.
+
+
 ========================================IMPLEMENTING PLAN========================================
 Remarks:
 	Acknowledge third parties in documentation.
@@ -30,6 +34,10 @@ TODOs/IDEAS:
 		- could make fadeRange smoother
 		- pinheads base could change smoothly
 !!		- pinheads are hard set to XY plane - extract enums to GridDrawer?
+!!	Reversed Depth buffer
+		- change remaining Ortho,Perspective functions to use reversed z-buffer
+		- add exceptions in OpenGLBackend when there are missing extensions/older GL version
+
 
 Plan:
 	UI overhaul:

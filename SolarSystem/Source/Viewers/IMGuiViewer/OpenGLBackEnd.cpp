@@ -17,7 +17,8 @@ namespace solar
 		constexpr int winPosX = 5;
 		constexpr int winPosY = 20;
 		//Background color
-		constexpr Vec4d bgColor(5/255.0, 10/255.0, 10/255.0, 1.0);
+		constexpr Vec4d bgColor(5 / 255.0, 10 / 255.0, 10 / 255.0, 1.0);
+		constexpr size_t samples = 4;
 	}
 
 	//Following usage of GLFW library is  based on their tutorial
@@ -30,11 +31,11 @@ namespace solar
 		glfwSetErrorCallback(ErrorCallback);
 		// Uses OpenGL 1.0 to atleast create contex
 		// will automatically use the newest available or throw on some error
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 1);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 		//Do not allow rezising
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-		glfwWindowHint(GLFW_SAMPLES, 4);//Anti-aliasing
+		glfwWindowHint(GLFW_SAMPLES, samples);//Anti-aliasing
 		win = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr); // create actual window
 		if (win == nullptr) // if that fails
 			throw Exception("Unable to create Window, reason: " + error);
@@ -42,40 +43,46 @@ namespace solar
 		glfwSetWindowPos(win, winPosX, winPosY);
 		glfwMakeContextCurrent(win);
 
-		auto tmpVers = glGetString(GL_VERSION);
-		if (tmpVers)
-		{
-			//Format is MAJOR.MINOR.RELEASE
-			std::string version = reinterpret_cast<const char*>(tmpVers);
-			int major = version[0] - '0';
-			if (major < 3)
-				throw Exception("Your version of OpenGL is not 3.0+, application will not work in graphics mode."
-								"But, can still be run from command-line with disabled viewer(see -help)"
-								"Make sure your graphics drivers are up to date. Detected version: " + version);
-			//There is slight chance that this application works even on OpenGL2.0+, but not sure.
-			//That means really old PC or no drivers anyway...
-			//Also GLSL shaders might not work, but that is heavilly driver specific.
-		}
-		//else Probably cannot even happen, glfw should've thrown by now
-
 
 		glewExperimental = GL_TRUE; // Can crash without
 		if (glewInit() != GLEW_OK) // tries to initialize glew
 			throw Exception("GLEW initialization failed.");
-
 		openGL::CheckForError();//glewInit causes INVALID_ENUM for some reason, this clears it.
 
-		glViewport(0, 0, width, height); // sets correct coordinate viewport
+		CheckVersionAndExtensions();
 
-		//Turn off VSYNC if possible - makes frameTime inaccurate
-		//Still, might be ignored by driver's settings
-
-		//Enable multisampling to make lineTrails nicer.
 		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_GREATER);
 
+		glViewport(0, 0, width, height); // sets correct coordinate viewport
 		glClearColor((GLclampf)bgColor.x, (GLclampf)bgColor.y, (GLclampf)bgColor.z, (GLclampf)bgColor.w);
+		glClearDepth(0.0f);// 0.0 means far in reversed z buffer
+
+		CreateFBO(width, height);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glfwSwapInterval(0);
+	}
+
+	void OpenGLBackend::CreateFBO(const size_t &width, const size_t &height)
+	{
+		glGenTextures(1, &FBOColTex);
+		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, FBOColTex);
+		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGBA, width, height, GL_TRUE);
+		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+		glGenTextures(1, &FBODepthTex);
+		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, FBODepthTex);
+		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_DEPTH_COMPONENT32F, width, height, GL_TRUE);
+		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+
+		glGenFramebuffers(1, &FBO);
+		glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, FBOColTex, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D_MULTISAMPLE, FBODepthTex, 0);
+		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+		if (status != GL_FRAMEBUFFER_COMPLETE)
+			assert(0);
 	}
 
 	OpenGLBackend::~OpenGLBackend()
@@ -93,21 +100,49 @@ namespace solar
 
 	bool OpenGLBackend::NewFrame()
 	{
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glfwSwapBuffers(win);
+		glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 		glfwPollEvents();//Get system events, calls registered callbacks
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 		if (errTrigger)
 		{
 			errTrigger = false;
 			throw Exception(error);
 		}
+
 		return glfwWindowShouldClose(win) != 0;
+	}
+
+	void OpenGLBackend::Render()
+	{
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, FBO);
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // default FBO
+		glBlitFramebuffer(
+			0, 0, 1200, 700,
+			0, 0, 1200, 700,
+			GL_COLOR_BUFFER_BIT, GL_LINEAR);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
 	void OpenGLBackend::ErrorCallback(int err, const char * description)
 	{
 		error = "GLFW error: " + std::to_string(err) + ": " + description;
 		errTrigger = true;
+	}
+	void OpenGLBackend::CheckVersionAndExtensions()
+	{
+		GLint major, minor;
+		glGetIntegerv(GL_MAJOR_VERSION, &major);
+		glGetIntegerv(GL_MINOR_VERSION, &minor);
+
+		//Is needed to implement reversed depth buffer.
+		if ((major == 4 && minor == 5) || glewIsSupported("GL_ARB_clip_control"))
+			glClipControl(GL_LOWER_LEFT, GL_ZERO_TO_ONE);
+		else if (glewIsSupported("GL_NV_depth_buffer_float"))
+			glDepthRangedNV(-1.0, 1.0);
+		else
+			assert(0);// throw Exception("");
+
 	}
 }
