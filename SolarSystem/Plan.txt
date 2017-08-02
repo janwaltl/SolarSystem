@@ -1,14 +1,35 @@
 =====================================IN THIS COMMIT=====================================
-Zero-warning (except for warnings caused by switched off stuff) build
+Draft of top and bottom menu bars. Planning.
 ========================================IMPLEMENTING PLAN========================================
-Remarks:
-	Acknowledge third parties in documentation.
-	Well, reorganize documentation.
-		- probably not worth the effort.
-		- but moving user guide to beggining is doable.
-	Resolve speeding/slowing down while recording.
-		- won't be easy - either we loose O(1) search in file or we get wrong replaying speed
-			- went for wrong replaying speed for now
+Next:
+	Merge all rendering into SceneDrawer, GUIDrawer
+		- SceneDrawer = SimData, LineTrails, Grid
+	Icons - try drawing them with ImGui
+			- if not, use textures
+			- make atleast a draft of them
+			- implement them as state buttons
+	Hook up implemented windows to menu bar's buttons
+	Finish SimControls
+	3D objects
+		- blin phong spheres, sun as a point light
+		- add stuff to formatted file parser?
+			- needs diameter, color...
+	Object picking
+	Create Visual Preferences
+		- move Camera Controls here
+		- use old visuals window regarding linetrails
+		- grid - projecting plane, pinheads, scale
+	Done with basic features?
+	TODOs, asserts, exceptions
+	Bonuses:
+		- textures, bloom, lens flare - easy
+		- rings with instanced asteroids - medium
+			- 
+		- atmosphere, tesselation - hard
+		- Kepler - tedious
+			- Might add simMethod for fixed hiearchy
+				- needs parser too, or just build it from initial values(biggest force)
+
 TODOs/IDEAS:
 	Add Inverses of matrices in UBO in camera class if needed.
 	Why is Ortho weirdly clipped when projecting to the center?
@@ -74,3 +95,11 @@ Plan:
 		OpenGL state machine - OpenGLSM
 			- maybe little bit of overkill for now
 
+Remarks:
+	Acknowledge third parties in documentation.
+	Well, reorganize documentation.
+		- probably not worth the effort.
+		- but moving user guide to beggining is doable.
+	Resolve speeding/slowing down while recording.
+		- won't be easy - either we loose O(1) search in file or we get wrong replaying speed
+			- went for wrong replaying speed for now
