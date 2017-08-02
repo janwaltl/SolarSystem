@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <cassert>
 #include "Shader.h"
-#include "Source/Viewers/IMGuiViewer/Camera.h"
+#include "Source/Viewers/IMGuiViewer/Drawers/Scene/Camera.h"
 #include "Error.h"
 namespace solar
 {

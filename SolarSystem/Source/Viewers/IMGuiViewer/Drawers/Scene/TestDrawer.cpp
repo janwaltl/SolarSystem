@@ -1,6 +1,6 @@
 #include "TestDrawer.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
-#include "Source/Viewers/IMGuiViewer/Camera.h"
+#include "Camera.h"
 
 #include <gl/glew.h>
 solar::drawers::TestDrawer::TestDrawer(const Camera & cam)

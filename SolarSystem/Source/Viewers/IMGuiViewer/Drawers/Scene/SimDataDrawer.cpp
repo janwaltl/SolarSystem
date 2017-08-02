@@ -2,7 +2,7 @@
 
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/CircleBuffer.h"
-#include "Source/Viewers/IMGuiViewer/Camera.h"
+#include "Camera.h"
 namespace solar
 {
 	namespace drawers

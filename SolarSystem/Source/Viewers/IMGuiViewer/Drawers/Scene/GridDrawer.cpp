@@ -2,7 +2,7 @@
 #include "Source/Viewers/IMGuiViewer/OpenGL/Grid.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Pinheads.h"
-#include "Source/Viewers/IMGuiViewer/Camera.h"
+#include "Source/Viewers/IMGuiViewer/Drawers/Scene/Camera.h"
 
 #include <algorithm>
 

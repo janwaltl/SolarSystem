@@ -1,9 +1,7 @@
 =====================================IN THIS COMMIT=====================================
-Draft of top and bottom menu bars. Planning.
+Merged all rendering into newly created SceneDrawer.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Merge all rendering into SceneDrawer, GUIDrawer
-		- SceneDrawer = SimData, LineTrails, Grid
 	Icons - try drawing them with ImGui
 			- if not, use textures
 			- make atleast a draft of them

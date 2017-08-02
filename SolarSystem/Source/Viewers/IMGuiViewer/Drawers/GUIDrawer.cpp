@@ -4,21 +4,21 @@
 #include "GUI/Visuals.h"
 #include "GUI/SimProperties.h"
 #include "GUI/CameraControls.h"
-#include "Source/Viewers/IMGuiViewer.h"
+#include "SceneDrawer.h"
 
 
 namespace solar
 {
 	namespace drawers
 	{
-		void GUIDrawer::Draw(SimData& data, IMGuiViewer& viewer, drawers::LineTrailsDrawer& lineTrails,
-							 size_t w, size_t h)
+		void GUIDrawer::Draw(SimData& data, Viewer& viewer, SceneDrawer& scene, size_t w, size_t h)
 		{
-			camControls(viewer.GetCamera(), data);
+			camControls(scene.GetCam(), data);
 			//unitsProps(data);
 			//graphs(data, viewer.GetRunTime(), viewer.GetSimTime());
 			gui::SimProperties(viewer);
-			//gui::Visuals(lineTrails, data, w, h);
+			//gui::Visuals(scene.GetLineTrails(), data, w, h);
+
 			auto context = ImGui::GetCurrentContext();
 			ImGui::SetNextWindowPos(ImVec2(0, 0));
 			ImGui::SetNextWindowContentSize(ImVec2(float(w), 0));

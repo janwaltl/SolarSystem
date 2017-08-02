@@ -5,7 +5,6 @@
 #include "GUI/UnitsProperties.h"
 #include "GUI/ReplayControls.h"
 #include "GUI/CameraControls.h"
-#include "LineTrailsDrawer.h"
 
 namespace solar
 {
@@ -13,12 +12,13 @@ namespace solar
 
 	namespace drawers
 	{
+		class SceneDrawer;
 		//Renders UserInface for replayed simulation
 		class ReplayGUIDrawer
 		{
 		public:
 			ReplayGUIDrawer(const std::string& replayFileName);
-			void Draw(SimData& data, ReplayerViewer& viewer, drawers::LineTrailsDrawer& lineTrails,
+			void Draw(SimData& data, ReplayerViewer& viewer, SceneDrawer& scene,
 					  size_t w, size_t h);
 		private:
 			gui::UnitsProperties unitsProps;

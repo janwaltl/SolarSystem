@@ -5,11 +5,7 @@
 #include "IMGuiViewer/OpenGLBackEnd.h"
 #include "IMGuiViewer/ImGuiBackend.h"
 #include "IMGuiViewer/Drawers/GUIDrawer.h"
-#include "IMGuiViewer/Drawers/SimDataDrawer.h"
-#include "IMGuiViewer/Drawers/LineTrailsDrawer.h"
-#include "IMGuiViewer/Drawers/GridDrawer.h"
-#include "IMGuiViewer/Camera.h"
-//#include "IMGuiViewer/Drawers/TestDrawer.h"
+#include "IMGuiViewer/Drawers/SceneDrawer.h"
 
 namespace solar
 {
@@ -24,20 +20,13 @@ namespace solar
 
 		void Prepare() override final;
 		void operator()() override final;
-
-		void DrawGrid();
-
-		Camera& GetCamera();
 	private:
 		size_t w, h;
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT
 		Camera cam;
-		std::unique_ptr<drawers::GUIDrawer> GUIDrawer;
-		std::unique_ptr<drawers::SimDataDrawer> simDataDrawer;
-		std::unique_ptr<drawers::GridDrawer> gridDrawer;
-		//std::unique_ptr<drawers::TestDrawer> testDrawer;
-		std::unique_ptr<drawers::LineTrailsDrawer> lineTrailsDrawer;
+		std::unique_ptr<drawers::GUIDrawer> GUI;
+		std::unique_ptr<drawers::SceneDrawer> scene;
 	};
 }
 

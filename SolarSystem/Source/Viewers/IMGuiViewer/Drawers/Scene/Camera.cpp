@@ -2,8 +2,8 @@
 
 #include <vector>
 #include <GL/glew.h>
-#include "OpenGL/Shader.h"
-#include "OpenGL/Error.h"
+#include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
+#include "Source/Viewers/IMGuiViewer/OpenGL/Error.h"
 #include <iostream>
 namespace solar
 {

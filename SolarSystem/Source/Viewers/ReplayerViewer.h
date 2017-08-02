@@ -4,10 +4,8 @@
 #include "Viewer.h"
 #include "IMGuiViewer/OpenGLBackEnd.h"
 #include "IMGuiViewer/ImGuiBackend.h"
-#include "IMGuiViewer/Drawers/SimDataDrawer.h"
-#include "IMGuiViewer/Drawers/LineTrailsDrawer.h"
+#include "IMGuiViewer/Drawers/SceneDrawer.h"
 #include "IMGuiViewer/Drawers/ReplayGUIDrawer.h"
-#include "IMGuiViewer/Camera.h"
 
 namespace solar
 {
@@ -21,16 +19,14 @@ namespace solar
 		ReplayerViewer(const std::string& replayFileName, size_t width, size_t height, const std::string& title);
 		void Prepare() override final;
 		void operator()() override final;
-		Camera& GetCamera();
 	private:
 		size_t w, h;
 		const std::string replayFileName;
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT
-		Camera cam;
-		std::unique_ptr<drawers::ReplayGUIDrawer> replayGUIDrawer;
-		std::unique_ptr<drawers::SimDataDrawer> simDataDrawer;
-		std::unique_ptr<drawers::LineTrailsDrawer> lineTrailsDrawer;
+
+		std::unique_ptr<drawers::ReplayGUIDrawer> GUI;
+		std::unique_ptr<drawers::SceneDrawer> scene;
 	};
 }
 

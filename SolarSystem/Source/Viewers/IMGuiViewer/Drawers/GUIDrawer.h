@@ -5,20 +5,18 @@
 #include "GUI/UnitsProperties.h"
 #include "GUI/CameraControls.h"
 #include "GUI/Graphs.h"
-#include "LineTrailsDrawer.h"
 #include "Source/Units/Unit.h"
-
+#include "Source/Viewers/Viewer.h"
 namespace solar
 {
-	class IMGuiViewer;
 	namespace drawers
 	{
-		//Renders User interface for simulation via ImGUI
+		class SceneDrawer;
+			//Renders User interface for simulation via ImGUI
 		class GUIDrawer
 		{
 		public:
-			void Draw(SimData& data, IMGuiViewer& viewer, drawers::LineTrailsDrawer& lineTrails,
-					  size_t w, size_t h);
+			void Draw(SimData& data,Viewer& viewer, SceneDrawer& scene, size_t w, size_t h);
 		private:
 			gui::UnitsProperties unitsProps;
 			gui::CameraControls camControls;
