@@ -471,7 +471,7 @@ namespace solar
 				for (const auto& g : graphs)
 				{
 					ImGui::PushID(i);
-					ImGui::PushStyleColor(ImGuiCol_HeaderActive, ImVec4(0.90f, 0.78f, 0.00f, 1.00f));
+					ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.90f, 0.78f, 0.00f, 1.00f));
 					if (ImGui::Selectable(std::to_string(i + 1).c_str(), i == selected, ImGuiSelectableFlags_SpanAllColumns))
 						selected = i;
 					ImGui::PopStyleColor();

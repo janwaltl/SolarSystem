@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Merged all rendering into newly created SceneDrawer.
+Tweaked GUI color style.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Icons - try drawing them with ImGui
