@@ -35,5 +35,42 @@ namespace ImGuiE
 			pos.y -= glyph->XAdvance;
 		}
 	}
+
+#pragma warning( push )
+#pragma warning (disable: 4706)//Assignment in if statement
+	struct StateButton
+	{
+		//Return whether the buttons has been clicked this frame
+		bool Draw(const std::string& text)
+		{
+			bool clicked = false;
+			ImGui::PushStyleColor(ImGuiCol_Button, selected ? ImGui::ColorConvertU32ToFloat4(ImGui::GetColorU32(ImGuiCol_ButtonHovered)) :
+								  ImGui::ColorConvertU32ToFloat4(ImGui::GetColorU32(ImGuiCol_Button)));
+			if (clicked = ImGui::Button(text.c_str()))
+				selected = !selected;
+			hovered = ImGui::IsItemHovered();
+
+			ImGui::PopStyleColor();
+			return clicked;
+		}
+		//Return whether the buttons has been clicked this frame
+		bool DrawBlank(const ImVec2& size)
+		{
+			bool clicked = false;
+			ImGui::PushStyleColor(ImGuiCol_Button, selected ? ImGui::ColorConvertU32ToFloat4(ImGui::GetColorU32(ImGuiCol_ButtonHovered)) :
+								  ImGui::ColorConvertU32ToFloat4(ImGui::GetColorU32(ImGuiCol_Button)));
+			ImGui::PushID(this);
+			if (clicked = ImGui::Button("", size))
+				selected = !selected;
+			hovered = ImGui::IsItemHovered();
+			ImGui::PopID();
+			ImGui::PopStyleColor();
+			return clicked;
+		}
+		//bool pressed = false;
+		bool hovered = false, selected = false;
+	};
 }
+
+#pragma warning( pop ) 
 #endif

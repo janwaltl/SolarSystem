@@ -15,7 +15,6 @@ namespace solar
 
 		CameraControls & CameraControls::operator()(Camera & cam, SimData& data)
 		{
-			MouseControls(cam, data);
 			ImGui::SetNextWindowPos(ImVec2(300, 300), ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiSetCond_Once);
 			if (ImGui::Begin("CameraControls"))

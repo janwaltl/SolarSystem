@@ -1,12 +1,9 @@
 =====================================IN THIS COMMIT=====================================
-Tweaked GUI color style.
+Created icons for topMenuBar.
+Added StateButton.
+Hooked up buttons to their windows.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	Icons - try drawing them with ImGui
-			- if not, use textures
-			- make atleast a draft of them
-			- implement them as state buttons
-	Hook up implemented windows to menu bar's buttons
 	Finish SimControls
 	3D objects
 		- blin phong spheres, sun as a point light
@@ -49,6 +46,7 @@ TODOs/IDEAS:
 !!		- pinheads are hard set to XY plane - extract enums to GridDrawer?
 !!	Reversed Depth buffer
 		- change remaining Ortho,Perspective functions to use reversed z-buffer
+			- imgui's ortho
 		- add exceptions in OpenGLBackend when there are missing extensions/older GL version
 
 

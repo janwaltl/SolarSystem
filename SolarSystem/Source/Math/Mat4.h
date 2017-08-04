@@ -305,7 +305,7 @@ namespace solar
 	template<typename T>
 	Mat4<T> MakeOrtho(T top, T bottom, T left, T right, T near, T far)
 	{
-		assert(0);///TODO change to reversed z-buffer
+		//assert(0);///TODO change to reversed z-buffer
 		T width = right - left;
 		T height = top - bottom;
 		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html

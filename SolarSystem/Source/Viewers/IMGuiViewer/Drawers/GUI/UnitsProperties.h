@@ -18,6 +18,7 @@ namespace solar
 		public:
 			explicit UnitsProperties(Vec2d winPos = Vec2d(10, 310), Vec2d winSize = Vec2d(500, 400));
 			void operator()(SimData& data);
+		private:
 			void UnitDetails(const size_t &i);
 			void UnitColorPopUp(solar::SimData & data, const size_t &i);
 			void ListHeader(solar::SimData & data);
@@ -25,7 +26,6 @@ namespace solar
 			void SetMassUnits(solar::SimData & data);
 			void SetLenUnits(solar::SimData & data);
 			void SetTimeUnits(solar::SimData & data);
-		private:
 			static bool UnitsProperties::UnitNameGetter(void * data, int index, const char ** result);
 			Vec2d winPos, winSize;
 			int frameOfRef;//0=center, 1+ index of Unit in SimData counting from 1
