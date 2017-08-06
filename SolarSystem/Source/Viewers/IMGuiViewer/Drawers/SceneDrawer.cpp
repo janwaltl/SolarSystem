@@ -17,14 +17,23 @@ namespace solar
 			//cam.MakePerspective(90, 1.7f, 0.01f, 10000.0f);
 			cam.MakePerspective(90.0f, 1.7f, 0.01f, 1e15f);
 			cam.LookAt(Vec3d(0, 0, 1.0), Vec3d(0, 0, 0));
+			gridEnabled = true;
 		}
 		void SceneDrawer::Draw(const SimData & data)
 		{
 			lineTrails.Draw(data);
+			//Make small grid to be 1AU big
 			auto ratio = data.RatioOfDistTo(PhysUnits::AU);
 			Vec2f scale {float(ratio), float(ratio)};
-			grid.Draw(data, cam, grid.XY, scale, -0.1f);
+			//Draw it, convert small grid scale back to meters
+			if (gridEnabled)
+				gridScale = grid.Draw(data, cam, grid.XY, scale, -0.1f)*ratio*PhysUnits::AU;
+
 			simData.Draw(data);
+		}
+		PhysUnits::ratio SceneDrawer::GetGridScale()
+		{
+			return gridScale;
 		}
 	}
 }

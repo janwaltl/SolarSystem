@@ -295,7 +295,8 @@ namespace solar
 			}
 		}
 		glDisable(GL_SCISSOR_TEST);// We dont use it in rest of our program.
-
+		shader->UnBind();
+		glBindVertexArray(0);
 		auto err = openGL::CheckErrorDBG();
 		if (err != openGL::errors::noError)
 			throw Exception("IMGUI::Render failed, because of following GL error: " + openGL::TranslateError(err));

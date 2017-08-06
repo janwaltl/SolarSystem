@@ -28,7 +28,7 @@ namespace solar
 		//For unique ptrs
 	}
 
-	void drawers::GridDrawer::Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset)
+	double drawers::GridDrawer::Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset)
 	{
 		//Set zoom based on dist to target or dist to grid ( both are linear in the sense that 2xZoom=2xwider view, holds for both perspective and ortho cameras)
 		auto zoomLevel = cam.GetDistToTarget();
@@ -85,6 +85,13 @@ namespace solar
 		Draw(smallerGrid, p, smallerScale, Vec4f(smallCol*bigAlpha + bigCol*(1.0f - bigAlpha), smallAlpha), gridOffset, fadeRange, gridRes*smallToBig);
 		Draw(biggerGrid, p, biggerScale, Vec4f(bigCol, bigAlpha), gridOffset, fadeRange, gridRes);
 		pinheads->Draw(data, pinheads->XY, corrOffset, smallerScale);
+
+		return smallerScale.x;
+	}
+
+	size_t drawers::GridDrawer::SmallToBig()
+	{
+		return smallToBig;
 	}
 
 	void drawers::GridDrawer::Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f & scale, const Vec4f & col, const Vec3f & offset, float fadeRange, size_t gridResolution)

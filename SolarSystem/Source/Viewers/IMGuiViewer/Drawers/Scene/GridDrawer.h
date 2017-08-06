@@ -32,7 +32,10 @@ namespace solar
 			//Draws the grid
 			//In which plane should the grid be drawn
 			//With given scale (size of bigger square) and offset in world coordinates
-			void Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset);
+			//Returns scale in which the small grid has been drawn in world coords
+			double Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset);
+			//Return number of smaller squares in a big one
+			size_t SmallToBig();
 		private:
 			void Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f& scale, const Vec4f& col, const Vec3f& offset, float fadeRange, size_t gridResolution);
 

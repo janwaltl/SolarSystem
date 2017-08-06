@@ -34,6 +34,7 @@ namespace solar
 			//Clears all units' trails
 			void ClearAll();
 			bool IsTrailEnabled(size_t index);
+			bool IsAnyEnabled();
 		private:
 			void CreateShader(const Camera& cam);
 			void CreateTrails(size_t dataSize);
@@ -45,6 +46,10 @@ namespace solar
 			std::unique_ptr<openGL::Shader> shader;
 			std::vector<openGL::UnitTrail> trails;
 			std::vector<bool> trailsControls;
+			struct
+			{
+				bool valid, enabled;
+			}anyEnabledCache;
 		};
 	}
 }

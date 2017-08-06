@@ -53,7 +53,14 @@ namespace solar
 			trailsControls[index] = enable;
 			if (!enable)//Disabling trail also clears it
 				trails[index].Clear();
-
+			//Enabling first one
+			if (anyEnabledCache.valid && !anyEnabledCache.enabled && enable)
+			{
+				anyEnabledCache.valid = true;
+				anyEnabledCache.enabled = true;
+			}
+			else if (anyEnabledCache.valid && anyEnabledCache.enabled && !enable)//Might disable last one
+				anyEnabledCache.valid = false;
 		}
 
 		void LineTrailsDrawer::SwitchAll(bool enable)
@@ -61,6 +68,8 @@ namespace solar
 			std::fill(trailsControls.begin(), trailsControls.end(), enable);
 			if (!enable)//Disabling
 				ClearAll();
+			anyEnabledCache.valid = true;
+			anyEnabledCache.enabled = enable;
 		}
 
 		void LineTrailsDrawer::ClearAll()
@@ -72,6 +81,18 @@ namespace solar
 		{
 			assert(index < trailsControls.size());
 			return trailsControls[index];
+		}
+
+		bool LineTrailsDrawer::IsAnyEnabled()
+		{
+			if (anyEnabledCache.valid)
+				return anyEnabledCache.enabled;
+			else
+			{
+				anyEnabledCache.enabled = std::any_of(trailsControls.begin(), trailsControls.end(), [](auto x) { return x; });
+				anyEnabledCache.valid = true;
+				return anyEnabledCache.enabled;
+			}
 		}
 
 		void LineTrailsDrawer::CreateShader(const Camera& cam)
@@ -117,7 +138,8 @@ namespace solar
 			{
 				trails.resize(dataSize);
 				trailsControls.resize(dataSize, enabledByDefault);
-
+				anyEnabledCache.enabled = enabledByDefault;
+				anyEnabledCache.valid = true;
 			}
 			catch (openGL::GLError& e)
 			{

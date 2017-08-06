@@ -1,7 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Created icons for topMenuBar.
-Added StateButton.
-Hooked up buttons to their windows.
+Got rest of menu bars working.
+	- Few additions to SceneDrawer,LineTrails and Grid
+Fixed bug in ImGuiBackend.
+	- Forgot to unbind VAO.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Finish SimControls
@@ -9,6 +10,7 @@ Next:
 		- blin phong spheres, sun as a point light
 		- add stuff to formatted file parser?
 			- needs diameter, color...
+			- get realScale in top menu bar working
 	Object picking
 	Create Visual Preferences
 		- move Camera Controls here
@@ -48,7 +50,7 @@ TODOs/IDEAS:
 		- change remaining Ortho,Perspective functions to use reversed z-buffer
 			- imgui's ortho
 		- add exceptions in OpenGLBackend when there are missing extensions/older GL version
-
+	VAOs for every render, apparently it might not draw without them on some machines.
 
 Plan:
 	UI overhaul:

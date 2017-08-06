@@ -17,13 +17,16 @@ namespace solar
 		class GUIDrawer
 		{
 		public:
+			GUIDrawer();
 			void Draw(SimData& data, Viewer& viewer, SceneDrawer& scene, size_t w, size_t h);
 		private:
 			void TopMenuBar(SimData& data, Viewer& viewer, SceneDrawer& scene, size_t w, size_t h);
-			void TopRightSwitches(solar::Viewer & viewer, ImDrawList * draw);
+			void TopRightSwitches(SceneDrawer& scene,solar::Viewer & viewer, ImDrawList * draw);
 			void TopButtons(solar::Viewer & viewer, ImDrawList * draw);
 			void DrawFasterTriangles(ImDrawList * draw, ImVec2 &cursorPos, ImGuiStyle &style, ImVec2 &buttonSize, const ImU32 &textCol);
 			void DrawSlowerTriangles(ImDrawList * draw, ImVec2 &cursorPos, ImVec2 &buttonSize, ImGuiStyle &style, const ImU32 &textCol);
+			void BotttomMenuBar(SimData& data, Viewer& viewer, SceneDrawer& scene, size_t w, size_t h);
+			void GridSize(const size_t &w, ImGuiContext * context, float menuBarHeight, solar::drawers::SceneDrawer & scene);
 			gui::UnitsProperties unitsProps;
 			gui::CameraControls camControls;
 			gui::Graphs graphs;
@@ -43,6 +46,13 @@ namespace solar
 				ImGuiE::StateButton play;
 				ImGuiE::StateButton pause;
 			}switches;
+
+			struct
+			{
+				float grid;
+				float pause;
+				float prefs;
+			} offsets;//Horizontal offsets for positioning of GUI elements
 		};
 	}
 }
