@@ -93,9 +93,11 @@ namespace solar
 
 		void SimProperties(SystemUnit& sys)
 		{
-			ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_Once);
+			auto menuBarHeight = ImGui::GetFontSize() + ImGui::GetStyle().FramePadding.y * 2.0f;
+
+			ImGui::SetNextWindowPos(ImVec2(0, menuBarHeight), ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(ImVec2(250, 300), ImGuiSetCond_Once);
-			if (ImGui::Begin("Simulation's controls", NULL))
+			if (ImGui::Begin("Simulation's controls", NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize))
 			{
 				SimControls(sys);
 				ImGui::Separator();

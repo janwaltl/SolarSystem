@@ -42,6 +42,7 @@ namespace solar
 					ImGui::SameLine();
 					ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
 					buttons.graphs.Draw("Graphs");
+					ImGui::TextTooltipOnHover("Enables creating graphs visualizing various physical properties of simulated objects.");
 					ImGui::PopStyleColor();
 
 					if (buttons.graphs.selected)
@@ -49,12 +50,14 @@ namespace solar
 					ImGui::SameLine();
 					ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
 					buttons.unitsProps.Draw("List of objects");
+					ImGui::TextTooltipOnHover("Shows all simulated objects and their physical properties.");
 					ImGui::PopStyleColor();
 					if (buttons.unitsProps.selected)
 						unitsProps(data);
 					ImGui::SameLine();
 					ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
 					buttons.simControls.Draw("Simulation's Details");
+					ImGui::TextTooltipOnHover("Shows statistics about ongoing simulation.");
 					ImGui::PopStyleColor();
 					if (buttons.simControls.selected)gui::SimProperties(viewer);
 
@@ -70,9 +73,10 @@ namespace solar
 					ImGui::SameLine(); ImGui::Button("Hide UI");//Grid on/off
 					ImGui::SameLine();
 					buttons.visuals.Draw("Visual Preferences");
+					ImGui::TextTooltipOnHover("Allows to change visual parts of the simulation.");
 					ImGui::PopStyleColor();
 					if (buttons.visuals.selected)
-						camControls(scene.GetCam(), data);
+						camControls(scene.GetCam(), data, w);
 					ImGui::EndGroup();
 					offsets.prefs = ImGui::GetItemRectSize().x;
 					ImGui::EndMenuBar();
@@ -89,7 +93,9 @@ namespace solar
 			ImVec2 cursorPos;
 			//RealPlanetScale Button
 			cursorPos = ImGui::GetCursorScreenPos();
+			///TODO implement
 			switches.planetScale.DrawBlank(buttonSize);
+			ImGui::TextTooltipOnHover("If enabled shows real scale of simulated objects.\nOtherwise objects are always large enough to be visible on screen.");
 			ImGui::SameLine();
 			draw->AddCircle(cursorPos + ImVec2(buttonSize.x*0.4f, buttonSize.y*0.5f), buttonSize.x*0.3f, textCol, 12, 2.0f);
 			draw->AddCircleFilled(cursorPos + buttonSize*0.75f, buttonSize.x*0.4f - style.FramePadding.x, textCol, 12);
@@ -98,6 +104,7 @@ namespace solar
 			switches.lineTrails.selected = scene.GetLineTrails().IsAnyEnabled();
 			if (switches.lineTrails.DrawBlank(buttonSize))
 				scene.SwitchLineTrails(switches.lineTrails.selected);
+			ImGui::TextTooltipOnHover("Enables/Disables rendering of trails behind simulated objects.");
 			ImGui::SameLine();
 			draw->PathArcTo(cursorPos + style.FramePadding, buttonSize.x*0.5f, 0, 3.14f / 2);
 			draw->PathStroke(textCol, false, 2.0f);
@@ -107,7 +114,7 @@ namespace solar
 			switches.grid.selected = scene.IsGridEnabled();
 			if (switches.grid.DrawBlank(buttonSize))
 				scene.SwitchGrid(switches.grid.selected);
-
+			ImGui::TextTooltipOnHover("Enables/Disabled rendering of the grid.");
 			ImGui::SameLine();
 			for (int i = 1; i <= 3; ++i)
 			{
@@ -132,7 +139,7 @@ namespace solar
 			if (ImGui::IsItemHovered())
 			{
 				ImGui::BeginTooltip();
-				ImGui::Text("Decreses raw multiplier by 10.\n Current value: %u", viewer.GetRawMultiplier());
+				ImGui::Text("Decreses raw multiplier by 10.\nControls speed of the simulation at expense of CPU power.\nCurrent value: %u", viewer.GetRawMultiplier());
 				ImGui::EndTooltip();
 			}
 			ImGui::SameLine();
@@ -146,7 +153,8 @@ namespace solar
 			if (ImGui::IsItemHovered())
 			{
 				ImGui::BeginTooltip();
-				ImGui::Text("Divides DT multiplier by 10.\n Current value: %u", viewer.GetDTMultiplier());
+				ImGui::Text("Divides DT multiplier by 10.\nControls speed of the simulation at expense of precision.\nCurrent value: %u", viewer.GetDTMultiplier());
+
 				ImGui::EndTooltip();
 			}
 			ImGui::SameLine();
@@ -186,7 +194,7 @@ namespace solar
 			if (ImGui::IsItemHovered())
 			{
 				ImGui::BeginTooltip();
-				ImGui::Text("Multiplies DT multiplier by 10.\n Current value: %u", viewer.GetDTMultiplier());
+				ImGui::Text("Multiplies DT multiplier by 10.\nControls speed of the simulation at expense of precision.\nCurrent value: %u", viewer.GetDTMultiplier());
 				ImGui::EndTooltip();
 			}
 			ImGui::SameLine();
@@ -198,7 +206,7 @@ namespace solar
 			if (ImGui::IsItemHovered())
 			{
 				ImGui::BeginTooltip();
-				ImGui::Text("Increases raw multiplier by 10.\n Current value: %u", viewer.GetRawMultiplier());
+				ImGui::Text("Increases raw multiplier by 10.\nControls speed of the simulation at expense of CPU power.\nCurrent value: %u", viewer.GetRawMultiplier());
 				ImGui::EndTooltip();
 			}
 			ImGui::SameLine();
@@ -228,7 +236,7 @@ namespace solar
 			auto context = ImGui::GetCurrentContext();
 			static float speed = 0.0f;
 			//Calculated same way as in Imgui's window calculations - function MenuBarHeight() in imgui_internal.h
-			auto menuBarHeight = context->FontSize + context->Style.FramePadding.y * 2.0f;
+			auto menuBarHeight = ImGui::GetFontSize() + ImGui::GetStyle().FramePadding.y * 2.0f;
 			ImGui::SetNextWindowPos(ImVec2(0, float(h) - menuBarHeight));
 			ImGui::SetNextWindowContentSize(ImVec2(float(w), 0));
 			if (ImGui::Begin("BottomMenuBar", nullptr, ImVec2(float(w), 0), 0.0f,

@@ -84,7 +84,8 @@ namespace solar
 		float fadeRange = frac*(1.0f - invSTB) + invSTB;
 		Draw(smallerGrid, p, smallerScale, Vec4f(smallCol*bigAlpha + bigCol*(1.0f - bigAlpha), smallAlpha), gridOffset, fadeRange, gridRes*smallToBig);
 		Draw(biggerGrid, p, biggerScale, Vec4f(bigCol, bigAlpha), gridOffset, fadeRange, gridRes);
-		pinheads->Draw(data, pinheads->XY, corrOffset, smallerScale);
+		float baseSize = offset*0.2f*zoomLevel;
+		pinheads->Draw(data, pinheads->XY, corrOffset, Vec2f(baseSize,baseSize));
 
 		return smallerScale.x;
 	}

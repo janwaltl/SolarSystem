@@ -1,8 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Got rest of menu bars working.
-	- Few additions to SceneDrawer,LineTrails and Grid
-Fixed bug in ImGuiBackend.
-	- Forgot to unbind VAO.
+Few visual tweaks and added more tooltips.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Finish SimControls

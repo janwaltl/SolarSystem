@@ -14,7 +14,7 @@ namespace solar
 		{
 		public:
 			CameraControls();
-			CameraControls& operator()(Camera& cam, SimData& data);
+			CameraControls& operator()(Camera& cam, SimData& data, float width);
 			void SetCamType(solar::Camera & cam);
 			void SetOrthoCamera(solar::Camera & cam);
 			void MouseControls(solar::Camera & cam, SimData& data);

@@ -16,7 +16,7 @@ namespace solar
 		class UnitsProperties
 		{
 		public:
-			explicit UnitsProperties(Vec2d winPos = Vec2d(10, 310), Vec2d winSize = Vec2d(500, 400));
+			explicit UnitsProperties();
 			void operator()(SimData& data);
 		private:
 			void UnitDetails(const size_t &i);
@@ -27,7 +27,6 @@ namespace solar
 			void SetLenUnits(solar::SimData & data);
 			void SetTimeUnits(solar::SimData & data);
 			static bool UnitsProperties::UnitNameGetter(void * data, int index, const char ** result);
-			Vec2d winPos, winSize;
 			int frameOfRef;//0=center, 1+ index of Unit in SimData counting from 1
 			int distPosCombo;//Distance=0, Position=1
 			int speedVelCombo;//Speed=0, Velocity=1

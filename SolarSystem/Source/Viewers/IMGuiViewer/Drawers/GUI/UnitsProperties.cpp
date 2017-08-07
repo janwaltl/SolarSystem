@@ -17,11 +17,9 @@ namespace solar
 				ImGui::TextTooltipOnHover(text);
 			}
 		}
-		UnitsProperties::UnitsProperties(Vec2d winPos, Vec2d winSize) :
-			winPos(winPos), winSize(winSize), refUnit(&center)
+		UnitsProperties::UnitsProperties() :
+			refUnit(&center)
 		{
-			this->winSize = Vec2d(900, 300);
-			this->winPos = Vec2d(200, 200);
 			distPosCombo = speedVelCombo = timeCombo = massCombo = lenCombo = 0;
 			massRatio = timeRatio = lenRatio = 1.0;
 			tempCol[0] = tempCol[1] = tempCol[2] = 0.0f;
@@ -29,9 +27,11 @@ namespace solar
 
 		void UnitsProperties::operator()(SimData & data)
 		{
-			ImGui::SetNextWindowPos(winPos, ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(winSize, ImGuiSetCond_Once);
-			if (ImGui::Begin("Units' properties", NULL, ImGuiWindowFlags_NoCollapse))
+			auto menuBarHeight = ImGui::GetFontSize() + ImGui::GetStyle().FramePadding.y * 2.0f;
+
+			ImGui::SetNextWindowPos(ImVec2(0, menuBarHeight), ImGuiSetCond_Once);
+			ImGui::SetNextWindowSize(ImVec2(900, 300), ImGuiSetCond_Once);
+			if (ImGui::Begin("Units' properties", NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove))
 			{
 				ListHeader(data);
 

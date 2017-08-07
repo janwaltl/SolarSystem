@@ -115,10 +115,11 @@ namespace solar
 	void gui::Graphs::operator()(SimData & data, const stepTime_t& realTime, const simulatedTime& simTime)
 	{
 		SampleGraphs(data, realTime, simTime);
+		auto menuBarHeight = ImGui::GetFontSize() + ImGui::GetStyle().FramePadding.y * 2.0f;
 
-		ImGui::SetNextWindowPos(ImVec2(300.0f, 100.0f), ImGuiSetCond_Once);
+		ImGui::SetNextWindowPos(ImVec2(0.0f, menuBarHeight), ImGuiSetCond_Once);
 		ImGui::SetNextWindowSize(ImVec2(showPreview ? 730.0f : 500.0f, 250.0f), ImGuiSetCond_Always);
-		if (ImGui::Begin("Graphs", NULL))
+		if (ImGui::Begin("Graphs", NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove))
 		{
 			ImGui::BeginGroup();
 			ImGui::AlignFirstTextHeightToWidgets();

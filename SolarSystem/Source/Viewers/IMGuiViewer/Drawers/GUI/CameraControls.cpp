@@ -13,11 +13,13 @@ namespace solar
 			camTypeCombo(0), camPosCombo(0), camTargetCombo(0), zoomSpeed(0.1f), forwSpeed(0.1f)
 		{}
 
-		CameraControls & CameraControls::operator()(Camera & cam, SimData& data)
+		CameraControls & CameraControls::operator()(Camera & cam, SimData& data, float width)
 		{
-			ImGui::SetNextWindowPos(ImVec2(300, 300), ImGuiSetCond_Once);
+			auto menuBarHeight = ImGui::GetFontSize() + ImGui::GetStyle().FramePadding.y * 2.0f;
+
+			ImGui::SetNextWindowPos(ImVec2(width - 400, menuBarHeight), ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiSetCond_Once);
-			if (ImGui::Begin("CameraControls"))
+			if (ImGui::Begin("CameraControls", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove))
 			{
 				ImGui::Text("Camera's type: "); ImGui::SameLine();
 				if (ImGui::Combo("##CamsType", &camTypeCombo, "Perspective\0Orthographic\0"))
