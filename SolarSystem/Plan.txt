@@ -1,14 +1,15 @@
 =====================================IN THIS COMMIT=====================================
-Few visual tweaks and added more tooltips.
+Implemented object picking - shows objects' names when hovering over them.
 ========================================IMPLEMENTING PLAN========================================
+
 Next:
-	Finish SimControls
 	3D objects
 		- blin phong spheres, sun as a point light
 		- add stuff to formatted file parser?
 			- needs diameter, color...
 			- get realScale in top menu bar working
 	Object picking
+		- works based on screen size circle even when realScale is on.
 	Create Visual Preferences
 		- move Camera Controls here
 		- use old visuals window regarding linetrails

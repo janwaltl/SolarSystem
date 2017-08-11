@@ -22,6 +22,7 @@ namespace solar
 			camControls.MouseControls(scene.GetCam(), data);
 			TopMenuBar(data, viewer, scene, w, h);
 			BotttomMenuBar(data, viewer, scene, w, h);
+			objectContextMenu.Draw(data, scene);
 		}
 		void GUIDrawer::TopMenuBar(SimData& data, Viewer& viewer, SceneDrawer& scene, size_t w, size_t h)
 		{

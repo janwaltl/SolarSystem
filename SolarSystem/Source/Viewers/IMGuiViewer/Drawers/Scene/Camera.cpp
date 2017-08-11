@@ -103,6 +103,16 @@ namespace solar
 		return view;
 	}
 
+	const Mat4f & Camera::ProjMatrix() const
+	{
+		return projection;
+	}
+
+	const Mat4f & Camera::ProjViewMatrix() const
+	{
+		return projView;
+	}
+
 	double Camera::GetDistToTarget() const
 	{
 		return (targetPos - camPos).Length();
@@ -121,6 +131,7 @@ namespace solar
 
 	void Camera::SubmitMatrices()
 	{
+		projView = projection*view;
 		//This is layout of buffer:
 		/*
 				mat4 projection;

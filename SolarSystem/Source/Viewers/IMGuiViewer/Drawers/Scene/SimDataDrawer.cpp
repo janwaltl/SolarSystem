@@ -38,9 +38,22 @@ namespace solar
 			shader->UnBind();
 		}
 
+		Vec2f SimDataDrawer::GetScreenPos(const Unit & object, const Camera & cam) const
+		{
+			auto screenPos = cam.ProjViewMatrix()*Vec4f(static_cast<Vec3f>(object.pos), 1.0f);
+			screenPos /= screenPos.w;
+			return Vec2f(screenPos.x, screenPos.y);
+		}
+
+		float SimDataDrawer::GetScreenRadius(const Unit &, const Camera &) const
+		{
+			//Radius is now fixed, in future it might be different when zooming in more
+			return radius;
+		}
+
 		void SimDataDrawer::CreateShader(const Camera& cam)
 		{
-			
+
 			const std::string vSource = R"(
 			#version 140
 			#extension GL_ARB_explicit_attrib_location : require

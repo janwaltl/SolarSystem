@@ -52,12 +52,14 @@ namespace solar
 		const Vec3d& UpDir() const;
 		const Vec3d& RightDir() const;
 		const Mat4f& ViewMatrix() const;
+		const Mat4f& ProjMatrix() const;
+		const Mat4f& ProjViewMatrix() const;	
 		double GetDistToTarget() const;
 	private:
 		void LazyInit();
 		void SubmitMatrices();
 		uint32_t UBO;
-		Mat4f projection, view;
+		Mat4f projection, view, projView;
 		Vec3d camPos, targetPos, upDir, rightDir;
 	};
 }

@@ -2,12 +2,14 @@
 #define DRAWERS_GUIDRAWER_HEADER
 
 
-#include "GUI/UnitsProperties.h"
-#include "GUI/CameraControls.h"
-#include "GUI/Graphs.h"
 #include "Source/Units/Unit.h"
 #include "Source/Viewers/Viewer.h"
 #include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imguiExtended.h"
+#include "GUI/UnitsProperties.h"
+#include "GUI/CameraControls.h"
+#include "GUI/Graphs.h"
+#include "GUI/ObjectContextMenu.h"
+
 namespace solar
 {
 	namespace drawers
@@ -30,7 +32,7 @@ namespace solar
 			gui::UnitsProperties unitsProps;
 			gui::CameraControls camControls;
 			gui::Graphs graphs;
-
+			gui::ObjectContextMenu objectContextMenu;
 			struct
 			{
 				ImGuiE::StateButton graphs;

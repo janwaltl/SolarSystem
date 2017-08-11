@@ -187,6 +187,7 @@
     <ClCompile Include="Source\Simulation.cpp" />
     <ClCompile Include="Source\Units\Unit.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer.cpp" />
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\ObjectContextMenu.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\Scene\Camera.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\Scene\GridDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.cpp" />
@@ -244,6 +245,7 @@
     <ClInclude Include="Source\Simulation.h" />
     <ClInclude Include="Source\Viewers\EmptyViewer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer.h" />
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\ObjectContextMenu.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\Scene\Camera.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\SceneDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\Scene\GridDrawer.h" />

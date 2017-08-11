@@ -18,7 +18,10 @@ namespace solar
 			SceneDrawer(const SimData& data);
 			void Draw(const SimData& data);
 			Camera& GetCam() { return cam; }
+			const Camera& GetCam() const { return cam; }
 			LineTrailsDrawer& GetLineTrails() { return lineTrails; }
+			SimDataDrawer& GetSimDataDrawer() { return simData; }
+			const SimDataDrawer& GetSimDataDrawer() const { return simData; }
 			GridDrawer& GetGrid() { return grid; }
 			//Return scale of smaller grid in meters from last draw call
 			PhysUnits::ratio GetGridScale();

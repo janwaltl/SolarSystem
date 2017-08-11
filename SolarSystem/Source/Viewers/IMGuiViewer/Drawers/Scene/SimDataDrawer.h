@@ -23,7 +23,10 @@ namespace solar
 			SimDataDrawer(const Camera& cam);
 			~SimDataDrawer();
 			void Draw(const SimData& data);
-		private:
+			//Returns [-1,1] screen position of passed object's center on the screen.
+			Vec2f GetScreenPos(const Unit& object, const Camera& cam) const;
+			//Returns radius of object (its circle or enclosing circle for other shapes) in screen coordinates.
+			float GetScreenRadius(const Unit& object, const Camera& cam) const;
 			void CreateShader(const Camera& cam);
 			std::unique_ptr<openGL::Shader> shader;
 			std::unique_ptr<openGL::CircleBuffer> circle;
