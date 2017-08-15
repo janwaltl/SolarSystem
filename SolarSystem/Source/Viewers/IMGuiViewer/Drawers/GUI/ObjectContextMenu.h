@@ -2,6 +2,7 @@
 #define GUI_OBJECT_CONTEXT_MENU_HEADER
 
 #include "Source/Units/Unit.h"
+#include <map>
 namespace solar
 {
 	namespace drawers
@@ -15,10 +16,19 @@ namespace solar
 		class ObjectContextMenu
 		{
 		public:
-			ObjectContextMenu();
+			ObjectContextMenu(const SimData& data);
 			void Draw(const SimData& data, const drawers::SceneDrawer& scene);
 		private:
-			bool open;
+			//Returns whether any object is hovered
+			bool SetObjectsStates(const SimData& data, const drawers::SceneDrawer& scene);
+			enum objectState
+			{
+				nothing, hovered, inContext
+			};
+			std::vector<objectState> objectsStates;
+			Vec2f contextWinPos;
+			bool contextWinOpened;
+			
 		};
 	}
 }

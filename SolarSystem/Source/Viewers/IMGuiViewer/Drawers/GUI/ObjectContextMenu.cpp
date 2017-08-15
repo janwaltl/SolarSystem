@@ -8,45 +8,118 @@ namespace solar
 {
 	namespace gui
 	{
-		ObjectContextMenu::ObjectContextMenu()
+		namespace
 		{
-			open = false;
+			constexpr Vec2f offset {5.0f,5.0f};
+		}
+		ObjectContextMenu::ObjectContextMenu(const SimData& data) :
+			objectsStates(data.Get().size(), nothing)
+		{
+			contextWinOpened = false;
 		}
 		void ObjectContextMenu::Draw(const SimData & data, const drawers::SceneDrawer & scene)
 		{
-			if (!open)
+			auto anyHovered = SetObjectsStates(data, scene);
+
+			if (contextWinOpened)
 			{
-				if (!ImGui::IsMouseHoveringAnyWindow())
+				ImGui::SetNextWindowPos(contextWinPos + offset, ImGuiSetCond_Always);
+				ImGui::Begin("ObjectContextMenu", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
+							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar);
 				{
 					const auto& objects = data.Get();
-					auto hovObjectIT = objects.begin();
-					ImVec2 mousePos = ImGui::GetMousePos();
-					ImVec2 winSize = ImGui::GetIO().DisplaySize;
-					ImVec2 screenMousePos = mousePos / winSize*2.0f - ImVec2(1.0f, 1.0f);//Convert mouse to -1,1
-					screenMousePos.y *= -1.0f;//Y is up in OpenGL screen
-
-					//Goes through each object and checks if we are hovering any
-					//
-					for (auto IT = objects.begin(); IT != objects.end(); ++IT)
-					{
-						auto objectPos = scene.GetSimDataDrawer().GetScreenPos(*IT, scene.GetCam());
-						float radius = scene.GetSimDataDrawer().GetScreenRadius(*IT, scene.GetCam());
-						auto distVec = screenMousePos - objectPos;
-
-						if (distVec.x*distVec.x + distVec.y* distVec.y <= radius*radius)
+					assert(data.Get().size() == objects.size());
+					size_t numInContext = 0;
+					for (size_t i = 0; i < objects.size(); ++i)
+						if (objectsStates[i] == inContext)
 						{
-							ImVec2 offset {5.0f,5.0f};
-							ImGui::SetNextWindowPos(mousePos + offset, ImGuiSetCond_Always);
-							if (ImGui::Begin("ObjectHoverContextMenu", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
-											 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar))
-							{
-								ImGui::TextColored(IT->color,IT->name.c_str());
-							}
-							ImGui::End();
+							ImGui::PushID(i);
+							ImGui::TextColored(objects[i].color, objects[i].name.c_str());
+							ImGui::SameLine(100);
+							if (ImGui::SmallButton("Follow"));
+							///TODO set as cam's target
+							ImGui::SameLine();
+							if (ImGui::SmallButton("Zoom to"));
+							///TODO implement after real scale planets
+							ImGui::PopID();
+							++numInContext;
+						}
+					if (numInContext > 1)
+					{
+						//Zooms to center of all objects in context menu
+						if (ImGui::SmallButton("Zoom to all"));
+							///TODO
+						ImGui::SameLine();
+					}
+
+					if (ImGui::SmallButton("Close"))
+						contextWinOpened = false;
+				}
+				ImGui::End();
+			}
+			if (anyHovered)
+			{
+				ImVec2 mousePos = ImGui::GetMousePos();
+				ImGui::SetNextWindowPos(mousePos + offset, ImGuiSetCond_Always);
+				ImGui::Begin("HoverContextMenu", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
+							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar);
+				{
+					const auto& objects = data.Get();
+					assert(data.Get().size() == objects.size());
+					for (size_t i = 0; i < objects.size(); ++i)
+						if (objectsStates[i] == hovered)
+							ImGui::TextColored(objects[i].color, objects[i].name.c_str());
+				}
+				ImGui::End();
+			}
+		}
+
+		bool ObjectContextMenu::SetObjectsStates(const SimData & data, const drawers::SceneDrawer & scene)
+		{
+			bool anyHovered = false;
+			//Only update if we are not hovering anything - Will prevent moving context menu underneath the mouse and picking objects behind other windows
+			if (!ImGui::IsMouseHoveringAnyWindow())
+			{
+				bool clicked = ImGui::IsMouseClicked(1);//Right click
+				if (clicked)
+					contextWinOpened = false;
+				const auto& objects = data.Get();
+				auto hovObjectIT = objects.begin();
+				ImVec2 mousePos = ImGui::GetMousePos();
+				ImVec2 winSize = ImGui::GetIO().DisplaySize;
+				ImVec2 screenMousePos = mousePos / winSize*2.0f - ImVec2(1.0f, 1.0f);//Convert mouse to -1,1
+				screenMousePos.y *= -1.0f;//Y is up in OpenGL screen
+
+				Vec2f newContextWinPos {0,0};
+				for (size_t i = 0; i < objects.size(); ++i)
+				{
+					auto& object = objects[i];
+					auto objectPos = scene.GetSimDataDrawer().GetScreenPos(object, scene.GetCam());
+					float radius = scene.GetSimDataDrawer().GetScreenRadius(object, scene.GetCam());
+					auto distVec = screenMousePos - objectPos;
+					//If mouse is hovering the object
+					if (distVec.x*distVec.x + distVec.y* distVec.y <= radius*radius)
+					{
+						if (clicked)//Rightclicked on the object -> add it to context menu, set its position based on first object in it
+							objectsStates[i] = inContext;
+						else if (!contextWinOpened || objectsStates[i] != inContext)//Don't replace objects in context menu unless we clicked for a new one or closed the old one
+						{
+							objectsStates[i] = hovered;
+							anyHovered = true;
 						}
 					}
+					else if (!contextWinOpened || clicked || objectsStates[i] != inContext)//Don't replace objects in context menu unless we clicked for a new one or closed the old one
+						objectsStates[i] = nothing;
+					if (objectsStates[i] == inContext)
+					{
+						objectPos.y *= -1.0f;//Y is up
+						newContextWinPos = (objectPos*0.5f + 0.5f)*Vec2f(winSize);
+						contextWinOpened = true;
+					}
 				}
+				contextWinPos = newContextWinPos;
 			}
+			return anyHovered;
 		}
 	}
 }

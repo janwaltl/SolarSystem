@@ -13,7 +13,7 @@ namespace solar
 
 	void IMGuiViewer::Prepare()
 	{	
-		GUI = std::make_unique<drawers::GUIDrawer>();
+		GUI = std::make_unique<drawers::GUIDrawer>(*data);
 		scene = std::make_unique<drawers::SceneDrawer>(*data);
 	}
 

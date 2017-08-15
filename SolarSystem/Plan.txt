@@ -1,5 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Implemented object picking - shows objects' names when hovering over them.
+Finished object picking and its context menu.
 ========================================IMPLEMENTING PLAN========================================
 
 Next:
@@ -8,14 +8,12 @@ Next:
 		- add stuff to formatted file parser?
 			- needs diameter, color...
 			- get realScale in top menu bar working
-	Object picking
-		- works based on screen size circle even when realScale is on.
 	Create Visual Preferences
 		- move Camera Controls here
 		- use old visuals window regarding linetrails
 		- grid - projecting plane, pinheads, scale
 	Done with basic features?
-	TODOs, asserts, exceptions
+	TODOs, asserts, exceptions, COMMENTS
 	Bonuses:
 		- textures, bloom, lens flare - easy
 		- rings with instanced asteroids - medium
@@ -24,6 +22,9 @@ Next:
 		- Kepler - tedious
 			- Might add simMethod for fixed hiearchy
 				- needs parser too, or just build it from initial values(biggest force)
+		- constrait system for System Units
+			- compile time version for hard constraints and run-time for optional features
+		- rename Unit to object...
 
 TODOs/IDEAS:
 	Add Inverses of matrices in UBO in camera class if needed.

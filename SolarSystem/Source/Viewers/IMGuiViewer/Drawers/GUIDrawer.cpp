@@ -11,7 +11,8 @@ namespace solar
 {
 	namespace drawers
 	{
-		GUIDrawer::GUIDrawer()
+		GUIDrawer::GUIDrawer(SimData& data):
+			objectContextMenu(data)
 		{
 			switches.grid.selected = true;
 			switches.lineTrails.selected = true;
