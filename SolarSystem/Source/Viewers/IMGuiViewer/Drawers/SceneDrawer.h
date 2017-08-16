@@ -12,6 +12,7 @@ namespace solar
 	namespace drawers
 	{
 		//Renders 3D scene of simulated objects
+		//Needs OpenGL context when constructed.
 		class SceneDrawer
 		{
 		public:
@@ -29,7 +30,7 @@ namespace solar
 			bool IsGridEnabled() { return gridEnabled; }
 			void SwitchLineTrails(bool enable) { lineTrails.SwitchAll(enable); }
 		private:
-			Camera cam;//ORDER DEPENDENT - must before all the drawers
+			Camera cam;//ORDER DEPENDENT - must be before all the drawers
 			GridDrawer grid;
 			LineTrailsDrawer lineTrails;
 			SimDataDrawer simData;

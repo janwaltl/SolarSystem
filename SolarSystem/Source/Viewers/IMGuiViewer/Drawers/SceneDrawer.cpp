@@ -21,6 +21,7 @@ namespace solar
 		}
 		void SceneDrawer::Draw(const SimData & data)
 		{
+			cam.Update(data);
 			lineTrails.Draw(data);
 			//Make small grid to be 1AU big
 			auto ratio = data.RatioOfDistTo(PhysUnits::AU);

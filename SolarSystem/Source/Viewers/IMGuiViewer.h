@@ -24,7 +24,6 @@ namespace solar
 		size_t w, h;
 		OpenGLBackend openGL;	  //ORDER-DEPENDENT
 		IMGuiBackend imguiBackend;//ORDER-DEPENDENT
-		Camera cam;
 		std::unique_ptr<drawers::GUIDrawer> GUI;
 		std::unique_ptr<drawers::SceneDrawer> scene;
 	};

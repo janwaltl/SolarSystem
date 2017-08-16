@@ -1,7 +1,6 @@
 =====================================IN THIS COMMIT=====================================
-Finished object picking and its context menu.
+Added support for following an object with camera.
 ========================================IMPLEMENTING PLAN========================================
-
 Next:
 	3D objects
 		- blin phong spheres, sun as a point light

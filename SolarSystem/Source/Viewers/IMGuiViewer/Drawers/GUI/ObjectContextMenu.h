@@ -17,10 +17,13 @@ namespace solar
 		{
 		public:
 			ObjectContextMenu(const SimData& data);
-			void Draw(const SimData& data, const drawers::SceneDrawer& scene);
+			void Draw(const SimData& data, drawers::SceneDrawer& scene);
+
 		private:
 			//Returns whether any object is hovered
 			bool SetObjectsStates(const SimData& data, const drawers::SceneDrawer& scene);
+			void OpenContextMenu() { contextWinOpened = true; }
+			void CloseContextMenu() { contextWinOpened = false; }
 			enum objectState
 			{
 				nothing, hovered, inContext

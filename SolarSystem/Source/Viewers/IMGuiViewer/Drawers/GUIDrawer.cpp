@@ -11,7 +11,7 @@ namespace solar
 {
 	namespace drawers
 	{
-		GUIDrawer::GUIDrawer(SimData& data):
+		GUIDrawer::GUIDrawer(SimData& data) :
 			objectContextMenu(data)
 		{
 			switches.grid.selected = true;
@@ -236,7 +236,6 @@ namespace solar
 		void GUIDrawer::BotttomMenuBar(SimData & data, Viewer & viewer, SceneDrawer & scene, size_t w, size_t h)
 		{
 			auto context = ImGui::GetCurrentContext();
-			static float speed = 0.0f;
 			//Calculated same way as in Imgui's window calculations - function MenuBarHeight() in imgui_internal.h
 			auto menuBarHeight = ImGui::GetFontSize() + ImGui::GetStyle().FramePadding.y * 2.0f;
 			ImGui::SetNextWindowPos(ImVec2(0, float(h) - menuBarHeight));
@@ -250,9 +249,20 @@ namespace solar
 					ImGui::AlignFirstTextHeightToWidgets();
 					auto simTime = SplitTime(viewer.GetSimTime());
 					ImGui::Text("Simulated time: %u years, %u days, %u hours, %u minutes, %u seconds", simTime.Y, simTime.D, simTime.H, simTime.M, simTime.S);
-					ImGui::SameLine(w / 2.0f - speed / 2.0f);
-					ImGui::Text("Speed: %ux", viewer.GetDTMultiplier()*viewer.GetRawMultiplier());
-					speed = ImGui::GetItemRectSize().x;
+					ImGui::SameLine(w / 2.0f - offsets.speedAndFollow / 2.0f);
+					ImGui::BeginGroup();
+					ImGui::Text("\tSpeed: %ux", viewer.GetDTMultiplier()*viewer.GetRawMultiplier());
+					auto index = scene.GetCam().GetFollowedObjectIndex();
+					if (index != Camera::noTarget)
+					{
+						ImGui::SameLine();
+						ImGui::Text("\tFollowing: %s", data[index].name.c_str());
+						ImGui::SameLine();
+						if (ImGui::SmallButton("X"))
+							scene.GetCam().FollowObject(Camera::noTarget);
+					}
+					ImGui::EndGroup();
+					offsets.speedAndFollow = ImGui::GetItemRectSize().x;
 					if (ImGui::IsItemHovered())
 					{
 						ImGui::BeginTooltip();

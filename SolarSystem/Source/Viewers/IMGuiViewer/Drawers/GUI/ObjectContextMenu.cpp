@@ -17,7 +17,7 @@ namespace solar
 		{
 			contextWinOpened = false;
 		}
-		void ObjectContextMenu::Draw(const SimData & data, const drawers::SceneDrawer & scene)
+		void ObjectContextMenu::Draw(const SimData & data, drawers::SceneDrawer & scene)
 		{
 			auto anyHovered = SetObjectsStates(data, scene);
 
@@ -36,8 +36,11 @@ namespace solar
 							ImGui::PushID(i);
 							ImGui::TextColored(objects[i].color, objects[i].name.c_str());
 							ImGui::SameLine(100);
-							if (ImGui::SmallButton("Follow"));
-							///TODO set as cam's target
+							if (ImGui::SmallButton("Follow"))
+							{
+								scene.GetCam().FollowObject(i);
+								CloseContextMenu();
+							}
 							ImGui::SameLine();
 							if (ImGui::SmallButton("Zoom to"));
 							///TODO implement after real scale planets
@@ -53,7 +56,7 @@ namespace solar
 					}
 
 					if (ImGui::SmallButton("Close"))
-						contextWinOpened = false;
+						CloseContextMenu();
 				}
 				ImGui::End();
 			}
@@ -82,7 +85,7 @@ namespace solar
 			{
 				bool clicked = ImGui::IsMouseClicked(1);//Right click
 				if (clicked)
-					contextWinOpened = false;
+					CloseContextMenu();
 				const auto& objects = data.Get();
 				auto hovObjectIT = objects.begin();
 				ImVec2 mousePos = ImGui::GetMousePos();
@@ -114,7 +117,7 @@ namespace solar
 					{
 						objectPos.y *= -1.0f;//Y is up
 						newContextWinPos = (objectPos*0.5f + 0.5f)*Vec2f(winSize);
-						contextWinOpened = true;
+						OpenContextMenu();
 					}
 				}
 				contextWinPos = newContextWinPos;

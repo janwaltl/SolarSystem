@@ -54,6 +54,7 @@ namespace solar
 				float grid;
 				float pause;
 				float prefs;
+				float speedAndFollow;
 			} offsets;//Horizontal offsets for positioning of GUI elements
 		};
 	}
