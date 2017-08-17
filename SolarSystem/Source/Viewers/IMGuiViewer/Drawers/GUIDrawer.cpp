@@ -1,9 +1,8 @@
 #include "GUIDrawer.h"
 
 
-#include "GUI/Visuals.h"
+#include "GUI/VisualPreferences.h"
 #include "GUI/SimProperties.h"
-#include "GUI/CameraControls.h"
 #include "SceneDrawer.h"
 
 
@@ -20,7 +19,6 @@ namespace solar
 		}
 		void GUIDrawer::Draw(SimData& data, Viewer& viewer, SceneDrawer& scene, size_t w, size_t h)
 		{
-			camControls.MouseControls(scene.GetCam(), data);
 			TopMenuBar(data, viewer, scene, w, h);
 			BotttomMenuBar(data, viewer, scene, w, h);
 			objectContextMenu.Draw(data, scene);
@@ -78,7 +76,7 @@ namespace solar
 					ImGui::TextTooltipOnHover("Allows to change visual parts of the simulation.");
 					ImGui::PopStyleColor();
 					if (buttons.visuals.selected)
-						camControls(scene.GetCam(), data, w);
+						visualPrefs.Draw(data, scene);
 					ImGui::EndGroup();
 					offsets.prefs = ImGui::GetItemRectSize().x;
 					ImGui::EndMenuBar();

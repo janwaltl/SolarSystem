@@ -37,10 +37,13 @@ namespace solar
 		Camera& MakeOrtho(float width, float height, float near, float far);
 		//Makes this camera use a perspective projection matrix
 		Camera& MakePerspective(float FOV, float AR, float near, float far);
+
+		type GetType() { return camType; }
 		//Set camera's target as object in simData[index]. Use Camera::noTarget to stop following
 		//To update matrices Update(simData) method must be called frequently.
 		void FollowObject(const size_t index);
 		size_t GetFollowedObjectIndex() { return targetObjectIndex; }
+		bool IsFollowing() { return targetObjectIndex != noTarget; }
 		//Updates camera if its targeted at some object.
 		///In future it might be used to animate its movement
 		void Update(const SimData& data);

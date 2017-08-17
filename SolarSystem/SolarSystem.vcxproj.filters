@@ -74,9 +74,6 @@
     <ClCompile Include="Source\SimMethods\ReplayerMethod.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Visuals.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\SimProperties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -110,9 +107,6 @@
     <ClCompile Include="Source\Units\Unit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\CameraControls.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Graphs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -144,6 +138,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\ObjectContextMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\Scene\CameraControls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\VisualPreferences.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -241,9 +241,6 @@
     <ClInclude Include="Source\ReplayedSimulation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Visuals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\SimProperties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -295,9 +292,6 @@
     <ClInclude Include="Source\Math\Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\CameraControls.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Graphs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -332,6 +326,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\ObjectContextMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\Scene\CameraControls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\VisualPreferences.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

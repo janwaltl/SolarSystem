@@ -6,7 +6,7 @@
 #include "Source/Viewers/Viewer.h"
 #include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imguiExtended.h"
 #include "GUI/UnitsProperties.h"
-#include "GUI/CameraControls.h"
+#include "GUI/VisualPreferences.h"
 #include "GUI/Graphs.h"
 #include "GUI/ObjectContextMenu.h"
 
@@ -15,7 +15,8 @@ namespace solar
 	namespace drawers
 	{
 		class SceneDrawer;
-			//Renders User interface for simulation via ImGUI
+
+		//Renders User interface for simulation via ImGUI
 		class GUIDrawer
 		{
 		public:
@@ -30,7 +31,7 @@ namespace solar
 			void BotttomMenuBar(SimData& data, Viewer& viewer, SceneDrawer& scene, size_t w, size_t h);
 			void GridSize(const size_t &w, ImGuiContext * context, float menuBarHeight, solar::drawers::SceneDrawer & scene);
 			gui::UnitsProperties unitsProps;
-			gui::CameraControls camControls;
+			gui::VisualPreferences visualPrefs;
 			gui::Graphs graphs;
 			gui::ObjectContextMenu objectContextMenu;
 			struct

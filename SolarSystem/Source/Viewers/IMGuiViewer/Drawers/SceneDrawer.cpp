@@ -21,6 +21,7 @@ namespace solar
 		}
 		void SceneDrawer::Draw(const SimData & data)
 		{
+			camControls.Update(cam);
 			cam.Update(data);
 			lineTrails.Draw(data);
 			//Make small grid to be 1AU big

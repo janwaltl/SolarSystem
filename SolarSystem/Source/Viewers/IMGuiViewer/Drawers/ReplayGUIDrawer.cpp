@@ -1,6 +1,6 @@
 #include "ReplayGUIDrawer.h"
 #include "Source/Viewers/ReplayerViewer.h"
-#include "GUI/Visuals.h"
+#include "GUI/VisualPreferences.h"
 #include "SceneDrawer.h"
 
 namespace solar
@@ -14,7 +14,6 @@ namespace solar
 		void ReplayGUIDrawer::Draw(SimData & data, ReplayerViewer & viewer, SceneDrawer& scene,
 								   size_t w, size_t h)
 		{
-			camControls(scene.GetCam(), data, w);
 			unitsProps(data);
 			replayControls(viewer, &scene.GetLineTrails(), w, h);
 			gui::Visuals(scene.GetLineTrails(), data, w, h);

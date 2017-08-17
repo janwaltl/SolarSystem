@@ -1,5 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Added support for following an object with camera.
+Renamed Visuals to VisualPreferences.
+Splitted CameraControls
+	- GUI Window has been integrated into VisualPreferences.
+	- rest moved to Scene/ and called in SceneDrawer.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	3D objects
@@ -49,7 +52,8 @@ TODOs/IDEAS:
 			- imgui's ortho
 		- add exceptions in OpenGLBackend when there are missing extensions/older GL version
 	VAOs for every render, apparently it might not draw without them on some machines.
-
+	Camera
+		- near, far plane? Zoom limits?
 Plan:
 	UI overhaul:
 		- Top-bar with dropdown windows

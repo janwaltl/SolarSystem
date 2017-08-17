@@ -4,7 +4,6 @@
 
 #include "GUI/UnitsProperties.h"
 #include "GUI/ReplayControls.h"
-#include "GUI/CameraControls.h"
 
 namespace solar
 {
@@ -22,7 +21,6 @@ namespace solar
 					  size_t w, size_t h);
 		private:
 			gui::UnitsProperties unitsProps;
-			gui::CameraControls camControls;
 			gui::ReplayControls replayControls;
 		};
 	}
