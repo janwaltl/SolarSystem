@@ -401,7 +401,7 @@ namespace solar
 		}
 		case plottedQuantity::objectEnergy:
 			yLabel = data[tempGraph.combo.target].name + "'s energy";
-			///TODO implement
+			//TODO implement
 			newGraph.ySampler = [units = tempGraph.units.energy](const SimData& data)->float { return static_cast<float>(1.0*units); };
 			break;
 		case plottedQuantity::distance:

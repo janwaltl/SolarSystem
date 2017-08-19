@@ -93,7 +93,7 @@ namespace solar
 			ImVec2 cursorPos;
 			//RealPlanetScale Button
 			cursorPos = ImGui::GetCursorScreenPos();
-			///TODO implement
+			//TODO implement
 			switches.planetScale.DrawBlank(buttonSize);
 			ImGui::TextTooltipOnHover("If enabled shows real scale of simulated objects.\nOtherwise objects are always large enough to be visible on screen.");
 			ImGui::SameLine();

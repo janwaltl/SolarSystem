@@ -28,13 +28,13 @@ namespace solar
 			{
 				if (!cam.IsFollowing() && io.KeyAlt)//ALT+Left button
 					FirstPersonCam(cam);
-				///TODO change if camera can be positioned somewhere
+				//TODO change if camera can be positioned somewhere
 				else //if (camPosCombo == 0) 
 					Trackball(cam);
 			}
 			else if (abs(io.MouseWheel) > epsilon<float>)// Wheel 
 			{
-				///TODO change if camera can be positioned somewhere
+				//TODO change if camera can be positioned somewhere
 				if (/*camPosCombo == 0 &&*/!cam.IsFollowing() && io.KeyAlt)// ALT+ Wheel 
 					ForwBackMovement(cam);
 				else //if (camPosCombo == 0)

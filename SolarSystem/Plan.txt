@@ -1,8 +1,5 @@
 =====================================IN THIS COMMIT=====================================
-Reworked Camera class into abstract interface.
-	- Added derived class for Perspective,Ortho and scaled Ortho cameras.
-	- Used them in SceneDrawer.
-	- in theory the work now like shaders, there can be more of them and they need to be bound before drawing from their perspective.
+Fixed TODO comments so they apper on tasks list.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	3D objects

@@ -85,7 +85,7 @@ namespace solar
 		glBufferSubData(GL_UNIFORM_BUFFER, 0 * matSize, matSize, proj.Data());
 		glBufferSubData(GL_UNIFORM_BUFFER, 1 * matSize, matSize, view.Data());
 		glBufferSubData(GL_UNIFORM_BUFFER, 2 * matSize, matSize, (proj*view).Data());
-		///TODO inverses if needed
+		//TODO inverses if needed
 		//glBufferSubData(GL_UNIFORM_BUFFER, 3 * matSize, matSize, Inverse(projection).Data());
 		//glBufferSubData(GL_UNIFORM_BUFFER, 4 * matSize, matSize, Inverse(view).Data());
 		//glBufferSubData(GL_UNIFORM_BUFFER, 5 * matSize, matSize, Inverse(projection*view).Data());

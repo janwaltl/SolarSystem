@@ -30,14 +30,14 @@ namespace solar
 		virtual void LookAt(const Vec3d& newCamPos, const Vec3d& newTargetPos, const Vec3d& newUpDir = Vec3d(0.0, 1.0, 0.0));
 		//Updates camera if its targeted at some object.
 		//Calls UpdateCamera() internally
-		///In future it might be used to animate its movement
+		//FUTURE In future it might be used to animate its movement
 		void Update(const SimData& data);
 		//Binds this camera for next drawing.( Updates its UBO with new matrices and binds UBO to binding point associated with all shaders)
 		//Should be used before drawing if there are more than one camera object.
-		///IMPROVE: UBOs can be indexed by uniqued index based on refCount and bound to multiple binding points.
-		///			That would allow multiple bound cameras at same time. Minimum binding points is 24 which is more than enough for all camera which will probably be the only use for UBOs anyway.
-		///			Might get messy. With OpenGLSM and with shader remembering its UBO it can bind correct camera with its own Bind() which is already called before draw calls.
-		///				- too many hidden dependecies
+		//IMPROVE: UBOs can be indexed by uniqued index based on refCount and bound to multiple binding points.
+		//			That would allow multiple bound cameras at same time. Minimum binding points is 24 which is more than enough for all camera which will probably be the only use for UBOs anyway.
+		//			Might get messy. With OpenGLSM and with shader remembering its UBO it can bind correct camera with its own Bind() which is already called before draw calls.
+		//				- too many hidden dependecies
 		void Bind();
 		void UnBind();
 		//If shader wants to draw from a camera's point of view, then it must contain following interface block:

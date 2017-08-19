@@ -260,7 +260,7 @@ namespace solar
 	template<typename T>
 	Mat4<T> MakePerspective(T top, T bottom, T left, T right, T near, T far)
 	{
-		assert(0);///TODO change to reversed z-buffer
+		assert(0);//TODO change to reversed z-buffer
 		T height = top - bottom;
 		T width = right - left;
 		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
@@ -291,7 +291,7 @@ namespace solar
 		//Altered to reflect reversed depth buffer
 		//Source http://dev.theomader.com/depth-precision/
 		//Projection onto near plane. instead of center of box.
-		///TODO why is it better?
+		//TODO why is it better?
 		Mat4<T> res;
 		res[0] = static_cast<T>(1) / width;
 		res[5] = static_cast<T>(1) / height;
@@ -305,7 +305,7 @@ namespace solar
 	template<typename T>
 	Mat4<T> MakeOrtho(T top, T bottom, T left, T right, T near, T far)
 	{
-		//assert(0);///TODO change to reversed z-buffer
+		//assert(0);//TODO change to reversed z-buffer
 		T width = right - left;
 		T height = top - bottom;
 		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html

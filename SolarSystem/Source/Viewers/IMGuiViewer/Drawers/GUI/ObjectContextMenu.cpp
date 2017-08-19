@@ -43,7 +43,7 @@ namespace solar
 							}
 							ImGui::SameLine();
 							if (ImGui::SmallButton("Zoom to"));
-							///TODO implement after real scale planets
+							//TODO implement after real scale planets
 							ImGui::PopID();
 							++numInContext;
 						}
@@ -51,7 +51,7 @@ namespace solar
 					{
 						//Zooms to center of all objects in context menu
 						if (ImGui::SmallButton("Zoom to all"));
-							///TODO
+							//TODO
 						ImGui::SameLine();
 					}
 
