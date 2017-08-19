@@ -84,29 +84,30 @@ namespace solar
 				}
 				if (ImGui::CollapsingHeader("Camera Controls", ImGuiTreeNodeFlags_DefaultOpen))
 				{
-					CameraControls(data, scene.GetCam());
+					CameraControls(data, scene);
 				}
 			}
 			ImGui::End();
 		}
 
-		void VisualPreferences::CameraControls(SimData & data, Camera & cam)
+		void VisualPreferences::CameraControls(SimData & data, drawers::SceneDrawer & scene)
 		{
 			ImGui::Text("Camera's type: "); ImGui::SameLine();
 			if (ImGui::Combo("##CamsType", &combo.camType, "Perspective\0Orthographic\0"))
+			{
 				switch (combo.camType)
 				{
 				case 0:
-					cam.MakePerspective(90, 1.7f, 0.001f, 10000.0f);
+					scene.SetActiveCam(scene.perspective);
 					break;
 				case 1:
-					float dist = float(cam.GetDistToTarget());
-					cam.MakeOrtho(dist*1.7f, dist, 0.1f, 10000.0f);
+					scene.SetActiveCam(scene.ortho);
 					break;
 				}
+			}
 			ImGui::Text("Camera's target:"); ImGui::SameLine();
 			if (ImGui::Combo("##CamTarget", &combo.camTarget, UnitNameGetter, &data, data->size() + 1))
-				cam.FollowObject(combo.camTarget - 1);
+				scene.GetActiveCam().FollowObject(combo.camTarget - 1);
 			ImGui::TextTooltipOnHover("Locks camera's orientation to always point to targeted object.\n"
 									  "Only zooming and trackball works while set.");
 			//ImGui::Text("Camera's position:"); ImGui::SameLine();

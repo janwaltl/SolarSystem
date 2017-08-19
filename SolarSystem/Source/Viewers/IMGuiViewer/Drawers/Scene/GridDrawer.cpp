@@ -31,7 +31,7 @@ namespace solar
 	double drawers::GridDrawer::Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset)
 	{
 		//Set zoom based on dist to target or dist to grid ( both are linear in the sense that 2xZoom=2xwider view, holds for both perspective and ortho cameras)
-		auto zoomLevel = cam.GetDistToTarget();
+		auto zoomLevel = cam.DistToTarget();
 		//auto zoomLevel = cam.CamPos().z - offset;
 		//Keeps offset constant troughout all zoom levels
 		float corrOffset = float(zoomLevel*offset);

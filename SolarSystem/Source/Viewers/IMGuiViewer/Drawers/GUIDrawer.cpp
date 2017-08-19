@@ -250,14 +250,14 @@ namespace solar
 					ImGui::SameLine(w / 2.0f - offsets.speedAndFollow / 2.0f);
 					ImGui::BeginGroup();
 					ImGui::Text("\tSpeed: %ux", viewer.GetDTMultiplier()*viewer.GetRawMultiplier());
-					auto index = scene.GetCam().GetFollowedObjectIndex();
+					auto index = scene.GetActiveCam().GetFollowedObjectIndex();
 					if (index != Camera::noTarget)
 					{
 						ImGui::SameLine();
 						ImGui::Text("\tFollowing: %s", data[index].name.c_str());
 						ImGui::SameLine();
 						if (ImGui::SmallButton("X"))
-							scene.GetCam().FollowObject(Camera::noTarget);
+							scene.GetActiveCam().FollowObject(Camera::noTarget);
 					}
 					ImGui::EndGroup();
 					offsets.speedAndFollow = ImGui::GetItemRectSize().x;

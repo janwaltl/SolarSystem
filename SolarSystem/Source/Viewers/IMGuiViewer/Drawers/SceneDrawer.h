@@ -18,10 +18,18 @@ namespace solar
 		class SceneDrawer
 		{
 		public:
+			enum camType
+			{
+				perspective,ortho
+			};
+			//Initializes all drawers and sets both cameras, sets perspective as active one by default
 			SceneDrawer(const SimData& data);
 			void Draw(const SimData& data);
-			Camera& GetCam() { return cam; }
-			const Camera& GetCam() const { return cam; }
+			Camera& GetActiveCam();
+			const Camera& GetActiveCam() const;
+			//If sync, then this function will call new camera's LookAt with old cam's arguments and copies its target
+			// - Set as false to make cameras independent - i.e ortho can draw view pro top and perpsective can be used to fly around
+			void SetActiveCam(camType cam, bool sync=true);
 			LineTrailsDrawer& GetLineTrails() { return lineTrails; }
 			SimDataDrawer& GetSimDataDrawer() { return simData; }
 			const SimDataDrawer& GetSimDataDrawer() const { return simData; }
@@ -32,7 +40,13 @@ namespace solar
 			bool IsGridEnabled() { return gridEnabled; }
 			void SwitchLineTrails(bool enable) { lineTrails.SwitchAll(enable); }
 		private:
-			Camera cam;//ORDER DEPENDENT - must be before all the drawers
+			struct
+			{
+				PerspectiveCamera perspective;
+				ScaledOrthoCamera scaledOrtho;
+				//OrthographicCamera ortho;
+			}camera;
+			Camera* activeCamera;
 			GridDrawer grid;
 			LineTrailsDrawer lineTrails;
 			SimDataDrawer simData;

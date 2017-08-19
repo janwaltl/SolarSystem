@@ -38,7 +38,7 @@ namespace solar
 							ImGui::SameLine(100);
 							if (ImGui::SmallButton("Follow"))
 							{
-								scene.GetCam().FollowObject(i);
+								scene.GetActiveCam().FollowObject(i);
 								CloseContextMenu();
 							}
 							ImGui::SameLine();
@@ -97,8 +97,8 @@ namespace solar
 				for (size_t i = 0; i < objects.size(); ++i)
 				{
 					auto& object = objects[i];
-					auto objectPos = scene.GetSimDataDrawer().GetScreenPos(object, scene.GetCam());
-					float radius = scene.GetSimDataDrawer().GetScreenRadius(object, scene.GetCam());
+					auto objectPos = scene.GetSimDataDrawer().GetScreenPos(object, scene.GetActiveCam());
+					float radius = scene.GetSimDataDrawer().GetScreenRadius(object, scene.GetActiveCam());
 					auto distVec = screenMousePos - objectPos;
 					//If mouse is hovering the object
 					if (distVec.x*distVec.x + distVec.y* distVec.y <= radius*radius)

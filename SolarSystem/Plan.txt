@@ -1,8 +1,8 @@
 =====================================IN THIS COMMIT=====================================
-Renamed Visuals to VisualPreferences.
-Splitted CameraControls
-	- GUI Window has been integrated into VisualPreferences.
-	- rest moved to Scene/ and called in SceneDrawer.
+Reworked Camera class into abstract interface.
+	- Added derived class for Perspective,Ortho and scaled Ortho cameras.
+	- Used them in SceneDrawer.
+	- in theory the work now like shaders, there can be more of them and they need to be bound before drawing from their perspective.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	3D objects

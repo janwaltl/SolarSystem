@@ -20,7 +20,7 @@ namespace solar
 		public:
 			void Draw(SimData& data, drawers::SceneDrawer& scene);
 		private:
-			void CameraControls(SimData& data, Camera& cam);
+			void CameraControls(SimData& data, drawers::SceneDrawer & scene);
 			struct
 			{
 				int camType;

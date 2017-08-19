@@ -54,14 +54,7 @@ namespace solar
 		double scroll = (std::max(std::min(maxSpeed, io.MouseWheel*zoomSpeed), -1.0f*maxSpeed) + maxSpeed)*0.5f;//Clamp
 		auto vec = -1.0*(cam.TargetPos() - cam.CamPos())*scroll;
 		if (vec.Length() > 0.05f)
-		{
-			if (cam.GetType() == Camera::ortho)
-			{
-				float dist = float(cam.GetDistToTarget());
-				cam.MakeOrtho(dist*1.7f, dist, 0.1f, 10000.0f);
-			}
 			cam.LookAt(cam.TargetPos() + vec, cam.TargetPos(), cam.UpDir());
-		}
 	}
 
 	void CameraControls::ForwBackMovement(solar::Camera & cam)
