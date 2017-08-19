@@ -1,5 +1,7 @@
-=====================================IN THIS COMMIT=====================================
-Fixed TODO comments so they apper on tasks list.
+=========================================IN THIS COMMIT==========================================
+Finished VisualPreferences for now.
+	- Added grid settings.
+Few fixes in CameraControls.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	3D objects
@@ -7,10 +9,7 @@ Next:
 		- add stuff to formatted file parser?
 			- needs diameter, color...
 			- get realScale in top menu bar working
-	Create Visual Preferences
-		- move Camera Controls here
-		- use old visuals window regarding linetrails
-		- grid - projecting plane, pinheads, scale
+
 	Done with basic features?
 	TODOs, asserts, exceptions, COMMENTS
 	Bonuses:

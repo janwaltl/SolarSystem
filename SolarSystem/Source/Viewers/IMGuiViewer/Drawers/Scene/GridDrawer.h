@@ -36,6 +36,8 @@ namespace solar
 			double Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset);
 			//Return number of smaller squares in a big one
 			size_t SmallToBig();
+			bool ArePinHeadsEnabled() { return pinHeadsEnabled; }
+			void SwitchPinHeads(bool enable) { pinHeadsEnabled = enable; }
 		private:
 			void Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f& scale, const Vec4f& col, const Vec3f& offset, float fadeRange, size_t gridResolution);
 
@@ -47,6 +49,7 @@ namespace solar
 			size_t gridRes;
 			//Indexed by 'plane' enum
 			std::unique_ptr<openGL::Shader> shaders[3];
+			bool pinHeadsEnabled;
 		};
 	}
 }

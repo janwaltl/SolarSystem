@@ -64,7 +64,7 @@ namespace solar
 		auto io = ImGui::GetIO();
 		//clamp and map to -max,max
 		double scroll = (std::max(std::min(maxSpeed, io.MouseWheel*forwSpeed), -1.0f*maxSpeed));//Clamp
-		auto vec = (cam.TargetPos() - cam.CamPos())*scroll;
+		auto vec = (cam.CamPos() - cam.TargetPos())*scroll;
 		cam.LookAt(cam.CamPos() + vec, cam.TargetPos() + vec, cam.UpDir());
 	}
 

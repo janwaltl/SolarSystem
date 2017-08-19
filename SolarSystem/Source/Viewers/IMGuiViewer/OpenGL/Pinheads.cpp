@@ -25,26 +25,26 @@ namespace solar
 
 			glBindVertexArray(0);
 
-			shaders[XY] = CreateShader(cam, XY);
-			shaders[XZ] = CreateShader(cam, XZ);
-			shaders[YZ] = CreateShader(cam, YZ);
+			shaders[plane::XY] = CreateShader(cam, plane::XY);
+			shaders[plane::XZ] = CreateShader(cam, plane::XZ);
+			shaders[plane::YZ] = CreateShader(cam, plane::YZ);
 		}
-		std::unique_ptr<Shader> Pinheads::CreateShader(const solar::Camera & cam, plane p)
+		std::unique_ptr<Shader> Pinheads::CreateShader(const solar::Camera & cam, drawers::GridDrawer::plane p)
 		{
 			std::string projPos, baseOffset[2];
 			switch (p)
 			{
-			case XY:
+			case plane::XY:
 				projPos = "inPos.xy, planeOffset, inPos.w";
 				baseOffset[0] = "1.0f, 0.0f, 0.0f, 0.0f";
 				baseOffset[1] = "0.0f, 1.0f, 0.0f, 0.0f";
 				break;
-			case XZ:
+			case plane::XZ:
 				projPos = "inPos.x, planeOffset, inPos.zw";
 				baseOffset[0] = "1.0f, 0.0f, 0.0f, 0.0f";
 				baseOffset[1] = "0.0f, 0.0f, 1.0f, 0.0f";
 				break;
-			case YZ:
+			case plane::YZ:
 				projPos = "planeOffset, inPos.yzw";
 				baseOffset[0] = "0.0f, 1.0f, 0.0f, 0.0f";
 				baseOffset[1] = "0.0f, 0.0f, 1.0f, 0.0f";

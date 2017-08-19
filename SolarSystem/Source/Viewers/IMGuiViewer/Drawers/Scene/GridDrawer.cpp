@@ -21,6 +21,7 @@ namespace solar
 		shaders[YZ] = CreateShader(cam, YZ);
 
 		pinheads = std::make_unique<openGL::Pinheads>(cam, data->size());
+		pinHeadsEnabled = true;
 	}
 
 	drawers::GridDrawer::~GridDrawer()
@@ -84,8 +85,13 @@ namespace solar
 		float fadeRange = frac*(1.0f - invSTB) + invSTB;
 		Draw(smallerGrid, p, smallerScale, Vec4f(smallCol*bigAlpha + bigCol*(1.0f - bigAlpha), smallAlpha), gridOffset, fadeRange, gridRes*smallToBig);
 		Draw(biggerGrid, p, biggerScale, Vec4f(bigCol, bigAlpha), gridOffset, fadeRange, gridRes);
-		float baseSize = offset*0.2f*zoomLevel;
-		pinheads->Draw(data, pinheads->XY, corrOffset, Vec2f(baseSize,baseSize));
+
+
+		if(pinHeadsEnabled)
+		{
+			float baseSize = offset*0.2f*zoomLevel;
+			pinheads->Draw(data, p, corrOffset, Vec2f(baseSize,baseSize));
+		}
 
 		return smallerScale.x;
 	}

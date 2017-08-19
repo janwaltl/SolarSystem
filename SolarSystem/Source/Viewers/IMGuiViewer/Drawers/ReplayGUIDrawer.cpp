@@ -16,7 +16,7 @@ namespace solar
 		{
 			unitsProps(data);
 			replayControls(viewer, &scene.GetLineTrails(), w, h);
-			gui::Visuals(scene.GetLineTrails(), data, w, h);
+			visualPrefs.Draw(data, scene);
 		}
 	}
 }

@@ -4,7 +4,7 @@
 
 #include "GUI/UnitsProperties.h"
 #include "GUI/ReplayControls.h"
-
+#include "GUI/VisualPreferences.h"
 namespace solar
 {
 	class ReplayerViewer;
@@ -22,6 +22,7 @@ namespace solar
 		private:
 			gui::UnitsProperties unitsProps;
 			gui::ReplayControls replayControls;
+			gui::VisualPreferences visualPrefs;
 		};
 	}
 }

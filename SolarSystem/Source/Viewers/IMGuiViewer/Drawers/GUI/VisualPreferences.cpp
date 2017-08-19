@@ -10,7 +10,7 @@ namespace solar
 	{
 		namespace
 		{
-			bool UnitNameGetter(void * data, int index, const char ** result)
+			bool ObjectNameGetter(void * data, int index, const char ** result)
 			{
 				static const char* none = "<Free>";
 				if (index == 0)
@@ -22,50 +22,45 @@ namespace solar
 				}
 				return true;
 			}
+			constexpr Vec2f winSize {400.0f,500.0f};
+			constexpr float popUpSize = 400.0f;
+			const char* lineTrailsPopUp = "Line Trails";
 		}
-		void Visuals(drawers::LineTrailsDrawer & lineTrails, const SimData & data, size_t w, size_t h)
+		void VisualPreferences::LineTrailsControls(drawers::LineTrailsDrawer & lineTrails)
 		{
 
-			ImGui::SetNextWindowPos(ImVec2(float(w - 250.0f), 10.0f), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(250.0f, std::min(400.0f, (float)h)), ImGuiSetCond_Once);
-			if (ImGui::Begin("Visuals", NULL))
-			{
-				if (ImGui::CollapsingHeader("Line Trails:", nullptr, false, false))
-				{
-					LineTrailsControls(lineTrails);
-					LineTrailsBoxes(lineTrails, data);
-				}
-			}
-			ImGui::End();
-		}
-		void LineTrailsControls(drawers::LineTrailsDrawer & lineTrails)
-		{
-			ImGui::Text("LineTrails' Controls:");
-
-			if (ImGui::SmallButton("Enable "))
+			if (ImGui::Button("Enable "))
 				lineTrails.SwitchAll(true);
 			ImGui::TextTooltipOnHover("Enable drawing of all trails.");
 			ImGui::SameLine();
-			if (ImGui::SmallButton("Disable"))
+			if (ImGui::Button("Disable"))
 				lineTrails.SwitchAll(false);
 			ImGui::TextTooltipOnHover("Disables drawing of all trails.");
 			ImGui::SameLine();
-			if (ImGui::SmallButton("Reset"))
+			if (ImGui::Button("Reset"))
 				lineTrails.ClearAll();
 			ImGui::TextTooltipOnHover("Deletes all drawn trails.");
+			ImGui::SameLine();
+			if (ImGui::Button("Switch Individual trails"))
+				ImGui::OpenPopup(lineTrailsPopUp);
 		}
-		void LineTrailsBoxes(drawers::LineTrailsDrawer & lineTrails, const SimData & data)
+		void VisualPreferences::LineTrailsPopUp(drawers::LineTrailsDrawer & lineTrails, const SimData & data)
 		{
-			///Assert that there are as many lineTrails as units
-			if (ImGui::BeginChild("Line Trails", ImVec2(0, 300), false, ImGuiWindowFlags_AlwaysUseWindowPadding))
+			ImGui::SetNextWindowSizeConstraints(ImVec2(popUpSize, 0), ImVec2(popUpSize, popUpSize));
+			if (ImGui::BeginPopupModal(lineTrailsPopUp, nullptr))
 			{
+				ImGui::Columns(3);
 				for (size_t i = 0; i < data->size(); ++i)
 				{
 					bool checked = lineTrails.IsTrailEnabled(i);
 					if (ImGui::Checkbox(data.Get()[i].name.c_str(), &checked))
 						lineTrails.SwitchTrail(i, checked);
+					ImGui::NextColumn();
 				}
-				ImGui::EndChild();
+				ImGui::Columns(1);
+				if (ImGui::Button("Close"))
+					ImGui::CloseCurrentPopup();
+				ImGui::EndPopup();
 			}
 		}
 
@@ -74,17 +69,40 @@ namespace solar
 			auto menuBarHeight = ImGui::GetFontSize() + ImGui::GetStyle().FramePadding.y * 2.0f;
 
 			ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x - 400, menuBarHeight), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiSetCond_Once);
+			ImGui::SetNextWindowSize(winSize, ImGuiSetCond_Once);
 			if (ImGui::Begin("Visuals", NULL))
 			{
-				if (ImGui::CollapsingHeader("Line Trails:", nullptr, false, false))
+				if (ImGui::CollapsingHeader("Line Trails:", ImGuiTreeNodeFlags_DefaultOpen))
 				{
 					LineTrailsControls(scene.GetLineTrails());
-					LineTrailsBoxes(scene.GetLineTrails(), data);
+					LineTrailsPopUp(scene.GetLineTrails(), data);
 				}
 				if (ImGui::CollapsingHeader("Camera Controls", ImGuiTreeNodeFlags_DefaultOpen))
 				{
 					CameraControls(data, scene);
+				}
+				if (ImGui::CollapsingHeader("Grid settings", ImGuiTreeNodeFlags_DefaultOpen))
+				{
+					constexpr float spacing = 120.0f;
+					ImGui::AlignFirstTextHeightToWidgets();
+					ImGui::Text("Grid plane:");
+					ImGui::TextTooltipOnHover("Plane in which will the grid be drawn.");
+					ImGui::SameLine(spacing);
+					if (ImGui::Combo("##GridPlane", &combo.gridPlane, "XY\0YZ\0XZ\0"))
+						//IMPROVE Cast to enum
+						// - but thats dependent on enum order, so if/else used for now
+						scene.SetGridPlane(combo.gridPlane == 0 ? drawers::SceneDrawer::plane::XY : (combo.gridPlane == 1 ? drawers::SceneDrawer::plane::YZ : drawers::SceneDrawer::plane::XZ));
+
+					gridOffset = scene.GetGridOffset();
+					ImGui::Text("Grid offset:");
+					ImGui::SameLine(spacing);
+					if (ImGui::SliderFloat("##Offset", &gridOffset, -1.0f, 1.0f))
+						scene.SetGridOffset(gridOffset);
+
+					checkBox.pinheads = scene.ArePinHeadsEnabled();
+					if (ImGui::Checkbox("Show pin heads", &checkBox.pinheads))
+						scene.SwitchGrid(scene.IsGridEnabled(), checkBox.pinheads);
+					ImGui::TextTooltipOnHover("Draws vertical line between object and its projection onto the grid.");
 				}
 			}
 			ImGui::End();
@@ -106,12 +124,13 @@ namespace solar
 				}
 			}
 			ImGui::Text("Camera's target:"); ImGui::SameLine();
-			if (ImGui::Combo("##CamTarget", &combo.camTarget, UnitNameGetter, &data, data->size() + 1))
+			if (ImGui::Combo("##CamTarget", &combo.camTarget, ObjectNameGetter, &data, data->size() + 1))
 				scene.GetActiveCam().FollowObject(combo.camTarget - 1);
 			ImGui::TextTooltipOnHover("Locks camera's orientation to always point to targeted object.\n"
 									  "Only zooming and trackball works while set.");
+			//TODO when camera can be positioned
 			//ImGui::Text("Camera's position:"); ImGui::SameLine();
-			//ImGui::Combo("##CamPosition", &combo.camPos, UnitNameGetter, &data, data->size() + 1);
+			//ImGui::Combo("##CamPosition", &combo.camPos, ObjectNameGetter, &data, data->size() + 1);
 			//ImGui::TextTooltipOnHover("Sets and locks camera's position to be same as chosen object's.\n"
 			//						  "Only 1st-person camera works while set.");
 

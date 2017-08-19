@@ -113,8 +113,8 @@ namespace solar
 		Camera::LookAt(newCamPos, newTargetPos, newUpDir);
 		proj = projOriginal;
 		auto dist = (newTargetPos - newCamPos).Length();
-		proj[0] *= static_cast<float>(dist);
-		proj[5] *= static_cast<float>(dist);
+		proj[0] /= static_cast<float>(dist);
+		proj[5] /= static_cast<float>(dist);
 	}
 
 }
