@@ -13,14 +13,15 @@ namespace solar
 	{
 	public:
 		explicit Unit(const Vec3d& pos = Vec3d(), const Vec3d&vel = Vec3d(), double mass = 0.0, const std::string& name = "",
-					  const Vec4d& color = Vec4d(1.0, 1.0, 1.0, 1.0))
-			:pos(pos), vel(vel), mass(mass), name(name), color(color)
+					  const Vec4d& color = Vec4d(1.0, 1.0, 1.0, 1.0), double radius = 0.0)
+			:pos(pos), vel(vel), mass(mass), name(name), color(color), radius(radius)
 		{}
 
 		Vec3d pos, vel;
 		double mass;
 		Vec4d color;
 		std::string name;
+		double radius;
 	};
 
 	class SimData

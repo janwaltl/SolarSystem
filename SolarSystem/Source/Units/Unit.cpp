@@ -81,6 +81,7 @@ namespace solar
 			{
 				unit.pos *= ratio;
 				unit.vel *= ratio;
+				unit.radius *= ratio;
 			}
 			physUnits.dist = newDist;
 		}

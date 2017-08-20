@@ -199,6 +199,8 @@ namespace solar
 		res[12] = x;
 		res[13] = y;
 		res[14] = z;
+		res[15] = static_cast<T>(1);
+
 		return res;
 	}
 	template<typename T>
@@ -212,6 +214,7 @@ namespace solar
 		res[12] = dir.x;
 		res[13] = dir.y;
 		res[14] = dir.z;
+		res[15] = static_cast<T>(1);
 		return res;
 	}
 	//Rotation matrix

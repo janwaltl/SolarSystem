@@ -146,6 +146,9 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\VisualPreferences.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Simulation.h">
@@ -332,6 +335,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\VisualPreferences.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

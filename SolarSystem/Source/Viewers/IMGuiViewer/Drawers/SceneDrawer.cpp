@@ -13,7 +13,7 @@ namespace solar
 		}
 		SceneDrawer::SceneDrawer(const SimData & data) :
 			//Near=1 meter, Far=10 light years
-			camera {PerspectiveCamera(90.0f, aspectRatio, 1.0 / data.RatioOfDistTo(PhysUnits::meter), 10.0 / data.RatioOfDistTo(PhysUnits::lightYear)),
+			camera {PerspectiveCamera(90, aspectRatio, 1.0 / data.RatioOfDistTo(PhysUnits::meter), 100.0 / data.RatioOfDistTo(PhysUnits::lightYear)),
 					ScaledOrthoCamera(aspectRatio, 1.0f,  1.0 / data.RatioOfDistTo(PhysUnits::kilometer), 100.0 / data.RatioOfDistTo(PhysUnits::AU))},
 			activeCamera(&camera.perspective), grid(data, GetActiveCam(), gridRes, smallToBig), lineTrails(data->size(), GetActiveCam()), simData(GetActiveCam())
 #ifdef TEST_DRAWER
@@ -36,7 +36,7 @@ namespace solar
 			test.Draw(data);
 #else 
 			lineTrails.Draw(data);
-			simData.Draw(data);
+			simData.Draw(data,GetActiveCam());
 #endif
 			//Disables writing to depth buffer
 			//Prevents unnecessary z-fighting between both grids, and because they are drawn last(well except GUI) there isn't any harm in it

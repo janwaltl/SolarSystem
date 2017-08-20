@@ -1,10 +1,5 @@
 =========================================IN THIS COMMIT==========================================
-Implemented MakeSphere in TestDrawer and depth resolution is excellent with near=1meter, far=10LY for perspective.
-Enabled Depth testing and changed few GL settings here and there.
-Trying to get my head around the whole reversed buffer thing again.
-	- Matrices should now be correct.
-	- Orto matrix shows some z-fighting because its linear by default and needs precision near the camera, not sure what to do about it.
-		I don't think it will be used much anyway.
+Added radius to all objects and now renders them as spheres.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	3D objects
@@ -48,6 +43,9 @@ TODOs/IDEAS:
 	Camera
 		- near, far plane? Zoom limits?
 		- disable ortho? Has limited precision and its not used much anyway
+	Create some Coordinate system hiearchy 
+		- //TEST in SimDataDrawer
+		- atleast relative to camera?
 Plan:
 	UI overhaul:
 		- Top-bar with dropdown windows
