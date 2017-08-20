@@ -17,7 +17,7 @@ namespace solar
 		constexpr int winPosX = 5;
 		constexpr int winPosY = 20;
 		//Background color
-		constexpr Vec4d bgColor(5 / 255.0, 10 / 255.0, 10 / 255.0, 1.0);
+		constexpr Vec4d bgColor(0 / 255.0, 0 / 255.0, 0 / 255.0, 1.0);
 		constexpr size_t samples = 4;
 	}
 
@@ -42,7 +42,7 @@ namespace solar
 
 		glfwSetWindowPos(win, winPosX, winPosY);
 		glfwMakeContextCurrent(win);
-
+		//near 1, far 2
 
 		glewExperimental = GL_TRUE; // Can crash without
 		if (glewInit() != GLEW_OK) // tries to initialize glew
@@ -53,11 +53,13 @@ namespace solar
 
 		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_GREATER);
-
+		glDepthFunc(GL_GEQUAL);
+		glEnable(GL_BLEND);
+		glBlendEquation(GL_FUNC_ADD);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glViewport(0, 0, width, height); // sets correct coordinate viewport
 		glClearColor((GLclampf)bgColor.x, (GLclampf)bgColor.y, (GLclampf)bgColor.z, (GLclampf)bgColor.w);
-		glClearDepth(0.0f);// 0.0 means far in reversed z buffer
+		glClearDepth(0.0f);
 
 		CreateFBO(width, height);
 
@@ -138,8 +140,15 @@ namespace solar
 
 		//Is needed to implement reversed depth buffer.
 		if ((major == 4 && minor == 5) || glewIsSupported("GL_ARB_clip_control"))
-			glClipControl(GL_LOWER_LEFT, GL_ZERO_TO_ONE);
+			//Sources: http://dev.theomader.com/depth-precision/ last paragraph 'Reverse depth on OpenGL'
+			//			issues #14 and #20 https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_clip_control.txt
+			glClipControl(GL_LOWER_LEFT, GL_ZERO_TO_ONE);//Overwrites standard -1,1 clip space
 		else if (glewIsSupported("GL_NV_depth_buffer_float"))
+			//Source: following two links
+			//Overwrites standard -1,1 clip space, but http://dev.theomader.com/depth-precision/ says it also needs custom far clipping plane
+			// http://outerra.blogspot.cz/2012/11/maximizing-depth-buffer-range-and.html paragraph 'DirectX vs. OpenGL' also mentions custom far clipping plane
+			//TODO Resolve: Not so sure about that, it clips fine here, but might be driver specific?
+			//	- Does it matter? Far plane is set to very far,basically infinity, anyway
 			glDepthRangedNV(-1.0, 1.0);
 		else
 			assert(0);// throw Exception("");

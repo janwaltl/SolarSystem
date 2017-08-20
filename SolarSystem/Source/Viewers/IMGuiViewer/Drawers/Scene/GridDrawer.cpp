@@ -5,7 +5,7 @@
 #include "Source/Viewers/IMGuiViewer/Drawers/Scene/Camera.h"
 
 #include <algorithm>
-
+#include <cmath>
 namespace solar
 {
 
@@ -48,25 +48,24 @@ namespace solar
 			frac = 1.0f - frac;
 
 		//Always centers grid to screen's center, but snaps it to biggerScale.
-		auto gridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
-								floorToMult(float(cam.TargetPos().y), biggerScale.y),
-								corrOffset);
+		Vec3f smallGridOffset, bigGridOffset;
 		switch (p)
 		{
 		case solar::drawers::GridDrawer::XY:
-			gridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
-							   floorToMult(float(cam.TargetPos().y), biggerScale.y),
-							   corrOffset);
+			smallGridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
+									floorToMult(float(cam.TargetPos().y), biggerScale.y),
+									corrOffset);
+			bigGridOffset = smallGridOffset + Vec3f(0, 0, 0)*float(copysign(1, cam.CamPos().z));
 			break;
 		case solar::drawers::GridDrawer::XZ:
-			gridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
-							   corrOffset,
-							   floorToMult(float(cam.TargetPos().z), biggerScale.y));
+			smallGridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
+									corrOffset,
+									floorToMult(float(cam.TargetPos().z), biggerScale.y));
 			break;
 		case solar::drawers::GridDrawer::YZ:
-			gridOffset = Vec3f(corrOffset,
-							   floorToMult(float(cam.TargetPos().y), biggerScale.x),
-							   floorToMult(float(cam.TargetPos().z), biggerScale.y));
+			smallGridOffset = Vec3f(corrOffset,
+									floorToMult(float(cam.TargetPos().y), biggerScale.x),
+									floorToMult(float(cam.TargetPos().z), biggerScale.y));
 			break;
 		default:
 			break;
@@ -83,15 +82,15 @@ namespace solar
 		//Map 0.0-1.0 to invSTB-1.0
 		//Scales rendering limit of the grid to preserve smooth transition when switching to next scales
 		float fadeRange = frac*(1.0f - invSTB) + invSTB;
-		Draw(smallerGrid, p, smallerScale, Vec4f(smallCol*bigAlpha + bigCol*(1.0f - bigAlpha), smallAlpha), gridOffset, fadeRange, gridRes*smallToBig);
-		Draw(biggerGrid, p, biggerScale, Vec4f(bigCol, bigAlpha), gridOffset, fadeRange, gridRes);
-
-
-		if(pinHeadsEnabled)
+		Draw(smallerGrid, p, smallerScale, Vec4f(smallCol*bigAlpha + bigCol*(1.0f - bigAlpha), smallAlpha), smallGridOffset, fadeRange, gridRes*smallToBig);
+		Draw(biggerGrid, p, biggerScale, Vec4f(bigCol, bigAlpha), bigGridOffset, fadeRange, gridRes);
+		if (pinHeadsEnabled)
 		{
 			float baseSize = offset*0.2f*zoomLevel;
-			pinheads->Draw(data, p, corrOffset, Vec2f(baseSize,baseSize));
+			pinheads->Draw(data, p, corrOffset, Vec2f(baseSize, baseSize));
 		}
+
+
 
 		return smallerScale.x;
 	}

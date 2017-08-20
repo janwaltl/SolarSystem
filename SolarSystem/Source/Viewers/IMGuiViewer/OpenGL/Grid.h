@@ -16,7 +16,7 @@ namespace solar
 
 			void Draw() const;
 		private:
-			unsigned int VBO;
+			unsigned int VBO,VAO;
 			size_t gridRes;
 		};
 	}

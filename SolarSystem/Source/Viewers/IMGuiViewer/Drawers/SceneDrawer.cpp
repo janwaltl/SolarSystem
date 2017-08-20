@@ -1,6 +1,6 @@
 #include "SceneDrawer.h"
 #include "Source/Units/Unit.h"
-
+#include <gl/glew.h>
 namespace solar
 {
 	namespace drawers
@@ -12,8 +12,13 @@ namespace solar
 			constexpr float aspectRatio = 1200 / 700.0;
 		}
 		SceneDrawer::SceneDrawer(const SimData & data) :
-			camera {PerspectiveCamera(90.0f, aspectRatio, 0.01f, 1e15f), ScaledOrthoCamera(aspectRatio, 1.0f, 0.1f, 10e15)},
-			activeCamera(&camera.perspective), grid(data, GetActiveCam(), gridRes, smallToBig), lineTrails(data->size(), GetActiveCam()), simData(GetActiveCam()), test(GetActiveCam())
+			//Near=1 meter, Far=10 light years
+			camera {PerspectiveCamera(90.0f, aspectRatio, 1.0 / data.RatioOfDistTo(PhysUnits::meter), 10.0 / data.RatioOfDistTo(PhysUnits::lightYear)),
+					ScaledOrthoCamera(aspectRatio, 1.0f,  1.0 / data.RatioOfDistTo(PhysUnits::kilometer), 100.0 / data.RatioOfDistTo(PhysUnits::AU))},
+			activeCamera(&camera.perspective), grid(data, GetActiveCam(), gridRes, smallToBig), lineTrails(data->size(), GetActiveCam()), simData(GetActiveCam())
+#ifdef TEST_DRAWER
+			, test(GetActiveCam())
+#endif
 		{
 			//Sets both cameras to look into same direction
 			camera.perspective.LookAt(Vec3d(0, 0, 1.0), Vec3d(0, 0, 0));
@@ -27,17 +32,22 @@ namespace solar
 			GetActiveCam().Bind();
 			camControls.Update(GetActiveCam());
 			GetActiveCam().Update(data);
-
+#ifdef TEST_DRAWER
+			test.Draw(data);
+#else 
 			lineTrails.Draw(data);
-
+			simData.Draw(data);
+#endif
+			//Disables writing to depth buffer
+			//Prevents unnecessary z-fighting between both grids, and because they are drawn last(well except GUI) there isn't any harm in it
+			glDepthMask(GL_FALSE);
 			//Make small grid to be 1AU big
 			auto ratio = data.RatioOfDistTo(PhysUnits::AU);
 			Vec2f scale {float(ratio), float(ratio)};
 			//Draw it, convert small grid scale back to meters
 			if (gridEnabled)
 				gridScale = grid.Draw(data, GetActiveCam(), gridPlane, scale, gridOffset)*ratio*PhysUnits::AU;
-
-			simData.Draw(data);
+			glDepthMask(GL_TRUE);
 		}
 		Camera & SceneDrawer::GetActiveCam()
 		{

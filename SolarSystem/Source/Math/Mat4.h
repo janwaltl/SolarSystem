@@ -243,35 +243,46 @@ namespace solar
 	template<typename T>
 	Mat4<T> MakePerspective(T FOV, T AR, T near, T far)
 	{
-
 		T halfW = 1*tan(DegToRad(FOV / T(2)));
 		T halfH = halfW / AR;
-		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
+		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html [1]
 		//Altered to reflect reversed depth buffer
-		//Source http://dev.theomader.com/depth-precision/
+		//Source http://dev.theomader.com/depth-precision/ [2]
+		//But OpenGL expects Z to be in [-1,1] by default. In reversed buffer it should map to [1,0].
+		//So additionaly we also needed to map Z from [-1,1] to [1,0].
+		//That can be simply done by multiplying projection matrix with another matrix that does this mapping
+		//( as in [2], but I think their matrix forgot division by 2 and their original projection matrix is different than my source [1])
+		// We can construct it this way: [-1,1] ->(flip sign) [1,-1] -> (add 1) -> [2,0] ->(divide by 2) [1,0]
+		//		1	0 	0	 0
+		//		0	1 	0	 0
+		//P =	0	0 -0.5	0.5
+		//		0	0 	0	 1
+		// And multiplying original projection matrix [1] by P from left will get:
 		Mat4<T> res;
 		res[0] = 1 / halfW;
 		res[5] = 1 / halfH;
-		res[10] = -far / (near - far) - 1;//-(far + near) / (far - near);//0
-		res[11] = -static_cast<T>(1);//-1
-		res[14] = far*near / (far - near);//-2 * far*near / (far - near);//1
+		res[10] = near / (far -near);
+		res[11] = -1;
+		res[14] = far*near / (far - near);
+
+		//Same matrix is posted in http://outerra.blogspot.cz/2012/11/maximizing-depth-buffer-range-and.html so I believe it should be correct.
 		return res;
 	}
 	template<typename T>
 	Mat4<T> MakePerspective(T top, T bottom, T left, T right, T near, T far)
 	{
-		assert(0);//TODO change to reversed z-buffer
 		T height = top - bottom;
 		T width = right - left;
 		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
+		//Altered with P matrix from above to use reversed depth
 		Mat4<T> res;
 		res[0] = T(2)*near / width;
 		res[5] = T(2)*near / height;
 		res[8] = (left + right) / width;
 		res[9] = (top + left) / height;
-		res[10] = -(far + near) / (far - near);
-		res[11] = -static_cast<T>(1);
-		res[14] = -2 * far*near / (far - near);
+		res[10] = near / (far - near);
+		res[11] = -1;
+		res[14] = far*near / (far - near);
 		return res;
 	}
 	//Orthogonal projection matrix
@@ -280,23 +291,21 @@ namespace solar
 	Mat4<T> MakeOrtho(T width, T height, T near, T far)
 	{
 		//From: http://www.songho.ca/opengl/gl_projectionmatrix.html
-		/*Mat4<T> res;
-		res[0] = static_cast<T>(1) / width;
-		res[5] = static_cast<T>(1) / height;
-		res[10] = static_cast<T>(2)/(far - near);
-		res[14] = (far + near) / (far - near)+1;
-		res[15] = static_cast<T>(1);
-		*/
+		//Mat4<T> res;
+		//res[0] = static_cast<T>(1) / width;
+		//res[5] = static_cast<T>(1) / height;
+		//res[10] = static_cast<T>(2)/(far - near);
+		//res[14] = (far + near) / (far - near)+1;
+		//res[15] = static_cast<T>(1);
+		
 
-		//Altered to reflect reversed depth buffer
+		//Altered with P matrix from above to use reversed depth
 		//Source http://dev.theomader.com/depth-precision/
-		//Projection onto near plane. instead of center of box.
-		//TODO why is it better?
 		Mat4<T> res;
 		res[0] = static_cast<T>(1) / width;
 		res[5] = static_cast<T>(1) / height;
-		res[10] = static_cast<T>(-1) / (near + far);
-		res[14] = (far) / (near + far);
+		res[10] = static_cast<T>(1) / (far-near);
+		res[14] = (far) / (far - near);
 		res[15] = static_cast<T>(1);
 		return res;
 	}
@@ -316,6 +325,9 @@ namespace solar
 		res[12] = -(right + left) / width;	   //Move to center
 		res[13] = -(top + bottom) / height;	   //Move to center
 		res[14] = -(far + near) / (far - near);//Move to center
+		res[15] = static_cast<T>(1);
+		res[10] = static_cast<T>(1) / (far - near);
+		res[14] = (far) / (far - near);
 		res[15] = static_cast<T>(1);
 		return res;
 	}

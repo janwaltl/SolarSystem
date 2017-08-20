@@ -120,6 +120,7 @@ namespace solar
 					break;
 				case 1:
 					scene.SetActiveCam(scene.ortho);
+
 					break;
 				}
 			}

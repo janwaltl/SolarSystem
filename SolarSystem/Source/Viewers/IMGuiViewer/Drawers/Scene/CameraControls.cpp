@@ -53,7 +53,7 @@ namespace solar
 		//clamp and map to 0.0,max
 		double scroll = (std::max(std::min(maxSpeed, io.MouseWheel*zoomSpeed), -1.0f*maxSpeed) + maxSpeed)*0.5f;//Clamp
 		auto vec = -1.0*(cam.TargetPos() - cam.CamPos())*scroll;
-		if (vec.Length() > 0.05f)
+		if (vec.Length() > 1e-20)	
 			cam.LookAt(cam.TargetPos() + vec, cam.TargetPos(), cam.UpDir());
 	}
 

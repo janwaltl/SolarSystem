@@ -59,7 +59,7 @@ namespace solar
 
 		const Mat4f& ProjMatrix() const { return proj; }
 		const Mat4f& ViewMatrix() const { return view; }
-		const Mat4f& ProjViewMatrix() const { return proj*view; }
+		Mat4f ProjViewMatrix() const { return proj*view; }
 		const Vec3d& CamPos() const { return camPos; }
 		const Vec3d& TargetPos() const { return targetPos; }
 		const Vec3d& UpDir() const { return upDir; }

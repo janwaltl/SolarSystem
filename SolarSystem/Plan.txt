@@ -1,7 +1,10 @@
 =========================================IN THIS COMMIT==========================================
-Finished VisualPreferences for now.
-	- Added grid settings.
-Few fixes in CameraControls.
+Implemented MakeSphere in TestDrawer and depth resolution is excellent with near=1meter, far=10LY for perspective.
+Enabled Depth testing and changed few GL settings here and there.
+Trying to get my head around the whole reversed buffer thing again.
+	- Matrices should now be correct.
+	- Orto matrix shows some z-fighting because its linear by default and needs precision near the camera, not sure what to do about it.
+		I don't think it will be used much anyway.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	3D objects
@@ -26,9 +29,7 @@ Next:
 
 TODOs/IDEAS:
 	Add Inverses of matrices in UBO in camera class if needed.
-	Why is Ortho weirdly clipped when projecting to the center?
-		- now projecting to near clipping plane, need to resolve it - there's typo or bug in matrices somewhere.
-	Camera's aspect ratio?
+	Add exceptions in OpenGLBackend when there are missing extensions/older GL version
 	Fix all Begin/End for windows
 	Decide on Ratio class
 		- too much work with operators, but it distinguishes it from simple double
@@ -42,14 +43,11 @@ TODOs/IDEAS:
 	Grid
 		- could make fadeRange smoother
 		- pinheads base could change smoothly
-!!		- pinheads are hard set to XY plane - extract enums to GridDrawer?
-!!	Reversed Depth buffer
-		- change remaining Ortho,Perspective functions to use reversed z-buffer
-			- imgui's ortho
-		- add exceptions in OpenGLBackend when there are missing extensions/older GL version
+
 	VAOs for every render, apparently it might not draw without them on some machines.
 	Camera
 		- near, far plane? Zoom limits?
+		- disable ortho? Has limited precision and its not used much anyway
 Plan:
 	UI overhaul:
 		- Top-bar with dropdown windows

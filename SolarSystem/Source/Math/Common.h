@@ -7,7 +7,7 @@
 
 namespace solar
 {
-	template<typename T> constexpr T epsilon = T(1.0e-6);
+	template<typename T> constexpr T epsilon = T(1.0e-20);
 	template<> constexpr double epsilon<double> = 0.0;
 	template<typename T> constexpr T PI = T(3.1415926535);
 	template<typename T> constexpr T G = T(6.67408e-11);

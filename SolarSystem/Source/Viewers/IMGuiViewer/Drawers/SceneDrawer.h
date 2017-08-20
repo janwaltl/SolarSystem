@@ -8,6 +8,8 @@
 #include "Scene/Camera.h"
 #include "Scene/CameraControls.h"
 
+//#define TEST_DRAWER
+
 namespace solar
 {
 	class SimData;
@@ -56,7 +58,9 @@ namespace solar
 			GridDrawer grid;
 			LineTrailsDrawer lineTrails;
 			SimDataDrawer simData;
+#ifdef TEST_DRAWER
 			TestDrawer test;
+#endif
 			CameraControls camControls;
 
 			PhysUnits::ratio gridScale;

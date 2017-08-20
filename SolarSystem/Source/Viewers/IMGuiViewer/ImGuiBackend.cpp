@@ -89,12 +89,6 @@ namespace solar
 
 		//Register Draw function
 		io.RenderDrawListsFn = IMGuiBackend::RenderFnc;
-		//OpenGL settings
-		glEnable(GL_BLEND);
-		glBlendEquation(GL_FUNC_ADD);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glDisable(GL_CULL_FACE);
-		glDisable(GL_DEPTH_TEST);
 
 		SetStyle();
 	}
@@ -256,6 +250,7 @@ namespace solar
 
 	void IMGuiBackend::RenderFnc(ImDrawData * draw_data)
 	{
+		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_SCISSOR_TEST);
 		glActiveTexture(GL_TEXTURE0);
 
@@ -294,9 +289,10 @@ namespace solar
 				idx_buffer_offset += pcmd->ElemCount;
 			}
 		}
-		glDisable(GL_SCISSOR_TEST);// We dont use it in rest of our program.
 		shader->UnBind();
 		glBindVertexArray(0);
+		glDisable(GL_SCISSOR_TEST);// We dont use it in rest of our program.
+		glEnable(GL_DEPTH_TEST);
 		auto err = openGL::CheckErrorDBG();
 		if (err != openGL::errors::noError)
 			throw Exception("IMGUI::Render failed, because of following GL error: " + openGL::TranslateError(err));
