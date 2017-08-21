@@ -28,8 +28,13 @@ namespace solar
 			//Returns radius of object (its circle or enclosing circle for other shapes) in screen coordinates.
 			float GetScreenRadius(const Unit& object, const Camera& cam) const;
 			void CreateShader(const Camera& cam);
+			bool IsRealScaleEnabled() { return realScale; }
+			void SetRealScale(bool enable) { realScale = enable; }
+		private:
 			std::unique_ptr<openGL::Shader> shader;
 			std::unique_ptr<openGL::Sphere> sphere;
+			//
+			bool realScale;
 		};
 	}
 }

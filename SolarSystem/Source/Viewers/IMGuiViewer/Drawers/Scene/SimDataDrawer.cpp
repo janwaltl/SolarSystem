@@ -21,6 +21,7 @@ namespace solar
 		{
 			sphere = std::make_unique<openGL::Sphere>(resolution, radius);
 			CreateShader(cam);
+			realScale = true;
 		}
 
 		SimDataDrawer::~SimDataDrawer()
@@ -44,9 +45,18 @@ namespace solar
 				//IMPROVE Could go further if relative is still to much( example?)
 				// Divide world into chunks, store all positions relative to chunk's origin(both camera's and object's), so in individual chunks it will be still precise and further chunks will be
 				// translated by chunks' size which can be integer or another float
+				if (!realScale)
+				{
+					auto screenPos = cam.ViewMatrix()*Vec4f(static_cast<Vec3f>(unit.pos), 1.0f);
+					screenPos /= screenPos.w;
+					double screenScale = -radius*screenPos.z;
+					shader->SetUniform1f("scale", std::max(screenScale, unit.radius));
+				}
+				else
+					shader->SetUniform1f("scale", unit.radius);
+
 				Vec3f relPos = Vec3f(unit.pos - cam.CamPos());
 				shader->SetUniform3f("offset", relPos);
-				shader->SetUniform1f("scale", unit.radius);
 				sphere->Draw();
 			}
 			shader->UnBind();
@@ -62,7 +72,7 @@ namespace solar
 		float SimDataDrawer::GetScreenRadius(const Unit &object, const Camera &cam) const
 		{
 			//Radius is now fixed, in future it might be different when zooming in more
-			return 0.01f;
+			return radius;
 		}
 
 		void SimDataDrawer::CreateShader(const Camera& cam)
