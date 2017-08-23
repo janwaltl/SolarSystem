@@ -11,17 +11,17 @@ namespace solar
 	{
 		namespace
 		{
-			// Number of ring to aproximate sphere with.
-			constexpr size_t resolution = 12;
-			// In screen coordinates
-			constexpr float radius = 0.01f;
+			// Number of rings to aproximate sphere with.
+			constexpr size_t resolution = 32;
+			constexpr Vec3f ambientCol {0.05f,0.05f,0.05f};
 		}
 
 		SimDataDrawer::SimDataDrawer(const Camera& cam)
 		{
-			sphere = std::make_unique<openGL::Sphere>(resolution, radius);
+			sphere = std::make_unique<openGL::Sphere>(resolution);
 			CreateShader(cam);
 			realScale = true;
+			minRadius = 0.03f;
 		}
 
 		SimDataDrawer::~SimDataDrawer()
@@ -32,8 +32,9 @@ namespace solar
 		void SimDataDrawer::Draw(const SimData& data, const Camera & cam)
 		{
 			shader->Bind();
-			for (const auto& unit : data.Get())
+			for (size_t i = 0; i < data.Get().size(); ++i)
 			{
+				const auto& unit = data.Get()[i];
 				shader->SetUniform4f("col", unit.color);
 				//TEST
 				//Trying new approach to render stuff far from origin
@@ -47,15 +48,24 @@ namespace solar
 				// translated by chunks' size which can be integer or another float
 				if (!realScale)
 				{
+					//Ensure minimum screen radius of the sphere = make it bigger the farther it is
 					auto screenPos = cam.ViewMatrix()*Vec4f(static_cast<Vec3f>(unit.pos), 1.0f);
 					screenPos /= screenPos.w;
-					double screenScale = -radius*screenPos.z;
+					double screenScale = -minRadius*screenPos.z;
 					shader->SetUniform1f("scale", std::max(screenScale, unit.radius));
 				}
 				else
 					shader->SetUniform1f("scale", unit.radius);
 
 				Vec3f relPos = Vec3f(unit.pos - cam.CamPos());
+				if (i == 0)
+					shader->SetUniform3f("lightDir", Vec3f());
+				else
+				{
+					auto lightDir = data.Get()[0].pos - unit.pos;//Points to light source
+					lightDir.Normalize();
+					shader->SetUniform3f("lightDir", lightDir);
+				}
 				shader->SetUniform3f("offset", relPos);
 				sphere->Draw();
 			}
@@ -72,7 +82,8 @@ namespace solar
 		float SimDataDrawer::GetScreenRadius(const Unit &object, const Camera &cam) const
 		{
 			//Radius is now fixed, in future it might be different when zooming in more
-			return radius;
+			//TEST Should it always return minimum or bigger raidus when zoomed in? Cause you really don't need to click on it when you are already looking at it
+			return minRadius;
 		}
 
 		void SimDataDrawer::CreateShader(const Camera& cam)
@@ -97,6 +108,7 @@ namespace solar
 			uniform vec3 offset=vec3(0.0f);
 			uniform float scale;
 
+			out vec3 normal;
 			void main()
 			{
 				//Aspect ratio of screen(Valid both for ortho and perspective matrices)
@@ -105,20 +117,30 @@ namespace solar
 				camView[3] = vec4(0,0,0,1.0f);
 				//gl_Position = cam.projection*cam.view*vec4(scale*position+offset, 1.0);
 				gl_Position = cam.projection*(camView)*vec4(scale*position+offset, 1.0);
+				normal=position;
 			})";
 			const std::string fSource = R"(
 			#version 140
 			out vec4 color;
 
 			uniform vec4 col;
+			//Points to light source, is zero if this object should not be affected by it(i.e Sun)
+			uniform vec3 lightDir;
+			uniform vec3 ambientCol;
 
+			in vec3 normal;
 			void main()
 			{
-				color = col;
+				float diffIntensity = max(dot(normalize(normal),lightDir),0.0f);
+				if(length(lightDir)<0.1f)//Not affected
+					diffIntensity=1.0f;
+				color = col*0.9f*diffIntensity + vec4(ambientCol,1.0f);
 			})";
 
 			shader = std::make_unique<openGL::Shader>(vSource, fSource);
 			cam.Subscribe(*shader);
+			shader->Bind();
+			shader->SetUniform3f("ambientCol", Vec3f());
 		}
 	}
 }

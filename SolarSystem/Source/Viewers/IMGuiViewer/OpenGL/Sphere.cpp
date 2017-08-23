@@ -6,7 +6,7 @@
 namespace solar
 {
 
-	openGL::Sphere::Sphere(size_t resolution, float radius)
+	openGL::Sphere::Sphere(size_t resolution)
 	{
 		std::vector<solar::Vec3f> vertices;
 		std::vector<uint32_t> indices;

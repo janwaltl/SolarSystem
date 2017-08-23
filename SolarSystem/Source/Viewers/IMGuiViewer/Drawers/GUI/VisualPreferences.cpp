@@ -104,6 +104,12 @@ namespace solar
 						scene.SwitchGrid(scene.IsGridEnabled(), checkBox.pinheads);
 					ImGui::TextTooltipOnHover("Draws vertical line between object and its projection onto the grid.");
 				}
+				if (ImGui::CollapsingHeader("Planets", ImGuiTreeNodeFlags_DefaultOpen))
+				{
+					minScreenRadius = scene.GetSimDataDrawer().GetMinScreenRadius();
+					ImGui::SliderFloat("Min radius", &minScreenRadius, 0.0f, 0.5f);
+					scene.GetSimDataDrawer().SetMinScreenRadius(minScreenRadius);
+				}
 			}
 			ImGui::End();
 		}

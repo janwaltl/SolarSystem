@@ -37,6 +37,7 @@ namespace solar
 				bool pinheads;
 			}checkBox;
 			float gridOffset;
+			float minScreenRadius;//RealScale planets
 		};
 	}
 }

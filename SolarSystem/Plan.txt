@@ -1,12 +1,7 @@
 =========================================IN THIS COMMIT==========================================
-Implemented Non-RealScale.
+Implemented simple lighting setup and made minScreenRadius editable in VisualPrefs.
 ========================================IMPLEMENTING PLAN========================================
 Next:
-	3D objects
-		- blin phong spheres, sun as a point light
-		- add stuff to formatted file parser?
-			
-
 	Done with basic features?
 	TODOs, asserts, exceptions, COMMENTS
 	Bonuses:
@@ -25,25 +20,24 @@ TODOs/IDEAS:
 	Add Inverses of matrices in UBO in camera class if needed.
 	Add exceptions in OpenGLBackend when there are missing extensions/older GL version
 	Fix all Begin/End for windows
-	Decide on Ratio class
-		- too much work with operators, but it distinguishes it from simple double
+	Add comments to PhysUnit class, especially for usage
+	 - Fix GridDrawer's gridSize (the AU stuff)
 !!	Graphs - object's energy is not implemented 
-	Graphs tweaks
+!!	Graphs tweaks
 		- better grid system, this one looks weird when zooming
 		- Scientific notation - labels and input ranges, checkbox for autoscale 
 		- maybe preview on hover over the list instead of side window
-		- csv export would be too hard
+		- csv export wouldn't be too hard
 		- separate window resizing - part of whole UI resize thing
 	Grid
 		- could make fadeRange smoother
 		- pinheads base could change smoothly
-
 	VAOs for every render, apparently it might not draw without them on some machines.
-	Camera
+!!	Camera
 		- near, far plane? Zoom limits?
 		- disable ortho? Has limited precision and its not used much anyway
 	Create some Coordinate system hiearchy 
-		- //TEST in SimDataDrawer
+		- //TESTed in SimDataDrawer
 		- atleast relative to camera?
 Plan:
 	UI overhaul:
