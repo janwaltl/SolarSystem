@@ -50,12 +50,14 @@ namespace solar
 		void ConvertTimeTo(PhysUnits::ratio newTime);
 		//Converts to such units that all values lie in [-1.0,1.0]
 		void Normalize();
-		//Gets ratio to multiply simData to get them to desired physics units
+		//Returns ratio with which one can multiply simData to get them to new physics units
+		//						   one can divide other numbers in new physics units to convert them to same units as data are
 		PhysUnits::ratio RatioOfMassTo(PhysUnits::ratio newMass) const;
 		PhysUnits::ratio RatioOfDistTo(PhysUnits::ratio newDist) const;
 		PhysUnits::ratio RatioOfTimeTo(PhysUnits::ratio newTime) const;
 	private:
 		units_t units;
+		//Physics units in which objects are
 		PhysUnits physUnits;
 	};
 }

@@ -63,9 +63,9 @@ namespace solar
 #endif
 			CameraControls camControls;
 
-			PhysUnits::ratio gridScale;
 			bool gridEnabled;
 			GridDrawer::plane gridPlane;
+			PhysUnits::ratio gridScale;
 			float gridOffset;
 		};
 	}

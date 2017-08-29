@@ -63,6 +63,7 @@ namespace solar
 
 	void SimData::ConvertMassTo(PhysUnits::ratio newMass)
 	{
+		//IMPROVE redo epsilon math
 		if (abs(newMass - physUnits.mass) > epsilon<PhysUnits::ratio>)
 		{
 			PhysUnits::ratio ratio = physUnits.mass / newMass;
@@ -74,6 +75,7 @@ namespace solar
 
 	void SimData::ConvertDistTo(PhysUnits::ratio newDist)
 	{
+		//IMPROVE redo epsilon math
 		if (abs(newDist - physUnits.dist) > epsilon<PhysUnits::ratio>)
 		{
 			PhysUnits::ratio ratio = physUnits.dist / newDist;
@@ -89,6 +91,7 @@ namespace solar
 
 	void SimData::ConvertTimeTo(PhysUnits::ratio newTime)
 	{
+		//IMPROVE redo epsilon math
 		if (abs(newTime - physUnits.time) > epsilon<PhysUnits::ratio>)
 		{
 			PhysUnits::ratio ratio = physUnits.time / newTime;

@@ -55,19 +55,22 @@ namespace solar
 			smallGridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
 									floorToMult(float(cam.TargetPos().y), biggerScale.y),
 									corrOffset);
-			bigGridOffset = smallGridOffset + Vec3f(0, 0, 0)*float(copysign(1, cam.CamPos().z));
+			bigGridOffset = smallGridOffset;
 			break;
 		case solar::drawers::GridDrawer::XZ:
 			smallGridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
 									corrOffset,
 									floorToMult(float(cam.TargetPos().z), biggerScale.y));
+			bigGridOffset = smallGridOffset;
 			break;
 		case solar::drawers::GridDrawer::YZ:
 			smallGridOffset = Vec3f(corrOffset,
 									floorToMult(float(cam.TargetPos().y), biggerScale.x),
 									floorToMult(float(cam.TargetPos().z), biggerScale.y));
+			bigGridOffset = smallGridOffset;
 			break;
 		default:
+			assert(0);
 			break;
 		}
 		//Map 0.0-0.5 to 0.0-1.0, clamp 0.5+ to 1.0

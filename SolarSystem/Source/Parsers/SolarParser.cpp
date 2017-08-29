@@ -40,7 +40,7 @@ namespace solar
 		data->push_back(Unit(Vec3d(780.3827e9, 0.0), Vec3d(0.0, 21254.0), 1.075938e23, "Callisto", Vec4d(0.4, 0.1, 0.92, 1.0), 1737e3));
 
 		data.ConvertTo(PhysUnits::sun, PhysUnits::AU, PhysUnits::year);
-		//data.Normalize();
+		data.Normalize();
 		return data;
 	}
 	void SolarParser::Save(const SimData & data)

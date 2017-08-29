@@ -20,12 +20,13 @@ namespace solar
 			, test(GetActiveCam())
 #endif
 		{
+			auto camPos = Vec3d(0, 0, 1.0 / data.RatioOfDistTo(PhysUnits::AU));
 			//Sets both cameras to look into same direction
-			camera.perspective.LookAt(Vec3d(0, 0, 1.0), Vec3d(0, 0, 0));
-			camera.scaledOrtho.LookAt(Vec3d(0, 0, 1.0), Vec3d(0, 0, 0));
+			camera.perspective.LookAt(camPos, Vec3d(0, 0, 0));
+			camera.scaledOrtho.LookAt(camPos, Vec3d(0, 0, 0));
 			gridPlane = plane::XY;
 			gridEnabled = true;
-			gridOffset = -data.RatioOfDistTo(PhysUnits::AU)*0.1f;
+			gridOffset = -0.1f;
 		}
 		void SceneDrawer::Draw(const SimData & data)
 		{
@@ -36,17 +37,18 @@ namespace solar
 			test.Draw(data);
 #else 
 			lineTrails.Draw(data);
-			simData.Draw(data,GetActiveCam());
+			simData.Draw(data, GetActiveCam());
 #endif
 			//Disables writing to depth buffer
 			//Prevents unnecessary z-fighting between both grids, and because they are drawn last(well except GUI) there isn't any harm in it
 			glDepthMask(GL_FALSE);
-			//Make small grid to be 1AU big
-			auto ratio = data.RatioOfDistTo(PhysUnits::AU);
+			//Make small grid to be 1unit 
+			auto ratio = 1.0;
+			//Compare to dist of Earth in debugger, make them match one another
 			Vec2f scale {float(ratio), float(ratio)};
 			//Draw it, convert small grid scale back to meters
 			if (gridEnabled)
-				gridScale = grid.Draw(data, GetActiveCam(), gridPlane, scale, gridOffset)*ratio*PhysUnits::AU;
+				gridScale = grid.Draw(data, GetActiveCam(), gridPlane, scale, gridOffset)*data.RatioOfDistTo(PhysUnits::meter);
 			glDepthMask(GL_TRUE);
 		}
 		Camera & SceneDrawer::GetActiveCam()

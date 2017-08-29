@@ -31,8 +31,8 @@ namespace solar
 			~GridDrawer();
 			//Draws the grid
 			//In which plane should the grid be drawn
-			//With given scale (size of bigger square) and offset in world coordinates
-			//Returns scale in which the small grid has been drawn in world coords
+			//With given scale (size of bigger square) and offset in SimData units when camera is one unit away from its target
+			//Returns scale in which the small grid has been drawn adjusted to camera's zoom level(also in same unit as SimData are)
 			double Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset);
 			//Return number of smaller squares in a big one
 			size_t SmallToBig();

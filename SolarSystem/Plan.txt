@@ -1,5 +1,5 @@
 =========================================IN THIS COMMIT==========================================
-Implemented simple lighting setup and made minScreenRadius editable in VisualPrefs.
+Going through TODO list.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?
@@ -18,65 +18,44 @@ Next:
 
 TODOs/IDEAS:
 	Add Inverses of matrices in UBO in camera class if needed.
-	Add exceptions in OpenGLBackend when there are missing extensions/older GL version
-	Fix all Begin/End for windows
-	Add comments to PhysUnit class, especially for usage
-	 - Fix GridDrawer's gridSize (the AU stuff)
-!!	Graphs - object's energy is not implemented 
-!!	Graphs tweaks
-		- better grid system, this one looks weird when zooming
+	Add ring around selected planets and on hover.
+4.	Graphs - object's energy is not implemented 
+	Graphs tweaks
+5.		- better grid system, this one looks weird when zooming
 		- Scientific notation - labels and input ranges, checkbox for autoscale 
-		- maybe preview on hover over the list instead of side window
+6.		- maybe preview on hover over the list instead of side window
 		- csv export wouldn't be too hard
 		- separate window resizing - part of whole UI resize thing
 	Grid
 		- could make fadeRange smoother
 		- pinheads base could change smoothly
-	VAOs for every render, apparently it might not draw without them on some machines.
+7.		- comments
+8.		- apply fadeRange to pinhead
+9.	VAOs for every render, apparently it might not draw without them on some machines.
 !!	Camera
 		- near, far plane? Zoom limits?
 		- disable ortho? Has limited precision and its not used much anyway
 	Create some Coordinate system hiearchy 
 		- //TESTed in SimDataDrawer
 		- atleast relative to camera?
-Plan:
-	UI overhaul:
-		- Top-bar with dropdown windows
-			- TopBar
-				- StateButtons to open individual windows
-				- Center:
-					- play, pause, resume
-			- SimControls
-				- just current SimControls
-				- usage statistics
-				- save/load/restart
-				- name of current simMethod?
-				- tickbox for break on collision?
-				- graph of frameTime,FPS?
-					- with stability line
-			- SimData - Done
-			- CameraControls - Done
-			- Graphs - Done
-			- Visuals
-				- controls visual guidances:
-					- visual trackball - make it smaller to allow easier rolling
-						- change size, position? (But keep it in screen coords)
-					- camTarget indicator
-					- UI for object
-						- shows name on hover
-						- when selected(on click) shows small window
-							- Name, set as target(follow), set as ref frame
-	Bonuses:
-		Make Planets colored spheres
-		And add shading with sun as lightsource
-			- per-pixel, bloom
-		Kepler with all trajectories
-			- would require hiearchy system in simData and input files
-				- wouldn't be too hard
-		Dynamic addition of objects
-			- could be done for stopped simulation
-				- would require viewer, simMethods and parser respond to these changes
-					- probably SystemUnit::UnitAdded/Removed(index) would be fine
+10.		- grid is doable
+
+After-Plan:
+		- ExtraInfo* for formatted parser
+		- Textured Planets
+		- Fix the coordinates
+			- octree
+		- better visuals
+			- lens-flare, bloom
+			- instanced rings
+			- precomputed atmosphere		
+			- nice milky way background 
+		- Kepler with all trajectories
+			- fixed hiearchy calculated at init
+		- Proper SystemUnit traits and promises
+		- Launch window and different resolutions support
+		- Go back to Replayer?
+
 		OpenGL state machine - OpenGLSM
 			- maybe little bit of overkill for now
 

@@ -42,7 +42,6 @@ namespace solar
 
 		glfwSetWindowPos(win, winPosX, winPosY);
 		glfwMakeContextCurrent(win);
-		//near 1, far 2
 
 		glewExperimental = GL_TRUE; // Can crash without
 		if (glewInit() != GLEW_OK) // tries to initialize glew
@@ -84,7 +83,7 @@ namespace solar
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D_MULTISAMPLE, FBODepthTex, 0);
 		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		if (status != GL_FRAMEBUFFER_COMPLETE)
-			assert(0);
+			throw Exception("Could not create OpenGL Framebuffer.");
 	}
 
 	OpenGLBackend::~OpenGLBackend()
@@ -151,7 +150,7 @@ namespace solar
 			//	- Does it matter? Far plane is set to very far,basically infinity, anyway
 			glDepthRangedNV(-1.0, 1.0);
 		else
-			assert(0);// throw Exception("");
-
+			throw Exception("This application requires OpenGL 4.5 or either of two following extensions GL_ARB_clip_control or GL_NV_depth_buffer_float.\n"
+							"Detected version: " + std::to_string(major) + '.' + std::to_string(minor));
 	}
 }
