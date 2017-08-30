@@ -1,5 +1,11 @@
 =========================================IN THIS COMMIT==========================================
 Going through TODO list.
+Modified rendering of grid and pinheads (SimData's was already done few commits earlier as a test of this method). Now:
+All positions are transformed from world coordinates to coordinates relative to camera's position.
+ - Because float does not have enough precision for values far from zero. So if origin is placed at camera's position then 
+		far from zero means far from camera which does not need much precision(it will occupy small portion of the screen).
+ - "Nice" demonstration of this effect is current rendering of line trails which can be seen on Pluto - showing the trail shaking in the range of hundreds of kilometers
+ - doubles allows submeter precision up to 1ly, so they are precise more than enough to store world positions.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?
@@ -7,7 +13,6 @@ Next:
 	Bonuses:
 		- textures, bloom, lens flare - easy
 		- rings with instanced asteroids - medium
-			- 
 		- atmosphere, tesselation - hard
 		- Kepler - tedious
 			- Might add simMethod for fixed hiearchy

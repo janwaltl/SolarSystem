@@ -43,12 +43,10 @@ namespace solar
 			//Prevents unnecessary z-fighting between both grids, and because they are drawn last(well except GUI) there isn't any harm in it
 			glDepthMask(GL_FALSE);
 			//Make small grid to be 1unit 
-			auto ratio = 1.0;
-			//Compare to dist of Earth in debugger, make them match one another
-			Vec2f scale {float(ratio), float(ratio)};
+			auto ratio = 0.1;
 			//Draw it, convert small grid scale back to meters
 			if (gridEnabled)
-				gridScale = grid.Draw(data, GetActiveCam(), gridPlane, scale, gridOffset)*data.RatioOfDistTo(PhysUnits::meter);
+				gridScale = grid.Draw(data, GetActiveCam(), gridPlane, ratio, gridOffset)*data.RatioOfDistTo(PhysUnits::meter);
 			glDepthMask(GL_TRUE);
 		}
 		Camera & SceneDrawer::GetActiveCam()

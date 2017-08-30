@@ -15,15 +15,17 @@ namespace solar
 		class Pinheads
 		{
 		public:
-			using plane = drawers::GridDrawer::plane ;
+			using plane = drawers::GridDrawer::plane;
 			Pinheads(const Camera& cam, size_t dataSize);
 			~Pinheads();
-
-			void Draw(const SimData& data, plane p, float planeOffset, const Vec2f& baseSize);
+			//Plane offset from origin in world coordinates
+			void Draw(const SimData& data, plane p, double planeOffset, float baseSize, const Camera& cam);
 		private:
 			std::unique_ptr<Shader>  CreateShader(const solar::Camera & cam, drawers::GridDrawer::plane p);
+			//Calculates plane offset relative to the camera
+			float CalcRelPlaneOffset(const solar::Camera & cam, drawers::GridDrawer::plane p, double planeOffset);
 			size_t dataSize;
-			unsigned int VBO,VAO;
+			unsigned int VBO, VAO;
 			//Shader to render the pinheads, indexed by plane enum
 			std::unique_ptr<Shader> shaders[3];
 		};

@@ -36,6 +36,15 @@ namespace solar
 		else
 			return std::floor(value / abs(multiple))*multiple;
 	}
+	template<typename T>
+	T fracToMult(T value, T multiple)
+	{
+		static T x;
+		if (multiple == T(0))
+			return value;
+		else
+			return std::modf(value / abs(multiple), &x)*multiple;
+	}
 }
 
 

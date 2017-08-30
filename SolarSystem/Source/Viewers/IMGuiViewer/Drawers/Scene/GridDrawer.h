@@ -31,15 +31,16 @@ namespace solar
 			~GridDrawer();
 			//Draws the grid
 			//In which plane should the grid be drawn
-			//With given scale (size of bigger square) and offset in SimData units when camera is one unit away from its target
+			//With given scale (size of smaller grid) and offset in SimData units when camera is one unit away from its target
 			//Returns scale in which the small grid has been drawn adjusted to camera's zoom level(also in same unit as SimData are)
-			double Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset);
+			double Draw(const SimData& data, const Camera& cam, plane p, const double scale, double offset);
 			//Return number of smaller squares in a big one
 			size_t SmallToBig();
 			bool ArePinHeadsEnabled() { return pinHeadsEnabled; }
 			void SwitchPinHeads(bool enable) { pinHeadsEnabled = enable; }
 		private:
-			void Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f& scale, const Vec4f& col, const Vec3f& offset, float fadeRange, size_t gridResolution);
+			//offset is position relative to the camera
+			void Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const float scale, const Vec4f& col, const Vec3f& offset, float fadeRange, size_t gridResolution);
 
 			std::unique_ptr<openGL::Shader> CreateShader(const Camera& cam, plane p);
 			std::unique_ptr<openGL::Grid> smallerGrid, biggerGrid;

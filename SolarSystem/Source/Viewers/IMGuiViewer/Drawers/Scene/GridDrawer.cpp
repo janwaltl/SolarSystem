@@ -29,44 +29,45 @@ namespace solar
 		//For unique ptrs
 	}
 
-	double drawers::GridDrawer::Draw(const SimData& data, const Camera& cam, plane p, const Vec2f& scale, float offset)
+	double drawers::GridDrawer::Draw(const SimData& data, const Camera& cam, plane p, const double scale, double offset)
 	{
 		//Set zoom based on dist to target or dist to grid ( both are linear in the sense that 2xZoom=2xwider view, holds for both perspective and ortho cameras)
 		auto zoomLevel = cam.DistToTarget();
-		//auto zoomLevel = cam.CamPos().z - offset;
-		//Keeps offset constant troughout all zoom levels
-		float corrOffset = float(zoomLevel*offset);
 		//Calculates scale of smaller and bigger grid
 		//Smaller grid is always smallToBig times smaller, when zooming in the bigger one switches to smaller one's scale and smaller shrinks to preserve smallToBig ratio.
 		//Thus only two grids are needed to create grid with infinite resolution.
 		auto logScale = log(zoomLevel) / log(smallToBig);
-		auto smallerScale = scale * invSTB  * float(pow(smallToBig, floor(logScale)));
-		auto biggerScale = smallerScale*float(smallToBig);
+		auto smallerScale = scale  * pow(smallToBig, floor(logScale));
+		auto biggerScale = smallerScale*smallToBig;
 		double x;
 		float frac = float(abs(modf(logScale, &x)));
 		if (logScale < 0.0f)//So frac is always increasing when zooming out
 			frac = 1.0f - frac;
 
-		//Always centers grid to screen's center, but snaps it to biggerScale.
+		//Always centers grid around camera target's position, but snaps it to biggerScale. Which effectively hides movement of the grid
+		//And stores it as relative to camera's position to preserve as much precision as possible
 		Vec3f smallGridOffset, bigGridOffset;
+		//auto zoomLevel = cam.CamPos().z - offset;
+		//Keeps offset constant troughout all zoom levels
+		auto corrOffset = zoomLevel*offset;
 		switch (p)
 		{
 		case solar::drawers::GridDrawer::XY:
-			smallGridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
-									floorToMult(float(cam.TargetPos().y), biggerScale.y),
-									corrOffset);
+			smallGridOffset = static_cast<Vec3f>(Vec3d(floorToMult(cam.TargetPos().x, biggerScale),
+													   floorToMult(cam.TargetPos().y, biggerScale),
+													   corrOffset) - cam.CamPos());
 			bigGridOffset = smallGridOffset;
 			break;
 		case solar::drawers::GridDrawer::XZ:
-			smallGridOffset = Vec3f(floorToMult(float(cam.TargetPos().x), biggerScale.x),
-									corrOffset,
-									floorToMult(float(cam.TargetPos().z), biggerScale.y));
+			smallGridOffset = static_cast<Vec3f>(Vec3d(fracToMult(cam.TargetPos().x, biggerScale),
+													   corrOffset,
+													   fracToMult(cam.TargetPos().z, biggerScale)) - cam.CamPos());
 			bigGridOffset = smallGridOffset;
 			break;
 		case solar::drawers::GridDrawer::YZ:
-			smallGridOffset = Vec3f(corrOffset,
-									floorToMult(float(cam.TargetPos().y), biggerScale.x),
-									floorToMult(float(cam.TargetPos().z), biggerScale.y));
+			smallGridOffset = static_cast<Vec3f>(Vec3d(corrOffset,
+													   fracToMult(cam.TargetPos().y, biggerScale),
+													   fracToMult(cam.TargetPos().z, biggerScale)) - cam.CamPos());
 			bigGridOffset = smallGridOffset;
 			break;
 		default:
@@ -90,12 +91,9 @@ namespace solar
 		if (pinHeadsEnabled)
 		{
 			float baseSize = offset*0.2f*zoomLevel;
-			pinheads->Draw(data, p, corrOffset, Vec2f(baseSize, baseSize));
+			pinheads->Draw(data, p, corrOffset, baseSize, cam);
 		}
-
-
-
-		return smallerScale.x;
+		return smallerScale;
 	}
 
 	size_t drawers::GridDrawer::SmallToBig()
@@ -103,10 +101,10 @@ namespace solar
 		return smallToBig;
 	}
 
-	void drawers::GridDrawer::Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const Vec2f & scale, const Vec4f & col, const Vec3f & offset, float fadeRange, size_t gridResolution)
+	void drawers::GridDrawer::Draw(const std::unique_ptr<openGL::Grid>& grid, plane p, const float scale, const Vec4f & col, const Vec3f & offset, float fadeRange, size_t gridResolution)
 	{
 		shaders[p]->Bind();
-		shaders[p]->SetUniform2f("scale", scale);
+		shaders[p]->SetUniform1f("scale", scale);
 		shaders[p]->SetUniform3f("offset", offset);
 		shaders[p]->SetUniform4f("col", col);
 		shaders[p]->SetUniform1f("fade", fadeRange);
@@ -137,7 +135,7 @@ namespace solar
 			#version 330
 			layout(location=0) in vec2 position;
 			uniform vec3 offset;
-			uniform vec2 scale;
+			uniform float scale;
 			
 			std140 uniform CameraMatrices
 			{
@@ -159,7 +157,9 @@ namespace solar
 				
 				vec2 scaledPos = position*scale;
 				vec3 pos = vec3()" + pos + R"() + offset;
-				gl_Position = cam.projection*cam.view*vec4(pos,1.0f);
+				mat4 camView = cam.view;
+				camView[3] = vec4(0,0,0,1.0f);//No need to translate, position is already relative to the camera
+				gl_Position = cam.projection*camView*vec4(pos,1.0f);
 			}
 			)";
 		const std::string fSource = R"(

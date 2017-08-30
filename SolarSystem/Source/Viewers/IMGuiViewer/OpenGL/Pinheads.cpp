@@ -78,10 +78,10 @@ namespace solar
 					mat4 invView;
 					mat4 invProjView;
 			};
-			void MakeLine(vec4 projPos,vec4 color);
-			void MakeBase(vec4 porjPos,vec4 color);
+			void MakeLine(vec4 projPos, vec4 color, mat4 projView);
+			void MakeBase(vec4 porjPos, vec4 color, mat4 projView);
 
-			uniform vec2 baseSize;
+			uniform float baseSize;
 			uniform float planeOffset;
 			uniform vec4 upCol;
 			uniform vec4 downCol;
@@ -90,33 +90,47 @@ namespace solar
 
 			void main()
 			{
+
+				mat4 camView = view;
+				camView[3] = vec4(0,0,0,1.0f);//No need to translate, position is already relative to the camera
+				mat4 projView = projection*camView;
+
 				vec4 inPos = gl_in[0].gl_Position;
 				vec4 projPos = vec4()" + projPos + R"();
-				col = sign(inPos.y - projPos.y)>0.0f? upCol:downCol;
-				MakeLine(projPos,vec4(0.0f));
-				MakeBase(projPos,vec4(0.0f));
-			}
-			void MakeLine(vec4 projPos,vec4 color)
-			{
-				gl_Position = projection*view*gl_in[0].gl_Position;
-				EmitVertex();
-				gl_Position = projection*view*projPos;
-				EmitVertex();
-				EndPrimitive();
-			}
-			void MakeBase(vec4 projPos,vec4 color)
-			{
-				vec4 firstOffset =  baseSize.x*vec4()" + baseOffset[0] + R"();
-				vec4 secondOffset = baseSize.y*vec4()" + baseOffset[1] + R"();
 
-				gl_Position = projection*view*(projPos + firstOffset);
+
+				col = sign(inPos.y - projPos.y)>0.0f? upCol:downCol;
+
+				MakeLine(projPos,col,projView);
+				MakeBase(projPos,col,projView);
+			}
+			void MakeLine(vec4 projPos,vec4 color, mat4 projView)
+			{
+				gl_Position = projView*gl_in[0].gl_Position;
+				col = color;
 				EmitVertex();
-				gl_Position = projection*view*(projPos - firstOffset);
+				gl_Position = projView*projPos;
+				col = color;
 				EmitVertex();
 				EndPrimitive();
-				gl_Position = projection*view*(projPos + secondOffset);
+			}
+			void MakeBase(vec4 projPos, vec4 color, mat4 projView)
+			{
+				vec4 firstOffset =  baseSize*vec4()" + baseOffset[0] + R"();
+				vec4 secondOffset = baseSize*vec4()" + baseOffset[1] + R"();
+
+				gl_Position = projView*(projPos + firstOffset);
+				col = color;
 				EmitVertex();
-				gl_Position = projection*view*(projPos - secondOffset);
+				gl_Position = projView*(projPos - firstOffset);
+				col = color;
+				EmitVertex();
+				EndPrimitive();
+				gl_Position = projView*(projPos + secondOffset);
+				col = color;
+				EmitVertex();
+				gl_Position = projView*(projPos - secondOffset);
+				col = color;
 				EmitVertex();
 				EndPrimitive();
 			}
@@ -140,24 +154,40 @@ namespace solar
 			shader->UnBind();
 			return shader;
 		}
+		float Pinheads::CalcRelPlaneOffset(const solar::Camera & cam, drawers::GridDrawer::plane p, double planeOffset)
+		{
+			switch (p)
+			{
+			case plane::XY: return static_cast<float>(planeOffset - cam.CamPos().z);
+			case plane::YZ: return static_cast<float>(planeOffset - cam.CamPos().x);
+			case plane::XZ: return static_cast<float>(planeOffset - cam.CamPos().y);
+			default:		assert(0); return 0.0f;
+			}
+		}
+
 		Pinheads::~Pinheads()
 		{}
-		void Pinheads::Draw(const SimData& data, plane p, float planeOffset, const Vec2f& baseSize)
+
+		void Pinheads::Draw(const SimData& data, plane p, double planeOffset, float baseSize, const Camera& cam)
 		{
 			assert(data->size() == dataSize);
+			//All positions are transformed from world coordinates to coordinates relative to camera's position.
+			// - Because float does not have enough precision for values far from zero. So if origin is placed at camera's position then 
+			//		far from zero means far from camera which does not need much precision(it will occupy small portion of the screen).
 
 			shaders[p]->Bind();
-			shaders[p]->SetUniform2f("baseSize", baseSize);
-			shaders[p]->SetUniform1f("planeOffset", planeOffset);
+			shaders[p]->SetUniform1f("baseSize", baseSize);
+			shaders[p]->SetUniform1f("planeOffset", CalcRelPlaneOffset(cam, p, planeOffset));
 			glBindVertexArray(VAO);
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
 			float* buffer = reinterpret_cast<float*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
 			assert(buffer);
 			for (const auto& unit : data.Get())
 			{
-				*buffer = static_cast<float>(unit.pos.x); buffer++;
-				*buffer = static_cast<float>(unit.pos.y); buffer++;
-				*buffer = static_cast<float>(unit.pos.z); buffer++;
+				const Vec3f relPos = static_cast<Vec3f>(unit.pos - cam.CamPos());
+				*buffer = relPos.x; buffer++;
+				*buffer = relPos.y; buffer++;
+				*buffer = relPos.z; buffer++;
 			}
 			auto result = glUnmapBuffer(GL_ARRAY_BUFFER);
 			assert(result);
