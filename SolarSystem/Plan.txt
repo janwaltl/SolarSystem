@@ -1,11 +1,7 @@
 =========================================IN THIS COMMIT==========================================
-Going through TODO list.
-Modified rendering of grid and pinheads (SimData's was already done few commits earlier as a test of this method). Now:
-All positions are transformed from world coordinates to coordinates relative to camera's position.
- - Because float does not have enough precision for values far from zero. So if origin is placed at camera's position then 
-		far from zero means far from camera which does not need much precision(it will occupy small portion of the screen).
- - "Nice" demonstration of this effect is current rendering of line trails which can be seen on Pluto - showing the trail shaking in the range of hundreds of kilometers
- - doubles allows submeter precision up to 1ly, so they are precise more than enough to store world positions.
+Replaced GLEW with GLAD and moved both GLAD and ImGui into External/
+Better exception handling(cleanup) in OpenGLBacked.
+RealScale disabled by default.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?
@@ -34,22 +30,30 @@ TODOs/IDEAS:
 	Grid
 		- could make fadeRange smoother
 		- pinheads base could change smoothly
-7.		- comments
 8.		- apply fadeRange to pinhead
-9.	VAOs for every render, apparently it might not draw without them on some machines.
+9.  Get Hide UI working
+10. Implement or remove 'Zoom to' in context menu
 !!	Camera
 		- near, far plane? Zoom limits?
 		- disable ortho? Has limited precision and its not used much anyway
 	Create some Coordinate system hiearchy 
 		- //TESTed in SimDataDrawer
-		- atleast relative to camera?
-10.		- grid is doable
-
 After-Plan:
 		- ExtraInfo* for formatted parser
+			- really design the Parser/SimMethod/Viewer communication
+				- keep SystemUnit pure virtual
+				- each derived class must specialize Trait class
+					- either traits for each P/S/V or just one
+				- Simulation's templated constructor checks traits for compatibility
+					- one trait can be type of SimData
+
 		- Textured Planets
 		- Fix the coordinates
 			- octree
+				-	double for planet positions is more than enough
+				-	double for planet rendering or cells of floats(cellSize can be 1Earth radius with roughly one meter precision)
+						- procedural tessalated planet would be fine without it as it can be generated already relative to camera
+						- but asteroid rings/sattellites can use the cells
 		- better visuals
 			- lens-flare, bloom
 			- instanced rings

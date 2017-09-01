@@ -1,6 +1,6 @@
 #include "Graphs.h"
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imguiExtended.h"
+#include <imgui/imgui.h>
+#include <imgui/imguiExtended.h>
 
 #include <sstream>
 

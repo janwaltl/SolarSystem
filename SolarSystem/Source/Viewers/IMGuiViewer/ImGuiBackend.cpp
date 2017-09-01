@@ -1,9 +1,9 @@
 #include "ImGuiBackend.h"
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "IMGuiLibrary/imgui.h"
+#include <imgui/imgui.h>
 #include "OpenGL/Shader.h"
 #include "OpenGL/Error.h"
 namespace solar

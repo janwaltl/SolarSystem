@@ -1,7 +1,7 @@
 #include "UnitsProperties.h"
 
 #include "Source/Units/PhysicsUnits.h"
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
+#include <imgui/imgui.h>
 
 namespace solar
 {

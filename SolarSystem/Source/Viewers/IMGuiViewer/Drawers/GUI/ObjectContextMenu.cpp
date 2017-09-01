@@ -2,8 +2,9 @@
 #include "Source/Viewers/IMGuiViewer/Drawers/SceneDrawer.h"
 #include "Source/Viewers/IMGuiViewer/Drawers/Scene/SimDataDrawer.h"
 
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imguiExtended.h"
+#include <imgui/imgui.h>
+#include <imgui/imguiExtended.h>
+#include <imgui/imguiExtended.h>
 namespace solar
 {
 	namespace gui

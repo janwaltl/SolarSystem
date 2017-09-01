@@ -16,6 +16,7 @@ namespace solar
 		OpenGLBackend(size_t width, size_t height, const std::string& title);
 		//Destroys OpenGL context and GLFW window
 		~OpenGLBackend();
+		void DestroyGLFW();
 		GLFWwindow* GetWin();
 		//Returns whether window should be closed(Close button pressed for example)
 		//Bind framebuffer into which should everything be rendered
@@ -27,6 +28,7 @@ namespace solar
 		static void ErrorCallback(int err, const char* description);
 
 		void CreateFBO(const size_t &width, const size_t &height);
+		void DeleteFBO();
 		void CheckVersionAndExtensions();
 		unsigned int FBO, FBOColTex, FBODepthTex;
 		GLFWwindow* win;

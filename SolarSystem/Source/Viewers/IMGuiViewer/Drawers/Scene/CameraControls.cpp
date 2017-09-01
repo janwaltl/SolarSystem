@@ -1,5 +1,6 @@
 #include "CameraControls.h"
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
+#include <imgui/imgui.h>
+#include <imgui/imgui.h>
 #include "Source/Viewers/IMGuiViewer/Drawers/Scene/Camera.h"
 #include "Source/Math/Math.h"
 #include "Source/Units/Unit.h"

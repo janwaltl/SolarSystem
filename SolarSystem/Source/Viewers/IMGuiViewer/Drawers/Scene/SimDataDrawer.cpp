@@ -20,7 +20,7 @@ namespace solar
 		{
 			sphere = std::make_unique<openGL::Sphere>(resolution);
 			CreateShader(cam);
-			realScale = true;
+			realScale = false;
 			minRadius = 0.03f;
 		}
 

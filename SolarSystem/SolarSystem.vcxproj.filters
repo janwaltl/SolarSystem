@@ -35,12 +35,6 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_draw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -110,9 +104,6 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Graphs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imguiExtended\LineGraph.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -149,6 +140,18 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\External\glad\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\External\imgui\imguiExtended\LineGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\External\imgui\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\External\imgui\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Simulation.h">
@@ -179,24 +182,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imconfig.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_internal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_rect_pack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_textedit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.h">
@@ -298,12 +283,6 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\GUI\Graphs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imguiExtended.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imguiExtended\LineGraph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -340,8 +319,35 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\External\glad\glad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\imgui\imguiExtended\LineGraph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\imgui\imconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\imgui\imgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\imgui\imgui_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\imgui\imguiExtended.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\imgui\stb_rect_pack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\imgui\stb_textedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\imgui\stb_truetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\LICENSE" />
+    <None Include="Source\External\imgui\LICENSE" />
   </ItemGroup>
 </Project>

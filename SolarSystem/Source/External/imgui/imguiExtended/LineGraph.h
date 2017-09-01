@@ -2,7 +2,7 @@
 #define IMGUI_EXTENDED_LINE_GRAPH_HEADER
 
 //This file is not part of imgui library
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
+#include <imgui/imgui.h>
 
 
 #include<vector>

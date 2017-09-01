@@ -1,7 +1,7 @@
 #include "SimProperties.h"
 
 #include "Source/Units/SystemUnit.h"
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui.h"
+#include <imgui/imgui.h>
 
 namespace solar
 {

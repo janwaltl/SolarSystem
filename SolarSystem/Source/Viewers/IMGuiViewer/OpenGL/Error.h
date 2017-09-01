@@ -2,7 +2,7 @@
 #define OPENGL_ERROR_532523569248_HEADER
 
 #include <string>
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <map>
 #include "Source/Common/Exception.h"
 

@@ -1,7 +1,7 @@
 #include "Sphere.h"
 #include "Source/Math/Math.h"
 #include <vector>
-#include <GL/glew.h>
+#include <glad/glad.h>
 
 namespace solar
 {

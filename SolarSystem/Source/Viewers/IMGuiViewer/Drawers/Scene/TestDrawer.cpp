@@ -2,7 +2,7 @@
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Camera.h"
 
-#include <gl/glew.h>
+#include <glad/glad.h>
 
 solar::drawers::TestDrawer::TestDrawer(const Camera & cam)
 {

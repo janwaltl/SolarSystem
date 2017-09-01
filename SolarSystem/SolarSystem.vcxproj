@@ -99,13 +99,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Source\External\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32sd.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,7 +132,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>GLEW_STATIC ;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Source\External\</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
@@ -145,7 +145,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SetChecksum>true</SetChecksum>
     </Link>
   </ItemDefinitionGroup>
@@ -174,6 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Timing.cpp" />
+    <ClCompile Include="Source\External\glad\glad.c" />
     <ClCompile Include="Source\SimMethods\ExplicitEuler.cpp" />
     <ClCompile Include="Source\Units\SystemUnit.cpp" />
     <ClCompile Include="Source\ConsoleControl.cpp" />
@@ -203,9 +204,9 @@
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\Scene\SimDataDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\Drawers\Scene\TestDrawer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\ImGuiBackend.cpp" />
-    <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.cpp" />
-    <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imguiExtended\LineGraph.cpp" />
-    <ClCompile Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_draw.cpp" />
+    <ClCompile Include="Source\External\imgui\imgui.cpp" />
+    <ClCompile Include="Source\External\imgui\imguiExtended\LineGraph.cpp" />
+    <ClCompile Include="Source\External\imgui\imgui_draw.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.cpp" />
     <ClCompile Include="Source\Viewers\IMGuiViewer\OpenGL\Error.cpp" />
@@ -218,6 +219,7 @@
     <ClCompile Include="Source\Viewers\ViewAndRecord.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\External\glad\glad.h" />
     <ClInclude Include="Source\Math\Common.h" />
     <ClInclude Include="Source\Math\Mat4.h" />
     <ClInclude Include="Source\Math\Vec3.h" />
@@ -262,14 +264,14 @@
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\Scene\SimDataDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\Drawers\Scene\TestDrawer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\ImGuiBackend.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imconfig.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imguiExtended.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imguiExtended\LineGraph.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\imgui_internal.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_rect_pack.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_textedit.h" />
-    <ClInclude Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\stb_truetype.h" />
+    <ClInclude Include="Source\External\imgui\imconfig.h" />
+    <ClInclude Include="Source\External\imgui\imgui.h" />
+    <ClInclude Include="Source\External\imgui\imguiExtended.h" />
+    <ClInclude Include="Source\External\imgui\imguiExtended\LineGraph.h" />
+    <ClInclude Include="Source\External\imgui\imgui_internal.h" />
+    <ClInclude Include="Source\External\imgui\stb_rect_pack.h" />
+    <ClInclude Include="Source\External\imgui\stb_textedit.h" />
+    <ClInclude Include="Source\External\imgui\stb_truetype.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGLBackEnd.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.h" />
     <ClInclude Include="Source\Viewers\IMGuiViewer\OpenGL\Error.h" />
@@ -283,7 +285,7 @@
     <ClInclude Include="Source\Viewers\Viewer.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Source\Viewers\IMGuiViewer\IMGuiLibrary\LICENSE" />
+    <None Include="Source\External\imgui\LICENSE" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

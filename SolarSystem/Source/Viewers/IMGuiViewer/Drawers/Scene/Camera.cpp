@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 #include <vector>
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include "Source/Viewers/IMGuiViewer/OpenGL/Shader.h"
 #include "Source/Viewers/IMGuiViewer/OpenGL/Error.h"
 

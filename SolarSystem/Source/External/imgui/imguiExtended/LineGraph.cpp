@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <algorithm>
 #define IMGUI_DEFINE_MATH_OPERATORS
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imgui_internal.h"
+#include <imgui/imgui_internal.h>
 
 namespace ImGuiE
 {

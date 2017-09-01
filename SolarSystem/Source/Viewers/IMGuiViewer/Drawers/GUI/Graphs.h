@@ -4,7 +4,7 @@
 
 #include "Source/Units/Unit.h"
 #include "Source/Math/Math.h"
-#include "Source/Viewers/IMGuiViewer/IMGuiLibrary/imguiExtended.h"
+#include <imgui/imguiExtended.h>
 #include "Source/Common/Timing.h"
 #include <vector>
 #include <memory>

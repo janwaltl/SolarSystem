@@ -1,6 +1,6 @@
 #include "OpenGLBackEnd.h"
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "Source/Common/Exception.h"
 #include "Source/Math/Math.h"
@@ -31,7 +31,7 @@ namespace solar
 		glfwSetErrorCallback(ErrorCallback);
 		// Uses OpenGL 1.0 to atleast create contex
 		// will automatically use the newest available or throw on some error
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 1);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 		//Do not allow rezising
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
@@ -43,10 +43,12 @@ namespace solar
 		glfwSetWindowPos(win, winPosX, winPosY);
 		glfwMakeContextCurrent(win);
 
-		glewExperimental = GL_TRUE; // Can crash without
-		if (glewInit() != GLEW_OK) // tries to initialize glew
-			throw Exception("GLEW initialization failed.");
-		openGL::CheckForError();//glewInit causes INVALID_ENUM for some reason, this clears it.
+		auto add = glfwGetProcAddress("glGetString");
+		if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) // tries to initialize glad
+		{
+			DestroyGLFW();
+			throw Exception("GLAD initialization failed.");
+		}
 
 		CheckVersionAndExtensions();
 
@@ -83,15 +85,34 @@ namespace solar
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D_MULTISAMPLE, FBODepthTex, 0);
 		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		if (status != GL_FRAMEBUFFER_COMPLETE)
+		{
+			DeleteFBO();
+			DestroyGLFW();
 			throw Exception("Could not create OpenGL Framebuffer.");
+		}
+	}
+
+	void OpenGLBackend::DeleteFBO()
+	{
+		glDeleteTextures(1, &FBOColTex);
+		glDeleteTextures(1, &FBODepthTex);
+		glDeleteFramebuffers(1, &FBO);
 	}
 
 	OpenGLBackend::~OpenGLBackend()
 	{
-		glfwDestroyWindow(win);
-		glfwTerminate();
+		DestroyGLFW();
+	}
 
-		win = nullptr;
+	void OpenGLBackend::DestroyGLFW()
+	{
+		if (win)
+		{
+			glfwDestroyWindow(win);
+			glfwTerminate();
+
+			win = nullptr;
+		}
 	}
 
 	GLFWwindow * OpenGLBackend::GetWin()
@@ -133,16 +154,13 @@ namespace solar
 	}
 	void OpenGLBackend::CheckVersionAndExtensions()
 	{
-		GLint major, minor;
-		glGetIntegerv(GL_MAJOR_VERSION, &major);
-		glGetIntegerv(GL_MINOR_VERSION, &minor);
 
 		//Is needed to implement reversed depth buffer.
-		if ((major == 4 && minor == 5) || glewIsSupported("GL_ARB_clip_control"))
+		if (GLAD_GL_VERSION_4_5 || GLAD_GL_ARB_clip_control)
 			//Sources: http://dev.theomader.com/depth-precision/ last paragraph 'Reverse depth on OpenGL'
 			//			issues #14 and #20 https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_clip_control.txt
 			glClipControl(GL_LOWER_LEFT, GL_ZERO_TO_ONE);//Overwrites standard -1,1 clip space
-		else if (glewIsSupported("GL_NV_depth_buffer_float"))
+		else if (GLAD_GL_NV_depth_buffer_float)
 			//Source: following two links
 			//Overwrites standard -1,1 clip space, but http://dev.theomader.com/depth-precision/ says it also needs custom far clipping plane
 			// http://outerra.blogspot.cz/2012/11/maximizing-depth-buffer-range-and.html paragraph 'DirectX vs. OpenGL' also mentions custom far clipping plane
@@ -150,7 +168,13 @@ namespace solar
 			//	- Does it matter? Far plane is set to very far,basically infinity, anyway
 			glDepthRangedNV(-1.0, 1.0);
 		else
-			throw Exception("This application requires OpenGL 4.5 or either of two following extensions GL_ARB_clip_control or GL_NV_depth_buffer_float.\n"
-							"Detected version: " + std::to_string(major) + '.' + std::to_string(minor));
+		{
+			GLint major, minor;
+			glGetIntegerv(GL_MAJOR_VERSION, &major);
+			glGetIntegerv(GL_MINOR_VERSION, &minor);
+			DestroyGLFW();
+			throw Exception("This application requires OpenGL 4.5 or either of the two following extensions GL_ARB_clip_control or GL_NV_depth_buffer_float.\n"
+							"Neither of those extensions have been found and OpenGL's detected version: " + std::to_string(major) + '.' + std::to_string(minor));
+		}
 	}
 }

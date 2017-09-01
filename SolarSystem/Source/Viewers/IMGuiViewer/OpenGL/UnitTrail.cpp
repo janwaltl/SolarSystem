@@ -1,6 +1,6 @@
 #include "UnitTrail.h"
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <vector>
 #include <numeric>
@@ -66,7 +66,7 @@ namespace solar
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
 			glBufferData(GL_ARRAY_BUFFER, 3 * maxLength * sizeof(GLfloat), nullptr, GL_DYNAMIC_DRAW);
-			//Positions are Vec2d of floats at location=0 in shader
+			//Positions are Vec2 of floats at location=0 in shader
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 			glEnableVertexAttribArray(0);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
