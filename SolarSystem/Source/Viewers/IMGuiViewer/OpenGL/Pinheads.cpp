@@ -11,7 +11,7 @@ namespace solar
 	namespace openGL
 	{
 		Pinheads::Pinheads(const Camera& cam, size_t dataSize) :
-			dataSize(dataSize)
+			dataSize(dataSize), dataPos(dataSize)
 		{
 			assert(dataSize > 0);
 
@@ -179,18 +179,11 @@ namespace solar
 			shaders[p]->SetUniform1f("baseSize", baseSize);
 			shaders[p]->SetUniform1f("planeOffset", CalcRelPlaneOffset(cam, p, planeOffset));
 			glBindVertexArray(VAO);
+			for (size_t i = 0; i < dataSize; ++i)
+				dataPos[i] = static_cast<Vec3f>(data[i].pos - cam.CamPos());
+			assert(sizeof(Vec3f) == 3 * sizeof(float));//Vec3f is tighly packed without any padding
 			glBindBuffer(GL_ARRAY_BUFFER, VBO);
-			float* buffer = reinterpret_cast<float*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
-			assert(buffer);
-			for (const auto& unit : data.Get())
-			{
-				const Vec3f relPos = static_cast<Vec3f>(unit.pos - cam.CamPos());
-				*buffer = relPos.x; buffer++;
-				*buffer = relPos.y; buffer++;
-				*buffer = relPos.z; buffer++;
-			}
-			auto result = glUnmapBuffer(GL_ARRAY_BUFFER);
-			assert(result);
+			glBufferSubData(GL_ARRAY_BUFFER, 0, dataSize * 3 * sizeof(float), dataPos.data());
 			glDrawArrays(GL_POINTS, 0, dataSize);
 			glBindVertexArray(0);
 			shaders[p]->UnBind();
