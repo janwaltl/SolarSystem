@@ -1,7 +1,5 @@
 =========================================IN THIS COMMIT==========================================
-Replaced GLEW with GLAD and moved both GLAD and ImGui into External/
-Better exception handling(cleanup) in OpenGLBacked.
-RealScale disabled by default.
+Implemented Hide UI and zoom to.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?
@@ -31,8 +29,6 @@ TODOs/IDEAS:
 		- could make fadeRange smoother
 		- pinheads base could change smoothly
 8.		- apply fadeRange to pinhead
-9.  Get Hide UI working
-10. Implement or remove 'Zoom to' in context menu
 !!	Camera
 		- near, far plane? Zoom limits?
 		- disable ortho? Has limited precision and its not used much anyway

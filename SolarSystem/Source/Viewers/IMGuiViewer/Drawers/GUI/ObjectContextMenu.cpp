@@ -30,7 +30,6 @@ namespace solar
 				{
 					const auto& objects = data.Get();
 					assert(data.Get().size() == objects.size());
-					size_t numInContext = 0;
 					for (size_t i = 0; i < objects.size(); ++i)
 						if (objectsStates[i] == inContext)
 						{
@@ -43,19 +42,19 @@ namespace solar
 								CloseContextMenu();
 							}
 							ImGui::SameLine();
-							if (ImGui::SmallButton("Zoom to"));
-							//TODO implement after real scale planets
+							if (ImGui::SmallButton("Zoom to"))
+							{
+								auto radius = objects[i].radius;
+								assert(radius > 1 * data.RatioOfDistTo(PhysUnits::meter));//Radius>1meter
+								auto& cam = scene.GetActiveCam();
+								//Zooms to fourth times the radius
+								auto viewDist = (objects[i].pos - cam.CamPos()).Normalize() *radius*4.0;
+								cam.LookAt(objects[i].pos - viewDist, objects[i].pos, cam.UpDir());
+								cam.FollowObject(i);
+								CloseContextMenu();
+							}
 							ImGui::PopID();
-							++numInContext;
 						}
-					if (numInContext > 1)
-					{
-						//Zooms to center of all objects in context menu
-						if (ImGui::SmallButton("Zoom to all"));
-							//TODO
-						ImGui::SameLine();
-					}
-
 					if (ImGui::SmallButton("Close"))
 						CloseContextMenu();
 				}

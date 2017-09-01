@@ -74,6 +74,7 @@ namespace solar
 
 		Vec2f SimDataDrawer::GetScreenPos(const Unit & object, const Camera & cam) const
 		{
+			//IMPROVE make position relative to the camera and then project it with view matrix with translation removed
 			auto screenPos = cam.ProjViewMatrix()*Vec4f(static_cast<Vec3f>(object.pos), 1.0f);
 			screenPos /= screenPos.w;
 			return screenPos.z > 0 ? Vec2f(screenPos.x, screenPos.y) : Vec2f(-1, -1);

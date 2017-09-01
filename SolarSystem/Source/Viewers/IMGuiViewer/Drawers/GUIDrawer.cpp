@@ -5,7 +5,7 @@
 #include "GUI/SimProperties.h"
 #include "SceneDrawer.h"
 
-
+#include <GLFW/glfw3.h>
 namespace solar
 {
 	namespace drawers
@@ -16,11 +16,18 @@ namespace solar
 			switches.grid.selected = true;
 			switches.lineTrails.selected = true;
 			switches.planetScale.selected = false;
+			drawGUI = true;
 		}
 		void GUIDrawer::Draw(SimData& data, Viewer& viewer, SceneDrawer& scene, size_t w, size_t h)
 		{
-			TopMenuBar(data, viewer, scene, w, h);
-			BotttomMenuBar(data, viewer, scene, w, h);
+			if (ImGui::IsKeyPressed(GLFW_KEY_F1))
+				drawGUI = !drawGUI;
+			if (drawGUI)
+			{
+				TopMenuBar(data, viewer, scene, w, h);
+				BotttomMenuBar(data, viewer, scene, w, h);
+			}
+
 			objectContextMenu.Draw(data, scene);
 		}
 		void GUIDrawer::TopMenuBar(SimData& data, Viewer& viewer, SceneDrawer& scene, size_t w, size_t h)
@@ -70,7 +77,10 @@ namespace solar
 					ImGui::SameLine(w - offsets.prefs - context->Style.FramePadding.x);
 					ImGui::BeginGroup();
 					TopRightSwitches(scene, viewer, draw);
-					ImGui::SameLine(); ImGui::Button("Hide UI");//Grid on/off
+					ImGui::SameLine();
+					if (ImGui::Button("Hide UI"))
+						drawGUI = false;
+					ImGui::TextTooltipOnHover("Hides all opened windows as well as both menu bars.\nPRESS 'F1' KEY TO BRING UI BACK.");
 					ImGui::SameLine();
 					buttons.visuals.Draw("Visual Preferences");
 					ImGui::TextTooltipOnHover("Allows to change visual parts of the simulation.");

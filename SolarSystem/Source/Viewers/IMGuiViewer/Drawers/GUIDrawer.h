@@ -57,6 +57,7 @@ namespace solar
 				float prefs;
 				float speedAndFollow;
 			} offsets;//Horizontal offsets for positioning of GUI elements
+			bool drawGUI;
 		};
 	}
 }
