@@ -22,10 +22,14 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -g -O3")
 add_executable (SolarSystem ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries(SolarSystem glfw)
 
+#Copy examples and documentation to same folder
 add_custom_command(TARGET SolarSystem POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
                        ${CMAKE_SOURCE_DIR}/SolarSystem/Data ${CMAKE_BINARY_DIR}/bin)
 add_custom_command(TARGET SolarSystem POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
                        ${CMAKE_SOURCE_DIR}/ZimniDokumentace/main.pdf ${CMAKE_BINARY_DIR}/bin/ZimniDokumentace.pdf)
+add_custom_command(TARGET SolarSystem POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy
+                       ${CMAKE_SOURCE_DIR}/LetniDokumentace/main.pdf ${CMAKE_BINARY_DIR}/bin/LetniDokumentace.pdf)
 
