@@ -1,11 +1,5 @@
 =========================================IN THIS COMMIT==========================================
-Did some performance profiling.
-	- Good bunch of time was spend on mapping buffer for pinheads, so added std::vector instead
-	Now:
-		- 90% of time is spend in OpenGL dlls(VSync is off)
-		- only 0.5% in SimMethod (rawDT=1, so one should always set it to much higher number)
-		- about 10% in GUI drawing
-			- mostly ImGui stuff
+Forgot to initialize variable -> Seg fault.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?

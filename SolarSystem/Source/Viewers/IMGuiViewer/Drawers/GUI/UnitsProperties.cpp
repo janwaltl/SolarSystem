@@ -20,7 +20,7 @@ namespace solar
 		UnitsProperties::UnitsProperties() :
 			refUnit(&center)
 		{
-			distPosCombo = speedVelCombo = timeCombo = massCombo = lenCombo = 0;
+			frameOfRef = distPosCombo = speedVelCombo = timeCombo = massCombo = lenCombo = 0;
 			massRatio = timeRatio = lenRatio = 1.0;
 			tempCol[0] = tempCol[1] = tempCol[2] = 0.0f;
 		}
