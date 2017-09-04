@@ -1,9 +1,9 @@
 #include "ImGuiBackend.h"
 
-#include <glad/glad.h>
+#include <External/glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <imgui/imgui.h>
+#include <External/imgui/imgui.h>
 #include <limits>
 #include "OpenGL/Shader.h"
 #include "OpenGL/Error.h"

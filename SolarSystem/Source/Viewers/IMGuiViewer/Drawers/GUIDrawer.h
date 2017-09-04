@@ -4,7 +4,7 @@
 
 #include "Source/Units/Unit.h"
 #include "Source/Viewers/Viewer.h"
-#include <imgui/imguiExtended.h>
+#include <External/imgui/imguiExtended.h>
 #include "GUI/UnitsProperties.h"
 #include "GUI/VisualPreferences.h"
 #include "GUI/Graphs.h"
