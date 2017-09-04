@@ -7,16 +7,15 @@ namespace solar
 {
 	namespace drawers
 	{
-		ReplayGUIDrawer::ReplayGUIDrawer(const std::string& replayFileName) :
-			replayControls(replayFileName)
+		ReplayGUIDrawer::ReplayGUIDrawer(const std::string& replayFileName, const SimData& data) :
+			gui(data), replayControls(replayFileName)
 		{}
 
 		void ReplayGUIDrawer::Draw(SimData & data, ReplayerViewer & viewer, SceneDrawer& scene,
 								   size_t w, size_t h)
 		{
-			unitsProps(data);
+			gui.Draw(data, viewer, scene, w, h);
 			replayControls(viewer, &scene.GetLineTrails(), w, h);
-			visualPrefs.Draw(data, scene);
 		}
 	}
 }

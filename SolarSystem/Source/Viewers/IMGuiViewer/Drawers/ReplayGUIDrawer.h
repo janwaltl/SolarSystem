@@ -2,9 +2,9 @@
 #define DRAWERS_REPLAY_GUIDRAWER_HEADER
 
 
-#include "GUI/UnitsProperties.h"
+#include "GUIDrawer.h"
 #include "GUI/ReplayControls.h"
-#include "GUI/VisualPreferences.h"
+
 namespace solar
 {
 	class ReplayerViewer;
@@ -16,13 +16,14 @@ namespace solar
 		class ReplayGUIDrawer
 		{
 		public:
-			ReplayGUIDrawer(const std::string& replayFileName);
+			ReplayGUIDrawer(const std::string& replayFileName, const SimData& data);
 			void Draw(SimData& data, ReplayerViewer& viewer, SceneDrawer& scene,
 					  size_t w, size_t h);
 		private:
-			gui::UnitsProperties unitsProps;
+			//Standard graphics interface
+			drawers::GUIDrawer gui;
 			gui::ReplayControls replayControls;
-			gui::VisualPreferences visualPrefs;
+			
 		};
 	}
 }

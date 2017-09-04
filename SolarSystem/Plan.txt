@@ -1,11 +1,5 @@
 =========================================IN THIS COMMIT==========================================
-Did some performance profiling.
-	- Good bunch of time was spend on mapping buffer for pinheads, so added std::vector instead
-	Now:
-		- 90% of time is spend in OpenGL dlls(VSync is off)
-		- only 0.5% in SimMethod (rawDT=1, so one should always set it to much higher number)
-		- about 10% in GUI drawing
-			- mostly ImGui stuff
+Fixed GUI.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?
@@ -35,6 +29,11 @@ TODOs/IDEAS:
 		- could make fadeRange smoother
 		- pinheads base could change smoothly
 8.		- apply fadeRange to pinhead
+9. Add radius support to FormattedFileParser
+10. Make sure Replayer is working, atleast not crashing and that UI is working
+	- does not work, there's no support for PhysUnits
+		- add to serializer, as well as radius(to same place as mass)
+		- other than that it should work
 !!	Camera
 		- near, far plane? Zoom limits?
 		- disable ortho? Has limited precision and its not used much anyway

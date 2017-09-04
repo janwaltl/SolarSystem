@@ -20,7 +20,7 @@ namespace solar
 		class GUIDrawer
 		{
 		public:
-			GUIDrawer(SimData& data);
+			GUIDrawer(const SimData& data);
 			void Draw(SimData& data, Viewer& viewer, SceneDrawer& scene, size_t w, size_t h);
 		private:
 			void TopMenuBar(SimData& data, Viewer& viewer, SceneDrawer& scene, size_t w, size_t h);

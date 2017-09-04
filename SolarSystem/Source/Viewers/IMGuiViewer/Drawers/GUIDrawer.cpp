@@ -10,7 +10,7 @@ namespace solar
 {
 	namespace drawers
 	{
-		GUIDrawer::GUIDrawer(SimData& data) :
+		GUIDrawer::GUIDrawer(const SimData& data) :
 			objectContextMenu(data)
 		{
 			switches.grid.selected = true;
