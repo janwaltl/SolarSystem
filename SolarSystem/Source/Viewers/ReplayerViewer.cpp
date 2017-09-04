@@ -9,7 +9,7 @@ namespace solar
 	void ReplayerViewer::Prepare()
 	{
 		scene = std::make_unique<drawers::SceneDrawer>(*data);
-		GUI = std::make_unique<drawers::ReplayGUIDrawer>(replayFileName);
+		GUI = std::make_unique<drawers::ReplayGUIDrawer>(replayFileName, *data);
 
 	}
 	void ReplayerViewer::operator()()
@@ -22,6 +22,7 @@ namespace solar
 		imguiBackend.NewFrame(GetFrameTime());
 		GUI->Draw(*data, *this, *scene, w, h);
 		scene->Draw(*data);
+		openGL.Render();
 		imguiBackend.Render();
 	}
 }

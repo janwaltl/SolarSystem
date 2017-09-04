@@ -1,5 +1,5 @@
 =========================================IN THIS COMMIT==========================================
-Forgot to initialize variable -> Seg fault.
+Merging replayer fixes.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?
@@ -29,6 +29,11 @@ TODOs/IDEAS:
 		- could make fadeRange smoother
 		- pinheads base could change smoothly
 8.		- apply fadeRange to pinhead
+9. Add radius support to FormattedFileParser
+10. Make sure Replayer is working, atleast not crashing and that UI is working
+	- does not work, there's no support for PhysUnits
+		- add to serializer, as well as radius(to same place as mass)
+		- other than that it should work
 !!	Camera
 		- near, far plane? Zoom limits?
 		- disable ortho? Has limited precision and its not used much anyway

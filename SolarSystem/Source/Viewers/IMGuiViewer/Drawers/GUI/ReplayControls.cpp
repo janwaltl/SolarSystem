@@ -39,7 +39,9 @@ namespace solar
 				sys.PauseSimulation();
 				recordNum = numRecords;
 			}
-			ImGui::SetNextWindowPos(ImVec2(10.0f, float(h - 80.0f)), ImGuiSetCond_Once);
+			//Calculated same way as in Imgui's window calculations - function MenuBarHeight() in imgui_internal.h
+			auto menuBarHeight = ImGui::GetFontSize() + ImGui::GetStyle().FramePadding.y * 2.0f;
+			ImGui::SetNextWindowPos(ImVec2(10.0f, float(h - 80.0f - menuBarHeight)), ImGuiSetCond_Once);
 			ImGui::SetNextWindowSize(ImVec2(float(w - 10.0f), 80.0f), ImGuiSetCond_Once);
 			if (ImGui::Begin("Replay controls", NULL, ImGuiWindowFlags_NoCollapse |
 							 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar))
