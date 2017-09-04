@@ -26,18 +26,18 @@ namespace solar
 			void LineTrailsPopUp(drawers::LineTrailsDrawer& lineTrails, const SimData& data);
 			struct
 			{
-				int camType;
-				int camTarget;
-				int camPos;
-				
-				int gridPlane;
+				int camType = 0;
+				int camTarget = 0;
+				int camPos = 0;
+
+				int gridPlane = 0;
 			} combo;
 			struct
 			{
-				bool pinheads;
+				bool pinheads = 0;
 			}checkBox;
-			float gridOffset;
-			float minScreenRadius;//RealScale planets
+			float gridOffset = 0.0f;
+			float minScreenRadius = 0.0f;//RealScale planets
 		};
 	}
 }

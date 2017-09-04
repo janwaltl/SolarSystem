@@ -1,5 +1,6 @@
 =========================================IN THIS COMMIT==========================================
-Merging replayer fixes.
+Cleaned up and tested unit properties.
+Added default values to VisualPrefs's variables.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?

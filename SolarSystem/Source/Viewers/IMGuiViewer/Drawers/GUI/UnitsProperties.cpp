@@ -1,7 +1,8 @@
 #include "UnitsProperties.h"
 
-#include "Source/Units/PhysicsUnits.h"
 #include <imgui/imgui.h>
+#include "Source/Units/PhysicsUnits.h"
+#include "Source/Viewers/IMGuiViewer/Drawers/Scene/Camera.h"
 
 namespace solar
 {
@@ -25,7 +26,7 @@ namespace solar
 			tempCol[0] = tempCol[1] = tempCol[2] = 0.0f;
 		}
 
-		void UnitsProperties::operator()(SimData & data)
+		void UnitsProperties::Draw(SimData & data, Camera & cam)
 		{
 			auto menuBarHeight = ImGui::GetFontSize() + ImGui::GetStyle().FramePadding.y * 2.0f;
 
@@ -60,7 +61,7 @@ namespace solar
 						ImGui::ColorButton(data[i].color, true); ImGui::NextColumn();
 						UnitColorPopUp(data, i);
 						ImGui::Selectable(data[i].name.c_str(), false, ImGuiSelectableFlags_SpanAllColumns);
-						UnitDetails(i);
+						UnitDetails(i, cam, data[i]);
 
 						ImGui::NextColumn();
 
@@ -90,16 +91,21 @@ namespace solar
 			}
 			ImGui::End();
 		}
-		void UnitsProperties::UnitDetails(const size_t &i)
+		void UnitsProperties::UnitDetails(const size_t &i, Camera& cam, const Unit& object)
 		{
 			if (ImGui::BeginPopupContextItem("UnitDetails"))
 			{
 				if (ImGui::Selectable("Set as frame of reference"))
 					frameOfRef = i + 1;
-				ImGui::Text("Edit values");
-				ImGui::Text("Focus");
-				ImGui::Text("Set as grid's frame of reference");
-				ImGui::Text("Other cool buttons");
+				if (ImGui::Selectable("Follow"))
+					cam.FollowObject(i);
+				if (ImGui::Selectable("Go to"))
+				{
+					//Zooms to fourth times the radius
+					auto viewDist = (object.pos - cam.CamPos()).Normalize() *object.radius*4.0;
+					cam.LookAt(object.pos - viewDist, object.pos, cam.UpDir());
+					cam.FollowObject(i);
+				}
 				ImGui::EndPopup();
 			}
 		}

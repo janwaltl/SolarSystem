@@ -61,7 +61,7 @@ namespace solar
 					ImGui::TextTooltipOnHover("Shows all simulated objects and their physical properties.");
 					ImGui::PopStyleColor();
 					if (buttons.unitsProps.selected)
-						unitsProps(data);
+						unitsProps.Draw(data, scene.GetActiveCam());
 					ImGui::SameLine();
 					ImGui::PushStyleColor(ImGuiCol_Button, ImVec4());
 					buttons.simControls.Draw("Simulation's Details");

@@ -42,10 +42,11 @@ namespace solar
 								CloseContextMenu();
 							}
 							ImGui::SameLine();
-							if (ImGui::SmallButton("Zoom to"))
+
+							auto radius = objects[i].radius;
+							//Only allow to go to objects that actually have a radius > 10m
+							if (radius > 10.0 * data.RatioOfDistTo(PhysUnits::meter) && ImGui::SmallButton("Go to"))
 							{
-								auto radius = objects[i].radius;
-								assert(radius > 1 * data.RatioOfDistTo(PhysUnits::meter));//Radius>1meter
 								auto& cam = scene.GetActiveCam();
 								//Zooms to fourth times the radius
 								auto viewDist = (objects[i].pos - cam.CamPos()).Normalize() *radius*4.0;

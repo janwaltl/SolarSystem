@@ -8,18 +8,17 @@ namespace solar
 {
 	class OMSAR;
 
+	class Camera;
 	namespace gui
 	{
 		//Window showing information about simulatedUnits.
-		//Also offers support for following a selected unit if OMSAR is passed
-		//	following = sets such offset to center selectedUnit
 		class UnitsProperties
 		{
 		public:
 			explicit UnitsProperties();
-			void operator()(SimData& data);
+			void Draw(SimData& data, Camera& cam);
 		private:
-			void UnitDetails(const size_t &i);
+			void UnitDetails(const size_t &i, Camera& cam, const Unit& object);
 			void UnitColorPopUp(solar::SimData & data, const size_t &i);
 			void ListHeader(solar::SimData & data);
 			void SetFrameOfRef(solar::SimData & data);
