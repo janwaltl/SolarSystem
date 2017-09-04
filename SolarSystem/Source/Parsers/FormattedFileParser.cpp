@@ -97,6 +97,7 @@ namespace solar
 		parse(ParseMass, "mass");
 		parse(ParseColor, "color");
 		parse(ParseName, "name");
+		parse(ParseRadius, "radius");
 
 		return unit;
 	}
@@ -153,7 +154,15 @@ namespace solar
 		if (!val.empty())
 			unit.mass = std::stod(val);
 	}
+	void FormattedFileParser::ParseRadius(Unit & unit, const std::string & val)
+	{
+		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt
 
+		if (!val.empty())
+			unit.radius = std::stod(val);
+		else
+			unit.radius = 1.0;
+	}
 	void FormattedFileParser::ParseColor(Unit & unit, const std::string & val)
 	{
 		//This function works with formatted text files whose format is documented in FileFormats/FormattedTextFile.txt

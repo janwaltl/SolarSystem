@@ -9,7 +9,7 @@ namespace solar
 	//Loads simulated data from formatted text files
 	//Outputed simData's values are NOT in SI units,
 	// - pos is in AU units, velocity in AU/Earth years and mass in multiples of Sun's mass
-	// - Default color is white and pos, mass, vel=0
+	// - Default color is white and pos=mass=vel=0, radius=1.0
 	//For detailed description of format, see documentation of examples included with binaries.
 	//Throws 'Exception' on any failure
 	class FormattedFileParser :public Parser
@@ -28,6 +28,7 @@ namespace solar
 		static void ParsePosition(Unit& unit, const std::string& val);
 		static void ParseVelocity(Unit& unit, const std::string& val);
 		static void ParseMass(Unit& unit, const std::string& val);
+		static void ParseRadius(Unit& unit, const std::string& val);
 		static void ParseColor(Unit& unit, const std::string& val);
 		static void ParseName(Unit& unit, const std::string& val);
 		const std::string inFileName, outFileName;

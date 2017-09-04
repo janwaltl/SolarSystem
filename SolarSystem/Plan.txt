@@ -1,11 +1,5 @@
 =========================================IN THIS COMMIT==========================================
-Fixes in context menu and OpeGL backend.
-Tweaks in graphs
-	- force autoscale, removed ranges
-	- got calculating system energy right for good.
-	- temporarely disabled object energy.
-		- exclude origin
-Fix: Now correct aspectRatio is passed to Camera classes.
+Implemented support for radius in FormattedFileParser as optional parameter.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?

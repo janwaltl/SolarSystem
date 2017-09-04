@@ -15,7 +15,8 @@ namespace solar
 		out << "  color<" << unit.color.x << " " << unit.color.y << " " << unit.color.z << " " << unit.color.w << ">\n";
 		out << "  position<" << unit.pos.x << " " << unit.pos.y << " " << unit.pos.z << ">\n";
 		out << "  velocity<" << unit.vel.x << " " << unit.vel.y << " " << unit.vel.z << ">\n";
-		out << "  mass<" << unit.mass << ">}\n";
+		out << "  mass<" << unit.mass << ">\n";
+		out << "  radius<" << unit.radius << ">}\n";
 
 		return out;
 	}
@@ -29,7 +30,9 @@ namespace solar
 		out << "  color<" << unit.color.x << " " << unit.color.y << " " << unit.color.z << " " << unit.color.w << ">\n";
 		out << "  position<" << unit.pos.x*distRatio << " " << unit.pos.y*distRatio << " " << unit.pos.z*distRatio << ">\n";
 		out << "  velocity<" << unit.vel.x *velRatio << " " << unit.vel.y*velRatio << " " << unit.vel.z*velRatio << ">\n";
-		out << "  mass<" << unit.mass*massRatio << ">}\n";
+		out << "  mass<" << unit.mass*massRatio << ">\n";
+		out << "  radius<" << unit.radius*distRatio << ">}\n";
+
 	}
 }
 #endif
