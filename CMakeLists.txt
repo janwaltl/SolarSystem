@@ -1,6 +1,11 @@
 project(SolarSystem)
 
 cmake_minimum_required(VERSION 3.5)
+
+#set output 
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 #only compile the library
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
@@ -16,3 +21,11 @@ file(GLOB_RECURSE HEADER_FILES "SolarSystem/*.h")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -g -O3")
 add_executable (SolarSystem ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries(SolarSystem glfw)
+
+add_custom_command(TARGET SolarSystem POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/SolarSystem/Data ${CMAKE_BINARY_DIR}/bin)
+add_custom_command(TARGET SolarSystem POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy
+                       ${CMAKE_SOURCE_DIR}/Dokumentace/main.pdf ${CMAKE_BINARY_DIR}/bin/ZimniDokumentace.pdf)
+
