@@ -10,9 +10,8 @@ namespace solar
 		{
 			constexpr size_t gridRes = 100;
 			constexpr size_t smallToBig = 10;
-			constexpr float aspectRatio = 1200 / 700.0;
 		}
-		SceneDrawer::SceneDrawer(const SimData & data) :
+		SceneDrawer::SceneDrawer(const SimData & data, double aspectRatio) :
 			//Near=1 meter, Far=100 light years
 			camera {PerspectiveCamera(90, aspectRatio, 1.0 / data.RatioOfDistTo(PhysUnits::meter), 100.0 / data.RatioOfDistTo(PhysUnits::lightYear)),
 					ScaledOrthoCamera(aspectRatio, 1.0f,  1.0 / data.RatioOfDistTo(PhysUnits::kilometer), 100.0 / data.RatioOfDistTo(PhysUnits::AU))},

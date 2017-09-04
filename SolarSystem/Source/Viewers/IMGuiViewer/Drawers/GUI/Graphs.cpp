@@ -11,18 +11,21 @@ namespace solar
 		const char* newGraphPopUp = "NewGraph##PopUp";
 		const size_t noneSelected = SIZE_MAX;
 		const float comboOffset = 200.0f;
+
+		const Unit origin {Vec3d(),Vec3d(),1.0,"<Origin>"};
 		//Enums for individual ImGui's combos
 		namespace plottedQuantity
 		{
 			enum : int
 			{
 				systemEnergy = 0,
-				objectEnergy = 1,
-				distance = 2,
-				speed = 3,
+				//objectEnergy = 1,
+				distance = 1,
+				speed = 2,
 			};
 		}
-		const char* plottedQunatityStr = "Energy of the system\0Energy(Kin+Potencial)\0Distance\0Speed";
+		const char* plottedQunatityStr = "System's Energy\0Distance\0Speed";
+		//const char* plottedQunatityStr = "System's Energy\0 Object's Energy\0Distance\0Speed";
 		namespace energyUnits
 		{
 			enum : int
@@ -73,7 +76,7 @@ namespace solar
 		bool UnitNameGetterOrigin(void * data, int index, const char ** result)
 		{
 			if (index == 0)
-				*result = "<Origin>";
+				*result = origin.name.c_str();
 			else
 			{
 				auto& simData = *reinterpret_cast<SimData*>(data);
@@ -84,11 +87,15 @@ namespace solar
 		double ComputeSystemEnergy(const SimData& data)
 		{
 			double potential = 0.0, kinetic = 0.0;
+
 			for (size_t left = 0; left < data->size(); ++left)
 			{
-				kinetic += 0.5*data[left].mass *data[left].vel.Length();
+				kinetic += 0.5*data[left].mass *data[left].vel.LengthSq();
+				//Convert to same units as data
+				const auto grav = G<double> / pow(data.RatioOfDistTo(PhysUnits::meter), 3) * data.RatioOfMassTo(PhysUnits::kilogram) * pow(data.RatioOfTimeTo(PhysUnits::second), 2);
+
 				for (size_t right = left + 1; right < data->size(); ++right)
-					potential += -G<double>*data[left].mass*data[right].mass / (data[right].pos - data[left].pos).LengthSq();
+					potential += -grav*data[left].mass*data[right].mass / (data[right].pos - data[left].pos).Length();
 			}
 			return potential + kinetic;
 		};
@@ -103,13 +110,15 @@ namespace solar
 	void gui::Graphs::ResetTempGraph()
 	{
 		tempGraph.combo.plottedQuantity = plottedQuantity::systemEnergy;
+		tempGraph.combo.distUnits = distUnits::AU;
 		tempGraph.combo.energyUnits = energyUnits::joules;
+		tempGraph.combo.timeUnits = timeUnits::secs;
 		tempGraph.combo.refFrame = 0;
 		tempGraph.combo.target = 0;
 		tempGraph.combo.xAxis = xAxis::realTime;
 		tempGraph.combo.xAxisUnits = timeUnits::secs;
-		tempGraph.xRange[0] = tempGraph.yRange[0] = -1.0f;
-		tempGraph.xRange[1] = tempGraph.yRange[1] = +1.0f;
+		//tempGraph.xRange[0] = tempGraph.yRange[0] = 0.0f;
+		//tempGraph.xRange[1] = tempGraph.yRange[1] = +1.0f;
 		strcpy(tempGraph.name, "New graph");
 	}
 	void gui::Graphs::operator()(SimData & data, const stepTime_t& realTime, const simulatedTime& simTime)
@@ -220,19 +229,23 @@ namespace solar
 		{
 			ImGui::AlignFirstTextHeightToWidgets();
 			ImGui::PushItemWidth(215);
-			ImGui::Text("Plot"); ImGui::SameLine(comboOffset);
+			ImGui::Text("Plot"); ImGui::SameLine();
+			ImGui::TextColored(ImVec4(0.2f, 0.2f, 0.2f, 1.0f), "(?)");
+			if (ImGui::IsItemHovered())
+				ImGui::TextTooltipOnHover("Energies mean the difference between current\n and intial kinetic + potential energy of the system/object.\n"
+										  "This quantity should be zero, non zero values measure numerical errors.");
+			ImGui::SameLine(comboOffset);
 			ImGui::Combo("##Quantity", &tempGraph.combo.plottedQuantity, plottedQunatityStr);
 			switch (tempGraph.combo.plottedQuantity)
 			{
 			case plottedQuantity::systemEnergy:
-				//ImGui::Text("Tracks change of energy, which should be zero -> Shows error of simulation");
 				ChooseEnergyUnits(data);
 				break;
-			case plottedQuantity::objectEnergy:
-				ChooseTarget(data);
-				ChooseReferenceFrame(data);
-				ChooseEnergyUnits(data);
-				break;
+			//case plottedQuantity::objectEnergy:
+			//	ChooseTarget(data);
+			//	ChooseReferenceFrame(data);
+			//	ChooseEnergyUnits(data);
+			//	break;
 			case plottedQuantity::distance:
 				ChooseTarget(data);
 				ChooseReferenceFrame(data);
@@ -250,8 +263,8 @@ namespace solar
 			ImGui::Text("Graph's name");
 			ImGui::SameLine(comboOffset);
 			ImGui::InputText("##NameOfGraph", tempGraph.name, sizeof(tempGraph.name) / sizeof(tempGraph.name[0]));
-			ImGui::Text("XRange"); ImGui::SameLine(comboOffset); ImGui::InputFloat2("##XRange", tempGraph.xRange);
-			ImGui::Text("YRange"); ImGui::SameLine(comboOffset); ImGui::InputFloat2("##YRange", tempGraph.yRange);
+			//ImGui::Text("XRange"); ImGui::SameLine(comboOffset); ImGui::InputFloat2("##XRange", tempGraph.xRange);
+			//ImGui::Text("YRange"); ImGui::SameLine(comboOffset); ImGui::InputFloat2("##YRange", tempGraph.yRange);
 
 			if (ImGui::Button("Create"))
 			{
@@ -388,75 +401,80 @@ namespace solar
 		std::string xLabel, yLabel;
 
 		newGraph.name = tempGraph.name;
-		newGraph.autoScale = {false,false};
+		newGraph.autoScale = {true,true};
 		switch (tempGraph.combo.plottedQuantity)//Create sampler for chosen quantity
 		{
 		case plottedQuantity::systemEnergy:
 		{
-			yLabel = "Energy of system";
+			yLabel = "delta Energy of the system";
+			//IMPROVE add relative error in the energy
 			auto currentEnergy = ComputeSystemEnergy(data);
 			newGraph.ySampler = [currentEnergy, units = tempGraph.units.energy](const SimData& data) ->float {
-				return static_cast<float>((ComputeSystemEnergy(data) - currentEnergy)*units); };
+				auto energy = ComputeSystemEnergy(data);
+				return static_cast<float>((energy - currentEnergy)*units); };
 			break;
 		}
-		case plottedQuantity::objectEnergy:
-			yLabel = data[tempGraph.combo.target].name + "'s energy";
-			//TODO implement
-			newGraph.ySampler = [units = tempGraph.units.energy](const SimData& data)->float { return static_cast<float>(1.0*units); };
-			break;
+		//case plottedQuantity::objectEnergy:
+		//	yLabel = data[tempGraph.combo.target].name + "'s energy";
+		//	//TODO implement
+		//	newGraph.ySampler = [target = tempGraph.combo.target, ref = tempGraph.combo.refFrame, units = tempGraph.units.energy](const SimData& data)->float {
+		//		return static_cast<float>(1.0*units); };
+		//	break;
 		case plottedQuantity::distance:
-			yLabel = data[tempGraph.combo.target].name + "-" + data[tempGraph.combo.refFrame].name + " distance";
+			yLabel = data[tempGraph.combo.target].name + "-" + (tempGraph.combo.refFrame == 0 ? origin : data[tempGraph.combo.refFrame - 1]).name + " distance";
 			newGraph.ySampler = [target = tempGraph.combo.target, ref = tempGraph.combo.refFrame, units = tempGraph.units.dist](const SimData& data)->float {
-				return static_cast<float>((data[target].pos - data[ref].pos).Length()*units); };
+				auto& refObject = ref == 0 ? origin : data[ref - 1];
+				return static_cast<float>((data[target].pos - refObject.pos).Length()*units); };
 			break;
 		case plottedQuantity::speed:
 			yLabel = "Speed of " + data[tempGraph.combo.target].name + " w.r.t." + data[tempGraph.combo.refFrame].name;
 
 			newGraph.ySampler = [target = tempGraph.combo.target, ref = tempGraph.combo.refFrame, distUnits = tempGraph.units.dist, timeUnits = tempGraph.units.time](const SimData& data)->float {
-				return static_cast<float>((data[target].vel - data[ref].vel).Length()*distUnits / timeUnits); };
+				auto& refObject = ref == 0 ? origin : data[ref - 1];
+				return static_cast<float>((data[target].vel - refObject.vel).Length()*distUnits / timeUnits); };
 			break;
 		}
 		switch (tempGraph.combo.xAxis)
 		{
 		case xAxis::realTime:
-			{
-				xLabel = "RealTime";
-				auto step = stepTime_t(static_cast<stepTime_t::rep>(tempGraph.units.x*stepTime_t::period::den));
-				newGraph.sampleCond = [counter = realTime, step = step](const stepTime_t& realTime, const simulatedTime&) mutable {
-					if (realTime - counter > step)
-					{
-						counter = realTime;
-						return true;
-					}
-					else
-						return false; };
-				newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t& realTime, const simulatedTime&)->float {
-					return static_cast<float>(realTime.count() / float(stepTime_t::period::den) * units); };//Convert to seconds, then to desired units
-				break;
-			}
+		{
+			xLabel = "RealTime";
+			auto step = stepTime_t(static_cast<stepTime_t::rep>(tempGraph.units.x*stepTime_t::period::den));
+			newGraph.sampleCond = [counter = realTime, step = step](const stepTime_t& realTime, const simulatedTime&) mutable {
+				if (realTime - counter > step)
+				{
+					counter = realTime;
+					return true;
+				}
+				else
+					return false; };
+			newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t& realTime, const simulatedTime&)->float {
+				return static_cast<float>(realTime.count() / float(stepTime_t::period::den) * units); };//Convert to seconds, then to desired units
+			break;
+		}
 		case xAxis::simTIme:
-			{
-				xLabel = "SimTime";
-				simulatedTime stepS(1.0*tempGraph.units.x);
-				newGraph.sampleCond = [counter = simTime, step = stepS](const stepTime_t&, const simulatedTime& simTime) mutable {
-					if (simTime - counter > step)
-					{
-						counter = simTime;
-						return true;
-					}
-					else
-						return false; };
-				newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t&, const simulatedTime& simTime)->float {
-					return static_cast<float>(simTime.seconds.count()*units); };//Convert to seconds, then to desired units
-				break;
-			}
+		{
+			xLabel = "SimTime";
+			simulatedTime stepS(1.0*tempGraph.units.x);
+			newGraph.sampleCond = [counter = simTime, step = stepS](const stepTime_t&, const simulatedTime& simTime) mutable {
+				if (simTime - counter > step)
+				{
+					counter = simTime;
+					return true;
+				}
+				else
+					return false; };
+			newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t&, const simulatedTime& simTime)->float {
+				return static_cast<float>(simTime.seconds.count()*units); };//Convert to seconds, then to desired units
+			break;
+		}
 		}
 
 		xLabel = xLabel + "[" + tempGraph.unitLabels.x + "]";
 		yLabel = yLabel + "[" + tempGraph.unitLabels.y + "]";
-		ImVec2 xRange {tempGraph.xRange[0],tempGraph.xRange[1]};
-		ImVec2 yRange {tempGraph.yRange[0],tempGraph.yRange[1]};
-		newGraph.graph = std::make_unique<ImGuiE::LineGraph>(ImVec2(150, 150), xRange, yRange, 1000, xLabel, yLabel);
+		//ImVec2 xRange {tempGraph.xRange[0],tempGraph.xRange[1]};
+		//ImVec2 yRange {tempGraph.yRange[0],tempGraph.yRange[1]};
+		newGraph.graph = std::make_unique<ImGuiE::LineGraph>(ImVec2(150, 150), 1000, xLabel, yLabel);
 		newGraph.active = true;
 		newGraph.separateWindow = false;
 		graphs.emplace_back(std::move(newGraph));

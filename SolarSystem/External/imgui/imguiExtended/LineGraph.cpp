@@ -86,10 +86,6 @@ namespace ImGuiE
 				yMin = std::min(yMin, p.y);
 				yMax = std::max(yMax, p.y);
 			}
-			xMin *= xMin > 0 ? 1.1f : 0.9f;
-			yMin *= yMin > 0 ? 1.1f : 0.9f;
-			xMax *= xMax > 0 ? 1.1f : 0.9f;
-			yMax *= yMax > 0 ? 1.1f : 0.9f;
 
 			if (xMax == xMin)//Fine because there were no arithemic ops, just assingments
 			{
@@ -101,6 +97,11 @@ namespace ImGuiE
 				yMax += 0.5f;
 				yMin -= 0.5f;
 			}
+			//Little bit expand the borders
+			xMin *= xMin > 0 ? 0.9f : 1.1f;
+			yMin *= yMin > 0 ? 0.9f : 1.1f;
+			xMax *= xMax > 0 ? 1.1f : 0.9f;
+			yMax *= yMax > 0 ? 1.1f : 0.9f;
 			if (changeX)
 			{
 				ranges.xMin = xMin;

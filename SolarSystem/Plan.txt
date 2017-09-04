@@ -1,6 +1,11 @@
 =========================================IN THIS COMMIT==========================================
-Cleaned up and tested unit properties.
-Added default values to VisualPrefs's variables.
+Fixes in context menu and OpeGL backend.
+Tweaks in graphs
+	- force autoscale, removed ranges
+	- got calculating system energy right for good.
+	- temporarely disabled object energy.
+		- exclude origin
+Fix: Now correct aspectRatio is passed to Camera classes.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?
@@ -19,17 +24,10 @@ Next:
 TODOs/IDEAS:
 	Add Inverses of matrices in UBO in camera class if needed.
 	Add ring around selected planets and on hover.
-4.	Graphs - object's energy is not implemented 
-	Graphs tweaks
-5.		- better grid system, this one looks weird when zooming
-		- Scientific notation - labels and input ranges, checkbox for autoscale 
-6.		- maybe preview on hover over the list instead of side window
-		- csv export wouldn't be too hard
-		- separate window resizing - part of whole UI resize thing
+
 	Grid
 		- could make fadeRange smoother
 		- pinheads base could change smoothly
-8.		- apply fadeRange to pinhead
 9. Add radius support to FormattedFileParser
 10. Make sure Replayer is working, atleast not crashing and that UI is working
 	- does not work, there's no support for PhysUnits

@@ -45,7 +45,7 @@ namespace solar
 
 							auto radius = objects[i].radius;
 							//Only allow to go to objects that actually have a radius > 10m
-							if (radius > 10.0 * data.RatioOfDistTo(PhysUnits::meter) && ImGui::SmallButton("Go to"))
+							if (radius > 10.0 / data.RatioOfDistTo(PhysUnits::meter) && ImGui::SmallButton("Go to"))
 							{
 								auto& cam = scene.GetActiveCam();
 								//Zooms to fourth times the radius

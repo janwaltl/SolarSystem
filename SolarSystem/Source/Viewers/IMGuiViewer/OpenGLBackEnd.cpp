@@ -5,7 +5,7 @@
 #include "Source/Common/Exception.h"
 #include "Source/Math/Math.h"
 #include "OpenGL/Error.h"
-
+#include <algorithm>
 
 namespace solar
 {
@@ -23,7 +23,8 @@ namespace solar
 
 	//Following usage of GLFW library is  based on their tutorial
 	// at http://www.glfw.org/docs/latest/quick.html .
-	OpenGLBackend::OpenGLBackend(size_t width, size_t height, const std::string & title)
+	OpenGLBackend::OpenGLBackend(size_t width, size_t height, const std::string & title) :
+		w(width), h(height)
 	{
 		if (glfwInit() == GL_FALSE)
 			throw Exception("Cannot initialize GLFW library.");
@@ -63,38 +64,35 @@ namespace solar
 		glClearColor((GLclampf)bgColor.x, (GLclampf)bgColor.y, (GLclampf)bgColor.z, (GLclampf)bgColor.w);
 		glClearDepth(0.0f);
 
-		CreateFBO(width, height);
+		CreateFBO();
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glfwSwapInterval(0);
 	}
 
-	void OpenGLBackend::CreateFBO(const size_t &width, const size_t &height)
+	void OpenGLBackend::CreateFBO()
 	{
-		auto err = openGL::CheckForError();
+		GLint colMaxSamples = 0, depthMaxSamples = 0;
+		glGetIntegerv(GL_MAX_DEPTH_TEXTURE_SAMPLES, &depthMaxSamples);
+		glGetIntegerv(GL_MAX_COLOR_TEXTURE_SAMPLES, &colMaxSamples);
+		if (samples <= 0 || samples > colMaxSamples || samples > depthMaxSamples)
+			throw Exception("This machine does not support this amount(" + std::to_string(samples) + ") of samples. Maximum is " + std::to_string(std::min(colMaxSamples, depthMaxSamples)) + '.' +
+							"Amount can be changed in file OpenGLBackEnd.cpp");
+
 		glGenTextures(1, &FBOColTex);
-		err = openGL::CheckForError();
-		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, FBOColTex);
-		err = openGL::CheckForError();		
-		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGBA, width, height, GL_TRUE);
-		err = openGL::CheckForError();
-		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
-		err = openGL::CheckForError();
 		glGenTextures(1, &FBODepthTex);
-		err = openGL::CheckForError();
-		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, FBODepthTex);
-		err = openGL::CheckForError();
-		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_DEPTH_COMPONENT32F, width, height, GL_TRUE);
-		err = openGL::CheckForError();
-		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
-		err = openGL::CheckForError();
 		glGenFramebuffers(1, &FBO);
-		err = openGL::CheckForError();
+
+		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, FBOColTex);
+		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGBA, w, h, GL_TRUE);
+		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, FBODepthTex);
+		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_DEPTH_COMPONENT32F, w, h, GL_TRUE);
+		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
 		glBindFramebuffer(GL_FRAMEBUFFER, FBO);
-		err = openGL::CheckForError();
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, FBOColTex, 0);
-		err = openGL::CheckForError();
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D_MULTISAMPLE, FBODepthTex, 0);
+
 		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		if (status != GL_FRAMEBUFFER_COMPLETE)
 		{
@@ -152,10 +150,7 @@ namespace solar
 	{
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, FBO);
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // default FBO
-		glBlitFramebuffer(
-			0, 0, 1200, 700,
-			0, 0, 1200, 700,
-			GL_COLOR_BUFFER_BIT, GL_LINEAR);
+		glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_LINEAR);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 

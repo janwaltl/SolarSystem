@@ -8,7 +8,7 @@ namespace solar
 	{}
 	void ReplayerViewer::Prepare()
 	{
-		scene = std::make_unique<drawers::SceneDrawer>(*data);
+		scene = std::make_unique<drawers::SceneDrawer>(*data,w/double(h));
 		GUI = std::make_unique<drawers::ReplayGUIDrawer>(replayFileName, *data);
 
 	}

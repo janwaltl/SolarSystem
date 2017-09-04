@@ -26,7 +26,7 @@ namespace solar
 			};
 			using plane = GridDrawer::plane;
 			//Initializes all drawers and sets both cameras, sets perspective as active one by default
-			SceneDrawer(const SimData& data);
+			SceneDrawer(const SimData& data, double aspectRatio);
 			void Draw(const SimData& data);
 			Camera& GetActiveCam();
 			const Camera& GetActiveCam() const;

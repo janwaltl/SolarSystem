@@ -66,7 +66,7 @@ namespace solar
 				{
 					int plottedQuantity;
 					int target;
-					int refFrame;
+					int refFrame;//0 for origin, x for data[x-1]
 					int xAxis;
 					int xAxisUnits;
 					int energyUnits;
@@ -85,7 +85,7 @@ namespace solar
 					std::string x, y;
 				}unitLabels;
 				char name[200];//Buffer for graph's name
-				float xRange[2], yRange[2];//Ranges, [0]=Min, [1]=Max
+				//float xRange[2], yRange[2];//Ranges, [0]=Min, [1]=Max
 			} tempGraph;
 		};
 

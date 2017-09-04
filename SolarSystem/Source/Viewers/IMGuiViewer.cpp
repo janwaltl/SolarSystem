@@ -12,9 +12,9 @@ namespace solar
 	{}
 
 	void IMGuiViewer::Prepare()
-	{	
+	{
 		GUI = std::make_unique<drawers::GUIDrawer>(*data);
-		scene = std::make_unique<drawers::SceneDrawer>(*data);
+		scene = std::make_unique<drawers::SceneDrawer>(*data, w / double(h));
 	}
 
 	void IMGuiViewer::operator()()

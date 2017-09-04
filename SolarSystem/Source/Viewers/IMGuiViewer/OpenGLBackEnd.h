@@ -27,11 +27,13 @@ namespace solar
 		//Callback function to be called on any GLFW error
 		static void ErrorCallback(int err, const char* description);
 
-		void CreateFBO(const size_t &width, const size_t &height);
+		void CreateFBO();
 		void DeleteFBO();
 		void CheckVersionAndExtensions();
 		unsigned int FBO, FBOColTex, FBODepthTex;
 		GLFWwindow* win;
+
+		size_t w, h;
 	};
 }
 
