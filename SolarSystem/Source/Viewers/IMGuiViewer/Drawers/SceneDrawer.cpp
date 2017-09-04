@@ -1,6 +1,7 @@
 #include "SceneDrawer.h"
 #include "Source/Units/Unit.h"
-#include <gl/glew.h>
+
+#include <glad/glad.h>
 namespace solar
 {
 	namespace drawers

@@ -26,7 +26,7 @@ namespace solar
 			void SetMassUnits(solar::SimData & data);
 			void SetLenUnits(solar::SimData & data);
 			void SetTimeUnits(solar::SimData & data);
-			static bool UnitsProperties::UnitNameGetter(void * data, int index, const char ** result);
+			static bool UnitNameGetter(void * data, int index, const char ** result);
 			int frameOfRef;//0=center, 1+ index of Unit in SimData counting from 1
 			int distPosCombo;//Distance=0, Position=1
 			int speedVelCombo;//Speed=0, Velocity=1

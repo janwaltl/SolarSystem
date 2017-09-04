@@ -30,7 +30,7 @@ namespace solar
 		{
 		public:
 			//using Exception::Exception;
-			GLError::GLError(errors err) :Exception(TranslateError(err)), error(err) {}
+			GLError(errors err) :Exception(TranslateError(err)), error(err) {}
 			errors GetErrType() { return error; }
 		private:
 			errors error;

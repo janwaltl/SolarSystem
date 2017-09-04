@@ -132,12 +132,12 @@ namespace solar
 			break;
 		}
 		const std::string vSource = R"(
-			#version 330
+			#version 330 core
 			layout(location=0) in vec2 position;
 			uniform vec3 offset;
 			uniform float scale;
 			
-			std140 uniform CameraMatrices
+			layout(std140) uniform CameraMatrices
 			{
 					mat4 projection;
 					mat4 view;
@@ -163,7 +163,7 @@ namespace solar
 			}
 			)";
 		const std::string fSource = R"(
-			#version 140
+			#version 330 core
 			out vec4 color;
 
 			uniform vec4 col;

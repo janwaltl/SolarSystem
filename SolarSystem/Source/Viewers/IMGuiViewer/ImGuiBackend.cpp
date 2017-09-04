@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 
 #include <imgui/imgui.h>
+#include <limits>
 #include "OpenGL/Shader.h"
 #include "OpenGL/Error.h"
 namespace solar
@@ -157,9 +158,7 @@ namespace solar
 	void IMGuiBackend::LoadShader()
 	{
 		const std::string vertSource = R"(
-			#version 140
-			//Might help for lower OpenGL versions
-			#extension GL_ARB_explicit_attrib_location : require
+			#version 330 core
 
 			layout(location=0)in vec2 pos;
 			layout(location=1)in vec4 color;
@@ -178,7 +177,7 @@ namespace solar
 			})";
 
 		const std::string fragSource = R"(
-			#version 140
+			#version 330 core
 
 			in vec2 fragUV;
 			in vec4 fragCol;

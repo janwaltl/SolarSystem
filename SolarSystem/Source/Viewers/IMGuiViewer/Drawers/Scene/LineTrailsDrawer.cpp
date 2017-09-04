@@ -98,11 +98,10 @@ namespace solar
 		void LineTrailsDrawer::CreateShader(const Camera& cam)
 		{
 			const std::string vSource = R"(
-			#version 140
-			#extension GL_ARB_explicit_attrib_location : require
+			#version 330 core
 			layout(location = 0) in vec3 position;
 
-			std140 uniform CameraMatrices
+			layout (std140) uniform CameraMatrices
 			{
 					mat4 projection;
 					mat4 view;
@@ -117,7 +116,7 @@ namespace solar
 				gl_Position = cam.projection* cam.view * vec4(position, 1.0);
 			})";
 			const std::string fSource = R"(
-			#version 140
+			#version 330 core
 
 			out vec4 color;
 

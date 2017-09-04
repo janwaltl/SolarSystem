@@ -73,7 +73,7 @@ namespace solar
 		}
 		Vec4<T>& operator/=(T val)
 		{
-			if (abs(val) < epsilon<T>)
+			if (std::abs(val) < epsilon<T>)
 				throw Exception("Cannot divide by zero.");
 			x /= val;
 			y /= val;
@@ -107,7 +107,7 @@ namespace solar
 		}
 		Vec4<T>& operator/=(const Vec4<T>& other)
 		{
-			if (abs(other.x) < epsilon<T> || abs(other.y) < epsilon<T> || abs(other.z) < epsilon<T> || abs(other.w) < epsilon<T>)
+			if (std::abs(other.x) < epsilon<T> || std::abs(other.y) < epsilon<T> || std::abs(other.z) < epsilon<T> || std::abs(other.w) < epsilon<T>)
 				throw Exception("Cannot divide by a vector containing zero element.");
 			x /= other.x;
 			y /= other.y;

@@ -18,7 +18,7 @@ namespace solar
 		constexpr int winPosY = 20;
 		//Background color
 		constexpr Vec4d bgColor(0 / 255.0, 0 / 255.0, 0 / 255.0, 1.0);
-		constexpr size_t samples = 4;
+		constexpr size_t samples = 1;
 	}
 
 	//Following usage of GLFW library is  based on their tutorial
@@ -32,10 +32,11 @@ namespace solar
 		// Uses OpenGL 1.0 to atleast create contex
 		// will automatically use the newest available or throw on some error
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		//Do not allow rezising
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 		glfwWindowHint(GLFW_SAMPLES, samples);//Anti-aliasing
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		win = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr); // create actual window
 		if (win == nullptr) // if that fails
 			throw Exception("Unable to create Window, reason: " + error);
@@ -70,18 +71,29 @@ namespace solar
 
 	void OpenGLBackend::CreateFBO(const size_t &width, const size_t &height)
 	{
+		auto err = openGL::CheckForError();
 		glGenTextures(1, &FBOColTex);
+		err = openGL::CheckForError();
 		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, FBOColTex);
+		err = openGL::CheckForError();		
 		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGBA, width, height, GL_TRUE);
+		err = openGL::CheckForError();
 		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+		err = openGL::CheckForError();
 		glGenTextures(1, &FBODepthTex);
+		err = openGL::CheckForError();
 		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, FBODepthTex);
+		err = openGL::CheckForError();
 		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_DEPTH_COMPONENT32F, width, height, GL_TRUE);
+		err = openGL::CheckForError();
 		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
-
+		err = openGL::CheckForError();
 		glGenFramebuffers(1, &FBO);
+		err = openGL::CheckForError();
 		glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+		err = openGL::CheckForError();
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, FBOColTex, 0);
+		err = openGL::CheckForError();
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D_MULTISAMPLE, FBODepthTex, 0);
 		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		if (status != GL_FRAMEBUFFER_COMPLETE)

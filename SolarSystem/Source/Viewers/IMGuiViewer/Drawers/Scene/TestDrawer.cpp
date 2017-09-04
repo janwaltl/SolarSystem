@@ -114,12 +114,10 @@ void solar::drawers::TestDrawer::Draw(const SimData& data)
 void solar::drawers::TestDrawer::CreateShader(const Camera & cam)
 {
 	const std::string vSource = R"(
-			#version 140
-			#extension GL_ARB_explicit_attrib_location : require
-			//Vertices of a cube
+			#version 330 core
 			layout(location=0) in vec3 position;
 
-			std140 uniform CameraMatrices
+			layout (std140) uniform CameraMatrices
 			{
 					mat4 projection;
 					mat4 view;
@@ -138,7 +136,7 @@ void solar::drawers::TestDrawer::CreateShader(const Camera & cam)
 				gl_Position=  cam.projection  *cam.view*vec4(scale*position+offset, 1.0);
 			})";
 	const std::string fSource = R"(
-			#version 140
+			#version 330 core
 			out vec4 color;
 
 			uniform vec4 col;

@@ -1,6 +1,8 @@
 #ifndef OPENGL_CIRCLE_BUFFER_HEADER
 #define OPENGL_CIRCLE_BUFFER_HEADER
 
+#include <cstddef>
+
 namespace solar
 {
 	namespace openGL

@@ -110,11 +110,11 @@ namespace solar
 		maxPos = maxMass = maxVel = std::numeric_limits<double>::min();
 		for (const auto& unit : units)
 		{
-			maxPos = std::max(maxPos, abs(unit.pos.x));
-			maxPos = std::max(maxPos, abs(unit.pos.y));
-			maxVel = std::max(maxVel, abs(unit.vel.x));
-			maxVel = std::max(maxVel, abs(unit.vel.y));
-			maxMass = std::max(maxMass, abs(unit.mass));
+			maxPos = std::max(maxPos, std::abs(unit.pos.x));
+			maxVel = std::max(maxVel, std::abs(unit.vel.x));
+			maxPos = std::max(maxPos, std::abs(unit.pos.y));
+			maxVel = std::max(maxVel, std::abs(unit.vel.y));
+			maxMass = std::max(maxMass, std::abs(unit.mass));
 		}
 		ConvertTo(physUnits.mass*maxMass, physUnits.dist*maxPos, physUnits.time* maxPos / maxVel);
 	}

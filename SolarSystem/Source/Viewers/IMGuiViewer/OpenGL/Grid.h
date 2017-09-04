@@ -2,6 +2,7 @@
 #define OPENGL_GRID_4242351870_HEADER
 
 #include <cstdint>
+#include <cstddef>
 namespace solar
 {
 	namespace openGL

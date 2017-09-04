@@ -6,6 +6,7 @@
 #include "SceneDrawer.h"
 
 #include <GLFW/glfw3.h>
+#include <stdio.h>
 namespace solar
 {
 	namespace drawers
@@ -326,7 +327,7 @@ namespace solar
 
 			ImGui::SameLine(gridPos); ImGui::Text("%.5g / %.5g %s", gridSize, gridSize*scene.GetGrid().SmallToBig(), units.c_str());
 			char buffer[255];
-			sprintf_s(buffer, "%f / %f %s", gridSize, gridSize*scene.GetGrid().SmallToBig(), units.c_str());
+			snprintf(buffer, 255, "%f / %f %s", gridSize, gridSize*scene.GetGrid().SmallToBig(), units.c_str());
 			ImGui::TextTooltipOnHover(buffer);
 			offsets.grid = ImGui::GetItemRectSize().x;
 		}

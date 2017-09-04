@@ -17,7 +17,8 @@ int main(int argc, char * argv[])
 		catch (const std::exception& e)
 		{
 			std::cout << "\n\nFollowing exception has been thrown:\n" << e.what() << "\n\n";
-			system("PAUSE");
+			std::cin.get();
+			std::cin.get();
 		}
 	}
 	catch (...)

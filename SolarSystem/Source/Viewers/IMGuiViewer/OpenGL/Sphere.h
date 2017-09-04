@@ -1,7 +1,7 @@
 #ifndef OPENGL_SPHERE_234724901641_HEADER
 #define OPENGL_SPHERE_234724901641_HEADER
 
-
+#include <cstddef>
 namespace solar
 {
 	namespace openGL

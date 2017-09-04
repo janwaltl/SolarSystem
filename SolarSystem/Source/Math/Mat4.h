@@ -47,7 +47,7 @@ namespace solar
 		}
 		Mat4<T>& operator/=(T val)
 		{
-			if (abs(val) < epsilon<T>)
+			if (std::abs(val) < epsilon<T>)
 				throw Exception("Cannot divide by zero.");
 			for (int i = 0; i < 16; ++i)
 				e[i] /= val;
@@ -65,7 +65,6 @@ namespace solar
 		{
 			for (int i = 0; i < 16; ++i)
 				e[i] += other.e[i];
-			type = mType::unknown;
 			return *this;
 		}
 		Mat4<T>& operator*=(const Mat4<T>& other)
@@ -123,7 +122,7 @@ namespace solar
 	{
 		Mat4<T> res;
 		T det = Determinant(m);
-		if (abs(det) <= epsilon<T>)
+		if (std::abs(det) <= epsilon<T>)
 			throw std::runtime_error("Cannot invert singular matrix");
 		
 		res[0] = m[6] * m[11] * m[13] - m[7] * m[10] * m[13] + m[7] * m[9] * m[14] - m[5] * m[11] * m[14] - m[6] * m[9] * m[15] + m[5] * m[10] * m[15];

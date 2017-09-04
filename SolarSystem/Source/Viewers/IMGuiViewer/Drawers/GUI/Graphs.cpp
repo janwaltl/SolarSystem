@@ -3,7 +3,7 @@
 #include <imgui/imguiExtended.h>
 
 #include <sstream>
-
+#include <cstring>
 namespace solar
 {
 	namespace
@@ -110,7 +110,7 @@ namespace solar
 		tempGraph.combo.xAxisUnits = timeUnits::secs;
 		tempGraph.xRange[0] = tempGraph.yRange[0] = -1.0f;
 		tempGraph.xRange[1] = tempGraph.yRange[1] = +1.0f;
-		strcpy_s(tempGraph.name, "New graph");
+		strcpy(tempGraph.name, "New graph");
 	}
 	void gui::Graphs::operator()(SimData & data, const stepTime_t& realTime, const simulatedTime& simTime)
 	{
@@ -419,32 +419,37 @@ namespace solar
 		switch (tempGraph.combo.xAxis)
 		{
 		case xAxis::realTime:
-			xLabel = "RealTime";
-			auto step = stepTime_t(static_cast<stepTime_t::rep>(tempGraph.units.x*stepTime_t::period::den));
-			newGraph.sampleCond = [counter = realTime, step = step](const stepTime_t& realTime, const simulatedTime&) mutable {
-				if (realTime - counter > step)
-				{
-					counter = realTime;
-					return true;
-				}
-				else
-					return false; };
-			newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t& realTime, const simulatedTime&)->float {
-				return static_cast<float>(realTime.count() / float(stepTime_t::period::den) * units); };//Convert to seconds, then to desired units
-			break;
+			{
+				xLabel = "RealTime";
+				auto step = stepTime_t(static_cast<stepTime_t::rep>(tempGraph.units.x*stepTime_t::period::den));
+				newGraph.sampleCond = [counter = realTime, step = step](const stepTime_t& realTime, const simulatedTime&) mutable {
+					if (realTime - counter > step)
+					{
+						counter = realTime;
+						return true;
+					}
+					else
+						return false; };
+				newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t& realTime, const simulatedTime&)->float {
+					return static_cast<float>(realTime.count() / float(stepTime_t::period::den) * units); };//Convert to seconds, then to desired units
+				break;
+			}
 		case xAxis::simTIme:
-			xLabel = "SimTime";
-			simulatedTime stepS(1.0*tempGraph.units.x);
-			newGraph.sampleCond = [counter = simTime, step = stepS](const stepTime_t&, const simulatedTime& simTime) mutable {
-				if (simTime - counter > step)
-				{
-					counter = simTime;
-					return true;
-				}
-				else
-					return false; };
-			newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t&, const simulatedTime& simTime)->float {
-				return static_cast<float>(simTime.seconds.count()*units); };//Convert to seconds, then to desired units
+			{
+				xLabel = "SimTime";
+				simulatedTime stepS(1.0*tempGraph.units.x);
+				newGraph.sampleCond = [counter = simTime, step = stepS](const stepTime_t&, const simulatedTime& simTime) mutable {
+					if (simTime - counter > step)
+					{
+						counter = simTime;
+						return true;
+					}
+					else
+						return false; };
+				newGraph.xSampler = [units = tempGraph.units.x](const stepTime_t&, const simulatedTime& simTime)->float {
+					return static_cast<float>(simTime.seconds.count()*units); };//Convert to seconds, then to desired units
+				break;
+			}
 		}
 
 		xLabel = xLabel + "[" + tempGraph.unitLabels.x + "]";
