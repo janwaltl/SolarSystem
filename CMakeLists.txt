@@ -25,7 +25,7 @@ target_link_libraries(SolarSystem glfw)
 #Copy examples and documentation to same folder
 add_custom_command(TARGET SolarSystem POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/SolarSystem/Data ${CMAKE_BINARY_DIR}/bin)
+                       ${CMAKE_SOURCE_DIR}/Data ${CMAKE_BINARY_DIR}/bin)
 add_custom_command(TARGET SolarSystem POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
                        ${CMAKE_SOURCE_DIR}/ZimniDokumentace/main.pdf ${CMAKE_BINARY_DIR}/bin/ZimniDokumentace.pdf)
