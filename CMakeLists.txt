@@ -27,5 +27,5 @@ add_custom_command(TARGET SolarSystem POST_BUILD
                        ${CMAKE_SOURCE_DIR}/SolarSystem/Data ${CMAKE_BINARY_DIR}/bin)
 add_custom_command(TARGET SolarSystem POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
-                       ${CMAKE_SOURCE_DIR}/Dokumentace/main.pdf ${CMAKE_BINARY_DIR}/bin/ZimniDokumentace.pdf)
+                       ${CMAKE_SOURCE_DIR}/ZimniDokumentace/main.pdf ${CMAKE_BINARY_DIR}/bin/ZimniDokumentace.pdf)
 
