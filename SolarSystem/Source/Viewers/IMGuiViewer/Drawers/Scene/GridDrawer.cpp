@@ -40,7 +40,7 @@ namespace solar
 		auto smallerScale = scale  * pow(smallToBig, floor(logScale));
 		auto biggerScale = smallerScale*smallToBig;
 		double x;
-		float frac = float(abs(modf(logScale, &x)));
+		float frac = float(std::abs(modf(logScale, &x)));
 		if (logScale < 0.0f)//So frac is always increasing when zooming out
 			frac = 1.0f - frac;
 
@@ -173,7 +173,7 @@ namespace solar
 			{
 				float maxDist =  max(abs(normPos.x),abs(normPos.y));
 
-				float fadeFactor =1.0f-smoothstep(fade,fade,maxDist);
+				float fadeFactor =1.0f-smoothstep(fade,fade+0.01,maxDist);
 				color = col*fadeFactor;
 			})";
 
