@@ -1,5 +1,5 @@
 =========================================IN THIS COMMIT==========================================
-Fixed replayer again.
+Added summer documentation to the repository.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?

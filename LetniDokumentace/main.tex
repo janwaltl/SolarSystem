@@ -1,0 +1,121 @@
+% !TeX spellcheck = cs_CZ
+\documentclass[a4paper,hidelinks]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{listingsutf8}
+\usepackage[table]{xcolor}
+\usepackage{inconsolata}
+\usepackage{nameref}
+\usepackage{pifont}
+\usepackage{placeins}
+\usepackage[a4paper,includeheadfoot,margin=3.5cm]{geometry}
+\usepackage{multirow}
+\usepackage{pdflscape}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+%Vkladani source kodu
+\lstdefinestyle{codeInput} { %
+	language=C++,
+	basicstyle=\ttfamily\footnotesize,
+	numberstyle=\scriptsize,
+	numbers=left,
+	backgroundcolor=\color{gray!10},
+	frame=single,
+	keepspaces=true,  
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=4,
+	rulecolor=\color{black!30},
+	escapeinside={\%*}{*)},
+	breaklines=true,
+	breakatwhitespace=true,
+	framextopmargin=2pt,
+	framexbottommargin=2pt,
+	inputencoding=utf8/latin2,
+	extendedchars=true,
+	literate=
+	{á}{{\'a}}1
+	{í}{{\'i}}1
+	{é}{{\'e}}1
+	{ý}{{\'y}}1
+	{ú}{{\'u}}1
+	{ó}{{\'o}}1
+	{ě}{{\v{e}}}1
+	{š}{{\v{s}}}1
+	{č}{{\v{c}}}1
+	{ř}{{\v{r}}}1
+	{ž}{{z}}1
+	{ď}{{\v{d}}}1
+	{ť}{{\v{t}}}1
+	{ň}{{\v{n}}}1                
+	{ů}{{\r{u}}}1
+	{Á}{{\'A}}1
+	{Í}{{\'I}}1
+	{É}{{\'E}}1
+	{Ý}{{\'Y}}1
+	{Ú}{{\'U}}1
+	{Ó}{{\'O}}1
+	{Ě}{{\v{E}}}1
+	{Š}{{\v{S}}}1
+	{Č}{{\v{C}}}1
+	{Ř}{{\v{R}}}1
+	{Ž}{{\v{Z}}}1
+	{Ď}{{\v{D}}}1
+	{Ť}{{\v{T}}}1
+	{Ň}{{\v{N}}}1                
+	{Ů}{{\r{U}}}1    	
+}
+\lstset{style=codeInput}
+\renewcommand{\lstlistingname}{Zdrojový kód}
+\renewcommand{\lstlistlistingname}{Seznam zdrojových kódů}
+\newcommand{\includecode}[3][default]
+{\lstinputlisting[caption=#3,label=lst:#1, style=codeInput]{#2}}
+
+
+\title{Simulace Sluneční soustavy}
+\date{\today}
+\author{Jan Waltl}
+
+
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{ \markboth{\thechapter \ #1}{} }
+\renewcommand{\sectionmark}[1]{ \markright{\thesection \ #1} }
+
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[L]{\textit{ \expandafter\MakeUppercase\expandafter{\leftmark}} }
+\fancyhead[R]{\textit{ {\rightmark}} }
+
+\fancypagestyle{plain}{ %
+	\fancyhf{} % remove everything
+	\fancyfoot[C]{\thepage}
+	\renewcommand{\headrulewidth}{0pt} % remove lines as well
+	\renewcommand{\footrulewidth}{0pt}
+}
+
+\begin{document}
+	\include{titlePage}
+	\pagenumbering{gobble}
+	\newpage
+	
+	\tableofcontents
+	\newpage
+	\include{organizace}
+	\pagenumbering{arabic}
+	
+	\include{implementace}
+	\include{uzivatelPrirucka}
+	\include{zdroje}
+\end{document}
