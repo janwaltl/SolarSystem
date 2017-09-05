@@ -69,34 +69,34 @@
   position<2.25609e+11 0 0>
   velocity<0 26238 0>
   mass<1.0659e+16>
-  radius<1.737e+06>}
+  radius<11000>}
 { name<Deimos>
   color<0.2 0.8 0.7 1>
   position<2.25623e+11 0 0>
   velocity<0 25451 0>
   mass<1.4762e+15>
-  radius<1.737e+06>}
+  radius<6000>}
 { name<Io>
   color<1 0.2 0.1 1>
   position<7.78922e+11 0 0>
   velocity<0 30350 0>
   mass<8.93194e+22>
-  radius<1.737e+06>}
+  radius<1.821e+06>}
 { name<Europa>
   color<1 0.8 0.7 1>
   position<7.79171e+11 0 0>
   velocity<0 26790 0>
   mass<4.79984e+22>
-  radius<1.737e+06>}
+  radius<1.56e+06>}
 { name<Ganymede>
   color<0.6 0.76 0.95 1>
   position<7.7957e+11 0 0>
   velocity<0 23930 0>
   mass<1.4819e+23>
-  radius<1.737e+06>}
+  radius<2.634e+06>}
 { name<Callisto>
   color<0.4 0.1 0.92 1>
   position<7.80383e+11 0 0>
   velocity<0 21254 0>
   mass<1.07594e+23>
-  radius<1.737e+06>}
+  radius<2.41e+06>}

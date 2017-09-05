@@ -30,14 +30,16 @@ namespace solar
 		data->push_back(Unit(Vec3d(7375.93e9, 0.0), Vec3d(0.0, 3710.0), 1.303e22, "Pluto", Vec4d(1.0, 1.0, 1.0, 1.0),1185e3));
 
 		//Moons
-		//TODO set correct radius
 		data->push_back(Unit(Vec3d(150.0e9, 0.0), Vec3d(0.0, 30822.0), 7.3476e22, "Moon", Vec4d(0.2, 0.2, 0.2, 1.0), 1737e3));
-		data->push_back(Unit(Vec3d(225.609376e9, 0.0), Vec3d(0.0, 26238.0), 1.0659e16, "Phobos", Vec4d(0.5, 0.46, 0.3, 1.0), 1737e3));
-		data->push_back(Unit(Vec3d(225.623463e9, 0.0), Vec3d(0.0, 25451.0), 1.4762e15, "Deimos", Vec4d(0.2, 0.8, 0.7, 1.0), 1737e3));
-		data->push_back(Unit(Vec3d(778.9217e9, 0.0), Vec3d(0.0, 30350.0), 8.931938e22, "Io", Vec4d(1.0, 0.2, 0.1, 1.0), 1737e3));
-		data->push_back(Unit(Vec3d(779.1709e9, 0.0), Vec3d(0.0, 26790.0), 4.799844e22, "Europa", Vec4d(1.0, 0.8, 0.7, 1.0), 1737e3));
-		data->push_back(Unit(Vec3d(779.5704e9, 0.0), Vec3d(0.0, 23930.0), 1.4819e23, "Ganymede", Vec4d(0.6, 0.76, 0.95, 1.0), 1737e3));
-		data->push_back(Unit(Vec3d(780.3827e9, 0.0), Vec3d(0.0, 21254.0), 1.075938e23, "Callisto", Vec4d(0.4, 0.1, 0.92, 1.0), 1737e3));
+
+		data->push_back(Unit(Vec3d(225.609376e9, 0.0), Vec3d(0.0, 26238.0), 1.0659e16, "Phobos", Vec4d(0.5, 0.46, 0.3, 1.0), 11e3));
+		data->push_back(Unit(Vec3d(225.623463e9, 0.0), Vec3d(0.0, 25451.0), 1.4762e15, "Deimos", Vec4d(0.2, 0.8, 0.7, 1.0), 6e3));
+
+		data->push_back(Unit(Vec3d(778.9217e9, 0.0), Vec3d(0.0, 30350.0), 8.931938e22, "Io", Vec4d(1.0, 0.2, 0.1, 1.0), 1821e3));
+		data->push_back(Unit(Vec3d(779.1709e9, 0.0), Vec3d(0.0, 26790.0), 4.799844e22, "Europa", Vec4d(1.0, 0.8, 0.7, 1.0), 1560e3));
+		data->push_back(Unit(Vec3d(779.5704e9, 0.0), Vec3d(0.0, 23930.0), 1.4819e23, "Ganymede", Vec4d(0.6, 0.76, 0.95, 1.0), 2634e3));
+		data->push_back(Unit(Vec3d(780.3827e9, 0.0), Vec3d(0.0, 21254.0), 1.075938e23, "Callisto", Vec4d(0.4, 0.1, 0.92, 1.0), 2410e3));
+
 
 		data.ConvertTo(PhysUnits::sun, PhysUnits::AU, PhysUnits::year);
 		data.Normalize();

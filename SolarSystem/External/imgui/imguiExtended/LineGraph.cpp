@@ -159,7 +159,7 @@ namespace ImGuiE
 				ranges.xMin = cachedRanges.xMin - drag.x; ranges.xMax = cachedRanges.xMax - drag.x;
 				ranges.yMin = cachedRanges.yMin + drag.y; ranges.yMax = cachedRanges.yMax + drag.y;//Y is up
 			}
-			else if (abs(io.MouseWheel) > solar::epsilon<float>)
+			else if (std::abs(io.MouseWheel) > solar::epsilon<float>)
 			{
 				const static float scrollSpeed = 0.05f;
 				auto xSize = ranges.xMax - ranges.xMin;

@@ -5,15 +5,13 @@ Tato dokumentace spolu se zdrojovými kódy programu je veřejně dostupná na:
 \begin{center}
 	\texttt{https://bitbucket.org/Quimby/solar/src}
 \end{center}
-Popřípadě přímo stažitelná pomocí git HTTPS\eqref{git:https} nebo SSH\eqref{git:ssh}:
-\begin{align}
-\label{git:https}
-\texttt{https://Quimby@bitbucket.org/Quimby/solar.git}\\
-\label{git:ssh}
-\texttt{git@bitbucket.org:Quimby/solar.git}
-\end{align}
+Popřípadě přímo stažitelná pomocí git:
+\begin{center}
+\texttt{git clone https://bitbucket.org/Quimby/solar.git}
+\end{center}
+Po kompilaci se u spustitelných souborů objeví obě dokumentace a také jeden příklad vstupního souboru pro \texttt{FormattedFileParser} a jedna zaznamenaná simulace.
 \section{Windows}
-Ve složce \texttt{buildVS/} je předpřipravený .sln projekt pro Visual Studio 2015 Community Edition, který by měl obsahovat vše potřebné pro správné zkompilování. Druhou možností je stejně jako na Unix vytvořit si vlastní projekt pomocí programu \textbf{CMake}.
+Ve složce \texttt{buildVS/} je předpřipravený .sln projekt pro Visual Studio 2015 Community Edition, který by měl obsahovat vše potřebné pro správné zkompilování. Druhou možností je stejně jako na Unixu vytvořit si vlastní projekt pomocí programu \textbf{CMake}.
 \section{Unix}
 Ke kompilaci je potřeba mít nainstalován balíček \texttt{xorg-dev}(vyžaduje ho GLFW, viz. \cite{GLFW}). Dále jsou potřeba programy \textbf{CMake, make} a nějaký kompilátor, který \textbf{CMake} pozná - např. \textbf{g++}. Poté by mělo stačit pustit následující sekvenci příkazů:
 \begin{lstlisting}
@@ -28,13 +26,10 @@ Což by mělo vytvořit složku \lstinline|build/bin/| s potřebnými soubory. T
 \chapter{Uživatelská příručka}
 \label{chap:userGuide}
 \section{Požadavky}
-Vyžaduje verzi OpenGL 3.3 nebo vyšší a rozšíření  \texttt{GL\_ARB\_clip\_control} nebo \texttt{GL\_NV\_depth\_buffer\_float}. Jinými slovy by program měl fungovat na většině dnešní počítačů s aktuálními grafickými ovladači( výjimkou by mohli být starší integrované grafiky od Intelu). Ke spuštění \texttt{.exe} na Windows je navíc potřeba balíček Microsoft Visual C++ 2015 Redistributable - aktuální verze na \url{https://www.microsoft.com/cs-CZ/download/details.aspx?id=53840}.
+Vyžaduje verzi OpenGL 3.3 nebo vyšší a rozšíření  \texttt{GL\_ARB\_clip\_control} nebo \texttt{GL\_NV\_depth\_buffer\_float}. Jinými slovy by program měl snad fungovat na většině dnešní počítačů s aktuálními grafickými ovladači( výjimkou by mohli být starší integrované grafiky od Intelu). Ke spuštění \texttt{.exe} na Windows je navíc potřeba balíček Microsoft Visual C++ 2015 Redistributable - aktuální verze na \url{https://www.microsoft.com/cs-CZ/download/details.aspx?id=53840}.
 Také v případě grafického výstupu(který se zapne jako výchozí) je doporučená velikost okna minimálně 1000x500 pixelů.
 \section{Základní ovladání}
-Při spuštění se program otevře v výchozím grafickém režimu, kde dojde k nahrání zabudované Sluneční soustavy. Simulace se ovládá pomocí grafického rozhraní, které je popsáno na následující okomentované sadě obrázků. Snaha byla, aby tato sekce nemusela existovat a uživatelské rozhraní bylo dostatečně intuitivní samo o sobě. Proto je šance, že při najetí myší na většinu grafických prvků se zobrazí doplňující popis.
-
-
-Ovládání myší:
+Při spuštění se program otevře v výchozím grafickém režimu, kde dojde k nahrání zabudované Sluneční soustavy. Simulace se ovládá pomocí grafického rozhraní, které je popsáno na následující okomentované sadě obrázků. Snaha byla, aby tato sekce nemusela existovat a uživatelské rozhraní bylo dostatečně intuitivní samo o sobě. Proto je šance, že při najetí myší na většinu grafických prvků se zobrazí doplňující popis. Kamera se ovládá pomocí myši:
 \begin{description}
 	\item \textbf{levé tlačítko} otáčení kamery okolo svého cíle
 	\item \textbf{pravé tlačítko} pohyb kamery do stran
@@ -49,7 +44,7 @@ Ovládání myší:
 	\includegraphics[width=\linewidth,keepaspectratio]{Figs/Overview}\\
 	\textit{1. Tlačítka s jednotlivými okny. Zleva - grafy, seznam simulovaných objektů, detaily simulace}\\
 	\textit{2. Ovladání simulace - zpomalení/zrychlení, zvětšení/zmenší sim. kroku a pozastavení}\\
-	\textit{3. Tři přepínače zleva zapínají/vypínají - Skutečné velikosti objektů, LineTrails, vykreslování mřížky. Dále je zde tlačítko \textbf{na vypnutí} uživatelského rozhraní, které se \textbf{objeví zmáčknutím F1}. Poslední tlačítko otevře okno s nastavením grafiky. }\\
+	\textit{3. Tři přepínače zleva zapínají/vypínají - Skutečné velikosti objektů, LineTrails, vykreslování mřížky. Dále je zde tlačítko \textbf{na vypnutí} uživatelského rozhraní, které se \textbf{ znovu objeví zmáčknutím F1}. Poslední tlačítko otevře okno s nastavením grafiky. }\\
 	\textit{4. Odsimulovaný čas \\ 5. Rychlost simulace vůči reálnému času.}\\
 	\textit{6. Velikost menší a větší mřížky.}
 \end{figure}
@@ -88,6 +83,8 @@ Program také nabízí pokročilejší ovládání pomocí příkazové řádky,
 Pro vypsání nápovědy a všech dostupných příkazů v českém jazyce použijte:
 \ \texttt{\textbf{SolarSystem.exe -help cz}}
 
+Vysvětlení parametrů simulace se věnuje druhá kapitola zimní dokumentace.
+
 Uveďme zde alespoň pár dalších příkladů různých příkazů:
 \begin{enumerate}
 	\item \texttt{\textbf{SolarSystem.exe vstup.txt}} \\
@@ -103,8 +100,4 @@ Uveďme zde alespoň pár dalších příkladů různých příkazů:
 	\item  \texttt{\textbf{SolarSystem.exe zaznam.replay}}\\
 	Přehraje zaznamenanou simulaci z předchozího příkladu v grafickém prostředí.
 \end{enumerate}
-Ke zdrojovým souborům je ve složce \texttt{data/} přiložen vzorový formátovaný text \texttt{vstup.txt} a také jeden záznam simulace \texttt{zaznam.replay}.
-Přesný popis formátu vstupního souboru je uvnitř ve formě komentářů a také v sekci \textbf{4.1} ze zimního semestru . Pro vysvětlení parametrů simulace je k dispozici popis v sekci \ref{sec:recap} a detailněji ve druhé kapitole zimní dokumentace.
-
-
 \FloatBarrier

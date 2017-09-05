@@ -33,7 +33,7 @@ namespace solar
 				else //if (camPosCombo == 0) 
 					Trackball(cam);
 			}
-			else if (abs(io.MouseWheel) > epsilon<float>)// Wheel 
+			else if (std::abs(io.MouseWheel) > epsilon<float>)// Wheel 
 			{
 				//TODO change if camera can be positioned somewhere
 				if (/*camPosCombo == 0 &&*/!cam.IsFollowing() && io.KeyAlt)// ALT+ Wheel 
