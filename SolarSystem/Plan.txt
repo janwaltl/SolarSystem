@@ -1,5 +1,5 @@
 =========================================IN THIS COMMIT==========================================
-abs fixes, added proper sizes to the moons.
+Added radius to unit properties.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?

@@ -31,18 +31,19 @@ namespace solar
 			auto menuBarHeight = ImGui::GetFontSize() + ImGui::GetStyle().FramePadding.y * 2.0f;
 
 			ImGui::SetNextWindowPos(ImVec2(0, menuBarHeight), ImGuiSetCond_Once);
-			ImGui::SetNextWindowSize(ImVec2(900, 300), ImGuiSetCond_Once);
+			ImGui::SetNextWindowSize(ImVec2(1000, 300), ImGuiSetCond_Once);
 			if (ImGui::Begin("Units' properties", NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove))
 			{
 				ListHeader(data);
 
 				if (ImGui::BeginChild("Units", ImVec2 {}, false, ImGuiWindowFlags_AlwaysUseWindowPadding))
 				{
-					ImGui::Columns(5);
+					ImGui::Columns(6);
 					ImGui::SetColumnOffset(1, 35);
-					ImGui::SetColumnOffset(2, 150);
-					ImGui::SetColumnOffset(3, 450);
-					ImGui::SetColumnOffset(4, 750);
+					ImGui::SetColumnOffset(2, 140);
+					ImGui::SetColumnOffset(3, 430);
+					ImGui::SetColumnOffset(4, 730);
+					ImGui::SetColumnOffset(5, 880);
 					ImGui::AlignFirstTextHeightToWidgets();
 					InfoBox("Left click to change"); ImGui::NextColumn();
 					ImGui::AlignFirstTextHeightToWidgets();
@@ -52,6 +53,7 @@ namespace solar
 					ImGui::Combo("##SpeedVel", &speedVelCombo, "Speed\0Velocity\0"); ImGui::NextColumn();
 					ImGui::AlignFirstTextHeightToWidgets();
 					ImGui::Text("Mass"); ImGui::NextColumn();
+					ImGui::Text("Radius"); ImGui::NextColumn();
 					ImGui::Separator();
 					ImGui::Separator();
 
@@ -83,6 +85,7 @@ namespace solar
 						ImGui::NextColumn();
 
 						ImGui::Text("%9.3g %s", data[i].mass*massRatio, massSuff); ImGui::NextColumn();
+						ImGui::Text("%9.3g %s", data[i].radius*lenRatio, lenSuff); ImGui::NextColumn();
 						ImGui::Separator();
 						ImGui::PopID();
 					}
