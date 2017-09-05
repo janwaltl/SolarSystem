@@ -110,7 +110,7 @@ Nasleduje vycet veskerych prikazu(P=povinne,N=nepovinne):
                                 - 1 vychozi
         -dm ['nezaporne cislo'] - N, delta time multiplier
                                 - 1 vychozi
-        -x ['nezaporne cislo' v sekundach] - N, maximalni doba simulace
+        -x ['nezaporne cislo' v sekundach] - N, maximalni doba behu programu
                                            - 0 pro neomezenou (vychozi)
 
     1.1 dodatecne prikazy pro 'formatted' parser:
@@ -158,11 +158,11 @@ Nasleduje par prikladu volani techto prikazu pri startu aplikace:
           Simulace probiha v realnem case a je zobrazena v 1200x700 oknì s uzivatelskym rozhranim.
           (Pouzil se automaticky rezim a vstup.txt byl rozpoznan jako formatovany text, pokud
            tedy neobsahoval 'R' a 'E' jako prvni dva bajty)
-    3.Priklad: SolarSystem record -r out.replay -p formatted -i vstup.txt
+    3.Priklad: SolarSystem -record -r out.replay -p formatted -i vstup.txt
         = Zaznamenavana simulace, vstupni data jsou nacteny z 'vstup.txt',
           zaznam ulozen do  'out.replay'.
           Zbytek stejny jako v druhem prikladu.
-    SolarSystem record -r out.replay -v none -u -m semiEuler -i vstup.txt -o out.txt
+    SolarSystem -record -r out.replay -v none -u -m semiEuler -i vstup.txt -o out.txt
         = Zaznamenavana necasovana simulace, vstupni data jsou nacteny z 'vstup.txt',
           pomoci 'formatted' parseru. SimMethod je semi-implicitni Euler, viewer neni.
           Zaznam je ulozen do 'out.replay'. Konecna simulovana data jsou ulozeny do 'out.txt'.
@@ -208,7 +208,7 @@ Following is description of all arguments(M=mandatory,O=optional):
                         - 1 default
         -dm ['integer'] - O, delta time multiplier
                         - 1 default
-        -x ['integer' in seconds] - O, max simTime in seconds,
+        -x ['integer' in seconds] - O, max run tim of application in seconds,
                                   - 0 for unlimited (default)
 
     1.1 additional arguments for 'formatted' parser:
@@ -255,11 +255,11 @@ Following are examples of correct calls to this application:
         = Timed simulation with 'formatted' as parser,'RK4' as simMethod and 'win' as viewer.
           Simulation is played at real-time in 1200x700 window with GUI.
           (Used [other] mode to determine that, assuming 'vstup.txt' does not start with 'RE'.)
-    3.Example: SolarSystem record -r out.replay -i vstup.txt
+    3.Example: SolarSystem -record -r out.replay -i vstup.txt
         = Recorded,timed simulation, data loaded from 'vstup.txt',
           record saved at 'out.replay'.
           Rest is same as in 2.Example.
-    SolarSystem record -r out.replay -v none -u -m semiEuler -i vstup.txt -o out.txt
+    SolarSystem -record -r out.replay -v none -u -m semiEuler -i vstup.txt -o out.txt
         = Recorded untimed simulation, data loaded from 'vstup.txt', parsed via 'formatted' parser.
           No viewer, simulated using semiImplicitEuler. Recording saved into 'out.replay'.
           Final simulated data are saved to 'out.txt'
@@ -503,6 +503,16 @@ Following are examples of correct calls to this application:
 			for (int i = 1; i < argc; ++i)//Ignore exe's name
 				cmds.push_back(argv[i]);
 
+			//cmds.push_back("b.replay");
+			//cmds.push_back("-record");
+			//cmds.push_back("-r");
+			//cmds.push_back("b.replay");
+			//cmds.push_back("-dm");
+			//cmds.push_back("30000");
+			//cmds.push_back("-rm");
+			//cmds.push_back("5");
+			//cmds.push_back("-x");
+			//cmds.push_back("30");
 			if (IsThere(cmds, "-help"))
 				PrintHelp(cmds);
 			else if (IsThere(cmds, "-sim"))

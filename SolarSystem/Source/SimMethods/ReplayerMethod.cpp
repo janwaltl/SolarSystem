@@ -1,6 +1,7 @@
 #include "ReplayerMethod.h"
 
 #include "Source/Common/Exception.h"
+#include <iostream>
 
 namespace solar
 {
@@ -34,7 +35,7 @@ namespace solar
 		in.seekg(10);//Skip to multiplier
 		in.read(reinterpret_cast<char*>(&multiplier), sizeof(multiplier));
 		in.read(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));
-		in.seekg(22);//Skip to offset
+		in.seekg(46);//Skip to offset
 		in.read(reinterpret_cast<char*>(&offset), sizeof(offset));
 
 		this->SetDTMultiplier(this->GetDTMultiplier() / 1);
@@ -48,6 +49,7 @@ namespace solar
 		double tmp = this->GetSimTime() / this->GetDtime() / double(multiplier);
 		uint32_t recordNum = static_cast<uint32_t>(tmp);
 		double lambda = tmp - recordNum;//For interpolation
+		std::cout << recordNum << '\t' << lambda << '\n';
 		if (recordNum >= numRecords)//Stop at the end, obviously...
 			recordNum = numRecords - 1;//Because 'recordNum' starts at zero and ends at 'numRecords-1'
 
@@ -74,12 +76,12 @@ namespace solar
 		for (size_t i = 0; !last && i < data->Get().size(); ++i)
 		{
 			in.read(reinterpret_cast<char*>(posVel), sizeof(posVel));
-			data->Get()[i].pos.x = lambda*posVel[0];
-			data->Get()[i].pos.y = lambda*posVel[1];
-			data->Get()[i].pos.z = lambda*posVel[2];
-			data->Get()[i].vel.x = lambda*posVel[3];
-			data->Get()[i].vel.y = lambda*posVel[4];
-			data->Get()[i].vel.z = lambda*posVel[5];
+			data->Get()[i].pos.x += lambda*posVel[0];
+			data->Get()[i].pos.y += lambda*posVel[1];
+			data->Get()[i].pos.z += lambda*posVel[2];
+			data->Get()[i].vel.x += lambda*posVel[3];
+			data->Get()[i].vel.y += lambda*posVel[4];
+			data->Get()[i].vel.z += lambda*posVel[5];
 		}
 	}
 }

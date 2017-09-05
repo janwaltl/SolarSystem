@@ -72,6 +72,14 @@ namespace solar
 		uint32_t numUnits = data->Get().size();
 		out.write(reinterpret_cast<char*>(&numUnits), sizeof(numUnits));
 
+		double distUnits = data->GetPhysUnits().dist;
+		double massUnits = data->GetPhysUnits().mass;
+		double timeUnits = data->GetPhysUnits().time;
+		out.write(reinterpret_cast<char*>(&distUnits), sizeof(distUnits));
+		out.write(reinterpret_cast<char*>(&massUnits), sizeof(massUnits));
+		out.write(reinterpret_cast<char*>(&timeUnits), sizeof(timeUnits));
+
+
 		uint32_t offset = 0;//No offset yet
 		auto offsetPos = out.tellp();
 		out.write(reinterpret_cast<char*>(&offset), sizeof(offset));
@@ -89,6 +97,7 @@ namespace solar
 			out.write(reinterpret_cast<const char*>(&simData[i].color.w), sizeof(simData[i].color.w));
 
 			out.write(reinterpret_cast<const char*>(&simData[i].mass), sizeof(simData[i].mass));
+			out.write(reinterpret_cast<const char*>(&simData[i].radius), sizeof(simData[i].radius));
 		}
 		//Write offset now
 		offset = static_cast<uint32_t>(out.tellp());

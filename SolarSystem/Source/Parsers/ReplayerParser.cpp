@@ -51,10 +51,14 @@ namespace solar
 		uint32_t numUnits = 0;
 		in.read(reinterpret_cast<char*>(&numUnits), sizeof(numUnits));
 
+		double distUnits, massUnits, timeUnits;
+		in.read(reinterpret_cast<char*>(&distUnits), sizeof(distUnits));
+		in.read(reinterpret_cast<char*>(&massUnits), sizeof(massUnits));
+		in.read(reinterpret_cast<char*>(&timeUnits), sizeof(timeUnits));
+
 		in.seekg(sizeof(uint32_t), std::ios::cur);//Skip byteOffset
-
-
 		SimData data;
+		data.SetPhysUnits(massUnits, distUnits, timeUnits);
 		*data = SimData::units_t(numUnits, Unit());
 
 		//Read units' properties
@@ -74,13 +78,17 @@ namespace solar
 			double mass;
 			in.read(reinterpret_cast<char*>(&mass), sizeof(mass));
 			data.Get()[i].mass = mass;
+
+			double radius;
+			in.read(reinterpret_cast<char*>(&radius), sizeof(radius));
+			data[i].radius = radius;
 		}
 
 		//Initialize them to their initial value = first record
 		for (decltype(numUnits) i = 0; i < numUnits; ++i)
 		{
 			//PosX, PosY, PosZ, VelX, VelY, VelZ
-			double posVel[5];
+			double posVel[6];
 
 			in.read(reinterpret_cast<char*>(&posVel), sizeof(posVel));
 			data.Get()[i].pos.x = posVel[0];

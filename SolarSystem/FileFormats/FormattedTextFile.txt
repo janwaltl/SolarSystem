@@ -26,7 +26,7 @@ Following is list of all valid parametres with their format:
 	mass <X> - Mass of the unit. 1 decimal number without any physics units.
 			 - Value is assumed to be in kilograms.
 			 - 0 by default.
-
+	radius - Radius of the objects, assumed to be in metres, 0 by default.
 
 Example:
 
