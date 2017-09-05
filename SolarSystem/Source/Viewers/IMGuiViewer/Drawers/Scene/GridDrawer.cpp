@@ -153,7 +153,7 @@ namespace solar
 
 			void main()
 			{
-				normPos = position/float(gridRes)*2.0f;
+				normPos = position/gridRes*2.0f;
 				
 				vec2 scaledPos = position*scale;
 				vec3 pos = vec3()" + pos + R"() + offset;
@@ -173,9 +173,8 @@ namespace solar
 			{
 				float maxDist =  max(abs(normPos.x),abs(normPos.y));
 
-				//float fadeFactor =(maxDist<fade)? 1.0f: 0.0f;
 				float fadeFactor =1.0f-smoothstep(fade,fade,maxDist);
-				color =col*fadeFactor;
+				color = col*fadeFactor;
 			})";
 
 		auto shader = std::make_unique<openGL::Shader>(vSource, fSource);

@@ -55,6 +55,7 @@ namespace solar
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &IBO);
 		glDeleteVertexArrays(1, &VAO);
+		shader.reset(nullptr);
 		ImGui::Shutdown();
 	}
 
