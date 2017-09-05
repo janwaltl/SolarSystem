@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\41bb742b2f9725e8fce4091d3bc52738\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{7781B3F6-819B-3A7E-9BEA-F7D60A7945D5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

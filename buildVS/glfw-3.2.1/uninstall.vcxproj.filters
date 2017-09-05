@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\CMakeLists.txt" />
+    <CustomBuild Include="D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\4f1fda77cd9af520ac85e2f52981c1e3\uninstall.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\Programming\Zápočťák\SolarSystem\buildVS\glfw-3.2.1\CMakeFiles\uninstall" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{7781B3F6-819B-3A7E-9BEA-F7D60A7945D5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

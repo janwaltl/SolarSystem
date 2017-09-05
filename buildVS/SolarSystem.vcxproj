@@ -1,0 +1,564 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{34FB5886-DB74-3C44-AE41-2DD6A941FE53}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>SolarSystem</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Programming\Zápočťák\SolarSystem\buildVS\bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">SolarSystem.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">SolarSystem</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Programming\Zápočťák\SolarSystem\buildVS\bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">SolarSystem.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">SolarSystem</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\Programming\Zápočťák\SolarSystem\buildVS\bin\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">SolarSystem.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">SolarSystem</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\Programming\Zápočťák\SolarSystem\buildVS\bin\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">SolarSystem.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">SolarSystem</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy_directory D:/Programming/Zápočťák/SolarSystem/Data D:/Programming/Zápočťák/SolarSystem/buildVS/bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy D:/Programming/Zápočťák/SolarSystem/ZimniDokumentace/main.pdf D:/Programming/Zápočťák/SolarSystem/buildVS/bin/ZimniDokumentace.pdf
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy D:/Programming/Zápočťák/SolarSystem/LetniDokumentace/main.pdf D:/Programming/Zápočťák/SolarSystem/buildVS/bin/LetniDokumentace.pdf
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>glfw-3.2.1\src\Debug\glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Programming/Zápočťák/SolarSystem/buildVS/Debug/SolarSystem.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Programming/Zápočťák/SolarSystem/buildVS/bin/Debug/SolarSystem.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy_directory D:/Programming/Zápočťák/SolarSystem/Data D:/Programming/Zápočťák/SolarSystem/buildVS/bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy D:/Programming/Zápočťák/SolarSystem/ZimniDokumentace/main.pdf D:/Programming/Zápočťák/SolarSystem/buildVS/bin/ZimniDokumentace.pdf
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy D:/Programming/Zápočťák/SolarSystem/LetniDokumentace/main.pdf D:/Programming/Zápočťák/SolarSystem/buildVS/bin/LetniDokumentace.pdf
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>glfw-3.2.1\src\Release\glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Programming/Zápočťák/SolarSystem/buildVS/Release/SolarSystem.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Programming/Zápočťák/SolarSystem/buildVS/bin/Release/SolarSystem.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy_directory D:/Programming/Zápočťák/SolarSystem/Data D:/Programming/Zápočťák/SolarSystem/buildVS/bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy D:/Programming/Zápočťák/SolarSystem/ZimniDokumentace/main.pdf D:/Programming/Zápočťák/SolarSystem/buildVS/bin/ZimniDokumentace.pdf
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy D:/Programming/Zápočťák/SolarSystem/LetniDokumentace/main.pdf D:/Programming/Zápočťák/SolarSystem/buildVS/bin/LetniDokumentace.pdf
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>glfw-3.2.1\src\MinSizeRel\glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Programming/Zápočťák/SolarSystem/buildVS/MinSizeRel/SolarSystem.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Programming/Zápočťák/SolarSystem/buildVS/bin/MinSizeRel/SolarSystem.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Programming\Zápočťák\SolarSystem\SolarSystem;D:\Programming\Zápočťák\SolarSystem\SolarSystem\External;D:\Programming\Zápočťák\SolarSystem\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy_directory D:/Programming/Zápočťák/SolarSystem/Data D:/Programming/Zápočťák/SolarSystem/buildVS/bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy D:/Programming/Zápočťák/SolarSystem/ZimniDokumentace/main.pdf D:/Programming/Zápočťák/SolarSystem/buildVS/bin/ZimniDokumentace.pdf
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+E:\Programy\CMake\bin\cmake.exe -E copy D:/Programming/Zápočťák/SolarSystem/LetniDokumentace/main.pdf D:/Programming/Zápočťák/SolarSystem/buildVS/bin/LetniDokumentace.pdf
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>glfw-3.2.1\src\RelWithDebInfo\glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Programming/Zápočťák/SolarSystem/buildVS/RelWithDebInfo/SolarSystem.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Programming/Zápočťák/SolarSystem/buildVS/bin/RelWithDebInfo/SolarSystem.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Programming\Zápočťák\SolarSystem\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule D:/Programming/Zápočťák/SolarSystem/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+E:\Programy\CMake\bin\cmake.exe -HD:/Programming/Zápočťák/SolarSystem -BD:/Programming/Zápočťák/SolarSystem/buildVS --check-stamp-file D:/Programming/Zápočťák/SolarSystem/buildVS/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:/Programming/Zápočťák/SolarSystem/CMakeLists.txt;D:\Programming\Zápočťák\SolarSystem\CMakeLists.txt;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystem.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerId.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCompilerIdDetection.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ADSP-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ARMCC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\AppleClang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Borland-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Cray-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GHS-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GNU-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\HP-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IAR-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Intel-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PGI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PathScale-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SCO-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Watcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\XL-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\zOS-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CompilerId\VS-10.vcxproj.in;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeFindBinUtils.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-Determine-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerId.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCompilerIdDetection.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ADSP-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ARMCC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\AppleClang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Borland-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Cray-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GHS-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IAR-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Intel-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PGI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PathScale-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SCO-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Watcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CompilerId\VS-10.vcxproj.in;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeFindBinUtils.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeRCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCompilerCommon.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerABI.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeParseImplicitLinkInfo.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompilerABI.c;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompileFeatures.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCompilerCommon.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerABI.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeParseImplicitLinkInfo.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompilerABI.cpp;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompileFeatures.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Internal\FeatureTesting.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCXXCompiler.cmake;D:\Programming\Zápočťák\SolarSystem\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule D:/Programming/Zápočťák/SolarSystem/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+E:\Programy\CMake\bin\cmake.exe -HD:/Programming/Zápočťák/SolarSystem -BD:/Programming/Zápočťák/SolarSystem/buildVS --check-stamp-file D:/Programming/Zápočťák/SolarSystem/buildVS/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:/Programming/Zápočťák/SolarSystem/CMakeLists.txt;D:\Programming\Zápočťák\SolarSystem\CMakeLists.txt;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystem.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerId.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCompilerIdDetection.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ADSP-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ARMCC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\AppleClang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Borland-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Cray-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GHS-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GNU-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\HP-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IAR-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Intel-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PGI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PathScale-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SCO-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Watcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\XL-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\zOS-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CompilerId\VS-10.vcxproj.in;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeFindBinUtils.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-Determine-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerId.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCompilerIdDetection.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ADSP-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ARMCC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\AppleClang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Borland-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Cray-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GHS-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IAR-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Intel-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PGI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PathScale-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SCO-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Watcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CompilerId\VS-10.vcxproj.in;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeFindBinUtils.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeRCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCompilerCommon.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerABI.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeParseImplicitLinkInfo.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompilerABI.c;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompileFeatures.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCompilerCommon.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerABI.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeParseImplicitLinkInfo.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompilerABI.cpp;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompileFeatures.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Internal\FeatureTesting.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCXXCompiler.cmake;D:\Programming\Zápočťák\SolarSystem\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule D:/Programming/Zápočťák/SolarSystem/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+E:\Programy\CMake\bin\cmake.exe -HD:/Programming/Zápočťák/SolarSystem -BD:/Programming/Zápočťák/SolarSystem/buildVS --check-stamp-file D:/Programming/Zápočťák/SolarSystem/buildVS/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:/Programming/Zápočťák/SolarSystem/CMakeLists.txt;D:\Programming\Zápočťák\SolarSystem\CMakeLists.txt;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystem.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerId.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCompilerIdDetection.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ADSP-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ARMCC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\AppleClang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Borland-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Cray-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GHS-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GNU-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\HP-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IAR-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Intel-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PGI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PathScale-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SCO-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Watcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\XL-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\zOS-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CompilerId\VS-10.vcxproj.in;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeFindBinUtils.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-Determine-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerId.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCompilerIdDetection.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ADSP-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ARMCC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\AppleClang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Borland-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Cray-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GHS-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IAR-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Intel-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PGI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PathScale-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SCO-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Watcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CompilerId\VS-10.vcxproj.in;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeFindBinUtils.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeRCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCompilerCommon.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerABI.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeParseImplicitLinkInfo.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompilerABI.c;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompileFeatures.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCompilerCommon.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerABI.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeParseImplicitLinkInfo.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompilerABI.cpp;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompileFeatures.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Internal\FeatureTesting.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCXXCompiler.cmake;D:\Programming\Zápočťák\SolarSystem\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule D:/Programming/Zápočťák/SolarSystem/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+E:\Programy\CMake\bin\cmake.exe -HD:/Programming/Zápočťák/SolarSystem -BD:/Programming/Zápočťák/SolarSystem/buildVS --check-stamp-file D:/Programming/Zápočťák/SolarSystem/buildVS/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:/Programming/Zápočťák/SolarSystem/CMakeLists.txt;D:\Programming\Zápočťák\SolarSystem\CMakeLists.txt;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystem.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerId.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCompilerIdDetection.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ADSP-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ARMCC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\AppleClang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Borland-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Cray-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GHS-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GNU-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\HP-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IAR-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Intel-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PGI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PathScale-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SCO-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Watcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\XL-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\zOS-C-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CompilerId\VS-10.vcxproj.in;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeFindBinUtils.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-Determine-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerId.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCompilerIdDetection.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ADSP-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\ARMCC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\AppleClang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Borland-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Cray-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GHS-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IAR-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Intel-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PGI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\PathScale-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SCO-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\TI-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\Watcom-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CompilerId\VS-10.vcxproj.in;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeFindBinUtils.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeRCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestRCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCompilerCommon.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerABI.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeParseImplicitLinkInfo.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompilerABI.c;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompileFeatures.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCXXCompiler.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeTestCompilerCommon.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompilerABI.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeParseImplicitLinkInfo.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompilerABI.cpp;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeDetermineCompileFeatures.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Internal\FeatureTesting.cmake;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\feature_tests.cxx;E:\Programy\CMake\share\cmake-3.9\Modules\CMakeCXXCompiler.cmake.in;D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\3.9.1\CMakeCXXCompiler.cmake;D:\Programming\Zápočťák\SolarSystem\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\Programming\Zápočťák\SolarSystem\buildVS\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\imgui\imgui.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\imgui\imguiExtended\LineGraph.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\imgui\imgui_draw.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Common\Timing.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\ConsoleControl.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Main.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Parsers\FormattedFileParser.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Parsers\ReplayerParser.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Parsers\SolarParser.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\SimMethods\ExplicitEuler.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\SimMethods\RK4.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\SimMethods\ReplayerMethod.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\SimMethods\SemiImplicitEuler.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Simulation.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Units\SystemUnit.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Units\Unit.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\Graphs.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\ObjectContextMenu.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\ReplayControls.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\SimProperties.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\UnitsProperties.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\VisualPreferences.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\ReplayGUIDrawer.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\Camera.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\CameraControls.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\GridDrawer.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\LineTrailsDrawer.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\SimDataDrawer.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\TestDrawer.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\SceneDrawer.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\ImGuiBackend.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\Error.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\Grid.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\Pinheads.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\Shader.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\Sphere.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGLBackEnd.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\ReplayerViewer.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\ViewAndRecord.cpp"  />
+    <ClCompile Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\glad\glad.c" >
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\glad\glad.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\imgui\imconfig.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\imgui\imgui.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\imgui\imguiExtended.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\imgui\imguiExtended\LineGraph.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\imgui\imgui_internal.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\imgui\stb_rect_pack.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\imgui\stb_textedit.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\External\imgui\stb_truetype.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Common\Exception.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Common\Timing.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\ConsoleControl.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Math\Common.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Math\Mat4.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Math\Math.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Math\Vec2.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Math\Vec3.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Math\Vec4.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Parsers\FormattedFileParser.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Parsers\Parser.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Parsers\ReplayerParser.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Parsers\SerializeUnit.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Parsers\SolarParser.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\RecordedSimulation.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\ReplayedSimulation.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\SimMethods\ExplicitEuler.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\SimMethods\RK4.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\SimMethods\ReplayerMethod.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\SimMethods\SemiImplicitEuler.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\SimMethods\SimMethod.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Simulation.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Units\PhysicsUnits.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Units\SystemUnit.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Units\SystemUnitTypes.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Units\Unit.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\EmptyViewer.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\Graphs.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\ObjectContextMenu.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\ReplayControls.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\SimProperties.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\UnitsProperties.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUI\VisualPreferences.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\GUIDrawer.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\ReplayGUIDrawer.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\Camera.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\CameraControls.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\GridDrawer.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\LineTrailsDrawer.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\SimDataDrawer.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\Scene\TestDrawer.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\Drawers\SceneDrawer.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\ImGuiBackend.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\CircleBuffer.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\Error.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\Grid.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\Pinheads.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\Shader.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\Sphere.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGL\UnitTrail.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\IMGuiViewer\OpenGLBackEnd.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\ReplayerViewer.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\ViewAndRecord.h" />
+    <ClInclude Include="D:\Programming\Zápočťák\SolarSystem\SolarSystem\Source\Viewers\Viewer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Programming\Zápočťák\SolarSystem\buildVS\ZERO_CHECK.vcxproj">
+      <Project>{A000938C-A0DE-38B3-BB6F-B5C26BE324D6}</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Programming\Zápočťák\SolarSystem\buildVS\glfw-3.2.1\src\glfw.vcxproj">
+      <Project>{23721CC0-759E-362B-AEFE-711CB0B00B96}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
