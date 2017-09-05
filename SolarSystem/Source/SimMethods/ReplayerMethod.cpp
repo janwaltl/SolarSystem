@@ -1,8 +1,6 @@
 #include "ReplayerMethod.h"
 
 #include "Source/Common/Exception.h"
-#include <iostream>
-
 namespace solar
 {
 	ReplayerSimMethod::ReplayerSimMethod(const std::string & inFileName) :
@@ -49,7 +47,6 @@ namespace solar
 		double tmp = this->GetSimTime() / this->GetDtime() / double(multiplier);
 		uint32_t recordNum = static_cast<uint32_t>(tmp);
 		double lambda = tmp - recordNum;//For interpolation
-		std::cout << recordNum << '\t' << lambda << '\n';
 		if (recordNum >= numRecords)//Stop at the end, obviously...
 			recordNum = numRecords - 1;//Because 'recordNum' starts at zero and ends at 'numRecords-1'
 

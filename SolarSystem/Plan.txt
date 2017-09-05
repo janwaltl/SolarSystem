@@ -1,5 +1,5 @@
 =========================================IN THIS COMMIT==========================================
-Forgot to destroy a shader.
+Better vstup.txt file, bug fixes in formattedFileParser.
 ========================================IMPLEMENTING PLAN========================================
 Next:
 	Done with basic features?

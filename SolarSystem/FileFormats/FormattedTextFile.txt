@@ -8,7 +8,7 @@ Description:
 	There is no arithmetic, so 100/2 is not interpretted as 50, but as IS INVALID input.
 	Parser is quite forgiving. So parity of brackets is not stricly enforced as long as there is atleast one closing brackets.
 	Also there can be more than one space between symbols(except in decimal numbers).
-	Any extra symbols/texts are ignored(except between <>), so comments are allowed.
+	Any extra symbols other than  < > { }  are ignored(except between <>), so comments are allowed.
 	All parametres are optional, so {} is valid unit. But when inputted, they must have correct format.
 
 Following is list of all valid parametres with their format:

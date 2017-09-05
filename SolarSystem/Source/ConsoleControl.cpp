@@ -502,7 +502,7 @@ Following are examples of correct calls to this application:
 			arguments cmds;
 			for (int i = 1; i < argc; ++i)//Ignore exe's name
 				cmds.push_back(argv[i]);
-
+			//cmds.push_back("vstup.txt");
 			//cmds.push_back("b.replay");
 			//cmds.push_back("-record");
 			//cmds.push_back("-r");

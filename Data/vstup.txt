@@ -1,86 +1,102 @@
 { name<Sun>
-  color<1.0 0.88 0.0 1.0>
-  position<0.0 0.0>
-  velocity<0.0 0.0>
-  mass<1.98843e30> }
-
+  color<1 1 0 1>
+  position<0 0 0>
+  velocity<0 0 0>
+  mass<1.98843e+30>
+  radius<6.957e+08>}
 { name<Mercury>
-  color<0.2 0.3 0.2 1.0>
-  position< 57.909e9 0.0>
-  velocity<0 47362.0>
-  mass<3.3011e23> }
-
+  color<0.2 0.3 0.2 1>
+  position<5.7909e+10 0 0>
+  velocity<0 47362 0>
+  mass<3.3011e+23>
+  radius<2.394e+06>}
 { name<Venus>
-  color<0.4 0.2 0.2 1.0>
-  position< 108.208e9 0.0>
-  velocity<0 35020.0>
-  mass<4.8675e24> }
-
+  color<0.5 0.2 0.2 1>
+  position<1.08208e+11 0 0>
+  velocity<0 35020 0>
+  mass<4.8675e+24>
+  radius<6.052e+06>}
 { name<Earth>
-  color<0.17 0.63 0.83 1.0>
-  position< 149.6e9 0.0>
-  velocity<0 29800.0>
-  mass<5.9736e24> }
-{ name<Moon>
-  color<0.2 0.2 0.2 1.0>
-  position< 150.0e9 0.0>
-  velocity<0 30822.0>
-  mass<7.3476e22> }
-
+  color<0.17 0.63 0.83 1>
+  position<1.496e+11 0 0>
+  velocity<0 29800 0>
+  mass<5.9736e+24>
+  radius<6.378e+06>}
 { name<Mars>
-  color<1.0 0.46 0.0 1.0>
-  position< -225.6e9 0.0>
-  velocity<0 -24100.0>
-  mass<6.4185e23> }
-{ name<Phobos>
-  color<0.5 0.46 0.2 1.0>
-  position< -225.609376e9 0.0>
-  velocity<0 -26238.0>
-  mass<1.0659e16> }
-{ name<Deimos>
-  color<0.5 0.2 0.46 1.0>
-  position< -225.623463e9 0.0>
-  velocity<0 -25451.0>
-  mass<1.4762e15> }
-  
+  color<1 0.46 0 1>
+  position<2.256e+11 0 0>
+  velocity<0 24100 0>
+  mass<6.4185e+23>
+  radius<3.396e+06>}
 { name<Jupiter>
-  color<0.86 0.76 0.57 1.0>
-  position< 0.0 778.5e9 >
-  velocity<-13050.0 0.0 >
-  mass<1.899e27> }
-{ name<Io>
-  color<1.0 0.2 0.1 1.0>
-  position< 0.0 778.9217e9 >
-  velocity<-30350.0 0.0 >
-  mass<8.931938e22> }
-{ name<Europa>
-  color<1.0 0.8 0.7 1.0>
-  position< 0.0 779.1709e9 >
-  velocity<-26790.0 0.0 >
-  mass<4.799844e22> }
-{ name<Ganymede>
-  color<0.6 0.76 0.95 1.0>
-  position< 0.0 779.5704e9>
-  velocity<-23930.0 0.0 >
-  mass<1.4819e23> }
-{ name<Callisto>
-  color<0.4 0.1 0.92 1.0>
-  position< 0.0 780.3827e9>
-  velocity<-21254.0 0.0>
-  mass<1.075938e23> }
-
+  color<0.86 0.76 0.57 1>
+  position<7.785e+11 0 0>
+  velocity<0 13050 0>
+  mass<1.899e+27>
+  radius<7.1492e+07>}
 { name<Saturn>
-  color<1.0 0.92 0.78 1.0>
-  position< 0.0 -1429e9 >
-  velocity<9638.0 0.0>
-  mass<5.6846e26> }
+  color<1 0.92 0.78 1>
+  position<1.429e+12 0 0>
+  velocity<0 9638 0>
+  mass<5.6846e+26>
+  radius<6.0268e+07>}
 { name<Uran>
-  color<0.71 0.98 0.96 1.0>
-  position< 2870e9 0.0>
-  velocity<0 6795.0>
-  mass<8.6832e25> }
+  color<0.71 0.98 0.96 1>
+  position<2.87e+12 0 0>
+  velocity<0 6795 0>
+  mass<8.6832e+25>
+  radius<2.5559e+07>}
 { name<Neptun>
-  color<0.0 0.3 0.77 1.0>
-  position< -4498e9 0.0>
-  velocity<0 -5432.0>
-  mass<1.0243e26> }
+  color<0 0.3 0.77 1>
+  position<4.498e+12 0 0>
+  velocity<0 5432 0>
+  mass<1.0243e+26>
+  radius<2.4764e+07>}
+{ name<Pluto>
+  color<1 1 1 1>
+  position<7.37593e+12 0 0>
+  velocity<0 3710 0>
+  mass<1.303e+22>
+  radius<1.185e+06>}
+{ name<Moon>
+  color<0.2 0.2 0.2 1>
+  position<1.5e+11 0 0>
+  velocity<0 30822 0>
+  mass<7.3476e+22>
+  radius<1.737e+06>}
+{ name<Phobos>
+  color<0.5 0.46 0.3 1>
+  position<2.25609e+11 0 0>
+  velocity<0 26238 0>
+  mass<1.0659e+16>
+  radius<1.737e+06>}
+{ name<Deimos>
+  color<0.2 0.8 0.7 1>
+  position<2.25623e+11 0 0>
+  velocity<0 25451 0>
+  mass<1.4762e+15>
+  radius<1.737e+06>}
+{ name<Io>
+  color<1 0.2 0.1 1>
+  position<7.78922e+11 0 0>
+  velocity<0 30350 0>
+  mass<8.93194e+22>
+  radius<1.737e+06>}
+{ name<Europa>
+  color<1 0.8 0.7 1>
+  position<7.79171e+11 0 0>
+  velocity<0 26790 0>
+  mass<4.79984e+22>
+  radius<1.737e+06>}
+{ name<Ganymede>
+  color<0.6 0.76 0.95 1>
+  position<7.7957e+11 0 0>
+  velocity<0 23930 0>
+  mass<1.4819e+23>
+  radius<1.737e+06>}
+{ name<Callisto>
+  color<0.4 0.1 0.92 1>
+  position<7.80383e+11 0 0>
+  velocity<0 21254 0>
+  mass<1.07594e+23>
+  radius<1.737e+06>}

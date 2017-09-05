@@ -10,8 +10,7 @@ namespace solar
 
 	FormattedFileParser::FormattedFileParser(const std::string & inputFileName, const std::string & outputFileName) :
 		inFileName(inputFileName), outFileName(outputFileName)
-	{
-	}
+	{}
 
 	SimData FormattedFileParser::Load()
 	{
@@ -71,9 +70,8 @@ namespace solar
 
 			std::cout << "Saving simulated data to file: " << outFileName << '\n';
 			for (const auto& unit : data.Get())
-			{
-				outputF << unit << "\n";
-			}
+				PrintUnit(outputF, unit, data.GetPhysUnits(), PhysUnits {PhysUnits::kilogram,PhysUnits::second,PhysUnits::meter});
+
 			std::cout << data->size() << " units saved.\n";
 		}
 	}
@@ -127,10 +125,10 @@ namespace solar
 
 		if (!val.empty())
 		{
-			size_t pos {};
-			unit.pos.x = std::stod(val, &pos);
-			unit.pos.y = std::stod(val.substr(pos),&pos);
-			unit.pos.z = std::stod(val.substr(pos));
+			size_t pos1, pos2 {};
+			unit.pos.x = std::stod(val, &pos1);
+			unit.pos.y = std::stod(val.substr(pos1), &pos2);
+			unit.pos.z = std::stod(val.substr(pos2 + pos1));
 		}
 	}
 
@@ -140,10 +138,10 @@ namespace solar
 
 		if (!val.empty())
 		{
-			size_t pos {};
-			unit.vel.x = std::stod(val, &pos) ;
-			unit.vel.y = std::stod(val.substr(pos), &pos);
-			unit.vel.z = std::stod(val.substr(pos));
+			size_t pos1, pos2 {};
+			unit.vel.x = std::stod(val, &pos1);
+			unit.vel.y = std::stod(val.substr(pos1), &pos2);
+			unit.vel.z = std::stod(val.substr(pos2 + pos1));
 		}
 	}
 
@@ -169,14 +167,11 @@ namespace solar
 
 		if (!val.empty())
 		{
-			size_t pos {};
-			unit.color.x = std::stod(val, &pos);
-			std::string tmp = val.substr(pos);
-			unit.color.y = std::stod(tmp, &pos);
-			tmp = tmp.substr(pos);
-			unit.color.z = std::stod(tmp, &pos);
-			tmp = tmp.substr(pos);
-			unit.color.w = std::stod(tmp);
+			size_t pos1, pos2, pos3 {};
+			unit.color.x = std::stod(val, &pos1);
+			unit.color.y = std::stod(val.substr(pos1), &pos2);
+			unit.color.z = std::stod(val.substr(pos2 + pos1), &pos3);
+			unit.color.w = std::stod(val.substr(pos1 + pos2 + pos3));
 		}
 		else
 			unit.color = Vec4d {1.0,1.0,1.0,1.0};
