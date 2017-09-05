@@ -18,7 +18,7 @@ include_directories(SolarSystem/ SolarSystem/External glfw-3.2.1/include)
 file(GLOB_RECURSE SOURCE_FILES "SolarSystem/*.cpp" "SolarSystem/*.c")
 file(GLOB_RECURSE HEADER_FILES "SolarSystem/*.h")
 # use c++14, it's maybe used in lambdas, not sure
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -g -O3")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
 add_executable (SolarSystem ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries(SolarSystem glfw)
 
