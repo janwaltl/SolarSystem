@@ -157,11 +157,14 @@ namespace solar
 	void OpenGLBackend::ErrorCallback(int err, const char * description)
 	{
 		error = "GLFW error: " + std::to_string(err) + ": " + description;
+		if(err==65543)//Failed to create context - version might be too low
+			error+="\n Make sure your version of OpenGL is atleast 3.3";			
 		errTrigger = true;
 	}
 	void OpenGLBackend::CheckVersionAndExtensions()
 	{
-
+		if(!GLAD_GL_VERSION_3_3)
+			throw Exception("This application requires OpenGL 3.3");
 		//Is needed to implement reversed depth buffer.
 		if (GLAD_GL_VERSION_4_5 || GLAD_GL_ARB_clip_control)
 			//Sources: http://dev.theomader.com/depth-precision/ last paragraph 'Reverse depth on OpenGL'
