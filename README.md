@@ -3,7 +3,7 @@
 SolarSystem is a 3D simulation of the Solar System using numerical integration written in C++ and OpenGL.
 
 The program was written as the final project for a programming class during my first year at Charles University.
-![Jupiter and its moons](first.gif "Jupiter and its moons")
+![Jupiter and its moons](jupiter.gif "Jupiter and its moons")
 ![Inner planets](preview.gif "Inner planets")
 ![Graphs](LetniDokumentace/Figs/Graphs.PNG "Graphs")
 
