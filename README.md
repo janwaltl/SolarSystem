@@ -5,9 +5,9 @@ SolarSystem is a 3D simulation of the Solar System using numerical integration w
 The program was written as the final project for a programming class during my first year at Charles University.
 ![Jupiter and its moons](first.gif "Jupiter and its moons")
 ![Inner planets](preview.gif "Inner planets")
-![Graphs](LetniDokumentace/Figs/Graphs.png "Graphs")
+![Graphs](LetniDokumentace/Figs/Graphs.PNG "Graphs")
 
-![gUI](LetniDokumentace/Figs/SimPropsVisualPrefs_notEdited.png "GUI")
+![gUI](LetniDokumentace/Figs/SimPropsVisualPrefs_notEdited.PNG "GUI")
 ### Main Features
 1. Written in C++ and OpenGL using [Dear ImGui](https://github.com/ocornut/imgui), [GLAD](https://github.com/Dav1dde/glad), and [GLFW](https://github.com/glfw/glfw) libraries.
 2. Explicit and implicit Euler, RungeKutta4 integration methods,
